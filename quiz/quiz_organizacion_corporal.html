@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz · Organización corporal — Morfología General</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --parchment:#f5ecd6;--amber:#c89b3c;--amber-deep:#a97e28;--ink:#1c1815;--ink-soft:#4a4239;
+    --teal:#2a7a6e;--blue:#2d5d8f;--rust:#a0522d;--line:#d9c9a3;--card:#fffaf0;
+    --ok:#2a7a6e;--bad:#b23a2e;--amber-bg:#fdf3d8;--red-bg:#fbe7e3;
+    --shadow:0 2px 4px rgba(28,24,21,.06),0 8px 24px rgba(28,24,21,.08);--radius:14px;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--parchment);color:var(--ink);font-family:"Source Serif 4",Georgia,serif;font-size:17px;line-height:1.6}
+  .wrap{max-width:760px;margin:0 auto;padding:0 20px}
+  header{background:linear-gradient(160deg,#efe3c4,#f5ecd6);border-bottom:3px solid var(--amber);padding:30px 0 22px}
+  .kicker{font-family:"DM Mono",monospace;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--amber-deep);margin:0 0 8px}
+  h1{font-family:"Playfair Display",serif;font-weight:900;font-size:clamp(1.6rem,4.5vw,2.3rem);margin:0}
+  h1 small{display:block;font-weight:700;font-size:.5em;color:var(--ink-soft);margin-top:.3em;font-family:"Source Serif 4",serif;font-style:italic}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;margin:22px 0}
+  label{display:block;font-weight:600;margin:0 0 6px;font-size:.95rem}
+  select,input{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:9px;background:#fff;font:inherit;color:var(--ink)}
+  .row{display:grid;gap:14px;grid-template-columns:1fr 1fr}
+  @media(max-width:520px){.row{grid-template-columns:1fr}}
+  button{cursor:pointer;font:inherit;font-family:"DM Mono",monospace;letter-spacing:.04em;border:none;border-radius:999px;padding:13px 26px;font-weight:500}
+  .btn-primary{background:var(--teal);color:#fff;text-transform:uppercase;font-size:.82rem}
+  .btn-primary:disabled{background:#b9c9c5;cursor:not-allowed}
+  .btn-ghost{background:transparent;color:var(--ink-soft);border:1px solid var(--line)}
+  .hidden{display:none!important}
+  .q{border-bottom:1px dashed var(--line);padding:18px 0}
+  .q:last-child{border-bottom:none}
+  .q .num{font-family:"DM Mono",monospace;color:var(--amber-deep);font-size:.78rem;letter-spacing:.1em}
+  .q .en{font-family:"DM Mono",monospace;font-size:.66rem;color:var(--blue);border:1px solid var(--blue);border-radius:6px;padding:1px 6px;margin-left:8px;text-transform:uppercase;letter-spacing:.08em}
+  .q p.stem{font-weight:600;margin:.35em 0 .8em;font-size:1.05rem}
+  .opt{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border:1px solid var(--line);border-radius:10px;margin:7px 0;background:#fff;cursor:pointer;transition:.12s}
+  .opt:hover{border-color:var(--amber)}
+  .opt input{width:auto;margin-top:4px}
+  .opt.sel{border-color:var(--teal);background:#eefaf6}
+  .bar{position:sticky;bottom:0;background:rgba(245,236,214,.96);backdrop-filter:blur(6px);border-top:1px solid var(--line);padding:12px 0;margin-top:10px}
+  .bar .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .timer{font-family:"DM Mono",monospace;font-weight:500;font-size:1.05rem}
+  .timer.warn{color:var(--rust)}
+  .progress{font-family:"DM Mono",monospace;font-size:.8rem;color:var(--ink-soft)}
+  .note{font-size:.85rem;color:var(--ink-soft)}
+  .rules{font-size:.9rem;color:var(--ink-soft);background:#f2f7fc;border-left:4px solid var(--blue);border-radius:10px;padding:12px 16px;margin:16px 0}
+  .rules b{color:var(--blue)}
+  .result-score{font-family:"Playfair Display",serif;font-size:3rem;font-weight:900;color:var(--teal);margin:.1em 0}
+  .review .q{opacity:1}
+  .opt.correct{border-color:var(--ok);background:#eafaf4}
+  .opt.wrong{border-color:var(--bad);background:var(--red-bg)}
+  .tag-ok{color:var(--ok);font-weight:600;font-size:.85rem}
+  .tag-bad{color:var(--bad);font-weight:600;font-size:.85rem}
+  .flash{position:fixed;top:14px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 18px;border-radius:999px;font-size:.85rem;z-index:99;box-shadow:var(--shadow);opacity:0;transition:.2s}
+  .flash.show{opacity:1}
+  .g1{color:var(--blue)} .g2{color:var(--rust)}
+  footer{padding:26px 0 50px;color:var(--ink-soft);font-size:.82rem;text-align:center}
+</style>
+</head>
+<body>
+
+<div class="flash" id="flash"></div>
+
+<header>
+  <div class="wrap">
+    <p class="kicker">Morfología General · Optometría · 2026-II</p>
+    <h1>Quiz · Organización corporal<small>Planos, ejes, posición anatómica y términos</small></h1>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- PANTALLA 1 · IDENTIDAD -->
+  <section id="screen-id">
+    <div class="card">
+      <div class="row">
+        <div>
+          <label for="grupo">Grupo</label>
+          <select id="grupo">
+            <option value="">— Selecciona —</option>
+            <option value="G1">G1 · 07:00–09:00 (Aula 402P)</option>
+            <option value="G2">G2 · 09:00–11:00 (Aula 403OPT)</option>
+          </select>
+        </div>
+        <div>
+          <label for="alumno">Nombre (listado oficial)</label>
+          <select id="alumno" disabled>
+            <option value="">— Primero elige grupo —</option>
+          </select>
+        </div>
+      </div>
+      <div class="rules">
+        <b>Reglas.</b> Ingresa con tu nombre del <b>listado oficial</b> (no se permite texto libre). El quiz registra cambios de pestaña, pérdidas de foco, copiar/pegar y reinicios. Tienes <b>15 minutos</b>. El puntaje lo recalcula el servidor.
+      </div>
+      <button class="btn-primary" id="btn-start" disabled>Comenzar</button>
+      <p class="note" id="version-note" style="margin-top:12px"></p>
+    </div>
+  </section>
+
+  <!-- PANTALLA 2 · QUIZ -->
+  <section id="screen-quiz" class="hidden">
+    <p class="note">Selecciona una respuesta por pregunta. Puedes cambiarla antes de enviar.</p>
+    <div id="questions"></div>
+    <div class="bar">
+      <div class="wrap">
+        <span class="timer" id="timer">15:00</span>
+        <span class="progress" id="progress">0 / 0</span>
+        <button class="btn-primary" id="btn-submit">Enviar</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PANTALLA 3 · RESULTADO -->
+  <section id="screen-result" class="hidden">
+    <div class="card" style="text-align:center">
+      <p class="kicker">Tu resultado</p>
+      <div class="result-score" id="score">–</div>
+      <p id="score-detail" class="note"></p>
+      <p id="submit-state" class="note"></p>
+    </div>
+    <h2 style="font-family:'Playfair Display',serif">Revisión</h2>
+    <div id="review" class="review"></div>
+    <div style="text-align:center;margin:24px 0">
+      <a href="../clase_organizacion_corporal.html"><button class="btn-ghost">← Volver a la clase</button></a>
+    </div>
+  </section>
+
+</main>
+
+<footer>Morfología General · Universidad de La Salle · Dr. Jorge Bogoya</footer>
+
+<script>
+/* ============================================================
+   QUIZ · ORGANIZACIÓN CORPORAL — Capa 1 (cliente autocontenido)
+   El cliente NO es la fuente de verdad: el servidor recalcula.
+   ============================================================ */
+
+/* ---------- CONFIG (rotar en cada instrumento) ---------- */
+const CONFIG = {
+  STORAGE_KEY : "MORFO_ORGCORP_2026II_v1",              // único por instrumento
+  TOKEN       : "QUIZ_ORGCORP_MORF_2026II_8dd5f3",      // debe coincidir con el Apps Script
+  ENDPOINT    : "https://script.google.com/macros/s/AKfycbwI9SiJIwScuhYtnpczk2V-js_WGAE97Xtm--nmK3waDqoZES-FQi320HsyK5Ir62_C/exec", // Web App /exec
+  UNIDAD      : "Organizacion_corporal",
+  TIEMPO_SEG  : 15 * 60,     // 15 minutos
+  SUBMIT_LOCK : 0,           // min. segundos antes de habilitar Enviar (mejora opcional; 0 = off)
+  MAX_PUNTOS  : 12
+};
+
+/* ---------- ROSTER OFICIAL (selector, NO texto libre) ----------
+   TODO Jorge: reemplaza con el listado real de cada grupo (2026-II).
+   Mantén el orden alfabético del acta. */
+const ROSTER = {
+  G1: [
+    "APELLIDO Nombre 01","APELLIDO Nombre 02","APELLIDO Nombre 03"
+    // … pega aquí los 26 de G1
+  ],
+  G2: [
+    "APELLIDO Nombre 01","APELLIDO Nombre 02","APELLIDO Nombre 03"
+    // … pega aquí los 28 de G2
+  ]
+};
+
+/* ---------- BANCO DE PREGUNTAS ----------
+   Respuestas por id estable (no por índice): el orden puede barajarse
+   sin afectar la calificación. El servidor tiene la misma clave. */
+const QUESTIONS = [
+  { id:"q01", q:"En la posición anatómica de referencia, los miembros superiores están a los lados del tronco con las palmas dirigidas…",
+    opts:[{id:"a",t:"hacia atrás"},{id:"b",t:"hacia adelante"},{id:"c",t:"hacia el plano medio"},{id:"d",t:"hacia abajo"}], correct:"b" },
+
+  { id:"q02", q:"¿Qué plano divide el cuerpo en dos mitades derecha e izquierda simétricas?",
+    opts:[{id:"a",t:"Plano frontal (coronal)"},{id:"b",t:"Plano transverso"},{id:"c",t:"Plano sagital medio (mediano)"},{id:"d",t:"Plano oblicuo"}], correct:"c" },
+
+  { id:"q03", q:"El plano coronal (frontal) divide el cuerpo en porciones…",
+    opts:[{id:"a",t:"superior e inferior"},{id:"b",t:"anterior y posterior"},{id:"c",t:"derecha e izquierda"},{id:"d",t:"proximal y distal"}], correct:"b" },
+
+  { id:"q04", q:"Los radiólogos suelen denominar al plano transverso como plano…",
+    opts:[{id:"a",t:"axial"},{id:"b",t:"paramediano"},{id:"c",t:"sagital"},{id:"d",t:"oblicuo"}], correct:"a" },
+
+  { id:"q05", q:"La flexión y la extensión del hombro se producen en el plano sagital, en torno al eje…",
+    opts:[{id:"a",t:"longitudinal (vertical)"},{id:"b",t:"transversal (frontal)"},{id:"c",t:"sagital (anteroposterior)"},{id:"d",t:"oblicuo"}], correct:"b" },
+
+  { id:"q06", q:"La abducción y la aducción ocurren en el plano frontal, en torno al eje…",
+    opts:[{id:"a",t:"sagital (anteroposterior)"},{id:"b",t:"transversal"},{id:"c",t:"longitudinal"},{id:"d",t:"coronal"}], correct:"a" },
+
+  { id:"q07", q:"En el fondo de ojo, la mácula se ubica ______ respecto del disco óptico (papila).",
+    opts:[{id:"a",t:"nasal"},{id:"b",t:"temporal"},{id:"c",t:"superior"},{id:"d",t:"inferior"}], correct:"b" },
+
+  { id:"q08", q:"En la descripción del ojo, los términos «medial» y «lateral» del cuerpo se sustituyen por…",
+    opts:[{id:"a",t:"proximal y distal"},{id:"b",t:"superior e inferior"},{id:"c",t:"nasal y temporal"},{id:"d",t:"dorsal y palmar"}], correct:"c" },
+
+  { id:"q09", q:"El término «ipsilateral» (homolateral) indica que una estructura está…",
+    opts:[{id:"a",t:"en el lado opuesto del cuerpo"},{id:"b",t:"en el mismo lado del cuerpo"},{id:"c",t:"en la línea media"},{id:"d",t:"en ambos lados"}], correct:"b" },
+
+  { id:"q10", q:"Según los ejes de Fick, el giro del globo ocular alrededor del eje vertical produce…",
+    opts:[{id:"a",t:"supraducción e infraducción"},{id:"b",t:"inciclo- y exciclotorsión"},{id:"c",t:"aducción y abducción"},{id:"d",t:"convergencia y acomodación"}], correct:"c" },
+
+  { id:"q11", q:"Un paciente acostado boca abajo se encuentra en decúbito…",
+    opts:[{id:"a",t:"supino"},{id:"b",t:"prono"},{id:"c",t:"lateral"},{id:"d",t:"anatómico"}], correct:"b" },
+
+  { id:"q12", en:true, q:"Which anatomical plane divides the body into anterior and posterior parts?",
+    opts:[{id:"a",t:"Median (midsagittal) plane"},{id:"b",t:"Transverse (axial) plane"},{id:"c",t:"Coronal (frontal) plane"},{id:"d",t:"Oblique plane"}], correct:"c" }
+];
+
+/* ============================================================
+   ESTADO E IDENTIDAD (7 claves en sessionStorage)
+   ============================================================ */
+const SK = CONFIG.STORAGE_KEY;
+const IDKEYS = {
+  grupo:  SK+"::grupo",
+  alumno: SK+"::alumno",
+  version:SK+"::version",
+  start:  SK+"::startTime",
+  answers:SK+"::answers",
+  session:SK+"::sessionId",
+  submitted:SK+"::submitted"
+};
+
+const counters = { tab:0, blur:0, devtools:0, copy:0, cut:0, paste:0, rightclick:0, forcedTimer:0, discrepancia:0 };
+let answers = {};
+let version = "A";
+let timerInt = null, remaining = CONFIG.TIEMPO_SEG, finished = false;
+
+/* ---------- utilidades ---------- */
+function flash(msg){ const f=document.getElementById('flash'); f.textContent=msg; f.classList.add('show'); setTimeout(()=>f.classList.remove('show'),1800); }
+function hash32(str){ let h=5381; for(let i=0;i<str.length;i++){ h=((h<<5)+h)+str.charCodeAt(i); h=h&0xffffffff; } return Math.abs(h); }
+function versionFor(name){ return (hash32(name)%2===0) ? "A" : "B"; }
+function seededShuffle(arr, seed){ // Fisher–Yates determinístico
+  const a=arr.slice(); let s=seed||1;
+  for(let i=a.length-1;i>0;i--){ s=(s*1103515245+12345)&0x7fffffff; const j=s%(i+1); [a[i],a[j]]=[a[j],a[i]]; }
+  return a;
+}
+function newSessionId(){ // sin Math.random para reproducibilidad de logs
+  return "S"+Date.now().toString(36)+"-"+hash32(navigator.userAgent+screen.width).toString(36);
+}
+
+/* ============================================================
+   PANTALLA 1 · IDENTIDAD
+   ============================================================ */
+const selGrupo=document.getElementById('grupo'), selAlumno=document.getElementById('alumno'),
+      btnStart=document.getElementById('btn-start'), vNote=document.getElementById('version-note');
+
+selGrupo.addEventListener('change',()=>{
+  const g=selGrupo.value; selAlumno.innerHTML="";
+  if(!g){ selAlumno.disabled=true; selAlumno.innerHTML='<option value="">— Primero elige grupo —</option>'; return; }
+  selAlumno.disabled=false;
+  selAlumno.innerHTML='<option value="">— Selecciona tu nombre —</option>'+
+    (ROSTER[g]||[]).map(n=>`<option value="${n}">${n}</option>`).join("");
+  checkReady();
+});
+selAlumno.addEventListener('change',()=>{
+  if(selAlumno.value){ version=versionFor(selAlumno.value); vNote.textContent="Versión asignada: "+version; }
+  checkReady();
+});
+function checkReady(){ btnStart.disabled=!(selGrupo.value && selAlumno.value); }
+
+btnStart.addEventListener('click',startQuiz);
+
+/* ============================================================
+   REINICIO: restaurar sesión si existe y <3h (fix bug #1)
+   ============================================================ */
+(function restoreIfAny(){
+  try{
+    const sAlumno=sessionStorage.getItem(IDKEYS.alumno);
+    const sStart=parseInt(sessionStorage.getItem(IDKEYS.start)||"0",10);
+    const submitted=sessionStorage.getItem(IDKEYS.submitted)==="1";
+    if(sAlumno && sStart && !submitted){
+      const age=(Date.now()-sStart)/1000;
+      if(age < 3*3600){ // menos de 3 horas: reanudar
+        selGrupo.value=sessionStorage.getItem(IDKEYS.grupo)||"";
+        selGrupo.dispatchEvent(new Event('change'));
+        selAlumno.value=sAlumno; selAlumno.dispatchEvent(new Event('change'));
+        version=sessionStorage.getItem(IDKEYS.version)||versionFor(sAlumno);
+        answers=JSON.parse(sessionStorage.getItem(IDKEYS.answers)||"{}");
+        counters.forcedTimer=0;
+        // marcar reinicio detectado
+        logEvent("reinicio_detectado",{age_seg:Math.round(age)});
+        flash("Sesión reanudada tras reinicio");
+        beginQuiz(sStart); // preserva startTime original
+      }
+    }
+  }catch(e){/* noop */}
+})();
+
+/* ============================================================
+   INICIO / RENDER DEL QUIZ
+   ============================================================ */
+function startQuiz(){
+  sessionStorage.setItem(IDKEYS.grupo, selGrupo.value);
+  sessionStorage.setItem(IDKEYS.alumno, selAlumno.value);
+  sessionStorage.setItem(IDKEYS.version, version);
+  sessionStorage.setItem(IDKEYS.session, newSessionId());
+  const start=Date.now();
+  sessionStorage.setItem(IDKEYS.start, String(start));
+  beginQuiz(start);
+}
+
+function beginQuiz(startTime){
+  document.getElementById('screen-id').classList.add('hidden');
+  document.getElementById('screen-quiz').classList.remove('hidden');
+  renderQuestions();
+  // tiempo restante desde el startTime real (soporta reinicio)
+  const elapsed=Math.floor((Date.now()-startTime)/1000);
+  remaining=Math.max(0, CONFIG.TIEMPO_SEG-elapsed);
+  startTimer();
+  installAntifraude();
+}
+
+function orderedQuestions(){
+  if(version==="B"){
+    const seed=hash32(sessionStorage.getItem(IDKEYS.alumno)||"B");
+    return seededShuffle(QUESTIONS, seed);
+  }
+  return QUESTIONS;
+}
+
+function renderQuestions(){
+  const cont=document.getElementById('questions'); cont.innerHTML="";
+  const qs=orderedQuestions();
+  qs.forEach((q,i)=>{
+    const opts = version==="B" ? seededShuffle(q.opts, hash32(q.id)) : q.opts;
+    const div=document.createElement('div'); div.className="q"; div.dataset.qid=q.id;
+    div.innerHTML=`<span class="num">Pregunta ${i+1} de ${qs.length}</span>${q.en?'<span class="en">English</span>':''}
+      <p class="stem">${q.q}</p>
+      ${opts.map(o=>`
+        <label class="opt" data-oid="${o.id}">
+          <input type="radio" name="${q.id}" value="${o.id}" ${answers[q.id]===o.id?'checked':''}>
+          <span>${o.t}</span>
+        </label>`).join("")}`;
+    cont.appendChild(div);
+  });
+  cont.querySelectorAll('input[type=radio]').forEach(inp=>{
+    inp.addEventListener('change',e=>{
+      answers[e.target.name]=e.target.value;
+      sessionStorage.setItem(IDKEYS.answers, JSON.stringify(answers));
+      cont.querySelectorAll(`[data-qid="${e.target.name}"] .opt`).forEach(l=>l.classList.remove('sel'));
+      e.target.closest('.opt').classList.add('sel');
+      updateProgress();
+    });
+  });
+  // marcar seleccionadas restauradas
+  cont.querySelectorAll('input:checked').forEach(inp=>inp.closest('.opt').classList.add('sel'));
+  updateProgress();
+}
+
+function updateProgress(){
+  document.getElementById('progress').textContent=`${Object.keys(answers).length} / ${QUESTIONS.length}`;
+}
+
+/* ============================================================
+   TIMER
+   ============================================================ */
+function startTimer(){
+  clearInterval(timerInt);
+  renderTimer();
+  timerInt=setInterval(()=>{
+    remaining--; renderTimer();
+    if(remaining<=0){ clearInterval(timerInt); counters.forcedTimer=1; submitQuiz(true); }
+  },1000);
+}
+function renderTimer(){
+  const m=String(Math.floor(remaining/60)).padStart(2,'0'), s=String(remaining%60).padStart(2,'0');
+  const t=document.getElementById('timer'); t.textContent=`${m}:${s}`;
+  t.classList.toggle('warn', remaining<=60);
+}
+
+/* ============================================================
+   ANTIFRAUDE · Capa 1 (contadores + registro)
+   ============================================================ */
+function installAntifraude(){
+  document.addEventListener('visibilitychange',()=>{
+    if(document.hidden){ counters.tab++; badge('tab'); logEvent("antifraude",{tipo:"tab_switch",valor:counters.tab}); }
+  });
+  window.addEventListener('blur',()=>{ counters.blur++; logEvent("antifraude",{tipo:"blur",valor:counters.blur}); });
+  document.addEventListener('copy',()=>{ counters.copy++; badge('copy'); logEvent("antifraude",{tipo:"copy",valor:counters.copy}); });
+  document.addEventListener('cut', ()=>{ counters.cut++;  logEvent("antifraude",{tipo:"cut",valor:counters.cut}); });
+  document.addEventListener('paste',()=>{ counters.paste++; badge('paste'); logEvent("antifraude",{tipo:"paste",valor:counters.paste}); });
+  document.addEventListener('contextmenu',e=>{ e.preventDefault(); counters.rightclick++; logEvent("antifraude",{tipo:"right_click",valor:counters.rightclick}); });
+  document.addEventListener('keydown',e=>{
+    const dev = e.key==="F12" ||
+      ((e.ctrlKey||e.metaKey)&&e.shiftKey&&["I","J","C"].includes(e.key.toUpperCase())) ||
+      ((e.ctrlKey||e.metaKey)&&e.key.toUpperCase()==="U");
+    if(dev){ counters.devtools++; logEvent("antifraude",{tipo:"devtools",valor:counters.devtools}); }
+  });
+  // Reinicio / cierre: sendBeacon
+  window.addEventListener('beforeunload',()=>{
+    if(finished) return;
+    const payload=basePayload("reinicio_detectado");
+    payload.counters=counters; payload.answers=answers;
+    try{ navigator.sendBeacon(CONFIG.ENDPOINT, new Blob([JSON.stringify(payload)],{type:"text/plain"})); }catch(e){}
+  });
+}
+function badge(kind){
+  const level = kind==='paste' ? 'ALERTA (rojo)' : 'aviso';
+  flash(kind==='tab'?`Cambio de pestaña registrado (${counters.tab})`:
+        kind==='copy'?'Copiar registrado':
+        kind==='paste'?'⚠ Pegar registrado — evento en rojo':'Registrado');
+}
+
+/* ============================================================
+   ENVÍO · el servidor recalcula (Capa 2)
+   ============================================================ */
+function basePayload(evento){
+  return {
+    token: CONFIG.TOKEN,
+    evento: evento,                       // envio | antifraude | reinicio_detectado
+    unidad: CONFIG.UNIDAD,
+    grupo: sessionStorage.getItem(IDKEYS.grupo)||selGrupo.value,
+    alumno: sessionStorage.getItem(IDKEYS.alumno)||selAlumno.value,
+    version: version,
+    sessionId: sessionStorage.getItem(IDKEYS.session)||"",
+    startTime: parseInt(sessionStorage.getItem(IDKEYS.start)||"0",10),
+    clientTime: Date.now()
+  };
+}
+
+function scoreLocal(){
+  let s=0; QUESTIONS.forEach(q=>{ if(answers[q.id]===q.correct) s++; }); return s;
+}
+
+async function logEvent(evento, extra){
+  const payload=basePayload(evento); Object.assign(payload, extra||{});
+  try{
+    if(navigator.sendBeacon){
+      navigator.sendBeacon(CONFIG.ENDPOINT, new Blob([JSON.stringify(payload)],{type:"text/plain"}));
+    }else{
+      fetch(CONFIG.ENDPOINT,{method:"POST",mode:"no-cors",body:JSON.stringify(payload)});
+    }
+  }catch(e){/* no bloquear */}
+}
+
+document.getElementById('btn-submit').addEventListener('click',()=>submitQuiz(false));
+
+async function submitQuiz(forced){
+  if(finished) return;
+  if(!forced){
+    const faltan=QUESTIONS.length-Object.keys(answers).length;
+    if(faltan>0 && !confirm(`Te faltan ${faltan} pregunta(s). ¿Enviar de todos modos?`)) return;
+  }
+  finished=true; clearInterval(timerInt);
+  const localScore=scoreLocal();
+  const payload=basePayload("envio");
+  payload.answers=answers;            // {qid: optId}
+  payload.counters=counters;
+  payload.clientScore=localScore;     // el servidor recalcula y compara
+  payload.maxScore=CONFIG.MAX_PUNTOS;
+  sessionStorage.setItem(IDKEYS.submitted,"1");
+
+  let serverScore=null, state="Enviado (registro local del puntaje).";
+  try{
+    const res=await fetch(CONFIG.ENDPOINT,{method:"POST",headers:{"Content-Type":"text/plain;charset=utf-8"},body:JSON.stringify(payload)});
+    const data=await res.json().catch(()=>null);
+    if(data && typeof data.serverScore==="number"){
+      serverScore=data.serverScore;
+      if(serverScore!==localScore){ counters.discrepancia=1; }
+      state = (serverScore===localScore)
+        ? "✓ Puntaje confirmado por el servidor."
+        : "⚠ Discrepancia cliente/servidor registrada (se conserva el puntaje del servidor).";
+    }
+  }catch(e){
+    state="No se pudo confirmar con el servidor (¿sin conexión?). Se guardó tu envío localmente.";
+  }
+  showResult(serverScore!==null?serverScore:localScore, localScore, state);
+}
+
+/* ============================================================
+   RESULTADO + REVISIÓN
+   ============================================================ */
+function showResult(finalScore, localScore, state){
+  document.getElementById('screen-quiz').classList.add('hidden');
+  document.getElementById('screen-result').classList.remove('hidden');
+  document.getElementById('score').textContent=`${finalScore} / ${CONFIG.MAX_PUNTOS}`;
+  const pct=Math.round(100*finalScore/CONFIG.MAX_PUNTOS);
+  document.getElementById('score-detail').textContent=`${pct}% de acierto · versión ${version}`;
+  document.getElementById('submit-state').textContent=state;
+
+  const rev=document.getElementById('review'); rev.innerHTML="";
+  QUESTIONS.forEach((q,i)=>{
+    const chosen=answers[q.id];
+    const div=document.createElement('div'); div.className="q";
+    div.innerHTML=`<span class="num">Pregunta ${i+1}</span>${q.en?'<span class="en">English</span>':''}
+      <p class="stem">${q.q}</p>
+      ${q.opts.map(o=>{
+        let cls="opt", tag="";
+        if(o.id===q.correct){ cls+=" correct"; tag='<span class="tag-ok"> ✓ correcta</span>'; }
+        if(o.id===chosen && chosen!==q.correct){ cls+=" wrong"; tag='<span class="tag-bad"> ✗ tu respuesta</span>'; }
+        return `<div class="${cls}"><span>${o.t}${tag}</span></div>`;
+      }).join("")}`;
+    rev.appendChild(div);
+  });
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+</script>
+</body>
+</html>
