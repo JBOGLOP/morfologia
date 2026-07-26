@@ -8,152 +8,144 @@
 ![Programa](https://img.shields.io/badge/Programa-Optometría-2a7a6e)
 ![Semestre](https://img.shields.io/badge/Semestre-2026--II-c89b3c)
 ![Docente](https://img.shields.io/badge/Docente-Dr.%20Jorge%20Bogoya-2d5d8f)
-![Formato](https://img.shields.io/badge/Formato-HTML5%20+%20GitHub%20Pages-1c1815)
 
-🌐 **[Sitio del curso →](https://jboglop.github.io/Morfologia_unisalle/)**
+🌐 **[Ir al sitio del curso →](https://jboglop.github.io/morfologia/)**
 
 </div>
 
 ---
 
-## 👋 Bienvenida al semestre
+## 👋 Bienvenidos
 
-Bienvenidos a **Morfología General**. Este curso es la puerta de entrada al estudio del cuerpo humano para el optómetra: aquí construimos el lenguaje y la estructura sobre los que se apoyará toda la carrera. Cada tema se estudia dos veces — una como anatomía general y otra a través de su **interfaz óptica y ocular** — de modo que lo que aprendes del cuerpo te sirva directamente para entender el ojo, la órbita y la vía visual.
+Morfología General es la puerta de entrada al estudio del cuerpo humano para el optómetra. Aquí
+construimos el lenguaje y la estructura sobre los que se apoyará toda la carrera.
 
-Este repositorio es el **hogar del curso**: clases, actividades y evaluaciones, todo en HTML autocontenido y publicado en GitHub Pages. Aquí encontrarás siempre la versión más actual del material y el cronograma del semestre.
+Cada tema se estudia dos veces: una como **anatomía general** y otra a través de su **interfaz
+óptica y ocular**. Aprendemos los planos y ejes del cuerpo… y con ellos los ejes de Fick del
+globo ocular. Vemos el sistema nervioso… y con él la vía visual. Estudiamos el circulatorio… y
+llegamos a la arteria oftálmica y la retina. Esas conexiones son el corazón del curso: hacen que
+la morfología no sea memoria suelta, sino la base de tu práctica clínica.
+
+**Esta página es el punto de encuentro del curso.** Aquí se publica cada clase el día que se
+dicta, junto con su actividad. Vuelve siempre a este enlace: es la versión más actual.
 
 ---
 
-## 📋 Información del curso
+## 📋 Información de la asignatura
 
 | | |
 |---|---|
-| **Asignatura** | Morfología General |
+| **Asignatura** | Morfología General · código 01008412 · 4 créditos |
 | **Programa** | Optometría · I Semestre |
-| **Universidad** | Universidad de La Salle · Sede Chapinero (Bogotá) |
-| **Docente** | Dr. Jorge Bogoya · `jbogoya@unisalle.edu.co` |
-| **Grupo 1** | 🔵 Aula 402P · 07:00 – 09:00 |
-| **Grupo 2** | 🟤 Aula 403OPT · 09:00 – 11:00 |
-| **Bibliografía base** | Latarjet & Ruiz Liard (5.ª) · Tortora & Derrickson (15.ª) · Moore (8.ª) · *Terminologia Anatomica* |
-
----
-
-## 🎯 Enfoque del curso — el hilo conductor
-
-> **Cada sistema anatómico se conecta con su interfaz optométrica.**
-
-No estudiamos anatomía «en abstracto». Aprendemos los planos y ejes del cuerpo… y con ellos los **ejes de Fick** del globo ocular. Estudiamos el sistema nervioso… y con él la **vía visual** y los pares craneales de la motilidad ocular. Vemos el sistema circulatorio… y llegamos a la **arteria oftálmica** y la retina. Esas conexiones — las «perlas optométricas» — son el corazón del curso y lo que hará que la morfología no sea memoria suelta, sino la base de tu práctica clínica.
-
----
-
-## 🤝 Compromisos del curso
-
-Un buen semestre se construye entre todos. Estos son los acuerdos que hacen posible el aprendizaje.
-
-### Del docente
-- Llegar preparado, con el material publicado **antes o el mismo día** de cada clase en este repositorio.
-- Explicar cada tema con su **aplicación optométrica**, no solo la teoría.
-- Retroalimentar las evaluaciones de forma oportuna y transparente.
-- Mantener canales de comunicación abiertos y un trato respetuoso con cada estudiante.
-
-### De los estudiantes
-- **Asistencia y puntualidad:** registrar la asistencia cada sesión y llegar a tiempo al aula asignada.
-- **Preparación:** revisar la lectura y el material de la clase previa antes de cada sesión.
-- **Participación activa:** preguntar, discutir los casos y aprovechar las conexiones clínicas.
-- **Respeto:** con los compañeros, con el docente y con el espacio de trabajo.
-
-### Integridad académica
-La honestidad es un compromiso de todos. Las actividades y evaluaciones de este curso se realizan de forma **individual**, con recálculo del puntaje en el servidor y registro de la actividad de la sesión. Presentar trabajo propio no es un requisito técnico: es la base de una formación clínica seria, en la que tus decisiones afectarán la salud visual de otras personas.
+| **Universidad** | Universidad de La Salle · Sede Chapinero, Bogotá |
+| **Docente** | Dr. Jorge Bogoya · [jbogoya@unisalle.edu.co](mailto:jbogoya@unisalle.edu.co) |
+| **Horario** | **Jueves** · 09:00 – 11:00 y 11:00 – 13:00 |
+| **Atención a estudiantes** | Miércoles · 09:00 – 11:00 · salón de clases |
 
 ---
 
 ## 🗓️ Cronograma del semestre
 
-Los temas se abren **en orden**, comenzando por el fundamento (el lenguaje anatómico) y avanzando de lo microscópico a los grandes sistemas. El material se enlaza aquí a medida que se publica.
+Los temas se abren **en orden**: primero el lenguaje anatómico, luego de lo microscópico a los
+grandes sistemas. Cada clase se enlaza aquí el día que se dicta.
 
-**Estados:** ▶️ en curso · 🟢 material listo · ⬜ por publicar
+> 📌 Las fechas siguen el calendario institucional y **se confirman en clase**. Si alguna cambia,
+> se actualiza en esta tabla.
 
-### 🧭 Unidad 1 · Generalidades e histología
+### 🧭 Primer corte · Fundamentos
 
-| # | Fecha | Tema | Interfaz optométrica | Estado |
-|:-:|---|---|---|:-:|
-| 1 | **23 jul 2026** | **[Organización corporal: planos, ejes y posición anatómica](https://jboglop.github.io/Morfologia_unisalle/00_Organizacion_corporal/clase_organizacion_corporal.html)** | Posición primaria de la mirada · ejes de Fick · nasal/temporal | ▶️ |
-| 2 | _por definir_ | Generalidades del esqueleto, articulaciones y músculos | Tipos de hueso · órbita ósea | 🟢 |
-| 3 | _por definir_ | Nivel celular | Célula y organelos en tejidos oculares | ⬜ |
-| 4 | _por definir_ | Nivel tisular (tejidos fundamentales) | Epitelios corneales · tejido conectivo escleral | ⬜ |
-| 5 | _por definir_ | Osteología general | Huesos del cráneo y de la órbita | ⬜ |
-| 6 | _por definir_ | Cabeza y cuello | Órbita, senos paranasales y drenaje | ⬜ |
-| — | _por definir_ | **📝 Primer parcial** | — | ⬜ |
+| # | Fecha | Tema | Interfaz optométrica | Material |
+|:-:|---|---|---|---|
+| 1 | **jue 23 jul** | Organización corporal: planos, ejes y posición anatómica | Posición primaria de la mirada · ejes de Fick · nasal y temporal | ✅ **[Abrir clase](https://jboglop.github.io/morfologia/clase_organizacion_corporal.html)** |
+| 2 | jue 30 jul | Nivel celular: organelos, membrana y transporte | Bomba Na⁺/K⁺ del endotelio corneal · fototransducción | próximamente |
+| 3 | jue 6 ago | Nivel tisular: epitelial, conectivo, muscular y nervioso | Epitelio corneal · estroma y esclera | próximamente |
+| 4 | jue 13 ago | Osteología general: clasificación de huesos y articulaciones | Huesos que forman la órbita | próximamente |
+| — | **jue 20 ago** | 📝 **Primer parcial** | — | — |
 
-### 🫁 Unidad 2 · Sistemas (I)
+### 🫁 Segundo corte · Cabeza, cuello y sistemas (I)
 
-| # | Fecha | Tema | Interfaz optométrica | Estado |
-|:-:|---|---|---|:-:|
-| 7 | _por definir_ | Sistema muscular | Músculos faciales y extraoculares · ptosis · signo de Bell | 🟢 |
-| 8 | _por definir_ | Sistema nervioso + pares craneales | Vía visual · NC II-III-IV-V₁-VI-VII | 🟢 |
-| 9 | _por definir_ | Sistema circulatorio | Arteria oftálmica · OACR · OVCR | 🟢 |
-| 10 | _por definir_ | Sistema linfático e inmunidad | Drenaje cervicofacial · MALT/CALT · privilegio inmune ocular | 🟢 |
-| — | _por definir_ | **📝 Segundo parcial** | — | 🟢 |
+| # | Fecha | Tema | Interfaz optométrica | Material |
+|:-:|---|---|---|---|
+| 5 | jue 27 ago | Cabeza y cuello: cráneo, cara y órbita | Órbita, senos paranasales y drenaje lagrimal | próximamente |
+| 6 | jue 3 sep | Sistema muscular: fibras, contracción y músculos faciales | Músculos extraoculares · ptosis · signo de Bell | próximamente |
+| 7 | jue 10 sep | Sistema nervioso central y periférico · pares craneales | Vía visual · NC II, III, IV, V₁, VI y VII | próximamente |
+| 8 | jue 17 sep | Sistema circulatorio: corazón y circulación mayor y menor | Arteria oftálmica · OACR · OVCR | próximamente |
+| 9 | jue 24 sep | Sistema linfático: linfa e inmunidad básica | Drenaje cervicofacial · privilegio inmune ocular | próximamente |
+| — | **jue 1 oct** | 📝 **Segundo parcial** | — | — |
 
-### 🩺 Unidad 3 · Sistemas (II) y cierre
+### 🩺 Tercer corte · Sistemas (II) y cierre
 
-| # | Fecha | Tema | Interfaz optométrica | Estado |
-|:-:|---|---|---|:-:|
-| 11 | _por definir_ | Sistema endocrino | Eje hipotálamo-hipófisis · Graves · retinopatía diabética | 🟢 |
-| 12 | _por definir_ | Sistema respiratorio | Horner/Pancoast · hipercapnia y papiledema · cianosis | 🟢 |
-| — | _por definir_ | Repasos integradores | — | 🟢 |
-| — | _por definir_ | **📝 Parcial final** | — | 🟢 |
+| # | Fecha | Tema | Interfaz optométrica | Material |
+|:-:|---|---|---|---|
+| 10 | jue 8 oct | Sistema endocrino: glándulas y hormonas básicas | Eje hipotálamo-hipófisis y quiasma · Graves · retinopatía diabética | próximamente |
+| 11 | jue 15 oct | Sistema respiratorio: anatomía general | Síndrome de Horner · hipercapnia y papiledema · cianosis | próximamente |
+| — | **jue 22 oct** | 📝 **Parcial final** | — | — |
 
-> 📌 Las fechas se ajustan al calendario institucional de la Universidad de La Salle. El material marcado 🟢 proviene de ciclos ya construidos y se actualiza para 2026-II.
-
----
-
-## 📁 Estructura del repositorio
-
-```
-Morfologia_unisalle/
-├── README.md                     · esta portada
-├── index / 0_Asistencia          · asistencia y navegación
-│
-├── 00_Organizacion_corporal/     · Clase 1 · planos, ejes, posición  ← HOY
-│   ├── clase_organizacion_corporal.html
-│   ├── img/                       · figuras
-│   └── quiz/                       · quiz + dashboard + Apps Script
-│
-├── 01_Generalidades/             · esqueleto, articulaciones, músculos
-├── 01_sistema_muscular/          · Muscular
-├── 02_sistema_nervioso/          · Nervioso + pares craneales
-├── 03_sistema_circulatorio/      · Circulatorio
-├── 04_sistema_linfatico/         · Linfático e inmunidad
-├── 05_sistema_endocrino/         · Endocrino
-├── 06_sistema_respiratorio/      · Respiratorio
-├── 05_SegundoParcial/            · Segundo parcial
-├── 075_Actividad_preExFinal/     · Repasos
-└── 08_examenfinal/               · Parcial final
-```
-
-Cada carpeta de tema incluye su clase en HTML, las imágenes y, cuando aplica, su actividad o quiz con el registro correspondiente.
+**Material complementario:** [Generalidades — esqueleto, articulaciones y movimientos](https://jboglop.github.io/morfologia/clase_magistral_generalidades.html)
+(apoyo para las sesiones de osteología y sistema muscular).
 
 ---
 
-## 🔗 Recursos
+## 📊 Evaluación
 
-- 🌐 **Sitio del curso:** https://jboglop.github.io/Morfologia_unisalle/
-- 🩻 **Clase de hoy — Organización corporal:** [abrir](https://jboglop.github.io/Morfologia_unisalle/00_Organizacion_corporal/clase_organizacion_corporal.html)
-- ✅ **Asistencia:** el enlace de cada sesión se comparte en clase.
+| Corte | Componentes | Peso |
+|---|---|:-:|
+| **Primer corte** | Actividades de seguimiento (20 %) + Primer parcial (15 %) | **35 %** |
+| **Segundo corte** | Quices, talleres, exposiciones y videos (20 %) + Segundo parcial (15 %) | **35 %** |
+| **Tercer corte** | Actividades de seguimiento y Lectura Selecta (15 %) + Parcial final (15 %) | **30 %** |
+
+**Los tres parciales** incluyen preguntas tipo **Saber Pro** y **una pregunta en inglés**.
+
+**Actividades de seguimiento:** esquemas anatómicos rotulados, mapas conceptuales, talleres
+resueltos, quices y evaluaciones escritas de estructuras y relaciones anatómicas.
+
+**Lectura Selecta (tercer corte):** película **_El hombre elefante_** (1980). Producto: una
+infografía sobre el cambio morfológico y su etiología. Plazo: 4 semanas.
+
+---
+
+## 🤝 Acuerdos del curso
+
+### Del docente
+- Publicar el material **antes o el mismo día** de cada clase, aquí en esta página.
+- Explicar cada tema con su **aplicación optométrica**, no solo la teoría.
+- Evaluar con **rúbricas conocidas de antemano** y retroalimentar de forma oportuna.
+- Mantener un trato respetuoso y canales de comunicación abiertos.
+
+### De los estudiantes
+- **Puntualidad:** margen máximo de 10 minutos para el ingreso a las sesiones.
+- **Asistencia:** registrarla cada sesión con el enlace que se comparte en clase.
+- **Preparación:** revisar la lectura y el material de la clase anterior antes de cada sesión.
+- **Participación activa:** preguntar, discutir los casos y aprovechar las conexiones clínicas.
+- **Celular:** restringido durante las sesiones; solo con fines académicos y autorización.
+
+### Integridad académica
+Las actividades y evaluaciones de este curso son **individuales**. El uso de inteligencia
+artificial debe ser **responsable y ético**: es una herramienta de estudio, no un sustituto de tu
+trabajo. Presentar trabajo propio no es un requisito formal, es la base de una formación clínica
+seria — tus decisiones afectarán la salud visual de otras personas.
+
+---
 
 ## 📚 Bibliografía
 
 - **Moore KL, Dalley AF, Agur AMR.** *Anatomía con orientación clínica*, 8.ª ed.
 - **Latarjet M, Ruiz Liard A.** *Anatomía humana*, 5.ª ed.
 - **Tortora GJ, Derrickson B.** *Principios de anatomía y fisiología*, 15.ª ed.
-- ***Terminologia Anatomica*** (FCAT/FIPAT) — nomenclatura oficial.
+- **Rohen JW, Yokochi C, Lütjen-Drecoll E.** *Atlas de anatomía humana* (atlas fotográfico).
+- ***Terminologia Anatomica*** (FIPAT) — nomenclatura oficial usada en el curso.
 
 ---
 
+## ✉️ Contacto
+
+**Dr. Jorge Bogoya** · [jbogoya@unisalle.edu.co](mailto:jbogoya@unisalle.edu.co)
+Universidad de La Salle · Programa de Optometría · Sede Chapinero
+
 <div align="center">
 
+---
+
 **Morfología General** · Optometría · Universidad de La Salle · 2026-II
-_Dr. Jorge Bogoya_
 
 </div>
