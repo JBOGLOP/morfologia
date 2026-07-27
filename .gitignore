@@ -1,0 +1,50 @@
+# ─────────────────────────────────────────────────────────────────────
+# Morfología General · Universidad de La Salle · 2026-II
+# Este repositorio es PÚBLICO (GitHub Pages). Lo listado abajo debe
+# permanecer únicamente en el taller de Google Drive.
+# ─────────────────────────────────────────────────────────────────────
+
+# Datos personales de estudiantes (Habeas Data)
+000_asistencia/
+00_roster/
+roster*
+*asistencia*.html
+lista*estudiantes*
+Listado*
+
+# Backend y credenciales: tokens, claves de respuestas, endpoints
+*.gs
+appsscript.json
+dashboard*.html
+*_credenciales*
+.env
+.env.*
+
+# Claves de corrección y solucionarios
+*solucionario*
+*Solucionario*
+*SOLUCIONARIO*
+*clave_respuestas*
+*_rubrica*
+
+# Notas y calificaciones
+*.xlsx
+*.gsheet
+*.gdoc
+*_NOTAS_*
+
+# Documentación interna del proyecto
+HANDOFF*.md
+INSTALACION.md
+
+# Borradores y material de trabajo
+**/papelera/
+**/Papelera/
+**/BD/
+*.tmp
+~$*
+
+# Sistema operativo / editor
+Thumbs.db
+desktop.ini
+.DS_Store
