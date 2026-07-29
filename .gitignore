@@ -24,8 +24,11 @@ dashboard*.html
 *solucionario*
 *Solucionario*
 *SOLUCIONARIO*
-*clave_respuestas*
+*clave_*
+*Clave_*
 *_rubrica*
+*.docx
+*.doc
 
 # Notas y calificaciones
 *.xlsx

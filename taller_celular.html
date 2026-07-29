@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Taller interactivo · El nivel celular de organización (Cap. 3, Tortora)</title>
+<style>
+  :root{
+    --azul:#1f5673; --azul2:#2b7a9b; --acento:#c8532b; --acento2:#e07a4f;
+    --verde:#2e7d5b; --verde-bg:#e6f4ec; --rojo:#b23a2e; --rojo-bg:#fbe9e7;
+    --tinta:#22303a; --gris:#5a6b75; --linea:#dfe6ea; --papel:#f4f7f9; --blanco:#ffffff;
+    --sombra:0 1px 3px rgba(20,40,55,.08),0 6px 20px rgba(20,40,55,.06);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--papel);color:var(--tinta);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.55;font-size:16px}
+  .wrap{max-width:920px;margin:0 auto;padding:0 18px 80px}
+  header.hero{background:linear-gradient(135deg,var(--azul),var(--azul2));color:#fff;
+    padding:34px 0 30px;box-shadow:var(--sombra)}
+  header.hero .wrap{padding-bottom:0}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;opacity:.9;font-weight:700}
+  header.hero h1{margin:8px 0 6px;font-size:27px;line-height:1.2}
+  header.hero p.sub{margin:0;opacity:.94;font-size:15px;max-width:640px}
+  .meta{margin-top:16px;display:flex;flex-wrap:wrap;gap:8px}
+  .chip{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28);
+    padding:5px 11px;border-radius:999px;font-size:12.5px;font-weight:600}
+  .studentbox{margin-top:18px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);
+    border-radius:12px;padding:12px 14px;display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+  .studentbox label{font-size:13px;font-weight:600;display:flex;flex-direction:column;gap:4px;flex:1;min-width:160px}
+  .studentbox input{border:none;border-radius:8px;padding:8px 10px;font-size:14px;color:var(--tinta)}
+  .instrucciones{background:var(--blanco);border:1px solid var(--linea);border-left:5px solid var(--acento);
+    border-radius:12px;padding:16px 18px;margin:24px 0;box-shadow:var(--sombra);font-size:14.5px}
+  .instrucciones h2{margin:0 0 8px;font-size:16px;color:var(--acento)}
+  .instrucciones ul{margin:6px 0 0;padding-left:20px}
+  .instrucciones li{margin:3px 0}
+
+  .barra-fija{position:sticky;top:0;z-index:30;background:rgba(244,247,249,.94);
+    backdrop-filter:blur(6px);border-bottom:1px solid var(--linea);padding:10px 0;margin-bottom:8px}
+  .barra-fija .wrap{padding-bottom:0;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .progreso{flex:1;min-width:150px;height:10px;background:#e2eaee;border-radius:999px;overflow:hidden}
+  .progreso > span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--verde),#3fa47a);
+    transition:width .35s ease}
+  .marcador{font-size:13.5px;font-weight:700;color:var(--azul)}
+  .marcador b{color:var(--verde)}
+
+  section.bloque{background:var(--blanco);border:1px solid var(--linea);border-radius:14px;
+    padding:20px 20px 8px;margin:22px 0;box-shadow:var(--sombra)}
+  .bloque > h2{margin:0 0 2px;font-size:19px;color:var(--azul);display:flex;align-items:center;gap:10px}
+  .bloque > h2 .n{background:var(--azul);color:#fff;width:30px;height:30px;border-radius:8px;
+    display:inline-flex;align-items:center;justify-content:center;font-size:15px;flex:none}
+  .bloque > p.desc{margin:2px 0 6px;color:var(--gris);font-size:13.5px}
+
+  .q{border-top:1px solid var(--linea);padding:18px 0 16px}
+  .q:first-of-type{border-top:none}
+  .q .enun{font-weight:600;margin:0 0 4px;display:flex;gap:8px}
+  .q .enun .qn{color:var(--acento);font-weight:800;flex:none}
+  .q .tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;
+    color:var(--azul2);background:#e9f2f6;border-radius:6px;padding:2px 8px;margin-bottom:8px}
+
+  .opciones{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:8px}
+  .opciones li{border:1.5px solid var(--linea);border-radius:10px;padding:10px 12px;cursor:pointer;
+    display:flex;gap:10px;align-items:flex-start;transition:.15s;background:#fbfdfe;font-size:15px}
+  .opciones li:hover{border-color:var(--azul2);background:#f2f8fb}
+  .opciones li .letra{font-weight:800;color:var(--azul);flex:none;width:20px}
+  .opciones li.sel{border-color:var(--azul2);background:#e9f4f9}
+  .opciones li.ok{border-color:var(--verde);background:var(--verde-bg)}
+  .opciones li.no{border-color:var(--rojo);background:var(--rojo-bg)}
+  .opciones li.correcta-marcada{border-color:var(--verde);background:var(--verde-bg)}
+  .opciones li.bloq{cursor:default;pointer-events:none}
+
+  .fb{margin-top:10px;font-size:14px;border-radius:9px;padding:10px 12px;display:none}
+  .fb.show{display:block}
+  .fb.bien{background:var(--verde-bg);border:1px solid #b6ddc7;color:#215c40}
+  .fb.mal{background:var(--rojo-bg);border:1px solid #eec3bd;color:#8a2b22}
+  .fb b{font-weight:700}
+
+  input.gap{border:1.5px solid var(--linea);border-radius:8px;padding:6px 9px;font-size:15px;
+    min-width:150px;margin:0 3px;font-family:inherit}
+  input.gap:focus{outline:none;border-color:var(--azul2)}
+  input.gap.ok{border-color:var(--verde);background:var(--verde-bg)}
+  input.gap.no{border-color:var(--rojo);background:var(--rojo-bg)}
+  .completar p{margin:6px 0}
+
+  table.match{width:100%;border-collapse:collapse;margin-top:8px}
+  table.match td{padding:7px 6px;border-bottom:1px solid var(--linea);vertical-align:middle;font-size:14.5px}
+  table.match td.term{font-weight:600;width:44%}
+  table.match select{width:100%;padding:7px 8px;border:1.5px solid var(--linea);border-radius:8px;
+    font-size:14px;font-family:inherit;background:#fbfdfe}
+  table.match select.ok{border-color:var(--verde);background:var(--verde-bg)}
+  table.match select.no{border-color:var(--rojo);background:var(--rojo-bg)}
+  .banco{font-size:13px;color:var(--gris);background:#f3f7f9;border:1px dashed var(--linea);
+    border-radius:9px;padding:10px 12px;margin-top:10px}
+  .banco b{color:var(--azul)}
+
+  .orden{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:7px;counter-reset:o}
+  .orden li{display:flex;gap:10px;align-items:center;border:1.5px solid var(--linea);border-radius:10px;
+    padding:8px 10px;background:#fbfdfe;font-size:14.5px}
+  .orden li select{width:64px;padding:6px;border:1.5px solid var(--linea);border-radius:8px;font-family:inherit;font-weight:700;text-align:center}
+  .orden li select.ok{border-color:var(--verde);background:var(--verde-bg)}
+  .orden li select.no{border-color:var(--rojo);background:var(--rojo-bg)}
+
+  .abierta textarea{width:100%;min-height:90px;border:1.5px solid var(--linea);border-radius:10px;
+    padding:10px 12px;font-family:inherit;font-size:14.5px;resize:vertical}
+  .abierta textarea:focus{outline:none;border-color:var(--azul2)}
+  .modelo{margin-top:10px;background:#eef5f8;border:1px solid #cfe2ea;border-radius:9px;padding:12px 14px;
+    font-size:14px;display:none}
+  .modelo.show{display:block}
+  .modelo h4{margin:0 0 5px;color:var(--azul);font-size:13.5px;text-transform:uppercase;letter-spacing:.04em}
+
+  .btn{border:none;border-radius:9px;padding:9px 16px;font-size:14px;font-weight:700;cursor:pointer;
+    font-family:inherit;transition:.15s}
+  .btn.primary{background:var(--azul);color:#fff}
+  .btn.primary:hover{background:#17475e}
+  .btn.ghost{background:#eef3f6;color:var(--azul);border:1px solid var(--linea)}
+  .btn.ghost:hover{background:#e2edf1}
+  .btn.small{padding:6px 12px;font-size:13px}
+  .q .acciones{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap}
+
+  .final{background:linear-gradient(135deg,#eaf3f7,#f4f7f9);border:1px solid var(--linea);
+    border-radius:14px;padding:24px;margin:26px 0;text-align:center;box-shadow:var(--sombra)}
+  .final h2{margin:0 0 6px;color:var(--azul)}
+  .final .puntaje{font-size:40px;font-weight:800;color:var(--verde);margin:6px 0}
+  .final .msg{font-size:15px;color:var(--gris)}
+  .acciones-globales{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+
+  footer{color:var(--gris);font-size:12.5px;text-align:center;margin-top:34px;line-height:1.6}
+  a{color:var(--azul2)}
+  @media print{
+    .barra-fija,.acciones-globales,.acciones{display:none!important}
+    body{background:#fff}
+    .fb,.modelo{display:block!important}
+    section.bloque{break-inside:avoid;box-shadow:none}
+    .glosario,.guardado,#modalConf{display:none!important}
+  }
+
+  /* ── Estado de guardado ─────────────────────────────────────────── */
+  .guardado{font-size:.78rem;padding:.15rem .55rem;border-radius:999px;
+    background:var(--verde-bg);color:var(--verde);border:1px solid var(--verde);
+    margin-left:.5rem;white-space:nowrap}
+  .guardado.pend{background:#fff6e5;color:#a06a12;border-color:#d9a441}
+  #estadoNube{font-size:.8rem;color:var(--gris)}
+  #estadoNube.ok{color:var(--verde)} #estadoNube.err{color:var(--rojo)}
+
+  /* ── Aviso de intento recuperable ───────────────────────────────── */
+  .recuperar{background:#fff6e5;border:1px solid #d9a441;border-radius:12px;
+    padding:.9rem 1rem;margin:1rem 0;font-size:.92rem}
+  .recuperar .btn{margin-top:.6rem}
+
+  /* ── Glosario ───────────────────────────────────────────────────── */
+  .glosario{background:var(--blanco);border:1px solid var(--linea);border-radius:14px;
+    padding:1rem 1.2rem;margin:1.4rem 0;box-shadow:var(--sombra)}
+  .glosario>summary{cursor:pointer;font-weight:700;font-size:1.05rem;color:var(--azul2);
+    list-style:none;display:flex;align-items:center;gap:.5rem}
+  .glosario>summary::-webkit-details-marker{display:none}
+  .glosario>summary::before{content:"▸";transition:transform .15s;display:inline-block}
+  .glosario[open]>summary::before{transform:rotate(90deg)}
+  .glosario .gdesc{font-size:.88rem;color:var(--gris);margin:.5rem 0 .9rem}
+  .glosario dl{margin:0;display:grid;gap:.55rem}
+  .glosario dt{font-weight:700;color:var(--tinta)}
+  .glosario dt .en{font-weight:400;font-style:italic;color:var(--gris);font-size:.85rem;margin-left:.4rem}
+  .glosario dd{margin:.1rem 0 .55rem;padding-left:.9rem;border-left:2px solid var(--linea);
+    font-size:.93rem;color:var(--tinta)}
+
+  /* ── Confirmación de envío ──────────────────────────────────────── */
+  #modalConf{position:fixed;inset:0;background:rgba(15,25,35,.55);display:none;
+    align-items:center;justify-content:center;padding:1rem;z-index:50}
+  #modalConf.show{display:flex}
+  #modalConf .caja{background:var(--blanco);border-radius:16px;max-width:520px;width:100%;
+    padding:1.4rem 1.5rem;box-shadow:0 20px 50px rgba(0,0,0,.3)}
+  #modalConf h3{margin:0 0 .6rem;font-size:1.2rem}
+  #modalConf .resumen{background:var(--papel);border-radius:10px;padding:.8rem 1rem;margin:.8rem 0;
+    font-size:.93rem;line-height:1.7}
+  #modalConf .aviso{font-size:.88rem;color:var(--rojo);margin:.6rem 0 0}
+  #modalConf .acciones-modal{display:flex;gap:.6rem;justify-content:flex-end;margin-top:1rem;flex-wrap:wrap}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Morfología · Taller de autoevaluación</div>
+    <h1>El nivel celular de organización</h1>
+    <p class="sub">Actividad interactiva basada en el Capítulo 3 de Tortora — <em>Principios de Anatomía y Fisiología</em>. Elaborada a partir de las <strong>Preguntas de revisión</strong>, la <strong>Revisión del capítulo</strong> y las <strong>Preguntas de autoevaluación</strong>.</p>
+    <div class="meta">
+      <span class="chip">Nivel intermedio</span>
+      <span class="chip">6 bloques</span>
+      <span class="chip" id="chip-total">— ítems</span>
+      <span class="chip">Autocalificable</span>
+    </div>
+    <div class="studentbox" id="cajaIngreso">
+      <label>Nombre del estudiante
+        <select id="nombre"><option value="">Cargando listado…</option></select>
+      </label>
+      <label>Código estudiantil
+        <input type="text" id="codigo" inputmode="numeric" placeholder="Tu código" autocomplete="off">
+      </label>
+      <label style="align-self:end">
+        <button class="btn primary" id="btnIngresar" disabled>Ingresar</button>
+      </label>
+    </div>
+    <div class="studentbox" id="cajaIdentificado" style="display:none">
+      <div><b id="quienSoy"></b><br>
+        <span style="font-size:.85rem;color:var(--gris)">Tu avance se está guardando.</span></div>
+      <label style="align-self:end">
+        <button class="btn ghost small" id="btnSalir">No soy yo</button>
+      </label>
+    </div>
+    <p id="idErr" style="margin:.6rem 0 0;font-size:.88rem;color:#a0522d"></p>
+  </div>
+</header>
+
+<div class="barra-fija">
+  <div class="wrap">
+    <span class="marcador" id="mk-resp">Respondidas: 0</span>
+    <div class="progreso"><span id="prog"></span></div>
+    <span class="marcador" id="mk-score">Aciertos: <b>0</b></span>
+    <span id="estadoNube">·</span>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="instrucciones">
+    <h2>Instrucciones</h2>
+    Resuelve cada ítem y pulsa <strong>Comprobar</strong> para recibir retroalimentación inmediata con la explicación del concepto. La barra superior registra tu avance y tus aciertos. En las preguntas de desarrollo escribe tu respuesta y luego compárala con la <strong>respuesta modelo</strong>.
+    <ul>
+      <li><strong>Bloque 1:</strong> opción múltiple &nbsp;·&nbsp; <strong>Bloque 2:</strong> verdadero/falso &nbsp;·&nbsp; <strong>Bloque 3:</strong> completar</li>
+      <li><strong>Bloque 4:</strong> emparejamiento orgánulo–función &nbsp;·&nbsp; <strong>Bloque 5:</strong> ordenar la síntesis proteica &nbsp;·&nbsp; <strong>Bloque 6:</strong> desarrollo</li>
+    </ul>
+  </div>
+
+  <div id="avisoRecuperar"></div>
+
+  <details class="glosario">
+    <summary>Glosario · términos nuevos de este capítulo</summary>
+    <p class="gdesc">Ábrelo cuando encuentres una palabra que no reconozcas. Están en el orden en
+      que aparecen en el taller, y con el término en inglés porque así los verás en los atlas y
+      en las preguntas tipo Saber&nbsp;Pro.</p>
+    <dl>
+      <dt>Citosol <span class="en">cytosol</span></dt>
+      <dd>La parte líquida del citoplasma: agua, solutos disueltos y partículas en suspensión. Es
+        el medio donde flotan los orgánulos, no el conjunto de ellos.</dd>
+
+      <dt>Orgánulo <span class="en">organelle</span></dt>
+      <dd>Estructura especializada dentro de la célula, con una forma y una función propias. En
+        español también se dice «organelo»; ambas formas son correctas.</dd>
+
+      <dt>Anfipático <span class="en">amphipathic</span></dt>
+      <dd>Molécula con una parte que atrae al agua (hidrofílica) y otra que la repele
+        (hidrofóbica). Los fosfolípidos lo son, y por eso forman bicapas espontáneamente.</dd>
+
+      <dt>Glucocáliz <span class="en">glycocalyx</span></dt>
+      <dd>Cubierta de azúcares en la cara externa de la membrana. Funciona como carné de
+        identidad de la célula: permite que otras la reconozcan.</dd>
+
+      <dt>Gradiente de concentración <span class="en">concentration gradient</span></dt>
+      <dd>Diferencia de concentración de una sustancia entre dos zonas. Moverse «a favor» del
+        gradiente es ir de donde hay más a donde hay menos, y no cuesta energía.</dd>
+
+      <dt>Gradiente electroquímico <span class="en">electrochemical gradient</span></dt>
+      <dd>Combinación del gradiente de concentración y de la diferencia de carga eléctrica a
+        ambos lados de la membrana. Es lo que realmente mueve a los iones.</dd>
+
+      <dt>Permeabilidad selectiva <span class="en">selective permeability</span></dt>
+      <dd>Propiedad de la membrana de dejar pasar unas sustancias y otras no. No es un filtro por
+        tamaño: depende de la solubilidad en lípidos y de las proteínas disponibles.</dd>
+
+      <dt>Ósmosis <span class="en">osmosis</span></dt>
+      <dd>Difusión del <em>agua</em> a través de una membrana con permeabilidad selectiva. Ojo: se
+        mueve el agua, no el soluto.</dd>
+
+      <dt>Tonicidad <span class="en">tonicity</span></dt>
+      <dd>Efecto que tiene una solución sobre el <em>volumen</em> de una célula sumergida en ella:
+        isotónica (sin cambio), hipotónica (se hincha) o hipertónica (se encoge).</dd>
+
+      <dt>Crenación <span class="en">crenation</span></dt>
+      <dd>Arrugamiento de una célula que perdió agua en una solución hipertónica.</dd>
+
+      <dt>Hemólisis <span class="en">hemolysis</span></dt>
+      <dd>Rotura del eritrocito cuando entra tanta agua en solución hipotónica que estalla.</dd>
+
+      <dt>Transporte activo <span class="en">active transport</span></dt>
+      <dd>Movimiento de una sustancia <em>en contra</em> de su gradiente, gastando ATP. Lo hace una
+        bomba, como la de Na⁺/K⁺.</dd>
+
+      <dt>Endocitosis / Exocitosis <span class="en">endocytosis / exocytosis</span></dt>
+      <dd>Entrada y salida de material empaquetado en vesículas. Se usan cuando la partícula es
+        demasiado grande para un canal o un transportador.</dd>
+
+      <dt>Fagocitosis / Pinocitosis <span class="en">phagocytosis / pinocytosis</span></dt>
+      <dd>Dos formas de endocitosis: «comer» partículas sólidas y «beber» gotas de líquido
+        extracelular.</dd>
+
+      <dt>Autofagia <span class="en">autophagy</span></dt>
+      <dd>La célula digiere sus propios orgánulos gastados dentro de un lisosoma, para reciclar sus
+        componentes.</dd>
+
+      <dt>Catalasa <span class="en">catalase</span></dt>
+      <dd>Enzima del peroxisoma que descompone el peróxido de hidrógeno (H₂O₂) que el propio
+        peroxisoma produce al oxidar otras sustancias.</dd>
+
+      <dt>Cisterna <span class="en">cisterna</span></dt>
+      <dd>Cada uno de los sacos membranosos aplanados que forman el aparato de Golgi.</dd>
+
+      <dt>Centríolo y huso mitótico <span class="en">centriole · mitotic spindle</span></dt>
+      <dd>El centríolo es un cilindro de microtúbulos; el par de centríolos del centrosoma organiza
+        el huso, la estructura que reparte los cromosomas durante la mitosis.</dd>
+
+      <dt>Transcripción <span class="en">transcription</span></dt>
+      <dd>Copiar un segmento de DNA en una molécula de RNA mensajero, dentro del núcleo.</dd>
+
+      <dt>Traducción <span class="en">translation</span></dt>
+      <dd>Leer ese RNA mensajero en el ribosoma para ensamblar la proteína, ya en el citoplasma.</dd>
+
+      <dt>Interfase <span class="en">interphase</span></dt>
+      <dd>La etapa del ciclo celular entre dos divisiones (fases G1, S y G2). No es «reposo»: es
+        cuando la célula crece y duplica su DNA.</dd>
+
+      <dt>Citocinesis <span class="en">cytokinesis</span></dt>
+      <dd>División del citoplasma que separa las dos células hijas, después de la mitosis.</dd>
+    </dl>
+  </details>
+
+  <!-- Los bloques se generan por JS -->
+  <div id="app"></div>
+
+  <div class="final" id="final">
+    <h2>Resultado del taller</h2>
+    <div class="puntaje" id="finalScore">0 / 0</div>
+    <div class="msg" id="finalMsg">Comprueba tus respuestas de opción múltiple, V/F, completar, emparejamiento y ordenar para ver tu puntaje.</div>
+    <div class="acciones-globales">
+      <button class="btn primary" onclick="calificarTodo()">Calificar todo</button>
+      <button class="btn primary" id="btnEnviar" onclick="abrirConfirmacion()">Entregar al docente</button>
+      <button class="btn ghost" onclick="window.print()">Imprimir / Guardar PDF</button>
+      <button class="btn ghost" onclick="reiniciar()">Reiniciar</button>
+    </div>
+  </div>
+
+  <div id="modalConf" role="dialog" aria-modal="true" aria-labelledby="mcTit">
+    <div class="caja">
+      <h3 id="mcTit">Confirmar entrega</h3>
+      <p style="font-size:.93rem;color:var(--gris);margin:0">Revisa antes de entregar. Esta es la
+        versión que califica el docente.</p>
+      <div class="resumen" id="mcResumen"></div>
+      <p class="aviso" id="mcAviso"></p>
+      <div class="acciones-modal">
+        <button class="btn ghost" onclick="cerrarConfirmacion()">Volver al taller</button>
+        <button class="btn primary" id="mcConfirmar" onclick="entregarDefinitivo()">Sí, entregar</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    Taller de estudiante · Asignatura de Morfología.<br>
+    Contenido adaptado de Tortora & Derrickson, <em>Principios de Anatomía y Fisiología</em>, Cap. 3 «El nivel celular de organización».
+  </footer>
+</div>
+
+<script>
+/* ====================== BANCO DE PREGUNTAS ====================== */
+
+// Bloque 1 — Opción múltiple
+const MULTIPLE = [
+  {
+    q: "Las tres partes principales de una célula son:",
+    tag:"Partes de la célula",
+    op:["Núcleo, mitocondria y ribosomas","Membrana plasmática, citoplasma y núcleo","Citosol, orgánulos y citoesqueleto","Bicapa lipídica, proteínas y glucocáliz"],
+    correcta:1,
+    fb:"La célula se divide en membrana plasmática (superficie externa), citoplasma (todo lo comprendido entre la membrana y el núcleo) y núcleo (alberga el DNA)."
+  },
+  {
+    q: "Si las concentraciones de solutos del líquido extracelular y del líquido intracelular son iguales, la célula se encuentra en una solución:",
+    tag:"Ósmosis y tonicidad",
+    op:["Hipertónica","Hipotónica","Isotónica","Saturada"],
+    correcta:2,
+    fb:"En una solución isotónica no hay movimiento neto de agua: el eritrocito conserva su forma y volumen normales. En la hipotónica se hincha (hemólisis) y en la hipertónica se arruga (crenación)."
+  },
+  {
+    q: "¿Cuál de las siguientes asociaciones entre proteínas de membrana y su función es INCORRECTA?",
+    tag:"Proteínas de membrana",
+    op:["Canal iónico: permite el pasaje de iones específicos","Receptor: reconoce ligandos específicos","Transportador: permite que las células se reconozcan entre sí","Enzima: cataliza reacciones químicas"],
+    correcta:2,
+    fb:"El reconocimiento entre células corresponde a los marcadores de identidad (glucoproteínas/glucolípidos), no a los transportadores. El transportador moviliza de forma selectiva una sustancia mediante un cambio de conformación."
+  },
+  {
+    q: "Una sustancia no polar y liposoluble como el O₂ o un esteroide atraviesa la membrana principalmente por:",
+    tag:"Transporte pasivo",
+    op:["Difusión facilitada por canal","Difusión simple a través de la bicapa lipídica","Transporte activo primario","Endocitosis mediada por receptor"],
+    correcta:1,
+    fb:"Las moléculas no polares e hidrófobas (O₂, CO₂, N₂, esteroides, vitaminas liposolubles) cruzan libremente la bicapa por difusión simple, sin ayuda de proteínas."
+  },
+  {
+    q: "La bomba de sodio-potasio (Na⁺/K⁺ ATPasa) es un ejemplo de:",
+    tag:"Transporte activo",
+    op:["Transporte pasivo","Difusión facilitada","Transporte activo primario","Cotransporte secundario"],
+    correcta:2,
+    fb:"Usa energía DIRECTA de la hidrólisis del ATP para expulsar 3 Na⁺ e introducir 2 K⁺ contra sus gradientes: es transporte activo primario. Consume alrededor del 40% del ATP de una célula típica."
+  },
+  {
+    q: "¿Cuál de los siguientes orgánulos participa sobre todo en reacciones de descomposición/digestión?",
+    tag:"Orgánulos",
+    op:["Ribosomas","Lisosomas","Centrosomas","Peroxisomas"],
+    correcta:1,
+    fb:"Los lisosomas contienen enzimas digestivas y realizan autofagia, autólisis y digestión extracelular. Los peroxisomas oxidan sustancias, pero la digestión enzimática es función lisosómica."
+  },
+  {
+    q: "La 'central de energía' de la célula, donde se produce la mayor parte del ATP, es:",
+    tag:"Orgánulos",
+    op:["El aparato de Golgi","El retículo endoplásmico liso","La mitocondria","El nucléolo"],
+    correcta:2,
+    fb:"La mitocondria, con su membrana interna plegada en crestas, produce la mayor parte del ATP y participa en la apoptosis."
+  },
+  {
+    q: "¿Cuál de estas afirmaciones sobre el núcleo es VERDADERA?",
+    tag:"Núcleo",
+    op:["El sitio de síntesis de los ribosomas es el nucléolo","La membrana nuclear es sólida e impermeable","La síntesis de proteínas ocurre dentro del núcleo","Contiene 46 pares de cromosomas"],
+    correcta:0,
+    fb:"El nucléolo, dentro del núcleo, sintetiza las subunidades ribosómicas. La envoltura nuclear es doble y con poros; la traducción ocurre en el citoplasma; las células somáticas tienen 46 cromosomas (23 pares)."
+  },
+  {
+    q: "La secuencia de bases del RNA mensajero transcrito a partir de la secuencia de DNA molde ATC sería:",
+    tag:"Síntesis de proteínas",
+    op:["TAG","UAG","AUC","GCU"],
+    correcta:1,
+    fb:"En la transcripción se aparean bases complementarias y, en el RNA, la timina (T) es sustituida por uracilo (U): A→U, T→A, C→G. Así, el molde ATC produce el mRNA UAG."
+  },
+  {
+    q: "La división celular reproductiva que reduce el número de cromosomas a la mitad y forma gametos haploides es:",
+    tag:"División celular",
+    op:["Mitosis","Citocinesis","Meiosis","Interfase"],
+    correcta:2,
+    fb:"La meiosis consta de dos divisiones sucesivas (meiosis I y II) y genera cuatro células haploides (n). La mitosis produce dos células somáticas idénticas (2n)."
+  }
+];
+
+// Bloque 2 — Verdadero / Falso
+const VF = [
+  {
+    q:"Una superficie pequeña aumenta la velocidad de difusión a través de la membrana celular.",
+    tag:"Difusión",
+    correcta:false,
+    fb:"Falso. A MAYOR superficie disponible, mayor velocidad de difusión (por eso los alvéolos tienen una superficie extensa). Una superficie pequeña la disminuye."
+  },
+  {
+    q:"Las células que se forman durante la meiosis poseen información genética diferente de la de la célula original.",
+    tag:"Meiosis",
+    correcta:true,
+    fb:"Verdadero. El entrecruzamiento (crossing-over) en la meiosis I genera cromátides con información genética distinta entre sí y respecto a la célula que les dio origen."
+  },
+  {
+    q:"La bomba de Na⁺/K⁺ ATPasa es un mecanismo activo que ayuda a mantener la tonicidad (volumen) de la célula.",
+    tag:"Transporte activo",
+    correcta:true,
+    fb:"Verdadero. Al mantener baja la concentración de Na⁺ en el citosol, la bomba evita que entre agua por ósmosis y ayuda a que la célula conserve su volumen normal."
+  },
+  {
+    q:"La bicapa lipídica es libremente permeable a los iones y a las moléculas grandes con carga eléctrica.",
+    tag:"Permeabilidad",
+    correcta:false,
+    fb:"Falso. La bicapa es permeable a moléculas no polares y a moléculas pequeñas sin carga (agua, urea), pero IMPERMEABLE a los iones y a las moléculas polares grandes como la glucosa; estos requieren canales o transportadores."
+  },
+  {
+    q:"En la difusión facilitada la sustancia se mueve a favor de su gradiente de concentración y NO requiere energía celular (ATP).",
+    tag:"Transporte pasivo",
+    correcta:true,
+    fb:"Verdadero. La difusión facilitada (por canal o por transportador) es un proceso pasivo: la sustancia baja por su gradiente; la proteína solo facilita el paso, sin gastar ATP."
+  },
+  {
+    q:"El retículo endoplásmico rugoso (RER) carece de ribosomas y se especializa en sintetizar lípidos y esteroides.",
+    tag:"Orgánulos",
+    correcta:false,
+    fb:"Falso. Eso describe al retículo endoplásmico LISO (REL). El RER está tapizado de ribosomas y sintetiza proteínas de secreción, de membrana y glucoproteínas."
+  }
+];
+
+// Bloque 3 — Completar espacios
+const COMPLETAR = [
+  {
+    partes:["El transporte pasivo de moléculas de agua a través de una membrana con permeabilidad selectiva se denomina ",
+            {resp:["osmosis","ósmosis"]},"."],
+    tag:"Ósmosis",
+    fb:"La ósmosis es el movimiento neto de agua desde la zona de mayor concentración de agua (menor soluto) hacia la de menor concentración de agua."
+  },
+  {
+    partes:["La muerte celular programada, que es normal y ocurre durante el desarrollo embriológico, se llama ",
+            {resp:["apoptosis"]},"; en cambio, la muerte por lesión tisular se denomina ",
+            {resp:["necrosis"]},"."],
+    tag:"División y muerte celular",
+    fb:"La apoptosis es programada y ordenada; la necrosis es patológica, consecuencia de una lesión."
+  },
+  {
+    partes:["Las proteínas integrales que atraviesan por completo la bicapa se llaman proteínas ",
+            {resp:["de transmembrana","transmembrana"]}," ; los sitios de reconocimiento que se unen a hormonas u otros ligandos son las proteínas ",
+            {resp:["receptoras","receptores","receptor"]},"."],
+    tag:"Proteínas de membrana",
+    fb:"Las proteínas de transmembrana cruzan toda la bicapa; los receptores reconocen ligandos específicos (p. ej., la insulina)."
+  },
+  {
+    partes:["En el transporte activo ",
+            {resp:["primario"]}," la energía proviene directamente de la hidrólisis del ATP, mientras que en el ",
+            {resp:["secundario"]}," se usa la energía almacenada en los gradientes de Na⁺ o H⁺."],
+    tag:"Transporte activo",
+    fb:"El primario usa ATP directamente (bombas); el secundario aprovecha de forma indirecta el gradiente creado por las bombas (cotransportadores y contratransportadores)."
+  },
+  {
+    partes:["La red de filamentos proteicos que da forma y sostén a la célula y moviliza sus contenidos es el ",
+            {resp:["citoesqueleto"]},"; sus tres componentes, de menor a mayor diámetro, son microfilamentos, filamentos intermedios y ",
+            {resp:["microtubulos","microtúbulos"]},"."],
+    tag:"Citoesqueleto",
+    fb:"El citoesqueleto está formado por microfilamentos (los más delgados), filamentos intermedios y microtúbulos (los más gruesos, de tubulina)."
+  }
+];
+
+// Bloque 4 — Emparejamiento orgánulo ↔ función
+const MATCH = {
+  tag:"Orgánulos y estructuras",
+  terminos:[
+    {t:"Ribosomas", c:"A"},
+    {t:"Retículo endoplásmico liso (REL)", c:"B"},
+    {t:"Aparato de Golgi", c:"C"},
+    {t:"Lisosomas", c:"D"},
+    {t:"Peroxisomas", c:"E"},
+    {t:"Mitocondrias", c:"F"},
+    {t:"Centrosoma", c:"G"},
+    {t:"Cilios", c:"H"}
+  ],
+  banco:[
+    {c:"A", d:"Sitio de síntesis de las proteínas"},
+    {c:"B", d:"Sintetiza ácidos grasos y esteroides; detoxifica fármacos; libera Ca²⁺"},
+    {c:"C", d:"Modifica, clasifica y envuelve las proteínas del RER en vesículas"},
+    {c:"D", d:"Vesículas con enzimas digestivas (autofagia y digestión)"},
+    {c:"E", d:"Contienen oxidasas que oxidan sustancias tóxicas (producen y neutralizan H₂O₂)"},
+    {c:"F", d:"Produce la mayor parte del ATP celular"},
+    {c:"G", d:"Par de centríolos que organiza el huso mitótico"},
+    {c:"H", d:"Proyecciones cortas que mueven líquidos sobre la superficie celular"}
+  ],
+  fb:"Cada orgánulo cumple una función especializada. Los ribosomas sintetizan proteínas; el REL, lípidos; el Golgi empaqueta; los lisosomas digieren; los peroxisomas oxidan; las mitocondrias generan ATP; el centrosoma organiza el huso; los cilios barren líquidos."
+};
+
+// Bloque 5 — Ordenar la síntesis de proteínas
+const ORDEN = {
+  tag:"Síntesis de proteínas (transcripción y traducción)",
+  pasos:[
+    {texto:"La RNA polimerasa se une al sitio promotor del DNA", correcto:1},
+    {texto:"Se transcribe un segmento de DNA en una molécula de mRNA", correcto:2},
+    {texto:"El pre-mRNA es modificado y sale del núcleo hacia el citoplasma", correcto:3},
+    {texto:"El mRNA se une a la subunidad ribosómica menor y luego se ensambla el ribosoma completo", correcto:4},
+    {texto:"Los anticodones del tRNA se unen a los codones del mRNA y los aminoácidos se enlazan por uniones peptídicas", correcto:5},
+    {texto:"El ribosoma alcanza el codón de terminación y se libera la proteína terminada", correcto:6}
+  ],
+  fb:"El flujo es: transcripción en el núcleo (promotor → mRNA → salida del núcleo) y traducción en el citoplasma (unión al ribosoma → lectura codón-anticodón → terminación)."
+};
+
+// Bloque 6 — Preguntas de desarrollo (respuesta modelo)
+const ABIERTAS = [
+  {
+    q:"Explica la diferencia principal entre el transporte pasivo y el transporte activo.",
+    tag:"Transporte de membrana",
+    modelo:"En el transporte pasivo la sustancia atraviesa la membrana a FAVOR de su gradiente de concentración (o electroquímico) usando su propia energía cinética; la célula no gasta ATP (difusión simple, difusión facilitada, ósmosis). En el transporte activo la sustancia se mueve EN CONTRA de su gradiente ('cuesta arriba') y la célula debe gastar energía: directamente del ATP en el transporte activo primario (bombas) o de los gradientes iónicos en el secundario."
+  },
+  {
+    q:"Describe cómo el colesterol influye en la fluidez de la membrana plasmática.",
+    tag:"Membrana plasmática",
+    modelo:"El colesterol es una molécula anfipática que se intercala entre los fosfolípidos. A temperatura corporal normal RESTA fluidez y confiere resistencia a la bicapa, porque sus anillos rígidos limitan el movimiento de las colas de ácidos grasos. Cuando la temperatura desciende, en cambio, el colesterol produce el efecto opuesto: impide que los lípidos se empaqueten y aumenta la fluidez. Así actúa como 'amortiguador' que mantiene una fluidez equilibrada."
+  },
+  {
+    q:"Compara la endocitosis mediada por receptor, la fagocitosis y la pinocitosis.",
+    tag:"Transporte en vesículas",
+    modelo:"Las tres son formas de endocitosis (entrada de materiales en vesículas, con gasto de ATP). La endocitosis mediada por receptor es MUY SELECTIVA: un ligando específico (LDL, transferrina, ciertas hormonas) se une a receptores en fositas cubiertas por clatrina. La fagocitosis ('ingesta celular') incorpora partículas sólidas grandes (bacterias, restos celulares) mediante seudópodos, y solo la realizan fagocitos como macrófagos y neutrófilos. La pinocitosis ('bebida celular') es la captación NO selectiva de pequeñas gotas de líquido extracelular y la efectúan casi todas las células."
+  },
+  {
+    q:"Explica por qué se afirma que la membrana plasmática tiene permeabilidad selectiva y qué consecuencia tiene para la célula.",
+    tag:"Permeabilidad y gradientes",
+    modelo:"La permeabilidad selectiva significa que la membrana permite el paso de algunas sustancias con más facilidad que otras: la bicapa deja pasar moléculas no polares y pequeñas sin carga (O₂, CO₂, agua, urea), pero es impermeable a iones y moléculas polares grandes, que requieren canales o transportadores. Como consecuencia, la membrana permite mantener concentraciones diferentes a cada lado, es decir, crea y sostiene los GRADIENTES de concentración y eléctrico (gradiente electroquímico), esenciales para procesos como los potenciales de acción y el transporte."
+  }
+];
+
+/* ====================== MOTOR ====================== */
+const respondidas = new Set();
+const aciertosMap = {};
+let totalCalificables = 0;
+
+function marcarResultado(id, ok){
+  respondidas.add(id);
+  aciertosMap[id] = ok;
+  actualizarBarra();
+  alResponder(id);   // respaldo local + snapshot al cerrar cada bloque
+}
+function actualizarBarra(){
+  const r = respondidas.size;
+  const ac = Object.values(aciertosMap).filter(Boolean).length;
+  document.getElementById('mk-resp').textContent = "Respondidas: "+r+" / "+totalCalificables;
+  document.getElementById('mk-score').innerHTML = "Aciertos: <b>"+ac+"</b>";
+  document.getElementById('prog').style.width = (totalCalificables? (r/totalCalificables*100):0)+"%";
+}
+function norm(s){
+  return (s||"").toString().trim().toLowerCase()
+    .normalize("NFD").replace(/[̀-ͯ]/g,"")
+    .replace(/\s+/g," ");
+}
+
+/* ---- Render Bloque 1: opción múltiple ---- */
+function renderMultiple(host){
+  const sec=document.createElement('section'); sec.className='bloque';
+  sec.innerHTML='<h2><span class="n">1</span>Opción múltiple</h2><p class="desc">Elige la única respuesta correcta y pulsa Comprobar.</p>';
+  MULTIPLE.forEach((item,i)=>{
+    const id='m'+i; totalCalificables++;
+    const q=document.createElement('div'); q.className='q';
+    let ops='';
+    item.op.forEach((o,j)=>{ ops+=`<li data-j="${j}"><span class="letra">${String.fromCharCode(65+j)}</span><span>${o}</span></li>`; });
+    q.innerHTML=`<span class="tag">${item.tag}</span>
+      <p class="enun"><span class="qn">${i+1}.</span><span>${item.q}</span></p>
+      <ul class="opciones" id="${id}">${ops}</ul>
+      <div class="acciones"><button class="btn primary small">Comprobar</button></div>
+      <div class="fb" id="fb-${id}"></div>`;
+    const ul=q.querySelector('#'+id);
+    let sel=-1;
+    ul.querySelectorAll('li').forEach(li=>{
+      li.addEventListener('click',()=>{
+        if(ul.dataset.done)return;
+        ul.querySelectorAll('li').forEach(x=>x.classList.remove('sel'));
+        li.classList.add('sel'); sel=+li.dataset.j;
+      });
+    });
+    q.querySelector('button').addEventListener('click',()=>{
+      if(sel<0){ shake(q.querySelector('button')); return; }
+      if(ul.dataset.done) return;
+      ul.dataset.done="1";
+      const ok = sel===item.correcta;
+      ul.querySelectorAll('li').forEach(li=>{
+        li.classList.add('bloq');
+        const j=+li.dataset.j;
+        if(j===item.correcta) li.classList.add('correcta-marcada');
+        if(j===sel && !ok) li.classList.add('no');
+      });
+      const fb=q.querySelector('#fb-'+id);
+      fb.className='fb show '+(ok?'bien':'mal');
+      fb.innerHTML=(ok?'<b>✓ Correcto. </b>':'<b>✗ Incorrecto. </b>')+item.fb;
+      marcarResultado(id,ok);
+    });
+    sec.appendChild(q);
+  });
+  host.appendChild(sec);
+}
+
+/* ---- Render Bloque 2: V/F ---- */
+function renderVF(host){
+  const sec=document.createElement('section'); sec.className='bloque';
+  sec.innerHTML='<h2><span class="n">2</span>Verdadero o falso</h2><p class="desc">Decide si el enunciado es verdadero o falso; la retroalimentación justifica la respuesta.</p>';
+  VF.forEach((item,i)=>{
+    const id='vf'+i; totalCalificables++;
+    const q=document.createElement('div'); q.className='q';
+    q.innerHTML=`<span class="tag">${item.tag}</span>
+      <p class="enun"><span class="qn">${i+1}.</span><span>${item.q}</span></p>
+      <ul class="opciones" id="${id}">
+        <li data-v="true"><span class="letra">V</span><span>Verdadero</span></li>
+        <li data-v="false"><span class="letra">F</span><span>Falso</span></li>
+      </ul>
+      <div class="acciones"><button class="btn primary small">Comprobar</button></div>
+      <div class="fb" id="fb-${id}"></div>`;
+    const ul=q.querySelector('#'+id); let sel=null;
+    ul.querySelectorAll('li').forEach(li=>{
+      li.addEventListener('click',()=>{
+        if(ul.dataset.done)return;
+        ul.querySelectorAll('li').forEach(x=>x.classList.remove('sel'));
+        li.classList.add('sel'); sel=(li.dataset.v==="true");
+      });
+    });
+    q.querySelector('button').addEventListener('click',()=>{
+      if(sel===null){ shake(q.querySelector('button')); return; }
+      if(ul.dataset.done)return; ul.dataset.done="1";
+      const ok=sel===item.correcta;
+      ul.querySelectorAll('li').forEach(li=>{
+        li.classList.add('bloq');
+        const v=(li.dataset.v==="true");
+        if(v===item.correcta) li.classList.add('correcta-marcada');
+        if(v===sel && !ok) li.classList.add('no');
+      });
+      const fb=q.querySelector('#fb-'+id);
+      fb.className='fb show '+(ok?'bien':'mal');
+      fb.innerHTML=(ok?'<b>✓ Correcto. </b>':'<b>✗ Incorrecto. </b>')+item.fb;
+      marcarResultado(id,ok);
+    });
+    sec.appendChild(q);
+  });
+  host.appendChild(sec);
+}
+
+/* ---- Render Bloque 3: completar ---- */
+function renderCompletar(host){
+  const sec=document.createElement('section'); sec.className='bloque';
+  sec.innerHTML='<h2><span class="n">3</span>Completar los espacios</h2><p class="desc">Escribe la palabra que falta en cada espacio (se admiten tildes o su ausencia).</p>';
+  COMPLETAR.forEach((item,i)=>{
+    const id='c'+i; totalCalificables++;
+    const q=document.createElement('div'); q.className='q completar';
+    let html=`<span class="tag">${item.tag}</span><p class="enun"><span class="qn">${i+1}.</span><span>`;
+    let inputs=[];
+    item.partes.forEach((p,idx)=>{
+      if(typeof p==='string'){ html+=p; }
+      else { const inpId=id+'_'+idx; inputs.push({inpId,resp:p.resp}); html+=`<input class="gap" id="${inpId}" type="text" autocomplete="off">`; }
+    });
+    html+=`</span></p><div class="acciones"><button class="btn primary small">Comprobar</button></div><div class="fb" id="fb-${id}"></div>`;
+    q.innerHTML=html;
+    q.querySelector('button').addEventListener('click',()=>{
+      if(q.dataset.done)return;
+      let vacio=false; inputs.forEach(o=>{ if(!document.getElementById(o.inpId).value.trim()) vacio=true; });
+      if(vacio){ shake(q.querySelector('button')); return; }
+      q.dataset.done="1";
+      let ok=true;
+      inputs.forEach(o=>{
+        const el=document.getElementById(o.inpId);
+        const val=norm(el.value);
+        const bien=o.resp.map(norm).includes(val);
+        el.classList.add(bien?'ok':'no'); el.disabled=true;
+        if(!bien) ok=false;
+      });
+      const fb=q.querySelector('#fb-'+id);
+      fb.className='fb show '+(ok?'bien':'mal');
+      const soluciones=inputs.map(o=>o.resp[o.resp.length-1]).join(', ');
+      fb.innerHTML=(ok?'<b>✓ Correcto. </b>':'<b>✗ Revisa. </b>Respuesta(s): <b>'+soluciones+'</b>. ')+item.fb;
+      marcarResultado(id,ok);
+    });
+    sec.appendChild(q);
+  });
+  host.appendChild(sec);
+}
+
+/* ---- Render Bloque 4: emparejamiento ---- */
+function renderMatch(host){
+  const sec=document.createElement('section'); sec.className='bloque';
+  sec.innerHTML='<h2><span class="n">4</span>Emparejamiento: orgánulo → función</h2><p class="desc">Selecciona la letra de la función que corresponde a cada orgánulo.</p>';
+  totalCalificables++;
+  const id='match';
+  const q=document.createElement('div'); q.className='q';
+  // Banco en orden alfabético: la letra es la clave de respuesta, así que
+  // barajarlo solo dificultaba localizarla, sin aportar nada.
+  const bancoOrden=["A","B","C","D","E","F","G","H"];
+  let bancoHtml='<div class="banco"><b>Banco de funciones:</b><br>';
+  bancoOrden.forEach(c=>{ const d=MATCH.banco.find(b=>b.c===c).d; bancoHtml+=`<b>${c})</b> ${d}<br>`; });
+  bancoHtml+='</div>';
+  let rows='';
+  MATCH.terminos.forEach((tm,i)=>{
+    let opts='<option value="">—</option>';
+    bancoOrden.forEach(c=>{ opts+=`<option value="${c}">${c}</option>`; });
+    rows+=`<tr><td class="term">${i+1}. ${tm.t}</td><td><select id="mt${i}">${opts}</select></td></tr>`;
+  });
+  q.innerHTML=`<span class="tag">${MATCH.tag}</span>
+    <table class="match">${rows}</table>${bancoHtml}
+    <div class="acciones"><button class="btn primary small">Comprobar</button></div>
+    <div class="fb" id="fb-${id}"></div>`;
+  q.querySelector('button').addEventListener('click',()=>{
+    if(q.dataset.done)return;
+    let vacio=false; MATCH.terminos.forEach((tm,i)=>{ if(!document.getElementById('mt'+i).value) vacio=true; });
+    if(vacio){ shake(q.querySelector('button')); return; }
+    q.dataset.done="1";
+    let bien=0;
+    MATCH.terminos.forEach((tm,i)=>{
+      const sel=document.getElementById('mt'+i);
+      const ok=sel.value===tm.c;
+      sel.classList.add(ok?'ok':'no'); sel.disabled=true;
+      if(ok) bien++;
+    });
+    const ok=bien===MATCH.terminos.length;
+    const fb=q.querySelector('#fb-'+id);
+    fb.className='fb show '+(ok?'bien':'mal');
+    const clave=MATCH.terminos.map((tm,i)=>(i+1)+'→'+tm.c).join('  ·  ');
+    fb.innerHTML=`<b>${ok?'✓ ':'✗ '}Aciertos: ${bien}/${MATCH.terminos.length}. </b>Clave: ${clave}. `+MATCH.fb;
+    marcarResultado(id,ok);
+  });
+  sec.appendChild(q);
+  host.appendChild(sec);
+}
+
+/* ---- Render Bloque 5: ordenar ---- */
+function renderOrden(host){
+  const sec=document.createElement('section'); sec.className='bloque';
+  sec.innerHTML='<h2><span class="n">5</span>Ordena la síntesis de proteínas</h2><p class="desc">Asigna a cada paso el número de orden correcto (del 1 al 6), desde la transcripción hasta la proteína terminada.</p>';
+  totalCalificables++;
+  const id='orden';
+  const q=document.createElement('div'); q.className='q';
+  // presentar los pasos en orden barajado fijo
+  const barajado=[3,5,1,6,2,4]; // índices+1 de ORDEN.pasos mostrados
+  const mapa={1:2,2:4,3:0,4:5,5:1,6:3}; // no usado; construimos abajo
+  let lis='';
+  // Mostramos en un orden desordenado explícito
+  const displayOrder=[2,4,0,5,1,3]; // índices del array pasos
+  displayOrder.forEach((idx,k)=>{
+    const p=ORDEN.pasos[idx];
+    let opts='<option value="">#</option>';
+    for(let n=1;n<=6;n++) opts+=`<option value="${n}">${n}</option>`;
+    lis+=`<li><select id="or${idx}" data-correcto="${p.correcto}">${opts}</select><span>${p.texto}</span></li>`;
+  });
+  q.innerHTML=`<span class="tag">${ORDEN.tag}</span>
+    <ul class="orden">${lis}</ul>
+    <div class="acciones"><button class="btn primary small">Comprobar</button></div>
+    <div class="fb" id="fb-${id}"></div>`;
+  q.querySelector('button').addEventListener('click',()=>{
+    if(q.dataset.done)return;
+    let vacio=false; ORDEN.pasos.forEach((p,idx)=>{ const s=document.getElementById('or'+idx); if(s&&!s.value) vacio=true; });
+    if(vacio){ shake(q.querySelector('button')); return; }
+    q.dataset.done="1";
+    let bien=0;
+    ORDEN.pasos.forEach((p,idx)=>{
+      const s=document.getElementById('or'+idx); if(!s)return;
+      const ok=(+s.value)===p.correcto;
+      s.classList.add(ok?'ok':'no'); s.disabled=true; if(ok)bien++;
+    });
+    const ok=bien===ORDEN.pasos.length;
+    const fb=q.querySelector('#fb-'+id);
+    fb.className='fb show '+(ok?'bien':'mal');
+    fb.innerHTML=`<b>${ok?'✓ ':'✗ '}Aciertos: ${bien}/${ORDEN.pasos.length}. </b>`+ORDEN.fb;
+    marcarResultado(id,ok);
+  });
+  sec.appendChild(q);
+  host.appendChild(sec);
+}
+
+/* ---- Render Bloque 6: abiertas ---- */
+function renderAbiertas(host){
+  const sec=document.createElement('section'); sec.className='bloque';
+  sec.innerHTML='<h2><span class="n">6</span>Preguntas de desarrollo</h2><p class="desc">Redacta tu respuesta y luego compárala con la respuesta modelo. Estas preguntas no suman al puntaje automático: son de reflexión y repaso.</p>';
+  ABIERTAS.forEach((item,i)=>{
+    const id='a'+i;
+    const q=document.createElement('div'); q.className='q abierta';
+    q.innerHTML=`<span class="tag">${item.tag}</span>
+      <p class="enun"><span class="qn">${i+1}.</span><span>${item.q}</span></p>
+      <textarea placeholder="Escribe tu respuesta aquí..."></textarea>
+      <div class="acciones"><button class="btn ghost small">Ver respuesta modelo</button></div>
+      <div class="modelo" id="mod-${id}"><h4>Respuesta modelo</h4>${item.modelo}</div>`;
+    q.querySelector('button').addEventListener('click',()=>{
+      const m=q.querySelector('#mod-'+id); m.classList.toggle('show');
+      q.querySelector('button').textContent=m.classList.contains('show')?'Ocultar respuesta modelo':'Ver respuesta modelo';
+    });
+    sec.appendChild(q);
+  });
+  host.appendChild(sec);
+}
+
+function shake(el){ el.animate([{transform:'translateX(0)'},{transform:'translateX(-4px)'},{transform:'translateX(4px)'},{transform:'translateX(0)'}],{duration:220}); }
+
+/* ---- Calificar todo (fuerza clic en botones no resueltos) ---- */
+function calificarTodo(){
+  document.querySelectorAll('.q .acciones .btn.primary').forEach(b=>{
+    const q=b.closest('.q');
+    if(q && !q.querySelector('.opciones[data-done], [data-done]') && !q.dataset.done){
+      // intentar comprobar solo si hay selección/valor; si no, se ignora
+    }
+    b.click();
+  });
+  mostrarFinal();
+}
+function mostrarFinal(){
+  const ac=Object.values(aciertosMap).filter(Boolean).length;
+  document.getElementById('finalScore').textContent=ac+" / "+totalCalificables;
+  let msg;
+  const pct=totalCalificables? ac/totalCalificables:0;
+  const nombre=document.getElementById('nombre').value.trim();
+  const saludo=nombre? (nombre+", ") : "";
+  if(respondidas.size<totalCalificables){
+    msg=saludo+"aún tienes ítems sin comprobar ("+(totalCalificables-respondidas.size)+" pendientes).";
+  } else if(pct===1){ msg=saludo+"¡excelente! Dominas los conceptos del capítulo. 🎯";
+  } else if(pct>=0.8){ msg=saludo+"muy buen desempeño. Repasa los ítems marcados en rojo.";
+  } else if(pct>=0.6){ msg=saludo+"buen avance; conviene reforzar las secciones con más errores.";
+  } else { msg=saludo+"repasa la Revisión del capítulo y vuelve a intentarlo."; }
+  document.getElementById('finalMsg').textContent=msg;
+  document.getElementById('final').scrollIntoView({behavior:'smooth'});
+}
+function reiniciar(){ location.reload(); }
+
+/* ═══════════════ GUARDADO Y ENTREGA ═══════════════
+   El taller enseña las respuestas al comprobar cada ítem, así que aquí no
+   hay antifraude: lo que se guarda es el avance, para que nadie pierda su
+   trabajo si se cae la conexión o se cierra el navegador.
+
+   Tres capas de respaldo:
+     1. localStorage  — en cada respuesta. Sobrevive a recargar y a cerrar.
+     2. Servidor      — al terminar cada bloque, cada 90 s si hay cambios,
+                        y al salir de la página (sendBeacon).
+     3. Entrega final — explícita, con confirmación y calificación.
+
+   El listado de estudiantes se pide al servidor para no escribir nombres
+   en el repositorio, que es público. */
+const CONFIG = {
+  TOKEN   : "TALLER_CEL_MORF_2026II_c0c1e3",
+  ENDPOINT: "https://script.google.com/macros/s/AKfycbz-J681-hQK-zuG0pGJEm8YtLRw_ADyO162pkjfYscd2iEBHbNRTnEKKfrLRVqmfb1a/exec",
+  LS_PREFIJO: "taller_celular_2026II::",
+  AUTOGUARDADO_MS: 90000
+};
+
+/* Debe coincidir con BLOQUES de taller.gs */
+const BLOQUES = [
+  { clave:"m",     n:10, nombre:"Opción múltiple",  bloque:1 },
+  { clave:"vf",    n:6,  nombre:"Verdadero o falso", bloque:2 },
+  { clave:"c",     n:5,  nombre:"Completar",         bloque:3 },
+  { clave:"match", n:1,  nombre:"Emparejamiento",    bloque:4 },
+  { clave:"orden", n:1,  nombre:"Ordenar",           bloque:5 }
+];
+function bloqueDe(id){
+  if(id === "match" || id === "orden") return id;
+  if(id.indexOf("vf") === 0) return "vf";
+  if(id.charAt(0) === "m")   return "m";
+  if(id.charAt(0) === "c")   return "c";
+  return null;
+}
+
+let entregado = false;
+let sucio = false;               // hay cambios sin mandar al servidor
+let bloquesEnviados = {};        // clave -> true, para no repetir el snapshot
+
+const MOTIVOS = {
+  taller_cerrado: "El taller ya está cerrado a envíos.",
+  token_invalido: "Este enlace no es válido. Pídele al docente el correcto."
+};
+
+const $id = s => document.getElementById(s);
+let ingresado = "";                       // nombre confirmado contra el servidor
+const alumnoActual = () => ingresado;
+const abiertasActuales = () => [...document.querySelectorAll('.q.abierta textarea')].map(t => t.value.trim());
+
+function estadoNube(txt, clase){
+  const el = $id('estadoNube');
+  el.textContent = txt;
+  el.className = clase || "";
+}
+
+/* ───────────── Capa 1 · respaldo en el navegador ───────────── */
+function claveLocal(){ return CONFIG.LS_PREFIJO + (alumnoActual() || "sin-nombre"); }
+
+function guardarLocal(){
+  try{
+    localStorage.setItem(claveLocal(), JSON.stringify({
+      alumno: alumnoActual(),
+      items: aciertosMap,
+      abiertas: abiertasActuales(),
+      ts: new Date().toISOString()
+    }));
+  }catch(e){ /* modo privado o cuota llena: no es crítico */ }
+}
+
+function hayRespaldoLocal(){
+  try{ return JSON.parse(localStorage.getItem(claveLocal()) || "null"); }catch(e){ return null; }
+}
+
+function ofrecerRecuperacion(){
+  const g = hayRespaldoLocal();
+  const caja = $id('avisoRecuperar');
+  caja.innerHTML = "";
+  if(!g || (!Object.keys(g.items||{}).length && !(g.abiertas||[]).some(Boolean))) return;
+
+  const hora = new Date(g.ts).toLocaleString('es-CO', {dateStyle:'short', timeStyle:'short'});
+  const nItems = Object.keys(g.items||{}).length;
+  const nAb = (g.abiertas||[]).filter(Boolean).length;
+  caja.innerHTML = `<div class="recuperar">
+      <b>Tienes un avance guardado en este navegador</b> (${hora}): ${nItems} ítems comprobados
+      y ${nAb} respuesta(s) de desarrollo. Puedes recuperarlo y seguir donde ibas.
+      <div><button class="btn primary small" id="btnRecuperar">Recuperar mi avance</button>
+      <button class="btn ghost small" id="btnDescartar">Empezar de cero</button></div>
+    </div>`;
+  $id('btnRecuperar').addEventListener('click', ()=>{
+    Object.assign(aciertosMap, g.items || {});
+    Object.keys(g.items || {}).forEach(k => respondidas.add(k));
+    const tas = document.querySelectorAll('.q.abierta textarea');
+    (g.abiertas || []).forEach((v,i)=>{ if(tas[i] && v) tas[i].value = v; });
+    actualizarBarra();
+    BLOQUES.forEach(b => pintarEstadoBloque(b.clave));
+    caja.innerHTML = `<div class="recuperar">Avance recuperado. Los ítems que ya habías
+      comprobado cuentan en tu marcador; si quieres volver a ver la explicación de alguno,
+      respóndelo otra vez.</div>`;
+    sucio = true;
+  });
+  $id('btnDescartar').addEventListener('click', ()=>{
+    try{ localStorage.removeItem(claveLocal()); }catch(e){}
+    caja.innerHTML = "";
+  });
+}
+
+/* ───────────── Capa 2 · snapshots al servidor ───────────── */
+async function enviarServidor(payload, conBeacon){
+  const cuerpo = JSON.stringify(Object.assign({token: CONFIG.TOKEN}, payload));
+  if(conBeacon && navigator.sendBeacon){
+    try{ navigator.sendBeacon(CONFIG.ENDPOINT, new Blob([cuerpo], {type:"text/plain"})); return {ok:true}; }catch(e){}
+  }
+  const res = await fetch(CONFIG.ENDPOINT, {
+    method:"POST", headers:{"Content-Type":"text/plain;charset=utf-8"}, body:cuerpo
+  });
+  return res.json();
+}
+
+/** Snapshot de avance. `motivo` explica por qué se envió. */
+async function snapshot(motivo, conBeacon){
+  const alumno = alumnoActual();
+  if(!alumno || entregado) return;
+  const carga = {
+    evento : "snapshot",
+    motivo : motivo,
+    alumno : alumno,
+    items  : aciertosMap,
+    abiertas: abiertasActuales()
+  };
+  if(conBeacon){ enviarServidor(carga, true); sucio = false; return; }
+  try{
+    estadoNube("guardando…");
+    const d = await enviarServidor(carga);
+    if(!d.ok) throw new Error(d.error || "error");
+    sucio = false;
+    estadoNube("guardado ✓", "ok");
+  }catch(e){
+    estadoNube("sin guardar (se reintenta)", "err");
+  }
+}
+
+/** Se llama cada vez que se comprueba un ítem. */
+function alResponder(id){
+  guardarLocal();
+  sucio = true;
+  const b = bloqueDe(id);
+  if(b) pintarEstadoBloque(b);
+  // Snapshot en cuanto se completa un bloque: es el corte lógico natural.
+  if(b && !bloquesEnviados[b] && bloqueCompleto(b)){
+    bloquesEnviados[b] = true;
+    snapshot("bloque_completo:" + b);
+  }
+}
+
+function contarBloque(clave){
+  return Object.keys(aciertosMap).filter(k => bloqueDe(k) === clave).length;
+}
+function bloqueCompleto(clave){
+  const b = BLOQUES.find(x => x.clave === clave);
+  return b ? contarBloque(clave) >= b.n : false;
+}
+
+/** Etiqueta «3/10 · guardado» junto al título de cada bloque. */
+function pintarEstadoBloque(clave){
+  const b = BLOQUES.find(x => x.clave === clave);
+  if(!b) return;
+  const h2 = document.querySelectorAll('section.bloque > h2')[b.bloque - 1];
+  if(!h2) return;
+  let et = h2.querySelector('.guardado');
+  if(!et){ et = document.createElement('span'); et.className = 'guardado'; h2.appendChild(et); }
+  const hechos = contarBloque(clave);
+  et.textContent = hechos + "/" + b.n + (hechos >= b.n ? " · completo" : "");
+  et.classList.toggle('pend', hechos < b.n);
+}
+
+/* ───────────── Ingreso por estudiante ─────────────
+   El nombre se elige de la lista y se confirma con el código, de modo que
+   nadie entra por otro por descuido y queda un log de ingreso real. */
+async function cargarRoster(){
+  const sel = $id('nombre');
+  try{
+    const r = await fetch(CONFIG.ENDPOINT + "?action=roster&token=" + encodeURIComponent(CONFIG.TOKEN));
+    const d = await r.json();
+    if(!d.ok) throw new Error(MOTIVOS[d.error] || ("El servidor respondió: " + d.error));
+    if(!Array.isArray(d.roster) || !d.roster.length) throw new Error("El listado llegó vacío.");
+    sel.innerHTML = '<option value="">— Selecciona tu nombre —</option>' +
+      d.roster.map(n => `<option value="${n}">${n}</option>`).join("");
+    revisarIngreso();
+  }catch(err){
+    sel.innerHTML = '<option value="">No se pudo cargar el listado</option>';
+    $id('idErr').innerHTML = (err.message || "No se pudo cargar el listado.") +
+      ' <a href="#" onclick="location.reload();return false">Recargar</a>.';
+  }
+}
+
+function revisarIngreso(){
+  $id('btnIngresar').disabled = !($id('nombre').value && $id('codigo').value.trim());
+}
+
+async function ingresar(){
+  const btn = $id('btnIngresar');
+  const alumno = $id('nombre').value;
+  const codigo = $id('codigo').value.trim();
+  const err = $id('idErr');
+  err.textContent = "";
+  btn.disabled = true; btn.textContent = "Verificando…";
+  try{
+    const d = await enviarServidor({evento:"ingreso", alumno:alumno, codigo:codigo});
+    if(!d.ok) throw new Error(MOTIVOS[d.error] || d.error);
+
+    // Si empezó a trabajar antes de ingresar, su respaldo quedó bajo
+    // "sin-nombre": se traslada a su clave para no perderlo.
+    try{
+      const anon = localStorage.getItem(CONFIG.LS_PREFIJO + "sin-nombre");
+      if(anon){
+        localStorage.setItem(CONFIG.LS_PREFIJO + alumno, anon);
+        localStorage.removeItem(CONFIG.LS_PREFIJO + "sin-nombre");
+      }
+    }catch(e){}
+
+    ingresado = alumno;
+    $id('cajaIngreso').style.display = "none";
+    $id('cajaIdentificado').style.display = "";
+    $id('quienSoy').textContent = alumno;
+    if(d.codigo_pendiente){
+      err.style.color = "var(--gris)";
+      err.textContent = "Tu código no estaba en la lista del curso; quedó registrado el que escribiste.";
+    }
+    estadoNube("listo para guardar");
+    ofrecerRecuperacion();
+  }catch(e){
+    btn.disabled = false; btn.textContent = "Ingresar";
+    err.style.color = "var(--rojo)";
+    err.textContent = e.message === "codigo_incorrecto"
+      ? "Ese código no corresponde al nombre seleccionado. Revísalo."
+      : "No se pudo ingresar (" + e.message + "). Revisa tu conexión e inténtalo otra vez.";
+  }
+}
+
+function salirIngreso(){
+  ingresado = "";
+  $id('cajaIngreso').style.display = "";
+  $id('cajaIdentificado').style.display = "none";
+  $id('btnIngresar').disabled = false;
+  $id('btnIngresar').textContent = "Ingresar";
+  $id('codigo').value = "";
+  $id('avisoRecuperar').innerHTML = "";
+  estadoNube("·");
+}
+
+/* ───────────── Capa 3 · entrega definitiva ───────────── */
+function abrirConfirmacion(){
+  const alumno = alumnoActual();
+  if(!alumno){
+    $id('idErr').style.color = "var(--rojo)";
+    $id('idErr').textContent = "Primero ingresa con tu nombre y tu código, arriba.";
+    $id('cajaIngreso').scrollIntoView({behavior:'smooth'});
+    return;
+  }
+  const ac = Object.values(aciertosMap).filter(Boolean).length;
+  const ab = abiertasActuales();
+  const sinResponder = totalCalificables - respondidas.size;
+  const abVacias = ab.filter(t => !t).length;
+
+  $id('mcResumen').innerHTML =
+    `<b>${alumno}</b><br>` +
+    BLOQUES.map(b => `${b.nombre}: <b>${contarBloque(b.clave)}/${b.n}</b>`).join(" &nbsp;·&nbsp; ") +
+    `<br>Aciertos automáticos: <b>${ac} / ${totalCalificables}</b>` +
+    `<br>Preguntas de desarrollo escritas: <b>${4 - abVacias} / 4</b>`;
+
+  const avisos = [];
+  if(sinResponder > 0) avisos.push(`Te faltan ${sinResponder} ítems por comprobar.`);
+  if(abVacias > 0)     avisos.push(`Tienes ${abVacias} pregunta(s) de desarrollo en blanco.`);
+  if(entregado)        avisos.push("Ya entregaste antes; esto quedará como una entrega nueva.");
+  $id('mcAviso').textContent = avisos.join(" ");
+
+  $id('modalConf').classList.add('show');
+}
+function cerrarConfirmacion(){ $id('modalConf').classList.remove('show'); }
+
+async function entregarDefinitivo(){
+  const btn = $id('mcConfirmar');
+  btn.disabled = true; btn.textContent = "Entregando…";
+  try{
+    const d = await enviarServidor({
+      evento  : "envio",
+      alumno  : alumnoActual(),
+      items   : aciertosMap,
+      abiertas: abiertasActuales()
+    });
+    if(!d.ok) throw new Error(MOTIVOS[d.error] || d.error);
+
+    entregado = true; sucio = false;
+    try{ localStorage.removeItem(claveLocal()); }catch(e){}
+    cerrarConfirmacion();
+    estadoNube("entregado ✓", "ok");
+
+    const btnE = $id('btnEnviar');
+    btnE.disabled = true; btnE.textContent = "Entregado ✓";
+
+    const ab = abiertasActuales().filter(Boolean).length;
+    $id('finalScore').textContent = d.aciertos + " / " + d.max;
+    $id('finalMsg').innerHTML =
+      "<b>Entrega registrada.</b> Tu calificación automática es <b>" + d.aciertos + " / " + d.max +
+      "</b> (" + Math.round(d.aciertos / d.max * 100) + " %)." +
+      (ab ? " Tus " + ab + " respuesta(s) de desarrollo las califica el docente y no cuentan en ese número."
+          : " No escribiste las preguntas de desarrollo, que el docente califica aparte.");
+    $id('final').scrollIntoView({behavior:'smooth'});
+  }catch(e){
+    btn.disabled = false; btn.textContent = "Sí, entregar";
+    $id('mcAviso').textContent = "No se pudo entregar (" + e.message +
+      "). Revisa tu conexión e inténtalo otra vez; tu avance sigue guardado.";
+  }
+}
+
+/* ---- Init ---- */
+(function init(){
+  const app=document.getElementById('app');
+  renderMultiple(app);
+  renderVF(app);
+  renderCompletar(app);
+  renderMatch(app);
+  renderOrden(app);
+  renderAbiertas(app);
+  document.getElementById('chip-total').textContent=totalCalificables+" ítems calificables + 4 de desarrollo";
+  actualizarBarra();
+  cargarRoster();
+  BLOQUES.forEach(b => pintarEstadoBloque(b.clave));
+
+  // Ingreso por estudiante
+  $id('nombre').addEventListener('change', revisarIngreso);
+  $id('codigo').addEventListener('input', revisarIngreso);
+  $id('codigo').addEventListener('keydown', e=>{
+    if(e.key === "Enter" && !$id('btnIngresar').disabled) ingresar();
+  });
+  $id('btnIngresar').addEventListener('click', ingresar);
+  $id('btnSalir').addEventListener('click', salirIngreso);
+
+  // Las respuestas de desarrollo se respaldan mientras se escriben.
+  document.querySelectorAll('.q.abierta textarea').forEach(t=>{
+    let temporizador;
+    t.addEventListener('input', ()=>{
+      clearTimeout(temporizador);
+      temporizador = setTimeout(()=>{ guardarLocal(); sucio = true; }, 800);
+    });
+  });
+
+  // Autoguardado periódico: solo sube si hay algo nuevo.
+  setInterval(()=>{ if(sucio && !entregado && alumnoActual()) snapshot("periodico"); },
+              CONFIG.AUTOGUARDADO_MS);
+
+  // Último respaldo al cerrar o recargar la página.
+  window.addEventListener('beforeunload', ()=>{
+    guardarLocal();
+    if(sucio && !entregado && alumnoActual()) snapshot("salida", true);
+  });
+
+  // Cerrar el modal con Escape.
+  document.addEventListener('keydown', e=>{
+    if(e.key === "Escape") cerrarConfirmacion();
+  });
+})();
+</script>
+</body>
+</html>
