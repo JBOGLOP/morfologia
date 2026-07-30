@@ -57,7 +57,7 @@ grandes sistemas. Cada clase se enlaza aquí el día que se dicta.
 | # | Fecha | Tema | Interfaz optométrica | Material |
 |:-:|---|---|---|---|
 | 1 | **jue 23 jul** | Organización corporal: planos, ejes y posición anatómica | Posición primaria de la mirada · ejes de Fick · nasal y temporal | ✅ **[Abrir clase](https://jboglop.github.io/morfologia/clase_organizacion_corporal.html)**<!-- QUIZ1: quitar los marcadores de comentario el 30 jul · **[Quiz 1](https://jboglop.github.io/morfologia/quiz1/quiz1_organizacion_corporal.html)** --> |
-| 2 | **jue 30 jul** | Nivel celular: organelos, membrana y transporte | Bomba Na⁺/K⁺ del endotelio corneal · deturgescencia · cristalino sin organelos | ✅ **[Abrir clase](https://jboglop.github.io/morfologia/clase_nivel_celular.html)** · [Taller](https://jboglop.github.io/morfologia/taller_celular.html1) |
+| 2 | **jue 30 jul** | Nivel celular: organelos, membrana y transporte | Bomba Na⁺/K⁺ del endotelio corneal · deturgescencia · cristalino sin organelos | ✅ **[Abrir clase](https://jboglop.github.io/morfologia/clase_nivel_celular.html)** · [Taller](https://jboglop.github.io/morfologia/taller_celular.html) |
 | 3 | jue 6 ago | Nivel tisular: epitelial, conectivo, muscular y nervioso | Epitelio corneal · estroma y esclera | próximamente |
 | 4 | jue 13 ago | Osteología general: clasificación de huesos y articulaciones | Huesos que forman la órbita | próximamente |
 | — | **jue 20 ago** | 📝 **Primer parcial** | — | — |
