@@ -16,6 +16,8 @@ Listado*
 *.gs
 appsscript.json
 dashboard*.html
+calificador*.html
+calificacion*
 *_credenciales*
 .env
 .env.*
