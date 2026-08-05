@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Taller interactivo · El nivel tisular de organización (Cap. 4, Tortora)</title>
+<style>
+  :root{
+    --azul:#1f5673; --azul2:#2b7a9b; --acento:#c8532b; --acento2:#e07a4f;
+    --verde:#2e7d5b; --verde-bg:#e6f4ec; --rojo:#b23a2e; --rojo-bg:#fbe9e7;
+    --tinta:#22303a; --gris:#5a6b75; --linea:#dfe6ea; --papel:#f4f7f9; --blanco:#ffffff;
+    --sombra:0 1px 3px rgba(20,40,55,.08),0 6px 20px rgba(20,40,55,.06);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--papel);color:var(--tinta);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.55;font-size:16px}
+  .wrap{max-width:920px;margin:0 auto;padding:0 18px 80px}
+  header.hero{background:linear-gradient(135deg,var(--azul),var(--azul2));color:#fff;
+    padding:34px 0 30px;box-shadow:var(--sombra)}
+  header.hero .wrap{padding-bottom:0}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;opacity:.9;font-weight:700}
+  header.hero h1{margin:8px 0 6px;font-size:27px;line-height:1.2}
+  header.hero p.sub{margin:0;opacity:.94;font-size:15px;max-width:640px}
+  .meta{margin-top:16px;display:flex;flex-wrap:wrap;gap:8px}
+  .chip{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28);
+    padding:5px 11px;border-radius:999px;font-size:12.5px;font-weight:600}
+  .studentbox{margin-top:18px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);
+    border-radius:12px;padding:12px 14px;display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+  .studentbox label{font-size:13px;font-weight:600;display:flex;flex-direction:column;gap:4px;flex:1;min-width:160px}
+  .studentbox input{border:none;border-radius:8px;padding:8px 10px;font-size:14px;color:var(--tinta)}
+  .instrucciones{background:var(--blanco);border:1px solid var(--linea);border-left:5px solid var(--acento);
+    border-radius:12px;padding:16px 18px;margin:24px 0;box-shadow:var(--sombra);font-size:14.5px}
+  .instrucciones h2{margin:0 0 8px;font-size:16px;color:var(--acento)}
+  .instrucciones ul{margin:6px 0 0;padding-left:20px}
+  .instrucciones li{margin:3px 0}
+
+  .barra-fija{position:sticky;top:0;z-index:30;background:rgba(244,247,249,.94);
+    backdrop-filter:blur(6px);border-bottom:1px solid var(--linea);padding:10px 0;margin-bottom:8px}
+  .barra-fija .wrap{padding-bottom:0;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .progreso{flex:1;min-width:150px;height:10px;background:#e2eaee;border-radius:999px;overflow:hidden}
+  .progreso > span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--verde),#3fa47a);
+    transition:width .35s ease}
+  .marcador{font-size:13.5px;font-weight:700;color:var(--azul)}
+  .marcador b{color:var(--verde)}
+
+  section.bloque{background:var(--blanco);border:1px solid var(--linea);border-radius:14px;
+    padding:20px 20px 8px;margin:22px 0;box-shadow:var(--sombra)}
+  .bloque > h2{margin:0 0 2px;font-size:19px;color:var(--azul);display:flex;align-items:center;gap:10px}
+  .bloque > h2 .n{background:var(--azul);color:#fff;width:30px;height:30px;border-radius:8px;
+    display:inline-flex;align-items:center;justify-content:center;font-size:15px;flex:none}
+  .bloque > p.desc{margin:2px 0 6px;color:var(--gris);font-size:13.5px}
+
+  .q{border-top:1px solid var(--linea);padding:18px 0 16px}
+  .q:first-of-type{border-top:none}
+  .q .enun{font-weight:600;margin:0 0 4px;display:flex;gap:8px}
+  .q .enun .qn{color:var(--acento);font-weight:800;flex:none}
+  .q .tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;
+    color:var(--azul2);background:#e9f2f6;border-radius:6px;padding:2px 8px;margin-bottom:8px}
+
+  .opciones{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:8px}
+  .opciones li{border:1.5px solid var(--linea);border-radius:10px;padding:10px 12px;cursor:pointer;
+    display:flex;gap:10px;align-items:flex-start;transition:.15s;background:#fbfdfe;font-size:15px}
+  .opciones li:hover{border-color:var(--azul2);background:#f2f8fb}
+  .opciones li .letra{font-weight:800;color:var(--azul);flex:none;width:20px}
+  .opciones li.sel{border-color:var(--azul2);background:#e9f4f9}
+  .opciones li.ok{border-color:var(--verde);background:var(--verde-bg)}
+  .opciones li.no{border-color:var(--rojo);background:var(--rojo-bg)}
+  .opciones li.correcta-marcada{border-color:var(--verde);background:var(--verde-bg)}
+  .opciones li.bloq{cursor:default;pointer-events:none}
+
+  .fb{margin-top:10px;font-size:14px;border-radius:9px;padding:10px 12px;display:none}
+  .fb.show{display:block}
+  .fb.bien{background:var(--verde-bg);border:1px solid #b6ddc7;color:#215c40}
+  .fb.mal{background:var(--rojo-bg);border:1px solid #eec3bd;color:#8a2b22}
+  .fb b{font-weight:700}
+
+  input.gap{border:1.5px solid var(--linea);border-radius:8px;padding:6px 9px;font-size:15px;
+    min-width:150px;margin:0 3px;font-family:inherit}
+  input.gap:focus{outline:none;border-color:var(--azul2)}
+  input.gap.ok{border-color:var(--verde);background:var(--verde-bg)}
+  input.gap.no{border-color:var(--rojo);background:var(--rojo-bg)}
+  .completar p{margin:6px 0}
+
+  table.match{width:100%;border-collapse:collapse;margin-top:8px}
+  table.match td{padding:7px 6px;border-bottom:1px solid var(--linea);vertical-align:middle;font-size:14.5px}
+  table.match td.term{font-weight:600;width:44%}
+  table.match select{width:100%;padding:7px 8px;border:1.5px solid var(--linea);border-radius:8px;
+    font-size:14px;font-family:inherit;background:#fbfdfe}
+  table.match select.ok{border-color:var(--verde);background:var(--verde-bg)}
+  table.match select.no{border-color:var(--rojo);background:var(--rojo-bg)}
+  .banco{font-size:13px;color:var(--gris);background:#f3f7f9;border:1px dashed var(--linea);
+    border-radius:9px;padding:10px 12px;margin-top:10px}
+  .banco b{color:var(--azul)}
+
+  .orden{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:7px;counter-reset:o}
+  .orden li{display:flex;gap:10px;align-items:center;border:1.5px solid var(--linea);border-radius:10px;
+    padding:8px 10px;background:#fbfdfe;font-size:14.5px}
+  .orden li select{width:64px;padding:6px;border:1.5px solid var(--linea);border-radius:8px;font-family:inherit;font-weight:700;text-align:center}
+  .orden li select.ok{border-color:var(--verde);background:var(--verde-bg)}
+  .orden li select.no{border-color:var(--rojo);background:var(--rojo-bg)}
+
+  .abierta textarea{width:100%;min-height:90px;border:1.5px solid var(--linea);border-radius:10px;
+    padding:10px 12px;font-family:inherit;font-size:14.5px;resize:vertical}
+  .abierta textarea:focus{outline:none;border-color:var(--azul2)}
+  .modelo{margin-top:10px;background:#eef5f8;border:1px solid #cfe2ea;border-radius:9px;padding:12px 14px;
+    font-size:14px;display:none}
+  .modelo.show{display:block}
+  .modelo h4{margin:0 0 5px;color:var(--azul);font-size:13.5px;text-transform:uppercase;letter-spacing:.04em}
+
+  .btn{border:none;border-radius:9px;padding:9px 16px;font-size:14px;font-weight:700;cursor:pointer;
+    font-family:inherit;transition:.15s}
+  .btn.primary{background:var(--azul);color:#fff}
+  .btn.primary:hover{background:#17475e}
+  .btn.ghost{background:#eef3f6;color:var(--azul);border:1px solid var(--linea)}
+  .btn.ghost:hover{background:#e2edf1}
+  .btn.small{padding:6px 12px;font-size:13px}
+  .q .acciones{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap}
+
+  .final{background:linear-gradient(135deg,#eaf3f7,#f4f7f9);border:1px solid var(--linea);
+    border-radius:14px;padding:24px;margin:26px 0;text-align:center;box-shadow:var(--sombra)}
+  .final h2{margin:0 0 6px;color:var(--azul)}
+  .final .puntaje{font-size:40px;font-weight:800;color:var(--verde);margin:6px 0}
+  .final .msg{font-size:15px;color:var(--gris)}
+  .acciones-globales{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+
+  footer{color:var(--gris);font-size:12.5px;text-align:center;margin-top:34px;line-height:1.6}
+  a{color:var(--azul2)}
+  @media print{
+    .barra-fija,.acciones-globales,.acciones{display:none!important}
+    body{background:#fff}
+    .fb,.modelo{display:block!important}
+    section.bloque{break-inside:avoid;box-shadow:none}
+    .glosario,.guardado,#modalConf{display:none!important}
+  }
+
+  /* ── Estado de guardado ─────────────────────────────────────────── */
+  .guardado{font-size:.78rem;padding:.15rem .55rem;border-radius:999px;
+    background:var(--verde-bg);color:var(--verde);border:1px solid var(--verde);
+    margin-left:.5rem;white-space:nowrap}
+  .guardado.pend{background:#fff6e5;color:#a06a12;border-color:#d9a441}
+  #estadoNube{font-size:.8rem;color:var(--gris)}
+  #estadoNube.ok{color:var(--verde)} #estadoNube.err{color:var(--rojo)}
+
+  /* ── Aviso de intento recuperable ───────────────────────────────── */
+  .recuperar{background:#fff6e5;border:1px solid #d9a441;border-radius:12px;
+    padding:.9rem 1rem;margin:1rem 0;font-size:.92rem}
+  .recuperar .btn{margin-top:.6rem}
+
+  /* ── Glosario ───────────────────────────────────────────────────── */
+  .glosario{background:var(--blanco);border:1px solid var(--linea);border-radius:14px;
+    padding:1rem 1.2rem;margin:1.4rem 0;box-shadow:var(--sombra)}
+  .glosario>summary{cursor:pointer;font-weight:700;font-size:1.05rem;color:var(--azul2);
+    list-style:none;display:flex;align-items:center;gap:.5rem}
+  .glosario>summary::-webkit-details-marker{display:none}
+  .glosario>summary::before{content:"▸";transition:transform .15s;display:inline-block}
+  .glosario[open]>summary::before{transform:rotate(90deg)}
+  .glosario .gdesc{font-size:.88rem;color:var(--gris);margin:.5rem 0 .9rem}
+  .glosario dl{margin:0;display:grid;gap:.55rem}
+  .glosario dt{font-weight:700;color:var(--tinta)}
+  .glosario dt .en{font-weight:400;font-style:italic;color:var(--gris);font-size:.85rem;margin-left:.4rem}
+  .glosario dd{margin:.1rem 0 .55rem;padding-left:.9rem;border-left:2px solid var(--linea);
+    font-size:.93rem;color:var(--tinta)}
+
+  /* ── Confirmación de envío ──────────────────────────────────────── */
+  #modalConf{position:fixed;inset:0;background:rgba(15,25,35,.55);display:none;
+    align-items:center;justify-content:center;padding:1rem;z-index:50}
+  #modalConf.show{display:flex}
+  #modalConf .caja{background:var(--blanco);border-radius:16px;max-width:520px;width:100%;
+    padding:1.4rem 1.5rem;box-shadow:0 20px 50px rgba(0,0,0,.3)}
+  #modalConf h3{margin:0 0 .6rem;font-size:1.2rem}
+  #modalConf .resumen{background:var(--papel);border-radius:10px;padding:.8rem 1rem;margin:.8rem 0;
+    font-size:.93rem;line-height:1.7}
+  #modalConf .aviso{font-size:.88rem;color:var(--rojo);margin:.6rem 0 0}
+  #modalConf .acciones-modal{display:flex;gap:.6rem;justify-content:flex-end;margin-top:1rem;flex-wrap:wrap}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Morfología · Taller de autoevaluación</div>
+    <h1>El nivel tisular de organización</h1>
+    <p class="sub">Actividad interactiva basada en el Capítulo 4 de Tortora — <em>Principios de Anatomía y Fisiología</em>. Elaborada a partir de las <strong>Preguntas de revisión</strong>, la <strong>Revisión del capítulo</strong> y las <strong>Preguntas de autoevaluación</strong>.</p>
+    <div class="meta">
+      <span class="chip">Nivel intermedio</span>
+      <span class="chip">6 bloques</span>
+      <span class="chip" id="chip-total">— ítems</span>
+      <span class="chip">Autocalificable</span>
+    </div>
+    <div class="studentbox" id="cajaIngreso">
+      <label>Nombre del estudiante
+        <select id="nombre"><option value="">Cargando listado…</option></select>
+      </label>
+      <label>Código estudiantil
+        <input type="text" id="codigo" inputmode="numeric" placeholder="Tu código" autocomplete="off">
+      </label>
+      <label style="align-self:end">
+        <button class="btn primary" id="btnIngresar" disabled>Ingresar</button>
+      </label>
+    </div>
+    <div class="studentbox" id="cajaIdentificado" style="display:none">
+      <div><b id="quienSoy"></b><br>
+        <span style="font-size:.85rem;color:var(--gris)">Tu avance se está guardando.</span></div>
+      <label style="align-self:end">
+        <button class="btn ghost small" id="btnSalir">No soy yo</button>
+      </label>
+    </div>
+    <p id="idErr" style="margin:.6rem 0 0;font-size:.88rem;color:#a0522d"></p>
+  </div>
+</header>
+
+<div class="barra-fija">
+  <div class="wrap">
+    <span class="marcador" id="mk-resp">Respondidas: 0</span>
+    <div class="progreso"><span id="prog"></span></div>
+    <span class="marcador" id="mk-score">Aciertos: <b>0</b></span>
+    <span id="estadoNube">·</span>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="instrucciones">
+    <h2>Instrucciones</h2>
+    Resuelve cada ítem y pulsa <strong>Comprobar</strong> para recibir retroalimentación inmediata con la explicación del concepto. La barra superior registra tu avance y tus aciertos. En las preguntas de desarrollo escribe tu respuesta y luego compárala con la <strong>respuesta modelo</strong>.
+    <ul>
+      <li><strong>Bloque 1:</strong> opción múltiple &nbsp;·&nbsp; <strong>Bloque 2:</strong> verdadero/falso &nbsp;·&nbsp; <strong>Bloque 3:</strong> completar</li>
+      <li><strong>Bloque 4:</strong> emparejamiento orgánulo–función &nbsp;·&nbsp; <strong>Bloque 5:</strong> ordenar la síntesis proteica &nbsp;·&nbsp; <strong>Bloque 6:</strong> desarrollo</li>
+    </ul>
+  </div>
+
+  <div id="avisoRecuperar"></div>
+
+  <details class="glosario">
+    <summary>Glosario · términos nuevos de este capítulo</summary>
+    <p class="gdesc">Ábrelo cuando encuentres una palabra que no reconozcas. Están en el orden en
+      que aparecen en el taller, y con el término en inglés porque así los verás en los atlas y
+      en las preguntas tipo Saber&nbsp;Pro.</p>
+    <dl>
+      <dt>Matriz extracelular <span class="en">extracellular matrix</span></dt>
+      <dd>Todo el material que las células del tejido conectivo fabrican <em>a su alrededor</em>:
+        sustancia fundamental más fibras. En el conectivo es la matriz, y no la célula, la que
+        define de qué tejido se trata.</dd>
+
+      <dt>Sustancia fundamental <span class="en">ground substance</span></dt>
+      <dd>La parte no fibrosa de la matriz: agua y glucosaminoglucanos (ácido hialurónico,
+        condroitinsulfato). Almacena agua y permite el intercambio de sustancias.</dd>
+
+      <dt>Membrana basal <span class="en">basement membrane</span></dt>
+      <dd>Capa extracelular que separa el epitelio del tejido conectivo. Ojo: <em>no</em> es una
+        membrana plasmática; la fabrican entre los dos tejidos.</dd>
+
+      <dt>Unión hermética <span class="en">tight junction</span></dt>
+      <dd>También «zona de oclusión». Fusiona las membranas de dos células vecinas y sella el paso
+        entre ellas. Es la que forma las barreras del cuerpo.</dd>
+
+      <dt>Desmosoma y hemidesmosoma <span class="en">desmosome · hemidesmosome</span></dt>
+      <dd>El desmosoma es un remache que une <em>dos células</em>; el hemidesmosoma es «medio»
+        desmosoma y une <em>una célula a la membrana basal</em>.</dd>
+
+      <dt>Conexón y conexina <span class="en">connexon · connexin</span></dt>
+      <dd>La conexina es la proteína; seis conexinas forman un conexón, el cilindro que atraviesa
+        las dos membranas en una unión comunicante y deja pasar iones.</dd>
+
+      <dt>Cadherina e integrina <span class="en">cadherin · integrin</span></dt>
+      <dd>Glucoproteínas de anclaje. Las cadherinas unen célula con célula (uniones adherentes y
+        desmosomas); las integrinas unen la célula con la matriz (hemidesmosomas).</dd>
+
+      <dt>Pavimentoso <span class="en">squamous</span></dt>
+      <dd>Aplanado, como una baldosa. Es una de las cuatro formas con que se apellida un epitelio,
+        junto con cúbico, cilíndrico y de transición.</dd>
+
+      <dt>Seudoestratificado <span class="en">pseudostratified</span></dt>
+      <dd>Epitelio que <em>parece</em> tener varias capas pero tiene una sola: todas las células
+        tocan la membrana basal, aunque no todas lleguen a la superficie.</dd>
+
+      <dt>Endotelio y mesotelio <span class="en">endothelium · mesothelium</span></dt>
+      <dd>Dos nombres propios del mismo epitelio pavimentoso simple: endotelio si reviste corazón y
+        vasos, mesotelio si forma las membranas serosas.</dd>
+
+      <dt>Célula caliciforme <span class="en">goblet cell</span></dt>
+      <dd>Glándula exocrina <em>unicelular</em> que secreta moco sobre la superficie del epitelio.
+        Las de la conjuntiva producen la mucina de la lágrima.</dd>
+
+      <dt>Merocrina · apocrina · holocrina <span class="en">merocrine · apocrine · holocrine</span></dt>
+      <dd>Los tres mecanismos de secreción exocrina, ordenados por lo que le cuestan a la célula:
+        nada, una parte del citoplasma, o la célula entera.</dd>
+
+      <dt>Fibroblasto <span class="en">fibroblast</span></dt>
+      <dd>La célula más abundante del tejido conectivo: la que secreta las fibras y la sustancia
+        fundamental. En la córnea recibe el nombre de <em>queratocito</em>.</dd>
+
+      <dt>Fibra reticular <span class="en">reticular fibre</span></dt>
+      <dd>Fibra fina y ramificada de colágeno y glucoproteínas que forma redes de sostén alrededor
+        de adipocitos, nervios y fibras musculares.</dd>
+
+      <dt>Condrocito y laguna <span class="en">chondrocyte · lacuna</span></dt>
+      <dd>El condrocito es la célula del cartílago; la laguna es la cavidad de la matriz donde se
+        aloja. En el hueso, el equivalente es el osteocito, también en lagunas.</dd>
+
+      <dt>Pericondrio <span class="en">perichondrium</span></dt>
+      <dd>Cubierta de tejido conectivo denso irregular que envuelve el cartílago hialino y el
+        elástico. El fibrocartílago no lo tiene.</dd>
+
+      <dt>Lámina propia <span class="en">lamina propria</span></dt>
+      <dd>La capa de tejido conectivo areolar que sostiene el epitelio en una membrana mucosa. En
+        la conjuntiva es la que aporta vasos y tejido linfoide.</dd>
+
+      <dt>Parietal y visceral <span class="en">parietal · visceral</span></dt>
+      <dd>Las dos láminas de una membrana serosa: la parietal tapiza la pared de la cavidad, la
+        visceral cubre el órgano que hay dentro.</dd>
+
+      <dt>Disco intercalar <span class="en">intercalated disc</span></dt>
+      <dd>Unión entre fibras de músculo cardíaco que contiene desmosomas y uniones comunicantes.
+        Gracias a ellas todo el corazón se contrae a la vez.</dd>
+
+      <dt>Neuroglía <span class="en">neuroglia</span></dt>
+      <dd>Células de soporte y protección del tejido nervioso; no conducen impulsos. En la retina,
+        las células de Müller, los astrocitos y la microglía.</dd>
+
+      <dt>Regeneración parenquimatosa <span class="en">parenchymal regeneration</span></dt>
+      <dd>Reparación en la que las células propias del tejido se dividen y lo reconstruyen igual
+        que estaba, <em>sin cicatriz</em>. Solo es posible si el tejido conserva células madre.</dd>
+
+      <dt>Tejido de granulación <span class="en">granulation tissue</span></dt>
+      <dd>Tejido conectivo nuevo, muy vascularizado, que rellena una lesión extensa. Acaba
+        convertido en cicatriz, porque el colágeno se deposita desordenado.</dd>
+
+      <dt>Limbo esclerocorneal <span class="en">corneoscleral limbus</span></dt>
+      <dd>El anillo de transición entre la córnea y la esclera. Ahí viven las células madre que
+        regeneran el epitelio corneal.</dd>
+
+      <dt>Leucoma <span class="en">corneal leucoma</span></dt>
+      <dd>Cicatriz del estroma corneal. Como el colágeno queda desordenado, esa zona dispersa la
+        luz y se ve blanca: es una opacidad permanente.</dd>
+    </dl>
+  </details>
+
+  <!-- Los bloques se generan por JS -->
+  <div id="app"></div>
+
+  <div class="final" id="final">
+    <h2>Resultado del taller</h2>
+    <div class="puntaje" id="finalScore">0 / 0</div>
+    <div class="msg" id="finalMsg">Comprueba tus respuestas de opción múltiple, V/F, completar, emparejamiento y ordenar para ver tu puntaje.</div>
+    <div class="acciones-globales">
+      <button class="btn primary" onclick="calificarTodo()">Calificar todo</button>
+      <button class="btn primary" id="btnEnviar" onclick="abrirConfirmacion()">Entregar al docente</button>
+      <button class="btn ghost" onclick="window.print()">Imprimir / Guardar PDF</button>
+      <button class="btn ghost" onclick="reiniciar()">Reiniciar</button>
+    </div>
+  </div>
+
+  <div id="modalConf" role="dialog" aria-modal="true" aria-labelledby="mcTit">
+    <div class="caja">
+      <h3 id="mcTit">Confirmar entrega</h3>
+      <p style="font-size:.93rem;color:var(--gris);margin:0">Revisa antes de entregar. Esta es la
+        versión que califica el docente.</p>
+      <div class="resumen" id="mcResumen"></div>
+      <p class="aviso" id="mcAviso"></p>
+      <div class="acciones-modal">
+        <button class="btn ghost" onclick="cerrarConfirmacion()">Volver al taller</button>
+        <button class="btn primary" id="mcConfirmar" onclick="entregarDefinitivo()">Sí, entregar</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    Taller de estudiante · Asignatura de Morfología.<br>
+    Contenido adaptado de Tortora & Derrickson, <em>Principios de Anatomía y Fisiología</em>, Cap. 4 «El nivel tisular de organización».
+  </footer>
+</div>
+
+<script>
+/* ====================== BANCO DE PREGUNTAS ====================== */
+
+// Bloque 1 — Opción múltiple
+const MULTIPLE = [
+  {
+    q: "Un tejido se define como un grupo de células que comparten tres cosas. ¿Cuáles?",
+    tag:"Concepto de tejido",
+    op:["Igual tamaño, igual forma e igual número de núcleos",
+        "Estructura similar, origen embriológico semejante y una función específica",
+        "La misma cantidad de matriz extracelular, de fibras y de vasos",
+        "El mismo tipo de unión celular, de membrana basal y de irrigación"],
+    correcta:1,
+    fb:"Un tejido es un grupo de células similares, en general con un origen embriológico semejante, que se especializa en una función específica. Las tres partes de la definición importan: parecerse no basta."
+  },
+  {
+    q: "¿Qué unión celular sella el espacio entre células vecinas de modo que ninguna sustancia pueda pasar entre ellas?",
+    tag:"Uniones celulares",
+    op:["Desmosoma","Unión comunicante","Unión hermética (zona de oclusión)","Hemidesmosoma"],
+    correcta:2,
+    fb:"Las uniones herméticas fusionan las superficies externas de las membranas adyacentes. Son las que forman la barrera hematorretiniana en el epitelio pigmentario de la retina: todo lo que entre debe atravesar la célula, no colarse entre ellas."
+  },
+  {
+    q: "Una unión celular ancla la célula epitelial basal a la membrana basal, y no a otra célula. Se trata del:",
+    tag:"Uniones celulares",
+    op:["Hemidesmosoma","Desmosoma","Cinturón de adhesión","Conexón"],
+    correcta:0,
+    fb:"El hemidesmosoma es «medio desmosoma»: usa integrinas para fijar la célula a la membrana basal. El desmosoma, en cambio, une dos células entre sí. Cuando ese anclaje falla en la córnea aparece la erosión corneal recidivante."
+  },
+  {
+    q: "Los epitelios se nombran combinando dos criterios. ¿Cuáles son?",
+    tag:"Clasificación de epitelios",
+    op:["El origen embriológico y la presencia de cilios",
+        "El número de capas y la forma de las células de la capa apical",
+        "La vascularización y el tipo de unión celular predominante",
+        "El grosor de la membrana basal y la cantidad de matriz"],
+    correcta:1,
+    fb:"Solo dos criterios: capas (simple, seudoestratificado o estratificado) y forma de la capa superficial (pavimentoso, cúbico, cilíndrico o de transición). En los estratificados manda la forma de la capa APICAL, no la basal."
+  },
+  {
+    q: "El epitelio pavimentoso simple recibe dos nombres propios según dónde se encuentre. ¿Cuáles son y dónde están?",
+    tag:"Epitelios de revestimiento",
+    op:["Urotelio en la vejiga y mesotelio en los bronquios",
+        "Endotelio en corazón y vasos, y mesotelio en las serosas",
+        "Endotelio en las serosas y urotelio en los vasos",
+        "Mesotelio en el corazón y endotelio en el peritoneo"],
+    correcta:1,
+    fb:"Es el mismo epitelio con dos nombres según la localización: endotelio si reviste el corazón y los vasos —incluido el endotelio corneal—, mesotelio si forma las membranas serosas (pleura, pericardio, peritoneo)."
+  },
+  {
+    q: "Las glándulas de Meibomio del párpado son holocrinas. Eso significa que al secretar:",
+    tag:"Epitelio glandular",
+    op:["Liberan el producto por exocitosis y la célula queda intacta",
+        "Se desprende la porción apical del citoplasma y la célula se repara",
+        "La célula entera se llena de producto, muere y se desintegra",
+        "El producto pasa directamente a la sangre sin conducto"],
+    correcta:2,
+    fb:"«Holo» significa «todo»: en la secreción holocrina el producto ES la célula desintegrada, y las células basales reponen la población. La opción A describe la merocrina (glándula lagrimal) y la B, la apocrina (glándulas de Moll). Las tres conviven en el borde palpebral."
+  },
+  {
+    q: "¿Cuál es la célula más abundante del tejido conectivo y qué hace?",
+    tag:"Tejido conectivo",
+    op:["El macrófago, que fagocita","El mastocito, que produce histamina",
+        "El fibroblasto, que secreta la matriz extracelular","El adipocito, que almacena triglicéridos"],
+    correcta:2,
+    fb:"El fibroblasto secreta las fibras y la sustancia fundamental, es decir, fabrica la matriz que define al tejido. En la córnea se llaman queratocitos; al activarse tras una herida profunda depositan colágeno desordenado y producen el leucoma."
+  },
+  {
+    q: "El estroma corneal y la esclera son ambos tejido conectivo denso con colágeno tipo I. ¿Qué los diferencia?",
+    tag:"Tejido conectivo denso",
+    op:["El estroma es denso regular, con fibrillas paralelas y equidistantes; la esclera es denso irregular",
+        "El estroma tiene fibras elásticas y la esclera fibras reticulares",
+        "El estroma carece de matriz extracelular y la esclera no",
+        "El estroma está vascularizado y la esclera es avascular"],
+    correcta:0,
+    fb:"Mismo material, distinta arquitectura. En el estroma las fibrillas son finas, de diámetro uniforme y con separación menor que la longitud de onda de la luz: la atraviesan sin dispersarla. En la esclera son gruesas, variables y desordenadas, así que dispersan la luz y se ve blanca."
+  },
+  {
+    q: "¿Cuál de estas membranas NO es una membrana epitelial?",
+    tag:"Membranas",
+    op:["Mucosa","Serosa","Cutánea","Sinovial"],
+    correcta:3,
+    fb:"La membrana sinovial está formada por tejido conectivo areolar y adiposo, SIN capa epitelial; por eso queda fuera de la categoría. Las otras tres sí combinan epitelio sobre conectivo, que es la definición de membrana epitelial."
+  },
+  {
+    q: "Los seis músculos extraoculares y el músculo ciliar se diferencian en que:",
+    tag:"Tejido muscular",
+    op:["Los extraoculares son lisos e involuntarios; el ciliar es estriado y voluntario",
+        "Los extraoculares son esqueléticos, estriados y voluntarios; el ciliar es liso e involuntario",
+        "Ambos son músculo cardíaco y se unen por discos intercalares",
+        "Los extraoculares son cardíacos y el ciliar es esquelético"],
+    correcta:1,
+    fb:"Por eso decides hacia dónde miras pero no a qué distancia enfocas: son dos tejidos musculares distintos con inervaciones distintas. El músculo ciliar, liso y parasimpático, es el que paraliza un colirio ciclopléjico."
+  }
+];
+
+// Bloque 2 — Verdadero / falso
+const VF = [
+  {
+    q:"El tejido epitelial es avascular: carece de vasos sanguíneos y se nutre por difusión desde el tejido conectivo subyacente.",
+    tag:"Tejido epitelial",
+    correcta:true,
+    fb:"Verdadero. Ningún epitelio tiene vasos propios, aunque sí recibe inervación. De ahí que dependa por completo del conectivo que tiene debajo. En la córnea, además, la ausencia de vasos es requisito de la transparencia."
+  },
+  {
+    q:"El cartílago está muy vascularizado, y por eso repara sus lesiones con rapidez.",
+    tag:"Cartílago",
+    correcta:false,
+    fb:"Falso. El cartílago es la gran excepción del tejido conectivo: no tiene vasos ni nervios. Precisamente por eso repara mal y lento."
+  },
+  {
+    q:"En un epitelio seudoestratificado todas las células tocan la membrana basal, aunque no todas alcancen la superficie libre.",
+    tag:"Clasificación de epitelios",
+    correcta:true,
+    fb:"Verdadero. «Seudo» = falso: es una sola capa cuyos núcleos quedan a alturas distintas, lo que da la impresión de estratificación. El criterio de verdad es siempre el mismo: si todas las células tocan la membrana basal, el epitelio es simple."
+  },
+  {
+    q:"La sangre se clasifica como tejido conectivo porque tiene pocas células y abundante matriz extracelular, en su caso líquida.",
+    tag:"Conectivo líquido",
+    correcta:true,
+    fb:"Verdadero. La regla del conectivo se cumple: el plasma es la matriz y los elementos formes (eritrocitos, leucocitos y plaquetas) son las células. La linfa es el otro tejido conectivo líquido."
+  },
+  {
+    q:"En un epitelio estratificado, el apellido de la clasificación lo pone la forma de las células de la capa basal.",
+    tag:"Clasificación de epitelios",
+    correcta:false,
+    fb:"Falso. Lo pone la forma de la capa APICAL. Por eso el epitelio corneal es «pavimentoso estratificado» aunque sus células basales sean cilíndricas."
+  },
+  {
+    q:"Las neuronas y las fibras musculares son las únicas células del cuerpo con excitabilidad eléctrica, es decir, capaces de generar potenciales de acción.",
+    tag:"Células excitables",
+    correcta:true,
+    fb:"Verdadero. Esa propiedad compartida es lo que conecta el tejido nervioso con el muscular: todo lo que sientes, piensas y mueves ocurre en células que saben hacer un potencial de acción."
+  }
+];
+
+// Bloque 3 — Completar espacios
+const COMPLETAR = [
+  {
+    partes:["Un epitelio formado por una sola capa de células se denomina ",
+            {resp:["simple"]},", mientras que el formado por varias capas se llama ",
+            {resp:["estratificado"]},"."],
+    tag:"Clasificación de epitelios",
+    fb:"Simple = una capa; estratificado = varias. El tercer caso, el seudoestratificado, parece estratificado pero es simple: todas sus células tocan la membrana basal."
+  },
+  {
+    partes:["La glándula que secreta por exocitosis y queda intacta es ",
+            {resp:["merocrina","merócrina"]},", y aquella cuya célula entera muere y se desintegra al secretar es ",
+            {resp:["holocrina","holócrina"]},"."],
+    tag:"Epitelio glandular",
+    fb:"Merocrina no paga nada (glándula lagrimal), apocrina paga una parte (glándulas de Moll) y holocrina paga la célula entera (glándulas de Meibomio y de Zeis)."
+  },
+  {
+    partes:["En el tejido conectivo, la célula más abundante es el ",
+            {resp:["fibroblasto"]},", y el material que secreta a su alrededor, compuesto por sustancia fundamental y fibras, es la ",
+            {resp:["matriz extracelular","matriz"]},"."],
+    tag:"Tejido conectivo",
+    fb:"En el conectivo lo que define al tejido no son las células sino lo que fabrican alrededor. Cambiar la matriz cambia el tejido: por eso un tendón, un cartílago, un hueso y la sangre son el mismo tipo de tejido."
+  },
+  {
+    partes:["El tejido conectivo con haces de colágeno paralelos, como el estroma de la córnea, es denso ",
+            {resp:["regular"]},"; aquel con fibras dispuestas en todas las direcciones, como la esclera y la dermis, es denso ",
+            {resp:["irregular"]},"."],
+    tag:"Tejido conectivo denso",
+    fb:"Regular resiste tracción en una dirección; irregular, venga de donde venga. Esa diferencia de orden es exactamente la que separa ver de no ver a través del tejido."
+  },
+  {
+    partes:["El tejido nervioso está formado por dos clases de célula: las ",
+            {resp:["neuronas","neurona"]},", que conducen impulsos, y las células de la ",
+            {resp:["neuroglia","neuroglía","glia","glía"]},", que dan soporte y protección."],
+    tag:"Tejido nervioso",
+    fb:"La retina es tejido nervioso, no un sensor: tiene neuronas (fotorreceptores, bipolares, ganglionares, horizontales y amacrinas) y neuroglía propia (células de Müller, astrocitos y microglía)."
+  }
+];
+
+// Bloque 4 — Emparejamiento tejido ↔ rasgo o localización
+const MATCH = {
+  tag:"Tejidos y su localización característica",
+  terminos:[
+    {t:"Epitelio pavimentoso estratificado no queratinizado", c:"A"},
+    {t:"Epitelio de transición (urotelio)", c:"B"},
+    {t:"Tejido conectivo areolar", c:"C"},
+    {t:"Tejido adiposo", c:"D"},
+    {t:"Cartílago hialino", c:"E"},
+    {t:"Tejido óseo", c:"F"},
+    {t:"Músculo cardíaco", c:"G"},
+    {t:"Membrana serosa", c:"H"}
+  ],
+  banco:[
+    {c:"A", d:"Epitelio corneal y de la boca: protege superficies húmedas sin queratinizarse"},
+    {c:"B", d:"Tapiza la vejiga; sus células cambian de forma según el grado de distensión"},
+    {c:"C", d:"Conectivo laxo «de propósito general», con los tres tipos de fibra; lámina propia de las mucosas"},
+    {c:"D", d:"Adipocitos cargados de triglicéridos; forma la grasa orbitaria"},
+    {c:"E", d:"Condrocitos en lagunas, matriz gelatinosa blanco azulada, con pericondrio; extremos óseos y nariz"},
+    {c:"F", d:"Matriz de sales minerales y colágeno con osteocitos en lagunas; las paredes de la órbita"},
+    {c:"G", d:"Fibras estriadas y ramificadas unidas por discos intercalares con uniones comunicantes"},
+    {c:"H", d:"Mesotelio sobre conectivo, con lámina parietal y visceral; pleura, pericardio y peritoneo"}
+  ],
+  fb:"Cada tejido tiene un rasgo que lo delata. Los epitelios se nombran por capas y forma; los conectivos, por su matriz; los musculares, por estrías y control voluntario o no; las membranas, por la combinación de epitelio y conectivo que las forma."
+};
+
+// Bloque 5 — Ordenar las capas de la córnea
+const ORDEN = {
+  tag:"Las cinco capas de la córnea, de delante hacia atrás",
+  pasos:[
+    {texto:"Epitelio corneal: pavimentoso estratificado no queratinizado, en contacto con la lágrima", correcto:1},
+    {texto:"Membrana de Bowman", correcto:2},
+    {texto:"Estroma: tejido conectivo denso regular, el 90 % del espesor corneal", correcto:3},
+    {texto:"Membrana de Descemet, que es la membrana basal del endotelio", correcto:4},
+    {texto:"Endotelio corneal: pavimentoso simple, en contacto con el humor acuoso", correcto:5}
+  ],
+  fb:"De fuera hacia dentro: epitelio, Bowman, estroma, Descemet y endotelio. Dos capas son tejido epitelial (la primera y la última) y el estroma es conectivo. Ahí está la clave clínica: el epitelio se regenera sin cicatriz desde las células madre limbares, y el estroma no."
+};
+
+// Bloque 6 — Preguntas de desarrollo (respuesta modelo)
+const ABIERTAS = [
+  {
+    q:"La córnea y la esclera están formadas por el mismo colágeno tipo I, pero una es transparente y la otra opaca. Explica a qué se debe la diferencia.",
+    tag:"Tejido conectivo denso",
+    modelo:"Las dos son tejido conectivo denso, pero de subtipos distintos. El estroma corneal es denso REGULAR: sus fibrillas de colágeno son finas, de diámetro uniforme, dispuestas en láminas paralelas y separadas por una distancia regular MENOR que la longitud de onda de la luz; por eso la luz las atraviesa sin dispersarse y la córnea es transparente. La esclera es denso IRREGULAR: sus fibrillas son gruesas, de diámetro variable y orientadas en todas las direcciones, de modo que dispersan la luz y el tejido se ve blanco. La conclusión general es que en el tejido conectivo la función no depende del material sino de CÓMO está ordenada la matriz extracelular: cuando la córnea se edematiza y ese espaciado regular se pierde, aparece la opacidad."
+  },
+  {
+    q:"Explica en qué se diferencian la unión hermética, el desmosoma y la unión comunicante, y di para qué sirve cada una.",
+    tag:"Uniones celulares",
+    modelo:"La UNIÓN HERMÉTICA (zona de oclusión) está formada por haces de proteínas de transmembrana que fusionan las superficies externas de las membranas vecinas: SELLA el espacio intercelular, de modo que ninguna sustancia puede pasar entre las células y todo debe atravesarlas. Forma barreras, como la hematorretiniana en el epitelio pigmentario. El DESMOSOMA es un REMACHE puntual: tiene una placa densa de proteínas y cadherinas que unen las dos células, y filamentos intermedios de queratina que lo atraviesan y enlazan todo el epitelio en una red continua; su función es mecánica, resistir la separación. La UNIÓN COMUNICANTE está formada por conexones —cilindros de conexinas— que dejan pasar iones y moléculas pequeñas de una célula a otra: es la única de las tres que COMUNICA, y permite que las células se sincronicen. Nutre las fibras del cristalino y sincroniza la contracción del músculo cardíaco."
+  },
+  {
+    q:"Las glándulas exocrinas se clasifican en merocrinas, apocrinas y holocrinas. Explica el mecanismo de cada una y pon un ejemplo del párpado o del ojo.",
+    tag:"Epitelio glandular",
+    modelo:"La clasificación es FUNCIONAL, según cómo se libera el producto y qué le cuesta a la célula. MEROCRINA: secreta por exocitosis, la vesícula se fusiona con la membrana y la célula QUEDA INTACTA, así que puede repetir indefinidamente; ejemplo, la glándula lagrimal y las accesorias de Krause y Wolfring, que producen la capa acuosa de la lágrima. APOCRINA: se desprende la PORCIÓN APICAL del citoplasma cargada de producto y luego la célula se repara; ejemplo, las glándulas de Moll del párpado, sudoríparas modificadas. HOLOCRINA: la célula entera se llena de producto, MUERE y se desintegra, de modo que el producto es la propia célula, y se repone desde células basales; ejemplo, las glándulas de Meibomio, que aportan la capa lipídica de la lágrima, y las de Zeis anexas a las pestañas. El coste va en aumento: merocrina no paga nada, apocrina una parte y holocrina la célula entera."
+  },
+  {
+    q:"Un paciente sufre una abrasión corneal superficial y se recupera sin dejar marca. Otro sufre una herida más profunda y le queda una opacidad permanente. Explica a qué se debe la diferencia.",
+    tag:"Reparación tisular",
+    modelo:"La diferencia está en QUÉ TEJIDO se lesionó y si conserva células madre capaces de dividirse. Si la lesión afecta solo al EPITELIO, ocurre REGENERACIÓN PARENQUIMATOSA: las células madre del limbo esclerocorneal repueblan la superficie en 24 a 72 horas y reconstruyen el tejido igual que estaba, sin cicatriz, porque el epitelio tiene una alta velocidad de división. Si la herida atraviesa la membrana de Bowman y llega al ESTROMA, ya no hay regeneración posible: los queratocitos se activan y depositan colágeno de forma DESORDENADA, es decir, se forma tejido fibroso. Al perderse el diámetro uniforme y el espaciado regular de las fibrillas, esa zona dispersa la luz y queda una opacidad permanente, que en la córnea se llama LEUCOMA. Es el mismo principio general de la reparación tisular: regeneración si el daño es superficial y el tejido puede dividirse, fibrosis con cicatriz si el daño es extenso."
+  }
+];
+
+/* ====================== MOTOR ====================== */
+const respondidas = new Set();
+const aciertosMap = {};
+let totalCalificables = 0;
+
+function marcarResultado(id, ok){
+  respondidas.add(id);
+  aciertosMap[id] = ok;
+  actualizarBarra();
+  alResponder(id);   // respaldo local + snapshot al cerrar cada bloque
+}
+function actualizarBarra(){
+  const r = respondidas.size;
+  const ac = Object.values(aciertosMap).filter(Boolean).length;
+  document.getElementById('mk-resp').textContent = "Respondidas: "+r+" / "+totalCalificables;
+  document.getElementById('mk-score').innerHTML = "Aciertos: <b>"+ac+"</b>";
+  document.getElementById('prog').style.width = (totalCalificables? (r/totalCalificables*100):0)+"%";
+}
+function norm(s){
+  return (s||"").toString().trim().toLowerCase()
+    .normalize("NFD").replace(/[̀-ͯ]/g,"")
+    .replace(/\s+/g," ");
+}
+
+/* ---- Render Bloque 1: opción múltiple ---- */
+function renderMultiple(host){
+  const sec=document.createElement('section'); sec.className='bloque';
+  sec.innerHTML='<h2><span class="n">1</span>Opción múltiple</h2><p class="desc">Elige la única respuesta correcta y pulsa Comprobar.</p>';
+  MULTIPLE.forEach((item,i)=>{
+    const id='m'+i; totalCalificables++;
+    const q=document.createElement('div'); q.className='q';
+    let ops='';
+    item.op.forEach((o,j)=>{ ops+=`<li data-j="${j}"><span class="letra">${String.fromCharCode(65+j)}</span><span>${o}</span></li>`; });
+    q.innerHTML=`<span class="tag">${item.tag}</span>
+      <p class="enun"><span class="qn">${i+1}.</span><span>${item.q}</span></p>
+      <ul class="opciones" id="${id}">${ops}</ul>
+      <div class="acciones"><button class="btn primary small">Comprobar</button></div>
+      <div class="fb" id="fb-${id}"></div>`;
+    const ul=q.querySelector('#'+id);
+    let sel=-1;
+    ul.querySelectorAll('li').forEach(li=>{
+      li.addEventListener('click',()=>{
+        if(ul.dataset.done)return;
+        ul.querySelectorAll('li').forEach(x=>x.classList.remove('sel'));
+        li.classList.add('sel'); sel=+li.dataset.j;
+      });
+    });
+    q.querySelector('button').addEventListener('click',()=>{
+      if(sel<0){ shake(q.querySelector('button')); return; }
+      if(ul.dataset.done) return;
+      ul.dataset.done="1";
+      const ok = sel===item.correcta;
+      ul.querySelectorAll('li').forEach(li=>{
+        li.classList.add('bloq');
+        const j=+li.dataset.j;
+        if(j===item.correcta) li.classList.add('correcta-marcada');
+        if(j===sel && !ok) li.classList.add('no');
+      });
+      const fb=q.querySelector('#fb-'+id);
+      fb.className='fb show '+(ok?'bien':'mal');
+      fb.innerHTML=(ok?'<b>✓ Correcto. </b>':'<b>✗ Incorrecto. </b>')+item.fb;
+      marcarResultado(id,ok);
+    });
+    sec.appendChild(q);
+  });
+  host.appendChild(sec);
+}
+
+/* ---- Render Bloque 2: V/F ---- */
+function renderVF(host){
+  const sec=document.createElement('section'); sec.className='bloque';
+  sec.innerHTML='<h2><span class="n">2</span>Verdadero o falso</h2><p class="desc">Decide si el enunciado es verdadero o falso; la retroalimentación justifica la respuesta.</p>';
+  VF.forEach((item,i)=>{
+    const id='vf'+i; totalCalificables++;
+    const q=document.createElement('div'); q.className='q';
+    q.innerHTML=`<span class="tag">${item.tag}</span>
+      <p class="enun"><span class="qn">${i+1}.</span><span>${item.q}</span></p>
+      <ul class="opciones" id="${id}">
+        <li data-v="true"><span class="letra">V</span><span>Verdadero</span></li>
+        <li data-v="false"><span class="letra">F</span><span>Falso</span></li>
+      </ul>
+      <div class="acciones"><button class="btn primary small">Comprobar</button></div>
+      <div class="fb" id="fb-${id}"></div>`;
+    const ul=q.querySelector('#'+id); let sel=null;
+    ul.querySelectorAll('li').forEach(li=>{
+      li.addEventListener('click',()=>{
+        if(ul.dataset.done)return;
+        ul.querySelectorAll('li').forEach(x=>x.classList.remove('sel'));
+        li.classList.add('sel'); sel=(li.dataset.v==="true");
+      });
+    });
+    q.querySelector('button').addEventListener('click',()=>{
+      if(sel===null){ shake(q.querySelector('button')); return; }
+      if(ul.dataset.done)return; ul.dataset.done="1";
+      const ok=sel===item.correcta;
+      ul.querySelectorAll('li').forEach(li=>{
+        li.classList.add('bloq');
+        const v=(li.dataset.v==="true");
+        if(v===item.correcta) li.classList.add('correcta-marcada');
+        if(v===sel && !ok) li.classList.add('no');
+      });
+      const fb=q.querySelector('#fb-'+id);
+      fb.className='fb show '+(ok?'bien':'mal');
+      fb.innerHTML=(ok?'<b>✓ Correcto. </b>':'<b>✗ Incorrecto. </b>')+item.fb;
+      marcarResultado(id,ok);
+    });
+    sec.appendChild(q);
+  });
+  host.appendChild(sec);
+}
+
+/* ---- Render Bloque 3: completar ---- */
+function renderCompletar(host){
+  const sec=document.createElement('section'); sec.className='bloque';
+  sec.innerHTML='<h2><span class="n">3</span>Completar los espacios</h2><p class="desc">Escribe la palabra que falta en cada espacio (se admiten tildes o su ausencia).</p>';
+  COMPLETAR.forEach((item,i)=>{
+    const id='c'+i; totalCalificables++;
+    const q=document.createElement('div'); q.className='q completar';
+    let html=`<span class="tag">${item.tag}</span><p class="enun"><span class="qn">${i+1}.</span><span>`;
+    let inputs=[];
+    item.partes.forEach((p,idx)=>{
+      if(typeof p==='string'){ html+=p; }
+      else { const inpId=id+'_'+idx; inputs.push({inpId,resp:p.resp}); html+=`<input class="gap" id="${inpId}" type="text" autocomplete="off">`; }
+    });
+    html+=`</span></p><div class="acciones"><button class="btn primary small">Comprobar</button></div><div class="fb" id="fb-${id}"></div>`;
+    q.innerHTML=html;
+    q.querySelector('button').addEventListener('click',()=>{
+      if(q.dataset.done)return;
+      let vacio=false; inputs.forEach(o=>{ if(!document.getElementById(o.inpId).value.trim()) vacio=true; });
+      if(vacio){ shake(q.querySelector('button')); return; }
+      q.dataset.done="1";
+      let ok=true;
+      inputs.forEach(o=>{
+        const el=document.getElementById(o.inpId);
+        const val=norm(el.value);
+        const bien=o.resp.map(norm).includes(val);
+        el.classList.add(bien?'ok':'no'); el.disabled=true;
+        if(!bien) ok=false;
+      });
+      const fb=q.querySelector('#fb-'+id);
+      fb.className='fb show '+(ok?'bien':'mal');
+      const soluciones=inputs.map(o=>o.resp[o.resp.length-1]).join(', ');
+      fb.innerHTML=(ok?'<b>✓ Correcto. </b>':'<b>✗ Revisa. </b>Respuesta(s): <b>'+soluciones+'</b>. ')+item.fb;
+      marcarResultado(id,ok);
+    });
+    sec.appendChild(q);
+  });
+  host.appendChild(sec);
+}
+
+/* ---- Render Bloque 4: emparejamiento ---- */
+function renderMatch(host){
+  const sec=document.createElement('section'); sec.className='bloque';
+  sec.innerHTML='<h2><span class="n">4</span>Emparejamiento: orgánulo → función</h2><p class="desc">Selecciona la letra de la función que corresponde a cada orgánulo.</p>';
+  totalCalificables++;
+  const id='match';
+  const q=document.createElement('div'); q.className='q';
+  // Banco en orden alfabético: la letra es la clave de respuesta, así que
+  // barajarlo solo dificultaba localizarla, sin aportar nada.
+  const bancoOrden=["A","B","C","D","E","F","G","H"];
+  let bancoHtml='<div class="banco"><b>Banco de funciones:</b><br>';
+  bancoOrden.forEach(c=>{ const d=MATCH.banco.find(b=>b.c===c).d; bancoHtml+=`<b>${c})</b> ${d}<br>`; });
+  bancoHtml+='</div>';
+  let rows='';
+  MATCH.terminos.forEach((tm,i)=>{
+    let opts='<option value="">—</option>';
+    bancoOrden.forEach(c=>{ opts+=`<option value="${c}">${c}</option>`; });
+    rows+=`<tr><td class="term">${i+1}. ${tm.t}</td><td><select id="mt${i}">${opts}</select></td></tr>`;
+  });
+  q.innerHTML=`<span class="tag">${MATCH.tag}</span>
+    <table class="match">${rows}</table>${bancoHtml}
+    <div class="acciones"><button class="btn primary small">Comprobar</button></div>
+    <div class="fb" id="fb-${id}"></div>`;
+  q.querySelector('button').addEventListener('click',()=>{
+    if(q.dataset.done)return;
+    let vacio=false; MATCH.terminos.forEach((tm,i)=>{ if(!document.getElementById('mt'+i).value) vacio=true; });
+    if(vacio){ shake(q.querySelector('button')); return; }
+    q.dataset.done="1";
+    let bien=0;
+    MATCH.terminos.forEach((tm,i)=>{
+      const sel=document.getElementById('mt'+i);
+      const ok=sel.value===tm.c;
+      sel.classList.add(ok?'ok':'no'); sel.disabled=true;
+      if(ok) bien++;
+    });
+    const ok=bien===MATCH.terminos.length;
+    const fb=q.querySelector('#fb-'+id);
+    fb.className='fb show '+(ok?'bien':'mal');
+    const clave=MATCH.terminos.map((tm,i)=>(i+1)+'→'+tm.c).join('  ·  ');
+    fb.innerHTML=`<b>${ok?'✓ ':'✗ '}Aciertos: ${bien}/${MATCH.terminos.length}. </b>Clave: ${clave}. `+MATCH.fb;
+    marcarResultado(id,ok);
+  });
+  sec.appendChild(q);
+  host.appendChild(sec);
+}
+
+/* ---- Render Bloque 5: ordenar ---- */
+function renderOrden(host){
+  const sec=document.createElement('section'); sec.className='bloque';
+  sec.innerHTML='<h2><span class="n">5</span>Ordena la síntesis de proteínas</h2><p class="desc">Asigna a cada paso el número de orden correcto (del 1 al 6), desde la transcripción hasta la proteína terminada.</p>';
+  totalCalificables++;
+  const id='orden';
+  const q=document.createElement('div'); q.className='q';
+  // presentar los pasos en orden barajado fijo
+  const barajado=[3,5,1,6,2,4]; // índices+1 de ORDEN.pasos mostrados
+  const mapa={1:2,2:4,3:0,4:5,5:1,6:3}; // no usado; construimos abajo
+  let lis='';
+  // Mostramos en un orden desordenado explícito
+  const displayOrder=[2,4,0,5,1,3]; // índices del array pasos
+  displayOrder.forEach((idx,k)=>{
+    const p=ORDEN.pasos[idx];
+    let opts='<option value="">#</option>';
+    for(let n=1;n<=6;n++) opts+=`<option value="${n}">${n}</option>`;
+    lis+=`<li><select id="or${idx}" data-correcto="${p.correcto}">${opts}</select><span>${p.texto}</span></li>`;
+  });
+  q.innerHTML=`<span class="tag">${ORDEN.tag}</span>
+    <ul class="orden">${lis}</ul>
+    <div class="acciones"><button class="btn primary small">Comprobar</button></div>
+    <div class="fb" id="fb-${id}"></div>`;
+  q.querySelector('button').addEventListener('click',()=>{
+    if(q.dataset.done)return;
+    let vacio=false; ORDEN.pasos.forEach((p,idx)=>{ const s=document.getElementById('or'+idx); if(s&&!s.value) vacio=true; });
+    if(vacio){ shake(q.querySelector('button')); return; }
+    q.dataset.done="1";
+    let bien=0;
+    ORDEN.pasos.forEach((p,idx)=>{
+      const s=document.getElementById('or'+idx); if(!s)return;
+      const ok=(+s.value)===p.correcto;
+      s.classList.add(ok?'ok':'no'); s.disabled=true; if(ok)bien++;
+    });
+    const ok=bien===ORDEN.pasos.length;
+    const fb=q.querySelector('#fb-'+id);
+    fb.className='fb show '+(ok?'bien':'mal');
+    fb.innerHTML=`<b>${ok?'✓ ':'✗ '}Aciertos: ${bien}/${ORDEN.pasos.length}. </b>`+ORDEN.fb;
+    marcarResultado(id,ok);
+  });
+  sec.appendChild(q);
+  host.appendChild(sec);
+}
+
+/* ---- Render Bloque 6: abiertas ---- */
+function renderAbiertas(host){
+  const sec=document.createElement('section'); sec.className='bloque';
+  sec.innerHTML='<h2><span class="n">6</span>Preguntas de desarrollo</h2><p class="desc">Redacta tu respuesta y luego compárala con la respuesta modelo. Estas preguntas no suman al puntaje automático: son de reflexión y repaso.</p>';
+  ABIERTAS.forEach((item,i)=>{
+    const id='a'+i;
+    const q=document.createElement('div'); q.className='q abierta';
+    q.innerHTML=`<span class="tag">${item.tag}</span>
+      <p class="enun"><span class="qn">${i+1}.</span><span>${item.q}</span></p>
+      <textarea placeholder="Escribe tu respuesta aquí..."></textarea>
+      <div class="acciones"><button class="btn ghost small">Ver respuesta modelo</button></div>
+      <div class="modelo" id="mod-${id}"><h4>Respuesta modelo</h4>${item.modelo}</div>`;
+    q.querySelector('button').addEventListener('click',()=>{
+      const m=q.querySelector('#mod-'+id); m.classList.toggle('show');
+      q.querySelector('button').textContent=m.classList.contains('show')?'Ocultar respuesta modelo':'Ver respuesta modelo';
+    });
+    sec.appendChild(q);
+  });
+  host.appendChild(sec);
+}
+
+function shake(el){ el.animate([{transform:'translateX(0)'},{transform:'translateX(-4px)'},{transform:'translateX(4px)'},{transform:'translateX(0)'}],{duration:220}); }
+
+/* ---- Calificar todo (fuerza clic en botones no resueltos) ---- */
+function calificarTodo(){
+  document.querySelectorAll('.q .acciones .btn.primary').forEach(b=>{
+    const q=b.closest('.q');
+    if(q && !q.querySelector('.opciones[data-done], [data-done]') && !q.dataset.done){
+      // intentar comprobar solo si hay selección/valor; si no, se ignora
+    }
+    b.click();
+  });
+  mostrarFinal();
+}
+function mostrarFinal(){
+  const ac=Object.values(aciertosMap).filter(Boolean).length;
+  document.getElementById('finalScore').textContent=ac+" / "+totalCalificables;
+  let msg;
+  const pct=totalCalificables? ac/totalCalificables:0;
+  const nombre=document.getElementById('nombre').value.trim();
+  const saludo=nombre? (nombre+", ") : "";
+  if(respondidas.size<totalCalificables){
+    msg=saludo+"aún tienes ítems sin comprobar ("+(totalCalificables-respondidas.size)+" pendientes).";
+  } else if(pct===1){ msg=saludo+"¡excelente! Dominas los conceptos del capítulo. 🎯";
+  } else if(pct>=0.8){ msg=saludo+"muy buen desempeño. Repasa los ítems marcados en rojo.";
+  } else if(pct>=0.6){ msg=saludo+"buen avance; conviene reforzar las secciones con más errores.";
+  } else { msg=saludo+"repasa la Revisión del capítulo y vuelve a intentarlo."; }
+  document.getElementById('finalMsg').textContent=msg;
+  document.getElementById('final').scrollIntoView({behavior:'smooth'});
+}
+function reiniciar(){ location.reload(); }
+
+/* ═══════════════ GUARDADO Y ENTREGA ═══════════════
+   El taller enseña las respuestas al comprobar cada ítem, así que aquí no
+   hay antifraude: lo que se guarda es el avance, para que nadie pierda su
+   trabajo si se cae la conexión o se cierra el navegador.
+
+   Tres capas de respaldo:
+     1. localStorage  — en cada respuesta. Sobrevive a recargar y a cerrar.
+     2. Servidor      — al terminar cada bloque, cada 90 s si hay cambios,
+                        y al salir de la página (sendBeacon).
+     3. Entrega final — explícita, con confirmación y calificación.
+
+   El listado de estudiantes se pide al servidor para no escribir nombres
+   en el repositorio, que es público. */
+const CONFIG = {
+  TOKEN   : "TALLER_TIS_MORF_2026II_7fa412",
+  ENDPOINT: "https://script.google.com/macros/s/AKfycbwVm1Yun0cFbChYe5DS6EzxixcoqqI32pZtilaXFzHVLXRfUMopyFsgsvaAdZjCoxR1/exec",
+  LS_PREFIJO: "taller_tisular_2026II::",
+  AUTOGUARDADO_MS: 90000
+};
+
+/* Debe coincidir con BLOQUES de taller.gs */
+const BLOQUES = [
+  { clave:"m",     n:10, nombre:"Opción múltiple",  bloque:1 },
+  { clave:"vf",    n:6,  nombre:"Verdadero o falso", bloque:2 },
+  { clave:"c",     n:5,  nombre:"Completar",         bloque:3 },
+  { clave:"match", n:1,  nombre:"Emparejamiento",    bloque:4 },
+  { clave:"orden", n:1,  nombre:"Ordenar",           bloque:5 }
+];
+function bloqueDe(id){
+  if(id === "match" || id === "orden") return id;
+  if(id.indexOf("vf") === 0) return "vf";
+  if(id.charAt(0) === "m")   return "m";
+  if(id.charAt(0) === "c")   return "c";
+  return null;
+}
+
+let entregado = false;
+let sucio = false;               // hay cambios sin mandar al servidor
+let bloquesEnviados = {};        // clave -> true, para no repetir el snapshot
+
+const MOTIVOS = {
+  taller_cerrado: "El taller ya está cerrado a envíos.",
+  token_invalido: "Este enlace no es válido. Pídele al docente el correcto."
+};
+
+const $id = s => document.getElementById(s);
+let ingresado = "";                       // nombre confirmado contra el servidor
+const alumnoActual = () => ingresado;
+const abiertasActuales = () => [...document.querySelectorAll('.q.abierta textarea')].map(t => t.value.trim());
+
+function estadoNube(txt, clase){
+  const el = $id('estadoNube');
+  el.textContent = txt;
+  el.className = clase || "";
+}
+
+/* ───────────── Capa 1 · respaldo en el navegador ───────────── */
+function claveLocal(){ return CONFIG.LS_PREFIJO + (alumnoActual() || "sin-nombre"); }
+
+function guardarLocal(){
+  try{
+    localStorage.setItem(claveLocal(), JSON.stringify({
+      alumno: alumnoActual(),
+      items: aciertosMap,
+      abiertas: abiertasActuales(),
+      ts: new Date().toISOString()
+    }));
+  }catch(e){ /* modo privado o cuota llena: no es crítico */ }
+}
+
+function hayRespaldoLocal(){
+  try{ return JSON.parse(localStorage.getItem(claveLocal()) || "null"); }catch(e){ return null; }
+}
+
+function ofrecerRecuperacion(){
+  const g = hayRespaldoLocal();
+  const caja = $id('avisoRecuperar');
+  caja.innerHTML = "";
+  if(!g || (!Object.keys(g.items||{}).length && !(g.abiertas||[]).some(Boolean))) return;
+
+  const hora = new Date(g.ts).toLocaleString('es-CO', {dateStyle:'short', timeStyle:'short'});
+  const nItems = Object.keys(g.items||{}).length;
+  const nAb = (g.abiertas||[]).filter(Boolean).length;
+  caja.innerHTML = `<div class="recuperar">
+      <b>Tienes un avance guardado en este navegador</b> (${hora}): ${nItems} ítems comprobados
+      y ${nAb} respuesta(s) de desarrollo. Puedes recuperarlo y seguir donde ibas.
+      <div><button class="btn primary small" id="btnRecuperar">Recuperar mi avance</button>
+      <button class="btn ghost small" id="btnDescartar">Empezar de cero</button></div>
+    </div>`;
+  $id('btnRecuperar').addEventListener('click', ()=>{
+    Object.assign(aciertosMap, g.items || {});
+    Object.keys(g.items || {}).forEach(k => respondidas.add(k));
+    const tas = document.querySelectorAll('.q.abierta textarea');
+    (g.abiertas || []).forEach((v,i)=>{ if(tas[i] && v) tas[i].value = v; });
+    actualizarBarra();
+    BLOQUES.forEach(b => pintarEstadoBloque(b.clave));
+    caja.innerHTML = `<div class="recuperar">Avance recuperado. Los ítems que ya habías
+      comprobado cuentan en tu marcador; si quieres volver a ver la explicación de alguno,
+      respóndelo otra vez.</div>`;
+    sucio = true;
+  });
+  $id('btnDescartar').addEventListener('click', ()=>{
+    try{ localStorage.removeItem(claveLocal()); }catch(e){}
+    caja.innerHTML = "";
+  });
+}
+
+/* ───────────── Capa 2 · snapshots al servidor ───────────── */
+async function enviarServidor(payload, conBeacon){
+  const cuerpo = JSON.stringify(Object.assign({token: CONFIG.TOKEN}, payload));
+  if(conBeacon && navigator.sendBeacon){
+    try{ navigator.sendBeacon(CONFIG.ENDPOINT, new Blob([cuerpo], {type:"text/plain"})); return {ok:true}; }catch(e){}
+  }
+  const res = await fetch(CONFIG.ENDPOINT, {
+    method:"POST", headers:{"Content-Type":"text/plain;charset=utf-8"}, body:cuerpo
+  });
+  return res.json();
+}
+
+/** Snapshot de avance. `motivo` explica por qué se envió. */
+async function snapshot(motivo, conBeacon){
+  const alumno = alumnoActual();
+  if(!alumno || entregado) return;
+  const carga = {
+    evento : "snapshot",
+    motivo : motivo,
+    alumno : alumno,
+    items  : aciertosMap,
+    abiertas: abiertasActuales()
+  };
+  if(conBeacon){ enviarServidor(carga, true); sucio = false; return; }
+  try{
+    estadoNube("guardando…");
+    const d = await enviarServidor(carga);
+    if(!d.ok) throw new Error(d.error || "error");
+    sucio = false;
+    estadoNube("guardado ✓", "ok");
+  }catch(e){
+    estadoNube("sin guardar (se reintenta)", "err");
+  }
+}
+
+/** Se llama cada vez que se comprueba un ítem. */
+function alResponder(id){
+  guardarLocal();
+  sucio = true;
+  const b = bloqueDe(id);
+  if(b) pintarEstadoBloque(b);
+  // Snapshot en cuanto se completa un bloque: es el corte lógico natural.
+  if(b && !bloquesEnviados[b] && bloqueCompleto(b)){
+    bloquesEnviados[b] = true;
+    snapshot("bloque_completo:" + b);
+  }
+}
+
+function contarBloque(clave){
+  return Object.keys(aciertosMap).filter(k => bloqueDe(k) === clave).length;
+}
+function bloqueCompleto(clave){
+  const b = BLOQUES.find(x => x.clave === clave);
+  return b ? contarBloque(clave) >= b.n : false;
+}
+
+/** Etiqueta «3/10 · guardado» junto al título de cada bloque. */
+function pintarEstadoBloque(clave){
+  const b = BLOQUES.find(x => x.clave === clave);
+  if(!b) return;
+  const h2 = document.querySelectorAll('section.bloque > h2')[b.bloque - 1];
+  if(!h2) return;
+  let et = h2.querySelector('.guardado');
+  if(!et){ et = document.createElement('span'); et.className = 'guardado'; h2.appendChild(et); }
+  const hechos = contarBloque(clave);
+  et.textContent = hechos + "/" + b.n + (hechos >= b.n ? " · completo" : "");
+  et.classList.toggle('pend', hechos < b.n);
+}
+
+/* ───────────── Ingreso por estudiante ─────────────
+   El nombre se elige de la lista y se confirma con el código, de modo que
+   nadie entra por otro por descuido y queda un log de ingreso real. */
+async function cargarRoster(){
+  const sel = $id('nombre');
+  try{
+    const r = await fetch(CONFIG.ENDPOINT + "?action=roster&token=" + encodeURIComponent(CONFIG.TOKEN));
+    const d = await r.json();
+    if(!d.ok) throw new Error(MOTIVOS[d.error] || ("El servidor respondió: " + d.error));
+    if(!Array.isArray(d.roster) || !d.roster.length) throw new Error("El listado llegó vacío.");
+    sel.innerHTML = '<option value="">— Selecciona tu nombre —</option>' +
+      d.roster.map(n => `<option value="${n}">${n}</option>`).join("");
+    revisarIngreso();
+  }catch(err){
+    sel.innerHTML = '<option value="">No se pudo cargar el listado</option>';
+    $id('idErr').innerHTML = (err.message || "No se pudo cargar el listado.") +
+      ' <a href="#" onclick="location.reload();return false">Recargar</a>.';
+  }
+}
+
+function revisarIngreso(){
+  $id('btnIngresar').disabled = !($id('nombre').value && $id('codigo').value.trim());
+}
+
+async function ingresar(){
+  const btn = $id('btnIngresar');
+  const alumno = $id('nombre').value;
+  const codigo = $id('codigo').value.trim();
+  const err = $id('idErr');
+  err.textContent = "";
+  btn.disabled = true; btn.textContent = "Verificando…";
+  try{
+    const d = await enviarServidor({evento:"ingreso", alumno:alumno, codigo:codigo});
+    if(!d.ok) throw new Error(MOTIVOS[d.error] || d.error);
+
+    // Si empezó a trabajar antes de ingresar, su respaldo quedó bajo
+    // "sin-nombre": se traslada a su clave para no perderlo.
+    try{
+      const anon = localStorage.getItem(CONFIG.LS_PREFIJO + "sin-nombre");
+      if(anon){
+        localStorage.setItem(CONFIG.LS_PREFIJO + alumno, anon);
+        localStorage.removeItem(CONFIG.LS_PREFIJO + "sin-nombre");
+      }
+    }catch(e){}
+
+    ingresado = alumno;
+    $id('cajaIngreso').style.display = "none";
+    $id('cajaIdentificado').style.display = "";
+    $id('quienSoy').textContent = alumno;
+    if(d.codigo_pendiente){
+      err.style.color = "var(--gris)";
+      err.textContent = "Tu código no estaba en la lista del curso; quedó registrado el que escribiste.";
+    }
+    estadoNube("listo para guardar");
+    ofrecerRecuperacion();
+  }catch(e){
+    btn.disabled = false; btn.textContent = "Ingresar";
+    err.style.color = "var(--rojo)";
+    err.textContent = e.message === "codigo_incorrecto"
+      ? "Ese código no corresponde al nombre seleccionado. Revísalo."
+      : "No se pudo ingresar (" + e.message + "). Revisa tu conexión e inténtalo otra vez.";
+  }
+}
+
+function salirIngreso(){
+  ingresado = "";
+  $id('cajaIngreso').style.display = "";
+  $id('cajaIdentificado').style.display = "none";
+  $id('btnIngresar').disabled = false;
+  $id('btnIngresar').textContent = "Ingresar";
+  $id('codigo').value = "";
+  $id('avisoRecuperar').innerHTML = "";
+  estadoNube("·");
+}
+
+/* ───────────── Capa 3 · entrega definitiva ───────────── */
+function abrirConfirmacion(){
+  const alumno = alumnoActual();
+  if(!alumno){
+    $id('idErr').style.color = "var(--rojo)";
+    $id('idErr').textContent = "Primero ingresa con tu nombre y tu código, arriba.";
+    $id('cajaIngreso').scrollIntoView({behavior:'smooth'});
+    return;
+  }
+  const ac = Object.values(aciertosMap).filter(Boolean).length;
+  const ab = abiertasActuales();
+  const sinResponder = totalCalificables - respondidas.size;
+  const abVacias = ab.filter(t => !t).length;
+
+  $id('mcResumen').innerHTML =
+    `<b>${alumno}</b><br>` +
+    BLOQUES.map(b => `${b.nombre}: <b>${contarBloque(b.clave)}/${b.n}</b>`).join(" &nbsp;·&nbsp; ") +
+    `<br>Aciertos automáticos: <b>${ac} / ${totalCalificables}</b>` +
+    `<br>Preguntas de desarrollo escritas: <b>${4 - abVacias} / 4</b>`;
+
+  const avisos = [];
+  if(sinResponder > 0) avisos.push(`Te faltan ${sinResponder} ítems por comprobar.`);
+  if(abVacias > 0)     avisos.push(`Tienes ${abVacias} pregunta(s) de desarrollo en blanco.`);
+  if(entregado)        avisos.push("Ya entregaste antes; esto quedará como una entrega nueva.");
+  $id('mcAviso').textContent = avisos.join(" ");
+
+  $id('modalConf').classList.add('show');
+}
+function cerrarConfirmacion(){ $id('modalConf').classList.remove('show'); }
+
+async function entregarDefinitivo(){
+  const btn = $id('mcConfirmar');
+  btn.disabled = true; btn.textContent = "Entregando…";
+  try{
+    const d = await enviarServidor({
+      evento  : "envio",
+      alumno  : alumnoActual(),
+      items   : aciertosMap,
+      abiertas: abiertasActuales()
+    });
+    if(!d.ok) throw new Error(MOTIVOS[d.error] || d.error);
+
+    entregado = true; sucio = false;
+    try{ localStorage.removeItem(claveLocal()); }catch(e){}
+    cerrarConfirmacion();
+    estadoNube("entregado ✓", "ok");
+
+    const btnE = $id('btnEnviar');
+    btnE.disabled = true; btnE.textContent = "Entregado ✓";
+
+    const ab = abiertasActuales().filter(Boolean).length;
+    $id('finalScore').textContent = d.aciertos + " / " + d.max;
+    $id('finalMsg').innerHTML =
+      "<b>Entrega registrada.</b> Tu calificación automática es <b>" + d.aciertos + " / " + d.max +
+      "</b> (" + Math.round(d.aciertos / d.max * 100) + " %)." +
+      (ab ? " Tus " + ab + " respuesta(s) de desarrollo las califica el docente y no cuentan en ese número."
+          : " No escribiste las preguntas de desarrollo, que el docente califica aparte.");
+    $id('final').scrollIntoView({behavior:'smooth'});
+  }catch(e){
+    btn.disabled = false; btn.textContent = "Sí, entregar";
+    $id('mcAviso').textContent = "No se pudo entregar (" + e.message +
+      "). Revisa tu conexión e inténtalo otra vez; tu avance sigue guardado.";
+  }
+}
+
+/* ---- Init ---- */
+(function init(){
+  const app=document.getElementById('app');
+  renderMultiple(app);
+  renderVF(app);
+  renderCompletar(app);
+  renderMatch(app);
+  renderOrden(app);
+  renderAbiertas(app);
+  document.getElementById('chip-total').textContent=totalCalificables+" ítems calificables + 4 de desarrollo";
+  actualizarBarra();
+  cargarRoster();
+  BLOQUES.forEach(b => pintarEstadoBloque(b.clave));
+
+  // Ingreso por estudiante
+  $id('nombre').addEventListener('change', revisarIngreso);
+  $id('codigo').addEventListener('input', revisarIngreso);
+  $id('codigo').addEventListener('keydown', e=>{
+    if(e.key === "Enter" && !$id('btnIngresar').disabled) ingresar();
+  });
+  $id('btnIngresar').addEventListener('click', ingresar);
+  $id('btnSalir').addEventListener('click', salirIngreso);
+
+  // Las respuestas de desarrollo se respaldan mientras se escriben.
+  document.querySelectorAll('.q.abierta textarea').forEach(t=>{
+    let temporizador;
+    t.addEventListener('input', ()=>{
+      clearTimeout(temporizador);
+      temporizador = setTimeout(()=>{ guardarLocal(); sucio = true; }, 800);
+    });
+  });
+
+  // Autoguardado periódico: solo sube si hay algo nuevo.
+  setInterval(()=>{ if(sucio && !entregado && alumnoActual()) snapshot("periodico"); },
+              CONFIG.AUTOGUARDADO_MS);
+
+  // Último respaldo al cerrar o recargar la página.
+  window.addEventListener('beforeunload', ()=>{
+    guardarLocal();
+    if(sucio && !entregado && alumnoActual()) snapshot("salida", true);
+  });
+
+  // Cerrar el modal con Escape.
+  document.addEventListener('keydown', e=>{
+    if(e.key === "Escape") cerrarConfirmacion();
+  });
+})();
+</script>
+</body>
+</html>

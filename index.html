@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Morfología General · Optometría · Universidad de La Salle · 2026-II</title>
+<meta name="description" content="Espacio del curso de Morfología General para I semestre de Optometría, Universidad de La Salle. Cronograma, clases publicadas, evaluación y bibliografía.">
+<style>
+/* ─────────────────────────────────────────────────────────────
+   Portada del curso · sin JavaScript, sin recursos externos.
+   Así se puede incrustar o pegar en Moodle sin que el filtro la
+   rompa. Tipografías del sistema; tema claro y oscuro con CSS.
+   ───────────────────────────────────────────────────────────── */
+:root{
+  --ink:#1a2a35; --text:#2c3e4f; --soft:#5a6b7a; --muted:#8a9aa8;
+  --paper:#f8f3e8; --paper-2:#f0e8d4; --surface:#fdfaf2;
+  --line:#d4c8a8; --line-2:#e5dbc0;
+  --amber:#b8860b; --amber-dk:#8b6914; --amber-pale:#f5e9c8;
+  --teal:#2a7a6e; --teal-dk:#1f5d54;
+  --rust:#a0522d; --clinical:#b5413b;
+  --shadow:0 2px 10px rgba(26,42,53,.07);
+  --shadow-lg:0 6px 28px rgba(26,42,53,.12);
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --ink:#e8eef2; --text:#cdd8e0; --soft:#9fb0bd; --muted:#7d8d9a;
+    --paper:#12191e; --paper-2:#1a232a; --surface:#161f26;
+    --line:#31414c; --line-2:#26333c;
+    --amber:#d9a72e; --amber-dk:#e8bf5a; --amber-pale:#2b2415;
+    --teal:#5fbdad; --teal-dk:#7fd0c1;
+    --rust:#d08a5f; --clinical:#e0776f;
+    --shadow:0 2px 10px rgba(0,0,0,.35);
+    --shadow-lg:0 6px 28px rgba(0,0,0,.5);
+  }
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--paper); color:var(--text);
+  font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
+  font-size:clamp(15px,.5vw + 14px,17px); line-height:1.65;
+}
+.wrap{max-width:1060px;margin:0 auto;padding:0 clamp(16px,4vw,32px)}
+
+/* ── Cabecera ── */
+header.hero{
+  background:linear-gradient(160deg,var(--teal-dk) 0%,var(--teal) 55%,var(--amber-dk) 190%);
+  color:#f6f2e6; padding:clamp(34px,7vw,64px) 0 clamp(58px,9vw,84px);
+  border-bottom:3px solid var(--amber);
+}
+@media (prefers-color-scheme:dark){
+  header.hero{background:linear-gradient(160deg,#0e2a27 0%,#17403a 60%,#2f2a14 190%);color:#e8eef2}
+}
+.eyebrow{
+  font-family:ui-monospace,"SFMono-Regular",Consolas,"Liberation Mono",monospace;
+  font-size:.72rem; letter-spacing:.22em; text-transform:uppercase;
+  opacity:.85; margin-bottom:.7rem;
+}
+header.hero h1{
+  font-size:clamp(1.9rem,5.2vw,3.1rem); line-height:1.12; font-weight:700;
+  letter-spacing:-.015em; margin-bottom:.5rem;
+}
+header.hero h1 em{font-style:italic;color:var(--amber-pale)}
+@media (prefers-color-scheme:dark){header.hero h1 em{color:var(--amber-dk)}}
+.lede{font-size:clamp(1rem,1.6vw,1.15rem);opacity:.92;max-width:62ch}
+
+/* ── Tarjetas de datos prácticos, superpuestas ── */
+.datos{
+  display:grid; gap:clamp(10px,1.6vw,16px);
+  grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+  margin-top:clamp(-46px,-6vw,-40px); margin-bottom:clamp(34px,5vw,52px);
+}
+.dato{
+  background:var(--surface); border:1px solid var(--line-2); border-radius:10px;
+  padding:16px 18px; box-shadow:var(--shadow-lg);
+}
+.dato .k{
+  font-family:ui-monospace,"SFMono-Regular",Consolas,monospace;
+  font-size:.68rem; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--muted); margin-bottom:.35rem;
+}
+.dato .v{color:var(--ink);font-weight:600;line-height:1.4}
+.dato .v small{display:block;font-weight:400;font-size:.86rem;color:var(--soft);margin-top:.15rem}
+.dato a{color:var(--teal);text-decoration:none;border-bottom:1px solid var(--line)}
+.dato a:hover{border-bottom-color:var(--teal)}
+
+/* ── Secciones ── */
+section{margin-bottom:clamp(38px,6vw,58px)}
+h2{
+  font-size:clamp(1.3rem,2.6vw,1.75rem); color:var(--ink); font-weight:700;
+  letter-spacing:-.01em; line-height:1.25; margin-bottom:.35rem;
+  padding-bottom:.5rem; border-bottom:2px solid var(--amber);
+}
+h2 + .sub{color:var(--soft);font-size:.95rem;margin:.6rem 0 1.3rem;max-width:70ch}
+h3{
+  font-family:ui-monospace,"SFMono-Regular",Consolas,monospace;
+  font-size:.75rem; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--amber-dk); margin:1.9rem 0 .8rem; font-weight:600;
+}
+p{margin-bottom:1rem;max-width:74ch}
+p:last-child{margin-bottom:0}
+strong{color:var(--ink);font-weight:600}
+
+/* ── Aviso ── */
+.aviso{
+  background:var(--amber-pale); border-left:5px solid var(--amber);
+  border-radius:0 8px 8px 0; padding:16px 20px; margin-bottom:clamp(34px,5vw,50px);
+}
+.aviso .t{
+  font-family:ui-monospace,"SFMono-Regular",Consolas,monospace;
+  font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--amber-dk);font-weight:700;margin-bottom:.35rem;
+}
+.aviso p{margin:0;font-size:.95rem}
+
+/* ── Cronograma ── */
+.ses{
+  display:grid; grid-template-columns:auto 1fr; gap:0 clamp(12px,2vw,18px);
+  background:var(--surface); border:1px solid var(--line-2);
+  border-left:5px solid var(--muted); border-radius:0 9px 9px 0;
+  padding:14px clamp(14px,2.4vw,20px); margin-bottom:9px; box-shadow:var(--shadow);
+}
+.ses.hecha{border-left-color:var(--teal)}
+.ses.proxima{border-left-color:var(--amber);background:var(--amber-pale)}
+.ses.examen{border-left-color:var(--clinical);border-style:dashed;border-left-style:solid}
+.ses .n{
+  font-family:ui-monospace,"SFMono-Regular",Consolas,monospace;
+  font-size:1.15rem;font-weight:700;color:var(--muted);
+  min-width:2.1ch;text-align:right;line-height:1.35;
+}
+.ses.hecha .n{color:var(--teal)}
+.ses.proxima .n{color:var(--amber-dk)}
+.ses.examen .n{color:var(--clinical);font-size:.95rem}
+.ses .cuerpo{min-width:0}
+.ses .fecha{
+  font-family:ui-monospace,"SFMono-Regular",Consolas,monospace;
+  font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+}
+.ses .tema{color:var(--ink);font-weight:600;margin:.15rem 0;line-height:1.4}
+.ses .opto{font-size:.9rem;color:var(--soft);line-height:1.5}
+.ses .opto b{color:var(--teal-dk);font-weight:600}
+.ses .acc{margin-top:.55rem;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.btn{
+  display:inline-block;background:var(--teal);color:#fff;text-decoration:none;
+  font-family:ui-monospace,"SFMono-Regular",Consolas,monospace;
+  font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;font-weight:600;
+  padding:7px 14px;border-radius:6px;
+}
+.btn:hover{background:var(--teal-dk)}
+.btn.sec{background:transparent;color:var(--teal);border:1px solid var(--teal)}
+.btn.sec:hover{background:var(--teal);color:#fff}
+@media (prefers-color-scheme:dark){
+  .btn{color:#0e1a1e}.btn.sec{color:var(--teal)}.btn.sec:hover{color:#0e1a1e}
+}
+.pend{
+  font-family:ui-monospace,"SFMono-Regular",Consolas,monospace;
+  font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+}
+
+/* ── Tabla de evaluación ── */
+table{width:100%;border-collapse:collapse;margin:.4rem 0 1.1rem;font-size:.95rem}
+caption{text-align:left;color:var(--soft);font-size:.9rem;padding-bottom:.6rem}
+th{
+  background:var(--amber-dk);color:var(--paper);text-align:left;padding:9px 14px;
+  font-family:ui-monospace,"SFMono-Regular",Consolas,monospace;
+  font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;
+}
+@media (prefers-color-scheme:dark){th{color:#12191e}}
+td{padding:10px 14px;border-bottom:1px solid var(--line-2);vertical-align:top}
+tbody tr:nth-child(even) td{background:var(--paper-2)}
+td.peso{text-align:right;font-weight:700;color:var(--ink);white-space:nowrap}
+
+/* ── Listas y bibliografía ── */
+ul{list-style:none}
+ul.marca li{padding-left:1.25rem;position:relative;margin-bottom:.5rem;max-width:74ch}
+ul.marca li::before{content:"·";position:absolute;left:.35rem;color:var(--amber);font-weight:700}
+ul.biblio li{
+  padding:11px 0;border-bottom:1px solid var(--line-2);line-height:1.5;
+}
+ul.biblio li:last-child{border-bottom:0}
+ul.biblio .aut{color:var(--ink);font-weight:600}
+ul.biblio .obra{font-style:italic}
+.dos{display:grid;gap:clamp(14px,2.4vw,22px);grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.caja{background:var(--surface);border:1px solid var(--line-2);border-radius:9px;padding:18px 20px}
+.caja h4{color:var(--ink);font-size:1rem;margin-bottom:.6rem;font-weight:700}
+
+/* ── Pie ── */
+footer{
+  border-top:2px solid var(--line);margin-top:clamp(40px,6vw,60px);
+  padding:clamp(24px,4vw,34px) 0 clamp(30px,5vw,44px);
+  color:var(--muted);font-size:.85rem;line-height:1.6;
+}
+footer a{color:var(--teal);text-decoration:none}
+footer strong{color:var(--soft)}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Universidad de La Salle · Optometría · I Semestre · 2026-II</div>
+    <h1>Morfología <em>General</em></h1>
+    <p class="lede">El punto de encuentro del curso. Cada clase se publica aquí el día que se
+      dicta, junto con su actividad. Vuelve siempre a este enlace: es la versión más actual.</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <div class="datos">
+    <div class="dato">
+      <div class="k">Horario</div>
+      <div class="v">Jueves<small>09:00 – 11:00 · 11:00 – 13:00</small></div>
+    </div>
+    <div class="dato">
+      <div class="k">Asignatura</div>
+      <div class="v">Código 01008412<small>4 créditos</small></div>
+    </div>
+    <div class="dato">
+      <div class="k">Docente</div>
+      <div class="v">Dr. Jorge Bogoya<small><a href="mailto:jbogoya@unisalle.edu.co">jbogoya@unisalle.edu.co</a></small></div>
+    </div>
+    <div class="dato">
+      <div class="k">Atención a estudiantes</div>
+      <div class="v">Miércoles<small>09:00 – 11:00 · salón de clases</small></div>
+    </div>
+  </div>
+
+  <div class="aviso">
+    <div class="t">Próxima sesión</div>
+    <p><strong>Jueves 6 de agosto · Nivel tisular.</strong> Epitelial, conectivo, muscular y
+      nervioso. Lectura previa: Tortora, capítulo 4. La clase y su taller se publican aquí
+      el mismo día.</p>
+  </div>
+
+  <section>
+    <h2>Por qué existe este espacio</h2>
+    <p class="sub">No es un repositorio de archivos: es el orden en que se construye el curso.</p>
+    <p>Morfología General es la puerta de entrada al estudio del cuerpo humano para el optómetra.
+      Aquí se construyen el lenguaje y la estructura sobre los que se apoyará toda la carrera.</p>
+    <p><strong>Cada tema se estudia dos veces:</strong> una como anatomía general y otra a través
+      de su interfaz óptica y ocular. Aprendemos los planos y ejes del cuerpo… y con ellos los ejes
+      de Fick del globo ocular. Vemos el sistema nervioso… y con él la vía visual. Estudiamos el
+      circulatorio… y llegamos a la arteria oftálmica y la retina.</p>
+    <p>Esas conexiones son el corazón del curso: hacen que la morfología no sea memoria suelta,
+      sino la base de tu práctica clínica.</p>
+  </section>
+
+  <section>
+    <h2>Las sesiones</h2>
+    <p class="sub">Los temas se abren en orden: primero el lenguaje anatómico, luego de lo
+      microscópico a los grandes sistemas. Las fechas siguen el calendario institucional y se
+      confirman en clase.</p>
+
+    <h3>Primer corte · Fundamentos</h3>
+
+    <div class="ses hecha">
+      <div class="n">01</div>
+      <div class="cuerpo">
+        <div class="fecha">Jue. 23 de julio</div>
+        <div class="tema">Organización corporal: planos, ejes y posición anatómica</div>
+        <div class="opto"><b>Interfaz optométrica:</b> posición primaria de la mirada · ejes de
+          Fick · nasal y temporal</div>
+        <div class="acc"><a class="btn" href="clase_organizacion_corporal.html">Abrir clase</a></div>
+      </div>
+    </div>
+
+    <div class="ses hecha">
+      <div class="n">02</div>
+      <div class="cuerpo">
+        <div class="fecha">Jue. 30 de julio</div>
+        <div class="tema">Nivel celular: organelos, membrana y transporte</div>
+        <div class="opto"><b>Interfaz optométrica:</b> bomba Na⁺/K⁺ del endotelio corneal ·
+          deturgescencia · el cristalino sin organelos</div>
+        <div class="acc">
+          <a class="btn" href="clase_nivel_celular.html">Abrir clase</a>
+          <a class="btn sec" href="taller_celular.html">Taller</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="ses proxima">
+      <div class="n">03</div>
+      <div class="cuerpo">
+        <div class="fecha">Jue. 6 de agosto · próxima</div>
+        <div class="tema">Nivel tisular: epitelial, conectivo, muscular y nervioso</div>
+        <div class="opto"><b>Interfaz optométrica:</b> epitelio corneal · estroma y esclera ·
+          las glándulas del párpado</div>
+        <div class="acc">
+          <a class="btn" href="clase_nivel_tisular.html">Abrir clase</a>
+          <a class="btn sec" href="taller_tisular.html">Taller</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="ses">
+      <div class="n">04</div>
+      <div class="cuerpo">
+        <div class="fecha">Jue. 13 de agosto</div>
+        <div class="tema">Osteología general: clasificación de huesos y articulaciones</div>
+        <div class="opto"><b>Interfaz optométrica:</b> los huesos que forman la órbita</div>
+        <div class="acc"><span class="pend">Próximamente</span></div>
+      </div>
+    </div>
+
+    <div class="ses examen">
+      <div class="n">📝</div>
+      <div class="cuerpo">
+        <div class="fecha">Jue. 20 de agosto</div>
+        <div class="tema">Primer parcial</div>
+        <div class="opto">Incluye preguntas tipo Saber Pro y una pregunta en inglés.</div>
+      </div>
+    </div>
+
+    <h3>Segundo corte · Cabeza, cuello y sistemas (I)</h3>
+
+    <div class="ses">
+      <div class="n">05</div>
+      <div class="cuerpo">
+        <div class="fecha">Jue. 27 de agosto</div>
+        <div class="tema">Cabeza y cuello: cráneo, cara y órbita</div>
+        <div class="opto"><b>Interfaz optométrica:</b> órbita, senos paranasales y drenaje
+          lagrimal</div>
+        <div class="acc"><span class="pend">Próximamente</span></div>
+      </div>
+    </div>
+
+    <div class="ses">
+      <div class="n">06</div>
+      <div class="cuerpo">
+        <div class="fecha">Jue. 3 de septiembre</div>
+        <div class="tema">Sistema muscular: fibras, contracción y músculos faciales</div>
+        <div class="opto"><b>Interfaz optométrica:</b> músculos extraoculares · ptosis ·
+          signo de Bell</div>
+        <div class="acc"><span class="pend">Próximamente</span></div>
+      </div>
+    </div>
+
+    <div class="ses">
+      <div class="n">07</div>
+      <div class="cuerpo">
+        <div class="fecha">Jue. 10 de septiembre</div>
+        <div class="tema">Sistema nervioso central y periférico · pares craneales</div>
+        <div class="opto"><b>Interfaz optométrica:</b> vía visual · NC II, III, IV, V₁, VI y VII</div>
+        <div class="acc"><span class="pend">Próximamente</span></div>
+      </div>
+    </div>
+
+    <div class="ses">
+      <div class="n">08</div>
+      <div class="cuerpo">
+        <div class="fecha">Jue. 17 de septiembre</div>
+        <div class="tema">Sistema circulatorio: corazón y circulación mayor y menor</div>
+        <div class="opto"><b>Interfaz optométrica:</b> arteria oftálmica · OACR · OVCR</div>
+        <div class="acc"><span class="pend">Próximamente</span></div>
+      </div>
+    </div>
+
+    <div class="ses">
+      <div class="n">09</div>
+      <div class="cuerpo">
+        <div class="fecha">Jue. 24 de septiembre</div>
+        <div class="tema">Sistema linfático: linfa e inmunidad básica</div>
+        <div class="opto"><b>Interfaz optométrica:</b> drenaje cervicofacial · privilegio inmune
+          ocular</div>
+        <div class="acc"><span class="pend">Próximamente</span></div>
+      </div>
+    </div>
+
+    <div class="ses examen">
+      <div class="n">📝</div>
+      <div class="cuerpo">
+        <div class="fecha">Jue. 1 de octubre</div>
+        <div class="tema">Segundo parcial</div>
+        <div class="opto">Incluye preguntas tipo Saber Pro y una pregunta en inglés.</div>
+      </div>
+    </div>
+
+    <h3>Tercer corte · Sistemas (II) y cierre</h3>
+
+    <div class="ses">
+      <div class="n">10</div>
+      <div class="cuerpo">
+        <div class="fecha">Jue. 8 de octubre</div>
+        <div class="tema">Sistema endocrino: glándulas y hormonas básicas</div>
+        <div class="opto"><b>Interfaz optométrica:</b> eje hipotálamo-hipófisis y quiasma ·
+          Graves · retinopatía diabética</div>
+        <div class="acc"><span class="pend">Próximamente</span></div>
+      </div>
+    </div>
+
+    <div class="ses">
+      <div class="n">11</div>
+      <div class="cuerpo">
+        <div class="fecha">Jue. 15 de octubre</div>
+        <div class="tema">Sistema respiratorio: anatomía general</div>
+        <div class="opto"><b>Interfaz optométrica:</b> síndrome de Horner · hipercapnia y
+          papiledema · cianosis</div>
+        <div class="acc"><span class="pend">Próximamente</span></div>
+      </div>
+    </div>
+
+    <div class="ses examen">
+      <div class="n">📝</div>
+      <div class="cuerpo">
+        <div class="fecha">Jue. 22 de octubre</div>
+        <div class="tema">Parcial final</div>
+        <div class="opto">Incluye preguntas tipo Saber Pro y una pregunta en inglés.</div>
+      </div>
+    </div>
+
+    <h3>Material complementario</h3>
+    <div class="ses">
+      <div class="n">+</div>
+      <div class="cuerpo">
+        <div class="tema">Generalidades: esqueleto, articulaciones y movimientos</div>
+        <div class="opto">Apoyo para las sesiones de osteología y sistema muscular.</div>
+        <div class="acc"><a class="btn sec" href="clase_magistral_generalidades.html">Abrir material</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Cómo se evalúa</h2>
+    <table>
+      <caption>Los tres parciales incluyen preguntas tipo Saber Pro y una pregunta en inglés.</caption>
+      <thead>
+        <tr><th>Corte</th><th>Componentes</th><th>Peso</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Primero</strong></td>
+          <td>Actividades de seguimiento (20 %) + primer parcial (15 %)</td>
+          <td class="peso">35 %</td>
+        </tr>
+        <tr>
+          <td><strong>Segundo</strong></td>
+          <td>Quices, talleres, exposiciones y videos (20 %) + segundo parcial (15 %)</td>
+          <td class="peso">35 %</td>
+        </tr>
+        <tr>
+          <td><strong>Tercero</strong></td>
+          <td>Actividades de seguimiento y Lectura Selecta (15 %) + parcial final (15 %)</td>
+          <td class="peso">30 %</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="dos">
+      <div class="caja">
+        <h4>Actividades de seguimiento</h4>
+        <p>Esquemas anatómicos rotulados, mapas conceptuales, talleres resueltos, quices y
+          evaluaciones escritas de estructuras y relaciones anatómicas.</p>
+      </div>
+      <div class="caja">
+        <h4>Lectura Selecta · tercer corte</h4>
+        <p>Película <strong>El hombre elefante</strong> (1980). Producto: una infografía sobre el
+          cambio morfológico y su etiología. Plazo: cuatro semanas.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Acuerdos del curso</h2>
+    <div class="dos">
+      <div class="caja">
+        <h4>Del docente</h4>
+        <ul class="marca">
+          <li>Publicar el material <strong>antes o el mismo día</strong> de cada clase, aquí.</li>
+          <li>Explicar cada tema con su <strong>aplicación optométrica</strong>, no solo la teoría.</li>
+          <li>Evaluar con <strong>rúbricas conocidas de antemano</strong> y retroalimentar a tiempo.</li>
+          <li>Mantener un trato respetuoso y canales de comunicación abiertos.</li>
+        </ul>
+      </div>
+      <div class="caja">
+        <h4>De los estudiantes</h4>
+        <ul class="marca">
+          <li><strong>Puntualidad:</strong> margen máximo de 10 minutos de ingreso.</li>
+          <li><strong>Asistencia:</strong> registrarla cada sesión con el enlace de clase.</li>
+          <li><strong>Preparación:</strong> revisar la lectura y el material previo.</li>
+          <li><strong>Participación:</strong> preguntar y discutir los casos clínicos.</li>
+          <li><strong>Celular:</strong> solo con fines académicos y autorización.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="caja" style="margin-top:clamp(14px,2.4vw,22px)">
+      <h4>Integridad académica</h4>
+      <p>Las actividades y evaluaciones de este curso son <strong>individuales</strong>, salvo
+        cuando se indique expresamente que se trabajan en pareja. El uso de inteligencia artificial
+        debe ser responsable y ético: es una herramienta de estudio, no un sustituto de tu trabajo.
+        Presentar trabajo propio no es un requisito formal, es la base de una formación clínica
+        seria — tus decisiones afectarán la salud visual de otras personas.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Qué leer</h2>
+    <p class="sub">El curso usa la <strong>Terminologia Anatomica</strong> (FIPAT) como
+      nomenclatura oficial.</p>
+    <ul class="biblio">
+      <li><span class="aut">Moore KL, Dalley AF, Agur AMR.</span>
+          <span class="obra">Anatomía con orientación clínica</span>, 8.ª ed.</li>
+      <li><span class="aut">Latarjet M, Ruiz Liard A.</span>
+          <span class="obra">Anatomía humana</span>, 5.ª ed.</li>
+      <li><span class="aut">Tortora GJ, Derrickson B.</span>
+          <span class="obra">Principios de anatomía y fisiología</span>, 15.ª ed.
+          <br><small style="color:var(--muted)">Texto guía de las clases de nivel celular y tisular.</small></li>
+      <li><span class="aut">Rohen JW, Yokochi C, Lütjen-Drecoll E.</span>
+          <span class="obra">Atlas de anatomía humana</span> — atlas fotográfico.</li>
+    </ul>
+  </section>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    <p><strong>Morfología General</strong> · Optometría · I Semestre · Universidad de La Salle ·
+      Sede Chapinero, Bogotá · Período 2026-II</p>
+    <p>Dr. Jorge Bogoya · <a href="mailto:jbogoya@unisalle.edu.co">jbogoya@unisalle.edu.co</a></p>
+    <p style="margin-top:.9rem;font-size:.8rem">Material docente elaborado para este curso. Las
+      figuras y textos citados pertenecen a sus autores y se emplean con fines exclusivamente
+      académicos.</p>
+  </div>
+</footer>
+
+</body>
+</html>

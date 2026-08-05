@@ -1,0 +1,1535 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 3 · Nivel tisular · Morfología General 2026-II</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:#1a2a35;--text:#2c3e4f;--text-soft:#5a6b7a;--text-muted:#8a9aa8;
+  --parchment:#f8f3e8;--parchment-dark:#f0e8d4;--parchment-deep:#e8dcc0;
+  --bg-card:#fdfaf2;--border:#d4c8a8;--border-light:#e5dbc0;
+  --amber:#b8860b;--amber-dark:#8b6914;--amber-light:#d4a72c;--amber-pale:#f5e9c8;
+  --teal:#2a7a6e;--teal-dark:#1f5d54;
+  --rust:#a0522d;--rust-dark:#7d3f22;
+  --clinical:#b5413b;--clinical-dark:#8a2f2a;--clinical-bg:#fce8e6;
+  --blue:#1976a1;--blue-dark:#115670;--blue-bg:#e3f0f5;
+  --green:#2e7d32;--green-bg:#e8f5e9;
+  --purple:#6b4a8a;--purple-bg:#f0e8f4;--purple-dark:#4a2d6e;
+  --shadow-sm:0 2px 8px rgba(26,42,53,0.06);
+  --shadow-md:0 4px 20px rgba(26,42,53,0.10);
+  --font-display:'Playfair Display',Georgia,serif;
+  --font-body:'Source Serif 4',Georgia,serif;
+  --font-mono:'DM Mono','Courier New',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--parchment);color:var(--text);line-height:1.75;font-size:17px;
+  background-image:radial-gradient(at 12% 8%,rgba(184,134,11,.04) 0%,transparent 50%),radial-gradient(at 88% 92%,rgba(42,122,110,.04) 0%,transparent 50%);
+  background-attachment:fixed}
+
+/* HEADER */
+.header{text-align:center;padding:70px 30px 50px;border-bottom:3px double var(--amber);margin-bottom:50px;position:relative}
+.header::before{content:'';position:absolute;top:30px;left:50%;transform:translateX(-50%);width:80px;height:1px;background:var(--amber)}
+.eyebrow{font-family:var(--font-mono);font-size:.78rem;letter-spacing:.32em;text-transform:uppercase;color:var(--amber-dark);margin-bottom:14px}
+.header h1{font-family:var(--font-display);font-size:clamp(2.2rem,5vw,3.6rem);font-weight:900;color:var(--ink);line-height:1.05;margin-bottom:12px}
+.header h1 em{font-style:italic;font-weight:400;color:var(--amber-dark)}
+.header .subtitle{font-family:var(--font-body);font-style:italic;font-size:1.15rem;color:var(--text-soft);margin-bottom:22px;font-weight:300}
+.header .meta{font-family:var(--font-mono);font-size:.82rem;letter-spacing:.18em;color:var(--text-muted);text-transform:uppercase}
+
+/* TABS */
+.tab-bar{background:var(--bg-card);border:1px solid var(--border);border-radius:4px;padding:0;margin-bottom:50px;box-shadow:var(--shadow-sm);overflow:hidden;display:flex}
+.tab-btn{flex:1;padding:18px 24px;background:none;border:none;border-right:1px solid var(--border-light);font-family:var(--font-body);font-size:.95rem;color:var(--text-soft);cursor:pointer;transition:all .2s;text-align:center;line-height:1.4}
+.tab-btn:last-child{border-right:none}
+.tab-btn:hover{background:var(--parchment-dark);color:var(--ink)}
+.tab-btn.active{background:var(--amber-pale);color:var(--ink);font-weight:600;border-bottom:3px solid var(--amber)}
+.tab-btn .tab-date{display:block;font-family:var(--font-mono);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--amber-dark);margin-bottom:4px}
+.tab-pane{display:none}
+.tab-pane.active{display:block}
+
+/* CONTAINER */
+.container{max-width:1100px;margin:0 auto;padding:0 30px 80px}
+
+/* NAV INTERNA */
+.station-nav{background:var(--bg-card);border:1px solid var(--border);border-radius:4px;padding:24px 28px;margin-bottom:50px;box-shadow:var(--shadow-sm)}
+.station-nav h3{font-family:var(--font-mono);font-size:.75rem;letter-spacing:.25em;text-transform:uppercase;color:var(--amber-dark);margin-bottom:16px}
+.station-nav ol{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px 24px;counter-reset:stations}
+.station-nav li{counter-increment:stations;padding:4px 0}
+.station-nav li::before{content:counter(stations,decimal-leading-zero) '. ';font-family:var(--font-mono);color:var(--amber-dark);font-weight:500;margin-right:6px}
+.station-nav a{color:var(--text);text-decoration:none;font-style:italic;border-bottom:1px dotted var(--border);transition:color .2s,border-color .2s}
+.station-nav a:hover{color:var(--amber-dark);border-color:var(--amber-dark)}
+
+/* STATIONS */
+.station{margin-bottom:80px;scroll-margin-top:30px}
+.station-header{display:flex;align-items:baseline;gap:20px;margin-bottom:30px;padding-bottom:18px;border-bottom:2px solid var(--border)}
+.station-number{font-family:var(--font-display);font-style:italic;font-size:4rem;font-weight:400;color:var(--amber);line-height:1;flex-shrink:0}
+.station-titles{flex:1}
+.station-eyebrow{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--amber-dark);margin-bottom:6px}
+.station h2{font-family:var(--font-display);font-size:clamp(1.7rem,3.5vw,2.4rem);font-weight:700;color:var(--ink);line-height:1.15}
+
+/* CONTENT BLOCK */
+.content-block{background:var(--bg-card);border:1px solid var(--border-light);border-radius:4px;padding:28px 32px;margin-bottom:24px;box-shadow:var(--shadow-sm)}
+.content-block h3{font-family:var(--font-display);font-size:1.4rem;font-weight:700;color:var(--ink);margin-bottom:16px;padding-bottom:8px;border-bottom:1px dotted var(--border)}
+.content-block h4{font-family:var(--font-display);font-size:1.1rem;font-weight:700;color:var(--amber-dark);margin:20px 0 10px;font-style:italic}
+.content-block p{margin-bottom:14px}
+.content-block ul,.content-block ol{margin:12px 0 18px 24px}
+.content-block li{margin-bottom:8px;padding-left:6px}
+.content-block strong{color:var(--ink);font-weight:700}
+.content-block em.term{font-style:italic;color:var(--amber-dark);font-weight:600}
+
+/* TWO-COL / THREE-COL */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:20px 0}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin:20px 0}
+@media(max-width:900px){.two-col,.three-col{grid-template-columns:1fr}}
+.col-card{background:var(--parchment-dark);border-left:4px solid var(--amber);padding:18px 22px;border-radius:2px}
+.col-card.teal{border-color:var(--teal);background:#e8f0ee}
+.col-card.rust{border-color:var(--rust);background:#f3e8de}
+.col-card.blue{border-color:var(--blue);background:var(--blue-bg)}
+.col-card.green{border-color:var(--green);background:var(--green-bg)}
+.col-card h5{font-family:var(--font-display);font-weight:700;color:var(--ink);margin-bottom:8px;font-size:1.05rem}
+
+/* TABLE */
+table.data{width:100%;border-collapse:collapse;margin:18px 0;font-size:.95rem}
+table.data th{background:var(--amber-dark);color:var(--parchment);padding:10px 14px;text-align:left;font-family:var(--font-mono);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;font-weight:500}
+table.data td{padding:10px 14px;border-bottom:1px solid var(--border-light);vertical-align:top}
+table.data tr:nth-child(even) td{background:var(--parchment-dark)}
+table.data tr:hover td{background:var(--amber-pale)}
+
+/* CLINICAL BOX */
+.clinical-box{background:var(--clinical-bg);border-left:5px solid var(--clinical);padding:20px 26px;margin:22px 0;border-radius:2px;position:relative}
+.clinical-box::before{content:'👁 Interfaz optométrica';display:block;font-family:var(--font-mono);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--clinical-dark);margin-bottom:10px;font-weight:600}
+.clinical-box h5{font-family:var(--font-display);font-weight:700;color:var(--clinical-dark);font-size:1.1rem;margin-bottom:6px}
+
+/* PEARL */
+.pearl{background:var(--amber-pale);border:1px solid var(--amber-light);border-radius:2px;padding:16px 22px;margin:18px 0;font-style:italic;color:var(--text);position:relative;padding-left:50px}
+.pearl::before{content:'◆';position:absolute;left:18px;top:16px;color:var(--amber-dark);font-size:1.2rem;font-style:normal}
+
+/* SABER PRO */
+.saber-box{background:var(--purple-bg);border-left:5px solid var(--purple);padding:20px 26px;margin:22px 0;border-radius:2px}
+.saber-box::before{content:'★ Tipo Saber Pro';display:block;font-family:var(--font-mono);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--purple-dark);margin-bottom:10px;font-weight:600}
+
+/* FIGURE */
+.figure{margin:28px 0;background:var(--bg-card);border:1px solid var(--border-light);border-radius:4px;padding:20px;box-shadow:var(--shadow-sm);text-align:center}
+.figure svg{width:100%;max-width:800px;height:auto}
+.figure-caption{font-family:var(--font-mono);font-size:.78rem;color:var(--text-muted);margin-top:12px;letter-spacing:.06em;text-align:center}
+
+/* FLIP CARDS */
+.flip-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;margin:20px 0}
+.flip-card{height:160px;perspective:800px;cursor:pointer}
+.flip-inner{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform .5s ease}
+.flip-card:hover .flip-inner,.flip-card.flipped .flip-inner{transform:rotateY(180deg)}
+.flip-front,.flip-back{position:absolute;inset:0;border-radius:4px;padding:16px;backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.flip-front{background:var(--bg-card);border:2px solid var(--border)}
+.flip-back{background:var(--amber-pale);border:2px solid var(--amber);transform:rotateY(180deg)}
+.flip-front .term-label{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px}
+.flip-front .term-name{font-family:var(--font-display);font-size:1.15rem;font-weight:700;color:var(--ink);line-height:1.2}
+.flip-front .term-en{font-family:var(--font-mono);font-size:.75rem;color:var(--text-muted);margin-top:6px;font-style:italic}
+.flip-back .term-def{font-size:.88rem;color:var(--text);line-height:1.5;margin-bottom:8px}
+.flip-back .term-opto{font-family:var(--font-mono);font-size:.72rem;color:var(--clinical-dark);letter-spacing:.05em}
+
+/* CHECK QUESTION */
+.check-question{background:linear-gradient(180deg,#fdfaf2 0%,#f5ecd5 100%);border:2px dashed var(--amber);border-radius:4px;padding:28px 30px;margin:30px 0;position:relative}
+.check-question::before{content:'? Verificación';position:absolute;top:-12px;left:24px;background:var(--parchment);padding:2px 14px;font-family:var(--font-mono);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--amber-dark);font-weight:600}
+.check-question .question-text{font-family:var(--font-display);font-size:1.15rem;color:var(--ink);margin-bottom:18px;font-weight:400;font-style:italic}
+.options{list-style:none;margin:0}
+.options li{margin-bottom:10px;padding:12px 18px;background:var(--bg-card);border:1px solid var(--border);border-radius:3px;cursor:pointer;transition:all .2s;position:relative;padding-left:50px}
+.options li::before{content:attr(data-letter);position:absolute;left:16px;top:50%;transform:translateY(-50%);font-family:var(--font-mono);font-weight:500;color:var(--amber-dark)}
+.options li:hover{background:var(--amber-pale);border-color:var(--amber)}
+.options li.correct{background:#e8f5e8;border-color:#2e7d32;color:#1b5e20}
+.options li.correct::after{content:' ✓';color:#2e7d32;font-weight:700}
+.options li.incorrect{background:var(--clinical-bg);border-color:var(--clinical);color:var(--clinical-dark)}
+.options li.incorrect::after{content:' ✗';color:var(--clinical);font-weight:700}
+.feedback{display:none;margin-top:16px;padding:14px 18px;background:var(--bg-card);border-left:4px solid var(--amber);border-radius:2px;font-size:.96rem}
+.feedback.show{display:block}
+.feedback strong{color:var(--amber-dark)}
+
+/* PHOTO */
+.photo-grid{display:grid;gap:20px;margin:24px 0}
+@media(min-width:640px){.photo-grid.cols-2{grid-template-columns:1fr 1fr}.photo-grid.cols-3{grid-template-columns:1fr 1fr 1fr}}
+.photo-card{background:var(--bg-card);border:1px solid var(--border-light);border-radius:4px;padding:14px;box-shadow:var(--shadow-sm);transition:box-shadow .2s}
+.photo-card:hover{box-shadow:var(--shadow-md)}
+.photo-card .photo-frame{position:relative;background:repeating-linear-gradient(45deg,var(--parchment-dark) 0,var(--parchment-dark) 10px,var(--parchment-deep) 10px,var(--parchment-deep) 20px);border-radius:3px;overflow:hidden;min-height:200px;display:flex;align-items:center;justify-content:center}
+.photo-card img{display:block;width:100%;height:auto;border-radius:3px;cursor:zoom-in}
+.photo-card img.broken{display:none}
+.photo-card .photo-missing{display:none;font-family:var(--font-mono);font-size:.75rem;color:var(--text-muted);text-align:center;padding:40px 20px;letter-spacing:.08em;text-transform:uppercase}
+.photo-card img.broken+.photo-missing{display:block}
+.photo-card .photo-missing::before{content:'⏳ ';margin-right:4px}
+.photo-card .photo-caption{font-family:var(--font-body);font-size:.92rem;color:var(--text);margin-top:12px;line-height:1.5}
+.photo-card .photo-caption strong{font-family:var(--font-display);color:var(--ink);display:block;margin-bottom:4px;font-weight:700;font-size:.98rem}
+.photo-card .photo-credit{font-family:var(--font-mono);font-size:.7rem;color:var(--text-muted);margin-top:8px;letter-spacing:.06em;text-transform:uppercase}
+.photo-hero{background:var(--bg-card);border:1px solid var(--border-light);border-radius:4px;padding:18px;margin:24px 0;box-shadow:var(--shadow-sm);text-align:center}
+.photo-hero img{display:block;width:100%;max-width:720px;height:auto;margin:0 auto;border-radius:3px;cursor:zoom-in}
+.photo-hero img.broken{display:none}
+.photo-hero .photo-missing{display:none;font-family:var(--font-mono);font-size:.78rem;color:var(--text-muted);padding:60px 20px;letter-spacing:.1em;text-transform:uppercase}
+.photo-hero img.broken+.photo-missing{display:block}
+.photo-hero .photo-missing::before{content:'⏳ ';margin-right:4px}
+.photo-hero .photo-caption{font-family:var(--font-body);font-size:.92rem;color:var(--text);margin-top:14px;max-width:640px;margin-left:auto;margin-right:auto}
+.photo-hero .photo-caption strong{font-family:var(--font-display);color:var(--ink);font-weight:700}
+
+/* LIGHTBOX */
+.lightbox{display:none;position:fixed;inset:0;background:rgba(26,42,53,.92);z-index:9999;align-items:center;justify-content:center;padding:30px;cursor:zoom-out}
+.lightbox.open{display:flex}
+.lightbox img{max-width:95vw;max-height:90vh;border-radius:4px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.lightbox .lb-caption{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);color:var(--parchment);font-family:var(--font-mono);font-size:.82rem;background:rgba(26,42,53,.7);padding:8px 16px;border-radius:2px;max-width:90vw;text-align:center}
+.lightbox .lb-close{position:absolute;top:20px;right:30px;background:none;border:2px solid var(--parchment);color:var(--parchment);width:44px;height:44px;border-radius:50%;font-size:1.3rem;cursor:pointer;font-family:var(--font-mono)}
+.lightbox .lb-close:hover{background:rgba(255,255,255,.1)}
+
+/* FOOTER */
+.footer{margin-top:80px;padding:30px;text-align:center;border-top:3px double var(--amber);font-family:var(--font-mono);font-size:.78rem;color:var(--text-muted);letter-spacing:.12em}
+@media print{body{background:white;font-size:11pt}.tab-bar{display:none}}
+</style>
+<body>
+
+<header class="header">
+  <div class="eyebrow">Clase 3 · Morfología General 2026-II</div>
+  <h1>El nivel <em>tisular</em> de organización</h1>
+  <p class="subtitle">Uniones celulares, epitelios, tejido conectivo, muscular y nervioso</p>
+  <div class="meta">Dr. Jorge Bogoya &middot; Universidad de La Salle &middot; Optometría &middot; Primer semestre</div>
+</header>
+
+<div class="container">
+
+<div class="tab-bar" role="tablist">
+  <button class="tab-btn active" role="tab" onclick="showTab('s1',this)">
+    <span class="tab-date">Jue. 6 ago · 09:00–11:00</span>
+    Sesión 1 · Uniones y epitelios
+  </button>
+  <button class="tab-btn" role="tab" onclick="showTab('s2',this)">
+    <span class="tab-date">Jue. 6 ago · 11:00–13:00</span>
+    Sesión 2 · Conectivo, músculo y nervio
+  </button>
+</div>
+
+<!-- ═══════════════════════ SESIÓN 1 ═══════════════════════ -->
+<div class="tab-pane active" id="s1">
+
+<nav class="station-nav">
+  <h3>Contenido · Sesión 1</h3>
+  <ol>
+    <li><a href="#s1e0">Para empezar: cuatro preguntas</a></li>
+    <li><a href="#s1e1">Qué es un tejido y cuántos hay</a></li>
+    <li><a href="#s1e2">Uniones celulares: cómo se sujetan las células</a></li>
+    <li><a href="#s1e3">Epitelial y conectivo: dos estrategias opuestas</a></li>
+    <li><a href="#s1e4">Epitelios de cobertura y revestimiento</a></li>
+    <li><a href="#s1e5">Epitelio glandular</a></li>
+    <li><a href="#s1e6">Términos TA2 de la sesión</a></li>
+    <li><a href="#s1e7">Comprueba lo que aprendiste</a></li>
+  </ol>
+</nav>
+
+<!-- ─────────── 00 ─────────── -->
+<section class="station" id="s1e0">
+  <div class="station-header">
+    <div class="station-number">00</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Para empezar · Conversación</div>
+      <h2>Cuatro preguntas antes de abrir el libro</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Como la clase pasada: ninguna tiene todavía respuesta correcta y no hace falta haber leído
+      el capítulo para opinar. Piensa un momento, coméntala con quien tengas al lado y quédate con
+      tu respuesta. Al final de la segunda sesión volveremos sobre las cuatro.</p>
+
+    <div class="two-col">
+      <div class="col-card teal">
+        <h5>1 · Dos tejidos, el mismo material</h5>
+        <p>La córnea y la esclera están hechas casi de lo mismo: agua, colágeno y unas pocas
+          células. Una es transparente y la otra es blanca y opaca.
+          <strong>Si el material es el mismo, ¿qué puede estar marcando la diferencia?</strong></p>
+      </div>
+      <div class="col-card blue">
+        <h5>2 · La herida que desaparece y la que no</h5>
+        <p>Un raspón superficial de córnea se borra en dos días sin dejar rastro. Si el corte llega
+          más hondo, queda una mancha blanca para siempre.
+          <strong>¿Por qué el mismo tejido a veces se repara sin huella y a veces no?</strong></p>
+      </div>
+    </div>
+    <div class="two-col">
+      <div class="col-card rust">
+        <h5>3 · Dos músculos que no se parecen</h5>
+        <p>Mueves los ojos cuando quieres: es voluntario e inmediato. Pero el músculo que enfoca
+          de lejos a cerca trabaja solo, y no puedes ordenarle nada.
+          <strong>¿Cómo puede el mismo cuerpo tener dos clases de músculo tan distintas?</strong></p>
+      </div>
+      <div class="col-card green">
+        <h5>4 · Un tejido sin sangre</h5>
+        <p>Casi todo tu cuerpo está atravesado por vasos sanguíneos. La córnea —de las estructuras
+          más expuestas que tienes— no tiene ni uno solo.
+          <strong>¿Cómo se alimenta entonces, y por qué le conviene no tenerlos?</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="clinical-box">
+    <h5>Hacia dónde vamos</h5>
+    <p>Las cuatro se responden con lo mismo que veremos hoy: <strong>un tejido no es un montón de
+      células, es un patrón de organización</strong>. Cómo se unen entre sí, cuánta matriz ponen
+      alrededor y cómo la ordenan explica por qué la córnea es transparente, por qué unas heridas
+      cicatrizan y otras no, y por qué un músculo obedece y el otro no.</p>
+  </div>
+</section>
+
+<!-- ─────────── 01 ─────────── -->
+<section class="station" id="s1e1">
+  <div class="station-header">
+    <div class="station-number">01</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Tortora 4.1</div>
+      <h2>Qué es un tejido y cuántos hay</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <h3>La definición, con sus tres partes</h3>
+    <p>Un <strong>tejido</strong> es un grupo de células <em>similares</em>, en general con un
+      <em>origen embriológico semejante</em>, que se <em>especializa en una función específica</em>.
+      Las tres partes importan: no basta con que las células se parezcan ni con que estén juntas
+      —tienen que compartir origen y oficio—.</p>
+
+    <p>La clase pasada terminamos viendo que un mismo plano celular da lugar a unos doscientos
+      tipos de célula distintos. Hoy damos el paso siguiente: esas células no trabajan sueltas.
+      Se asocian, fabrican material a su alrededor y se organizan. <strong>La histología</strong>
+      es la ciencia que estudia esos tejidos; el <strong>anatomopatólogo</strong> es el médico que
+      los examina para buscar enfermedad.</p>
+
+    <h3>Los cuatro tipos básicos</h3>
+    <p>Todo el cuerpo humano —cada órgano, cada estructura— está construido con combinaciones de
+      solo cuatro tejidos. Merece la pena detenerse en lo económico que resulta:</p>
+
+    <table class="data">
+      <thead><tr><th>Tejido</th><th>Qué hace</th><th>Rasgo que lo delata</th><th>En el ojo</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Epitelial</strong></td><td>Cubre, reviste y secreta</td>
+            <td>Muchas células muy juntas, casi sin material entre ellas. Siempre tiene una
+                superficie libre. Avascular</td>
+            <td>Epitelio y endotelio corneales, conjuntiva, epitelio del cristalino, epitelio
+                pigmentario de la retina</td></tr>
+        <tr><td><strong>Conectivo</strong></td><td>Sostiene, une, protege y almacena</td>
+            <td>Pocas células y mucha matriz extracelular. Casi siempre vascularizado</td>
+            <td>Estroma corneal, esclera, coroides, tejido orbitario, sangre</td></tr>
+        <tr><td><strong>Muscular</strong></td><td>Genera fuerza y movimiento</td>
+            <td>Células alargadas capaces de contraerse</td>
+            <td>Músculos extraoculares, músculo ciliar, esfínter y dilatador del iris</td></tr>
+        <tr><td><strong>Nervioso</strong></td><td>Detecta, integra y transmite</td>
+            <td>Neuronas que conducen señales eléctricas, con neuroglía de soporte</td>
+            <td>Retina y nervio óptico</td></tr>
+      </tbody>
+    </table>
+
+    <div class="pearl">Cuatro tejidos, cientos de órganos. La variedad del cuerpo no viene de tener
+      muchas piezas distintas, sino de combinar unas pocas de muchas maneras.</div>
+  </div>
+
+  <div class="clinical-box">
+    <h5>La córnea entera cabe en esta tabla</h5>
+    <p>La córnea tiene cinco capas y en ellas aparecen <strong>dos de los cuatro tejidos</strong>:
+      epitelial en la superficie y en el fondo, conectivo en medio. Ni músculo ni nervio
+      —salvo las terminaciones nerviosas libres que la hacen la superficie más inervada del
+      cuerpo—. Volveremos a esta idea al final de la sesión 2: casi todo lo que verás en la
+      consulta se explica con estas cuatro palabras.</p>
+  </div>
+</section>
+
+<!-- ─────────── 02 ─────────── -->
+<section class="station" id="s1e2">
+  <div class="station-header">
+    <div class="station-number">02</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Tortora 4.2</div>
+      <h2>Uniones celulares: cómo se sujetan las células</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <h3>Cinco maneras de pegarse a la vecina</h3>
+    <p>Si las células de un epitelio solo estuvieran apoyadas unas contra otras, el primer roce las
+      separaría y el contenido del estómago se filtraría hacia la sangre. No ocurre porque hay
+      <strong>uniones celulares</strong>: puntos de contacto entre las membranas plasmáticas de
+      células adyacentes. Son cinco, y cada una resuelve un problema distinto.</p>
+
+    <div class="figure">
+      <svg viewBox="0 0 820 400" role="img" aria-label="Esquema de los cinco tipos de unión celular entre dos células epiteliales y la membrana basal">
+        <!-- células -->
+        <rect x="80" y="40" width="290" height="270" rx="6" fill="#e3f0f5" stroke="#1976a1" stroke-width="2"/>
+        <rect x="410" y="40" width="290" height="270" rx="6" fill="#e3f0f5" stroke="#1976a1" stroke-width="2"/>
+        <text x="225" y="30" text-anchor="middle" font-family="DM Mono, monospace" font-size="13" fill="#5a6b7a">Célula A</text>
+        <text x="555" y="30" text-anchor="middle" font-family="DM Mono, monospace" font-size="13" fill="#5a6b7a">Célula B</text>
+        <!-- superficie libre -->
+        <text x="390" y="18" text-anchor="middle" font-family="DM Mono, monospace" font-size="11" fill="#8a9aa8">SUPERFICIE APICAL (libre)</text>
+        <!-- membrana basal -->
+        <rect x="80" y="318" width="620" height="16" fill="#f5e9c8" stroke="#b8860b" stroke-width="2"/>
+        <text x="390" y="352" text-anchor="middle" font-family="DM Mono, monospace" font-size="12" fill="#8b6914">MEMBRANA BASAL</text>
+
+        <!-- 1 hermética -->
+        <g>
+          <line x1="370" y1="55" x2="410" y2="55" stroke="#b5413b" stroke-width="5"/>
+          <line x1="370" y1="68" x2="410" y2="68" stroke="#b5413b" stroke-width="5"/>
+          <line x1="370" y1="81" x2="410" y2="81" stroke="#b5413b" stroke-width="5"/>
+          <text x="725" y="72" font-family="DM Mono, monospace" font-size="13" fill="#8a2f2a">1 · Hermética</text>
+          <text x="725" y="88" font-family="DM Mono, monospace" font-size="10.5" fill="#8a9aa8">sella: nada pasa entre células</text>
+        </g>
+        <!-- 2 adherente -->
+        <g>
+          <rect x="352" y="115" width="18" height="34" fill="#2a7a6e"/>
+          <rect x="410" y="115" width="18" height="34" fill="#2a7a6e"/>
+          <line x1="370" y1="125" x2="410" y2="125" stroke="#2a7a6e" stroke-width="3"/>
+          <line x1="370" y1="139" x2="410" y2="139" stroke="#2a7a6e" stroke-width="3"/>
+          <path d="M330 132 q12 -10 22 0" stroke="#2a7a6e" stroke-width="2" fill="none"/>
+          <text x="725" y="132" font-family="DM Mono, monospace" font-size="13" fill="#1f5d54">2 · Adherente</text>
+          <text x="725" y="148" font-family="DM Mono, monospace" font-size="10.5" fill="#8a9aa8">cinturón de adhesión · actina</text>
+        </g>
+        <!-- 3 desmosoma -->
+        <g>
+          <rect x="352" y="180" width="18" height="30" fill="#6b4a8a"/>
+          <rect x="410" y="180" width="18" height="30" fill="#6b4a8a"/>
+          <line x1="370" y1="188" x2="410" y2="188" stroke="#6b4a8a" stroke-width="3"/>
+          <line x1="370" y1="202" x2="410" y2="202" stroke="#6b4a8a" stroke-width="3"/>
+          <line x1="300" y1="176" x2="352" y2="192" stroke="#6b4a8a" stroke-width="2"/>
+          <line x1="300" y1="214" x2="352" y2="198" stroke="#6b4a8a" stroke-width="2"/>
+          <text x="725" y="196" font-family="DM Mono, monospace" font-size="13" fill="#4a2d6e">3 · Desmosoma</text>
+          <text x="725" y="212" font-family="DM Mono, monospace" font-size="10.5" fill="#8a9aa8">remache · queratina</text>
+        </g>
+        <!-- 4 comunicante -->
+        <g>
+          <rect x="352" y="240" width="76" height="9" fill="#b8860b"/>
+          <rect x="352" y="256" width="76" height="9" fill="#b8860b"/>
+          <text x="725" y="252" font-family="DM Mono, monospace" font-size="13" fill="#8b6914">4 · Comunicante</text>
+          <text x="725" y="268" font-family="DM Mono, monospace" font-size="10.5" fill="#8a9aa8">conexones · pasan iones</text>
+        </g>
+        <!-- 5 hemidesmosoma -->
+        <g>
+          <rect x="150" y="296" width="16" height="24" fill="#a0522d"/>
+          <rect x="500" y="296" width="16" height="24" fill="#a0522d"/>
+          <line x1="158" y1="296" x2="158" y2="270" stroke="#a0522d" stroke-width="2"/>
+          <line x1="508" y1="296" x2="508" y2="270" stroke="#a0522d" stroke-width="2"/>
+          <text x="725" y="308" font-family="DM Mono, monospace" font-size="13" fill="#7d3f22">5 · Hemidesmosoma</text>
+          <text x="725" y="324" font-family="DM Mono, monospace" font-size="10.5" fill="#8a9aa8">ancla a la membrana basal</text>
+        </g>
+      </svg>
+      <p class="figure-caption">Figura 4.2 · Los cinco tipos de unión celular. Las cuatro primeras
+        unen célula con célula; el hemidesmosoma une la célula con la membrana basal.</p>
+    </div>
+
+    <table class="data">
+      <thead><tr><th>Unión</th><th>Proteína clave</th><th>Qué consigue</th><th>Dónde importa en el ojo</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Hermética</strong><br><em>zona de oclusión</em></td>
+            <td>Ocludinas y claudinas</td>
+            <td>Fusiona las membranas vecinas y <strong>sella</strong>: nada pasa por el espacio
+                entre células, todo debe atravesarlas</td>
+            <td>Epitelio pigmentario de la retina y endotelio de los capilares retinianos: son
+                <strong>la barrera hematorretiniana</strong></td></tr>
+        <tr><td><strong>Adherente</strong></td>
+            <td>Cadherinas + placa + actina</td>
+            <td>Forma un <strong>cinturón de adhesión</strong> alrededor de la célula; resiste la
+                separación durante el movimiento</td>
+            <td>Epitelio corneal, sometido al roce del parpadeo unas 15 000 veces al día</td></tr>
+        <tr><td><strong>Desmosoma</strong></td>
+            <td>Cadherinas + placa + queratina</td>
+            <td><strong>Remache</strong> puntual. Los filamentos de queratina lo atraviesan y unen
+                todo el epitelio en una red continua</td>
+            <td>Capas del epitelio corneal y de la epidermis; su fallo autoinmune causa el pénfigo</td></tr>
+        <tr><td><strong>Comunicante</strong><br><em>gap junction</em></td>
+            <td>Conexinas, que forman conexones</td>
+            <td>Túneles que dejan pasar <strong>iones y moléculas pequeñas</strong>: las células
+                se comunican y se sincronizan</td>
+            <td>Fibras del cristalino: sin vasos ni organelos, sobreviven conectadas entre sí</td></tr>
+        <tr><td><strong>Hemidesmosoma</strong></td>
+            <td>Integrinas</td>
+            <td><strong>Medio</strong> desmosoma: no une dos células, ancla la célula basal a la
+                <strong>membrana basal</strong></td>
+            <td>Une el epitelio corneal a su membrana basal; si falla, la erosión corneal recidivante</td></tr>
+      </tbody>
+    </table>
+
+    <div class="pearl">Truco para no confundirlas: <strong>hermética</strong> sella,
+      <strong>adherente</strong> y <strong>desmosoma</strong> pegan, <strong>comunicante</strong>
+      comunica y <strong>hemidesmosoma</strong> ancla al suelo. Solo una deja pasar algo.</div>
+  </div>
+
+  <div class="clinical-box">
+    <h5>El cristalino vive de sus uniones comunicantes</h5>
+    <p>Las fibras del cristalino pierden núcleo y organelos para ser transparentes, y el cristalino
+      no tiene un solo vaso. ¿Cómo sobreviven las del centro? Porque están unidas por
+      <strong>uniones comunicantes</strong> —conexinas 46 y 50— que forman un circuito de
+      circulación interna: nutrientes y antioxidantes viajan de célula a célula hasta el núcleo del
+      cristalino. Las mutaciones de esas conexinas producen <strong>cataratas congénitas</strong>,
+      y el deterioro del circuito con la edad es uno de los mecanismos de la catarata senil.</p>
+  </div>
+</section>
+
+<!-- ─────────── 03 ─────────── -->
+<section class="station" id="s1e3">
+  <div class="station-header">
+    <div class="station-number">03</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Tortora 4.3</div>
+      <h2>Epitelial y conectivo: dos estrategias opuestas</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Antes de entrar en el detalle conviene fijar el contraste, porque casi todo lo demás se
+      deduce de él. Epitelio y conectivo resuelven el mismo problema —cómo organizar células en un
+      tejido— con decisiones contrarias.</p>
+
+    <div class="two-col">
+      <div class="col-card blue">
+        <h5>Tejido epitelial</h5>
+        <p><strong>Muchas células, poca matriz.</strong> Las células están estrechamente unidas por
+          uniones celulares, con muy poco material extracelular entre ellas. Siempre hay una
+          <strong>superficie libre</strong> (apical) y una <strong>membrana basal</strong> que lo
+          separa del conectivo. Es <strong>avascular</strong>: no tiene vasos, se nutre por
+          difusión desde el conectivo de debajo. Sí tiene inervación. Se divide rápido, así que
+          <strong>se renueva bien</strong>.</p>
+      </div>
+      <div class="col-card rust">
+        <h5>Tejido conectivo</h5>
+        <p><strong>Pocas células, mucha matriz.</strong> Lo que define al tejido no son las células
+          sino el <strong>material que fabrican a su alrededor</strong>. No suele tener superficie
+          libre. Está muy <strong>vascularizado</strong> —salvo el cartílago, los tendones y los
+          ligamentos— y tiene inervación, salvo el cartílago.</p>
+      </div>
+    </div>
+
+    <p>De ese contraste sale una consecuencia que usarás toda la carrera: como el epitelio no tiene
+      vasos, <strong>depende por completo del conectivo que tiene debajo</strong>. Y como el
+      conectivo se define por su matriz, <strong>cambiar la matriz cambia el tejido</strong>. La
+      diferencia entre un tendón, un cartílago, un hueso y la sangre no está en sus células: está
+      en lo que esas células segregaron alrededor.</p>
+  </div>
+
+  <div class="clinical-box">
+    <h5>Por qué la córnea es transparente y la esclera no</h5>
+    <p>Ya podemos responder la primera pregunta del inicio. Córnea y esclera son las dos tejido
+      conectivo con colágeno tipo I; la diferencia está en <strong>cómo está ordenada la
+      matriz</strong>. En el estroma corneal las fibrillas son finas, de diámetro uniforme y
+      dispuestas en láminas paralelas regularmente espaciadas: la luz las atraviesa sin dispersarse.
+      En la esclera las fibrillas son gruesas, de diámetro variable y desordenadas: dispersan la luz
+      y se ve blanca. <strong>Mismo material, distinto orden.</strong> Cuando la córnea se edematiza
+      y ese espaciado se pierde, aparece el halo y la visión borrosa.</p>
+  </div>
+</section>
+
+<!-- ─────────── 04 ─────────── -->
+<section class="station" id="s1e4">
+  <div class="station-header">
+    <div class="station-number">04</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Tortora 4.4 · Cuadro 4.1</div>
+      <h2>Epitelios de cobertura y revestimiento</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <h3>Se nombran con dos apellidos</h3>
+    <p>Aquí está la única regla que hay que aprender de memoria, y es sencilla. Todo epitelio se
+      nombra con <strong>dos criterios</strong>: cuántas capas tiene y qué forma tienen las células
+      de la capa superficial. Nada más.</p>
+
+    <div class="two-col">
+      <div class="col-card teal">
+        <h5>Criterio 1 · Capas</h5>
+        <p><strong>Simple:</strong> una sola capa.<br>
+           <strong>Estratificado:</strong> varias capas.<br>
+           <strong>Seudoestratificado:</strong> parece que tiene varias, pero es una sola —todas
+           las células tocan la membrana basal, aunque no todas llegan a la superficie—.</p>
+      </div>
+      <div class="col-card">
+        <h5>Criterio 2 · Forma</h5>
+        <p><strong>Pavimentoso:</strong> aplanado, como una baldosa.<br>
+           <strong>Cúbico:</strong> tan alto como ancho.<br>
+           <strong>Cilíndrico:</strong> más alto que ancho.<br>
+           <strong>De transición:</strong> cambia de forma según se distienda.</p>
+      </div>
+    </div>
+
+    <div class="pearl">En el estratificado, la forma que da el apellido es la de la
+      <strong>capa apical</strong>, no la de las de abajo. Por eso el epitelio de la córnea es
+      «pavimentoso estratificado» aunque sus células basales sean cilíndricas.</div>
+
+    <div class="figure">
+      <svg viewBox="0 0 800 300" role="img" aria-label="Esquema comparativo de epitelio simple pavimentoso, cúbico, cilíndrico, seudoestratificado y estratificado">
+        <g font-family="DM Mono, monospace" font-size="11" fill="#5a6b7a" text-anchor="middle">
+          <!-- 1 pavimentoso simple -->
+          <rect x="20" y="150" width="130" height="8" fill="#f5e9c8" stroke="#b8860b"/>
+          <ellipse cx="52" cy="140" rx="30" ry="11" fill="#e3f0f5" stroke="#1976a1" stroke-width="1.5"/>
+          <ellipse cx="117" cy="140" rx="30" ry="11" fill="#e3f0f5" stroke="#1976a1" stroke-width="1.5"/>
+          <circle cx="52" cy="140" r="5" fill="#1976a1"/><circle cx="117" cy="140" r="5" fill="#1976a1"/>
+          <text x="85" y="180">Pavimentoso simple</text>
+          <text x="85" y="196" font-size="10" fill="#8a9aa8">difusión y filtración</text>
+
+          <!-- 2 cúbico simple -->
+          <rect x="180" y="150" width="130" height="8" fill="#f5e9c8" stroke="#b8860b"/>
+          <rect x="188" y="112" width="38" height="38" fill="#e3f0f5" stroke="#1976a1" stroke-width="1.5"/>
+          <rect x="230" y="112" width="38" height="38" fill="#e3f0f5" stroke="#1976a1" stroke-width="1.5"/>
+          <rect x="272" y="112" width="30" height="38" fill="#e3f0f5" stroke="#1976a1" stroke-width="1.5"/>
+          <circle cx="207" cy="131" r="6" fill="#1976a1"/><circle cx="249" cy="131" r="6" fill="#1976a1"/><circle cx="287" cy="131" r="6" fill="#1976a1"/>
+          <text x="245" y="180">Cúbico simple</text>
+          <text x="245" y="196" font-size="10" fill="#8a9aa8">secreción y absorción</text>
+
+          <!-- 3 cilíndrico simple -->
+          <rect x="340" y="150" width="130" height="8" fill="#f5e9c8" stroke="#b8860b"/>
+          <rect x="348" y="80" width="38" height="70" fill="#e3f0f5" stroke="#1976a1" stroke-width="1.5"/>
+          <rect x="390" y="80" width="38" height="70" fill="#e3f0f5" stroke="#1976a1" stroke-width="1.5"/>
+          <rect x="432" y="80" width="30" height="70" fill="#e3f0f5" stroke="#1976a1" stroke-width="1.5"/>
+          <circle cx="367" cy="128" r="6" fill="#1976a1"/><circle cx="409" cy="128" r="6" fill="#1976a1"/><circle cx="447" cy="128" r="6" fill="#1976a1"/>
+          <text x="405" y="180">Cilíndrico simple</text>
+          <text x="405" y="196" font-size="10" fill="#8a9aa8">absorción y secreción</text>
+
+          <!-- 4 seudoestratificado -->
+          <rect x="500" y="150" width="130" height="8" fill="#f5e9c8" stroke="#b8860b"/>
+          <rect x="508" y="80" width="34" height="70" fill="#e3f0f5" stroke="#1976a1" stroke-width="1.5"/>
+          <rect x="546" y="105" width="34" height="45" fill="#e3f0f5" stroke="#1976a1" stroke-width="1.5"/>
+          <rect x="584" y="80" width="34" height="70" fill="#e3f0f5" stroke="#1976a1" stroke-width="1.5"/>
+          <circle cx="525" cy="100" r="6" fill="#1976a1"/><circle cx="563" cy="132" r="6" fill="#1976a1"/><circle cx="601" cy="100" r="6" fill="#1976a1"/>
+          <text x="565" y="180">Seudoestratificado</text>
+          <text x="565" y="196" font-size="10" fill="#8a9aa8">una capa que lo parece</text>
+
+          <!-- 5 estratificado -->
+          <rect x="660" y="150" width="130" height="8" fill="#f5e9c8" stroke="#b8860b"/>
+          <rect x="668" y="128" width="36" height="22" fill="#e3f0f5" stroke="#1976a1" stroke-width="1.5"/>
+          <rect x="708" y="128" width="36" height="22" fill="#e3f0f5" stroke="#1976a1" stroke-width="1.5"/>
+          <rect x="748" y="128" width="34" height="22" fill="#e3f0f5" stroke="#1976a1" stroke-width="1.5"/>
+          <rect x="668" y="108" width="52" height="18" fill="#e3f0f5" stroke="#1976a1" stroke-width="1.5"/>
+          <rect x="724" y="108" width="58" height="18" fill="#e3f0f5" stroke="#1976a1" stroke-width="1.5"/>
+          <ellipse cx="700" cy="97" rx="30" ry="9" fill="#e3f0f5" stroke="#1976a1" stroke-width="1.5"/>
+          <ellipse cx="762" cy="97" rx="26" ry="9" fill="#e3f0f5" stroke="#1976a1" stroke-width="1.5"/>
+          <text x="725" y="180">Estratificado</text>
+          <text x="725" y="196" font-size="10" fill="#8a9aa8">protección al roce</text>
+
+          <text x="400" y="232" font-size="11.5" fill="#8b6914">La franja amarilla es la MEMBRANA BASAL · la superficie de arriba es siempre LIBRE</text>
+          <text x="400" y="256" font-size="11.5" fill="#a0522d">El apellido lo pone la forma de la capa de ARRIBA</text>
+        </g>
+      </svg>
+      <p class="figure-caption">Figura 4.3 · Los patrones de organización epitelial. Toda la
+        clasificación del Cuadro 4.1 sale de cruzar estos dos criterios.</p>
+    </div>
+
+    <h3>El cuadro completo</h3>
+    <table class="data">
+      <thead><tr><th>Epitelio</th><th>Función principal</th><th>Dónde se encuentra</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Pavimentoso simple</strong></td>
+            <td>Filtración, difusión, secreción en zonas de mucho tránsito</td>
+            <td>Alvéolos, cápsula de Bowman renal. Recibe dos nombres propios:
+                <strong>endotelio</strong> si reviste corazón y vasos, <strong>mesotelio</strong>
+                si forma las serosas</td></tr>
+        <tr><td><strong>Cúbico simple</strong></td><td>Secreción y absorción</td>
+            <td>Túbulos renales, superficie del ovario, conductos glandulares,
+                <strong>epitelio del cristalino</strong></td></tr>
+        <tr><td><strong>Cilíndrico simple no ciliado</strong></td><td>Secreción y absorción</td>
+            <td>Casi todo el tubo digestivo. Tiene <strong>células caliciformes</strong>, que
+                secretan moco, y microvellosidades</td></tr>
+        <tr><td><strong>Cilíndrico simple ciliado</strong></td><td>Mover moco y partículas</td>
+            <td>Parte de las vías respiratorias superiores, trompas uterinas</td></tr>
+        <tr><td><strong>Cilíndrico seudoestratificado ciliado</strong></td>
+            <td>Secreta moco y lo desplaza</td>
+            <td>Mayor parte de las vías respiratorias superiores; tiene células caliciformes</td></tr>
+        <tr><td><strong>Cilíndrico seudoestratificado no ciliado</strong></td>
+            <td>Absorción y protección</td>
+            <td>Epidídimo, conductos de muchas glándulas, parte de la uretra masculina</td></tr>
+        <tr><td><strong>Pavimentoso estratificado no queratinizado</strong></td>
+            <td>Protección en superficies húmedas</td>
+            <td>Boca, esófago, vagina — y el <strong>epitelio corneal</strong>. La conjuntiva
+                también es estratificada, pero cambia de forma según la zona: pavimentosa cerca del
+                limbo y del borde palpebral, cilíndrica en los fondos de saco</td></tr>
+        <tr><td><strong>Pavimentoso estratificado queratinizado</strong></td>
+            <td>Protección en superficies secas y expuestas</td>
+            <td>Epidermis de la piel</td></tr>
+        <tr><td><strong>Cúbico estratificado</strong></td><td>Protección, algo de secreción</td>
+            <td>Conductos de glándulas sudoríparas del adulto, parte de la uretra masculina</td></tr>
+        <tr><td><strong>Cilíndrico estratificado</strong></td><td>Protección y secreción</td>
+            <td>Parte de la uretra masculina, conductos excretores grandes</td></tr>
+        <tr><td><strong>De transición</strong> <em>(urotelio)</em></td>
+            <td>Permite la distensión sin romperse</td>
+            <td>Vejiga y vías urinarias. Sus células cambian de cúbicas a aplanadas al llenarse</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Las tres superficies de una célula epitelial</h3>
+    <p>Una célula epitelial no es igual por todos lados: está <strong>polarizada</strong>. Cada cara
+      tiene su especialización, y esto explica por qué un epitelio puede transportar en una sola
+      dirección.</p>
+    <div class="three-col">
+      <div class="col-card blue"><h5>Apical</h5>
+        <p>Mira a la superficie libre —a la luz del órgano o al exterior—. Puede llevar
+          <strong>microvellosidades</strong> para absorber o <strong>cilios</strong> para mover.</p></div>
+      <div class="col-card teal"><h5>Lateral</h5>
+        <p>Mira a las células vecinas. Aquí están las <strong>uniones celulares</strong> que
+          acabamos de ver.</p></div>
+      <div class="col-card rust"><h5>Basal</h5>
+        <p>Se apoya en la <strong>membrana basal</strong>, una capa extracelular que no es una
+          membrana plasmática: la fabrican entre el epitelio y el conectivo.</p></div>
+    </div>
+  </div>
+
+  <div class="clinical-box">
+    <h5>La superficie ocular, capa por capa</h5>
+    <p>Con la tabla en la mano ya puedes leer un ojo entero:</p>
+    <ul>
+      <li><strong>Epitelio corneal:</strong> pavimentoso estratificado <em>no</em> queratinizado.
+        Que no se queratinice es lo que lo mantiene transparente y húmedo; en el ojo seco grave sí
+        empieza a queratinizarse y la superficie se vuelve opaca.</li>
+      <li><strong>Endotelio corneal:</strong> pavimentoso simple, una sola capa en la cara
+        posterior. Es la bomba que mantiene la córnea deshidratada — lo vimos la clase pasada.</li>
+      <li><strong>Conjuntiva:</strong> epitelio estratificado con abundantes
+        <strong>células caliciformes</strong>, que producen la capa de mucina de la lágrima. Menos
+        caliciformes, lágrima inestable, ojo seco.</li>
+      <li><strong>Epitelio del cristalino:</strong> cúbico simple, solo en la cara anterior. De ahí
+        salen las nuevas fibras durante toda la vida.</li>
+      <li><strong>Epitelio pigmentario de la retina:</strong> cúbico simple, unido por uniones
+        herméticas — la barrera hematorretiniana externa.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ─────────── 05 ─────────── -->
+<section class="station" id="s1e5">
+  <div class="station-header">
+    <div class="station-number">05</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Tortora 4.4 · Cuadro 4.2</div>
+      <h2>Epitelio glandular</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>El otro subtipo de tejido epitelial no cubre nada: <strong>secreta</strong>. Una
+      <strong>glándula</strong> es una célula o un grupo de células epiteliales adaptadas para
+      producir y liberar una sustancia. Se clasifican de tres maneras distintas, y conviene no
+      mezclarlas.</p>
+
+    <h3>Primero: ¿a dónde va lo que secreta?</h3>
+    <div class="two-col">
+      <div class="col-card teal"><h5>Endocrinas</h5>
+        <p>Vierten <strong>hormonas</strong> al líquido intersticial y de ahí a la sangre.
+          <strong>No tienen conducto.</strong> Hipófisis, tiroides, suprarrenales.</p></div>
+      <div class="col-card blue"><h5>Exocrinas</h5>
+        <p>Vierten su producto <strong>a un conducto</strong> o directamente sobre una superficie
+          libre. Sudoríparas, sebáceas, salivales, digestivas — y la lagrimal.</p></div>
+    </div>
+
+    <h3>Segundo: ¿cuántas células?</h3>
+    <p>Clasificación <strong>estructural</strong>: <strong>unicelulares</strong> —la célula
+      caliciforme es el ejemplo— o <strong>multicelulares</strong>, que se subdividen según la forma
+      del conducto y de la porción secretora (tubulares, acinares, tubuloacinares; simples o
+      compuestas).</p>
+
+    <h3>Tercero: ¿cómo sueltan el producto?</h3>
+    <p>Esta es la clasificación <strong>funcional</strong> y la que más se pregunta, porque
+      distingue tres mecanismos con un coste celular muy distinto:</p>
+
+    <table class="data">
+      <thead><tr><th>Tipo</th><th>Mecanismo</th><th>Qué le pasa a la célula</th><th>Ejemplo clásico</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Merocrina</strong></td>
+            <td>Exocitosis: la vesícula se fusiona con la membrana y libera el contenido</td>
+            <td><strong>Queda intacta.</strong> Puede repetir indefinidamente</td>
+            <td>Glándulas salivales y pancreáticas</td></tr>
+        <tr><td><strong>Apocrina</strong></td>
+            <td>Se desprende la porción apical del citoplasma cargada de producto</td>
+            <td><strong>Pierde un trozo</strong> y luego se repara</td>
+            <td>Glándulas mamarias</td></tr>
+        <tr><td><strong>Holocrina</strong></td>
+            <td>La célula entera se llena de producto, muere y se desintegra: el producto
+                <em>es</em> la célula</td>
+            <td><strong>Muere.</strong> Se repone desde células basales</td>
+            <td>Glándulas sebáceas</td></tr>
+      </tbody>
+    </table>
+
+    <div class="pearl">Mnemotecnia por el coste: <strong>mero</strong>crina no paga nada,
+      <strong>apo</strong>crina paga una parte, <strong>holo</strong>crina paga la célula entera
+      —<em>holo</em>, del griego, es «todo»—.</div>
+  </div>
+
+  <div class="clinical-box">
+    <h5>El párpado tiene los tres mecanismos a la vez</h5>
+    <p>No hace falta irse al páncreas ni a la mama: <strong>el borde del párpado reúne los tres
+      tipos funcionales</strong>, y por eso es el mejor sitio del cuerpo para entender esta
+      clasificación.</p>
+    <ul>
+      <li><strong>Glándulas de Meibomio</strong> (tarsales) — <strong>holocrinas</strong>. Sus
+        células mueren para producir los lípidos de la capa externa de la lágrima, la que evita que
+        se evapore. Su disfunción es la causa más frecuente de ojo seco evaporativo.</li>
+      <li><strong>Glándulas de Zeis</strong>, sebáceas anexas a las pestañas —
+        <strong>holocrinas</strong> también. Su obstrucción produce el orzuelo externo.</li>
+      <li><strong>Glándulas de Moll</strong>, sudoríparas modificadas —
+        <strong>apocrinas</strong>.</li>
+      <li><strong>Glándula lagrimal</strong> y las accesorias de Krause y Wolfring —
+        <strong>merocrinas</strong>, exocrinas tubuloacinares compuestas. Producen la capa acuosa
+        sin destruirse, que es justo lo que hace falta para segregar todo el día.</li>
+    </ul>
+    <p>Repasar la lágrima como producto de tres glándulas distintas —mucina de las caliciformes,
+      agua de la lagrimal, lípido de Meibomio— es repasar toda esta sección.</p>
+  </div>
+</section>
+
+<!-- ─────────── 06 · TA2 ─────────── -->
+<section class="station" id="s1e6">
+  <div class="station-header">
+    <div class="station-number">06</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Terminología</div>
+      <h2>Términos TA2 de uniones y epitelios</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <h3>Voltea cada tarjeta para ver la definición</h3>
+    <div class="flip-grid">
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Tejido</span><span class="term-en">Tissue</span></div>
+        <div class="flip-back"><p class="term-def">Grupo de células similares, de origen embriológico semejante, especializadas en una función.</p><p class="term-opto">👁 La córnea combina tejido epitelial y conectivo en cinco capas.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Unión hermética</span><span class="term-en">Tight junction</span></div>
+        <div class="flip-back"><p class="term-def">Fusión de las membranas de células vecinas que sella el paso de sustancias entre ellas.</p><p class="term-opto">👁 Forma la barrera hematorretiniana en el epitelio pigmentario.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Desmosoma</span><span class="term-en">Desmosome</span></div>
+        <div class="flip-back"><p class="term-def">Unión en forma de remache con placa y filamentos de queratina que atraviesan la célula.</p><p class="term-opto">👁 Mantiene cohesionadas las capas del epitelio corneal frente al parpadeo.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Hemidesmosoma</span><span class="term-en">Hemidesmosome</span></div>
+        <div class="flip-back"><p class="term-def">Medio desmosoma con integrinas que ancla la célula epitelial a la membrana basal.</p><p class="term-opto">👁 Su fallo causa la erosión corneal recidivante.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Unión comunicante</span><span class="term-en">Gap junction</span></div>
+        <div class="flip-back"><p class="term-def">Conexones de conexinas que dejan pasar iones y moléculas pequeñas entre células.</p><p class="term-opto">👁 Nutre las fibras del cristalino; su fallo produce catarata congénita.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Membrana basal</span><span class="term-en">Basement membrane</span></div>
+        <div class="flip-back"><p class="term-def">Capa extracelular entre el epitelio y el tejido conectivo; da soporte y filtra.</p><p class="term-opto">👁 La cápsula del cristalino es la membrana basal más gruesa del cuerpo.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Epitelio pavimentoso estratificado</span><span class="term-en">Stratified squamous epithelium</span></div>
+        <div class="flip-back"><p class="term-def">Varias capas cuya capa apical es aplanada; protege frente al roce. Puede ser queratinizado o no.</p><p class="term-opto">👁 El epitelio corneal es la variedad no queratinizada.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Endotelio</span><span class="term-en">Endothelium</span></div>
+        <div class="flip-back"><p class="term-def">Nombre propio del epitelio pavimentoso simple que reviste el corazón y los vasos.</p><p class="term-opto">👁 El endotelio corneal mantiene la transparencia bombeando agua hacia el humor acuoso.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Mesotelio</span><span class="term-en">Mesothelium</span></div>
+        <div class="flip-back"><p class="term-def">Epitelio pavimentoso simple que forma las membranas serosas.</p><p class="term-opto">👁 Mismo epitelio que el endotelio, distinto lugar y distinto nombre.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Célula caliciforme</span><span class="term-en">Goblet cell</span></div>
+        <div class="flip-back"><p class="term-def">Glándula exocrina unicelular que secreta moco sobre la superficie epitelial.</p><p class="term-opto">👁 Las de la conjuntiva producen la mucina de la lágrima.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Glándula merocrina</span><span class="term-en">Merocrine gland</span></div>
+        <div class="flip-back"><p class="term-def">Secreta por exocitosis y la célula queda intacta.</p><p class="term-opto">👁 La glándula lagrimal: produce la capa acuosa sin destruirse.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Glándula holocrina</span><span class="term-en">Holocrine gland</span></div>
+        <div class="flip-back"><p class="term-def">La célula entera se llena de producto, muere y se desintegra; el producto es la célula.</p><p class="term-opto">👁 Las glándulas de Meibomio, que aportan el lípido de la lágrima.</p></div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 07 · QUIZ ─────────── -->
+<section class="station" id="s1e7">
+  <div class="station-header">
+    <div class="station-number">07</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Autoevaluación</div>
+      <h2>Comprueba lo que aprendiste</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Elige una opción en cada pregunta. La respuesta aparece al pulsar.</p>
+
+    <div class="check-question" data-question="q1s1t">
+      <p class="question-text">1. ¿Qué tipo de unión celular es el único que permite el paso de iones y moléculas pequeñas de una célula a otra?</p>
+      <ul class="options">
+        <li data-letter="A">Unión hermética (zona de oclusión)</li>
+        <li data-letter="B">Desmosoma</li>
+        <li data-letter="C" data-correct="true">Unión comunicante</li>
+        <li data-letter="D">Hemidesmosoma</li>
+        <li data-letter="E">Unión adherente</li>
+      </ul>
+      <div class="feedback"><strong>Correcto: C.</strong> Las uniones comunicantes están formadas por conexones —cilindros de conexinas— que atraviesan las dos membranas y dejan pasar iones y moléculas pequeñas. Las demás sujetan o sellan, pero no comunican. En el cristalino, este es el único modo que tienen las fibras profundas de recibir nutrientes.</div>
+    </div>
+
+    <div class="check-question" data-question="q2s1t">
+      <p class="question-text">2. El epitelio de la córnea es pavimentoso estratificado no queratinizado. ¿Qué le aporta el hecho de <em>no</em> estar queratinizado?</p>
+      <ul class="options">
+        <li data-letter="A">Le permite absorber nutrientes desde la lágrima por transporte activo</li>
+        <li data-letter="B" data-correct="true">Mantiene las células vivas e hidratadas en la superficie, lo que conserva la transparencia</li>
+        <li data-letter="C">Lo hace más resistente al roce que la epidermis</li>
+        <li data-letter="D">Le permite prescindir de membrana basal</li>
+        <li data-letter="E">Hace que sus células apicales sean cilíndricas</li>
+      </ul>
+      <div class="feedback"><strong>Correcto: B.</strong> En la epidermis, las células apicales mueren y se llenan de queratina: quedan opacas y secas, que es justo lo que conviene en la piel. La córnea necesita lo contrario —células vivas, hidratadas y ópticamente homogéneas—. Cuando en un ojo seco grave el epitelio empieza a queratinizarse, la superficie se opacifica.</div>
+    </div>
+
+    <div class="check-question" data-question="q3s1t">
+      <p class="question-text">3. Las glándulas de Meibomio del párpado son holocrinas. Eso significa que:</p>
+      <ul class="options">
+        <li data-letter="A">Liberan su producto por exocitosis y quedan intactas</li>
+        <li data-letter="B">Pierden la porción apical del citoplasma y luego se reparan</li>
+        <li data-letter="C" data-correct="true">La célula entera se llena de producto, muere y se desintegra al secretar</li>
+        <li data-letter="D">Vierten su producto a la sangre, sin conducto</li>
+        <li data-letter="E">Son glándulas unicelulares como las caliciformes</li>
+      </ul>
+      <div class="feedback"><strong>Correcto: C.</strong> <em>Holo</em> significa «todo»: en la secreción holocrina el producto <em>es</em> la célula desintegrada, y las células basales reponen la población. A es merocrina (glándula lagrimal), B es apocrina (glándulas de Moll). Las tres conviven en el borde palpebral.</div>
+    </div>
+
+    <div class="check-question" data-question="q4s1t">
+      <p class="question-text">4. Un epitelio en el que todas las células tocan la membrana basal, pero no todas alcanzan la superficie libre, y que por eso aparenta tener varias capas, se denomina:</p>
+      <ul class="options">
+        <li data-letter="A">Estratificado</li>
+        <li data-letter="B">De transición</li>
+        <li data-letter="C">Simple cilíndrico</li>
+        <li data-letter="D" data-correct="true">Seudoestratificado</li>
+        <li data-letter="E">Mesotelio</li>
+      </ul>
+      <div class="feedback"><strong>Correcto: D.</strong> «Seudo» = falso. Es una sola capa cuyos núcleos quedan a alturas distintas, lo que en el microscopio da la impresión de estratificación. El criterio de verdad es siempre el mismo: si todas las células tocan la membrana basal, el epitelio es simple.</div>
+    </div>
+
+    <div class="saber-box">
+      <strong>Pregunta tipo Saber Pro · Inglés</strong>
+      <div class="check-question" style="margin-top:16px;border-color:var(--purple)" data-question="q5s1t">
+        <p class="question-text">5. Which cell junction anchors the basal epithelial cells of the cornea to the basement membrane, and whose failure leads to recurrent corneal erosion?<br><em style="font-size:.85rem;color:var(--text-muted)">¿Qué unión celular ancla las células epiteliales basales de la córnea a la membrana basal, y cuyo fallo conduce a la erosión corneal recidivante?</em></p>
+        <ul class="options">
+          <li data-letter="A">Gap junction (unión comunicante)</li>
+          <li data-letter="B">Tight junction (unión hermética)</li>
+          <li data-letter="C" data-correct="true">Hemidesmosome (hemidesmosoma)</li>
+          <li data-letter="D">Adherens junction (unión adherente)</li>
+          <li data-letter="E">Desmosome (desmosoma)</li>
+        </ul>
+        <div class="feedback"><strong>Correct: C.</strong> Hemidesmosomes contain integrins that bind the basal cell to the basement membrane. When this anchorage is damaged — often after a corneal abrasion — the epithelium detaches again on waking, which is the classic presentation of recurrent corneal erosion. Note that desmosomes join <em>two cells</em>, while hemidesmosomes join <em>one cell to the basement membrane</em>.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div><!-- /s1 -->
+
+<!-- ═══════════════════════ SESIÓN 2 ═══════════════════════ -->
+<div class="tab-pane" id="s2">
+
+<nav class="station-nav">
+  <h3>Contenido · Sesión 2</h3>
+  <ol>
+    <li><a href="#s2e1">El tejido conectivo: células y matriz</a></li>
+    <li><a href="#s2e2">Los tipos de tejido conectivo</a></li>
+    <li><a href="#s2e3">Membranas</a></li>
+    <li><a href="#s2e4">Tejido muscular</a></li>
+    <li><a href="#s2e5">Tejido nervioso y células excitables</a></li>
+    <li><a href="#s2e6">Reparación tisular y envejecimiento</a></li>
+    <li><a href="#s2e7">Términos TA2 de la sesión</a></li>
+    <li><a href="#s2e8">Comprueba lo que aprendiste</a></li>
+    <li><a href="#s2e9">Cierre: volvemos a las cuatro preguntas</a></li>
+  </ol>
+</nav>
+
+<!-- ─────────── 08 ─────────── -->
+<section class="station" id="s2e1">
+  <div class="station-header">
+    <div class="station-number">01</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Tortora 4.5</div>
+      <h2>El tejido conectivo: células y matriz</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Es el tejido más abundante y el más variado del cuerpo: bajo el mismo nombre caben la grasa,
+      el cartílago, el hueso, los tendones y la sangre. Que cosas tan distintas sean el mismo tejido
+      deja de ser raro en cuanto se entiende la regla: <strong>en el conectivo lo que manda no son
+      las células, sino lo que las células fabrican a su alrededor</strong>.</p>
+
+    <h3>Las células</h3>
+    <p>Casi todas derivan de células <strong>mesenquimáticas</strong>. Conviene reconocer seis:</p>
+    <table class="data">
+      <thead><tr><th>Célula</th><th>Qué hace</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Fibroblasto</strong></td><td>El más numeroso. <strong>Secreta la matriz extracelular</strong>: fibras y sustancia fundamental</td></tr>
+        <tr><td><strong>Macrófago</strong></td><td>Realiza fagocitosis; deriva de los monocitos</td></tr>
+        <tr><td><strong>Célula plasmática</strong></td><td>Secreta anticuerpos; deriva del linfocito B</td></tr>
+        <tr><td><strong>Mastocito</strong></td><td>Produce <strong>histamina</strong>, que dilata los vasos en la inflamación</td></tr>
+        <tr><td><strong>Adipocito</strong></td><td>Almacena triglicéridos</td></tr>
+        <tr><td><strong>Leucocito</strong></td><td>Migra desde la sangre cuando hay infección</td></tr>
+      </tbody>
+    </table>
+
+    <h3>La matriz extracelular: sustancia fundamental + fibras</h3>
+    <p>La <strong>sustancia fundamental</strong> es el material que ocupa el espacio entre células y
+      fibras. Da soporte, une las células, permite el intercambio de sustancias y almacena agua.
+      Está hecha de agua y <strong>glucosaminoglucanos</strong> —ácido hialurónico,
+      condroitinsulfato, dermatansulfato, queratansulfato—, más proteoglucanos y proteínas de
+      adhesión.</p>
+
+    <p>Dentro de ella hay tres tipos de <strong>fibra</strong>, y esta distinción sí hay que
+      saberla:</p>
+    <div class="three-col">
+      <div class="col-card teal"><h5>De colágeno</h5>
+        <p>Muy resistentes a la tracción y flexibles. Son las más abundantes del cuerpo. Predominan
+          en hueso, tendones y ligamentos.</p></div>
+      <div class="col-card blue"><h5>Elásticas</h5>
+        <p>De elastina y fibrilina. Se estiran y <strong>recuperan la forma</strong>. En piel,
+          paredes vasculares y pulmón.</p></div>
+      <div class="col-card rust"><h5>Reticulares</h5>
+        <p>De colágeno y glucoproteínas, finas y ramificadas. Forman <strong>redes de
+          sostén</strong> alrededor de adipocitos, nervios y fibras musculares.</p></div>
+    </div>
+
+    <div class="pearl">Si las fibras de colágeno son las cuerdas y las elásticas son las gomas, las
+      reticulares son la malla que lo mantiene todo en su sitio.</div>
+  </div>
+
+  <div class="clinical-box">
+    <h5>El humor vítreo es, en el fondo, sustancia fundamental</h5>
+    <p>El vítreo es un gel de <strong>ácido hialurónico</strong> con una red laxa de fibrillas de
+      colágeno: exactamente los dos componentes de la matriz extracelular que acabamos de nombrar,
+      con muy pocas células (los hialocitos). Con la edad el hialurónico se despolimeriza, el gel se
+      licúa y el colágeno se agrega en haces visibles — eso son las <strong>miodesopsias</strong>,
+      las «moscas volantes». Cuando la retracción del gel tira de la retina aparece el
+      <strong>desprendimiento de vítreo posterior</strong>, y con él el riesgo de desgarro retiniano.
+      Envejecimiento de una matriz extracelular, con consecuencias clínicas directas.</p>
+  </div>
+</section>
+
+<!-- ─────────── 09 ─────────── -->
+<section class="station" id="s2e2">
+  <div class="station-header">
+    <div class="station-number">02</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Tortora 4.5 · Cuadros 4.3 a 4.8</div>
+      <h2>Los tipos de tejido conectivo</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>La clasificación tiene dos ramas: el <strong>embrionario</strong> —mesenquimático, del que
+      derivan todos los demás, y mucoso, el del cordón umbilical— y el <strong>maduro</strong>, que
+      es el que nos ocupa. El maduro se organiza en cinco grupos:</p>
+
+    <h3>1 · Conectivo laxo</h3>
+    <table class="data">
+      <thead><tr><th>Tipo</th><th>Composición</th><th>Dónde está</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Areolar</strong></td>
+            <td>Los <strong>tres</strong> tipos de fibra, varios tipos de célula y sustancia fundamental semilíquida. Es el conectivo «de propósito general»</td>
+            <td>Capa subcutánea, membranas mucosas, alrededor de vasos, nervios y órganos. Bajo la conjuntiva</td></tr>
+        <tr><td><strong>Adiposo</strong></td><td>Adipocitos cargados de triglicéridos</td>
+            <td>Capa subcutánea, alrededor de órganos, médula ósea amarilla. <strong>La grasa orbitaria</strong>. El adiposo pardo genera calor</td></tr>
+        <tr><td><strong>Reticular</strong></td><td>Fibras y células reticulares formando una red</td>
+            <td>Hígado, bazo y ganglios linfáticos</td></tr>
+      </tbody>
+    </table>
+
+    <h3>2 · Conectivo denso</h3>
+    <table class="data">
+      <thead><tr><th>Tipo</th><th>Disposición de las fibras</th><th>Dónde está</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Denso regular</strong></td>
+            <td>Haces de colágeno <strong>paralelos</strong>, con fibroblastos entre ellos. Resiste la tracción en <em>una</em> dirección</td>
+            <td>Tendones, la mayoría de ligamentos, aponeurosis — y el <strong>estroma corneal</strong></td></tr>
+        <tr><td><strong>Denso irregular</strong></td>
+            <td>Colágeno <strong>en todas las direcciones</strong>. Resiste tracción venga de donde venga</td>
+            <td>Dermis, fascias, cápsulas de los órganos — y la <strong>esclera</strong></td></tr>
+        <tr><td><strong>Elástico</strong></td><td>Fibras elásticas ramificadas y fibroblastos</td>
+            <td>Paredes de las arterias grandes, tráquea, bronquios, pulmón</td></tr>
+      </tbody>
+    </table>
+
+    <div class="pearl">Regular contra irregular es exactamente la diferencia entre la córnea y la
+      esclera. Y también entre ver y no ver a través de ellas.</div>
+
+    <h3>3 · Cartílago</h3>
+    <p>Condrocitos alojados en <strong>lagunas</strong>, dentro de una matriz gomosa de
+      condroitinsulfato. Es el gran excepcional del conectivo: <strong>no tiene vasos ni
+      nervios</strong>, y por eso repara tan mal.</p>
+    <table class="data">
+      <thead><tr><th>Tipo</th><th>Rasgo</th><th>Dónde está</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Hialino</strong></td><td>Sustancia fundamental gelatinosa, blanco azulada. El más abundante. Con pericondrio</td><td>Esqueleto embrionario, extremos óseos, nariz, estructuras respiratorias</td></tr>
+        <tr><td><strong>Fibrocartílago</strong></td><td>Condrocitos entre <strong>haces visibles</strong> de colágeno. El más resistente. Sin pericondrio</td><td>Sínfisis del pubis, discos intervertebrales, meniscos de la rodilla</td></tr>
+        <tr><td><strong>Elástico</strong></td><td>Condrocitos en una red de fibras elásticas. Mantiene la forma. Con pericondrio</td><td>Epiglotis, trompa auditiva, pabellón auricular. <strong>El tarso palpebral</strong> es tejido denso, no cartílago, pese a su nombre clásico</td></tr>
+      </tbody>
+    </table>
+
+    <h3>4 · Tejido óseo</h3>
+    <p>Matriz de <strong>sales minerales</strong> y fibras de colágeno —lo primero da dureza, lo
+      segundo evita que sea quebradizo— con osteocitos en lagunas. Sostiene, protege, permite el
+      movimiento, almacena minerales y aloja la médula ósea. Las <strong>siete paredes óseas de la
+      órbita</strong> son este tejido.</p>
+
+    <h3>5 · Conectivo líquido</h3>
+    <p>Sorprende que la sangre sea conectivo hasta que se aplica la regla: pocas células y mucha
+      matriz — solo que aquí la matriz es líquida.</p>
+    <div class="two-col">
+      <div class="col-card rust"><h5>Sangre</h5>
+        <p><strong>Plasma</strong> como matriz y <strong>elementos formes</strong> como células:
+          eritrocitos que transportan gases, leucocitos que defienden y plaquetas que coagulan.</p></div>
+      <div class="col-card blue"><h5>Linfa</h5>
+        <p>El líquido extracelular que circula por los vasos linfáticos. Parecido al plasma, pero
+          con menos proteínas.</p></div>
+    </div>
+  </div>
+
+  <div class="clinical-box">
+    <h5>El estroma corneal: conectivo denso regular llevado al extremo</h5>
+    <p>El estroma es el <strong>90 % del espesor</strong> de la córnea y es tejido conectivo denso
+      regular, pero con una precisión que no tiene ningún tendón: unas 200 a 250 laminillas de
+      colágeno tipo I, cada una con las fibrillas paralelas entre sí y girada respecto a la
+      siguiente, todas del <strong>mismo diámetro</strong> y con la <strong>misma
+      separación</strong>, menor que la longitud de onda de la luz. Los queratocitos —los
+      fibroblastos del estroma— mantienen ese orden. Cuando una herida llega al estroma, los
+      queratocitos se activan y depositan colágeno <em>desordenado</em>: eso es una cicatriz, y en
+      la córnea una cicatriz se llama <strong>leucoma</strong> y se ve.</p>
+  </div>
+</section>
+
+<!-- ─────────── 10 ─────────── -->
+<section class="station" id="s2e3">
+  <div class="station-header">
+    <div class="station-number">03</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Tortora 4.6</div>
+      <h2>Membranas</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Una <strong>membrana epitelial</strong> es la combinación de una capa de epitelio sobre una
+      capa de tejido conectivo. Es el primer ejemplo de cómo dos tejidos se asocian para formar algo
+      con función propia — el paso siguiente hacia el órgano.</p>
+
+    <table class="data">
+      <thead><tr><th>Membrana</th><th>De qué está hecha</th><th>Dónde</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Mucosa</strong></td><td>Epitelio + lámina propia de conectivo areolar</td>
+            <td>Reviste cavidades que <strong>se abren al exterior</strong>: tubo digestivo, vías respiratorias, urinarias. <strong>La conjuntiva es una mucosa</strong></td></tr>
+        <tr><td><strong>Serosa</strong></td><td>Mesotelio + conectivo areolar. Dos láminas: <strong>parietal</strong> (pared) y <strong>visceral</strong> (órgano)</td>
+            <td>Reviste cavidades <strong>cerradas</strong>: pleura, pericardio, peritoneo. Secreta líquido seroso que reduce la fricción</td></tr>
+        <tr><td><strong>Cutánea</strong></td><td>Epidermis (epitelio) + dermis (conectivo)</td>
+            <td>Es <strong>la piel</strong>. Cubre todo el cuerpo</td></tr>
+        <tr><td><strong>Sinovial</strong></td><td>Conectivo areolar y adiposo. <strong>No tiene epitelio</strong> — por eso no es una membrana epitelial</td>
+            <td>Tapiza las cavidades articulares; secreta líquido sinovial</td></tr>
+      </tbody>
+    </table>
+
+    <div class="pearl">La sinovial es la que se cae de la lista: las otras tres llevan epitelio, ella
+      no. Es la pregunta de examen más repetida de esta sección.</div>
+  </div>
+
+  <div class="clinical-box">
+    <h5>La conjuntiva es una mucosa, y eso explica la consulta</h5>
+    <p>Que la conjuntiva sea una membrana mucosa —epitelio con células caliciformes sobre una lámina
+      propia de conectivo areolar vascularizado— explica casi todo lo que verás en ella. Tiene
+      <strong>vasos</strong>, así que se enrojece cuando se inflama, y son vasos que se pueden
+      blanquear con vasoconstrictores. Tiene <strong>caliciformes</strong>, así que produce mucina y
+      su pérdida causa ojo seco. Tiene <strong>tejido linfoide</strong> en la lámina propia, así que
+      monta respuestas alérgicas —las papilas de la conjuntivitis alérgica—. Y como toda mucosa,
+      está en contacto con el exterior: es una puerta de entrada.</p>
+  </div>
+</section>
+
+<!-- ─────────── 11 ─────────── -->
+<section class="station" id="s2e4">
+  <div class="station-header">
+    <div class="station-number">04</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Tortora 4.7 · Cuadro 4.9</div>
+      <h2>Tejido muscular</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Células alargadas llamadas <strong>fibras musculares</strong> o miocitos, especializadas en
+      <strong>contraerse</strong>. Producen movimiento, mantienen la postura y generan calor. Son
+      tres tipos, y se distinguen por tres preguntas: ¿tiene estrías?, ¿cuántos núcleos?, ¿obedece a
+      la voluntad?</p>
+
+    <table class="data">
+      <thead><tr><th></th><th>Esquelético</th><th>Cardíaco</th><th>Liso</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Estriado</strong></td><td>Sí</td><td>Sí</td><td>No</td></tr>
+        <tr><td><strong>Núcleos</strong></td><td>Muchos, periféricos</td><td>Uno o dos, centrales</td><td>Uno, central</td></tr>
+        <tr><td><strong>Control</strong></td><td><strong>Voluntario</strong></td><td>Involuntario</td><td>Involuntario</td></tr>
+        <tr><td><strong>Rasgo propio</strong></td><td>Fibras largas y cilíndricas, insertadas en hueso</td><td>Fibras ramificadas unidas por <strong>discos intercalares</strong> con uniones comunicantes, que sincronizan el latido</td><td>Fibras fusiformes, en las paredes de órganos huecos</td></tr>
+        <tr><td><strong>En el ojo</strong></td><td><strong>Los seis músculos extraoculares</strong> y el elevador del párpado superior. También el orbicular</td><td>—</td><td><strong>Músculo ciliar</strong> (acomodación), <strong>esfínter</strong> y <strong>dilatador del iris</strong>, músculo de Müller</td></tr>
+      </tbody>
+    </table>
+
+    <div class="pearl">Los discos intercalares del músculo cardíaco llevan uniones comunicantes: es
+      la misma unión que nutre el cristalino, aquí usada para que todo el corazón se contraiga a la
+      vez. Una pieza, dos oficios.</div>
+  </div>
+
+  <div class="clinical-box">
+    <h5>Tercera pregunta del inicio, respondida</h5>
+    <p>Mueves los ojos con <strong>músculo esquelético</strong> —los seis extraoculares, estriados y
+      voluntarios, de los más rápidos y precisos del cuerpo—. Enfocas con <strong>músculo
+      liso</strong>: el músculo ciliar, que al contraerse relaja la zónula y deja que el cristalino
+      abombe. Por eso puedes decidir hacia dónde miras pero no a qué distancia enfocas: son dos
+      tejidos distintos con dos inervaciones distintas. El ciliar responde al parasimpático, y por
+      eso un colirio ciclopléjico —que lo bloquea— paraliza la acomodación.</p>
+  </div>
+</section>
+
+<!-- ─────────── 12 ─────────── -->
+<section class="station" id="s2e5">
+  <div class="station-header">
+    <div class="station-number">05</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Tortora 4.8 y 4.9 · Cuadro 4.10</div>
+      <h2>Tejido nervioso y células excitables</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>El cuarto tejido tiene solo dos clases de célula:</p>
+    <div class="two-col">
+      <div class="col-card teal"><h5>Neuronas</h5>
+        <p>Convierten estímulos en una señal eléctrica —el <strong>potencial de acción</strong>— y
+          la conducen hasta otra célula. La mayoría tiene <strong>cuerpo celular</strong>,
+          <strong>dendritas</strong> que reciben y un <strong>axón</strong> que transmite.</p></div>
+      <div class="col-card blue"><h5>Neuroglía</h5>
+        <p>Células de soporte y protección. No conducen impulsos, pero sin ellas las neuronas no
+          funcionan: las nutren, las aíslan y limpian el entorno.</p></div>
+    </div>
+
+    <h3>Excitabilidad eléctrica</h3>
+    <p>La <strong>excitabilidad eléctrica</strong> es la capacidad de responder a un estímulo
+      generando potenciales de acción. Solo dos tipos de célula del cuerpo la tienen, y por eso se
+      llaman <strong>células excitables</strong>: las <strong>neuronas</strong> y las
+      <strong>fibras musculares</strong>. Es lo que conecta los dos tejidos que acabamos de ver.</p>
+
+    <div class="pearl">Todo lo que sientes, piensas y mueves ocurre en células que comparten una
+      sola propiedad: saben hacer un potencial de acción.</div>
+  </div>
+
+  <div class="clinical-box">
+    <h5>La retina es tejido nervioso, no un sensor</h5>
+    <p>Conviene decirlo con precisión: la retina <strong>no es</strong> una película fotográfica ni
+      un sensor pegado al fondo del ojo. Es <strong>tejido nervioso</strong> —parte del sistema
+      nervioso central, derivada del diencéfalo— con sus neuronas y su neuroglía propia.</p>
+    <ul>
+      <li><strong>Neuronas:</strong> fotorreceptores, células bipolares, ganglionares, horizontales
+        y amacrinas. Los axones de las ganglionares forman <strong>el nervio óptico</strong>.</li>
+      <li><strong>Neuroglía:</strong> las <strong>células de Müller</strong>, que atraviesan la
+        retina de lado a lado, más astrocitos y microglía.</li>
+    </ul>
+    <p>De ahí se sigue algo importante: como es sistema nervioso central,
+      <strong>no se regenera</strong>. Una neurona ganglionar perdida en un glaucoma no vuelve. Por
+      eso el daño glaucomatoso es irreversible y todo el tratamiento va dirigido a evitar la pérdida
+      siguiente, no a recuperar la anterior.</p>
+  </div>
+</section>
+
+<!-- ─────────── 13 ─────────── -->
+<section class="station" id="s2e6">
+  <div class="station-header">
+    <div class="station-number">06</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Tortora 4.10 y 4.11</div>
+      <h2>Reparación tisular y envejecimiento</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>La <strong>reparación tisular</strong> es el reemplazo de células deterioradas, dañadas o
+      muertas. De qué modo ocurra depende de dos cosas: si el tejido conserva
+      <strong>células madre</strong> capaces de dividirse, y qué tan profunda sea la lesión.</p>
+
+    <div class="two-col">
+      <div class="col-card green"><h5>Regeneración parenquimatosa</h5>
+        <p>Si la herida es <strong>superficial</strong>, las células propias del tejido —el
+          parénquima— se dividen y lo reconstruyen igual que estaba.
+          <strong>No queda cicatriz.</strong></p></div>
+      <div class="col-card rust"><h5>Tejido de granulación y fibrosis</h5>
+        <p>Si el daño es <strong>extenso</strong>, se forma tejido de granulación y los fibroblastos
+          depositan colágeno desordenado. Se repara la brecha, pero
+          <strong>con cicatriz</strong> y sin recuperar la función original.</p></div>
+    </div>
+
+    <p>La capacidad de regenerar no es la misma en los cuatro tejidos: el epitelial se renueva muy
+      bien, el conectivo bastante, el muscular poco y el nervioso, en el sistema nervioso central,
+      prácticamente nada. Y en todos los casos <strong>la buena nutrición y la irrigación</strong>
+      son determinantes.</p>
+
+    <h3>Envejecimiento</h3>
+    <p>Los tejidos jóvenes curan más rápido y dejan menos cicatriz —de hecho, la cirugía fetal no
+      deja cicatriz—. Con la edad cambian sobre todo los <strong>componentes
+      extracelulares</strong>: el colágeno se entrecruza y pierde flexibilidad, y las fibras
+      elásticas se degradan.</p>
+  </div>
+
+  <div class="clinical-box">
+    <h5>Segunda pregunta del inicio: por qué unas heridas de córnea desaparecen y otras no</h5>
+    <p>Ahora tiene respuesta exacta, y es la frontera entre dos tejidos:</p>
+    <ul>
+      <li><strong>Si la erosión afecta solo al epitelio</strong>, las células madre del
+        <strong>limbo esclerocorneal</strong> repueblan la superficie en 24 a 72 horas. Es
+        regeneración parenquimatosa pura: <strong>no queda rastro</strong>.</li>
+      <li><strong>Si la herida atraviesa la membrana de Bowman y llega al estroma</strong>, ahí no
+        hay regeneración posible: los queratocitos depositan colágeno desordenado, se pierde el
+        espaciado regular y queda un <strong>leucoma</strong> permanente.</li>
+    </ul>
+    <p>Esa frontera explica una decisión quirúrgica real: la <strong>PRK</strong> retira el epitelio,
+      que se regenera; las técnicas que tallan profundo trabajan sobre estroma, que no. Y explica el
+      pterigión, la elastosis por radiación ultravioleta del conectivo subconjuntival, y el
+      <strong>arco senil</strong>, el depósito lipídico periférico que aparece con la edad.</p>
+  </div>
+</section>
+
+<!-- ─────────── 14 · TA2 ─────────── -->
+<section class="station" id="s2e7">
+  <div class="station-header">
+    <div class="station-number">07</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Terminología</div>
+      <h2>Términos TA2 de conectivo, músculo y nervio</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <h3>Voltea cada tarjeta para ver la definición</h3>
+    <div class="flip-grid">
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Matriz extracelular</span><span class="term-en">Extracellular matrix</span></div>
+        <div class="flip-back"><p class="term-def">Sustancia fundamental más fibras que las células del conectivo secretan a su alrededor.</p><p class="term-opto">👁 Su orden en el estroma corneal es lo que hace transparente la córnea.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Fibroblasto</span><span class="term-en">Fibroblast</span></div>
+        <div class="flip-back"><p class="term-def">Célula más abundante del tejido conectivo; secreta las fibras y la sustancia fundamental.</p><p class="term-opto">👁 En la córnea se llaman queratocitos; al activarse producen el leucoma.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Sustancia fundamental</span><span class="term-en">Ground substance</span></div>
+        <div class="flip-back"><p class="term-def">Componente de la matriz entre células y fibras; agua y glucosaminoglucanos.</p><p class="term-opto">👁 El vítreo es un gel de ácido hialurónico: sustancia fundamental casi pura.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Fibra de colágeno</span><span class="term-en">Collagen fibre</span></div>
+        <div class="flip-back"><p class="term-def">Fibra proteica resistente a la tracción; la más abundante del organismo.</p><p class="term-opto">👁 Tipo I en el estroma corneal, en láminas de espaciado uniforme.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Conectivo denso regular</span><span class="term-en">Dense regular connective tissue</span></div>
+        <div class="flip-back"><p class="term-def">Haces de colágeno paralelos; resiste tracción en una dirección.</p><p class="term-opto">👁 El estroma corneal, con un orden mucho mayor que el de un tendón.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Conectivo denso irregular</span><span class="term-en">Dense irregular connective tissue</span></div>
+        <div class="flip-back"><p class="term-def">Colágeno dispuesto en todas las direcciones; resiste tracción multidireccional.</p><p class="term-opto">👁 La esclera: mismo colágeno que la córnea, desordenado y por eso opaco.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Cartílago hialino</span><span class="term-en">Hyaline cartilage</span></div>
+        <div class="flip-back"><p class="term-def">Condrocitos en lagunas dentro de matriz gelatinosa; sin vasos ni nervios, con pericondrio.</p><p class="term-opto">👁 Su avascularidad es la razón de que repare tan mal.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Membrana mucosa</span><span class="term-en">Mucous membrane</span></div>
+        <div class="flip-back"><p class="term-def">Epitelio sobre lámina propia que reviste cavidades abiertas al exterior.</p><p class="term-opto">👁 La conjuntiva: vascularizada, con caliciformes y tejido linfoide.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Membrana serosa</span><span class="term-en">Serous membrane</span></div>
+        <div class="flip-back"><p class="term-def">Mesotelio sobre conectivo que reviste cavidades cerradas; láminas parietal y visceral.</p><p class="term-opto">👁 Pleura, pericardio y peritoneo. La sinovial NO lleva epitelio.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Músculo liso</span><span class="term-en">Smooth muscle</span></div>
+        <div class="flip-back"><p class="term-def">Fibras fusiformes, un núcleo central, sin estrías, involuntario.</p><p class="term-opto">👁 Músculo ciliar y musculatura del iris: enfocan y regulan la pupila sin tu permiso.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Neuroglía</span><span class="term-en">Neuroglia</span></div>
+        <div class="flip-back"><p class="term-def">Células de soporte y protección del tejido nervioso; no conducen impulsos.</p><p class="term-opto">👁 Las células de Müller atraviesan toda la retina.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Excitabilidad eléctrica</span><span class="term-en">Electrical excitability</span></div>
+        <div class="flip-back"><p class="term-def">Capacidad de generar potenciales de acción ante un estímulo; solo neuronas y fibras musculares.</p><p class="term-opto">👁 Es lo que registra un electrorretinograma.</p></div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 15 · QUIZ ─────────── -->
+<section class="station" id="s2e8">
+  <div class="station-header">
+    <div class="station-number">08</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Autoevaluación</div>
+      <h2>Comprueba lo que aprendiste</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <div class="check-question" data-question="q1s2t">
+      <p class="question-text">1. La córnea y la esclera están formadas por tejido conectivo denso con colágeno tipo I. ¿Qué explica que una sea transparente y la otra opaca?</p>
+      <ul class="options">
+        <li data-letter="A">La esclera tiene colágeno y la córnea tiene fibras elásticas</li>
+        <li data-letter="B" data-correct="true">En la córnea las fibrillas son finas, uniformes y regularmente espaciadas; en la esclera son gruesas, variables y desordenadas</li>
+        <li data-letter="C">La córnea carece de matriz extracelular</li>
+        <li data-letter="D">La esclera está vascularizada y la córnea recibe más sangre todavía</li>
+        <li data-letter="E">La córnea es epitelio y la esclera es conectivo</li>
+      </ul>
+      <div class="feedback"><strong>Correcto: B.</strong> Mismo material, distinta arquitectura. El estroma corneal es conectivo denso <em>regular</em> —láminas paralelas de fibrillas idénticas y equidistantes, con separación menor que la longitud de onda de la luz— y la esclera es denso <em>irregular</em>. Cuando la córnea se edematiza, ese espaciado se pierde y aparece la opacidad.</div>
+    </div>
+
+    <div class="check-question" data-question="q2s2t">
+      <p class="question-text">2. ¿Cuál de estas membranas <em>no</em> es una membrana epitelial?</p>
+      <ul class="options">
+        <li data-letter="A">Mucosa</li>
+        <li data-letter="B">Serosa</li>
+        <li data-letter="C">Cutánea</li>
+        <li data-letter="D" data-correct="true">Sinovial</li>
+        <li data-letter="E">Todas lo son</li>
+      </ul>
+      <div class="feedback"><strong>Correcto: D.</strong> La membrana sinovial está formada por tejido conectivo areolar y adiposo, <strong>sin capa epitelial</strong>. Las otras tres sí combinan epitelio sobre conectivo, que es la definición de membrana epitelial.</div>
+    </div>
+
+    <div class="check-question" data-question="q3s2t">
+      <p class="question-text">3. Un paciente sufre una abrasión corneal que respeta el estroma. ¿Qué se espera y por qué?</p>
+      <ul class="options">
+        <li data-letter="A">Cicatriz permanente, porque el epitelio no se regenera</li>
+        <li data-letter="B">Cicatriz permanente, porque los queratocitos depositan colágeno desordenado</li>
+        <li data-letter="C" data-correct="true">Reparación completa sin cicatriz, por regeneración desde las células madre limbares</li>
+        <li data-letter="D">Reparación por tejido de granulación en 24 horas</li>
+        <li data-letter="E">Ninguna reparación: la córnea es avascular</li>
+      </ul>
+      <div class="feedback"><strong>Correcto: C.</strong> Mientras la lesión se limite al epitelio, hay <strong>regeneración parenquimatosa</strong>: las células madre del limbo esclerocorneal repueblan la superficie en 24 a 72 horas sin dejar rastro. La opción B describe lo que ocurre <em>si</em> la herida alcanza el estroma — entonces sí queda leucoma.</div>
+    </div>
+
+    <div class="check-question" data-question="q4s2t">
+      <p class="question-text">4. Los seis músculos extraoculares y el músculo ciliar se diferencian en que:</p>
+      <ul class="options">
+        <li data-letter="A">Los extraoculares son lisos e involuntarios; el ciliar es estriado y voluntario</li>
+        <li data-letter="B" data-correct="true">Los extraoculares son esqueléticos, estriados y voluntarios; el ciliar es liso e involuntario</li>
+        <li data-letter="C">Ambos son músculo cardíaco, unidos por discos intercalares</li>
+        <li data-letter="D">Los extraoculares carecen de núcleo y el ciliar tiene varios</li>
+        <li data-letter="E">No hay diferencia: los dos son músculo liso</li>
+      </ul>
+      <div class="feedback"><strong>Correcto: B.</strong> Por eso decides hacia dónde miras pero no a qué distancia enfocas. El ciliar, liso e inervado por el parasimpático, es el que bloquea un colirio ciclopléjico para paralizar la acomodación.</div>
+    </div>
+
+    <div class="saber-box">
+      <strong>Pregunta tipo Saber Pro · Inglés</strong>
+      <div class="check-question" style="margin-top:16px;border-color:var(--purple)" data-question="q5s2t">
+        <p class="question-text">5. Retinal ganglion cells lost in glaucoma are never replaced. Which property of nervous tissue best explains this?<br><em style="font-size:.85rem;color:var(--text-muted)">Las células ganglionares de la retina que se pierden en el glaucoma no se reemplazan nunca. ¿Qué propiedad del tejido nervioso lo explica mejor?</em></p>
+        <ul class="options">
+          <li data-letter="A">Nervous tissue is avascular (el tejido nervioso es avascular)</li>
+          <li data-letter="B">Neurons lack a plasma membrane (las neuronas carecen de membrana plasmática)</li>
+          <li data-letter="C" data-correct="true">Mature CNS neurons have essentially no regenerative capacity (las neuronas maduras del SNC casi no tienen capacidad regenerativa)</li>
+          <li data-letter="D">Neuroglia phagocytose new neurons (la neuroglía fagocita las neuronas nuevas)</li>
+          <li data-letter="E">Ganglion cells are epithelial, not nervous (las células ganglionares son epiteliales)</li>
+        </ul>
+        <div class="feedback"><strong>Correct: C.</strong> The retina is central nervous tissue: its mature neurons do not divide, so parenchymal regeneration is not available to them. This is why glaucomatous damage is irreversible and treatment aims at preventing further loss rather than recovering what is gone. Note that the retina <em>is</em> vascularised, so A is false.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 16 · CIERRE ─────────── -->
+<section class="station" id="s2e9">
+  <div class="station-header">
+    <div class="station-number">09</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Cierre</div>
+      <h2>Volvemos a las cuatro preguntas</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Recupera la respuesta que diste al empezar la mañana y compárala. No importa si te
+      equivocaste: importa que ahora puedas decir <em>por qué</em>.</p>
+
+    <table class="data">
+      <thead><tr><th>La pregunta</th><th>Lo que ahora sabes</th></tr></thead>
+      <tbody>
+        <tr><td><strong>1 ·</strong> Córnea y esclera, mismo material, distinto aspecto</td>
+            <td>Conectivo denso <strong>regular</strong> frente a <strong>irregular</strong>. En el conectivo manda el orden de la matriz, no la célula</td></tr>
+        <tr><td><strong>2 ·</strong> Heridas que desaparecen y heridas que no</td>
+            <td><strong>Regeneración parenquimatosa</strong> desde las células madre limbares si es epitelial; <strong>fibrosis</strong> si llega al estroma</td></tr>
+        <tr><td><strong>3 ·</strong> Un músculo que obedece y otro que no</td>
+            <td><strong>Esquelético</strong> estriado voluntario en los extraoculares; <strong>liso</strong> involuntario en el ciliar</td></tr>
+        <tr><td><strong>4 ·</strong> Un tejido sin sangre</td>
+            <td>El <strong>epitelio es avascular</strong> por definición y se nutre por difusión. En la córnea, además, no tener vasos es requisito de la transparencia</td></tr>
+      </tbody>
+    </table>
+
+    <h3>La córnea, capa por capa, con los cuatro tejidos en la mano</h3>
+    <p>Cierra la clase leyendo una sola estructura con todo lo de hoy:</p>
+
+    <div class="figure">
+      <svg viewBox="0 0 760 300" role="img" aria-label="Las cinco capas de la córnea y el tejido al que corresponde cada una">
+        <g font-family="DM Mono, monospace" font-size="12">
+          <rect x="60" y="40" width="420" height="30" fill="#e3f0f5" stroke="#1976a1" stroke-width="1.5"/>
+          <text x="270" y="60" text-anchor="middle" fill="#115670">Epitelio · pavimentoso estratificado no queratinizado</text>
+          <text x="496" y="60" fill="#1976a1">EPITELIAL</text>
+
+          <rect x="60" y="72" width="420" height="16" fill="#f5e9c8" stroke="#b8860b" stroke-width="1.5"/>
+          <text x="270" y="84" text-anchor="middle" fill="#8b6914" font-size="11">Membrana de Bowman</text>
+
+          <rect x="60" y="90" width="420" height="130" fill="#f3e8de" stroke="#a0522d" stroke-width="1.5"/>
+          <text x="270" y="145" text-anchor="middle" fill="#7d3f22">Estroma · conectivo denso REGULAR</text>
+          <text x="270" y="165" text-anchor="middle" fill="#8a9aa8" font-size="10.5">200–250 laminillas · queratocitos · 90 % del espesor</text>
+          <text x="496" y="155" fill="#a0522d">CONECTIVO</text>
+
+          <rect x="60" y="222" width="420" height="16" fill="#f5e9c8" stroke="#b8860b" stroke-width="1.5"/>
+          <text x="270" y="234" text-anchor="middle" fill="#8b6914" font-size="11">Membrana de Descemet · membrana basal del endotelio</text>
+
+          <rect x="60" y="240" width="420" height="26" fill="#e3f0f5" stroke="#1976a1" stroke-width="1.5"/>
+          <text x="270" y="257" text-anchor="middle" fill="#115670">Endotelio · pavimentoso simple</text>
+          <text x="496" y="257" fill="#1976a1">EPITELIAL</text>
+
+          <text x="270" y="26" text-anchor="middle" fill="#8a9aa8" font-size="11">LÁGRIMA · exterior</text>
+          <text x="270" y="286" text-anchor="middle" fill="#8a9aa8" font-size="11">HUMOR ACUOSO · cámara anterior</text>
+
+          <text x="620" y="100" fill="#2a7a6e" font-size="11.5">Se regenera</text>
+          <text x="620" y="118" fill="#8a9aa8" font-size="10">células madre limbares</text>
+          <text x="620" y="176" fill="#b5413b" font-size="11.5">Cicatriza: leucoma</text>
+          <text x="620" y="194" fill="#8a9aa8" font-size="10">colágeno desordenado</text>
+          <text x="620" y="252" fill="#b5413b" font-size="11.5">NO se regenera</text>
+          <text x="620" y="270" fill="#8a9aa8" font-size="10">nace con las células que tendrá</text>
+        </g>
+      </svg>
+      <p class="figure-caption">Figura 4.4 · Dos tejidos, cinco capas y tres destinos distintos ante
+        una herida. Toda la clase de hoy cabe en este esquema.</p>
+    </div>
+
+    <div class="pearl">La próxima clase abrimos el sistema tegumentario: la piel, que es el mejor
+      ejemplo de cómo epitelio y conectivo se combinan en un órgano. Lectura previa:
+      Tortora, capítulo 5.</div>
+  </div>
+
+  <div class="clinical-box">
+    <h5>Y una idea para llevarse</h5>
+    <p>Todo lo de hoy se resume en una frase que te servirá el resto de la carrera:
+      <strong>la función de un tejido está en su arquitectura, no en su lista de ingredientes.</strong>
+      Córnea y esclera tienen los mismos ingredientes. La diferencia —ver o no ver— está en cómo
+      están puestos.</p>
+  </div>
+</section>
+
+</div><!-- /s2 -->
+
+<footer class="footer">
+  Morfología General 2026-II · Universidad de La Salle · Facultad de Ciencias de la Salud · Optometría<br>
+  Jueves 6 de agosto de 2026 · Terminología TA2 · Fuente: Tortora &amp; Derrickson 15.ª ed., cap. 4 — El nivel tisular de organización
+</footer>
+
+</div><!-- /container -->
+
+<script>
+function showTab(id,btn){
+  document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+document.querySelectorAll('.check-question').forEach(block=>{
+  const options=block.querySelectorAll('.options li');
+  const feedback=block.querySelector('.feedback');
+  const correctLetter=Array.from(options).find(o=>o.dataset.correct==='true')?.dataset.letter;
+  let answered=false;
+  options.forEach(opt=>{
+    opt.addEventListener('click',()=>{
+      if(answered)return;
+      answered=true;
+      options.forEach(o=>{
+        if(o.dataset.letter===correctLetter)o.classList.add('correct');
+        else if(o===opt&&opt.dataset.letter!==correctLetter)o.classList.add('incorrect');
+      });
+      feedback.classList.add('show');
+      feedback.scrollIntoView({behavior:'smooth',block:'nearest'});
+    });
+  });
+});
+document.querySelectorAll('.flip-card').forEach(card=>{
+  card.addEventListener('click',()=>card.classList.toggle('flipped'));
+});
+</script>
+
+</body>
+</html>
