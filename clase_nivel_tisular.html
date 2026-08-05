@@ -177,6 +177,39 @@ table.data tr:hover td{background:var(--amber-pale)}
 
 /* FOOTER */
 .footer{margin-top:80px;padding:30px;text-align:center;border-top:3px double var(--amber);font-family:var(--font-mono);font-size:.78rem;color:var(--text-muted);letter-spacing:.12em}
+/* ACORDEONES — <details>/<summary> nativos: se despliegan sin JavaScript,
+   así que funcionan aunque el archivo se abra desde el disco o se imprima. */
+.acorde{background:var(--bg-card);border:1px solid var(--border-light);border-left:4px solid var(--teal);
+  border-radius:3px;margin:10px 0;overflow:hidden}
+.acorde > summary{cursor:pointer;padding:13px 18px;font-family:var(--font-display);font-weight:700;
+  color:var(--ink);font-size:1rem;list-style:none;display:flex;align-items:center;gap:10px;
+  background:var(--parchment-dark);transition:background .15s}
+.acorde > summary:hover{background:var(--amber-pale)}
+.acorde > summary::-webkit-details-marker{display:none}
+.acorde > summary::before{content:'+';font-family:var(--font-mono);font-size:1.15rem;color:var(--teal);
+  font-weight:400;width:16px;flex-shrink:0;text-align:center}
+.acorde[open] > summary::before{content:'−'}
+.acorde[open] > summary{border-bottom:1px solid var(--border-light)}
+.acorde > summary .pista{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);
+  font-weight:400;letter-spacing:.06em;margin-left:auto;text-transform:uppercase}
+.acorde .cuerpo{padding:16px 18px 18px}
+.acorde .cuerpo > *:last-child{margin-bottom:0}
+.acorde.rust{border-left-color:var(--rust)} .acorde.amber{border-left-color:var(--amber)}
+.acorde.blue{border-left-color:var(--blue)} .acorde.purple{border-left-color:var(--purple)}
+@media print{.acorde .cuerpo{display:block!important}.acorde > summary::before{content:''}}
+
+/* Ficha de tejido: la imagen del cuadro de Tortora más su texto */
+.ficha{margin:22px 0}
+.ficha > h4{font-family:var(--font-display);font-size:1.12rem;color:var(--ink);font-weight:700;
+  margin-bottom:4px;padding-bottom:5px;border-bottom:2px solid var(--amber-light)}
+.ficha .datos{display:grid;grid-template-columns:auto 1fr;gap:5px 14px;margin:10px 0 0;font-size:.93rem}
+.ficha .datos dt{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--amber-dark);padding-top:3px;font-weight:500}
+.ficha .datos dd{margin:0;color:var(--text)}
+.ficha .datos dd b{color:var(--ink)}
+@media(max-width:640px){.ficha .datos{grid-template-columns:1fr;gap:2px}
+  .ficha .datos dd{margin-bottom:8px}}
+
 @media print{body{background:white;font-size:11pt}.tab-bar{display:none}}
 </style>
 <body>
@@ -297,6 +330,16 @@ table.data tr:hover td{background:var(--amber-pale)}
     <p>Todo el cuerpo humano —cada órgano, cada estructura— está construido con combinaciones de
       solo cuatro tejidos. Merece la pena detenerse en lo económico que resulta:</p>
 
+    <div class="photo-hero">
+      <img src="img/fig_4_1_tipos_tejido.png" alt="Figura 4.1 de Tortora: los cuatro tipos de tejido —epitelial, conectivo, muscular y nervioso— con su localización en el cuerpo">
+      <div class="photo-missing">Figura 4.1 · imagen no disponible</div>
+      <p class="photo-caption"><strong>Figura 4.1 · Los cuatro tipos de tejido.</strong>
+        Fíjate en el criterio que separa a los dos primeros: en el epitelial las células están
+        pegadas unas a otras; en el conectivo lo que domina es el material que hay entre ellas.
+        Esa sola diferencia explica casi todo lo demás.</p>
+      <div class="photo-credit">Tortora &amp; Derrickson, 15.ª ed. · Fig. 4.1</div>
+    </div>
+
     <table class="data">
       <thead><tr><th>Tejido</th><th>Qué hace</th><th>Rasgo que lo delata</th><th>En el ojo</th></tr></thead>
       <tbody>
@@ -347,67 +390,15 @@ table.data tr:hover td{background:var(--amber-pale)}
       <strong>uniones celulares</strong>: puntos de contacto entre las membranas plasmáticas de
       células adyacentes. Son cinco, y cada una resuelve un problema distinto.</p>
 
-    <div class="figure">
-      <svg viewBox="0 0 820 400" role="img" aria-label="Esquema de los cinco tipos de unión celular entre dos células epiteliales y la membrana basal">
-        <!-- células -->
-        <rect x="80" y="40" width="290" height="270" rx="6" fill="#e3f0f5" stroke="#1976a1" stroke-width="2"/>
-        <rect x="410" y="40" width="290" height="270" rx="6" fill="#e3f0f5" stroke="#1976a1" stroke-width="2"/>
-        <text x="225" y="30" text-anchor="middle" font-family="DM Mono, monospace" font-size="13" fill="#5a6b7a">Célula A</text>
-        <text x="555" y="30" text-anchor="middle" font-family="DM Mono, monospace" font-size="13" fill="#5a6b7a">Célula B</text>
-        <!-- superficie libre -->
-        <text x="390" y="18" text-anchor="middle" font-family="DM Mono, monospace" font-size="11" fill="#8a9aa8">SUPERFICIE APICAL (libre)</text>
-        <!-- membrana basal -->
-        <rect x="80" y="318" width="620" height="16" fill="#f5e9c8" stroke="#b8860b" stroke-width="2"/>
-        <text x="390" y="352" text-anchor="middle" font-family="DM Mono, monospace" font-size="12" fill="#8b6914">MEMBRANA BASAL</text>
-
-        <!-- 1 hermética -->
-        <g>
-          <line x1="370" y1="55" x2="410" y2="55" stroke="#b5413b" stroke-width="5"/>
-          <line x1="370" y1="68" x2="410" y2="68" stroke="#b5413b" stroke-width="5"/>
-          <line x1="370" y1="81" x2="410" y2="81" stroke="#b5413b" stroke-width="5"/>
-          <text x="725" y="72" font-family="DM Mono, monospace" font-size="13" fill="#8a2f2a">1 · Hermética</text>
-          <text x="725" y="88" font-family="DM Mono, monospace" font-size="10.5" fill="#8a9aa8">sella: nada pasa entre células</text>
-        </g>
-        <!-- 2 adherente -->
-        <g>
-          <rect x="352" y="115" width="18" height="34" fill="#2a7a6e"/>
-          <rect x="410" y="115" width="18" height="34" fill="#2a7a6e"/>
-          <line x1="370" y1="125" x2="410" y2="125" stroke="#2a7a6e" stroke-width="3"/>
-          <line x1="370" y1="139" x2="410" y2="139" stroke="#2a7a6e" stroke-width="3"/>
-          <path d="M330 132 q12 -10 22 0" stroke="#2a7a6e" stroke-width="2" fill="none"/>
-          <text x="725" y="132" font-family="DM Mono, monospace" font-size="13" fill="#1f5d54">2 · Adherente</text>
-          <text x="725" y="148" font-family="DM Mono, monospace" font-size="10.5" fill="#8a9aa8">cinturón de adhesión · actina</text>
-        </g>
-        <!-- 3 desmosoma -->
-        <g>
-          <rect x="352" y="180" width="18" height="30" fill="#6b4a8a"/>
-          <rect x="410" y="180" width="18" height="30" fill="#6b4a8a"/>
-          <line x1="370" y1="188" x2="410" y2="188" stroke="#6b4a8a" stroke-width="3"/>
-          <line x1="370" y1="202" x2="410" y2="202" stroke="#6b4a8a" stroke-width="3"/>
-          <line x1="300" y1="176" x2="352" y2="192" stroke="#6b4a8a" stroke-width="2"/>
-          <line x1="300" y1="214" x2="352" y2="198" stroke="#6b4a8a" stroke-width="2"/>
-          <text x="725" y="196" font-family="DM Mono, monospace" font-size="13" fill="#4a2d6e">3 · Desmosoma</text>
-          <text x="725" y="212" font-family="DM Mono, monospace" font-size="10.5" fill="#8a9aa8">remache · queratina</text>
-        </g>
-        <!-- 4 comunicante -->
-        <g>
-          <rect x="352" y="240" width="76" height="9" fill="#b8860b"/>
-          <rect x="352" y="256" width="76" height="9" fill="#b8860b"/>
-          <text x="725" y="252" font-family="DM Mono, monospace" font-size="13" fill="#8b6914">4 · Comunicante</text>
-          <text x="725" y="268" font-family="DM Mono, monospace" font-size="10.5" fill="#8a9aa8">conexones · pasan iones</text>
-        </g>
-        <!-- 5 hemidesmosoma -->
-        <g>
-          <rect x="150" y="296" width="16" height="24" fill="#a0522d"/>
-          <rect x="500" y="296" width="16" height="24" fill="#a0522d"/>
-          <line x1="158" y1="296" x2="158" y2="270" stroke="#a0522d" stroke-width="2"/>
-          <line x1="508" y1="296" x2="508" y2="270" stroke="#a0522d" stroke-width="2"/>
-          <text x="725" y="308" font-family="DM Mono, monospace" font-size="13" fill="#7d3f22">5 · Hemidesmosoma</text>
-          <text x="725" y="324" font-family="DM Mono, monospace" font-size="10.5" fill="#8a9aa8">ancla a la membrana basal</text>
-        </g>
-      </svg>
-      <p class="figure-caption">Figura 4.2 · Los cinco tipos de unión celular. Las cuatro primeras
-        unen célula con célula; el hemidesmosoma une la célula con la membrana basal.</p>
+    <div class="photo-hero">
+      <img src="img/fig_4_2_uniones_celulares.png" alt="Figura 4.2 de Tortora: los cinco tipos de unión intercelular — hermética, adherente, desmosoma, hemidesmosoma y comunicante — con sus proteínas y filamentos">
+      <div class="photo-missing">Figura 4.2 · imagen no disponible</div>
+      <p class="photo-caption"><strong>Figura 4.2 · Las cinco uniones intercelulares.</strong>
+        Las cuatro primeras unen una célula con otra; el <em>hemidesmosoma</em> es el único que une
+        la célula con la membrana basal, es decir, con el tejido conectivo de debajo. Observa las
+        proteínas: cadherinas en las que pegan células entre sí, integrinas en la que ancla al
+        suelo, conexinas en la única que comunica.</p>
+      <div class="photo-credit">Tortora &amp; Derrickson, 15.ª ed. · Fig. 4.2</div>
     </div>
 
     <table class="data">
@@ -445,6 +436,109 @@ table.data tr:hover td{background:var(--amber-pale)}
     <div class="pearl">Truco para no confundirlas: <strong>hermética</strong> sella,
       <strong>adherente</strong> y <strong>desmosoma</strong> pegan, <strong>comunicante</strong>
       comunica y <strong>hemidesmosoma</strong> ancla al suelo. Solo una deja pasar algo.</div>
+
+    <h3>Dónde está cada unión en el resto del cuerpo</h3>
+    <p>El ojo es nuestro hilo conductor, pero estas uniones están en todas partes y en varios sitios
+      explican una enfermedad conocida. Abre la que quieras:</p>
+
+    <details class="acorde rust">
+      <summary>Unión hermética <span class="pista">las barreras del cuerpo</span></summary>
+      <div class="cuerpo">
+        <p>Donde haga falta <strong>separar dos compartimentos</strong>, hay uniones herméticas.
+          Son literalmente lo que define una «barrera» fisiológica.</p>
+        <ul>
+          <li><strong>Estómago e intestino:</strong> impiden que el contenido de la luz —ácido,
+            enzimas, bacterias— se filtre entre las células hacia la sangre.</li>
+          <li><strong>Vejiga urinaria:</strong> retienen la orina, que es tóxica para los tejidos
+            de alrededor.</li>
+          <li><strong>Barrera hematoencefálica:</strong> el endotelio de los capilares cerebrales
+            está sellado, y por eso muchos fármacos no llegan al encéfalo.</li>
+          <li><strong>Túbulos renales:</strong> obligan a que todo lo reabsorbido pase
+            <em>a través</em> de la célula, que es donde se decide qué se recupera.</li>
+          <li><strong>Barrera hematotesticular</strong> y <strong>conductos biliares</strong>.</li>
+        </ul>
+        <p>La lógica es siempre la misma: si nada puede colarse <em>entre</em> las células, todo
+          tiene que atravesarlas — y ahí la célula controla el paso.</p>
+      </div>
+    </details>
+
+    <details class="acorde">
+      <summary>Unión adherente <span class="pista">tejidos que se mueven</span></summary>
+      <div class="cuerpo">
+        <ul>
+          <li><strong>Tubo digestivo:</strong> el cinturón de adhesión evita que el epitelio se
+            desgarre con las ondas peristálticas, que lo estiran cientos de veces al día.</li>
+          <li><strong>Vías respiratorias:</strong> resisten la deformación de cada respiración y de
+            la tos.</li>
+          <li><strong>Músculo cardíaco:</strong> forman parte de los discos intercalares —ahí se
+            llaman <em>fascia adherens</em>— y transmiten la fuerza de una fibra a la siguiente.</li>
+        </ul>
+        <p>Regla práctica: donde un epitelio <strong>se estira o se dobla de forma repetida</strong>,
+          espera encontrar cinturones de adhesión.</p>
+      </div>
+    </details>
+
+    <details class="acorde purple">
+      <summary>Desmosoma <span class="pista">y dos enfermedades ampollosas</span></summary>
+      <div class="cuerpo">
+        <ul>
+          <li><strong>Epidermis:</strong> es el tejido con más desmosomas del cuerpo. Los
+            filamentos de queratina los atraviesan y unen toda la capa en una red continua.</li>
+          <li><strong>Músculo cardíaco:</strong> en los discos intercalares impiden que las fibras
+            se separen con cada latido.</li>
+          <li><strong>Esófago, mucosa oral y cuello uterino:</strong> epitelios sometidos a roce.</li>
+        </ul>
+        <p><strong>El pénfigo vulgar</strong> es una enfermedad autoinmune en la que el propio
+          sistema inmune fabrica anticuerpos contra la <em>desmogleína</em>, la cadherina del
+          desmosoma. Sin ese remache, las células de la epidermis se despegan entre sí y se forman
+          ampollas dolorosas en piel y mucosas. Es la demostración clínica de para qué sirve un
+          desmosoma: se ve lo que pasa cuando falta.</p>
+      </div>
+    </details>
+
+    <details class="acorde amber">
+      <summary>Unión comunicante <span class="pista">la única que deja pasar algo</span></summary>
+      <div class="cuerpo">
+        <p>Es la más interesante de las cinco, porque no sujeta: <strong>comunica</strong>. Los
+          conexones dejan pasar iones y moléculas de menos de 1 000 dalton, así que un grupo de
+          células conectadas se comporta casi como una sola.</p>
+        <ul>
+          <li><strong>Músculo cardíaco:</strong> el impulso pasa de fibra a fibra sin necesidad de
+            un nervio para cada una. Por eso el corazón se contrae <em>a la vez</em> y no por
+            partes. Sin uniones comunicantes no habría latido coordinado.</li>
+          <li><strong>Músculo liso visceral:</strong> lo mismo en el intestino, el útero y la
+            vejiga — permite ondas de contracción coordinadas.</li>
+          <li><strong>Neuronas:</strong> forman las <em>sinapsis eléctricas</em>, mucho más rápidas
+            que las químicas porque no hay neurotransmisor de por medio.</li>
+          <li><strong>Hueso:</strong> los osteocitos quedan atrapados en lagunas dentro de matriz
+            mineralizada; se comunican y se nutren por prolongaciones unidas con uniones
+            comunicantes a través de los canalículos. Es el mismo problema del cristalino resuelto
+            del mismo modo.</li>
+          <li><strong>Embrión:</strong> coordinan a las células durante el desarrollo.</li>
+          <li><strong>Hígado y páncreas.</strong></li>
+        </ul>
+        <p>Fíjate en el patrón: aparecen siempre que un grupo de células tiene que
+          <strong>actuar de forma sincronizada</strong> o <strong>alimentar a células aisladas del
+          torrente sanguíneo</strong>.</p>
+      </div>
+    </details>
+
+    <details class="acorde blue">
+      <summary>Hemidesmosoma <span class="pista">la unión epitelio-conectivo</span></summary>
+      <div class="cuerpo">
+        <p>Está en <strong>todo</strong> epitelio, porque todo epitelio se apoya en una membrana
+          basal y necesita anclarse a ella. El caso más estudiado es la piel:</p>
+        <ul>
+          <li><strong>Unión dermoepidérmica:</strong> los hemidesmosomas de la capa basal fijan la
+            epidermis a la dermis. Si fallan, la piel se despega en láminas.</li>
+        </ul>
+        <p><strong>El penfigoide ampolloso</strong> es la contraparte del pénfigo: aquí los
+          anticuerpos atacan antígenos del <em>hemidesmosoma</em>, no del desmosoma. El resultado
+          es distinto y sirve para distinguirlos — como lo que falla es el anclaje al suelo y no la
+          unión entre células, la ampolla se forma <em>debajo</em> de toda la epidermis y es más
+          tensa. En la córnea, el equivalente es la erosión recidivante.</p>
+      </div>
+    </details>
   </div>
 
   <div class="clinical-box">
@@ -489,6 +583,16 @@ table.data tr:hover td{background:var(--amber-pale)}
           libre. Está muy <strong>vascularizado</strong> —salvo el cartílago, los tendones y los
           ligamentos— y tiene inervación, salvo el cartílago.</p>
       </div>
+    </div>
+
+    <div class="photo-hero">
+      <img src="img/fig_4_3_epitelial_conectivo.png" alt="Figura 4.3 de Tortora: comparación entre tejido epitelial y tejido conectivo, mostrando la densidad celular, la matriz extracelular y la vascularización de cada uno">
+      <div class="photo-missing">Figura 4.3 · imagen no disponible</div>
+      <p class="photo-caption"><strong>Figura 4.3 · Epitelial contra conectivo.</strong>
+        Es la imagen que resume la sección: arriba, células apretadas sin apenas nada entre ellas y
+        sin un solo vaso; abajo, pocas células perdidas en un mar de matriz, atravesada por vasos.
+        Observa también la <em>membrana basal</em> que los separa: es la frontera entre los dos.</p>
+      <div class="photo-credit">Tortora &amp; Derrickson, 15.ª ed. · Fig. 4.3</div>
     </div>
 
     <p>De ese contraste sale una consecuencia que usarás toda la carrera: como el epitelio no tiene
@@ -546,65 +650,324 @@ table.data tr:hover td{background:var(--amber-pale)}
       <strong>capa apical</strong>, no la de las de abajo. Por eso el epitelio de la córnea es
       «pavimentoso estratificado» aunque sus células basales sean cilíndricas.</div>
 
-    <div class="figure">
-      <svg viewBox="0 0 800 300" role="img" aria-label="Esquema comparativo de epitelio simple pavimentoso, cúbico, cilíndrico, seudoestratificado y estratificado">
-        <g font-family="DM Mono, monospace" font-size="11" fill="#5a6b7a" text-anchor="middle">
-          <!-- 1 pavimentoso simple -->
-          <rect x="20" y="150" width="130" height="8" fill="#f5e9c8" stroke="#b8860b"/>
-          <ellipse cx="52" cy="140" rx="30" ry="11" fill="#e3f0f5" stroke="#1976a1" stroke-width="1.5"/>
-          <ellipse cx="117" cy="140" rx="30" ry="11" fill="#e3f0f5" stroke="#1976a1" stroke-width="1.5"/>
-          <circle cx="52" cy="140" r="5" fill="#1976a1"/><circle cx="117" cy="140" r="5" fill="#1976a1"/>
-          <text x="85" y="180">Pavimentoso simple</text>
-          <text x="85" y="196" font-size="10" fill="#8a9aa8">difusión y filtración</text>
-
-          <!-- 2 cúbico simple -->
-          <rect x="180" y="150" width="130" height="8" fill="#f5e9c8" stroke="#b8860b"/>
-          <rect x="188" y="112" width="38" height="38" fill="#e3f0f5" stroke="#1976a1" stroke-width="1.5"/>
-          <rect x="230" y="112" width="38" height="38" fill="#e3f0f5" stroke="#1976a1" stroke-width="1.5"/>
-          <rect x="272" y="112" width="30" height="38" fill="#e3f0f5" stroke="#1976a1" stroke-width="1.5"/>
-          <circle cx="207" cy="131" r="6" fill="#1976a1"/><circle cx="249" cy="131" r="6" fill="#1976a1"/><circle cx="287" cy="131" r="6" fill="#1976a1"/>
-          <text x="245" y="180">Cúbico simple</text>
-          <text x="245" y="196" font-size="10" fill="#8a9aa8">secreción y absorción</text>
-
-          <!-- 3 cilíndrico simple -->
-          <rect x="340" y="150" width="130" height="8" fill="#f5e9c8" stroke="#b8860b"/>
-          <rect x="348" y="80" width="38" height="70" fill="#e3f0f5" stroke="#1976a1" stroke-width="1.5"/>
-          <rect x="390" y="80" width="38" height="70" fill="#e3f0f5" stroke="#1976a1" stroke-width="1.5"/>
-          <rect x="432" y="80" width="30" height="70" fill="#e3f0f5" stroke="#1976a1" stroke-width="1.5"/>
-          <circle cx="367" cy="128" r="6" fill="#1976a1"/><circle cx="409" cy="128" r="6" fill="#1976a1"/><circle cx="447" cy="128" r="6" fill="#1976a1"/>
-          <text x="405" y="180">Cilíndrico simple</text>
-          <text x="405" y="196" font-size="10" fill="#8a9aa8">absorción y secreción</text>
-
-          <!-- 4 seudoestratificado -->
-          <rect x="500" y="150" width="130" height="8" fill="#f5e9c8" stroke="#b8860b"/>
-          <rect x="508" y="80" width="34" height="70" fill="#e3f0f5" stroke="#1976a1" stroke-width="1.5"/>
-          <rect x="546" y="105" width="34" height="45" fill="#e3f0f5" stroke="#1976a1" stroke-width="1.5"/>
-          <rect x="584" y="80" width="34" height="70" fill="#e3f0f5" stroke="#1976a1" stroke-width="1.5"/>
-          <circle cx="525" cy="100" r="6" fill="#1976a1"/><circle cx="563" cy="132" r="6" fill="#1976a1"/><circle cx="601" cy="100" r="6" fill="#1976a1"/>
-          <text x="565" y="180">Seudoestratificado</text>
-          <text x="565" y="196" font-size="10" fill="#8a9aa8">una capa que lo parece</text>
-
-          <!-- 5 estratificado -->
-          <rect x="660" y="150" width="130" height="8" fill="#f5e9c8" stroke="#b8860b"/>
-          <rect x="668" y="128" width="36" height="22" fill="#e3f0f5" stroke="#1976a1" stroke-width="1.5"/>
-          <rect x="708" y="128" width="36" height="22" fill="#e3f0f5" stroke="#1976a1" stroke-width="1.5"/>
-          <rect x="748" y="128" width="34" height="22" fill="#e3f0f5" stroke="#1976a1" stroke-width="1.5"/>
-          <rect x="668" y="108" width="52" height="18" fill="#e3f0f5" stroke="#1976a1" stroke-width="1.5"/>
-          <rect x="724" y="108" width="58" height="18" fill="#e3f0f5" stroke="#1976a1" stroke-width="1.5"/>
-          <ellipse cx="700" cy="97" rx="30" ry="9" fill="#e3f0f5" stroke="#1976a1" stroke-width="1.5"/>
-          <ellipse cx="762" cy="97" rx="26" ry="9" fill="#e3f0f5" stroke="#1976a1" stroke-width="1.5"/>
-          <text x="725" y="180">Estratificado</text>
-          <text x="725" y="196" font-size="10" fill="#8a9aa8">protección al roce</text>
-
-          <text x="400" y="232" font-size="11.5" fill="#8b6914">La franja amarilla es la MEMBRANA BASAL · la superficie de arriba es siempre LIBRE</text>
-          <text x="400" y="256" font-size="11.5" fill="#a0522d">El apellido lo pone la forma de la capa de ARRIBA</text>
-        </g>
-      </svg>
-      <p class="figure-caption">Figura 4.3 · Los patrones de organización epitelial. Toda la
-        clasificación del Cuadro 4.1 sale de cruzar estos dos criterios.</p>
+    <div class="photo-hero">
+      <img src="img/fig_4_5_formas_capas.png" alt="Figura 4.5 de Tortora: formas de las células epiteliales —pavimentosa, cúbica, cilíndrica y de transición— y su disposición en capas simple, seudoestratificada y estratificada">
+      <div class="photo-missing">Figura 4.5 · imagen no disponible</div>
+      <p class="photo-caption"><strong>Figura 4.5 · Formas y capas.</strong>
+        Toda la clasificación del Cuadro 4.1 sale de cruzar estas dos columnas. Fíjate en el
+        seudoestratificado: los núcleos están a distinta altura y parecen varias capas, pero todas
+        las células tocan la membrana basal.</p>
+      <div class="photo-credit">Tortora &amp; Derrickson, 15.ª ed. · Fig. 4.5</div>
     </div>
 
-    <h3>El cuadro completo</h3>
+    <h3>Qué aporta cada criterio</h3>
+    <p>Los dos apellidos no son etiquetas arbitrarias: cada uno predice una función. Si entiendes
+      esto, no tienes que memorizar el cuadro — lo deduces.</p>
+
+    <details class="acorde">
+      <summary>Qué dice el número de capas <span class="pista">tránsito o protección</span></summary>
+      <div class="cuerpo">
+        <p><strong>Simple · una sola capa.</strong> Una sustancia que entre solo tiene que atravesar
+          <em>una</em> célula. Es lo más barato posible en distancia, así que aparece donde lo que
+          importa es el <strong>paso de sustancias</strong>: difusión, filtración, absorción y
+          secreción. El precio es que no protege: una capa se rompe con facilidad.</p>
+        <p><strong>Seudoestratificado · una capa que aparenta varias.</strong> Todas las células
+          tocan la membrana basal, pero solo algunas llegan a la superficie. Es la solución de las
+          <strong>vías respiratorias</strong>: unas células secretan moco y otras lo empujan con
+          cilios, todas en una sola capa.</p>
+        <p><strong>Estratificado · varias capas.</strong> Las células de arriba se desgastan y se
+          desprenden, y se reponen desde las basales, que son las que se dividen. Aparece donde hay
+          <strong>roce, presión o desecación</strong>. El precio es el inverso: con varias capas el
+          intercambio se vuelve inviable.</p>
+        <div class="pearl">Es un intercambio, no una escala de calidad: <strong>a más capas, más
+          protección y menos intercambio.</strong> Ningún epitelio hace bien las dos cosas. Por eso
+          el alvéolo es simple y la piel es estratificada.</div>
+      </div>
+    </details>
+
+    <details class="acorde amber">
+      <summary>Qué dice la forma de la célula <span class="pista">altura = maquinaria</span></summary>
+      <div class="cuerpo">
+        <p>La forma indica <strong>cuánto citoplasma y cuántos organelos</strong> cabe dentro, y eso
+          determina cuánto trabajo puede hacer la célula.</p>
+        <p><strong>Pavimentosa · aplanada.</strong> Casi no tiene altura, así que la distancia que
+          debe recorrer una sustancia es mínima: <strong>difusión y filtración</strong>. El alvéolo
+          y el capilar están hechos de esto. En un epitelio estratificado, en cambio, esa misma
+          forma plana sirve de baldosa protectora.</p>
+        <p><strong>Cúbica · tan alta como ancha.</strong> Ya hay sitio para organelos:
+          <strong>secreción y absorción</strong> moderadas. Túbulos renales, conductos glandulares,
+          epitelio del cristalino.</p>
+        <p><strong>Cilíndrica · más alta que ancha.</strong> Es la que más maquinaria alberga, así
+          que <strong>secreta y absorbe más</strong> que la cúbica. Además, al ser alta puede
+          permitirse adornos en la cara apical: <em>microvellosidades</em> para multiplicar la
+          superficie de absorción, o <em>cilios</em> para mover material por encima.</p>
+        <p><strong>De transición · cambia de forma.</strong> No es una forma, es una capacidad: las
+          células pasan de cúbicas a aplanadas según el órgano se llene. Sirve para
+          <strong>distenderse sin romperse</strong>, y solo se encuentra en las vías urinarias.</p>
+        <div class="pearl">Regla que casi nunca falla: <strong>cuanto más alta la célula, más
+          trabajo metabólico hace.</strong> Plana = deja pasar; alta = fabrica o absorbe.</div>
+      </div>
+    </details>
+
+    <h3>Las tres superficies de una célula epitelial</h3>
+    <p>Una célula epitelial no es igual por todos lados: está <strong>polarizada</strong>. Cada cara
+      tiene su especialización, y de eso depende que un epitelio pueda transportar en una sola
+      dirección — que es justo lo que hace útil a un epitelio.</p>
+
+    <div class="three-col">
+      <div class="col-card blue"><h5>Apical</h5>
+        <p>Mira a la superficie libre —a la luz del órgano o al exterior—. Puede llevar
+          <strong>microvellosidades</strong> para absorber o <strong>cilios</strong> para mover
+          material.</p></div>
+      <div class="col-card teal"><h5>Lateral</h5>
+        <p>Mira a las células vecinas. Aquí están las <strong>uniones celulares</strong> que
+          acabamos de ver: herméticas, adherentes, desmosomas y comunicantes.</p></div>
+      <div class="col-card rust"><h5>Basal</h5>
+        <p>Se apoya en la <strong>membrana basal</strong> mediante hemidesmosomas. Es la cara
+          por la que le llega el alimento desde el conectivo.</p></div>
+    </div>
+
+    <h3>La membrana basal: ni membrana, ni del epitelio solo</h3>
+    <p>El nombre engaña dos veces. <strong>No es una membrana plasmática</strong> —no es una bicapa
+      lipídica, sino una capa de matriz extracelular—, y <strong>no la fabrica solo el
+      epitelio</strong>: la construyen entre los dos tejidos que separa. Tiene dos láminas:</p>
+
+    <div class="two-col">
+      <div class="col-card blue"><h5>Lámina basal</h5>
+        <p>La más cercana al epitelio, y <strong>secretada por las células epiteliales</strong>.
+          Contiene laminina, colágeno tipo IV y proteoglucanos.</p></div>
+      <div class="col-card rust"><h5>Lámina reticular</h5>
+        <p>La más profunda, <strong>secretada por los fibroblastos</strong> del tejido conectivo.
+          Contiene fibras reticulares (colágeno tipo III).</p></div>
+    </div>
+
+    <p>Sirve para cuatro cosas, y conviene tenerlas presentes porque volverán:</p>
+    <ul>
+      <li><strong>Sostén físico:</strong> es el suelo al que se anclan los hemidesmosomas.</li>
+      <li><strong>Filtro selectivo:</strong> regula qué moléculas pasan entre el conectivo y el
+        epitelio. En el riñón, esta propiedad <em>es</em> el mecanismo de filtración del glomérulo.</li>
+      <li><strong>Guía en la reparación:</strong> tras una herida, las células epiteliales migran
+        <em>sobre</em> ella. Si la membrana basal sobrevive, el epitelio se reconstruye ordenado;
+        si se destruye, la reparación se desorganiza.</li>
+      <li><strong>Barrera frente al cáncer:</strong> un tumor epitelial que aún no la ha atravesado
+        se llama <em>carcinoma in situ</em>; cuando la rompe, pasa a ser invasor y puede dar
+        metástasis. Atravesar esa capa es, literalmente, el momento en que un cáncer cambia de
+        pronóstico.</li>
+    </ul>
+
+    <div class="photo-hero">
+      <img src="img/fig_4_4_superficies_membrana_basal.png" alt="Figura 4.4 de Tortora: superficies apical, lateral y basal de las células epiteliales, y estructura de la membrana basal con su lámina basal y su lámina reticular">
+      <div class="photo-missing">Figura 4.4 · imagen no disponible</div>
+      <p class="photo-caption"><strong>Figura 4.4 · Las tres superficies y la membrana basal.</strong>
+        Localiza en el esquema las microvellosidades y los cilios en la cara apical, las uniones en
+        la lateral, y los hemidesmosomas de la basal clavados en la lámina basal.</p>
+      <div class="photo-credit">Tortora &amp; Derrickson, 15.ª ed. · Fig. 4.4</div>
+    </div>
+
+    <div class="clinical-box">
+      <h5>La cápsula del cristalino es una membrana basal</h5>
+      <p>Y la <strong>más gruesa del cuerpo humano</strong>: la fabrica el epitelio del cristalino y
+        lo envuelve por completo. Eso explica dos cosas de la consulta. Primero, que en la cirugía
+        de catarata se pueda vaciar el cristalino y <strong>dejar la cápsula puesta</strong> como
+        bolsa donde alojar la lente intraocular. Segundo, la <em>opacificación de cápsula
+        posterior</em>: si quedan células epiteliales, proliferan sobre esa membrana basal —que es
+        justo su guía natural de migración— y la visión vuelve a nublarse meses después. Se
+        resuelve con capsulotomía YAG. La <strong>membrana de Descemet</strong> de la córnea es
+        también una membrana basal, la del endotelio.</p>
+    </div>
+
+    <h3>Los ocho epitelios de cobertura y revestimiento</h3>
+    <p>Cada ficha trae la lámina del Cuadro 4.1 de Tortora con su microfotografía y su esquema.
+      Léelas con los dos criterios en la mano: <strong>capas y forma</strong>. Verás que la
+      localización y la función casi siempre se deducen de ahí.</p>
+
+    <div class="ficha">
+      <h4>A · Epitelio pavimentoso simple</h4>
+      <dl class="datos">
+        <dt>Descripción</dt><dd>Una sola capa de células aplanadas, como las tejas de un tejado
+          vistas desde arriba; núcleos centrales, aplanados, ovalados o esféricos.</dd>
+        <dt>Localización</dt><dd>Corazón y vasos sanguíneos y linfáticos, donde se llama
+          <b>endotelio</b>; capa epitelial de las serosas —peritoneo, pleura, pericardio—, donde se
+          llama <b>mesotelio</b>. También alvéolos pulmonares, cápsula glomerular (de Bowman) del
+          riñón y cara interna de la membrana timpánica.</dd>
+        <dt>Función</dt><dd><b>Filtración y difusión</b>, y secreción en las serosas. Nunca aparece
+          en superficies sometidas a desgaste mecánico: una sola capa plana no aguantaría.</dd>
+      </dl>
+      <div class="photo-hero">
+        <img src="img/c41_a_pavimentoso_simple.png" alt="Cuadro 4.1 A de Tortora: epitelio pavimentoso simple, con microfotografía del mesotelio del peritoneo y esquema de la capa única de células aplanadas sobre la membrana basal">
+        <div class="photo-missing">Cuadro 4.1 A · imagen no disponible</div>
+        <div class="photo-credit">Tortora &amp; Derrickson, 15.ª ed. · Cuadro 4.1 A</div>
+      </div>
+      <div class="clinical-box">
+        <h5>Es el epitelio del endotelio corneal</h5>
+        <p>La cara posterior de la córnea está tapizada por una sola capa de células planas: es
+          endotelio, el mismo tipo que reviste los vasos. Su delgadez es funcional — el agua que
+          bombea hacia el humor acuoso tiene que atravesar el mínimo espesor posible.</p>
+      </div>
+    </div>
+
+    <div class="ficha">
+      <h4>B · Epitelio cúbico simple</h4>
+      <dl class="datos">
+        <dt>Descripción</dt><dd>Una sola capa de células con forma de cubo y núcleo central
+          redondo. La forma solo se aprecia en un corte perpendicular.</dd>
+        <dt>Localización</dt><dd>Superficie del ovario, <b>cara anterior de la cápsula del
+          cristalino</b>, <b>epitelio pigmentario en la cara posterior de la retina</b>, túbulos
+          renales, conductos de varias glándulas y porción secretora de glándulas como la
+          tiroides.</dd>
+        <dt>Función</dt><dd><b>Secreción y absorción.</b></dd>
+      </dl>
+      <div class="photo-hero">
+        <img src="img/c41_b_cubico_simple.png" alt="Cuadro 4.1 B de Tortora: epitelio cúbico simple, con microfotografía de los túbulos renales y esquema de la capa de células cúbicas sobre la membrana basal">
+        <div class="photo-missing">Cuadro 4.1 B · imagen no disponible</div>
+        <div class="photo-credit">Tortora &amp; Derrickson, 15.ª ed. · Cuadro 4.1 B</div>
+      </div>
+      <div class="clinical-box">
+        <h5>Dos de los ejemplos que da Tortora son oculares</h5>
+        <p>No hay que buscarlos: el propio libro cita el <strong>epitelio del cristalino</strong> y
+          el <strong>epitelio pigmentario de la retina</strong> entre las localizaciones del cúbico
+          simple. Del primero salen las fibras nuevas durante toda la vida; el segundo fagocita
+          cada día los segmentos externos gastados de los fotorreceptores. Los dos <em>secretan y
+          absorben</em>, que es exactamente la función que predice la forma cúbica.</p>
+      </div>
+    </div>
+
+    <div class="ficha">
+      <h4>C · Epitelio cilíndrico simple no ciliado</h4>
+      <dl class="datos">
+        <dt>Descripción</dt><dd>Una sola capa de células cilíndricas sin cilios, con núcleos
+          ovalados cerca de la base. Lleva dos tipos de célula: unas con
+          <b>microvellosidades</b> apicales, que multiplican la superficie de absorción, y
+          <b>células caliciformes</b>, que secretan moco y adoptan forma de copa.</dd>
+        <dt>Localización</dt><dd>Tapiza el tubo digestivo desde el estómago hasta el ano, los
+          conductos de varias glándulas y la vesícula biliar.</dd>
+        <dt>Función</dt><dd><b>Secreción y absorción</b>, en mayor cantidad que el cúbico porque
+          la célula es más alta y cabe más maquinaria. El moco lubrica y, en el estómago, protege
+          la mucosa del propio jugo ácido.</dd>
+      </dl>
+      <div class="photo-hero">
+        <img src="img/c41_c_cilindrico_simple.png" alt="Cuadro 4.1 C de Tortora: epitelio cilíndrico simple no ciliado del yeyuno, con microvellosidades y células caliciformes cargadas de moco">
+        <div class="photo-missing">Cuadro 4.1 C · imagen no disponible</div>
+        <div class="photo-credit">Tortora &amp; Derrickson, 15.ª ed. · Cuadro 4.1 C</div>
+      </div>
+    </div>
+
+    <div class="ficha">
+      <h4>D · Epitelio cilíndrico simple ciliado</h4>
+      <dl class="datos">
+        <dt>Descripción</dt><dd>Una sola capa de células cilíndricas <b>ciliadas</b> con núcleos
+          basales, con células caliciformes intercaladas.</dd>
+        <dt>Localización</dt><dd>Algunos bronquiolos, <b>trompas uterinas</b>, útero, algunos senos
+          paranasales, conducto central de la médula espinal y ventrículos cerebrales.</dd>
+        <dt>Función</dt><dd>Los cilios <b>baten al unísono</b> y desplazan el moco con las
+          partículas atrapadas hacia la garganta, donde se expulsa o se deglute. La tos y el
+          estornudo aceleran ese movimiento. En la trompa uterina, los cilios mueven el ovocito
+          hacia el útero.</dd>
+      </dl>
+      <div class="pearl">Compara C y D: misma forma, misma capa, y la única diferencia —tener
+        cilios o no— cambia por completo el órgano donde aparece. La forma dice qué puede hacer la
+        célula; los adornos apicales dicen para qué se usa.</div>
+    </div>
+
+    <div class="ficha">
+      <h4>E · Epitelio cilíndrico seudoestratificado</h4>
+      <dl class="datos">
+        <dt>Descripción</dt><dd>Parece tener varias capas porque los núcleos se disponen a
+          distintas alturas, pero <b>todas las células tocan la membrana basal</b> y solo algunas
+          llegan a la superficie. De ahí el nombre: <em>pseudos</em> = falso.</dd>
+        <dt>Localización</dt><dd><b>Ciliado</b>, con células caliciformes: la mayor parte de las
+          vías respiratorias superiores. <b>No ciliado</b>, sin caliciformes: conductos de muchas
+          glándulas, epidídimo y parte de la uretra masculina.</dd>
+        <dt>Función</dt><dd>El ciliado secreta moco y lo desplaza; el no ciliado se ocupa de la
+          absorción y la protección.</dd>
+      </dl>
+      <div class="pearl">Es el epitelio que más se confunde en un examen. El criterio infalible no
+        es contar capas de núcleos: es <strong>ver si todas las células llegan a la membrana
+        basal</strong>. Si llegan, es simple.</div>
+    </div>
+
+    <div class="ficha">
+      <h4>F · Epitelio pavimentoso estratificado</h4>
+      <dl class="datos">
+        <dt>Descripción</dt><dd>Dos o más capas, con células aplanadas en la capa apical; las
+          profundas van de cúbicas a cilíndricas. Las <b>basales se dividen</b> y empujan a las
+          hijas hacia la superficie, alejándolas de la irrigación del conectivo, así que se
+          deshidratan, se endurecen y acaban desprendiéndose.</dd>
+        <dt>Localización</dt><dd><b>Queratinizado:</b> la epidermis. <b>No queratinizado:</b> boca,
+          esófago, parte de la epiglotis, vagina, lengua — y la <b>superficie de la córnea y la
+          conjuntiva</b>.</dd>
+        <dt>Función</dt><dd><b>Protección</b> frente a la abrasión, la invasión de microorganismos
+          y la pérdida de agua.</dd>
+      </dl>
+      <div class="photo-hero">
+        <img src="img/c41_f_pavimentoso_estratificado.png" alt="Cuadro 4.1 F de Tortora: epitelio pavimentoso estratificado, con microfotografía de la variedad no queratinizada de la vagina y esquema de las capas celulares">
+        <div class="photo-missing">Cuadro 4.1 F · imagen no disponible</div>
+        <div class="photo-credit">Tortora &amp; Derrickson, 15.ª ed. · Cuadro 4.1 F</div>
+      </div>
+      <div class="clinical-box">
+        <h5>Por qué la córnea usa la variedad no queratinizada</h5>
+        <p>Queratinizarse significa que las células apicales mueren y se llenan de queratina:
+          quedan opacas, secas y duras. Eso es justo lo que le conviene a la piel y lo que
+          arruinaría a la córnea, que necesita células vivas, hidratadas y ópticamente homogéneas.
+          En el <strong>ojo seco grave</strong> el epitelio corneal empieza a queratinizarse —el
+          tejido responde al ambiente seco como si fuera piel— y la superficie se opacifica.</p>
+      </div>
+    </div>
+
+    <div class="ficha">
+      <h4>G · Epitelio cúbico estratificado</h4>
+      <dl class="datos">
+        <dt>Descripción</dt><dd>Dos o más capas, con las células apicales cúbicas. Es
+          <b>bastante infrecuente</b>.</dd>
+        <dt>Localización</dt><dd>Conductos de las glándulas sudoríparas y esofágicas del adulto, y
+          parte de la uretra masculina.</dd>
+        <dt>Función</dt><dd>Protección, con algo de secreción y absorción.</dd>
+      </dl>
+      <div class="photo-hero">
+        <img src="img/c41_g_cubico_estratificado.png" alt="Cuadro 4.1 G de Tortora: epitelio cúbico estratificado del conducto de una glándula sudorípara, con microfotografía y esquema">
+        <div class="photo-missing">Cuadro 4.1 G · imagen no disponible</div>
+        <div class="photo-credit">Tortora &amp; Derrickson, 15.ª ed. · Cuadro 4.1 G</div>
+      </div>
+    </div>
+
+    <div class="ficha">
+      <h4>H · Epitelio cilíndrico estratificado</h4>
+      <dl class="datos">
+        <dt>Descripción</dt><dd>Las capas basales son de células pequeñas e irregulares y
+          <b>solo la capa apical es cilíndrica</b>. También infrecuente.</dd>
+        <dt>Localización</dt><dd>Parte de la uretra, conductos excretores grandes de algunas
+          glándulas como las esofágicas, pequeñas áreas de la mucosa anal y parte de la
+          <b>conjuntiva</b>.</dd>
+        <dt>Función</dt><dd>Protección y secreción.</dd>
+      </dl>
+      <div class="photo-hero">
+        <img src="img/c41_h_cilindrico_estratificado.png" alt="Cuadro 4.1 H de Tortora: epitelio cilíndrico estratificado, con microfotografía y esquema de las capas basales irregulares bajo una capa apical cilíndrica">
+        <div class="photo-missing">Cuadro 4.1 H · imagen no disponible</div>
+        <div class="photo-credit">Tortora &amp; Derrickson, 15.ª ed. · Cuadro 4.1 H</div>
+      </div>
+    </div>
+
+    <div class="ficha">
+      <h4>I · Epitelio de transición <em>(urotelio)</em></h4>
+      <dl class="datos">
+        <dt>Descripción</dt><dd>Su aspecto <b>cambia</b>: relajado parece cúbico estratificado, con
+          las células apicales redondeadas y abombadas; distendido, esas mismas células se aplanan
+          y el epitelio adelgaza.</dd>
+        <dt>Localización</dt><dd>Tapiza la <b>vejiga</b> y parte de los uréteres y la uretra.</dd>
+        <dt>Función</dt><dd>Permite la <b>distensión</b> sin romperse, y a la vez retiene la orina
+          gracias a sus uniones herméticas. Es el único epitelio cuya función es cambiar de
+          forma.</dd>
+      </dl>
+      <div class="photo-hero">
+        <img src="img/c41_i_transicion.png" alt="Cuadro 4.1 I de Tortora: epitelio de transición de la vejiga, con microfotografías en estado relajado y distendido y esquema comparativo">
+        <div class="photo-missing">Cuadro 4.1 I · imagen no disponible</div>
+        <div class="photo-credit">Tortora &amp; Derrickson, 15.ª ed. · Cuadro 4.1 I</div>
+      </div>
+    </div>
+
+    <h3>Todo junto</h3>
+    <p>Ahora sí, el cuadro completo para repasar de un vistazo:</p>
+
     <table class="data">
       <thead><tr><th>Epitelio</th><th>Función principal</th><th>Dónde se encuentra</th></tr></thead>
       <tbody>
@@ -645,21 +1008,39 @@ table.data tr:hover td{background:var(--amber-pale)}
       </tbody>
     </table>
 
-    <h3>Las tres superficies de una célula epitelial</h3>
-    <p>Una célula epitelial no es igual por todos lados: está <strong>polarizada</strong>. Cada cara
-      tiene su especialización, y esto explica por qué un epitelio puede transportar en una sola
-      dirección.</p>
-    <div class="three-col">
-      <div class="col-card blue"><h5>Apical</h5>
-        <p>Mira a la superficie libre —a la luz del órgano o al exterior—. Puede llevar
-          <strong>microvellosidades</strong> para absorber o <strong>cilios</strong> para mover.</p></div>
-      <div class="col-card teal"><h5>Lateral</h5>
-        <p>Mira a las células vecinas. Aquí están las <strong>uniones celulares</strong> que
-          acabamos de ver.</p></div>
-      <div class="col-card rust"><h5>Basal</h5>
-        <p>Se apoya en la <strong>membrana basal</strong>, una capa extracelular que no es una
-          membrana plasmática: la fabrican entre el epitelio y el conectivo.</p></div>
-    </div>
+    <h3>Dos aplicaciones clínicas del capítulo</h3>
+
+    <details class="acorde rust">
+      <summary>Biopsia <span class="pista">Tortora · correlación clínica</span></summary>
+      <div class="cuerpo">
+        <p>Una <strong>biopsia</strong> (<em>bíos</em> = vida, <em>-op</em> = ver) es la extracción
+          de una muestra pequeña de tejido <em>vivo</em> para examinarla al microscopio. Se usa para
+          diagnosticar numerosos trastornos —sobre todo el cáncer— y para averiguar la causa de
+          infecciones e inflamaciones sin explicación.</p>
+        <p>Un detalle del procedimiento que dice mucho sobre cómo se razona en histología:
+          <strong>se extrae tanto tejido presuntamente enfermo como tejido normal</strong>, porque
+          el diagnóstico se hace <em>comparando</em>. No existe una imagen de «tejido enfermo» en
+          abstracto: existe una desviación respecto de cómo debería verse ese tejido concreto. Por
+          eso la clase de hoy —saber cómo se ve lo normal— es el requisito para reconocer lo
+          patológico.</p>
+      </div>
+    </details>
+
+    <details class="acorde purple">
+      <summary>Prueba de Papanicolaou <span class="pista">un epitelio que se lee</span></summary>
+      <div class="cuerpo">
+        <p>La <strong>prueba de Papanicolaou</strong> consiste en raspar y examinar al microscopio
+          las células de la <strong>capa apical</strong> de un epitelio. La más conocida estudia el
+          <strong>epitelio pavimentoso estratificado no queratinizado</strong> de la vagina y el
+          cuello uterino, para detectar cambios precoces que indiquen un estado precanceroso.</p>
+        <p>Funciona precisamente por lo que vimos en este apartado: en un epitelio estratificado
+          las células apicales <em>se están desprendiendo continuamente</em>, así que se pueden
+          recoger sin dañar nada. Es la citología exfoliativa, y el mismo principio se aplica en el
+          ojo con la <strong>citología de impresión conjuntival</strong>, que se usa para valorar
+          la pérdida de células caliciformes en el ojo seco.</p>
+      </div>
+    </details>
+
   </div>
 
   <div class="clinical-box">
@@ -707,11 +1088,88 @@ table.data tr:hover td{background:var(--amber-pale)}
           libre. Sudoríparas, sebáceas, salivales, digestivas — y la lagrimal.</p></div>
     </div>
 
-    <h3>Segundo: ¿cuántas células?</h3>
-    <p>Clasificación <strong>estructural</strong>: <strong>unicelulares</strong> —la célula
-      caliciforme es el ejemplo— o <strong>multicelulares</strong>, que se subdividen según la forma
-      del conducto y de la porción secretora (tubulares, acinares, tubuloacinares; simples o
-      compuestas).</p>
+    <div class="two-col">
+      <div class="photo-hero" style="margin:0">
+        <img src="img/c42_a_endocrinas.png" alt="Cuadro 4.2 A de Tortora: glándulas endocrinas, con microfotografía de folículos tiroideos y esquema de la secreción hormonal hacia el vaso sanguíneo">
+        <div class="photo-missing">Cuadro 4.2 A · imagen no disponible</div>
+        <p class="photo-caption"><strong>Cuadro 4.2 A · Endocrinas.</strong> Hipófisis, pineal,
+          tiroides, paratiroides, suprarrenales, ovarios, testículos y timo. Las hormonas pasan al
+          líquido intersticial y de ahí a la sangre; regulan el metabolismo y sostienen la
+          homeostasis.</p>
+        <div class="photo-credit">Tortora, 15.ª ed. · Cuadro 4.2 A</div>
+      </div>
+      <div class="photo-hero" style="margin:0">
+        <img src="img/c42_b_exocrinas.png" alt="Cuadro 4.2 B de Tortora: glándulas exocrinas, con microfotografía de una glándula sudorípara y esquema de la porción secretora vertiendo a un conducto">
+        <div class="photo-missing">Cuadro 4.2 B · imagen no disponible</div>
+        <p class="photo-caption"><strong>Cuadro 4.2 B · Exocrinas.</strong> Sudoríparas, sebáceas y
+          ceruminosas de la piel; salivales y páncreas entre las digestivas. Producen sudor —que
+          baja la temperatura—, sebo, cera, saliva o enzimas.</p>
+        <div class="photo-credit">Tortora, 15.ª ed. · Cuadro 4.2 B</div>
+      </div>
+    </div>
+
+    <div class="pearl">El <strong>páncreas</strong> es las dos cosas a la vez: su porción exocrina
+      vierte enzimas al duodeno por un conducto, y sus islotes vierten insulina y glucagón
+      directamente a la sangre. Endocrino y exocrino no son tipos de glándula, sino
+      <em>modos de secretar</em>.</div>
+
+    <h3>Segundo: ¿cuántas células y con qué forma?</h3>
+    <p>Esta es la clasificación <strong>estructural</strong>, y solo se aplica a las exocrinas:</p>
+
+    <div class="two-col">
+      <div class="col-card teal"><h5>Unicelulares</h5>
+        <p>Una sola célula que secreta por su cuenta, sin conducto. El ejemplo es la
+          <strong>célula caliciforme</strong>, que vierte moco sobre la superficie del epitelio en
+          el que está inserta — como las de la conjuntiva.</p></div>
+      <div class="col-card blue"><h5>Multicelulares</h5>
+        <p>Un grupo de células con una <strong>porción secretora</strong> y un
+          <strong>conducto</strong> que lleva el producto a su destino. Se subdividen cruzando dos
+          rasgos.</p></div>
+    </div>
+
+    <p>Las multicelulares se nombran, otra vez, con dos criterios cruzados:</p>
+    <div class="two-col">
+      <div class="col-card"><h5>Por el conducto</h5>
+        <p><strong>Simple:</strong> el conducto no se ramifica.<br>
+           <strong>Compuesta:</strong> el conducto se ramifica.</p></div>
+      <div class="col-card rust"><h5>Por la porción secretora</h5>
+        <p><strong>Tubular:</strong> con forma de tubo.<br>
+           <strong>Acinar</strong> (o alveolar)<strong>:</strong> con forma de saco redondeado.<br>
+           <strong>Tubuloacinar:</strong> las dos formas a la vez.</p></div>
+    </div>
+
+    <div class="photo-hero">
+      <img src="img/fig_4_6_glandulas_multicelulares.png" alt="Figura 4.6 de Tortora: tipos de glándulas exocrinas multicelulares, tubulares y acinares, simples y compuestas, con sus variedades ramificadas y enrolladas">
+      <div class="photo-missing">Figura 4.6 · imagen no disponible</div>
+      <p class="photo-caption"><strong>Figura 4.6 · Las glándulas exocrinas multicelulares.</strong>
+        Cada dibujo es una combinación de los dos criterios. No hace falta memorizar los ocho: basta
+        con saber leer el nombre y reconstruir la forma.</p>
+      <div class="photo-credit">Tortora &amp; Derrickson, 15.ª ed. · Fig. 4.6</div>
+    </div>
+
+    <table class="data">
+      <thead><tr><th>Tipo estructural</th><th>Dónde encontrarla</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Tubular simple</strong></td><td>Glándulas intestinales</td></tr>
+        <tr><td><strong>Tubular simple ramificada</strong></td><td>Glándulas gástricas y uterinas</td></tr>
+        <tr><td><strong>Tubular enrollada simple</strong></td><td>Glándulas sudoríparas</td></tr>
+        <tr><td><strong>Acinar simple</strong></td><td>Glándulas de la uretra peneana</td></tr>
+        <tr><td><strong>Acinar simple ramificada</strong></td>
+            <td>Glándulas sebáceas — y por tanto las de <strong>Meibomio</strong> y las de
+                <strong>Zeis</strong> del párpado</td></tr>
+        <tr><td><strong>Tubular compuesta</strong></td>
+            <td>Glándulas bulbouretrales, túbulos seminíferos del testículo, glándulas mucosas de la
+                boca</td></tr>
+        <tr><td><strong>Acinar compuesta</strong></td><td>Páncreas exocrino</td></tr>
+        <tr><td><strong>Tubuloacinar compuesta</strong></td>
+            <td>Glándulas salivales submandibular y sublingual — y la <strong>glándula
+                lagrimal</strong></td></tr>
+      </tbody>
+    </table>
+
+    <div class="pearl">Fíjate en que la lagrimal y la salival comparten arquitectura:
+      <strong>tubuloacinar compuesta</strong>. No es casualidad — las dos tienen que producir un
+      líquido acuoso de forma continua, y esa es la forma que lo permite.</div>
 
     <h3>Tercero: ¿cómo sueltan el producto?</h3>
     <p>Esta es la clasificación <strong>funcional</strong> y la que más se pregunta, porque
@@ -974,6 +1432,15 @@ table.data tr:hover td{background:var(--amber-pale)}
           sostén</strong> alrededor de adipocitos, nervios y fibras musculares.</p></div>
     </div>
 
+    <div class="photo-hero">
+      <img src="img/fig_4_8_celulas_fibras.png" alt="Figura 4.8 de Tortora: esquema de las células y las fibras del tejido conectivo — fibroblasto, macrófago, célula plasmática, mastocito, adipocito y leucocito— entre fibras de colágeno, elásticas y reticulares">
+      <div class="photo-missing">Figura 4.8 · imagen no disponible</div>
+      <p class="photo-caption"><strong>Figura 4.8 · Células y fibras del tejido conectivo.</strong>
+        Localiza el fibroblasto: es el más grande y el más numeroso, y todo lo demás que ves
+        alrededor —fibras y sustancia fundamental— lo fabricó él.</p>
+      <div class="photo-credit">Tortora &amp; Derrickson, 15.ª ed. · Fig. 4.8</div>
+    </div>
+
     <div class="pearl">Si las fibras de colágeno son las cuerdas y las elásticas son las gomas, las
       reticulares son la malla que lo mantiene todo en su sitio.</div>
   </div>
@@ -1000,9 +1467,50 @@ table.data tr:hover td{background:var(--amber-pale)}
     </div>
   </div>
   <div class="content-block">
-    <p>La clasificación tiene dos ramas: el <strong>embrionario</strong> —mesenquimático, del que
-      derivan todos los demás, y mucoso, el del cordón umbilical— y el <strong>maduro</strong>, que
-      es el que nos ocupa. El maduro se organiza en cinco grupos:</p>
+    <p>La clasificación tiene dos ramas: el <strong>embrionario</strong>, presente en el embrión y
+      el feto, y el <strong>maduro</strong>, el que ya está en el recién nacido. Empecemos por el
+      primero, porque explica de dónde salen todos los demás.</p>
+
+    <h3>Conectivo embrionario · Cuadro 4.3</h3>
+
+    <div class="ficha">
+      <h4>A · Mesénquima</h4>
+      <dl class="datos">
+        <dt>Descripción</dt><dd>Células mesenquimáticas de forma irregular inmersas en una sustancia
+          fundamental semilíquida que contiene fibras reticulares delicadas.</dd>
+        <dt>Localización</dt><dd>Casi en exclusiva debajo de la piel y a lo largo de los huesos en
+          desarrollo del embrión. En el adulto quedan algunas células mesenquimáticas, sobre todo
+          <b>a lo largo de los vasos sanguíneos</b>.</dd>
+        <dt>Función</dt><dd><b>Da origen a casi todos los demás tipos de tejido conectivo.</b></dd>
+      </dl>
+      <div class="pearl">Que queden células mesenquimáticas en el adulto no es un detalle
+        anecdótico: son la reserva desde la que el conectivo se repara. Cuando en la clase anterior
+        hablamos de células madre, esta es su versión para el tejido conectivo.</div>
+    </div>
+
+    <div class="ficha">
+      <h4>B · Tejido conectivo mucoso</h4>
+      <dl class="datos">
+        <dt>Descripción</dt><dd>Fibroblastos muy dispersos en una sustancia fundamental viscosa y
+          gelatinosa con fibras de colágeno delicadas.</dd>
+        <dt>Localización</dt><dd><b>Cordón umbilical del feto</b>, donde se conoce como gelatina de
+          Wharton.</dd>
+        <dt>Función</dt><dd>Sostén.</dd>
+      </dl>
+    </div>
+
+    <div class="photo-hero">
+      <img src="img/c43_embrionarios.png" alt="Cuadro 4.3 de Tortora: tejidos conectivos embrionarios, mesénquima y tejido conectivo mucoso, con microfotografías y esquemas">
+      <div class="photo-missing">Cuadro 4.3 · imagen no disponible</div>
+      <p class="photo-caption"><strong>Cuadro 4.3 · Tejidos conectivos embrionarios.</strong>
+        Compara la densidad celular con la de cualquier conectivo maduro: aquí todavía hay más
+        célula que matriz. La especialización llegará al fabricar la matriz.</p>
+      <div class="photo-credit">Tortora &amp; Derrickson, 15.ª ed. · Cuadro 4.3</div>
+    </div>
+
+    <h3>Conectivo maduro · cinco grupos</h3>
+    <p>Todo lo que sigue deriva del mesénquima, y lo que los separa es <strong>qué matriz
+      fabricaron</strong>:</p>
 
     <h3>1 · Conectivo laxo</h3>
     <table class="data">
@@ -1018,6 +1526,33 @@ table.data tr:hover td{background:var(--amber-pale)}
       </tbody>
     </table>
 
+    <div class="photo-grid cols-2">
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/c44_a_areolar.png" alt="Cuadro 4.4 A de Tortora: tejido conectivo areolar del tejido subcutáneo, con fibras de colágeno, elásticas y reticulares y varios tipos celulares">
+          <div class="photo-missing">Cuadro 4.4 A · no disponible</div>
+        </div>
+        <p class="photo-caption"><strong>A · Areolar.</strong> El «material cobertor» del organismo:
+          los tres tipos de fibra y casi todos los tipos celulares, en sustancia fundamental
+          semilíquida. Está en el tejido subcutáneo, en la <em>lámina propia</em> de las mucosas
+          —incluida la conjuntiva— y rodeando vasos, nervios y órganos.</p>
+        <div class="photo-credit">Tortora · Cuadro 4.4 A</div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/c44_bc_adiposo_reticular.png" alt="Cuadro 4.4 B y C de Tortora: tejido adiposo con adipocitos cargados de triglicéridos, y tejido conectivo reticular de un ganglio linfático">
+          <div class="photo-missing">Cuadro 4.4 B–C · no disponible</div>
+        </div>
+        <p class="photo-caption"><strong>B · Adiposo</strong> y <strong>C · Reticular.</strong>
+          El adiposo almacena triglicéridos en una gota que empuja núcleo y citoplasma a la
+          periferia; reduce la pérdida de calor, guarda energía y amortigua órganos — es la
+          <em>grasa orbitaria</em> que sostiene el globo ocular. El reticular forma el estroma del
+          hígado, el bazo y los ganglios, y ahí filtra células sanguíneas gastadas y
+          microorganismos.</p>
+        <div class="photo-credit">Tortora · Cuadro 4.4 B–C</div>
+      </div>
+    </div>
+
     <h3>2 · Conectivo denso</h3>
     <table class="data">
       <thead><tr><th>Tipo</th><th>Disposición de las fibras</th><th>Dónde está</th></tr></thead>
@@ -1032,6 +1567,28 @@ table.data tr:hover td{background:var(--amber-pale)}
             <td>Paredes de las arterias grandes, tráquea, bronquios, pulmón</td></tr>
       </tbody>
     </table>
+
+    <div class="photo-hero">
+      <img src="img/c45_de_denso_regular_irregular.png" alt="Cuadro 4.5 D y E de Tortora: tejido conectivo denso regular de un tendón, con haces de colágeno paralelos, y denso irregular de la dermis, con colágeno en todas direcciones">
+      <div class="photo-missing">Cuadro 4.5 D–E · imagen no disponible</div>
+      <p class="photo-caption"><strong>Cuadro 4.5 D y E · Denso regular y denso irregular.</strong>
+        Arriba, el tendón: haces de colágeno paralelos con los fibroblastos en hilera entre ellos,
+        que resisten la tracción <em>a lo largo</em> del eje. Abajo, la dermis: el mismo colágeno
+        revuelto, que resiste venga de donde venga. Tortora advierte además que las fibras de
+        colágeno <b>no están vivas</b> —son proteína secretada—, y por eso tendones y ligamentos
+        cicatrizan con tanta lentitud.</p>
+      <div class="photo-credit">Tortora &amp; Derrickson, 15.ª ed. · Cuadro 4.5 D–E</div>
+    </div>
+
+    <div class="photo-hero">
+      <img src="img/c45_f_elastico.png" alt="Cuadro 4.5 F de Tortora: tejido conectivo elástico de una arteria elástica, con laminillas de fibras elásticas entre fibroblastos">
+      <div class="photo-missing">Cuadro 4.5 F · imagen no disponible</div>
+      <p class="photo-caption"><strong>Cuadro 4.5 F · Elástico.</strong> Predominan las fibras
+        elásticas; sin teñir, el tejido es amarillento. Permite que un órgano se estire y
+        <em>recupere</em> su forma: el pulmón retrocede en la espiración y las arterias elásticas
+        rebotan entre latidos para mantener el flujo.</p>
+      <div class="photo-credit">Tortora &amp; Derrickson, 15.ª ed. · Cuadro 4.5 F</div>
+    </div>
 
     <div class="pearl">Regular contra irregular es exactamente la diferencia entre la córnea y la
       esclera. Y también entre ver y no ver a través de ellas.</div>
@@ -1049,11 +1606,118 @@ table.data tr:hover td{background:var(--amber-pale)}
       </tbody>
     </table>
 
-    <h3>4 · Tejido óseo</h3>
+    <div class="photo-grid cols-3">
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/c46_a_hialino.png" alt="Cuadro 4.6 A de Tortora: cartílago hialino, con condrocitos en lagunas y matriz gelatinosa blanco azulada rodeada de pericondrio">
+          <div class="photo-missing">Cuadro 4.6 A · no disponible</div>
+        </div>
+        <p class="photo-caption"><strong>A · Hialino.</strong> El más abundante y el
+          <em>más débil</em>. Matriz gelatinosa blanco azulada con fibras finas que no se ven con
+          las tinciones habituales. Extremos de los huesos largos, costillas, nariz, laringe,
+          tráquea y bronquios, y todo el esqueleto embrionario.</p>
+        <div class="photo-credit">Tortora · Cuadro 4.6 A</div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/c46_b_fibrocartilago.png" alt="Cuadro 4.6 B de Tortora: fibrocartílago de un disco intervertebral, con condrocitos dispersos entre haces gruesos y visibles de fibras de colágeno">
+          <div class="photo-missing">Cuadro 4.6 B · no disponible</div>
+        </div>
+        <p class="photo-caption"><strong>B · Fibrocartílago.</strong> Condrocitos entre haces
+          <em>visibles</em> de colágeno. Es el <strong>más resistente</strong> de los tres y el
+          único <strong>sin pericondrio</strong>. Sínfisis del pubis, discos intervertebrales y
+          meniscos de la rodilla.</p>
+        <div class="photo-credit">Tortora · Cuadro 4.6 B</div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/c46_c_elastico.png" alt="Cuadro 4.6 C de Tortora: cartílago elástico del pabellón auricular, con condrocitos en una red de fibras elásticas y pericondrio">
+          <div class="photo-missing">Cuadro 4.6 C · no disponible</div>
+        </div>
+        <p class="photo-caption"><strong>C · Elástico.</strong> Condrocitos en una red de fibras
+          elásticas, con pericondrio. Da fuerza y elasticidad y <em>mantiene la forma</em>:
+          epiglotis, pabellón auricular y trompas auditivas.</p>
+        <div class="photo-credit">Tortora · Cuadro 4.6 C</div>
+      </div>
+    </div>
+
+    <div class="pearl">Los tres se distinguen por dos preguntas: <strong>¿se ven las fibras?</strong>
+      —solo en el fibrocartílago— y <strong>¿tiene pericondrio?</strong> — lo tienen el hialino y el
+      elástico, no el fibrocartílago.</div>
+
+    <details class="acorde amber">
+      <summary>Por qué el cartílago no tiene vasos <span class="pista">y qué tiene que ver con la córnea</span></summary>
+      <div class="cuerpo">
+        <p>No es que los vasos «no lleguen». El cartílago <strong>secreta un factor
+          antiangiogénico</strong>, una sustancia que <em>inhibe activamente</em> el crecimiento de
+          vasos sanguíneos en su matriz. Es una decisión del tejido, no una carencia. De ahí que se
+          esté estudiando ese factor como posible tratamiento contra el cáncer: un tumor que no
+          consigue vascularizarse no crece.</p>
+        <p><strong>La córnea hace exactamente lo mismo.</strong> Su transparencia depende de estar
+          libre de vasos, y lo consigue produciendo factores antiangiogénicos que contrarrestan a
+          los que inducen vasos. Cuando ese equilibrio se rompe —hipoxia por lentes de contacto de
+          uso prolongado, inflamación crónica, insuficiencia de células madre limbares— aparece la
+          <strong>neovascularización corneal</strong>: los vasos invaden el estroma y la córnea
+          pierde transparencia. Es el mismo mecanismo que en el cartílago, con una consecuencia que
+          verás en consulta.</p>
+      </div>
+    </details>
+
+    <details class="acorde rust">
+      <summary>Síndrome de Marfan <span class="pista">y el cristalino desplazado</span></summary>
+      <div class="cuerpo">
+        <p>Es un trastorno <strong>hereditario</strong> por un defecto en el gen de la
+          <strong>fibrilina</strong>, una de las proteínas de las fibras elásticas. El resultado es
+          que las fibras elásticas se desarrollan mal, y los tejidos que dependen de ellas quedan
+          débiles o malformados.</p>
+        <p>Tortora nombra tres estructuras afectadas con más frecuencia, y <strong>una de ellas es
+          ocular</strong>: el periostio, las paredes de las grandes arterias y
+          <strong>el ligamento que suspende el cristalino</strong>, es decir, la zónula. Cuando esa
+          zónula falla, el cristalino se desplaza —<em>ectopia lentis</em>, característicamente
+          hacia arriba y afuera—, y es uno de los signos que hace sospechar el síndrome. Las
+          personas con Marfan tienden además a ser altas y con extremidades largas.</p>
+        <p><strong>Por qué te importa como optómetra:</strong> puedes ser quien lo detecte primero.
+          Un cristalino subluxado en un paciente joven y alto obliga a descartar Marfan — y lo que
+          está en juego no es la refracción, sino un aneurisma de aorta.</p>
+      </div>
+    </details>
+
+    <details class="acorde blue">
+      <summary>Otras tres correlaciones del capítulo <span class="pista">liposucción · condroitín · ingeniería</span></summary>
+      <div class="cuerpo">
+        <p><strong>Condroitinsulfato y glucosamina.</strong> Son componentes reales de la sustancia
+          fundamental del cartílago, y por eso se usan como suplementos para intentar mantener la
+          estructura del cartílago articular y reducir el dolor. Aquí lo interesante es el
+          razonamiento: se administra el <em>material de la matriz</em> con la esperanza de que el
+          tejido lo aproveche.</p>
+        <p><strong>Liposucción.</strong> Aspiración de tejido adiposo a través de una cánula
+          conectada a una unidad de vacío, tras una incisión en la piel. Se usa para remodelar el
+          contorno corporal.</p>
+        <p><strong>Ingeniería de tejidos.</strong> Combina material sintético con células vivas
+          para fabricar tejido de reemplazo. Ya se aplica en piel y cartílago, y es la línea de la
+          que dependen los sustitutos corneales que se investigan hoy.</p>
+      </div>
+    </details>
+
+    <h3>4 · Tejido óseo · Cuadro 4.7</h3>
     <p>Matriz de <strong>sales minerales</strong> y fibras de colágeno —lo primero da dureza, lo
-      segundo evita que sea quebradizo— con osteocitos en lagunas. Sostiene, protege, permite el
-      movimiento, almacena minerales y aloja la médula ósea. Las <strong>siete paredes óseas de la
-      órbita</strong> son este tejido.</p>
+      segundo evita que sea quebradizo— con osteocitos alojados en lagunas. Se presenta de dos
+      formas: el <strong>compacto</strong>, organizado en <em>osteonas</em> o sistemas de Havers
+      —laminillas concéntricas, lagunas, osteocitos, canalículos y un conducto central—, y el
+      <strong>esponjoso</strong>, formado por columnas delgadas llamadas <em>trabéculas</em> con
+      médula ósea roja entre ellas. Sostiene, protege, almacena minerales, aloja la médula y sirve
+      de palanca para los músculos. Las <strong>siete paredes óseas de la órbita</strong> son este
+      tejido.</p>
+
+    <div class="photo-hero">
+      <img src="img/c47_oseo.png" alt="Cuadro 4.7 de Tortora: tejido óseo compacto, con osteonas, laminillas concéntricas, lagunas con osteocitos, canalículos y conducto central">
+      <div class="photo-missing">Cuadro 4.7 · imagen no disponible</div>
+      <p class="photo-caption"><strong>Cuadro 4.7 · Tejido óseo.</strong> Busca los
+        <em>canalículos</em>: son los túneles por los que los osteocitos, atrapados en matriz
+        mineralizada, se comunican y se nutren mediante uniones comunicantes. Es el mismo problema
+        del cristalino resuelto de la misma manera.</p>
+      <div class="photo-credit">Tortora &amp; Derrickson, 15.ª ed. · Cuadro 4.7</div>
+    </div>
 
     <h3>5 · Conectivo líquido</h3>
     <p>Sorprende que la sangre sea conectivo hasta que se aplica la regla: pocas células y mucha
@@ -1065,6 +1729,16 @@ table.data tr:hover td{background:var(--amber-pale)}
       <div class="col-card blue"><h5>Linfa</h5>
         <p>El líquido extracelular que circula por los vasos linfáticos. Parecido al plasma, pero
           con menos proteínas.</p></div>
+    </div>
+
+    <div class="photo-hero">
+      <img src="img/c48_sangre.png" alt="Cuadro 4.8 de Tortora: tejido sanguíneo, con plasma como matriz y los elementos formes —eritrocitos, leucocitos y plaquetas— en un frotis">
+      <div class="photo-missing">Cuadro 4.8 · imagen no disponible</div>
+      <p class="photo-caption"><strong>Cuadro 4.8 · Sangre.</strong> Los eritrocitos transportan
+        oxígeno y algo de dióxido de carbono; los leucocitos fagocitan y participan en las
+        reacciones alérgicas y la inmunidad; las plaquetas son esenciales para la coagulación. La
+        matriz —el plasma— es líquida, y por eso cuesta reconocerla como tejido conectivo.</p>
+      <div class="photo-credit">Tortora &amp; Derrickson, 15.ª ed. · Cuadro 4.8</div>
     </div>
   </div>
 
@@ -1109,6 +1783,17 @@ table.data tr:hover td{background:var(--amber-pale)}
       </tbody>
     </table>
 
+    <div class="photo-hero">
+      <img src="img/fig_4_9_membranas.png" alt="Figura 4.9 de Tortora: las membranas del cuerpo — mucosa, serosa con sus láminas parietal y visceral, cutánea y sinovial— con su localización">
+      <div class="photo-missing">Figura 4.9 · imagen no disponible</div>
+      <p class="photo-caption"><strong>Figura 4.9 · Las membranas del cuerpo.</strong>
+        Fíjate en la serosa: una sola membrana que se pliega sobre sí misma, de modo que la
+        <em>lámina parietal</em> tapiza la pared de la cavidad y la <em>visceral</em> envuelve el
+        órgano. Entre las dos queda una película de líquido seroso que hace de lubricante — por eso
+        el corazón late y el pulmón se expande sin rozar.</p>
+      <div class="photo-credit">Tortora &amp; Derrickson, 15.ª ed. · Fig. 4.9</div>
+    </div>
+
     <div class="pearl">La sinovial es la que se cae de la lista: las otras tres llevan epitelio, ella
       no. Es la pregunta de examen más repetida de esta sección.</div>
   </div>
@@ -1150,6 +1835,16 @@ table.data tr:hover td{background:var(--amber-pale)}
         <tr><td><strong>En el ojo</strong></td><td><strong>Los seis músculos extraoculares</strong> y el elevador del párpado superior. También el orbicular</td><td>—</td><td><strong>Músculo ciliar</strong> (acomodación), <strong>esfínter</strong> y <strong>dilatador del iris</strong>, músculo de Müller</td></tr>
       </tbody>
     </table>
+
+    <div class="photo-hero">
+      <img src="img/c49_musculares.png" alt="Cuadro 4.9 de Tortora: los tres tejidos musculares —esquelético estriado con núcleos periféricos, cardíaco estriado con discos intercalares, y liso fusiforme sin estrías— con microfotografías y esquemas">
+      <div class="photo-missing">Cuadro 4.9 · imagen no disponible</div>
+      <p class="photo-caption"><strong>Cuadro 4.9 · Los tres tejidos musculares.</strong>
+        Tres cosas que mirar en la microfotografía: si hay <em>estrías</em> transversales, dónde
+        están los <em>núcleos</em> y si se ven <em>discos intercalares</em>. Con esas tres
+        preguntas se identifican sin dudar.</p>
+      <div class="photo-credit">Tortora &amp; Derrickson, 15.ª ed. · Cuadro 4.9</div>
+    </div>
 
     <div class="pearl">Los discos intercalares del músculo cardíaco llevan uniones comunicantes: es
       la misma unión que nutre el cristalino, aquí usada para que todo el corazón se contraiga a la
@@ -1245,6 +1940,44 @@ table.data tr:hover td{background:var(--amber-pale)}
       bien, el conectivo bastante, el muscular poco y el nervioso, en el sistema nervioso central,
       prácticamente nada. Y en todos los casos <strong>la buena nutrición y la irrigación</strong>
       son determinantes.</p>
+
+    <h3>Quién repara: parénquima o estroma</h3>
+    <p>Detrás de esos dos desenlaces hay una sola pregunta, y conviene nombrarla bien porque es el
+      concepto que organiza todo el apartado. Cualquier órgano tiene dos partes:</p>
+    <div class="two-col">
+      <div class="col-card teal"><h5>Parénquima</h5>
+        <p>Las células que hacen <strong>el trabajo propio</strong> del órgano: las del epitelio
+          corneal, las neuronas de la retina, los hepatocitos del hígado.</p></div>
+      <div class="col-card rust"><h5>Estroma</h5>
+        <p>El tejido conectivo de <strong>sostén</strong>, con sus fibroblastos, que le da
+          estructura y lo irriga.</p></div>
+    </div>
+    <p>Si la reparación la llevan a cabo las <strong>células parenquimatosas</strong>, hay
+      regeneración y la reconstrucción puede ser casi perfecta. Si en cambio quienes se activan son
+      los <strong>fibroblastos del estroma</strong>, estos sintetizan colágeno y el tejido dañado
+      queda sustituido por tejido conectivo — es decir, por cicatriz. <strong>El resultado no
+      depende de la gravedad de la herida, sino de qué población celular responde primero.</strong>
+      En la córnea eso se traduce directamente: si responden las células madre limbares, no queda
+      marca; si responden los queratocitos, queda leucoma.</p>
+
+    <details class="acorde purple">
+      <summary>Adherencias <span class="pista">cuando la cicatriz pega lo que no debe</span></summary>
+      <div class="cuerpo">
+        <p>El tejido cicatricial puede formar <strong>adherencias</strong>
+          (<em>adhaerentia</em> = unirse a): uniones anormales entre tejidos que deberían quedar
+          separados. Se forman sobre todo en el abdomen —donde se llaman <em>bridas</em>—, alrededor
+          de un foco de inflamación como un apéndice inflamado, y con frecuencia después de una
+          operación.</p>
+        <p>No siempre dan síntomas, pero pueden restar elasticidad al tejido, provocar una
+          obstrucción intestinal o complicar una cirugía posterior. Es la otra cara de la
+          reparación: el mismo mecanismo que cierra una herida puede, si se pasa, pegar dos
+          estructuras que necesitaban deslizarse una sobre otra.</p>
+        <p><strong>En el ojo</strong> ocurre lo mismo con otro nombre: el <em>simbléfaron</em> es la
+          adherencia entre la conjuntiva palpebral y la bulbar tras una quemadura química o una
+          inflamación grave, y limita el movimiento del globo exactamente igual que una brida limita
+          el asa intestinal.</p>
+      </div>
+    </details>
 
     <h3>Envejecimiento</h3>
     <p>Los tejidos jóvenes curan más rápido y dejan menos cicatriz —de hecho, la cirugía fetal no
@@ -1500,6 +2233,13 @@ table.data tr:hover td{background:var(--amber-pale)}
 
 </div><!-- /container -->
 
+<!-- Visor de imagen ampliada: las microfotografías se leen mal en pequeño -->
+<div class="lightbox" id="lightbox" role="dialog" aria-label="Imagen ampliada">
+  <button class="lb-close" aria-label="Cerrar">✕</button>
+  <img src="" alt="">
+  <div class="lb-caption"></div>
+</div>
+
 <script>
 function showTab(id,btn){
   document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('active'));
@@ -1529,6 +2269,26 @@ document.querySelectorAll('.check-question').forEach(block=>{
 document.querySelectorAll('.flip-card').forEach(card=>{
   card.addEventListener('click',()=>card.classList.toggle('flipped'));
 });
+
+/* Visor ampliado. Si una imagen no carga, se marca .broken: el CSS la oculta
+   y muestra el aviso de «no disponible» en su lugar, así que la clase nunca
+   se ve con un icono de imagen rota. */
+(function(){
+  const lb=document.getElementById('lightbox');
+  if(!lb)return;
+  const lbImg=lb.querySelector('img'), lbCap=lb.querySelector('.lb-caption');
+  document.querySelectorAll('.photo-card img,.photo-hero img').forEach(img=>{
+    img.addEventListener('error',()=>img.classList.add('broken'));
+    if(img.complete&&img.naturalWidth===0)img.classList.add('broken');
+    img.addEventListener('click',()=>{
+      if(img.classList.contains('broken'))return;
+      lbImg.src=img.src;lbImg.alt=img.alt;lbCap.textContent=img.alt||'';lb.classList.add('open');
+    });
+  });
+  function cerrar(){lb.classList.remove('open');lbImg.src='';}
+  lb.addEventListener('click',e=>{if(e.target!==lbImg)cerrar();});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')cerrar();});
+})();
 </script>
 
 </body>

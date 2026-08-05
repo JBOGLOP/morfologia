@@ -210,7 +210,7 @@
   </div>
 </header>
 
-<div class="barra-fija">
+<div class="barra-fija" id="barraFija" style="display:none">
   <div class="wrap">
     <span class="marcador" id="mk-resp">Respondidas: 0</span>
     <div class="progreso"><span id="prog"></span></div>
@@ -221,14 +221,46 @@
 
 <div class="wrap">
 
-  <div class="instrucciones">
-    <h2>Instrucciones</h2>
-    Resuelve cada ítem y pulsa <strong>Comprobar</strong> para recibir retroalimentación inmediata con la explicación del concepto. La barra superior registra tu avance y tus aciertos. En las preguntas de desarrollo escribe tu respuesta y luego compárala con la <strong>respuesta modelo</strong>.
-    <ul>
-      <li><strong>Bloque 1:</strong> opción múltiple &nbsp;·&nbsp; <strong>Bloque 2:</strong> verdadero/falso &nbsp;·&nbsp; <strong>Bloque 3:</strong> completar</li>
-      <li><strong>Bloque 4:</strong> emparejamiento orgánulo–función &nbsp;·&nbsp; <strong>Bloque 5:</strong> ordenar la síntesis proteica &nbsp;·&nbsp; <strong>Bloque 6:</strong> desarrollo</li>
-    </ul>
+  <!-- ═══ PORTADA · lo único visible antes de ingresar ═══ -->
+  <div id="portada">
+    <div class="instrucciones">
+      <h2>Antes de empezar</h2>
+      Este es el taller del <strong>nivel tisular</strong>, correspondiente al capítulo 4 de
+      Tortora. Para verlo tienes que <strong>ingresar arriba</strong> con tu nombre y tu código
+      estudiantil: el taller no se muestra hasta entonces, y así queda registrado tu trabajo.
+      <ul>
+        <li><strong>Se trabaja en pareja.</strong> Pónganse de acuerdo en quién entrega: basta una
+          sola entrega y la nota vale para los dos. Si entregan las dos, quedan dos versiones
+          distintas.</li>
+        <li><strong>Son 23 ítems autocalificables</strong> —opción múltiple, verdadero/falso,
+          completar, emparejamiento y ordenar— más <strong>4 preguntas de desarrollo</strong>.</li>
+        <li><strong>Las cuatro de desarrollo pesan el 40 %</strong> de la nota y se califican por
+          las ideas que expliques, no por la extensión. Vale más una respuesta corta que diga
+          <em>por qué</em>, que una lista de términos sueltos.</li>
+        <li><strong>Tu avance se guarda solo</strong>, pero al terminar hay que pulsar
+          <strong>«Entregar al docente»</strong>. Es el paso que más se olvida: sin él, el trabajo
+          queda guardado pero no me llega.</li>
+      </ul>
+    </div>
+
+    <div class="instrucciones" style="border-left-color:var(--azul)">
+      <h2>Cómo funciona</h2>
+      Cada ítem tiene un botón <strong>Comprobar</strong> que da retroalimentación inmediata con la
+      explicación del concepto. En las de desarrollo escribes tu respuesta y luego la comparas con
+      la <strong>respuesta modelo</strong>. La barra superior registra tu avance y tus aciertos.
+      <ul>
+        <li><strong>Bloque 1:</strong> opción múltiple &nbsp;·&nbsp;
+            <strong>Bloque 2:</strong> verdadero/falso &nbsp;·&nbsp;
+            <strong>Bloque 3:</strong> completar</li>
+        <li><strong>Bloque 4:</strong> emparejar tejidos con su localización &nbsp;·&nbsp;
+            <strong>Bloque 5:</strong> ordenar las capas de la córnea &nbsp;·&nbsp;
+            <strong>Bloque 6:</strong> desarrollo</li>
+      </ul>
+    </div>
   </div>
+
+  <!-- ═══ TALLER · se monta al ingresar ═══ -->
+  <div id="zonaTaller" style="display:none">
 
   <div id="avisoRecuperar"></div>
 
@@ -351,6 +383,8 @@
       <button class="btn ghost" onclick="reiniciar()">Reiniciar</button>
     </div>
   </div>
+
+  </div><!-- /zonaTaller -->
 
   <div id="modalConf" role="dialog" aria-modal="true" aria-labelledby="mcTit">
     <div class="caja">
@@ -1124,6 +1158,7 @@ async function ingresar(){
     }catch(e){}
 
     ingresado = alumno;
+    mostrarTaller();          // hasta aquí, el taller no existía en el DOM
     $id('cajaIngreso').style.display = "none";
     $id('cajaIdentificado').style.display = "";
     $id('quienSoy').textContent = alumno;
@@ -1144,6 +1179,7 @@ async function ingresar(){
 
 function salirIngreso(){
   ingresado = "";
+  ocultarTaller();          // el taller vuelve a esconderse al salir
   $id('cajaIngreso').style.display = "";
   $id('cajaIdentificado').style.display = "none";
   $id('btnIngresar').disabled = false;
@@ -1218,19 +1254,59 @@ async function entregarDefinitivo(){
   }
 }
 
-/* ---- Init ---- */
-(function init(){
-  const app=document.getElementById('app');
+/* ---- Montaje del taller ----
+   Las preguntas NO se pintan al cargar la página: se montan solo cuando el
+   servidor acepta el ingreso. Antes de eso, el DOM no contiene ni un ítem, así
+   que abrir el enlace sin identificarse no permite resolver nada ni deja
+   trabajo sin registrar.
+
+   Aviso honesto: esto no es un cerrojo. El banco de preguntas sigue siendo un
+   array de JavaScript dentro de este archivo, y quien mire el código fuente lo
+   verá. Sube el listón, no lo cierra. El cierre de verdad es CONFIG.CERRADO en
+   el servidor, o servir el banco desde el backend tras validar el ingreso. */
+let montado = false;
+function montarTaller(){
+  if(montado) return;
+  const app = document.getElementById('app');
   renderMultiple(app);
   renderVF(app);
   renderCompletar(app);
   renderMatch(app);
   renderOrden(app);
   renderAbiertas(app);
-  document.getElementById('chip-total').textContent=totalCalificables+" ítems calificables + 4 de desarrollo";
-  actualizarBarra();
-  cargarRoster();
+  document.getElementById('chip-total').textContent =
+    totalCalificables + " ítems calificables + 4 de desarrollo";
   BLOQUES.forEach(b => pintarEstadoBloque(b.clave));
+
+  // Las respuestas de desarrollo se respaldan mientras se escriben. Se conecta
+  // aquí, y no en init, porque antes de montar no existen los textarea.
+  document.querySelectorAll('.q.abierta textarea').forEach(t=>{
+    let temporizador;
+    t.addEventListener('input', ()=>{
+      clearTimeout(temporizador);
+      temporizador = setTimeout(()=>{ guardarLocal(); sucio = true; }, 800);
+    });
+  });
+
+  montado = true;
+  actualizarBarra();
+}
+
+function mostrarTaller(){
+  montarTaller();
+  $id('portada').style.display   = "none";
+  $id('zonaTaller').style.display = "";
+  $id('barraFija').style.display  = "";
+}
+function ocultarTaller(){
+  $id('portada').style.display   = "";
+  $id('zonaTaller').style.display = "none";
+  $id('barraFija').style.display  = "none";
+}
+
+/* ---- Init ---- */
+(function init(){
+  cargarRoster();
 
   // Ingreso por estudiante
   $id('nombre').addEventListener('change', revisarIngreso);
