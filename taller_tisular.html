@@ -797,7 +797,7 @@ function renderCompletar(host){
 /* ---- Render Bloque 4: emparejamiento ---- */
 function renderMatch(host){
   const sec=document.createElement('section'); sec.className='bloque';
-  sec.innerHTML='<h2><span class="n">4</span>Emparejamiento: orgánulo → función</h2><p class="desc">Selecciona la letra de la función que corresponde a cada orgánulo.</p>';
+  sec.innerHTML='<h2><span class="n">4</span>Emparejamiento: tejido → localización</h2><p class="desc">Selecciona la letra de la descripción que corresponde a cada tejido.</p>';
   totalCalificables++;
   const id='match';
   const q=document.createElement('div'); q.className='q';
@@ -843,20 +843,29 @@ function renderMatch(host){
 /* ---- Render Bloque 5: ordenar ---- */
 function renderOrden(host){
   const sec=document.createElement('section'); sec.className='bloque';
-  sec.innerHTML='<h2><span class="n">5</span>Ordena la síntesis de proteínas</h2><p class="desc">Asigna a cada paso el número de orden correcto (del 1 al 6), desde la transcripción hasta la proteína terminada.</p>';
+  const nPasos=ORDEN.pasos.length;
+  sec.innerHTML='<h2><span class="n">5</span>Ordena la secuencia</h2><p class="desc">Asigna a cada elemento su número de orden, del 1 al '+nPasos+'.</p>';
   totalCalificables++;
   const id='orden';
   const q=document.createElement('div'); q.className='q';
-  // presentar los pasos en orden barajado fijo
-  const barajado=[3,5,1,6,2,4]; // índices+1 de ORDEN.pasos mostrados
-  const mapa={1:2,2:4,3:0,4:5,5:1,6:3}; // no usado; construimos abajo
+
+  /* Orden de presentación barajado pero DETERMINISTA: parte la lista por la
+     mitad e intercala. Es una permutación válida para cualquier longitud y no
+     deja ningún elemento en su posición natural.
+     (Antes había una lista de seis índices escrita a mano, heredada del taller
+     celular; con cinco pasos leía ORDEN.pasos[5] y reventaba el ingreso.) */
+  const mitad=Math.ceil(nPasos/2);
+  const displayOrder=[];
+  for(let i=0;i<mitad;i++){
+    if(i+mitad<nPasos) displayOrder.push(i+mitad);
+    displayOrder.push(i);
+  }
+
   let lis='';
-  // Mostramos en un orden desordenado explícito
-  const displayOrder=[2,4,0,5,1,3]; // índices del array pasos
-  displayOrder.forEach((idx,k)=>{
+  displayOrder.forEach(idx=>{
     const p=ORDEN.pasos[idx];
     let opts='<option value="">#</option>';
-    for(let n=1;n<=6;n++) opts+=`<option value="${n}">${n}</option>`;
+    for(let n=1;n<=nPasos;n++) opts+=`<option value="${n}">${n}</option>`;
     lis+=`<li><select id="or${idx}" data-correcto="${p.correcto}">${opts}</select><span>${p.texto}</span></li>`;
   });
   q.innerHTML=`<span class="tag">${ORDEN.tag}</span>
