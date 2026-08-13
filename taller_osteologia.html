@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Taller rápido · Osteología general · Morfología General 2026-II</title>
+<style>
+:root{
+  --ink:#1a2a35; --text:#2c3e4f; --gris:#5a6b7a; --muted:#8a9aa8;
+  --paper:#f8f3e8; --paper2:#f0e8d4; --blanco:#fdfaf2;
+  --linea:#d4c8a8; --linea2:#e5dbc0;
+  --amber:#b8860b; --amber-dk:#8b6914; --amber-pale:#f5e9c8;
+  --teal:#2a7a6e; --teal-dk:#1f5d54; --azul:#1976a1;
+  --verde:#2e7d32; --verde-bg:#e8f5e9; --rojo:#b5413b; --rojo-bg:#fce8e6;
+  --sombra:0 2px 10px rgba(26,42,53,.07);
+}
+@media (prefers-color-scheme:dark){
+  :root{ --ink:#e8eef2; --text:#cdd8e0; --gris:#9fb0bd; --muted:#7d8d9a;
+    --paper:#12191e; --paper2:#1a232a; --blanco:#161f26; --linea:#31414c; --linea2:#26333c;
+    --amber:#d9a72e; --amber-dk:#e8bf5a; --amber-pale:#2b2415;
+    --teal:#5fbdad; --teal-dk:#7fd0c1; --azul:#5aa9cf;
+    --verde:#6fbf73; --verde-bg:#16281a; --rojo:#e0776f; --rojo-bg:#2b1614;
+    --sombra:0 2px 10px rgba(0,0,0,.4); }
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--paper);color:var(--text);
+  font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+  font-size:16.5px;line-height:1.6;-webkit-text-size-adjust:100%}
+.mono{font-family:ui-monospace,"SFMono-Regular",Consolas,monospace}
+.wrap{max-width:820px;margin:0 auto;padding:0 20px}
+
+header.hero{background:linear-gradient(160deg,#1f5d54,#2a7a6e 60%,#8b6914 200%);
+  color:#f6f2e6;padding:26px 0 22px;border-bottom:3px solid var(--amber)}
+@media (prefers-color-scheme:dark){header.hero{background:linear-gradient(160deg,#0e2a27,#17403a 60%,#2f2a14 200%)}}
+.eyebrow{font-family:ui-monospace,Consolas,monospace;font-size:.7rem;letter-spacing:.2em;
+  text-transform:uppercase;opacity:.85;margin-bottom:.3rem}
+header.hero h1{font-size:clamp(1.35rem,3.4vw,1.9rem);font-weight:700}
+header.hero .sub{opacity:.9;font-size:.95rem;margin-top:.2rem}
+.meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.chip{background:rgba(255,255,255,.16);border-radius:20px;padding:4px 12px;
+  font-family:ui-monospace,Consolas,monospace;font-size:.72rem;letter-spacing:.06em}
+
+.caja{background:rgba(255,255,255,.14);border-radius:10px;padding:14px 16px;margin-top:14px;
+  display:flex;gap:12px;flex-wrap:wrap;align-items:end}
+.caja label{font-size:.8rem;display:flex;flex-direction:column;gap:4px;flex:1;min-width:170px}
+.caja select,.caja input{font-family:inherit;font-size:.95rem;padding:8px 10px;border-radius:7px;
+  border:1px solid rgba(255,255,255,.4);background:rgba(255,255,255,.92);color:#1a2a35}
+.err{margin:.6rem 0 0;font-size:.88rem;color:#ffd9d4}
+
+.barra{position:sticky;top:0;z-index:30;background:var(--paper);
+  border-bottom:1px solid var(--linea);padding:9px 0}
+.barra .wrap{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.marca{font-family:ui-monospace,Consolas,monospace;font-size:.76rem;color:var(--gris)}
+.prog{flex:1;min-width:110px;height:7px;background:var(--paper2);border-radius:4px;overflow:hidden}
+.prog span{display:block;height:100%;background:var(--teal);width:0;transition:width .3s}
+
+.btn{font-family:ui-monospace,Consolas,monospace;font-size:.76rem;letter-spacing:.06em;
+  padding:9px 16px;border-radius:7px;border:1px solid var(--teal);background:var(--teal);
+  color:#fff;cursor:pointer;transition:filter .15s}
+.btn:hover{filter:brightness(1.1)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.ghost{background:transparent;color:var(--teal)}
+.btn.small{padding:6px 12px;font-size:.72rem}
+
+.instr{background:var(--blanco);border-left:5px solid var(--amber);border-radius:0 10px 10px 0;
+  padding:16px 20px;margin:20px 0;box-shadow:var(--sombra)}
+.instr h2{font-size:1.05rem;color:var(--ink);margin-bottom:.4rem}
+.instr ul{list-style:none;margin-top:.6rem}
+.instr li{padding-left:16px;position:relative;margin-bottom:.35rem;font-size:.93rem}
+.instr li::before{content:"·";position:absolute;left:5px;color:var(--amber);font-weight:700}
+
+section.bloque{background:var(--blanco);border:1px solid var(--linea2);border-radius:12px;
+  padding:20px 22px;margin:18px 0;box-shadow:var(--sombra)}
+.bloque > h2{font-size:1.15rem;color:var(--teal-dk);display:flex;align-items:center;gap:10px;margin-bottom:3px}
+.bloque > h2 .n{background:var(--teal);color:#fff;width:28px;height:28px;border-radius:7px;
+  display:grid;place-items:center;font-family:ui-monospace,Consolas,monospace;font-size:.85rem}
+.bloque > p.desc{color:var(--gris);font-size:.88rem;margin-bottom:14px}
+
+.q{border-top:1px solid var(--linea2);padding:16px 0}
+.q:first-of-type{border-top:0}
+.tag{display:inline-block;font-family:ui-monospace,Consolas,monospace;font-size:.64rem;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--amber-dk);
+  background:var(--amber-pale);padding:2px 8px;border-radius:12px;margin-bottom:7px}
+.enun{color:var(--ink);font-weight:600;margin-bottom:10px;line-height:1.5}
+.ops{list-style:none}
+.ops li{border:1px solid var(--linea2);border-radius:8px;padding:9px 13px;margin-bottom:6px;
+  cursor:pointer;display:flex;gap:10px;align-items:flex-start;transition:background .12s,border-color .12s}
+.ops li:hover{background:var(--paper2)}
+.ops li .let{font-family:ui-monospace,Consolas,monospace;font-size:.78rem;color:var(--amber-dk);
+  font-weight:600;flex:0 0 auto;min-width:1.1em}
+.ops li.sel{border-color:var(--teal);background:var(--paper2)}
+.ops li.ok{border-color:var(--verde);background:var(--verde-bg)}
+.ops li.no{border-color:var(--rojo);background:var(--rojo-bg)}
+.ops li.era{border-color:var(--verde);border-style:dashed}
+.ops.bloqueada li{cursor:default}
+.ops.bloqueada li:hover{background:inherit}
+.ops.bloqueada li.sel:hover{background:var(--paper2)}
+
+.acc{margin-top:10px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.fb{display:none;margin-top:11px;padding:12px 15px;border-radius:8px;font-size:.9rem;line-height:1.55}
+.fb.show{display:block}
+.fb.bien{background:var(--verde-bg);border-left:4px solid var(--verde)}
+.fb.mal{background:var(--rojo-bg);border-left:4px solid var(--rojo)}
+
+.final{background:var(--blanco);border:2px solid var(--amber);border-radius:12px;
+  padding:24px;margin:24px 0;text-align:center;box-shadow:var(--sombra)}
+.final h2{color:var(--ink);font-size:1.2rem}
+.puntaje{font-family:ui-monospace,Consolas,monospace;font-size:2.4rem;color:var(--teal-dk);
+  font-weight:700;margin:10px 0 4px}
+.final .msg{color:var(--gris);font-size:.92rem;max-width:52ch;margin:0 auto 16px}
+.acciones{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+
+#modal{display:none;position:fixed;inset:0;background:rgba(26,42,53,.75);z-index:90;
+  align-items:center;justify-content:center;padding:20px}
+#modal.open{display:flex}
+#modal .m{background:var(--blanco);border-radius:12px;padding:24px;max-width:440px;width:100%}
+#modal h3{color:var(--ink);margin-bottom:.5rem}
+#modal .res{background:var(--paper2);border-radius:8px;padding:12px 14px;margin:14px 0;
+  font-family:ui-monospace,Consolas,monospace;font-size:.84rem;line-height:1.7}
+.aviso{font-size:.86rem;color:var(--rojo)}
+footer{border-top:2px solid var(--linea);margin-top:30px;padding:18px 0 30px;
+  color:var(--muted);font-size:.82rem;text-align:center}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Clase 4 · Morfología General 2026-II</div>
+    <h1>Taller rápido · Osteología general</h1>
+    <p class="sub">20 preguntas, todas de respuesta cerrada. Se califica solo.</p>
+    <div class="meta">
+      <span class="chip">20 ítems</span>
+      <span class="chip">3 bloques</span>
+      <span class="chip">Autocalificable</span>
+      <span class="chip" id="chipEstado">Sin ingresar</span>
+    </div>
+
+    <div class="caja" id="cajaIngreso">
+      <label>Nombre del estudiante
+        <select id="nombre"><option value="">Cargando listado…</option></select>
+      </label>
+      <label style="flex:0 0 150px">Código estudiantil
+        <input type="text" id="codigo" inputmode="numeric" placeholder="Tu código" autocomplete="off">
+      </label>
+      <button class="btn" id="btnEntrar" disabled style="background:#fff;color:#1f5d54;border-color:#fff">Ingresar</button>
+    </div>
+    <div class="caja" id="cajaDentro" style="display:none">
+      <div style="flex:1"><b id="quien"></b><br>
+        <span style="font-size:.82rem;opacity:.85">Tu avance se guarda solo.</span></div>
+      <button class="btn ghost small" id="btnSalir" style="color:#fff;border-color:rgba(255,255,255,.5)">No soy yo</button>
+    </div>
+    <p class="err" id="errIngreso"></p>
+  </div>
+</header>
+
+<div class="barra" id="barra" style="display:none">
+  <div class="wrap">
+    <span class="marca" id="mkResp">Respondidas: 0 / 20</span>
+    <div class="prog"><span id="progBar"></span></div>
+    <span class="marca" id="mkAc">Aciertos: <b>0</b></span>
+    <span class="marca" id="nube">·</span>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div id="portada">
+    <div class="instr">
+      <h2>Antes de empezar</h2>
+      <p>Este es el taller de <strong>osteología general</strong>. Para verlo tienes que
+        <strong>ingresar arriba</strong> con tu nombre y tu código: el taller no se muestra hasta
+        entonces, y así queda registrado tu trabajo.</p>
+      <ul>
+        <li><strong>Son 20 preguntas</strong> y todas se califican solas. No hay preguntas de
+          desarrollo.</li>
+        <li><strong>Se trabaja en grupo.</strong> Pónganse de acuerdo en quién entrega: una sola
+          entrega y la nota vale para todo el grupo.</li>
+        <li>Cada pregunta tiene un botón <strong>Comprobar</strong> que da la respuesta y la
+          explicación al momento.</li>
+        <li><strong>Al terminar hay que pulsar «Entregar al docente».</strong> Es el paso que más
+          se olvida: sin él, el trabajo se guarda pero no me llega.</li>
+      </ul>
+    </div>
+    <div class="instr" style="border-left-color:var(--azul)">
+      <h2>Los tres bloques</h2>
+      <ul>
+        <li><strong>Bloque 1 · Opción múltiple</strong> — diez preguntas, una sola respuesta
+          correcta entre cinco.</li>
+        <li><strong>Bloque 2 · Verdadero o falso</strong> — cinco enunciados.</li>
+        <li><strong>Bloque 3 · Selección múltiple</strong> — cinco preguntas con
+          <em>varias</em> respuestas correctas. Solo cuenta si marcas todas las correctas y ninguna
+          incorrecta.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="zona" style="display:none">
+    <div id="app"></div>
+
+    <div class="final">
+      <h2>Resultado del taller</h2>
+      <div class="puntaje" id="score">0 / 20</div>
+      <div class="msg" id="msg">Comprueba las veinte preguntas para ver tu puntaje.</div>
+      <div class="acciones">
+        <button class="btn" id="btnCalificar">Calificar todo</button>
+        <button class="btn" id="btnEnviar">Entregar al docente</button>
+        <button class="btn ghost" onclick="window.print()">Imprimir</button>
+        <button class="btn ghost" id="btnReiniciar">Reiniciar</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="modal" role="dialog" aria-modal="true">
+    <div class="m">
+      <h3>Confirmar entrega</h3>
+      <p style="font-size:.9rem;color:var(--gris)">Esta es la versión que queda registrada.</p>
+      <div class="res" id="resumen"></div>
+      <p class="aviso" id="avisoModal"></p>
+      <div class="acciones">
+        <button class="btn ghost" id="btnVolver">Volver al taller</button>
+        <button class="btn" id="btnConfirmar">Sí, entregar</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  Morfología General 2026-II · Universidad de La Salle · Optometría<br>
+  Contenido de Tortora &amp; Derrickson 15.ª ed., caps. 6, 7 y 9, y Moore.
+</footer>
+
+<script>
+/* ══════════════════════════════════════════════════════════════
+   CONFIGURACIÓN
+   ══════════════════════════════════════════════════════════════ */
+const CONFIG = {
+  TOKEN   : "TALLER_OSE_MORF_2026II_2d9a51",
+  ENDPOINT: "https://script.google.com/macros/s/AKfycbxx1_oPyqVgq4lU8jbcaZn8_6hsjWrqW7tWX0xy9YbOQGyIJZDck5hVuSRdds7gwQ-C/exec",
+  LS: "taller_osteologia_2026II::",
+  AUTOGUARDADO_MS: 90000,
+};
+
+/* ══════════════════════════════════════════════════════════════
+   BANCO · 20 preguntas, todas cerradas
+
+   Ninguna repite las trece del autodiagnóstico de la clase. Las que
+   sí lo hacían —las seis de opción múltiple— se sustituyeron por
+   completo el 13 de agosto. Antes de añadir una pregunta aquí,
+   contrástala con los data-question de clase_osteologia.html.
+   ══════════════════════════════════════════════════════════════ */
+const MULTIPLE = [
+  { q:"Un hueso sumergido en ácido se puede anudar como una goma; otro al que se le quema la parte orgánica se desmenuza entre los dedos. ¿Qué demuestran los dos experimentos?", tag:"Matriz ósea",
+    op:["Que el hueso está muerto y solo importa su forma",
+        "Que las sales minerales aportan la dureza y el colágeno la flexibilidad: la resistencia está en la combinación de los dos",
+        "Que el colágeno es el único componente que importa",
+        "Que el hueso se comporta igual que el cartílago",
+        "Que la matriz ósea es casi toda agua"],
+    correcta:1,
+    fb:"El ácido disuelve la <b>hidroxiapatita</b> y queda el colágeno: flexible. El fuego quema el colágeno y quedan las sales: duras pero quebradizas como la tiza. Ninguno de los dos por separado sirve — es la lógica del hormigón armado, cemento a compresión y acero a tracción." },
+
+  { q:"En el hueso <b>compacto</b>, ¿qué hay dentro del conducto central de una osteona?", tag:"Histología ósea",
+    op:["Médula ósea roja",
+        "Líquido sinovial",
+        "Cartílago hialino de reserva",
+        "Vasos sanguíneos y nervios",
+        "Osteoclastos en reposo"],
+    correcta:3,
+    fb:"La osteona o sistema de Havers son laminillas concéntricas alrededor de un <b>conducto central con vasos y nervios</b>. Es la forma que tiene el compacto de llevar irrigación a un tejido macizo. La médula roja (opción A) está en los espacios del esponjoso, que no tiene osteonas." },
+
+  { q:"¿Qué huesos se forman por osificación <b>intramembranosa</b>, es decir, directamente en el mesénquima y sin molde de cartílago?", tag:"Osificación",
+    op:["Los huesos planos del cráneo, la mandíbula y la clavícula",
+        "El fémur, la tibia y el húmero",
+        "Los huesos del carpo y del tarso",
+        "Las vértebras y las costillas",
+        "Todos los huesos del cuerpo, sin excepción"],
+    correcta:0,
+    fb:"La intramembranosa es la vía directa y da los huesos planos del cráneo, la mandíbula y la clavícula. Todos los demás —y en particular los largos, opción B— se forman por vía <b>endocondral</b>, sobre una maqueta de cartílago hialino que el hueso va sustituyendo." },
+
+  { q:"Un hueso largo aumenta de grosor durante toda la vida sin volverse macizo. ¿Cómo lo consigue?", tag:"Crecimiento óseo",
+    op:["La placa epifisaria deposita hueso hacia los lados",
+        "El endostio fabrica hueso nuevo hacia dentro",
+        "Los osteoblastos del periostio depositan hueso por fuera mientras los osteoclastos agrandan la cavidad medular por dentro",
+        "El cartílago articular se osifica poco a poco",
+        "No aumenta de grosor: solo crece en longitud"],
+    correcta:2,
+    fb:"Es el <b>crecimiento por aposición</b>, y son dos procesos simultáneos y opuestos: se añade por fuera y se retira por dentro. Por eso la pared del tubo se mantiene mientras el diámetro aumenta. La placa epifisaria (opción A) solo da longitud, y además se cierra; la aposición no se detiene nunca." },
+
+  { q:"Baja el calcio en la sangre. ¿Qué hace la <b>paratohormona</b>?", tag:"Homeostasis del calcio",
+    op:["Frena a los osteoclastos, para que el calcio se quede en el hueso",
+        "Activa a los osteoclastos: saca calcio del hueso y lo sube en sangre",
+        "Bloquea la absorción intestinal de calcio",
+        "No interviene: de eso se encarga solo la vitamina D",
+        "Convierte los osteocitos en osteoblastos"],
+    correcta:1,
+    fb:"La PTH <b>sube</b> el calcio en sangre a costa del hueso; la <b>calcitonina</b> hace lo contrario (opción A). Detrás hay una jerarquía de prioridades: el cuerpo prefiere debilitar el esqueleto antes que dejar caer el calcio circulante, porque de él dependen la contracción muscular, la coagulación y la transmisión nerviosa." },
+
+  { q:"¿En qué se diferencian la <b>osteoporosis</b> y la <b>osteomalacia</b>?", tag:"Patología ósea",
+    op:["Son dos nombres de la misma enfermedad",
+        "La osteoporosis es de la infancia y la osteomalacia del adulto",
+        "En la osteoporosis falta matriz —hay menos hueso, pero normal—; en la osteomalacia hay matriz pero sin mineralizar",
+        "La osteoporosis afecta solo al cráneo",
+        "En la osteomalacia sobran osteoclastos y en la osteoporosis faltan"],
+    correcta:2,
+    fb:"Son los dos problemas opuestos de la matriz. En la <b>osteoporosis</b> la resorción supera a la formación: menos hueso, con composición normal. En la <b>osteomalacia</b> falta vitamina D y la matriz se fabrica pero no se mineraliza: hay hueso, pero blando. En el niño, la misma falta se llama raquitismo." },
+
+  { q:"Girar la cabeza para decir «no» ocurre en la articulación atloaxoidea. ¿Qué tipo de sinovial es y cuántos ejes tiene?", tag:"Tipos de sinovial",
+    op:["Artrodia, no axial",
+        "Gínglimo, uniaxial",
+        "Trocoide, uniaxial",
+        "Condílea, biaxial",
+        "Enartrosis, triaxial"],
+    correcta:2,
+    fb:"Es una <b>trocoide</b> o articulación en pivote: un hueso gira sobre su eje longitudinal dentro de un anillo. Uniaxial, como el gínglimo, pero con un movimiento distinto — el gínglimo (opción B) flexiona y extiende, la trocoide rota. La otra trocoide del cuerpo es la radiocubital proximal, la de la supinación." },
+
+  { q:"La <b>circunducción</b> aparece en la lista de movimientos, pero tiene algo distinto. ¿Qué?", tag:"Movimientos",
+    op:["Que solo ocurre en articulaciones uniaxiales",
+        "Que no es un movimiento propio, sino la secuencia de flexión, abducción, extensión y aducción encadenadas",
+        "Que es sinónimo de rotación",
+        "Que solo la hace el pulgar",
+        "Que ocurre en el plano transversal"],
+    correcta:1,
+    fb:"No tiene eje propio: es la <i>combinación</i> de los movimientos angulares en sucesión, y por eso el extremo distal dibuja un cono. Conviene no confundirla con la <b>rotación</b> (opción C), que sí es un movimiento propio: el hueso gira sobre su eje longitudinal sin desplazarse." },
+
+  { q:"El ojo gira sobre los tres <b>ejes de Fick</b>. La <i>intorsión</i> y la <i>extorsión</i> ocurren alrededor de:", tag:"Movimientos oculares",
+    op:["El eje vertical",
+        "El eje horizontal transversal",
+        "El eje anteroposterior",
+        "Ningún eje: no son giros",
+        "Los tres a la vez"],
+    correcta:2,
+    fb:"Alrededor del <b>eje anteroposterior</b>: el ojo rota sobre sí mismo. Es el único movimiento ocular sin equivalente evidente en el resto del cuerpo. Sobre el eje vertical van la aducción y la abducción, y sobre el horizontal transversal la elevación y la depresión. Tres ejes, tres pares: el globo es triaxial." },
+
+  { q:"Tras una fractura del piso de la órbita, un paciente no puede elevar el ojo. Se le aplica anestesia tópica y se intenta moverlo <b>pasivamente</b> con una pinza: el ojo no cede. ¿Qué indica esa prueba?", tag:"Aplicación clínica",
+    op:["Que el nervio motor ocular común está paralizado",
+        "Que el músculo recto inferior está debilitado pero íntegro",
+        "Que hay una restricción mecánica: algo sujeta el ojo, probablemente el recto inferior atrapado en el trazo de fractura",
+        "Que la prueba no sirve para nada en la órbita",
+        "Que el globo ocular se ha luxado"],
+    correcta:2,
+    fb:"Es la <b>prueba de ducción forzada</b>, y es semiología articular aplicada al ojo: se compara la movilidad activa con la pasiva. Si el ojo no se deja mover, la causa es una <b>traba mecánica</b>; si se mueve sin resistencia y aun así el paciente no puede elevarlo, el problema está en el nervio o en el músculo (opciones A y B)." },
+];
+
+const VF = [
+  { q:"El periostio recubre todo el hueso <b>salvo</b> donde hay cartílago articular.", tag:"Estructura del hueso",
+    correcta:true,
+    fb:"Verdadero. Es la excepción constante: donde empieza la superficie articular, termina el periostio. Tiene sentido — el periostio es una envoltura de conectivo con vasos y nervios, y dentro de una cavidad sinovial no pintaría nada." },
+  { q:"En el adulto, toda la médula ósea del cuerpo es amarilla.", tag:"Médula ósea",
+    correcta:false,
+    fb:"Falso. La <b>cavidad medular de la diáfisis</b> sí tiene médula amarilla en el adulto, y de ahí viene la confusión. Pero queda médula <b>roja</b> —la que fabrica células sanguíneas— en los espacios del hueso esponjoso: esternón, costillas, vértebras, hueso ilíaco y las epífisis proximales del fémur y el húmero." },
+  { q:"El periostio es especialmente sensible al estiramiento, y eso explica el dolor intenso de una fractura o de un tumor óseo.", tag:"Irrigación e inervación",
+    correcta:true,
+    fb:"Verdadero. El periostio está inervado por abundantes nervios sensitivos que responden sobre todo a la tensión, no al contacto. El hueso en sí apenas duele: lo que duele es su envoltura estirada." },
+  { q:"La <b>membrana interósea</b> que une las diáfisis de la tibia y el peroné es una articulación fibrosa.", tag:"Clasificación de articulaciones",
+    correcta:true,
+    fb:"Verdadero, aunque no lo parezca. Es tejido fibroso entre dos huesos y sin cavidad: cumple la definición. Es la articulación fibrosa más extensa del cuerpo, y además permite algo de movimiento — otra prueba de que «fibrosa» no significa «inmóvil»." },
+  { q:"En la <b>artritis reumatoide</b>, lo primero que se destruye es el cartílago articular.", tag:"Patología articular",
+    correcta:false,
+    fb:"Falso, y es justo lo que la distingue de la artrosis. La artritis reumatoide es autoinmune y ataca primero la <b>membrana sinovial</b>, que prolifera formando un <i>pannus</i> y solo después erosiona cartílago y hueso. La <b>artrosis</b> sí empieza por el cartílago, que se desgasta con los años y la carga." },
+];
+
+const SELMULTIPLE = [
+  { q:"Marca <b>todas</b> las articulaciones <b>fibrosas</b>.", tag:"Clasificación estructural",
+    op:["Sutura","Sínfisis del pubis","Sindesmosis","Sincondrosis","Gonfosis","Membrana interósea","Disco intervertebral"],
+    correctas:[0,2,4,5],
+    fb:"Fibrosas son cuatro: <b>sutura, sindesmosis, gonfosis y membrana interósea</b> — tejido fibroso entre los huesos y ninguna cavidad. Las otras tres son <b>cartilaginosas</b>: la sincondrosis de cartílago hialino (la placa epifisaria), y la sínfisis del pubis y el disco intervertebral de fibrocartílago." },
+
+  { q:"Marca <b>todos</b> los factores que modifican la amplitud de movimiento de una articulación.", tag:"Amplitud de movimiento",
+    op:["La forma de las superficies articulares",
+        "La tensión de los ligamentos",
+        "La disposición y el tono de los músculos",
+        "El contacto entre las masas de tejido blando",
+        "El color del hueso subcondral",
+        "Las hormonas, como la relaxina al final del embarazo",
+        "La falta de uso"],
+    correctas:[0,1,2,3,5,6],
+    fb:"Son <b>seis</b>, y todas las opciones lo son salvo la E, que es un invento. La más contraintuitiva es la última: una articulación inmovilizada pierde amplitud porque disminuye el líquido sinovial, los ligamentos se acortan y el músculo se atrofia. <i>Se deteriora por estar quieta, no por usarse.</i>" },
+
+  { q:"Marca todo lo que sea cierto del <b>hueso esponjoso</b>.", tag:"Histología ósea",
+    op:["Su unidad estructural es la osteona",
+        "Está formado por trabéculas",
+        "Aloja la médula ósea roja en sus espacios",
+        "Forma la mayor parte de la diáfisis",
+        "Sus trabéculas se orientan según las líneas de fuerza",
+        "Constituye el interior de las epífisis"],
+    correctas:[1,2,4,5],
+    fb:"El esponjoso <b>no tiene osteonas</b> —esa es la unidad del compacto— y <b>no forma la diáfisis</b>, que es casi toda compacta. Sí es cierto lo demás: trabéculas orientadas según las líneas de fuerza, médula roja en los huecos e interior de las epífisis." },
+
+  { q:"Marca todos los componentes que pertenecen a una <b>articulación sinovial</b>.", tag:"Articulación sinovial",
+    op:["Cavidad sinovial",
+        "Cartílago articular",
+        "Membrana fibrosa de la cápsula",
+        "Sutura",
+        "Líquido sinovial",
+        "Fibrocartílago que une los dos huesos entre sí",
+        "Ligamentos accesorios"],
+    correctas:[0,1,2,4,6],
+    fb:"La <b>sutura</b> es una articulación fibrosa, no un componente de la sinovial. Y el <b>fibrocartílago que une los huesos</b> describe una sínfisis: en la sinovial puede haber fibrocartílago, pero como <i>disco o menisco</i> entre las superficies, no uniéndolas. Lo demás sí forma parte." },
+
+  { q:"La <b>pared medial</b> de la órbita es la que separa el ojo de las celdillas etmoidales, y la más delgada de las cuatro. Marca todos los huesos que la forman.", tag:"La órbita · pared medial",
+    op:["Apófisis frontal del maxilar","Hueso nasal","Hueso lacrimal","Vómer","Lámina orbitaria del etmoides","Hueso cigomático","Cuerpo del esfenoides","Hueso palatino"],
+    correctas:[0,2,4,6],
+    fb:"Cuatro, de delante hacia atrás: <b>apófisis frontal del maxilar, lacrimal, lámina orbitaria del etmoides y cuerpo del esfenoides</b>. La lámina del etmoides es la <i>lámina papirácea</i>, de menos de medio milímetro — por eso la infección de un seno etmoidal pasa a la órbita con tanta facilidad. El <b>nasal</b> (opción B) es el distractor de siempre: está al lado, pero no forma ninguna pared." },
+];
+
+/* ══════════════════════════════════════════════════════════════
+   ESTADO
+   ══════════════════════════════════════════════════════════════ */
+const $ = s => document.querySelector(s);
+const TOTAL = MULTIPLE.length + VF.length + SELMULTIPLE.length;
+let ingresado = "", montado = false, entregado = false, sucio = false;
+const resultado = {};          // id → true/false
+const marcado   = {};          // id → selección del estudiante
+
+const alumno = () => ingresado || "sin-nombre";
+const clave  = () => CONFIG.LS + alumno();
+
+function guardarLocal(){
+  try{ localStorage.setItem(clave(), JSON.stringify({resultado, marcado, entregado})); }catch(e){}
+}
+function cargarLocal(){
+  try{
+    const d = JSON.parse(localStorage.getItem(clave()) || "{}");
+    if(d.resultado) Object.assign(resultado, d.resultado);
+    if(d.marcado)   Object.assign(marcado, d.marcado);
+    return Object.keys(d.resultado || {}).length;
+  }catch(e){ return 0; }
+}
+
+function aciertos(){ return Object.values(resultado).filter(Boolean).length; }
+function respondidas(){ return Object.keys(resultado).length; }
+
+function actualizarBarra(){
+  $("#mkResp").textContent = "Respondidas: " + respondidas() + " / " + TOTAL;
+  $("#mkAc").innerHTML = "Aciertos: <b>" + aciertos() + "</b>";
+  $("#progBar").style.width = (respondidas()/TOTAL*100) + "%";
+  $("#score").textContent = aciertos() + " / " + TOTAL;
+  if(respondidas() === TOTAL){
+    const n = (aciertos()/TOTAL*5).toFixed(2);
+    $("#msg").innerHTML = "Nota <b>" + n + " / 5,0</b>. " +
+      (entregado ? "Ya está entregado." : "Ahora pulsa <b>Entregar al docente</b>.");
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   PINTADO
+   ══════════════════════════════════════════════════════════════ */
+const LET = "ABCDEFGHIJK";
+
+function bloque(n, titulo, desc){
+  const s = document.createElement("section");
+  s.className = "bloque";
+  s.innerHTML = '<h2><span class="n">'+n+'</span>'+titulo+'</h2><p class="desc">'+desc+'</p>';
+  return s;
+}
+function pieAcciones(id){
+  return '<div class="acc"><button class="btn small" data-comprobar="'+id+'">Comprobar</button></div>' +
+         '<div class="fb" id="fb-'+id+'"></div>';
+}
+
+/* `desde` es el número con el que arranca la numeración visible del bloque:
+   la del taller es continua de 1 a 20, mientras que el id de cada ítem sigue
+   siendo relativo a su bloque (m1…m10, vf1…vf5, sm1…sm5). */
+function pintarUnica(host, lista, pref, num, titulo, desc, desde){
+  const sec = bloque(num, titulo, desc);
+  lista.forEach((item, i) => {
+    const id = pref + (i+1);
+    const q = document.createElement("div"); q.className = "q";
+    const ops = item.op
+      ? item.op.map((t,k)=>'<li data-op="'+k+'"><span class="let">'+LET[k]+'</span><span>'+t+'</span></li>').join("")
+      : ['<li data-op="1"><span class="let">V</span><span>Verdadero</span></li>',
+         '<li data-op="0"><span class="let">F</span><span>Falso</span></li>'].join("");
+    q.innerHTML = '<span class="tag">'+item.tag+'</span>' +
+      '<div class="enun">'+(desde+i)+'. '+item.q+'</div>' +
+      '<ul class="ops" id="ops-'+id+'">'+ops+'</ul>' + pieAcciones(id);
+    sec.appendChild(q);
+  });
+  host.appendChild(sec);
+}
+
+function pintarMultiple(host, num){
+  const sec = bloque(num, "Selección múltiple",
+    "Varias respuestas son correctas. Solo cuenta si marcas <b>todas</b> las correctas y <b>ninguna</b> incorrecta.");
+  SELMULTIPLE.forEach((item, i) => {
+    const id = "sm" + (i+1);
+    const q = document.createElement("div"); q.className = "q";
+    const ops = item.op.map((t,k) =>
+      '<li data-op="'+k+'"><span class="let">'+LET[k]+'</span><span>'+t+'</span></li>').join("");
+    q.innerHTML = '<span class="tag">'+item.tag+'</span>' +
+      '<div class="enun">'+(MULTIPLE.length+VF.length+i+1)+'. '+item.q+'</div>' +
+      '<ul class="ops" id="ops-'+id+'" data-multi="1">'+ops+'</ul>' + pieAcciones(id);
+    sec.appendChild(q);
+  });
+  host.appendChild(sec);
+}
+
+function montar(){
+  if(montado) return;
+  const app = $("#app"); app.innerHTML = "";
+  pintarUnica(app, MULTIPLE, "m", 1, "Opción múltiple", "Una sola respuesta correcta entre cinco.", 1);
+  pintarUnica(app, VF, "vf", 2, "Verdadero o falso", "Decide si el enunciado es verdadero o falso.", MULTIPLE.length+1);
+  pintarMultiple(app, 3);
+
+  // Selección
+  app.querySelectorAll(".ops").forEach(ul => {
+    const multi = ul.dataset.multi === "1";
+    ul.querySelectorAll("li").forEach(li => {
+      li.addEventListener("click", () => {
+        if(ul.classList.contains("bloqueada")) return;
+        if(multi) li.classList.toggle("sel");
+        else { ul.querySelectorAll("li").forEach(o=>o.classList.remove("sel")); li.classList.add("sel"); }
+      });
+    });
+  });
+  // Comprobar
+  app.querySelectorAll("[data-comprobar]").forEach(b =>
+    b.addEventListener("click", () => comprobar(b.dataset.comprobar)));
+
+  montado = true;
+  restaurarPintado();
+  actualizarBarra();
+}
+
+function datosDe(id){
+  const n = parseInt(id.replace(/\D/g,""),10) - 1;
+  if(id.indexOf("sm")===0) return {item:SELMULTIPLE[n], multi:true, correctas:SELMULTIPLE[n].correctas};
+  if(id.indexOf("vf")===0) return {item:VF[n], multi:false, correctas:[VF[n].correcta ? 1 : 0]};
+  return {item:MULTIPLE[n], multi:false, correctas:[MULTIPLE[n].correcta]};
+}
+
+function comprobar(id){
+  const ul = $("#ops-"+id);
+  if(ul.classList.contains("bloqueada")) return;
+  const sel = [...ul.querySelectorAll("li.sel")].map(li=>+li.dataset.op);
+  if(!sel.length){ ul.animate([{transform:"translateX(-4px)"},{transform:"translateX(4px)"},
+                               {transform:"translateX(0)"}],{duration:220}); return; }
+  const {item, correctas} = datosDe(id);
+  const bien = sel.length === correctas.length && sel.every(k => correctas.includes(k));
+
+  ul.classList.add("bloqueada");
+  ul.querySelectorAll("li").forEach(li => {
+    const k = +li.dataset.op;
+    const marcada = li.classList.contains("sel");
+    if(correctas.includes(k)) li.classList.add(marcada ? "ok" : "era");
+    else if(marcada) li.classList.add("no");
+  });
+
+  const fb = $("#fb-"+id);
+  fb.className = "fb show " + (bien ? "bien" : "mal");
+  const letras = correctas.map(k => id.indexOf("vf")===0 ? (k?"Verdadero":"Falso") : LET[k]).join(", ");
+  fb.innerHTML = "<b>" + (bien ? "✓ Correcto" : "✗ Respuesta: " + letras) + ".</b> " + item.fb;
+
+  resultado[id] = bien;
+  marcado[id] = sel;
+  sucio = true;
+  guardarLocal(); actualizarBarra();
+}
+
+function restaurarPintado(){
+  Object.keys(resultado).forEach(id => {
+    const ul = $("#ops-"+id); if(!ul) return;
+    (marcado[id]||[]).forEach(k => {
+      const li = ul.querySelector('li[data-op="'+k+'"]'); if(li) li.classList.add("sel");
+    });
+    const {item, correctas} = datosDe(id);
+    ul.classList.add("bloqueada");
+    ul.querySelectorAll("li").forEach(li => {
+      const k = +li.dataset.op, m = li.classList.contains("sel");
+      if(correctas.includes(k)) li.classList.add(m ? "ok" : "era");
+      else if(m) li.classList.add("no");
+    });
+    const fb = $("#fb-"+id);
+    fb.className = "fb show " + (resultado[id] ? "bien" : "mal");
+    const letras = correctas.map(k => id.indexOf("vf")===0 ? (k?"Verdadero":"Falso") : LET[k]).join(", ");
+    fb.innerHTML = "<b>" + (resultado[id] ? "✓ Correcto" : "✗ Respuesta: " + letras) + ".</b> " + item.fb;
+  });
+}
+
+/* ══════════════════════════════════════════════════════════════
+   SERVIDOR
+   ══════════════════════════════════════════════════════════════ */
+async function enviar(payload, conBeacon){
+  const cuerpo = JSON.stringify(Object.assign({token: CONFIG.TOKEN}, payload));
+  if(conBeacon && navigator.sendBeacon){
+    try{ navigator.sendBeacon(CONFIG.ENDPOINT, new Blob([cuerpo],{type:"text/plain"})); return {ok:true}; }catch(e){}
+  }
+  const r = await fetch(CONFIG.ENDPOINT, {method:"POST", body:cuerpo,
+    headers:{"Content-Type":"text/plain;charset=utf-8"}});
+  return r.json();
+}
+function nube(t){ $("#nube").textContent = t; }
+
+async function snapshot(motivo, beacon){
+  if(!ingresado || entregado) return;
+  try{
+    nube("guardando…");
+    await enviar({evento:"snapshot", alumno:ingresado, motivo:motivo, items:resultado}, beacon);
+    sucio = false; nube("guardado");
+  }catch(e){ nube("sin conexión"); }
+}
+
+const MOTIVOS = {
+  alumno_no_esta_en_el_listado: "Tu nombre no está en el listado del curso. Avísame.",
+  codigo_incorrecto: "Ese código no corresponde al nombre seleccionado. Revísalo.",
+  falta_codigo: "Escribe tu código.",
+  taller_cerrado: "El taller está cerrado.",
+  token_invalido: "Error de configuración del taller. Avísame.",
+};
+
+async function cargarRoster(){
+  try{
+    const r = await fetch(CONFIG.ENDPOINT + "?action=roster&token=" + encodeURIComponent(CONFIG.TOKEN));
+    const d = await r.json();
+    if(!d.ok) throw new Error(d.error);
+    const s = $("#nombre");
+    s.innerHTML = '<option value="">Selecciona tu nombre…</option>' +
+      d.roster.map(n => '<option>' + n + '</option>').join("");
+  }catch(e){
+    $("#nombre").innerHTML = '<option value="">No se pudo cargar el listado</option>';
+    $("#errIngreso").textContent = "No se pudo cargar el listado. Revisa la conexión.";
+  }
+}
+
+async function entrar(){
+  const b = $("#btnEntrar"), nom = $("#nombre").value, cod = $("#codigo").value.trim();
+  const err = $("#errIngreso"); err.textContent = "";
+  b.disabled = true; b.textContent = "Verificando…";
+  try{
+    const d = await enviar({evento:"ingreso", alumno:nom, codigo:cod});
+    if(!d.ok) throw new Error(MOTIVOS[d.error] || d.error);
+    ingresado = nom;
+    cargarLocal();
+    montar();
+    $("#portada").style.display = "none";
+    $("#zona").style.display = "";
+    $("#barra").style.display = "";
+    $("#cajaIngreso").style.display = "none";
+    $("#cajaDentro").style.display = "";
+    $("#quien").textContent = nom;
+    $("#chipEstado").textContent = "Ingresado";
+    if(d.codigo_pendiente) err.style.color = "#ffe9a8",
+      err.textContent = "Tu código no estaba en la lista; quedó registrado el que escribiste.";
+    nube("listo para guardar");
+  }catch(e){
+    b.disabled = false; b.textContent = "Ingresar";
+    err.style.color = "#ffd9d4";
+    err.textContent = e.message || "No se pudo ingresar. Revisa la conexión.";
+  }
+}
+
+function salir(){
+  ingresado = ""; montado = false; entregado = false;
+  Object.keys(resultado).forEach(k=>delete resultado[k]);
+  Object.keys(marcado).forEach(k=>delete marcado[k]);
+  $("#app").innerHTML = "";
+  $("#portada").style.display = "";
+  $("#zona").style.display = "none";
+  $("#barra").style.display = "none";
+  $("#cajaIngreso").style.display = "";
+  $("#cajaDentro").style.display = "none";
+  $("#btnEntrar").disabled = false; $("#btnEntrar").textContent = "Ingresar";
+  $("#codigo").value = ""; $("#errIngreso").textContent = "";
+  $("#chipEstado").textContent = "Sin ingresar";
+}
+
+/* ══════════════════════════════════════════════════════════════
+   ENTREGA
+   ══════════════════════════════════════════════════════════════ */
+function abrirModal(){
+  const faltan = TOTAL - respondidas();
+  $("#resumen").innerHTML =
+    "Estudiante: <b>" + ingresado + "</b><br>" +
+    "Respondidas: <b>" + respondidas() + " / " + TOTAL + "</b><br>" +
+    "Aciertos: <b>" + aciertos() + "</b><br>" +
+    "Nota: <b>" + (aciertos()/TOTAL*5).toFixed(2) + " / 5,0</b>";
+  $("#avisoModal").textContent = faltan
+    ? "Te faltan " + faltan + " pregunta(s) por comprobar. Si entregas ahora contarán como no acertadas."
+    : "";
+  $("#modal").classList.add("open");
+}
+async function confirmar(){
+  const b = $("#btnConfirmar");
+  b.disabled = true; b.textContent = "Enviando…";
+  try{
+    const d = await enviar({evento:"envio", alumno:ingresado, items:resultado});
+    if(!d.ok) throw new Error(d.error);
+    entregado = true; guardarLocal();
+    $("#modal").classList.remove("open");
+    $("#btnEnviar").disabled = true; $("#btnEnviar").textContent = "Entregado ✓";
+    $("#chipEstado").textContent = "Entregado";
+    nube("entregado");
+    $("#msg").innerHTML = "<b>Entregado.</b> Aciertos " + d.aciertos + " / " + d.max +
+      " · nota <b>" + d.nota + " / 5,0</b>.";
+  }catch(e){
+    b.disabled = false; b.textContent = "Sí, entregar";
+    $("#avisoModal").textContent = "No se pudo entregar (" + e.message + "). Tu avance sigue guardado; inténtalo otra vez.";
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   ARRANQUE
+   ══════════════════════════════════════════════════════════════ */
+function revisarIngreso(){
+  $("#btnEntrar").disabled = !($("#nombre").value && $("#codigo").value.trim());
+}
+$("#nombre").addEventListener("change", revisarIngreso);
+$("#codigo").addEventListener("input", revisarIngreso);
+$("#codigo").addEventListener("keydown", e => {
+  if(e.key === "Enter" && !$("#btnEntrar").disabled) entrar();
+});
+$("#btnEntrar").addEventListener("click", entrar);
+$("#btnSalir").addEventListener("click", salir);
+$("#btnEnviar").addEventListener("click", abrirModal);
+$("#btnVolver").addEventListener("click", () => $("#modal").classList.remove("open"));
+$("#btnConfirmar").addEventListener("click", confirmar);
+$("#btnCalificar").addEventListener("click", () => {
+  document.querySelectorAll("[data-comprobar]").forEach(b => comprobar(b.dataset.comprobar));
+});
+$("#btnReiniciar").addEventListener("click", () => {
+  if(!confirm("Se borran tus respuestas y empiezas de nuevo. ¿Seguro?")) return;
+  Object.keys(resultado).forEach(k=>delete resultado[k]);
+  Object.keys(marcado).forEach(k=>delete marcado[k]);
+  guardarLocal(); montado = false; montar(); actualizarBarra();
+});
+document.addEventListener("keydown", e => {
+  if(e.key === "Escape") $("#modal").classList.remove("open");
+});
+
+setInterval(() => { if(sucio && !entregado && ingresado) snapshot("periodico"); }, CONFIG.AUTOGUARDADO_MS);
+window.addEventListener("beforeunload", () => {
+  guardarLocal();
+  if(sucio && !entregado && ingresado) snapshot("salida", true);
+});
+
+cargarRoster();
+</script>
+</body>
+</html>

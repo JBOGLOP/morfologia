@@ -11,6 +11,9 @@ roster*
 *asistencia*.html
 lista*estudiantes*
 Listado*
+# Los listados y consolidados siempre viajan en CSV, y basta con que uno se
+# copie aquí por descuido para publicar códigos y correos de todo el curso.
+*.csv
 
 # Backend y credenciales: tokens, claves de respuestas, endpoints
 *.gs
