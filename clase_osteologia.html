@@ -1,0 +1,2047 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clase 4 · Osteología general · Morfología General 2026-II</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:#1a2a35;--text:#2c3e4f;--text-soft:#5a6b7a;--text-muted:#8a9aa8;
+  --parchment:#f8f3e8;--parchment-dark:#f0e8d4;--parchment-deep:#e8dcc0;
+  --bg-card:#fdfaf2;--border:#d4c8a8;--border-light:#e5dbc0;
+  --amber:#b8860b;--amber-dark:#8b6914;--amber-light:#d4a72c;--amber-pale:#f5e9c8;
+  --teal:#2a7a6e;--teal-dark:#1f5d54;
+  --rust:#a0522d;--rust-dark:#7d3f22;
+  --clinical:#b5413b;--clinical-dark:#8a2f2a;--clinical-bg:#fce8e6;
+  --blue:#1976a1;--blue-dark:#115670;--blue-bg:#e3f0f5;
+  --green:#2e7d32;--green-bg:#e8f5e9;
+  --purple:#6b4a8a;--purple-bg:#f0e8f4;--purple-dark:#4a2d6e;
+  --shadow-sm:0 2px 8px rgba(26,42,53,0.06);
+  --shadow-md:0 4px 20px rgba(26,42,53,0.10);
+  --font-display:'Playfair Display',Georgia,serif;
+  --font-body:'Source Serif 4',Georgia,serif;
+  --font-mono:'DM Mono','Courier New',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--parchment);color:var(--text);line-height:1.75;font-size:17px;
+  background-image:radial-gradient(at 12% 8%,rgba(184,134,11,.04) 0%,transparent 50%),radial-gradient(at 88% 92%,rgba(42,122,110,.04) 0%,transparent 50%);
+  background-attachment:fixed}
+
+/* HEADER */
+.header{text-align:center;padding:70px 30px 50px;border-bottom:3px double var(--amber);margin-bottom:50px;position:relative}
+.header::before{content:'';position:absolute;top:30px;left:50%;transform:translateX(-50%);width:80px;height:1px;background:var(--amber)}
+.eyebrow{font-family:var(--font-mono);font-size:.78rem;letter-spacing:.32em;text-transform:uppercase;color:var(--amber-dark);margin-bottom:14px}
+.header h1{font-family:var(--font-display);font-size:clamp(2.2rem,5vw,3.6rem);font-weight:900;color:var(--ink);line-height:1.05;margin-bottom:12px}
+.header h1 em{font-style:italic;font-weight:400;color:var(--amber-dark)}
+.header .subtitle{font-family:var(--font-body);font-style:italic;font-size:1.15rem;color:var(--text-soft);margin-bottom:22px;font-weight:300}
+.header .meta{font-family:var(--font-mono);font-size:.82rem;letter-spacing:.18em;color:var(--text-muted);text-transform:uppercase}
+
+/* TABS */
+.tab-bar{background:var(--bg-card);border:1px solid var(--border);border-radius:4px;padding:0;margin-bottom:50px;box-shadow:var(--shadow-sm);overflow:hidden;display:flex}
+.tab-btn{flex:1;padding:18px 24px;background:none;border:none;border-right:1px solid var(--border-light);font-family:var(--font-body);font-size:.95rem;color:var(--text-soft);cursor:pointer;transition:all .2s;text-align:center;line-height:1.4}
+.tab-btn:last-child{border-right:none}
+.tab-btn:hover{background:var(--parchment-dark);color:var(--ink)}
+.tab-btn.active{background:var(--amber-pale);color:var(--ink);font-weight:600;border-bottom:3px solid var(--amber)}
+.tab-btn .tab-date{display:block;font-family:var(--font-mono);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--amber-dark);margin-bottom:4px}
+.tab-pane{display:none}
+.tab-pane.active{display:block}
+
+/* CONTAINER */
+.container{max-width:1100px;margin:0 auto;padding:0 30px 80px}
+
+/* NAV INTERNA */
+.station-nav{background:var(--bg-card);border:1px solid var(--border);border-radius:4px;padding:24px 28px;margin-bottom:50px;box-shadow:var(--shadow-sm)}
+.station-nav h3{font-family:var(--font-mono);font-size:.75rem;letter-spacing:.25em;text-transform:uppercase;color:var(--amber-dark);margin-bottom:16px}
+.station-nav ol{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px 24px;counter-reset:stations}
+.station-nav li{counter-increment:stations;padding:4px 0}
+.station-nav li::before{content:counter(stations,decimal-leading-zero) '. ';font-family:var(--font-mono);color:var(--amber-dark);font-weight:500;margin-right:6px}
+.station-nav a{color:var(--text);text-decoration:none;font-style:italic;border-bottom:1px dotted var(--border);transition:color .2s,border-color .2s}
+.station-nav a:hover{color:var(--amber-dark);border-color:var(--amber-dark)}
+
+/* STATIONS */
+.station{margin-bottom:80px;scroll-margin-top:30px}
+.station-header{display:flex;align-items:baseline;gap:20px;margin-bottom:30px;padding-bottom:18px;border-bottom:2px solid var(--border)}
+.station-number{font-family:var(--font-display);font-style:italic;font-size:4rem;font-weight:400;color:var(--amber);line-height:1;flex-shrink:0}
+.station-titles{flex:1}
+.station-eyebrow{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--amber-dark);margin-bottom:6px}
+.station h2{font-family:var(--font-display);font-size:clamp(1.7rem,3.5vw,2.4rem);font-weight:700;color:var(--ink);line-height:1.15}
+
+/* CONTENT BLOCK */
+.content-block{background:var(--bg-card);border:1px solid var(--border-light);border-radius:4px;padding:28px 32px;margin-bottom:24px;box-shadow:var(--shadow-sm)}
+.content-block h3{font-family:var(--font-display);font-size:1.4rem;font-weight:700;color:var(--ink);margin-bottom:16px;padding-bottom:8px;border-bottom:1px dotted var(--border)}
+.content-block h4{font-family:var(--font-display);font-size:1.1rem;font-weight:700;color:var(--amber-dark);margin:20px 0 10px;font-style:italic}
+.content-block p{margin-bottom:14px}
+.content-block ul,.content-block ol{margin:12px 0 18px 24px}
+.content-block li{margin-bottom:8px;padding-left:6px}
+.content-block strong{color:var(--ink);font-weight:700}
+.content-block em.term{font-style:italic;color:var(--amber-dark);font-weight:600}
+
+/* TWO-COL / THREE-COL */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:20px 0}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin:20px 0}
+@media(max-width:900px){.two-col,.three-col{grid-template-columns:1fr}}
+.col-card{background:var(--parchment-dark);border-left:4px solid var(--amber);padding:18px 22px;border-radius:2px}
+.col-card.teal{border-color:var(--teal);background:#e8f0ee}
+.col-card.rust{border-color:var(--rust);background:#f3e8de}
+.col-card.blue{border-color:var(--blue);background:var(--blue-bg)}
+.col-card.green{border-color:var(--green);background:var(--green-bg)}
+.col-card h5{font-family:var(--font-display);font-weight:700;color:var(--ink);margin-bottom:8px;font-size:1.05rem}
+
+/* TABLE */
+table.data{width:100%;border-collapse:collapse;margin:18px 0;font-size:.95rem}
+table.data th{background:var(--amber-dark);color:var(--parchment);padding:10px 14px;text-align:left;font-family:var(--font-mono);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;font-weight:500}
+table.data td{padding:10px 14px;border-bottom:1px solid var(--border-light);vertical-align:top}
+table.data tr:nth-child(even) td{background:var(--parchment-dark)}
+table.data tr:hover td{background:var(--amber-pale)}
+
+/* CLINICAL BOX */
+.clinical-box{background:var(--clinical-bg);border-left:5px solid var(--clinical);padding:20px 26px;margin:22px 0;border-radius:2px;position:relative}
+.clinical-box::before{content:'👁 Interfaz optométrica';display:block;font-family:var(--font-mono);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--clinical-dark);margin-bottom:10px;font-weight:600}
+.clinical-box h5{font-family:var(--font-display);font-weight:700;color:var(--clinical-dark);font-size:1.1rem;margin-bottom:6px}
+
+/* PEARL */
+.pearl{background:var(--amber-pale);border:1px solid var(--amber-light);border-radius:2px;padding:16px 22px;margin:18px 0;font-style:italic;color:var(--text);position:relative;padding-left:50px}
+.pearl::before{content:'◆';position:absolute;left:18px;top:16px;color:var(--amber-dark);font-size:1.2rem;font-style:normal}
+
+/* SABER PRO */
+.saber-box{background:var(--purple-bg);border-left:5px solid var(--purple);padding:20px 26px;margin:22px 0;border-radius:2px}
+.saber-box::before{content:'★ Tipo Saber Pro';display:block;font-family:var(--font-mono);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--purple-dark);margin-bottom:10px;font-weight:600}
+
+/* FIGURE */
+.figure{margin:28px 0;background:var(--bg-card);border:1px solid var(--border-light);border-radius:4px;padding:20px;box-shadow:var(--shadow-sm);text-align:center}
+.figure svg{width:100%;max-width:800px;height:auto}
+.figure-caption{font-family:var(--font-mono);font-size:.78rem;color:var(--text-muted);margin-top:12px;letter-spacing:.06em;text-align:center}
+
+/* FLIP CARDS */
+.flip-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;margin:20px 0}
+.flip-card{height:160px;perspective:800px;cursor:pointer}
+.flip-inner{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform .5s ease}
+.flip-card:hover .flip-inner,.flip-card.flipped .flip-inner{transform:rotateY(180deg)}
+.flip-front,.flip-back{position:absolute;inset:0;border-radius:4px;padding:16px;backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.flip-front{background:var(--bg-card);border:2px solid var(--border)}
+.flip-back{background:var(--amber-pale);border:2px solid var(--amber);transform:rotateY(180deg)}
+.flip-front .term-label{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px}
+.flip-front .term-name{font-family:var(--font-display);font-size:1.15rem;font-weight:700;color:var(--ink);line-height:1.2}
+.flip-front .term-en{font-family:var(--font-mono);font-size:.75rem;color:var(--text-muted);margin-top:6px;font-style:italic}
+.flip-back .term-def{font-size:.88rem;color:var(--text);line-height:1.5;margin-bottom:8px}
+.flip-back .term-opto{font-family:var(--font-mono);font-size:.72rem;color:var(--clinical-dark);letter-spacing:.05em}
+
+/* CHECK QUESTION */
+.check-question{background:linear-gradient(180deg,#fdfaf2 0%,#f5ecd5 100%);border:2px dashed var(--amber);border-radius:4px;padding:28px 30px;margin:30px 0;position:relative}
+.check-question::before{content:'? Verificación';position:absolute;top:-12px;left:24px;background:var(--parchment);padding:2px 14px;font-family:var(--font-mono);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--amber-dark);font-weight:600}
+.check-question .question-text{font-family:var(--font-display);font-size:1.15rem;color:var(--ink);margin-bottom:18px;font-weight:400;font-style:italic}
+.options{list-style:none;margin:0}
+.options li{margin-bottom:10px;padding:12px 18px;background:var(--bg-card);border:1px solid var(--border);border-radius:3px;cursor:pointer;transition:all .2s;position:relative;padding-left:50px}
+.options li::before{content:attr(data-letter);position:absolute;left:16px;top:50%;transform:translateY(-50%);font-family:var(--font-mono);font-weight:500;color:var(--amber-dark)}
+.options li:hover{background:var(--amber-pale);border-color:var(--amber)}
+.options li.correct{background:#e8f5e8;border-color:#2e7d32;color:#1b5e20}
+.options li.correct::after{content:' ✓';color:#2e7d32;font-weight:700}
+.options li.incorrect{background:var(--clinical-bg);border-color:var(--clinical);color:var(--clinical-dark)}
+.options li.incorrect::after{content:' ✗';color:var(--clinical);font-weight:700}
+.feedback{display:none;margin-top:16px;padding:14px 18px;background:var(--bg-card);border-left:4px solid var(--amber);border-radius:2px;font-size:.96rem}
+.feedback.show{display:block}
+.feedback strong{color:var(--amber-dark)}
+
+/* PHOTO */
+.photo-grid{display:grid;gap:20px;margin:24px 0}
+@media(min-width:640px){.photo-grid.cols-2{grid-template-columns:1fr 1fr}.photo-grid.cols-3{grid-template-columns:1fr 1fr 1fr}}
+.photo-card{background:var(--bg-card);border:1px solid var(--border-light);border-radius:4px;padding:14px;box-shadow:var(--shadow-sm);transition:box-shadow .2s}
+.photo-card:hover{box-shadow:var(--shadow-md)}
+.photo-card .photo-frame{position:relative;background:repeating-linear-gradient(45deg,var(--parchment-dark) 0,var(--parchment-dark) 10px,var(--parchment-deep) 10px,var(--parchment-deep) 20px);border-radius:3px;overflow:hidden;min-height:200px;display:flex;align-items:center;justify-content:center}
+.photo-card img{display:block;width:100%;height:auto;border-radius:3px;cursor:zoom-in}
+.photo-card img.broken{display:none}
+.photo-card .photo-missing{display:none;font-family:var(--font-mono);font-size:.75rem;color:var(--text-muted);text-align:center;padding:40px 20px;letter-spacing:.08em;text-transform:uppercase}
+.photo-card img.broken+.photo-missing{display:block}
+.photo-card .photo-missing::before{content:'⏳ ';margin-right:4px}
+.photo-card .photo-caption{font-family:var(--font-body);font-size:.92rem;color:var(--text);margin-top:12px;line-height:1.5}
+.photo-card .photo-caption strong{font-family:var(--font-display);color:var(--ink);display:block;margin-bottom:4px;font-weight:700;font-size:.98rem}
+.photo-card .photo-credit{font-family:var(--font-mono);font-size:.7rem;color:var(--text-muted);margin-top:8px;letter-spacing:.06em;text-transform:uppercase}
+.photo-hero{background:var(--bg-card);border:1px solid var(--border-light);border-radius:4px;padding:18px;margin:24px 0;box-shadow:var(--shadow-sm);text-align:center}
+.photo-hero img{display:block;width:100%;max-width:720px;height:auto;margin:0 auto;border-radius:3px;cursor:zoom-in}
+.photo-hero img.broken{display:none}
+.photo-hero .photo-missing{display:none;font-family:var(--font-mono);font-size:.78rem;color:var(--text-muted);padding:60px 20px;letter-spacing:.1em;text-transform:uppercase}
+.photo-hero img.broken+.photo-missing{display:block}
+.photo-hero .photo-missing::before{content:'⏳ ';margin-right:4px}
+.photo-hero .photo-caption{font-family:var(--font-body);font-size:.92rem;color:var(--text);margin-top:14px;max-width:640px;margin-left:auto;margin-right:auto}
+.photo-hero .photo-caption strong{font-family:var(--font-display);color:var(--ink);font-weight:700}
+
+/* LIGHTBOX */
+.lightbox{display:none;position:fixed;inset:0;background:rgba(26,42,53,.92);z-index:9999;align-items:center;justify-content:center;padding:30px;cursor:zoom-out}
+.lightbox.open{display:flex}
+.lightbox img{max-width:95vw;max-height:90vh;border-radius:4px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.lightbox .lb-caption{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);color:var(--parchment);font-family:var(--font-mono);font-size:.82rem;background:rgba(26,42,53,.7);padding:8px 16px;border-radius:2px;max-width:90vw;text-align:center}
+.lightbox .lb-close{position:absolute;top:20px;right:30px;background:none;border:2px solid var(--parchment);color:var(--parchment);width:44px;height:44px;border-radius:50%;font-size:1.3rem;cursor:pointer;font-family:var(--font-mono)}
+.lightbox .lb-close:hover{background:rgba(255,255,255,.1)}
+
+/* FOOTER */
+.footer{margin-top:80px;padding:30px;text-align:center;border-top:3px double var(--amber);font-family:var(--font-mono);font-size:.78rem;color:var(--text-muted);letter-spacing:.12em}
+/* ACORDEONES — <details>/<summary> nativos: se despliegan sin JavaScript,
+   así que funcionan aunque el archivo se abra desde el disco o se imprima. */
+.acorde{background:var(--bg-card);border:1px solid var(--border-light);border-left:4px solid var(--teal);
+  border-radius:3px;margin:10px 0;overflow:hidden}
+.acorde > summary{cursor:pointer;padding:13px 18px;font-family:var(--font-display);font-weight:700;
+  color:var(--ink);font-size:1rem;list-style:none;display:flex;align-items:center;gap:10px;
+  background:var(--parchment-dark);transition:background .15s}
+.acorde > summary:hover{background:var(--amber-pale)}
+.acorde > summary::-webkit-details-marker{display:none}
+.acorde > summary::before{content:'+';font-family:var(--font-mono);font-size:1.15rem;color:var(--teal);
+  font-weight:400;width:16px;flex-shrink:0;text-align:center}
+.acorde[open] > summary::before{content:'−'}
+.acorde[open] > summary{border-bottom:1px solid var(--border-light)}
+.acorde > summary .pista{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);
+  font-weight:400;letter-spacing:.06em;margin-left:auto;text-transform:uppercase}
+.acorde .cuerpo{padding:16px 18px 18px}
+.acorde .cuerpo > *:last-child{margin-bottom:0}
+.acorde.rust{border-left-color:var(--rust)} .acorde.amber{border-left-color:var(--amber)}
+.acorde.blue{border-left-color:var(--blue)} .acorde.purple{border-left-color:var(--purple)}
+@media print{.acorde .cuerpo{display:block!important}.acorde > summary::before{content:''}}
+
+/* Ficha de tejido: la imagen del cuadro de Tortora más su texto */
+.ficha{margin:22px 0}
+.ficha > h4{font-family:var(--font-display);font-size:1.12rem;color:var(--ink);font-weight:700;
+  margin-bottom:4px;padding-bottom:5px;border-bottom:2px solid var(--amber-light)}
+.ficha .datos{display:grid;grid-template-columns:auto 1fr;gap:5px 14px;margin:10px 0 0;font-size:.93rem}
+.ficha .datos dt{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--amber-dark);padding-top:3px;font-weight:500}
+.ficha .datos dd{margin:0;color:var(--text)}
+.ficha .datos dd b{color:var(--ink)}
+@media(max-width:640px){.ficha .datos{grid-template-columns:1fr;gap:2px}
+  .ficha .datos dd{margin-bottom:8px}}
+
+@media print{body{background:white;font-size:11pt}.tab-bar{display:none}}
+</style>
+<body>
+
+<header class="header">
+  <div class="eyebrow">Clase 4 · Morfología General 2026-II</div>
+  <h1>Osteología <em>general</em></h1>
+  <p class="subtitle">El hueso como órgano, la clasificación de los huesos y las articulaciones</p>
+  <div class="meta">Dr. Jorge Bogoya &middot; Universidad de La Salle &middot; Optometría &middot; Primer semestre</div>
+</header>
+
+<div class="container">
+
+<div class="tab-bar" role="tablist">
+  <button class="tab-btn active" role="tab" onclick="showTab('s1',this)">
+    <span class="tab-date">Jue. 13 ago · 09:00–11:00</span>
+    Sesión 1 · El hueso
+  </button>
+  <button class="tab-btn" role="tab" onclick="showTab('s2',this)">
+    <span class="tab-date">Jue. 13 ago · 11:00–13:00</span>
+    Sesión 2 · Cómo se unen y se mueven
+  </button>
+</div>
+
+<!-- ═══════════════════════ SESIÓN 1 ═══════════════════════ -->
+<div class="tab-pane active" id="s1">
+
+<nav class="station-nav">
+  <h3>Contenido · Sesión 1</h3>
+  <ol>
+    <li><a href="#s1e0">Para empezar: cuatro preguntas</a></li>
+    <li><a href="#s1e1">Para qué sirve un esqueleto</a></li>
+    <li><a href="#s1e2">Cómo se clasifican los huesos</a></li>
+    <li><a href="#s1e3">Un hueso por dentro</a></li>
+    <li><a href="#s1e4">El tejido óseo: células y matriz</a></li>
+    <li><a href="#s1e5">Accidentes óseos: el vocabulario</a></li>
+    <li><a href="#s1e6">Términos TA2 de la sesión</a></li>
+    <li><a href="#s1e7">Comprueba lo que aprendiste</a></li>
+  </ol>
+</nav>
+
+<!-- ─────────── 00 ─────────── -->
+<section class="station" id="s1e0">
+  <div class="station-header">
+    <div class="station-number">00</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Para empezar · Conversación</div>
+      <h2>Cuatro preguntas antes de abrir el libro</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Como siempre: ninguna tiene todavía respuesta correcta y no hace falta haber leído el
+      capítulo. Piénsalas, coméntalas con tu grupo y quédate con tu respuesta. Al final de la
+      segunda sesión volvemos sobre las cuatro.</p>
+
+    <div class="two-col">
+      <div class="col-card teal">
+        <h5>1 · Un hueso que no pesa</h5>
+        <p>El esqueleto sostiene todo tu cuerpo, pero solo pesa unos 10 kilos. Una barra de acero
+          con esa resistencia pesaría muchísimo más.
+          <strong>¿Cómo consigue un hueso ser tan resistente y tan liviano a la vez?</strong></p>
+      </div>
+      <div class="col-card blue">
+        <h5>2 · El ojo vive en un agujero de siete paredes</h5>
+        <p>Tu globo ocular está alojado en una cavidad hecha de <strong>siete huesos
+          distintos</strong> que encajan entre sí.
+          <strong>¿Por qué siete y no uno solo, que sería más sencillo y más fuerte?</strong></p>
+      </div>
+    </div>
+    <div class="two-col">
+      <div class="col-card rust">
+        <h5>3 · Articulaciones que no se mueven</h5>
+        <p>Los huesos del cráneo están unidos por articulaciones —las suturas— que no permiten
+          ningún movimiento. <strong>Si no se mueven, ¿para qué son articulaciones? ¿Por qué no
+          nacer con el cráneo de una sola pieza?</strong></p>
+      </div>
+      <div class="col-card green">
+        <h5>4 · Un tejido que se reconstruye entero</h5>
+        <p>El hueso parece lo más inerte del cuerpo, pero se renueva por completo cada cierto
+          número de años, y tú no notas nada.
+          <strong>¿Qué gana el cuerpo demoliendo y rehaciendo continuamente su propio
+          esqueleto?</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="clinical-box">
+    <h5>Hacia dónde vamos</h5>
+    <p>Las cuatro se responden con la misma idea, que es la de todo el curso:
+      <strong>la forma sigue a la función</strong>. Un hueso es liviano porque está hueco donde no
+      hace falta y macizo donde sí; la órbita tiene siete huesos porque crece y se remodela por
+      partes; las suturas existen para permitir el crecimiento, no el movimiento. Y hoy vas a ver
+      que el hueso, lejos de ser inerte, es de los tejidos más activos que tienes.</p>
+  </div>
+</section>
+
+<!-- ─────────── 01 ─────────── -->
+<section class="station" id="s1e1">
+  <div class="station-header">
+    <div class="station-number">01</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Tortora 6.1 · 7.1</div>
+      <h2>Para qué sirve un esqueleto</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <div class="photo-hero">
+      <img src="img/esq_general.png" alt="Figura 1-6 de Moore: el sistema esquelético completo, con los huesos principales rotulados en vista anterior">
+      <div class="photo-missing">Imagen no disponible</div>
+      <p class="photo-caption"><strong>El esqueleto completo.</strong> Antes de entrar en el
+        detalle, una vista del conjunto. Casi todo lo que veremos hoy —clasificación, estructura,
+        uniones— se puede ir señalando sobre esta lámina.</p>
+      <div class="photo-credit">Moore, <em>Anatomía con orientación clínica</em> · Fig. 1-6</div>
+    </div>
+
+    <h3>Seis funciones, y solo dos son las que uno imagina</h3>
+    <p>Si preguntas en la calle para qué sirven los huesos, todo el mundo dice «para sostener» y
+      «para proteger». Son dos de seis, y las otras cuatro son las que explican por qué el hueso es
+      un <strong>órgano vivo</strong> y no un andamio.</p>
+
+    <table class="data">
+      <thead><tr><th>Función</th><th>En qué consiste</th></tr></thead>
+      <tbody>
+        <tr><td><strong>1 · Sostén</strong></td>
+            <td>Es el armazón del cuerpo: sostiene los tejidos blandos y da inserción a los tendones
+                de casi todos los músculos esqueléticos</td></tr>
+        <tr><td><strong>2 · Protección</strong></td>
+            <td>Encierra los órganos más delicados. El cráneo protege el encéfalo, las costillas el
+                corazón y los pulmones — y <strong>la órbita, el ojo</strong></td></tr>
+        <tr><td><strong>3 · Movimiento</strong></td>
+            <td>Los huesos son las <em>palancas</em>; los músculos, el motor. Sin un punto rígido
+                donde tirar, la contracción muscular no movería nada</td></tr>
+        <tr><td><strong>4 · Homeostasis mineral</strong></td>
+            <td>Es el <strong>almacén de calcio y fósforo</strong> del organismo. Los libera a la
+                sangre cuando hacen falta y los recupera cuando sobran</td></tr>
+        <tr><td><strong>5 · Producción de células sanguíneas</strong></td>
+            <td>En la <strong>médula ósea roja</strong> ocurre la <em>hemopoyesis</em>: se fabrican
+                eritrocitos, leucocitos y plaquetas</td></tr>
+        <tr><td><strong>6 · Almacenamiento de triglicéridos</strong></td>
+            <td>La <strong>médula ósea amarilla</strong> guarda grasa, que es reserva de energía</td></tr>
+      </tbody>
+    </table>
+
+    <div class="pearl">Fíjate en las funciones 4, 5 y 6: ninguna es mecánica. El hueso no es solo la
+      estructura del cuerpo — es también su banco de calcio, su fábrica de sangre y una de sus
+      despensas. Por eso tiene vasos, nervios y un metabolismo intenso.</div>
+
+    <h3>206 huesos, en dos grupos</h3>
+    <p>El esqueleto adulto tiene <strong>206 huesos</strong>, y se divide en dos por un criterio
+      geométrico simple: si está en el eje del cuerpo o si cuelga de él.</p>
+
+    <div class="two-col">
+      <div class="col-card teal"><h5>Esqueleto axial · 80 huesos</h5>
+        <p>Los del <strong>eje longitudinal</strong>: cabeza, columna vertebral y tórax —esternón y
+          costillas—. Es el que <strong>protege</strong>. Aquí están todos los huesos que le
+          interesan a un optómetra.</p></div>
+      <div class="col-card blue"><h5>Esqueleto apendicular · 126 huesos</h5>
+        <p>Los de los <strong>miembros</strong> y las cinturas que los sujetan al eje: escapular
+          —clavícula y escápula— y pélvica. Es el que <strong>mueve</strong>.</p></div>
+    </div>
+
+    <div class="pearl">Las dos divisiones reparten el trabajo: el axial protege y sostiene, el
+      apendicular manipula y desplaza. Y eso se refleja en su arquitectura — el axial tiene huesos
+      planos e irregulares; el apendicular, largos.</div>
+    <div class="photo-grid cols-2">
+      <div class="photo-card">
+        <div class="photo-frame"><img src="img/fig_7_1_divisiones.png" alt="Figura 7.1 de Tortora: divisiones del sistema esquelético, con el esqueleto axial destacado en color respecto al apendicular"><div class="photo-missing">No disponible</div></div>
+        <p class="photo-caption"><strong>Figura 7.1 · Las dos divisiones.</strong> En color, el <em>axial</em>: cabeza, columna y tórax. En gris, el <em>apendicular</em>: miembros y las cinturas que los cuelgan del eje.</p><div class="photo-credit">Tortora, 15.ª ed. · Fig. 7.1</div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-frame"><img src="img/c71_huesos_adulto.png" alt="Cuadro 7.1 de Tortora: recuento de los huesos del esqueleto del adulto por región, con los totales del esqueleto axial y apendicular"><div class="photo-missing">No disponible</div></div>
+        <p class="photo-caption"><strong>Cuadro 7.1 · Los 206 huesos, contados.</strong> 80 axiales y 126 apendiculares. No hay que memorizar la tabla: sirve para ver de un vistazo dónde se concentran.</p><div class="photo-credit">Tortora, 15.ª ed. · Cuadro 7.1</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="clinical-box">
+    <h5>Todo lo tuyo está en el esqueleto axial</h5>
+    <p>Los 22 huesos de la cabeza —8 craneales y 14 faciales— son la parte del esqueleto que vas a
+      usar toda la carrera. De ellos, <strong>siete forman cada órbita</strong>, y por sus
+      aberturas pasan el nervio óptico, la arteria oftálmica y los nervios que mueven el ojo. Un
+      traumatismo orbitario, un tumor que erosiona una pared, una fractura del piso: todo eso es
+      osteología aplicada, y empieza aquí.</p>
+  </div>
+</section>
+
+<!-- ─────────── 02 ─────────── -->
+<section class="station" id="s1e2">
+  <div class="station-header">
+    <div class="station-number">02</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Moore · clasificación</div>
+      <h2>Cómo se clasifican los huesos</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <h3>Por su forma, y la forma predice la función</h3>
+    <p>Son cinco tipos. Lo que hay que aprender no es la lista, sino la lógica: en cada uno,
+      <strong>la geometría explica para qué sirve</strong>.</p>
+
+        <div class="photo-hero">
+      <img src="img/fig_7_2_tipos_forma.png" alt="Figura 7.2 de Tortora: los cinco tipos de hueso según su forma señalados sobre un esqueleto — húmero como largo, trapezoide como corto, esternón como plano, vértebra como irregular y rótula como sesamoideo">
+      <div class="photo-missing">Imagen no disponible</div>
+      <p class="photo-caption"><strong>Figura 7.2 · Tipos de huesos según la forma.</strong> Los huesos no están dibujados a escala. Fíjate en el criterio: es la <em>proporción</em>, no el tamaño — por eso las falanges, que miden dos centímetros, son huesos largos.</p>
+      <div class="photo-credit">Tortora &amp; Derrickson, 15.ª ed. · Fig. 7.2</div>
+    </div>
+
+    <table class="data">
+      <thead><tr><th>Tipo</th><th>Para qué esa forma</th><th>Ejemplos</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Largo</strong></td>
+            <td>Tubulares y con más longitud que anchura. Funcionan como <strong>palancas</strong>:
+                un pequeño acortamiento del músculo produce un gran desplazamiento del extremo</td>
+            <td>Húmero, fémur, falanges — sí, los de los dedos también son largos</td></tr>
+        <tr><td><strong>Corto</strong></td>
+            <td>Casi cúbicos. Muchos huesos pequeños juntos dan <strong>estabilidad con movilidad
+                repartida</strong>: cada uno se mueve poco, el conjunto mucho</td>
+            <td>Solo en el <strong>carpo</strong> (muñeca) y el <strong>tarso</strong> (tobillo)</td></tr>
+        <tr><td><strong>Plano</strong></td>
+            <td>Delgados y a menudo curvos. Dan <strong>protección</strong> con poco peso y mucha
+                superficie de inserción muscular</td>
+            <td>Huesos del cráneo, escápula, esternón, costillas</td></tr>
+        <tr><td><strong>Irregular</strong></td>
+            <td>Formas complejas que no entran en las anteriores. Suelen resolver
+                <strong>varias funciones a la vez</strong> en un espacio apretado</td>
+            <td>Vértebras, y los huesos de la cara: <strong>etmoides y esfenoides</strong></td></tr>
+        <tr><td><strong>Sesamoideo</strong></td>
+            <td>Se desarrollan <strong>dentro de un tendón</strong>. Lo protegen del desgaste y
+                <strong>cambian el ángulo de inserción</strong>, lo que aumenta la fuerza</td>
+            <td>La patela (rótula) es el mayor</td></tr>
+      </tbody>
+    </table>
+    <div class="photo-hero">
+      <img src="img/moore_1_7_femur.png" alt="Figura 1-7 de Moore: secciones transversales del fémur donde se ven las trabéculas orientadas según las líneas de tensión y presión">
+      <div class="photo-missing">Imagen no disponible</div>
+      <p class="photo-caption"><strong>Moore, fig. 1-7 · Secciones del fémur.</strong> Mira las <em>trabéculas</em>: no están puestas al azar, siguen las líneas de tensión y presión que atraviesan el hueso. Es material colocado justo donde la carga lo pide — la ley de Wolff, hecha visible.</p>
+      <div class="photo-credit">Moore, <em>Anatomía con orientación clínica</em> · Fig. 1-7</div>
+    </div>
+
+
+    <div class="pearl">«Largo» no significa grande: las falanges de tus dedos son huesos largos y
+      miden dos centímetros. El criterio es la <strong>proporción</strong>, no el tamaño.</div>
+  </div>
+
+  <div class="clinical-box">
+    <h5>La órbita se construye con los dos tipos más difíciles</h5>
+    <p>De los siete huesos orbitarios, unos son <strong>planos</strong> —el frontal, el lacrimal— y
+      otros <strong>irregulares</strong> —el esfenoides, el etmoides, el maxilar—. Ninguno es
+      largo ni corto. Eso no es casualidad: la órbita necesita paredes finas que protejan sin pesar
+      y, a la vez, formas complejas que dejen pasar nervios y vasos por sitios muy precisos.</p>
+    <p>Y tiene una consecuencia clínica directa: <strong>el piso y la pared medial de la órbita son
+      finísimos</strong> —el etmoides que forma la pared medial se llama <em>lámina papirácea</em>,
+      «delgada como el papel»—. Por eso un golpe frontal sobre el globo ocular fractura antes esas
+      paredes que el reborde: es la <strong>fractura por estallido</strong>, y descomprime la
+      órbita hacia el seno maxilar.</p>
+  </div>
+</section>
+
+<!-- ─────────── 03 ─────────── -->
+<section class="station" id="s1e3">
+  <div class="station-header">
+    <div class="station-number">03</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Tortora 6.2</div>
+      <h2>Un hueso por dentro</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <h3>Las partes de un hueso largo</h3>
+    <p>Se usa el hueso largo como modelo porque tiene todas las piezas; en los demás tipos aparecen
+      las mismas, solo que dispuestas de otro modo.</p>
+
+        <div class="photo-hero">
+      <img src="img/fig_6_1_hueso_largo.png" alt="Figura 6.1 de Tortora: partes de un hueso largo, con diáfisis, epífisis proximal y distal, metáfisis, cartílago articular, periostio, cavidad medular y endostio">
+      <div class="photo-missing">Imagen no disponible</div>
+      <p class="photo-caption"><strong>Figura 6.1 · Partes de un hueso largo.</strong> Localiza el corte: compacto por fuera, esponjoso en las epífisis y hueco en el centro. El hueso es un <em>tubo</em>, y por eso resiste tanto pesando tan poco.</p>
+      <div class="photo-credit">Tortora &amp; Derrickson, 15.ª ed. · Fig. 6.1</div>
+    </div>
+
+    <table class="data">
+      <thead><tr><th>Parte</th><th>Qué es</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Diáfisis</strong></td><td>El cuerpo del hueso: el cilindro largo</td></tr>
+        <tr><td><strong>Epífisis</strong></td><td>Los dos extremos, ensanchados. Son las que se articulan</td></tr>
+        <tr><td><strong>Metáfisis</strong></td><td>La zona entre diáfisis y epífisis. En el hueso que crece, aquí está la <strong>placa epifisaria</strong>; en el adulto queda una línea</td></tr>
+        <tr><td><strong>Cartílago articular</strong></td><td>Capa fina de <strong>cartílago hialino</strong> sobre la superficie que se articula. Amortigua y reduce la fricción. <em>No tiene pericondrio</em>, y por eso repara mal</td></tr>
+        <tr><td><strong>Periostio</strong></td><td>Membrana de conectivo denso irregular que envuelve el hueso salvo donde hay cartílago articular. Nutre, permite el <strong>crecimiento en grosor</strong>, repara y da inserción a tendones y ligamentos. <strong>Está muy inervado</strong></td></tr>
+        <tr><td><strong>Cavidad medular</strong></td><td>El espacio hueco de la diáfisis, con <strong>médula ósea amarilla</strong> en el adulto</td></tr>
+        <tr><td><strong>Endostio</strong></td><td>Membrana fina que tapiza la cavidad medular por dentro</td></tr>
+      </tbody>
+    </table>
+
+    <div class="pearl">Aquí está la respuesta a la primera pregunta del inicio. <strong>El hueso es
+      un tubo, no una barra.</strong> Un cilindro hueco resiste la flexión casi igual que uno macizo
+      del mismo diámetro, pero pesa mucho menos — es el mismo principio del andamio y del manillar
+      de una bicicleta. Y el material que se ahorra en el centro se aprovecha: ahí va la médula.</div>
+
+    <h3>Cómo le llega la sangre</h3>
+    <p>Un tejido con este metabolismo necesita mucha irrigación, y el hueso
+      <strong>está profusamente irrigado</strong> — sobre todo donde hay médula ósea roja. Los
+      vasos entran por cuatro vías, y cada una atiende una zona:</p>
+
+        <div class="photo-hero">
+      <img src="img/fig_6_4_irrigacion.png" alt="Figura 6.4 de Tortora: irrigación de un hueso largo maduro, con la arteria nutricia entrando por el agujero nutricio y las arterias periósticas, metafisarias y epifisarias">
+      <div class="photo-missing">Imagen no disponible</div>
+      <p class="photo-caption"><strong>Figura 6.4 · Irrigación de un hueso largo maduro.</strong> Sigue la <em>arteria nutricia</em>: entra por un único agujero y se reparte por la cavidad medular. Las periósticas, en cambio, entran por muchos canales y traen los nervios consigo.</p>
+      <div class="photo-credit">Tortora &amp; Derrickson, 15.ª ed. · Fig. 6.4</div>
+    </div>
+
+    <table class="data">
+      <thead><tr><th>Arterias</th><th>Por dónde entran</th><th>Qué irrigan</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Periósticas</strong></td>
+            <td>Por múltiples <strong>canales perforantes</strong>, desde el periostio</td>
+            <td>La parte externa del hueso compacto. Van <strong>acompañadas de nervios</strong></td></tr>
+        <tr><td><strong>Nutricia</strong></td>
+            <td>Por el <strong>agujero nutricio</strong>, una sola abertura en la diáfisis</td>
+            <td>El hueso compacto interno y la médula de la cavidad medular</td></tr>
+        <tr><td><strong>Metafisarias</strong></td><td>Por las metáfisis</td>
+            <td>La médula roja y el hueso de esa zona</td></tr>
+        <tr><td><strong>Epifisarias</strong></td><td>Por las epífisis</td>
+            <td>La médula roja y el hueso esponjoso de los extremos</td></tr>
+      </tbody>
+    </table>
+
+    <p>Y con la sangre viajan los nervios. <strong>El periostio está inervado por abundantes
+      nervios sensitivos</strong>, especialmente sensibles al <em>estiramiento</em> — no al
+      contacto. Eso explica el dolor intenso de una fractura, de un tumor óseo que expande el hueso
+      y de la punción de médula ósea.</p>
+  </div>
+
+  <div class="clinical-box">
+    <h5>Por qué un golpe en la espinilla duele tanto</h5>
+    <p>El <strong>periostio</strong> es una de las estructuras más inervadas del cuerpo, y en la
+      cara anterior de la tibia está justo bajo la piel, sin músculo que lo amortigüe. El hueso en
+      sí apenas duele; lo que duele es su envoltura.</p>
+    <p>El mismo dato explica algo que sí verás en consulta: el <strong>reborde orbitario</strong>
+      también tiene el periostio a flor de piel. Y dentro de la órbita, esa capa recibe el nombre de
+      <strong>periórbita</strong> — se despega con facilidad del hueso, lo que en cirugía es una
+      ventaja y en una infección un problema, porque deja un plano por donde el pus avanza.</p>
+  </div>
+</section>
+
+<!-- ─────────── 04 ─────────── -->
+<section class="station" id="s1e4">
+  <div class="station-header">
+    <div class="station-number">04</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Tortora 6.3</div>
+      <h2>El tejido óseo: células y matriz</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Volvemos a la lógica de la clase pasada: el hueso es <strong>tejido conectivo</strong>, así
+      que se define por su <strong>matriz</strong>. Pocas células, mucho material — solo que aquí el
+      material está mineralizado.</p>
+
+    <h3>La matriz: dos ingredientes que se necesitan</h3>
+    <div class="two-col">
+      <div class="col-card teal"><h5>Sales minerales · ~25 % del peso</h5>
+        <p>Sobre todo <strong>hidroxiapatita</strong>, un fosfato de calcio cristalizado. Aporta la
+          <strong>dureza</strong> y la resistencia a la compresión.</p></div>
+      <div class="col-card rust"><h5>Fibras de colágeno</h5>
+        <p>Aportan la <strong>flexibilidad</strong> y la resistencia a la tracción. Sin ellas el
+          hueso sería tan quebradizo como la tiza.</p></div>
+    </div>
+    <div class="pearl">Un hueso descalcificado en ácido se puede anudar como una goma; uno al que se
+      le quema el colágeno se desmenuza entre los dedos. <strong>La resistencia del hueso no está en
+      ninguno de los dos componentes, sino en su combinación</strong> — igual que el hormigón
+      armado, que es cemento a compresión y acero a tracción.</div>
+
+    <h3>Las cuatro células, y la de más</h3>
+    <table class="data">
+      <thead><tr><th>Célula</th><th>Qué hace</th><th>De dónde sale</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Osteogénica</strong></td>
+            <td>La única que <strong>se divide</strong>. Es la célula madre del hueso</td>
+            <td>Del mesénquima. Vive en periostio y endostio</td></tr>
+        <tr><td><strong>Osteoblasto</strong></td>
+            <td><strong>Construye:</strong> secreta la matriz. Cuando queda atrapado en lo que él
+                mismo fabricó, se convierte en osteocito</td>
+            <td>De la osteogénica</td></tr>
+        <tr><td><strong>Osteocito</strong></td>
+            <td>La célula <strong>madura y mayoritaria</strong>. Mantiene el tejido e intercambia
+                sustancias con la sangre. Vive en una <em>laguna</em></td>
+            <td>Del osteoblasto que quedó dentro</td></tr>
+        <tr><td><strong>Osteoclasto</strong></td>
+            <td><strong>Destruye:</strong> libera enzimas y ácidos que disuelven las sales y
+                degradan el colágeno. Es enorme y multinucleado</td>
+            <td>De la fusión de <strong>monocitos</strong> — viene de la sangre, no del hueso</td></tr>
+      </tbody>
+    </table>
+    <div class="photo-hero">
+      <img src="img/fig_6_2_celulas.png" alt="Figura 6.2 de Tortora: los cuatro tipos de células óseas — célula osteogénica, osteoblasto, osteocito y osteoclasto — con su morfología y su posición en el tejido">
+      <div class="photo-missing">Imagen no disponible</div>
+      <p class="photo-caption"><strong>Figura 6.2 · Las cuatro células del hueso.</strong> Fíjate en el tamaño del <em>osteoclasto</em> y en sus múltiples núcleos: se nota a simple vista que no pertenece a la misma familia que las otras tres.</p>
+      <div class="photo-credit">Tortora, 15.ª ed. · Fig. 6.2</div>
+    </div>
+
+
+    <div class="pearl">Nombres que se confunden en todos los exámenes:
+      <strong>osteoBlasto = Build</strong>, construye. <strong>OsteoClasto = Corta</strong>, destruye.
+      Y el osteoclasto es el intruso: no deriva de la línea ósea, sino de células de la sangre.</div>
+
+    <h3>Compacto y esponjoso</h3>
+    <p>El mismo tejido, con dos arquitecturas. Y las dos están en todos los huesos.</p>
+
+        <div class="photo-hero">
+      <img src="img/fig_6_3_histologia.png" alt="Figura 6.3 de Tortora: histología del hueso compacto con sus osteonas, laminillas concéntricas, lagunas y conductos centrales, junto al hueso esponjoso con sus trabéculas">
+      <div class="photo-missing">Imagen no disponible</div>
+      <p class="photo-caption"><strong>Figura 6.3 · Hueso compacto y hueso esponjoso.</strong> A la izquierda, las osteonas: anillos concéntricos en torno a un conducto con vasos. A la derecha, las trabéculas, sin osteonas y con médula en los huecos. Mismo tejido, dos arquitecturas.</p>
+      <div class="photo-credit">Tortora &amp; Derrickson, 15.ª ed. · Fig. 6.3</div>
+    </div>
+
+    <table class="data">
+      <thead><tr><th></th><th>Compacto</th><th>Esponjoso</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Unidad</strong></td>
+            <td><strong>Osteona</strong> o sistema de Havers: laminillas concéntricas alrededor de un
+                conducto central con vasos y nervios</td>
+            <td><strong>Trabéculas</strong>: columnas irregulares con espacios entre ellas.
+                <em>No tiene osteonas</em></td></tr>
+        <tr><td><strong>Dónde</strong></td>
+            <td>Capa externa de todos los huesos y casi toda la diáfisis</td>
+            <td>Interior de las epífisis, y casi todo el volumen de los huesos cortos, planos e
+                irregulares</td></tr>
+        <tr><td><strong>Qué contiene</strong></td><td>Los conductos, y por ellos vasos</td>
+            <td><strong>Médula ósea roja</strong> en los espacios</td></tr>
+        <tr><td><strong>Para qué</strong></td>
+            <td>Resistencia, protección y soporte de las tensiones</td>
+            <td>Resiste según las <strong>líneas de fuerza</strong>, aligera el hueso y aloja la
+                médula</td></tr>
+      </tbody>
+    </table>
+
+    <div class="pearl">Las trabéculas no están puestas al azar: siguen las <strong>líneas de tensión
+      y presión</strong> que atraviesan ese hueso. Es material colocado exactamente donde la carga
+      lo pide. Y se reorientan si la carga cambia — el hueso, literalmente, se reconstruye según
+      cómo lo uses.</div>
+  </div>
+
+  <div class="clinical-box">
+    <h5>Las paredes de la órbita casi no tienen esponjoso</h5>
+    <p>La <em>lámina papirácea</em> del etmoides y el piso orbitario son tan finos que apenas hay
+      dos láminas de compacto con casi nada en medio — a veces menos de medio milímetro. Por eso
+      ceden con tanta facilidad. En cambio el <strong>reborde orbitario</strong>, que sí tiene
+      espesor y esponjoso dentro, es de las estructuras más resistentes de la cara: hace de
+      parachoques y protege al globo de los golpes directos.</p>
+  </div>
+</section>
+
+<!-- ─────────── 05 ─────────── -->
+<section class="station" id="s1e5">
+  <div class="station-header">
+    <div class="station-number">05</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Moore · detalles óseos</div>
+      <h2>Accidentes óseos: el vocabulario</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>La superficie de un hueso no es lisa. Tiene salientes, huecos y agujeros, y todos tienen
+      nombre. Esto parece la parte más árida de la osteología, pero es la más rentable:
+      <strong>sin este vocabulario no se puede leer una descripción anatómica, ni un informe
+      radiológico, ni un parte quirúrgico</strong>.</p>
+
+    <div class="pearl">Y hay una regla que lo ordena todo: <strong>los accidentes óseos no son
+      caprichos de la forma, son huellas</strong>. Donde se inserta un tendón queda una elevación;
+      donde pasa un vaso o un nervio queda un surco o un agujero; donde se apoya otro hueso queda
+      una carilla lisa. <em>Leer un hueso seco es reconstruir lo que había alrededor.</em></div>
+
+    <h3>Salientes: donde algo tiró</h3>
+    <table class="data">
+      <thead><tr><th>Término</th><th>Qué es</th><th>Ejemplo</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Proceso</strong> <em>(apófisis)</em></td><td>Extensión o proyección, el término general</td><td>Proceso espinoso de una vértebra</td></tr>
+        <tr><td><strong>Tuberosidad</strong></td><td>Elevación grande y redondeada</td><td>Tuberosidad isquiática</td></tr>
+        <tr><td><strong>Tubérculo</strong></td><td>Eminencia pequeña</td><td>Tubérculo mayor del húmero</td></tr>
+        <tr><td><strong>Trocánter</strong></td><td>Elevación grande y roma. Solo en el fémur</td><td>Trocánter mayor</td></tr>
+        <tr><td><strong>Cresta</strong></td><td>Reborde alargado</td><td>Cresta ilíaca · <strong>cresta lacrimal</strong></td></tr>
+        <tr><td><strong>Línea</strong></td><td>Elevación lineal, más suave que una cresta</td><td>Línea del sóleo, en la tibia</td></tr>
+        <tr><td><strong>Espina</strong></td><td>Prolongación puntiaguda</td><td>Espina de la escápula · <strong>espina troclear</strong> de la órbita</td></tr>
+        <tr><td><strong>Protuberancia</strong></td><td>Abultamiento</td><td>Protuberancia occipital externa</td></tr>
+        <tr><td><strong>Cóndilo</strong></td><td>Área articular redondeada</td><td>Cóndilos del fémur</td></tr>
+        <tr><td><strong>Epicóndilo</strong></td><td>Eminencia <em>por encima</em> de un cóndilo</td><td>Epicóndilos del húmero</td></tr>
+        <tr><td><strong>Maléolo</strong></td><td>Proceso redondeado</td><td>Maléolo lateral de la fíbula</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Huecos y aberturas: donde algo pasa o se aloja</h3>
+    <table class="data">
+      <thead><tr><th>Término</th><th>Qué es</th><th>Ejemplo</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Foramen</strong> <em>(agujero)</em></td><td>Paso <strong>a través</strong> del hueso</td><td>Foramen obturado · <strong>foramen óptico</strong></td></tr>
+        <tr><td><strong>Fosa</strong></td><td>Hueco o depresión amplia</td><td>Fosa infraespinosa · <strong>fosa lacrimal</strong></td></tr>
+        <tr><td><strong>Incisura</strong> <em>(escotadura)</em></td><td>Muesca en el <strong>borde</strong> de un hueso</td><td>Incisura isquiática mayor · <strong>incisura supraorbitaria</strong></td></tr>
+        <tr><td><strong>Carilla</strong> <em>(cara, fosita)</em></td><td>Superficie plana y lisa, cubierta de cartílago, donde se articula con otro hueso</td><td>Carilla articular de una vértebra</td></tr>
+        <tr><td><strong>Fisura</strong></td><td>Hendidura alargada entre dos huesos</td><td><strong>Fisura orbitaria superior</strong></td></tr>
+        <tr><td><strong>Conducto</strong> <em>(meato)</em></td><td>Paso en forma de túnel</td><td>Meato acústico externo · <strong>conducto nasolacrimal</strong></td></tr>
+        <tr><td><strong>Seno</strong></td><td>Cavidad llena de aire dentro de un hueso</td><td><strong>Seno maxilar</strong>, justo bajo el piso de la órbita</td></tr>
+      </tbody>
+    </table>
+
+    <div class="pearl">Distingue bien tres que se confunden: el <strong>foramen</strong> atraviesa el
+      hueso, la <strong>fosa</strong> es un hueco que no lo atraviesa, y la <strong>incisura</strong>
+      es una muesca en el borde. Si la incisura se cierra por un puente óseo, pasa a ser foramen —y
+      eso ocurre de verdad en la <em>incisura supraorbitaria</em>, que en mucha gente es un
+      <em>foramen</em> supraorbitario.</div>
+    <div class="photo-hero">
+      <img src="img/moore_1_8_accidentes.png" alt="Figura 1-8 de Moore: detalles y formaciones óseas, con ejemplos de cóndilo, epicóndilo, cresta, espina, tubérculo, tuberosidad, trocánter, fosa, foramen, incisura y carilla señalados sobre huesos reales">
+      <div class="photo-missing">Imagen no disponible</div>
+      <p class="photo-caption"><strong>Moore, fig. 1-8 · Detalles y formaciones óseas.</strong> Todo el vocabulario de las dos tablas, señalado sobre huesos de verdad. Vale la pena volver a esta lámina cada vez que aparezca un término nuevo.</p>
+      <div class="photo-credit">Moore, <em>Anatomía con orientación clínica</em> · Fig. 1-8</div>
+    </div>
+
+  </div>
+
+  <div class="clinical-box">
+    <h5>Toda la órbita en este vocabulario</h5>
+    <p>Fíjate en que ya puedes nombrar la órbita entera con los términos de arriba, sin haberla
+      estudiado todavía:</p>
+    <ul>
+      <li><strong>Foramen óptico:</strong> por ahí salen el nervio óptico y entra la arteria
+        oftálmica.</li>
+      <li><strong>Fisura orbitaria superior:</strong> hendidura entre el ala mayor y menor del
+        esfenoides; por ella pasan los nervios que mueven el ojo — III, IV, VI y la rama V₁.</li>
+      <li><strong>Fosa lacrimal:</strong> aloja el saco lagrimal, y se continúa en el
+        <strong>conducto nasolacrimal</strong> que drena a la nariz.</li>
+      <li><strong>Incisura supraorbitaria:</strong> por donde emerge el nervio supraorbitario. Se
+        palpa en el reborde superior — y presionarla es una maniobra clínica para valorar el nivel
+        de conciencia.</li>
+      <li><strong>Espina troclear:</strong> el diminuto gancho del frontal donde se apoya la polea
+        del músculo oblicuo superior.</li>
+    </ul>
+    <p>Cinco términos genéricos, cinco estructuras oculares. <strong>El vocabulario es la
+      herramienta; la órbita, el caso.</strong></p>
+  </div>
+</section>
+
+<!-- ─────────── 06 · TA2 ─────────── -->
+<section class="station" id="s1e6">
+  <div class="station-header">
+    <div class="station-number">06</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Terminología</div>
+      <h2>Términos TA2 del hueso</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <h3>Voltea cada tarjeta para ver la definición</h3>
+    <div class="flip-grid">
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Diáfisis</span><span class="term-en">Diaphysis</span></div>
+        <div class="flip-back"><p class="term-def">Cuerpo o porción cilíndrica de un hueso largo, formada casi toda por hueso compacto.</p><p class="term-opto">👁 Ningún hueso orbitario tiene diáfisis: todos son planos o irregulares.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Epífisis</span><span class="term-en">Epiphysis</span></div>
+        <div class="flip-back"><p class="term-def">Cada extremo ensanchado de un hueso largo; contiene hueso esponjoso y se articula.</p><p class="term-opto">👁 Su núcleo esponjoso aloja la médula ósea roja.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Metáfisis</span><span class="term-en">Metaphysis</span></div>
+        <div class="flip-back"><p class="term-def">Zona entre diáfisis y epífisis. Contiene la placa epifisaria mientras el hueso crece.</p><p class="term-opto">👁 Cuando el crecimiento termina, queda como línea epifisaria.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Periostio</span><span class="term-en">Periosteum</span></div>
+        <div class="flip-back"><p class="term-def">Membrana de conectivo denso irregular que envuelve el hueso; nutre, repara y permite el crecimiento en grosor.</p><p class="term-opto">👁 Dentro de la órbita se llama periórbita y se despega con facilidad.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Endostio</span><span class="term-en">Endosteum</span></div>
+        <div class="flip-back"><p class="term-def">Membrana fina que tapiza la cavidad medular por dentro.</p><p class="term-opto">👁 Contiene células osteogénicas, igual que el periostio.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Osteona</span><span class="term-en">Osteon</span></div>
+        <div class="flip-back"><p class="term-def">Unidad del hueso compacto: laminillas concéntricas en torno a un conducto central con vasos. También llamada sistema de Havers.</p><p class="term-opto">👁 El hueso esponjoso NO tiene osteonas.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Trabécula</span><span class="term-en">Trabecula</span></div>
+        <div class="flip-back"><p class="term-def">Columna irregular de hueso esponjoso, orientada según las líneas de fuerza.</p><p class="term-opto">👁 Entre las trabéculas está la médula ósea roja.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Osteoblasto</span><span class="term-en">Osteoblast</span></div>
+        <div class="flip-back"><p class="term-def">Célula que construye: secreta la matriz ósea. Al quedar rodeada por ella se convierte en osteocito.</p><p class="term-opto">👁 Blasto = Build, construye.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Osteocito</span><span class="term-en">Osteocyte</span></div>
+        <div class="flip-back"><p class="term-def">Célula ósea madura, alojada en una laguna; mantiene el tejido e intercambia sustancias con la sangre.</p><p class="term-opto">👁 Se comunican por canalículos mediante uniones comunicantes.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Osteoclasto</span><span class="term-en">Osteoclast</span></div>
+        <div class="flip-back"><p class="term-def">Célula gigante y multinucleada que reabsorbe hueso; deriva de la fusión de monocitos.</p><p class="term-opto">👁 Clasto = Corta. Es el único que no viene de la línea ósea.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Hidroxiapatita</span><span class="term-en">Hydroxyapatite</span></div>
+        <div class="flip-back"><p class="term-def">Cristal de fosfato de calcio que mineraliza la matriz y da dureza al hueso.</p><p class="term-opto">👁 Sin colágeno sería quebradiza como la tiza.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Foramen</span><span class="term-en">Foramen</span></div>
+        <div class="flip-back"><p class="term-def">Abertura que atraviesa un hueso y da paso a vasos o nervios.</p><p class="term-opto">👁 El foramen óptico da paso al nervio óptico y a la arteria oftálmica.</p></div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 07 · QUIZ ─────────── -->
+<section class="station" id="s1e7">
+  <div class="station-header">
+    <div class="station-number">07</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Autoevaluación</div>
+      <h2>Comprueba lo que aprendiste</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Elige una opción en cada pregunta. La respuesta aparece al pulsar.</p>
+
+    <div class="check-question" data-question="q1s1o">
+      <p class="question-text">1. ¿Cuál de estas funciones del sistema esquelético <em>no</em> es mecánica?</p>
+      <ul class="options">
+        <li data-letter="A">Sostén de los tejidos blandos</li>
+        <li data-letter="B">Protección de los órganos internos</li>
+        <li data-letter="C">Servir de palanca para el movimiento</li>
+        <li data-letter="D" data-correct="true">Almacenar calcio y fósforo y liberarlos a la sangre</li>
+        <li data-letter="E">Dar inserción a los tendones</li>
+      </ul>
+      <div class="feedback"><strong>Correcto: D.</strong> Tres de las seis funciones no son mecánicas: la homeostasis mineral, la producción de células sanguíneas en la médula roja y el almacenamiento de triglicéridos en la amarilla. Son las que revelan que el hueso es un órgano vivo con metabolismo intenso, no un andamio.</div>
+    </div>
+
+    <div class="check-question" data-question="q2s1o">
+      <p class="question-text">2. Los huesos <strong>cortos</strong> se encuentran únicamente en dos regiones del cuerpo. ¿Cuáles?</p>
+      <ul class="options">
+        <li data-letter="A">Cráneo y cara</li>
+        <li data-letter="B" data-correct="true">Carpo (muñeca) y tarso (tobillo)</li>
+        <li data-letter="C">Columna vertebral y tórax</li>
+        <li data-letter="D">Manos y pies, incluidas las falanges</li>
+        <li data-letter="E">Cintura escapular y cintura pélvica</li>
+      </ul>
+      <div class="feedback"><strong>Correcto: B.</strong> Solo el carpo y el tarso. Ojo con la trampa de la opción D: las <em>falanges</em> están en manos y pies pero son huesos <strong>largos</strong> — el criterio es la proporción, no el tamaño.</div>
+    </div>
+
+    <div class="check-question" data-question="q3s1o">
+      <p class="question-text">3. ¿Por qué un hueso largo es hueco en el centro?</p>
+      <ul class="options">
+        <li data-letter="A">Porque el hueso solo puede crecer desde la superficie</li>
+        <li data-letter="B" data-correct="true">Porque un cilindro hueco resiste la flexión casi igual que uno macizo pesando mucho menos, y el espacio se aprovecha para la médula</li>
+        <li data-letter="C">Porque los osteoclastos no alcanzan el centro del hueso</li>
+        <li data-letter="D">Para que quepan las osteonas, que son huecas</li>
+        <li data-letter="E">Porque el hueso compacto no soporta la compresión</li>
+      </ul>
+      <div class="feedback"><strong>Correcto: B.</strong> Es el principio del tubo, el mismo del andamio y del cuadro de una bicicleta: en la flexión el material del centro casi no trabaja, así que quitarlo apenas resta resistencia y ahorra mucho peso. Y el hueco no se desperdicia: aloja la médula.</div>
+    </div>
+
+    <div class="check-question" data-question="q4s1o">
+      <p class="question-text">4. El <strong>osteoclasto</strong> se distingue de las otras tres células óseas en que:</p>
+      <ul class="options">
+        <li data-letter="A">Es la única que puede dividirse</li>
+        <li data-letter="B">Es la más abundante del tejido óseo</li>
+        <li data-letter="C" data-correct="true">Reabsorbe hueso y deriva de la fusión de monocitos, no de la línea osteogénica</li>
+        <li data-letter="D">Vive alojada en lagunas dentro de la matriz</li>
+        <li data-letter="E">Secreta la matriz ósea que luego se mineraliza</li>
+      </ul>
+      <div class="feedback"><strong>Correcto: C.</strong> Es el intruso del tejido: llega desde la sangre por fusión de monocitos, mientras que osteogénicas, osteoblastos y osteocitos son la misma estirpe en tres momentos. A describe la osteogénica, B y D el osteocito, E el osteoblasto.</div>
+    </div>
+
+    <div class="saber-box">
+      <strong>Pregunta tipo Saber Pro · Inglés</strong>
+      <div class="check-question" style="margin-top:16px;border-color:var(--purple)" data-question="q5s1o">
+        <p class="question-text">5. A blunt blow to the eye fractures the orbital floor rather than the sturdy orbital rim. Which structural feature best explains this?<br><em style="font-size:.85rem;color:var(--text-muted)">Un golpe romo en el ojo fractura el piso de la órbita y no el resistente reborde orbitario. ¿Qué rasgo estructural lo explica mejor?</em></p>
+        <ul class="options">
+          <li data-letter="A">The floor is made of cartilage (el piso es de cartílago)</li>
+          <li data-letter="B" data-correct="true">The floor is a very thin plate of compact bone with almost no spongy bone between its layers (el piso es una lámina finísima de hueso compacto, casi sin esponjoso entre sus capas)</li>
+          <li data-letter="C">The floor has no periosteum (el piso carece de periostio)</li>
+          <li data-letter="D">The rim is a sesamoid bone (el reborde es un hueso sesamoideo)</li>
+          <li data-letter="E">The floor is a long bone (el piso es un hueso largo)</li>
+        </ul>
+        <div class="feedback"><strong>Correct: B.</strong> The orbital floor and the medial wall are wafer-thin — the ethmoid plate forming the medial wall is called <em>lamina papyracea</em>, «paper-thin». The rim, by contrast, is thick and contains spongy bone, so it acts as a bumper. This is why the globe is protected by a blow-out fracture: the floor gives way and decompresses the orbit into the maxillary sinus.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div><!-- /s1 -->
+
+<!-- ═══════════════════════ SESIÓN 2 ═══════════════════════ -->
+<div class="tab-pane" id="s2">
+
+<nav class="station-nav">
+  <h3>Contenido · Sesión 2</h3>
+  <ol>
+    <li><a href="#s2e1">Cómo se forma un hueso</a></li>
+    <li><a href="#s2e2">El hueso que se rehace solo</a></li>
+    <li><a href="#s2e3">Articulaciones: las dos clasificaciones</a></li>
+    <li><a href="#s2e4">La articulación sinovial por dentro</a></li>
+    <li><a href="#s2e5">Los seis tipos de sinovial</a></li>
+    <li><a href="#s2e6">Los movimientos</a></li>
+    <li><a href="#s2e7">La cabeza ósea y la órbita</a></li>
+    <li><a href="#s2e8">Términos TA2 de la sesión</a></li>
+    <li><a href="#s2e9">Comprueba lo que aprendiste</a></li>
+    <li><a href="#s2e10">Cierre: volvemos a las cuatro preguntas</a></li>
+  </ol>
+</nav>
+
+<!-- ─────────── 01 ─────────── -->
+<section class="station" id="s2e1">
+  <div class="station-header">
+    <div class="station-number">01</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Tortora 6.5</div>
+      <h2>Cómo se forma un hueso</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>El proceso se llama <strong>osificación</strong> y empieza en la sexta o séptima semana del
+      desarrollo. Hay dos modos, y los dos consisten en lo mismo: <strong>sustituir un tejido
+      conectivo previo por hueso</strong>. Lo que cambia es cuál era ese tejido.</p>
+
+    <div class="two-col">
+      <div class="col-card teal"><h5>Intramembranosa · directa</h5>
+        <p>El hueso se forma <strong>directamente dentro del mesénquima</strong>, sin molde
+          intermedio. Da los <strong>huesos planos del cráneo</strong>, la mandíbula y la clavícula.</p>
+        <p>Es la más sencilla: unas células mesenquimáticas se convierten en osteoblastos, empiezan
+          a secretar matriz y esa matriz se mineraliza donde estaba el tejido blando.</p></div>
+      <div class="col-card blue"><h5>Endocondral · con molde</h5>
+        <p>Primero se fabrica una <strong>maqueta de cartílago hialino</strong>, y el hueso la va
+          sustituyendo. Da <strong>casi todos los demás huesos</strong>, y en particular los largos.</p>
+        <p>Es más lenta pero permite algo que la otra no: como el molde de cartílago puede seguir
+          creciendo por delante del hueso, <strong>el hueso puede alargarse durante años</strong>.</p></div>
+    </div>
+
+    <div class="pearl">Los dos procesos parten del <strong>mesénquima</strong>, el tejido conectivo
+      embrionario que vimos la clase pasada en el Cuadro 4.3. Aquello que parecía una curiosidad
+      —«da origen a casi todos los tejidos conectivos»— es literalmente de donde sale tu
+      esqueleto.</div>
+
+    <h3>La placa epifisaria: la fábrica del crecimiento</h3>
+    <p>En un hueso largo que todavía crece hay, en cada metáfisis, una lámina de cartílago hialino
+      que no se osifica: la <strong>placa epifisaria</strong>. Funciona como una cinta
+      transportadora — produce cartílago nuevo por el lado de la epífisis mientras se osifica por el
+      lado de la diáfisis. Resultado: <strong>el hueso se alarga y la placa se mantiene</strong>.</p>
+
+        <div class="photo-hero">
+      <img src="img/fig_6_7_placa.png" alt="Figura 6.7 de Tortora: la placa epifisaria con sus cuatro zonas — cartílago inactivo, proliferativo, hipertrófico y calcificado — entre la epífisis y la diáfisis">
+      <div class="photo-missing">Imagen no disponible</div>
+      <p class="photo-caption"><strong>Figura 6.7 · La placa epifisaria.</strong>
+        Las cuatro zonas, de la epífisis hacia la diáfisis. Crece por arriba y se osifica por abajo:
+        por eso el hueso se alarga sin que la placa se consuma… hasta que deja de dividirse y se
+        cierra.</p>
+      <div class="photo-credit">Tortora &amp; Derrickson, 15.ª ed. · Fig. 6.7</div>
+    </div>
+    <div class="photo-grid cols-2">
+      <div class="photo-card">
+        <div class="photo-frame"><img src="img/fig_6_6_endocondral.png" alt="Figura 6.6 de Tortora: las etapas de la osificación endocondral, desde el molde de cartílago hialino hasta el hueso con su cavidad medular y sus centros de osificación primario y secundario"><div class="photo-missing">No disponible</div></div>
+        <p class="photo-caption"><strong>Figura 6.6 · Osificación endocondral.</strong> El molde de cartílago y su sustitución progresiva. Localiza el <em>centro primario</em> en la diáfisis y los <em>secundarios</em> en las epífisis.</p><div class="photo-credit">Tortora, 15.ª ed. · Fig. 6.6</div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-frame"><img src="img/fig_6_8_aposicion.png" alt="Figura 6.8 de Tortora: aumento del diámetro óseo por crecimiento aposicional, con los osteoblastos del periostio depositando hueso en la superficie mientras los osteoclastos amplían la cavidad medular"><div class="photo-missing">No disponible</div></div>
+        <p class="photo-caption"><strong>Figura 6.8 · Crecimiento en grosor.</strong> Dos procesos a la vez: el periostio añade hueso por fuera y los osteoclastos agrandan la cavidad por dentro. Así el hueso engorda sin volverse macizo.</p><div class="photo-credit">Tortora, 15.ª ed. · Fig. 6.8</div>
+      </div>
+    </div>
+    <div class="photo-hero">
+      <img src="img/moore_1_9_desarrollo.png" alt="Figura 1-9 de Moore: desarrollo y crecimiento de un hueso largo desde el molde cartilaginoso fetal hasta el hueso adulto con las epífisis soldadas">
+      <div class="photo-missing">Imagen no disponible</div>
+      <p class="photo-caption"><strong>Moore, fig. 1-9 · Toda la vida de un hueso largo.</strong>
+        De izquierda a derecha, el molde de cartílago, la aparición de los centros de osificación,
+        el hueso en crecimiento con sus placas abiertas y, al final, el adulto con las epífisis
+        soldadas. La secuencia completa en una sola lámina.</p>
+      <div class="photo-credit">Moore · Fig. 1-9</div>
+    </div>
+
+
+
+    <p>Cuando el cartílago deja de dividirse más rápido de lo que se osifica, la placa se consume,
+      la epífisis se suelda a la diáfisis y queda la <strong>línea epifisaria</strong>. Ahí termina
+      el crecimiento en longitud, y es definitivo.</p>
+
+    <div class="two-col">
+      <div class="col-card blue"><h5>Crecimiento en longitud</h5>
+        <p>Solo en la <strong>placa epifisaria</strong>, y solo hasta que se cierra.</p></div>
+      <div class="col-card rust"><h5>Crecimiento en grosor</h5>
+        <p><strong>Por aposición</strong>: los osteoblastos del periostio depositan hueso nuevo en
+          la superficie externa. Esto no se detiene nunca.</p></div>
+    </div>
+
+    <div class="pearl">Las dos vías explican por qué un adulto no puede crecer de estatura pero sí
+      engrosar sus huesos con el ejercicio. Y explican también las fracturas infantiles que
+      preocupan al traumatólogo: <strong>si la fractura atraviesa la placa epifisaria</strong>, ese
+      hueso puede dejar de alargarse.</div>
+  </div>
+
+  <div class="clinical-box">
+    <h5>Los huesos de la órbita se forman por las dos vías</h5>
+    <p>El <strong>frontal</strong> y los huesos planos que la rodean son de osificación
+      <strong>intramembranosa</strong>; el <strong>esfenoides</strong> y el <strong>etmoides</strong>
+      tienen partes de osificación <strong>endocondral</strong>. Por eso la órbita del recién nacido
+      no es una copia pequeña de la del adulto: crece a ritmos distintos según la pared.</p>
+    <p>Y de ahí sale un principio clínico importante: <strong>la órbita crece porque el ojo crece
+      dentro</strong>. Si un niño pierde el globo ocular muy pronto —por un retinoblastoma, por
+      ejemplo—, esa órbita se queda pequeña. Por eso se coloca un implante que mantenga el volumen:
+      no es estético, es para que el hueso reciba el estímulo que necesita para crecer.</p>
+  </div>
+</section>
+
+<!-- ─────────── 02 ─────────── -->
+<section class="station" id="s2e2">
+  <div class="station-header">
+    <div class="station-number">02</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Tortora 6.5 · 6.7 · 6.8</div>
+      <h2>El hueso que se rehace solo</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <h3>Remodelación: demoler y reconstruir, toda la vida</h3>
+    <p>La <strong>remodelación ósea</strong> es un proceso continuo: los osteoclastos labran túneles
+      en el hueso viejo y los osteoblastos los rellenan con hueso nuevo. No para nunca, y no se
+      nota. Sirve para tres cosas: <strong>reparar microfracturas</strong>, <strong>liberar o
+      almacenar calcio</strong> y <strong>adaptar la forma del hueso a las cargas</strong>.</p>
+
+    <div class="pearl">Esa es la respuesta a la cuarta pregunta del inicio. Un esqueleto que no se
+      renovara acumularía microgrietas hasta romperse, no podría servir de reserva de calcio y
+      quedaría fijo en la forma que tuvo a los veinte años. <strong>La renovación es lo que lo
+      mantiene vivo, útil y adaptable.</strong></div>
+
+    <h3>La ley de Wolff, en una frase</h3>
+    <p>El hueso <strong>se deposita donde se le exige y se reabsorbe donde no</strong>. Es la razón
+      de que las trabéculas sigan las líneas de fuerza, de que el tenista tenga más hueso en el
+      brazo dominante y de que un astronauta pierda masa ósea en ingravidez. La carga mecánica no
+      es un desgaste para el hueso: es su estímulo.</p>
+
+    <h3>El hueso como banco de calcio</h3>
+    <p>El 99 % del calcio del cuerpo está en el esqueleto, pero lo que importa fisiológicamente es
+      el 1 % que circula: de él dependen la contracción muscular, la coagulación y la transmisión
+      nerviosa. Ese nivel se mantiene <strong>constante</strong> a costa del hueso.</p>
+
+    <table class="data">
+      <thead><tr><th>Señal</th><th>De dónde viene</th><th>Qué hace con el calcio en sangre</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Paratohormona (PTH)</strong></td><td>Glándulas paratiroides</td>
+            <td><strong>Lo sube.</strong> Activa a los osteoclastos: saca calcio del hueso</td></tr>
+        <tr><td><strong>Calcitonina (CT)</strong></td><td>Glándula tiroides</td>
+            <td><strong>Lo baja.</strong> Frena a los osteoclastos: el calcio se queda en el hueso</td></tr>
+        <tr><td><strong>Vitamina D</strong></td><td>Piel y dieta</td>
+            <td><strong>Lo sube.</strong> Aumenta la absorción intestinal de calcio y fosfato</td></tr>
+      </tbody>
+    </table>
+
+    <div class="pearl">Piénsalo al revés de como suena: <strong>el cuerpo prefiere debilitar el
+      esqueleto antes que dejar caer el calcio de la sangre.</strong> Es una jerarquía de
+      prioridades — sin calcio circulante el corazón se para; con un hueso algo más frágil se puede
+      vivir años.</div>
+
+    <details class="acorde rust">
+      <summary>Qué pasa cuando esto falla <span class="pista">osteoporosis y raquitismo</span></summary>
+      <div class="cuerpo">
+        <p><strong>Osteoporosis.</strong> La resorción supera a la formación: el hueso pierde masa y
+          se vuelve poroso y frágil. Es más frecuente tras la menopausia porque los estrógenos
+          frenaban la resorción, y al caer, los osteoclastos quedan sin freno. El hueso conserva su
+          forma; lo que pierde es densidad.</p>
+        <p><strong>Raquitismo y osteomalacia.</strong> Falta vitamina D, así que la matriz se
+          fabrica pero <strong>no se mineraliza</strong>. Es el problema inverso: hay hueso, pero
+          blando. En el niño deforma los huesos en crecimiento —raquitismo—; en el adulto los
+          reblandece —osteomalacia—.</p>
+        <p>La distinción vale la pena porque es exactamente la de la sección anterior:
+          <strong>la osteoporosis es falta de matriz; la osteomalacia, falta de mineral</strong>. Y
+          la resistencia del hueso necesitaba las dos cosas.</p>
+      </div>
+    </details>
+  </div>
+
+  <div class="clinical-box">
+    <h5>Un signo ocular de enfermedad ósea</h5>
+    <p>En la <strong>enfermedad de Paget</strong>, donde la remodelación se descontrola y el hueso
+      se rehace deprisa y mal, el engrosamiento del cráneo puede estrechar los agujeros por los que
+      pasan los nervios. Cuando afecta al <strong>conducto óptico</strong>, comprime el nervio
+      óptico y produce pérdida visual. También aparecen <em>estrías angioides</em> en el fondo de
+      ojo: grietas en la membrana de Bruch.</p>
+    <p>Es un buen recordatorio de por qué esta clase importa en optometría. <strong>El ojo vive
+      dentro de un hueso, y sale de la órbita por un agujero de hueso.</strong> Cualquier
+      enfermedad que cambie el grosor del hueso puede acabar comprimiendo la vía visual.</p>
+  </div>
+</section>
+
+<!-- ─────────── 03 ─────────── -->
+<section class="station" id="s2e3">
+  <div class="station-header">
+    <div class="station-number">03</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Tortora 9.1–9.3 · Moore</div>
+      <h2>Articulaciones: las dos clasificaciones</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Una <strong>articulación</strong> es el punto de contacto entre dos huesos, entre hueso y
+      cartílago, o entre hueso y diente. Y aquí está la idea que más cuesta al principio:
+      <strong>«articulación» no significa «que se mueve»</strong>. Significa unión.</p>
+
+    <p>Se clasifican de dos maneras distintas, y hay que tener las dos en la cabeza porque
+      <strong>no coinciden</strong>: una mira de qué está hecha la unión y la otra, cuánto se mueve.</p>
+
+    <div class="figure">
+      <svg viewBox="0 0 860 300" role="img" aria-label="Las dos clasificaciones de las articulaciones: estructural en fibrosas, cartilaginosas y sinoviales, y funcional en sinartrosis, anfiartrosis y diartrosis">
+        <g font-family="DM Mono, monospace" font-size="11.5" text-anchor="middle">
+          <text x="215" y="26" font-size="13" fill="#1a2a35">ESTRUCTURAL · ¿de qué está hecha?</text>
+          <rect x="40" y="46" width="150" height="52" rx="6" fill="#f3e8de" stroke="#a0522d" stroke-width="1.8"/>
+          <text x="115" y="70" fill="#7d3f22">FIBROSA</text>
+          <text x="115" y="87" font-size="10.5" fill="#8a9aa8">tejido conectivo denso</text>
+          <rect x="40" y="112" width="150" height="52" rx="6" fill="#e8f0ee" stroke="#2a7a6e" stroke-width="1.8"/>
+          <text x="115" y="136" fill="#1f5d54">CARTILAGINOSA</text>
+          <text x="115" y="153" font-size="10.5" fill="#8a9aa8">cartílago</text>
+          <rect x="40" y="178" width="150" height="52" rx="6" fill="#e3f0f5" stroke="#1976a1" stroke-width="1.8"/>
+          <text x="115" y="202" fill="#115670">SINOVIAL</text>
+          <text x="115" y="219" font-size="10.5" fill="#8a9aa8">cavidad con líquido</text>
+
+          <text x="645" y="26" font-size="13" fill="#1a2a35">FUNCIONAL · ¿cuánto se mueve?</text>
+          <rect x="570" y="46" width="150" height="52" rx="6" fill="#f0e8d4" stroke="#b8860b" stroke-width="1.8"/>
+          <text x="645" y="70" fill="#8b6914">SINARTROSIS</text>
+          <text x="645" y="87" font-size="10.5" fill="#8a9aa8">inmóvil</text>
+          <rect x="570" y="112" width="150" height="52" rx="6" fill="#f0e8d4" stroke="#b8860b" stroke-width="1.8"/>
+          <text x="645" y="136" fill="#8b6914">ANFIARTROSIS</text>
+          <text x="645" y="153" font-size="10.5" fill="#8a9aa8">poco móvil</text>
+          <rect x="570" y="178" width="150" height="52" rx="6" fill="#f0e8d4" stroke="#b8860b" stroke-width="1.8"/>
+          <text x="645" y="202" fill="#8b6914">DIARTROSIS</text>
+          <text x="645" y="219" font-size="10.5" fill="#8a9aa8">libre</text>
+
+          <g stroke="#8a9aa8" stroke-width="1.4" fill="none">
+            <path d="M190 62 L570 62"/>
+            <path d="M190 82 L570 130"/>
+            <path d="M190 128 L570 74"/>
+            <path d="M190 148 L570 142"/>
+            <path d="M190 204 L570 204"/>
+          </g>
+          <text x="430" y="272" font-size="11.5" fill="#a0522d">Las líneas se cruzan: una fibrosa puede ser inmóvil o poco móvil,</text>
+          <text x="430" y="290" font-size="11.5" fill="#a0522d">y una cartilaginosa también. Solo la sinovial tiene una única correspondencia.</text>
+        </g>
+      </svg>
+      <p class="figure-caption">Las dos clasificaciones no son equivalentes. La estructural mira el
+        material; la funcional, el movimiento.</p>
+    </div>
+
+    <h3>Estructural · de qué está hecha la unión</h3>
+    <table class="data">
+      <thead><tr><th>Tipo</th><th>Qué une los huesos</th><th>Subtipos y ejemplos</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Fibrosa</strong></td><td>Tejido conectivo denso irregular. <strong>Sin cavidad</strong></td>
+            <td><strong>Sutura</strong> — entre huesos del cráneo · <strong>Sindesmosis</strong> —
+                tibioperonea distal, y la <em>gonfosis</em> del diente en su alvéolo ·
+                <strong>Membrana interósea</strong> — entre radio y cúbito</td></tr>
+        <tr><td><strong>Cartilaginosa</strong></td><td>Cartílago. <strong>Sin cavidad</strong></td>
+            <td><strong>Sincondrosis</strong> — cartílago hialino: la placa epifisaria ·
+                <strong>Sínfisis</strong> — fibrocartílago: sínfisis del pubis, discos
+                intervertebrales</td></tr>
+        <tr><td><strong>Sinovial</strong></td><td><strong>Cavidad sinovial</strong> con líquido, más una cápsula</td>
+            <td>Todas las que se mueven libremente: hombro, codo, rodilla, cadera</td></tr>
+      </tbody>
+    </table>
+    <div class="photo-grid cols-2">
+      <div class="photo-card">
+        <div class="photo-frame"><img src="img/fig_9_1_fibrosas_a.png" alt="Figura 9.1 de Tortora: articulaciones fibrosas, con una sutura del cráneo, una sindesmosis tibioperonea y una gonfosis dentoalveolar"><div class="photo-missing">No disponible</div></div>
+        <p class="photo-caption"><strong>Figura 9.1 · Fibrosas.</strong> Sutura, sindesmosis y gonfosis. En las tres, tejido fibroso entre los huesos y <em>ninguna cavidad</em>.</p><div class="photo-credit">Tortora, 15.ª ed. · Fig. 9.1</div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-frame"><img src="img/fig_9_2_cartilaginosas.png" alt="Figura 9.2 de Tortora: articulaciones cartilaginosas, con una sincondrosis de placa epifisaria y una sínfisis del pubis y disco intervertebral"><div class="photo-missing">No disponible</div></div>
+        <p class="photo-caption"><strong>Figura 9.2 · Cartilaginosas.</strong> Arriba la <em>sincondrosis</em> —cartílago hialino, la placa epifisaria—; abajo la <em>sínfisis</em> —fibrocartílago, pubis y discos—.</p><div class="photo-credit">Tortora, 15.ª ed. · Fig. 9.2</div>
+      </div>
+    </div>
+
+
+    <details class="acorde purple">
+      <summary>Un cuarto tipo que Latarjet añade: la sinostosis <span class="pista">cuando la unión se osifica</span></summary>
+      <div class="cuerpo">
+        <p>Tortora se queda en tres categorías estructurales; Latarjet añade una cuarta, la
+          <strong>articulación ósea o sinostosis</strong>: aquella en la que el tejido interpuesto
+          es <em>hueso</em>. Son completamente inmóviles, y casi siempre son
+          <strong>el destino final de otra articulación</strong>: una sutura o una sincondrosis que
+          acaba osificándose.</p>
+        <ul>
+          <li>Entre el <strong>esfenoides y el occipital</strong> —era una sincondrosis y se
+            suelda hacia los 25 años—.</li>
+          <li>Entre los <strong>cuerpos vertebrales del sacro</strong>, que en el niño son cinco
+            vértebras separadas.</li>
+          <li>La <strong>línea epifisaria</strong> del adulto: lo que queda cuando la placa
+            epifisaria se osifica.</li>
+        </ul>
+        <p>Merece la pena tenerlo presente porque enseña que <strong>las articulaciones no son
+          categorías fijas</strong>: una misma unión puede ser cartilaginosa en el niño y ósea en el
+          adulto. La clasificación describe un momento, no una esencia.</p>
+      </div>
+    </details>
+
+    <h3>Las suturas tienen cuatro formas</h3>
+    <p>Latarjet las subdivide según cómo encajan los bordes, y esto sí conviene verlo porque
+      <strong>el cráneo tiene las cuatro</strong> y varias están en la órbita.</p>
+
+    <div class="figure">
+      <svg viewBox="0 0 760 200" role="img" aria-label="Los cuatro tipos de sutura: plana o armónica, escamosa en bisel, dentada con engranajes y esquindilesis con cresta y ranura">
+        <g font-family="DM Mono, monospace" font-size="11" text-anchor="middle">
+          <!-- plana -->
+          <rect x="34" y="52" width="120" height="26" fill="#e8f0ee" stroke="#2a7a6e" stroke-width="1.6"/>
+          <rect x="34" y="82" width="120" height="26" fill="#e8f0ee" stroke="#2a7a6e" stroke-width="1.6"/>
+          <text x="94" y="136" font-size="12.5" fill="#1a2a35">PLANA</text>
+          <text x="94" y="154" fill="#5a6b7a">bordes lisos y rectos</text>
+          <text x="94" y="171" font-size="10" fill="#8a9aa8">entre los huesos nasales</text>
+          <!-- escamosa -->
+          <path d="M212 52 L332 52 L332 80 L212 96 Z" fill="#e3f0f5" stroke="#1976a1" stroke-width="1.6"/>
+          <path d="M212 100 L332 84 L332 108 L212 108 Z" fill="#e3f0f5" stroke="#1976a1" stroke-width="1.6"/>
+          <text x="272" y="136" font-size="12.5" fill="#1a2a35">ESCAMOSA</text>
+          <text x="272" y="154" fill="#5a6b7a">bordes en bisel, superpuestos</text>
+          <text x="272" y="171" font-size="10" fill="#8a9aa8">temporoparietal</text>
+          <!-- dentada -->
+          <path d="M390 52 L510 52 L510 78 l-15 0 l0 10 l-15 0 l0 -10 l-15 0 l0 10 l-15 0 l0 -10
+                   l-15 0 l0 10 l-15 0 l0 -10 l-15 0 Z" fill="#f3e8de" stroke="#a0522d" stroke-width="1.6"/>
+          <path d="M390 108 L510 108 L510 82 l-15 0 l0 -10 l-15 0 l0 10 l-15 0 l0 -10 l-15 0 l0 10
+                   l-15 0 l0 -10 l-15 0 l0 10 l-15 0 Z" fill="#f3e8de" stroke="#a0522d" stroke-width="1.6"/>
+          <text x="450" y="136" font-size="12.5" fill="#1a2a35">DENTADA</text>
+          <text x="450" y="154" fill="#5a6b7a">engranaje de dientes</text>
+          <text x="450" y="171" font-size="10" fill="#8a9aa8">sutura coronal · la más firme</text>
+          <!-- esquindilesis -->
+          <path d="M568 52 L688 52 L688 78 L640 78 L628 90 L616 78 L568 78 Z" fill="#f0e8f4" stroke="#6b4a8a" stroke-width="1.6"/>
+          <path d="M568 108 L688 108 L688 84 L638 84 L628 96 L618 84 L568 84 Z" fill="#f0e8f4" stroke="#6b4a8a" stroke-width="1.6"/>
+          <text x="628" y="136" font-size="12.5" fill="#1a2a35">ESQUINDILESIS</text>
+          <text x="628" y="154" fill="#5a6b7a">una cresta en una ranura</text>
+          <text x="628" y="171" font-size="10" fill="#8a9aa8">vómer y esfenoides</text>
+          <text x="380" y="26" font-size="12" fill="#8b6914">Las cuatro son inmóviles: lo que cambia es cómo encajan</text>
+        </g>
+      </svg>
+      <p class="figure-caption">Los cuatro tipos de sutura según Latarjet. A más engranaje, más
+        resistencia a la separación.</p>
+    </div>
+
+    <div class="pearl">Y una que se olvida siempre: <strong>la gonfosis</strong>, la unión del
+      diente con su alvéolo. Es fibrosa, y sus fibras cortas —el ligamento periodontal— no solo
+      sujetan: <strong>informan</strong>. Son propioceptores que miden con cuánta fuerza estás
+      mordiendo.</div>
+
+    <h3>Funcional · cuánto permite moverse</h3>
+    <div class="three-col">
+      <div class="col-card rust"><h5>Sinartrosis</h5>
+        <p><strong>Inmóvil.</strong> Suturas del cráneo, gonfosis.</p></div>
+      <div class="col-card teal"><h5>Anfiartrosis</h5>
+        <p><strong>Poco móvil.</strong> Sínfisis del pubis, discos intervertebrales, membranas
+          interóseas.</p></div>
+      <div class="col-card blue"><h5>Diartrosis</h5>
+        <p><strong>Libremente móvil.</strong> Y aquí sí hay equivalencia exacta:
+          <strong>todas las diartrosis son sinoviales, y todas las sinoviales son
+          diartrosis</strong>.</p></div>
+    </div>
+
+    <div class="pearl">Esa equivalencia es lo único que se puede memorizar sin miedo:
+      <strong>sinovial = diartrosis</strong>. El resto no casa uno a uno — una sutura es fibrosa e
+      inmóvil, pero una membrana interósea también es fibrosa y sí se mueve un poco.</div>
+  </div>
+
+  <div class="clinical-box">
+    <h5>Por qué el cráneo no es de una sola pieza</h5>
+    <p>Aquí está la tercera pregunta del inicio. Las <strong>suturas</strong> son articulaciones
+      fibrosas inmóviles, y su función no es el movimiento: es <strong>permitir que el cráneo
+      crezca</strong>. Mientras están abiertas, cada hueso puede añadir material en su borde y la
+      bóveda se agranda siguiendo al encéfalo. En el recién nacido ni siquiera están cerradas: son
+      las <em>fontanelas</em>, que además dejan que la cabeza se moldee al pasar por el canal del
+      parto.</p>
+    <p>Cuando una sutura se cierra antes de tiempo —<strong>craneosinostosis</strong>— el cráneo
+      crece deformado, porque solo puede hacerlo en las direcciones que quedan libres. Y si eso
+      deforma las órbitas, aparecen <strong>proptosis, estrabismo y a veces compresión del nervio
+      óptico</strong>: motivo de consulta oftalmológica antes que traumatológica.</p>
+  </div>
+</section>
+
+<!-- ─────────── 04 ─────────── -->
+<section class="station" id="s2e4">
+  <div class="station-header">
+    <div class="station-number">04</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Tortora 9.4</div>
+      <h2>La articulación sinovial por dentro</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Es el tipo más frecuente y el único que permite movimiento amplio. Lo que la define es
+      justamente <strong>lo que no hay</strong>: entre los dos huesos no hay tejido que los una
+      directamente, sino un <strong>espacio</strong>.</p>
+
+    <table class="data">
+      <thead><tr><th>Componente</th><th>Qué es y para qué</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Cavidad sinovial</strong></td>
+            <td>El espacio entre los huesos. Es lo que permite que se muevan uno respecto al otro</td></tr>
+        <tr><td><strong>Cartílago articular</strong></td>
+            <td>Cartílago hialino que recubre las superficies. Reduce la fricción y amortigua. Sin
+                pericondrio, sin vasos: <strong>por eso no se repara</strong></td></tr>
+        <tr><td><strong>Cápsula articular</strong></td>
+            <td>Rodea la articulación. Tiene dos capas: la <strong>membrana fibrosa</strong>
+                externa —conectivo denso, da resistencia— y la <strong>membrana sinovial</strong>
+                interna</td></tr>
+        <tr><td><strong>Líquido sinovial</strong></td>
+            <td>Lo secreta la membrana sinovial. <strong>Lubrica</strong> y, sobre todo,
+                <strong>nutre al cartílago articular</strong>, que no tiene vasos propios</td></tr>
+        <tr><td><strong>Ligamentos accesorios</strong></td>
+            <td>Refuerzan. Pueden ser <em>extracapsulares</em> —fuera de la cápsula— o
+                <em>intracapsulares</em></td></tr>
+        <tr><td><strong>Discos y meniscos</strong></td>
+            <td>Fibrocartílago entre las superficies. Aparecen cuando los huesos
+                <strong>no encajan bien</strong>: rellenan y reparten la carga</td></tr>
+        <tr><td><strong>Bolsas y vainas</strong></td>
+            <td>Sacos de líquido sinovial que <strong>reducen el rozamiento</strong> donde tendones
+                o piel friccionan contra hueso</td></tr>
+      </tbody>
+    </table>
+    <div class="photo-hero">
+      <img src="img/fig_9_3_sinovial.png" alt="Figura 9.3 de Tortora: estructura de una articulación sinovial típica, con cavidad sinovial, cartílago articular, cápsula con membrana fibrosa y membrana sinovial, líquido sinovial, ligamentos y periostio">
+      <div class="photo-missing">Imagen no disponible</div>
+      <p class="photo-caption"><strong>Figura 9.3 · La articulación sinovial típica.</strong> Todos los componentes de la tabla, en un solo corte. Fíjate en las <em>dos capas</em> de la cápsula: la fibrosa por fuera, que da resistencia, y la sinovial por dentro, que fabrica el líquido.</p>
+      <div class="photo-credit">Tortora, 15.ª ed. · Fig. 9.3</div>
+    </div>
+
+
+    <div class="pearl">El líquido sinovial resuelve un problema que arrastramos de la clase pasada:
+      el cartílago articular es avascular, así que <strong>tiene que alimentarse por difusión desde
+      el líquido</strong>. Y esa difusión se activa con el movimiento, que comprime y descomprime el
+      cartílago como una esponja. <em>Una articulación inmovilizada se queda sin nutrir su propio
+      cartílago.</em> Por eso la rehabilitación empieza cuanto antes.</div>
+
+    <p>Las articulaciones tienen <strong>inervación abundante</strong>. Las fibras de dolor son
+      numerosas en la membrana fibrosa y en los ligamentos; la membrana sinovial, en cambio, es poco
+      sensible. Y transmiten la <strong>propiocepción</strong>: la información de posición y
+      movimiento sin la cual no sabrías dónde está tu mano con los ojos cerrados.</p>
+
+    <details class="acorde blue">
+      <summary>La ley de Hilton <span class="pista">por qué duele donde duele</span></summary>
+      <div class="cuerpo">
+        <p>Enuncia algo muy útil: <strong>el nervio que inerva una articulación inerva también los
+          músculos que la mueven y la piel que los cubre</strong>.</p>
+        <p>La consecuencia práctica es que el dolor articular <em>se refiere</em> a la piel de esa
+          zona, y a veces a distancia. Explica por qué un problema de cadera duele en la rodilla, o
+          por qué un dolor cervical se siente en el hombro. Cuando un paciente señala dónde le
+          duele, no siempre señala dónde está el problema.</p>
+      </div>
+    </details>
+  </div>
+
+  <div class="clinical-box">
+    <h5>La única sinovial de la cabeza que te interesa</h5>
+    <p>De las articulaciones de la cabeza, casi todas son suturas inmóviles. La gran excepción es la
+      <strong>temporomandibular</strong>, que es sinovial, tiene <strong>disco articular</strong> y
+      permite abrir la boca. Su disfunción produce dolor referido que llega a la región periorbitaria
+      y a la sien, y no es raro que llegue a consulta como «dolor de ojos» o cefalea.</p>
+    <p>El globo ocular, en cambio, <strong>no se articula con nada</strong>: se apoya en la grasa
+      orbitaria y lo mueven seis músculos. No es una articulación sinovial, pero funciona con la
+      misma lógica — superficies lisas, un medio que lubrica y un rango de movimiento limitado por
+      tejidos blandos.</p>
+    <div class="photo-hero">
+      <img src="img/fig_9_11_atm.png" alt="Figura 9.11 de Tortora: articulación temporomandibular derecha, con el disco articular entre el cóndilo mandibular y la fosa mandibular del temporal, y sus ligamentos">
+      <div class="photo-missing">Imagen no disponible</div>
+      <p class="photo-caption"><strong>Figura 9.11 · La temporomandibular.</strong> La única sinovial de la cabeza. El <em>disco articular</em> que se ve en el corte es lo que le permite combinar bisagra y deslizamiento — y lo que se desplaza cuando la articulación chasquea.</p>
+      <div class="photo-credit">Tortora, 15.ª ed. · Fig. 9.11</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─────────── 05 ─────────── -->
+<section class="station" id="s2e5">
+  <div class="station-header">
+    <div class="station-number">05</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Tortora 9.6</div>
+      <h2>Los seis tipos de sinovial</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Se clasifican por la <strong>forma de las superficies</strong>, y esa forma determina
+      <strong>en cuántos ejes</strong> puede moverse la articulación. Uno, dos o tres.</p>
+
+    <table class="data">
+      <thead><tr><th>Tipo</th><th>Forma</th><th>Ejes</th><th>Ejemplo</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Artrodia</strong> <em>(plana)</em></td><td>Superficies casi planas: se deslizan</td>
+            <td>No axial o biaxial</td><td>Entre huesos del carpo y del tarso</td></tr>
+        <tr><td><strong>Gínglimo</strong> <em>(troclear, «bisagra»)</em></td><td>Una superficie convexa en otra cóncava</td>
+            <td><strong>Uniaxial</strong></td><td>Codo, tobillo, rodilla (modificado)</td></tr>
+        <tr><td><strong>Trocoide</strong> <em>(pivote)</em></td><td>Superficie redondeada dentro de un anillo</td>
+            <td><strong>Uniaxial</strong>, rotación</td><td>Atloaxoidea — la del «no» con la cabeza — y radiocubital</td></tr>
+        <tr><td><strong>Condílea</strong> <em>(elipsoidea)</em></td><td>Proyección ovalada en cavidad ovalada</td>
+            <td><strong>Biaxial</strong></td><td>Muñeca, metacarpofalángicas</td></tr>
+        <tr><td><strong>En silla de montar</strong></td><td>Una silla y un jinete: cóncava en un sentido, convexa en el otro</td>
+            <td><strong>Biaxial</strong></td><td>Carpometacarpiana del pulgar — la que nos da la pinza</td></tr>
+        <tr><td><strong>Enartrosis</strong> <em>(esferoidea)</em></td><td>Esfera en una copa</td>
+            <td><strong>Triaxial</strong></td><td>Hombro y cadera</td></tr>
+      </tbody>
+    </table>
+    <div class="photo-hero">
+      <img src="img/fig_9_10_tipos_sinoviales.png" alt="Figura 9.10 de Tortora: los seis tipos de articulaciones sinoviales — plana, gínglimo, trocoide, condílea, en silla de montar y esferoidea — con un esquema y un ejemplo anatómico de cada una">
+      <div class="photo-missing">Imagen no disponible</div>
+      <p class="photo-caption"><strong>Figura 9.10 · Los seis tipos de sinovial.</strong> El esquema geométrico junto al ejemplo real. Recorre la lámina preguntándote en cada una <em>cuántos ejes</em> permite: ahí está toda la clasificación.</p>
+      <div class="photo-credit">Tortora, 15.ª ed. · Fig. 9.10</div>
+    </div>
+
+    <div class="photo-grid cols-2">
+      <div class="photo-card">
+        <div class="photo-frame"><img src="img/moore_t1_2_sinoviales_a.png" alt="Tabla 1-2 de Moore, primera parte: tipos de articulaciones sinoviales — plana, gínglimo y trocoide — con esquema y ejemplo de cada una"><div class="photo-missing">No disponible</div></div>
+        <p class="photo-caption"><strong>Moore, tabla 1-2 (1/2).</strong> Plana, gínglimo y trocoide. Compara la forma de las superficies con el número de ejes que permite.</p><div class="photo-credit">Moore · Tabla 1-2</div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-frame"><img src="img/moore_t1_2_sinoviales_b.png" alt="Tabla 1-2 de Moore, segunda parte: tipos de articulaciones sinoviales — condílea, en silla de montar y esferoidea — con esquema y ejemplo de cada una"><div class="photo-missing">No disponible</div></div>
+        <p class="photo-caption"><strong>Moore, tabla 1-2 (2/2).</strong> Condílea, en silla de montar y esferoidea. La progresión de la tabla es la de la movilidad: uno, dos y tres ejes.</p><div class="photo-credit">Moore · Tabla 1-2</div>
+      </div>
+    </div>
+
+
+    <div class="pearl">Hay un intercambio que recorre toda la tabla:
+      <strong>a más movilidad, menos estabilidad</strong>. El hombro es la articulación más móvil
+      del cuerpo y también la que más se luxa; la cadera, con la misma forma pero una cavidad más
+      profunda, se mueve menos y casi no se disloca. La forma decide las dos cosas a la vez.</div>
+    <div class="photo-grid cols-2">
+      <div class="photo-card">
+        <div class="photo-frame"><img src="img/fig_9_12_hombro_a.png" alt="Figura 9.12 de Tortora: articulación del hombro derecho en corte frontal, con la cabeza del húmero en la cavidad glenoidea, la cápsula laxa y el rodete glenoideo"><div class="photo-missing">No disponible</div></div>
+        <p class="photo-caption"><strong>Hombro · enartrosis.</strong> La cavidad glenoidea es poco profunda y la cápsula, laxa. De ahí su enorme movilidad — y que sea la articulación que más se luxa.</p><div class="photo-credit">Tortora · Fig. 9.12</div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-frame"><img src="img/fig_9_14_cadera.png" alt="Figura 9.14 de Tortora: articulación de la cadera derecha en corte frontal, con la cabeza femoral encajada profundamente en el acetábulo y el ligamento de la cabeza del fémur"><div class="photo-missing">No disponible</div></div>
+        <p class="photo-caption"><strong>Cadera · enartrosis también.</strong> Misma forma, pero el acetábulo es profundo y la cápsula fuerte. Se mueve menos y casi no se disloca: <em>la comparación entre las dos es la lección</em>.</p><div class="photo-credit">Tortora · Fig. 9.14</div>
+      </div>
+    </div>
+    <div class="photo-grid cols-2">
+      <div class="photo-card">
+        <div class="photo-frame"><img src="img/fig_9_13_codo.png" alt="Figura 9.13 de Tortora: articulación del codo derecho en corte sagital y vista lateral, con la tróclea humeral y la incisura troclear del cúbito"><div class="photo-missing">No disponible</div></div>
+        <p class="photo-caption"><strong>Codo · gínglimo.</strong> Una superficie convexa en otra cóncava: solo flexión y extensión. Uniaxial, un grado de libertad.</p><div class="photo-credit">Tortora · Fig. 9.13</div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-frame"><img src="img/fig_9_15_rodilla_a.png" alt="Figura 9.15 de Tortora: articulación de la rodilla derecha, con los cóndilos femorales, los meniscos medial y lateral y los ligamentos cruzados"><div class="photo-missing">No disponible</div></div>
+        <p class="photo-caption"><strong>Rodilla · gínglimo modificado.</strong> Los cóndilos no encajan bien con la tibia, y por eso hay <em>meniscos</em>: fibrocartílago que rellena y reparte la carga. Es el caso de la tabla anterior.</p><div class="photo-credit">Tortora · Fig. 9.15</div>
+      </div>
+    </div>
+
+
+
+    <h3>«Ejes» y «grados de libertad» son lo mismo</h3>
+    <p>Latarjet usa una expresión que conviene tener, porque aparece en biomecánica y en óptica:
+      los <strong>grados de libertad</strong>. Son el número de ejes independientes sobre los que
+      una articulación puede girar — es decir, exactamente lo mismo que la columna «ejes» de la
+      tabla, dicho de otra manera.</p>
+
+    <div class="three-col">
+      <div class="col-card rust"><h5>Uniaxial · 1 grado</h5>
+        <p>Gira sobre un solo eje. Gínglimo y trocoide.</p></div>
+      <div class="col-card teal"><h5>Biaxial · 2 grados</h5>
+        <p>Dos ejes independientes. Condílea y en silla de montar.</p></div>
+      <div class="col-card blue"><h5>Triaxial · 3 grados</h5>
+        <p>Tres ejes. Solo la enartrosis — y el globo ocular.</p></div>
+    </div>
+
+    <details class="acorde amber">
+      <summary>Qué limita el movimiento de una articulación <span class="pista">Tortora 9.7 · seis factores</span></summary>
+      <div class="cuerpo">
+        <p>La <strong>amplitud de movimiento</strong> (ROM) no la decide solo la forma de las
+          superficies. Seis factores la modulan:</p>
+        <ol>
+          <li><strong>La forma de las superficies articulares</strong> — cuánto encajan entre sí.</li>
+          <li><strong>La tensión de los ligamentos</strong> — se tensan en unas posiciones y se
+            aflojan en otras.</li>
+          <li><strong>La disposición de los músculos</strong> y su tono.</li>
+          <li><strong>El contacto de los tejidos blandos</strong> — a veces el movimiento se detiene
+            porque dos masas musculares chocan, no porque el hueso lo impida.</li>
+          <li><strong>Las hormonas.</strong> La <em>relaxina</em>, al final del embarazo, ablanda el
+            fibrocartílago de la sínfisis del pubis y relaja los ligamentos pélvicos, lo que amplía
+            el estrecho inferior para el parto.</li>
+          <li><strong>La falta de uso.</strong> Una articulación inmovilizada pierde amplitud:
+            disminuye el líquido sinovial, los ligamentos y tendones pierden flexibilidad y el
+            músculo se atrofia.</li>
+        </ol>
+        <div class="pearl">El sexto factor cierra el círculo con lo que vimos del cartílago: se
+          nutre por difusión y esa difusión depende del movimiento. <strong>Una articulación quieta
+          se deteriora por estar quieta</strong>, no por desgaste. Es lo contrario de lo que sugiere
+          la intuición.</div>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- ─────────── 06 ─────────── -->
+<section class="station" id="s2e6">
+  <div class="station-header">
+    <div class="station-number">06</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Tortora 9.5</div>
+      <h2>Los movimientos</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>El vocabulario ya lo viste en la primera clase, con los planos y los ejes. Aquí solo se
+      ordena en las cuatro familias de Tortora y se conecta con el ojo, que es donde lo vas a usar.</p>
+
+    <details class="acorde">
+      <summary>1 · Deslizamiento <span class="pista">el más simple</span></summary>
+      <div class="cuerpo">
+        <p>Superficies casi planas que se desplazan una sobre otra, adelante y atrás o de lado a
+          lado, <strong>sin que cambie el ángulo</strong> entre los huesos. Es lo que hacen los
+          huesos del carpo entre sí.</p>
+        <div class="photo-hero" style="margin:14px 0 0">
+          <img src="img/fig_9_4_deslizamiento.png" alt="Figura 9.4 de Tortora: movimientos de deslizamiento entre los huesos del carpo, con superficies planas que se desplazan una sobre otra">
+          <div class="photo-missing">Imagen no disponible</div>
+          <p class="photo-caption"><strong>Figura 9.4 · Deslizamiento.</strong> Las superficies se desplazan sin girar. Poco recorrido en cada articulación, mucho en el conjunto.</p>
+          <div class="photo-credit">Tortora · Fig. 9.4</div>
+        </div>
+      </div>
+    </details>
+
+    <details class="acorde teal">
+      <summary>2 · Movimientos angulares <span class="pista">cambia el ángulo</span></summary>
+      <div class="cuerpo">
+        <ul>
+          <li><strong>Flexión y extensión:</strong> disminuye o aumenta el ángulo, en el plano
+            sagital.</li>
+          <li><strong>Hiperextensión:</strong> extensión más allá de la posición anatómica.</li>
+          <li><strong>Abducción y aducción:</strong> alejarse o acercarse a la línea media, en el
+            plano frontal.</li>
+          <li><strong>Circunducción:</strong> no es un movimiento propio, sino la
+            <em>secuencia</em> de flexión, abducción, extensión y aducción encadenadas — el extremo
+            distal dibuja un cono.</li>
+        </ul>
+        <div class="photo-hero" style="margin:14px 0 0">
+          <img src="img/fig_9_5_flexion.png" alt="Figura 9.5 de Tortora: movimientos angulares de flexión, extensión, hiperextensión y flexión lateral en distintas articulaciones sinoviales">
+          <div class="photo-missing">Imagen no disponible</div>
+          <p class="photo-caption"><strong>Figura 9.5 · Flexión, extensión e hiperextensión.</strong> Todos en el plano sagital. Localiza la <em>hiperextensión</em>: es la que va más allá de la posición anatómica.</p>
+          <div class="photo-credit">Tortora · Fig. 9.5</div>
+        </div>
+        <div class="photo-hero" style="margin:14px 0 0">
+          <img src="img/fig_9_6_abduccion.png" alt="Figura 9.6 de Tortora: movimientos angulares de abducción y aducción del brazo, el muslo y los dedos respecto a la línea media">
+          <div class="photo-missing">Imagen no disponible</div>
+          <p class="photo-caption"><strong>Figura 9.6 · Abducción y aducción.</strong> En el plano frontal, alejarse o acercarse a la línea media. Ojo con los dedos: su línea media es el tercer dedo, no la del cuerpo.</p>
+          <div class="photo-credit">Tortora · Fig. 9.6</div>
+        </div>
+        <div class="photo-hero" style="margin:14px 0 0">
+          <img src="img/fig_9_7_circunduccion.png" alt="Figura 9.7 de Tortora: circunducción del miembro superior, con el extremo distal describiendo un cono">
+          <div class="photo-missing">Imagen no disponible</div>
+          <p class="photo-caption"><strong>Figura 9.7 · Circunducción.</strong> No es un movimiento nuevo: es la <em>secuencia</em> de los anteriores encadenados. El extremo distal dibuja un cono.</p>
+          <div class="photo-credit">Tortora · Fig. 9.7</div>
+        </div>
+      </div>
+    </details>
+
+    <details class="acorde blue">
+      <summary>3 · Rotación <span class="pista">sobre su propio eje</span></summary>
+      <div class="cuerpo">
+        <p>El hueso gira <strong>alrededor de su eje longitudinal</strong>. Girar la cabeza para
+          decir «no» es rotación en la articulación atloaxoidea.</p>
+        <div class="photo-hero" style="margin:14px 0 0">
+          <img src="img/fig_9_8_rotacion.png" alt="Figura 9.8 de Tortora: rotación del atlas sobre el axis y rotación medial y lateral del húmero y del fémur">
+          <div class="photo-missing">Imagen no disponible</div>
+          <p class="photo-caption"><strong>Figura 9.8 · Rotación.</strong> El hueso gira sobre su propio eje sin desplazarse. Es el movimiento de la trocoide.</p>
+          <div class="photo-credit">Tortora · Fig. 9.8</div>
+        </div>
+      </div>
+    </details>
+
+    <details class="acorde amber">
+      <summary>4 · Movimientos especiales <span class="pista">solo en ciertas articulaciones</span></summary>
+      <div class="cuerpo">
+        <p>Elevación y depresión · protracción y retracción · inversión y eversión · dorsiflexión y
+          flexión plantar · <strong>supinación y pronación</strong> · oposición del pulgar.</p>
+        <div class="photo-hero" style="margin:14px 0 0">
+          <img src="img/fig_9_9_especiales.png" alt="Figura 9.9 de Tortora: movimientos especiales — elevación y depresión, protracción y retracción, inversión y eversión, dorsiflexión y flexión plantar, supinación y pronación, y oposición del pulgar">
+          <div class="photo-missing">Imagen no disponible</div>
+          <p class="photo-caption"><strong>Figura 9.9 · Los movimientos especiales.</strong> Cada uno ocurre solo en ciertas articulaciones. La <em>oposición</em> del pulgar es la que nos da la pinza, y depende de la articulación en silla de montar.</p>
+          <div class="photo-credit">Tortora · Fig. 9.9</div>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <div class="clinical-box">
+    <h5>El ojo se mueve en tres ejes, y usa este mismo vocabulario</h5>
+    <p>El globo ocular gira dentro de la órbita sobre los <strong>ejes de Fick</strong>, que ya
+      viste en la clase 1. Funciona como una enartrosis sin serlo: <strong>triaxial</strong>.</p>
+    <ul>
+      <li><strong>Eje vertical:</strong> aducción y abducción — el ojo hacia la nariz o hacia la
+        sien.</li>
+      <li><strong>Eje horizontal transversal:</strong> elevación y depresión — mirar arriba y
+        abajo.</li>
+      <li><strong>Eje anteroposterior:</strong> <em>intorsión</em> y <em>extorsión</em>, la rotación
+        del ojo sobre sí mismo. Es el único movimiento ocular que no tiene equivalente evidente en
+        el resto del cuerpo.</li>
+    </ul>
+    <p>Los términos son los mismos que acabas de repasar. La diferencia es que en el ojo
+      <strong>aducción no es «acercarse a la línea media del cuerpo»</strong>, sino a la línea media
+      de la cara — hacia la nariz. En optometría, «nasal» y «temporal» sustituyen a «medial» y
+      «lateral», y conviene fijarlo desde ya.</p>
+  </div>
+</section>
+
+<!-- ─────────── 07 ─────────── -->
+<section class="station" id="s2e7">
+  <div class="station-header">
+    <div class="station-number">07</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Interfaz optométrica · Tortora 7.4</div>
+      <h2>La cabeza ósea y la órbita</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <h3>Primero, los 22 huesos de la cabeza</h3>
+    <p>Antes de meterse en la órbita conviene situarla. La cabeza ósea tiene
+      <strong>22 huesos</strong>: <strong>8 craneales</strong>, que forman la caja que protege el
+      encéfalo, y <strong>14 faciales</strong>, que forman la cara. Casi todos son
+      <strong>planos o irregulares</strong>, y casi todos están unidos por <strong>suturas</strong>
+      — es decir, articulaciones fibrosas inmóviles, de las que acabamos de ver.</p>
+
+    <div class="two-col">
+      <div class="col-card teal"><h5>8 huesos craneales</h5>
+        <p><strong>Frontal</strong> · 2 <strong>parietales</strong> · 2 <strong>temporales</strong>
+          · <strong>occipital</strong> · <strong>esfenoides</strong> · <strong>etmoides</strong></p>
+        <p style="margin-top:.5rem;font-size:.92rem">Tres de ellos —frontal, esfenoides y
+          etmoides— llegan a la órbita.</p></div>
+      <div class="col-card rust"><h5>14 huesos faciales</h5>
+        <p>2 <strong>nasales</strong> · 2 <strong>maxilares</strong> · 2
+          <strong>cigomáticos</strong> · 2 <strong>lacrimales</strong> · 2
+          <strong>palatinos</strong> · 2 <strong>cornetes inferiores</strong> ·
+          <strong>vómer</strong> · <strong>mandíbula</strong></p>
+        <p style="margin-top:.5rem;font-size:.92rem">Cuatro llegan a la órbita: maxilar,
+          cigomático, lacrimal y palatino.</p></div>
+    </div>
+
+    <div class="pearl">Fíjate en el reparto: <strong>los craneales van casi todos de uno en uno y
+      los faciales, casi todos en pareja</strong>. Y solo dos huesos de la cabeza se mueven — la
+      <strong>mandíbula</strong>, por la temporomandibular, y los huesecillos del oído. Todo lo
+      demás está soldado por suturas.</div>
+
+    <h3>Las cuatro vistas que hay que saber leer</h3>
+    <p>Un mismo hueso se ve distinto según desde dónde se mire, y cada vista revela unas
+      estructuras y esconde otras. Estas son las cuatro de referencia:</p>
+
+    <div class="photo-grid cols-2">
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_7_3_cabeza_ant.png" alt="Figura 7.3 de Tortora: vista anterior de la cabeza ósea con el hueso frontal, las órbitas, los huesos nasales, los maxilares, los cigomáticos y la mandíbula rotulados">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <p class="photo-caption"><strong>Vista anterior.</strong> Es la vista de la
+          <strong>órbita</strong>: se ven las dos cavidades enteras, el reborde y la abertura
+          nasal. La que más vas a usar.</p>
+        <div class="photo-credit">Tortora · Fig. 7.3</div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_7_4_cabeza_sup_lat_a.png" alt="Figura 7.4 de Tortora: vistas superior y lateral derecha de la cabeza ósea, con las suturas coronal, sagital, lambdoidea y escamosa">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <p class="photo-caption"><strong>Vistas superior y lateral.</strong> Aquí se leen las
+          <strong>suturas</strong>: coronal, sagital, lambdoidea y escamosa. Compáralas con los
+          cuatro tipos que vimos.</p>
+        <div class="photo-credit">Tortora · Fig. 7.4</div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_7_5_cabeza_sagital.png" alt="Figura 7.5 de Tortora: vista medial de un corte sagital de la cabeza, con el tabique nasal, el esfenoides, el etmoides y el paladar">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <p class="photo-caption"><strong>Corte sagital.</strong> La única forma de ver el
+          <strong>esfenoides y el etmoides por dentro</strong>, y la relación de la órbita con la
+          nariz y los senos.</p>
+        <div class="photo-credit">Tortora · Fig. 7.5</div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_7_7_cabeza_inf.png" alt="Figura 7.7 de Tortora: vista inferior de la cabeza ósea con la base del cráneo, el paladar óseo, el foramen magno y los forámenes de la base">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <p class="photo-caption"><strong>Vista inferior.</strong> La base del cráneo, con el
+          <strong>foramen magno</strong> y las aberturas por donde entran y salen vasos y nervios.</p>
+        <div class="photo-credit">Tortora · Fig. 7.7</div>
+      </div>
+    </div>
+
+    <div class="clinical-box">
+      <h5>Los senos paranasales rodean la órbita por tres lados</h5>
+      <p>Son cavidades llenas de aire dentro de los huesos de la cabeza, y aligeran el cráneo
+        además de dar resonancia a la voz. Lo que importa aquí es <strong>dónde están</strong>:
+        el <strong>frontal</strong> por encima de la órbita, el <strong>etmoidal</strong> por
+        dentro y el <strong>maxilar</strong> por debajo. Es decir, <strong>la órbita está rodeada
+        de aire por tres de sus cuatro paredes</strong>, separada solo por láminas de hueso de menos
+        de un milímetro.</p>
+      <p>Esa vecindad es la que explica que una sinusitis pueda convertirse en una infección
+        orbitaria, y que una fractura del piso descomprima la órbita hacia el seno maxilar.</p>
+      <div class="photo-hero">
+        <img src="img/fig_7_13_senos.png" alt="Figura 7.13 de Tortora: senos paranasales frontal, etmoidal, esfenoidal y maxilar proyectados sobre la superficie de la cara">
+        <div class="photo-missing">Imagen no disponible</div>
+        <p class="photo-caption"><strong>Figura 7.13 · Los senos paranasales.</strong> Proyectados
+          sobre la cara. Mira cuánto rodean a la órbita: por arriba el frontal, por dentro el
+          etmoidal, por debajo el maxilar.</p>
+        <div class="photo-credit">Tortora, 15.ª ed. · Fig. 7.13</div>
+      </div>
+    </div>
+
+    <h3>Y ahora sí, la órbita</h3>
+    <p>Es una <strong>pirámide de cuatro paredes</strong> con el vértice hacia atrás, construida
+      por <strong>siete huesos</strong>: tres del cráneo y cuatro de la cara. La estudiaremos a
+      fondo en la clase 5; hoy nos interesa como <em>caso</em> de todo lo anterior: qué huesos, cómo
+      se unen y por dónde pasan las cosas.</p>
+
+    <div class="two-col">
+      <div class="col-card teal"><h5>Tres huesos craneales</h5>
+        <p><strong>Frontal</strong> · <strong>Esfenoides</strong> · <strong>Etmoides</strong></p></div>
+      <div class="col-card rust"><h5>Cuatro huesos faciales</h5>
+        <p><strong>Maxilar</strong> · <strong>Cigomático</strong> · <strong>Lacrimal</strong> ·
+          <strong>Palatino</strong></p></div>
+    </div>
+
+        <div class="photo-hero">
+      <img src="img/fig_7_12_orbita.png" alt="Figura 7.12 de Tortora: detalles de la órbita derecha en vista anterior, con los siete huesos que la forman coloreados y las aberturas — foramen óptico, fisuras orbitarias superior e inferior, fosa lacrimal y foramen supraorbitario">
+      <div class="photo-missing">Imagen no disponible</div>
+      <p class="photo-caption"><strong>Figura 7.12 · Detalles de la órbita derecha.</strong> Cada color es un hueso distinto: cuenta siete. Ojo con el <em>hueso nasal</em>, que aparece rotulado al borde pero <strong>no forma parte de la órbita</strong> — está al lado. Localiza el foramen óptico, las dos fisuras y la fosa lacrimal.</p>
+      <div class="photo-credit">Tortora &amp; Derrickson, 15.ª ed. · Fig. 7.12</div>
+    </div>
+
+    <table class="data">
+      <thead><tr><th>Pared</th><th>Huesos que la forman</th><th>Qué hay al otro lado</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Techo</strong></td><td>Frontal y ala menor del esfenoides</td>
+            <td>La fosa craneal anterior — el <strong>lóbulo frontal</strong></td></tr>
+        <tr><td><strong>Pared lateral</strong></td><td>Cigomático y ala mayor del esfenoides</td>
+            <td>La fosa temporal. Es la <strong>pared más gruesa</strong></td></tr>
+        <tr><td><strong>Piso</strong></td><td>Maxilar, cigomático y palatino</td>
+            <td>El <strong>seno maxilar</strong>. Muy fino</td></tr>
+        <tr><td><strong>Pared medial</strong></td><td>Etmoides, lacrimal, maxilar y esfenoides</td>
+            <td>Las <strong>celdillas etmoidales</strong> y la nariz. Es la
+                <strong>más fina de todas</strong> — <em>lámina papirácea</em></td></tr>
+      </tbody>
+    </table>
+
+    <h3>Los dos huesos que más cuesta imaginar</h3>
+    <p>Cinco de los siete son fáciles de situar. Los otros dos —<strong>esfenoides</strong> y
+      <strong>etmoides</strong>— son huesos irregulares que no se ven desde fuera y que atraviesan
+      la base del cráneo. Merece la pena verlos sueltos:</p>
+
+    <div class="photo-grid cols-2">
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_7_8_esfenoides.png" alt="Figura 7.8 de Tortora: el hueso esfenoides aislado, con su cuerpo, las alas menores y mayores, los procesos pterigoides y el conducto óptico">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <p class="photo-caption"><strong>Esfenoides.</strong> Con forma de mariposa, ocupa el centro
+          de la base del cráneo. Sus <em>alas menores</em> forman parte del techo de la órbita y
+          contienen el <strong>conducto óptico</strong>; sus <em>alas mayores</em>, la pared lateral.
+          Entre unas y otras queda la <strong>fisura orbitaria superior</strong>.</p>
+        <div class="photo-credit">Tortora, 15.ª ed. · Fig. 7.8</div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_7_9_etmoides.png" alt="Figura 7.9 de Tortora: el hueso etmoides aislado, con la lámina cribosa, la crista galli, las masas laterales con las celdillas etmoidales y la lámina perpendicular">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <p class="photo-caption"><strong>Etmoides.</strong> Esponjoso y ligerísimo, entre las dos
+          órbitas. Sus <em>masas laterales</em> forman la <strong>pared medial</strong> — la lámina
+          papirácea— y contienen las celdillas etmoidales, que son senos. Justo al otro lado de esa
+          pared de papel está la nariz.</p>
+        <div class="photo-credit">Tortora, 15.ª ed. · Fig. 7.9</div>
+      </div>
+    </div>
+
+    <div class="photo-hero">
+      <img src="img/cabeza_desarticulada.png" alt="Vista anterior de una cabeza ósea desarticulada, con los huesos del cráneo y de la cara separados para mostrar cómo encajan entre sí">
+      <div class="photo-missing">Imagen no disponible</div>
+      <p class="photo-caption"><strong>La cabeza, desarticulada.</strong> Aquí se entiende de golpe
+        por qué la órbita necesita siete huesos: <em>ninguno es «el hueso de la órbita»</em>. Cada
+        pieza pertenece a otra estructura —el cráneo, la nariz, el pómulo, el paladar— y la órbita
+        es el hueco que queda donde todas se encuentran.</p>
+      <div class="photo-credit">Cabeza ósea desarticulada · vista anterior</div>
+    </div>
+
+    <div class="pearl">Aquí está la segunda pregunta del inicio, respondida. <strong>La órbita no es
+      de siete huesos porque sea mejor así: es que cada uno de esos huesos pertenece a otra cosa</strong>
+      —al cráneo, a la nariz, al pómulo, al paladar— y la órbita es el hueco que queda donde todos
+      se encuentran. Es una <em>intersección</em>, no una pieza. Y eso explica por qué las
+      enfermedades de la nariz, de los senos y del cráneo acaban afectando al ojo.</div>
+  </div>
+
+  <div class="clinical-box">
+    <h5>Tres consecuencias que verás en consulta</h5>
+    <ul>
+      <li><strong>Celulitis orbitaria de origen sinusal.</strong> La lámina papirácea separa el
+        etmoides de la órbita y tiene menos de un milímetro. Una sinusitis etmoidal en un niño puede
+        atravesarla y convertirse en una infección orbitaria — es la causa más frecuente, y una
+        urgencia.</li>
+      <li><strong>Fractura por estallido del piso.</strong> Un golpe con un objeto romo —una pelota,
+        un puño— sube la presión dentro de la órbita y rompe el piso, que cede hacia el seno
+        maxilar. Si el recto inferior queda atrapado, el ojo no puede mirar hacia arriba y aparece
+        <strong>diplopía</strong>.</li>
+      <li><strong>Síndrome del vértice orbitario.</strong> Como el nervio óptico y los tres nervios
+        oculomotores entran por dos aberturas contiguas y muy juntas, una lesión en el vértice puede
+        dejar el ojo <em>ciego e inmóvil</em> a la vez. La anatomía explica la combinación.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ─────────── 08 · TA2 ─────────── -->
+<section class="station" id="s2e8">
+  <div class="station-header">
+    <div class="station-number">08</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Terminología</div>
+      <h2>Términos TA2 de las articulaciones</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <h3>Voltea cada tarjeta para ver la definición</h3>
+    <div class="flip-grid">
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Osificación</span><span class="term-en">Ossification</span></div>
+        <div class="flip-back"><p class="term-def">Proceso de formación de hueso, por sustitución de un tejido conectivo previo.</p><p class="term-opto">👁 Intramembranosa en el frontal; endocondral en partes del esfenoides.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Placa epifisaria</span><span class="term-en">Epiphyseal plate</span></div>
+        <div class="flip-back"><p class="term-def">Lámina de cartílago hialino de la metáfisis que permite el crecimiento en longitud; al cerrarse deja la línea epifisaria.</p><p class="term-opto">👁 Es una sincondrosis: articulación cartilaginosa inmóvil.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Remodelación ósea</span><span class="term-en">Bone remodeling</span></div>
+        <div class="flip-back"><p class="term-def">Sustitución continua de hueso viejo por nuevo: osteoclastos reabsorben y osteoblastos reconstruyen.</p><p class="term-opto">👁 Descontrolada en la enfermedad de Paget, que puede comprimir el nervio óptico.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Sutura</span><span class="term-en">Suture</span></div>
+        <div class="flip-back"><p class="term-def">Articulación fibrosa inmóvil entre huesos del cráneo; permite el crecimiento, no el movimiento.</p><p class="term-opto">👁 Su cierre precoz deforma las órbitas y causa proptosis.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Sindesmosis</span><span class="term-en">Syndesmosis</span></div>
+        <div class="flip-back"><p class="term-def">Articulación fibrosa unida por un ligamento o membrana; permite algo de movimiento.</p><p class="term-opto">👁 La gonfosis del diente en su alvéolo es de este grupo.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Sincondrosis</span><span class="term-en">Synchondrosis</span></div>
+        <div class="flip-back"><p class="term-def">Articulación cartilaginosa unida por cartílago hialino; inmóvil.</p><p class="term-opto">👁 El ejemplo es la placa epifisaria.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Sínfisis</span><span class="term-en">Symphysis</span></div>
+        <div class="flip-back"><p class="term-def">Articulación cartilaginosa unida por fibrocartílago; poco móvil.</p><p class="term-opto">👁 Sínfisis del pubis y discos intervertebrales.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Diartrosis</span><span class="term-en">Diarthrosis</span></div>
+        <div class="flip-back"><p class="term-def">Articulación libremente móvil. Equivale exactamente a la articulación sinovial.</p><p class="term-opto">👁 Es la única equivalencia exacta entre las dos clasificaciones.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Líquido sinovial</span><span class="term-en">Synovial fluid</span></div>
+        <div class="flip-back"><p class="term-def">Secreción de la membrana sinovial que lubrica la articulación y nutre el cartílago articular.</p><p class="term-opto">👁 El cartílago es avascular: sin movimiento no se nutre bien.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Enartrosis</span><span class="term-en">Ball-and-socket joint</span></div>
+        <div class="flip-back"><p class="term-def">Sinovial esferoidea: una esfera en una copa. Triaxial, la más móvil.</p><p class="term-opto">👁 El ojo se mueve en tres ejes sin ser una articulación.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Gínglimo</span><span class="term-en">Hinge joint</span></div>
+        <div class="flip-back"><p class="term-def">Sinovial en bisagra: superficie convexa en cóncava. Uniaxial.</p><p class="term-opto">👁 Codo y tobillo; la rodilla es un gínglimo modificado.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Propiocepción</span><span class="term-en">Proprioception</span></div>
+        <div class="flip-back"><p class="term-def">Sensación de posición y movimiento del cuerpo, transmitida en parte por las articulaciones.</p><p class="term-opto">👁 Los músculos extraoculares tienen propioceptores que informan de dónde mira el ojo.</p></div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 09 · QUIZ ─────────── -->
+<section class="station" id="s2e9">
+  <div class="station-header">
+    <div class="station-number">09</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Autoevaluación</div>
+      <h2>Comprueba lo que aprendiste</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <div class="check-question" data-question="q1s2o">
+      <p class="question-text">1. La <strong>placa epifisaria</strong> permite el crecimiento en longitud del hueso. Desde el punto de vista articular, ¿qué es?</p>
+      <ul class="options">
+        <li data-letter="A">Una sínfisis, porque une dos partes del mismo hueso</li>
+        <li data-letter="B" data-correct="true">Una sincondrosis: articulación cartilaginosa de cartílago hialino, inmóvil</li>
+        <li data-letter="C">Una sindesmosis, porque está unida por tejido fibroso</li>
+        <li data-letter="D">Una articulación sinovial en miniatura</li>
+        <li data-letter="E">No es una articulación</li>
+      </ul>
+      <div class="feedback"><strong>Correcto: B.</strong> Es cartilaginosa —de cartílago <em>hialino</em>, no fibrocartílago— y funcionalmente una sinartrosis. La sínfisis (opción A) también es cartilaginosa, pero de fibrocartílago y poco móvil. Que una articulación no se mueva no le quita la condición de articulación: la placa epifisaria y las suturas son el mejor ejemplo.</div>
+    </div>
+
+    <div class="check-question" data-question="q2s2o">
+      <p class="question-text">2. ¿Cuál de estas afirmaciones sobre las dos clasificaciones de las articulaciones es <em>correcta</em>?</p>
+      <ul class="options">
+        <li data-letter="A">Toda articulación fibrosa es inmóvil</li>
+        <li data-letter="B">Toda articulación cartilaginosa es poco móvil</li>
+        <li data-letter="C" data-correct="true">Toda articulación sinovial es una diartrosis, y toda diartrosis es sinovial</li>
+        <li data-letter="D">La clasificación estructural y la funcional son equivalentes</li>
+        <li data-letter="E">Las sinartrosis son siempre cartilaginosas</li>
+      </ul>
+      <div class="feedback"><strong>Correcto: C.</strong> Es la única equivalencia exacta que existe. Las demás no casan: una sindesmosis es fibrosa y sí se mueve algo (contra A); una sincondrosis es cartilaginosa e inmóvil (contra B); y las sinartrosis pueden ser fibrosas —suturas— o cartilaginosas —placa epifisaria— (contra E).</div>
+    </div>
+
+    <div class="check-question" data-question="q3s2o">
+      <p class="question-text">3. El cartílago articular no tiene vasos sanguíneos. ¿Cómo se nutre?</p>
+      <ul class="options">
+        <li data-letter="A">Desde el periostio que lo recubre</li>
+        <li data-letter="B">Por los conductos centrales de las osteonas subyacentes</li>
+        <li data-letter="C" data-correct="true">Por difusión desde el líquido sinovial, favorecida por el movimiento de la articulación</li>
+        <li data-letter="D">A través de su pericondrio</li>
+        <li data-letter="E">No se nutre: sus células están muertas</li>
+      </ul>
+      <div class="feedback"><strong>Correcto: C.</strong> El movimiento comprime y descomprime el cartílago como una esponja, y eso hace circular el líquido sinovial a través de él. La opción D es la trampa: el cartílago articular es la excepción, <strong>carece de pericondrio</strong>, y esa es una de las razones de que repare tan mal. Por eso la rehabilitación busca movilizar pronto.</div>
+    </div>
+
+    <div class="check-question" data-question="q4s2o">
+      <p class="question-text">4. La órbita está formada por siete huesos. ¿Cuáles son los tres <strong>craneales</strong>?</p>
+      <ul class="options">
+        <li data-letter="A">Maxilar, cigomático y palatino</li>
+        <li data-letter="B" data-correct="true">Frontal, esfenoides y etmoides</li>
+        <li data-letter="C">Frontal, temporal y occipital</li>
+        <li data-letter="D">Esfenoides, lacrimal y nasal</li>
+        <li data-letter="E">Etmoides, vómer y maxilar</li>
+      </ul>
+      <div class="feedback"><strong>Correcto: B.</strong> Tres craneales —frontal, esfenoides y etmoides— y cuatro faciales —maxilar, cigomático, lacrimal y palatino—. La opción A enumera tres de los cuatro faciales. Ni el temporal ni el occipital llegan a la órbita.</div>
+    </div>
+
+    <div class="saber-box">
+      <strong>Pregunta tipo Saber Pro · Inglés</strong>
+      <div class="check-question" style="margin-top:16px;border-color:var(--purple)" data-question="q5s2o">
+        <p class="question-text">5. Wolff's law states that bone is deposited where it is mechanically stressed and resorbed where it is not. Which observation best illustrates it?<br><em style="font-size:.85rem;color:var(--text-muted)">La ley de Wolff sostiene que el hueso se deposita donde se le exige mecánicamente y se reabsorbe donde no. ¿Qué observación la ilustra mejor?</em></p>
+        <ul class="options">
+          <li data-letter="A">Bone contains both collagen and hydroxyapatite (el hueso tiene colágeno e hidroxiapatita)</li>
+          <li data-letter="B">Long bones grow in length at the epiphyseal plate (los huesos largos crecen en longitud en la placa epifisaria)</li>
+          <li data-letter="C" data-correct="true">Astronauts lose bone mass in weightlessness, and the trabeculae align along lines of force (los astronautas pierden masa ósea en ingravidez, y las trabéculas se alinean según las líneas de fuerza)</li>
+          <li data-letter="D">Parathyroid hormone raises blood calcium (la paratohormona sube el calcio en sangre)</li>
+          <li data-letter="E">Osteoclasts derive from monocytes (los osteoclastos derivan de monocitos)</li>
+        </ul>
+        <div class="feedback"><strong>Correct: C.</strong> Both halves of the option are the law in action: remove the load and bone is lost; apply a load and the trabeculae orient themselves along it. B is growth, not remodelling; D is calcium homeostasis; A and E are composition and cell origin. Wolff's law is why weight-bearing exercise protects against osteoporosis.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 10 · CIERRE ─────────── -->
+<section class="station" id="s2e10">
+  <div class="station-header">
+    <div class="station-number">10</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Cierre</div>
+      <h2>Volvemos a las cuatro preguntas</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Recupera lo que respondiste al empezar la mañana. Lo que importa no es si acertaste, sino que
+      ahora puedas decir <em>por qué</em>.</p>
+
+    <table class="data">
+      <thead><tr><th>La pregunta</th><th>Lo que ahora sabes</th></tr></thead>
+      <tbody>
+        <tr><td><strong>1 ·</strong> Resistente y liviano a la vez</td>
+            <td>Es un <strong>tubo</strong>, no una barra: compacto donde soporta la flexión,
+                esponjoso donde solo reparte carga, y hueco en el centro, que además se aprovecha
+                para la médula</td></tr>
+        <tr><td><strong>2 ·</strong> Siete huesos para una órbita</td>
+            <td>Porque la órbita <strong>no es una pieza</strong>: es la intersección donde se
+                encuentran el cráneo, la nariz, el pómulo y el paladar. Cada hueso pertenece a otra
+                estructura</td></tr>
+        <tr><td><strong>3 ·</strong> Articulaciones que no se mueven</td>
+            <td>Las <strong>suturas</strong> existen para permitir el <em>crecimiento</em> del
+                cráneo, no el movimiento. Cuando se cierran antes de tiempo, la cabeza crece
+                deformada</td></tr>
+        <tr><td><strong>4 ·</strong> Un esqueleto que se rehace</td>
+            <td>La <strong>remodelación</strong> repara microfracturas, permite usar el hueso como
+                banco de calcio y adapta su forma a las cargas — la ley de Wolff</td></tr>
+      </tbody>
+    </table>
+
+    <h3>La idea que conecta las cuatro</h3>
+    <p>Las cuatro respuestas dicen lo mismo con distintas palabras, y es lo que llevamos viendo
+      desde la primera clase: <strong>la forma sigue a la función</strong>. El hueso es hueco porque
+      así pesa menos sin perder resistencia; la órbita tiene siete piezas porque cada una crece a su
+      ritmo; las suturas no se mueven porque su trabajo era otro; el esqueleto se demuele y se
+      rehace porque un material fijo no podría adaptarse.</p>
+
+    <div class="pearl">Y fíjate en el hilo que viene de la clase pasada: el hueso es
+      <strong>tejido conectivo</strong>, así que se define por su matriz. Todo lo de hoy —dureza,
+      ligereza, crecimiento, remodelación, reserva de calcio— es lo que puede hacer una matriz
+      extracelular cuando se mineraliza y se mantiene viva.</div>
+
+    <p><strong>La próxima clase</strong> abrimos cabeza y cuello: cráneo, cara y la órbita en
+      detalle, con sus paredes, sus aberturas y lo que pasa por cada una. Hoy has puesto las
+      herramientas; el jueves 27 se usan. Lectura previa: Tortora, capítulo 7.</p>
+  </div>
+
+  <div class="clinical-box">
+    <h5>Y una idea para llevarse</h5>
+    <p>El ojo es el único órgano de los sentidos que vive <strong>dentro de una caja de hueso y sale
+      de ella por un agujero</strong>. Esa doble condición —protegido y a la vez dependiente de un
+      canal estrecho— es la que hace que la osteología no sea una asignatura ajena a la optometría:
+      <strong>casi todo lo que comprime, deforma o rompe el hueso de la órbita acaba en la consulta
+      de un optómetra.</strong></p>
+  </div>
+</section>
+
+</div><!-- /s2 -->
+
+<footer class="footer">
+  Morfología General 2026-II · Universidad de La Salle · Facultad de Ciencias de la Salud · Optometría<br>
+  Jueves 13 de agosto de 2026 · Terminología TA2 · Fuentes: Tortora &amp; Derrickson 15.ª ed., caps. 6, 7 y 9 · Moore, <em>Anatomía con orientación clínica</em> · Latarjet-Ruiz Liard
+</footer>
+
+</div><!-- /container -->
+
+<script>
+function showTab(id,btn){
+  document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+document.querySelectorAll('.check-question').forEach(block=>{
+  const options=block.querySelectorAll('.options li');
+  const feedback=block.querySelector('.feedback');
+  const correctLetter=Array.from(options).find(o=>o.dataset.correct==='true')?.dataset.letter;
+  let answered=false;
+  options.forEach(opt=>{
+    opt.addEventListener('click',()=>{
+      if(answered)return;
+      answered=true;
+      options.forEach(o=>{
+        if(o.dataset.letter===correctLetter)o.classList.add('correct');
+        else if(o===opt&&opt.dataset.letter!==correctLetter)o.classList.add('incorrect');
+      });
+      feedback.classList.add('show');
+      feedback.scrollIntoView({behavior:'smooth',block:'nearest'});
+    });
+  });
+});
+document.querySelectorAll('.flip-card').forEach(card=>{
+  card.addEventListener('click',()=>card.classList.toggle('flipped'));
+});
+</script>
+
+</body>
+</html>
