@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resultado del I Parcial · Morfología General 2026-II</title>
+<!--
+  Se publica. No lleva clave de respuestas ni banco.
+
+  Devuelve LA FILA PROPIA tras validar identidad contra el listado: nombre,
+  y ademas codigo y correo cuando el listado los tiene. No permite leer el
+  curso. Cada consulta queda registrada en la pestaña Accesos.
+
+  La puerta es doble y esta en el servidor: PUBLICADO y PUBLICA_DESDE. Esta
+  pagina puede estar en linea desde antes; no muestra nada hasta que el
+  servidor abra.
+-->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1a2a35;--text:#2c3e4f;--soft:#5a6b7a;--muted:#8a9aa8;
+  --parchment:#f8f3e8;--dark:#f0e8d4;--card:#fdfaf2;--border:#d4c8a8;--light:#e5dbc0;
+  --amber:#b8860b;--amber-dark:#8b6914;--amber-pale:#f5e9c8;
+  --teal:#2a7a6e;--teal-dark:#1f5d54;
+  --green:#2e7d32;--green-bg:#e8f5e9;
+  --red:#b5413b;--red-dark:#8a2f2a;--red-bg:#fce8e6;
+  --shadow:0 2px 8px rgba(26,42,53,.06);
+  --f-d:'Playfair Display',Georgia,serif;--f-b:'Source Serif 4',Georgia,serif;--f-m:'DM Mono',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--f-b);background:var(--parchment);color:var(--text);line-height:1.65;font-size:17px;padding-bottom:60px}
+.wrap{max-width:760px;margin:0 auto;padding:0 22px}
+header{text-align:center;padding:44px 20px 26px;border-bottom:3px double var(--amber);margin-bottom:28px}
+.eyebrow{font-family:var(--f-m);font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--amber-dark)}
+header h1{font-family:var(--f-d);font-size:clamp(1.7rem,4.5vw,2.4rem);font-weight:900;color:var(--ink);margin:10px 0 6px}
+header p{color:var(--soft);font-style:italic}
+
+.tarjeta{background:var(--card);border:1px solid var(--border);border-radius:4px;padding:26px 28px;margin-bottom:20px;box-shadow:var(--shadow)}
+.tarjeta h2{font-family:var(--f-d);font-size:1.25rem;color:var(--ink);margin-bottom:14px}
+.tarjeta p+p{margin-top:12px}
+label{display:block;font-family:var(--f-m);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--amber-dark);margin:14px 0 6px}
+select,input{width:100%;font-family:var(--f-b);font-size:1rem;padding:11px 13px;border:1px solid var(--border);border-radius:3px;background:#fff;color:var(--text)}
+select:focus,input:focus{outline:2px solid var(--teal);outline-offset:1px}
+button{font-family:var(--f-b);font-size:1rem;padding:12px 26px;border-radius:3px;border:1px solid var(--teal);background:var(--teal);color:#fff;cursor:pointer;margin-top:20px}
+button:hover:not(:disabled){background:var(--teal-dark)}
+button:disabled{opacity:.45;cursor:not-allowed}
+button:focus-visible{outline:2px solid var(--amber-dark);outline-offset:2px}
+
+.marcador{text-align:center;padding:30px 24px;background:var(--card);border:2px solid var(--teal);border-radius:4px;margin-bottom:20px}
+.marcador .nota{font-family:var(--f-d);font-size:4rem;font-weight:900;line-height:1;color:var(--teal)}
+.marcador .nota.baja{color:var(--red)}
+.marcador .de{font-family:var(--f-m);font-size:.76rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:8px}
+.marcador .quien{font-family:var(--f-d);font-size:1.1rem;color:var(--ink);margin-bottom:14px}
+
+.bloques{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:20px}
+.bloque{background:var(--card);border:1px solid var(--light);border-radius:4px;padding:16px 18px;text-align:center}
+.bloque .v{font-family:var(--f-d);font-size:1.6rem;font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums}
+.bloque .r{font-family:var(--f-m);font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:5px}
+
+.tema{background:var(--card);border:1px solid var(--light);border-radius:4px;padding:14px 18px;margin-bottom:10px;display:flex;justify-content:space-between;gap:14px;align-items:baseline;flex-wrap:wrap}
+.tema .n{font-family:var(--f-b);color:var(--ink)}
+.tema .p{font-family:var(--f-m);font-size:.95rem;font-weight:500}
+.tema.bien .p{color:var(--green)} .tema.regular .p{color:var(--amber-dark)} .tema.mal .p{color:var(--red)}
+
+.preg{background:var(--card);border:1px solid var(--light);border-left:5px solid var(--green);border-radius:3px;padding:13px 18px;margin-bottom:9px}
+.preg.fallo{border-left-color:var(--red)}
+.preg.blanco{border-left-color:var(--muted)}
+.preg .cab{font-family:var(--f-m);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--green);margin-bottom:5px}
+.preg.fallo .cab{color:var(--red-dark)} .preg.blanco .cab{color:var(--muted)}
+.preg .q{color:var(--ink);font-size:.96rem}
+.preg .extra{margin-top:9px;padding-top:9px;border-top:1px dotted var(--border);font-size:.92rem;color:var(--soft)}
+.preg .extra b{color:var(--ink)}
+
+.aviso{border-radius:3px;padding:15px 20px;margin-bottom:18px;font-size:.96rem}
+.aviso.malo{background:var(--red-bg);border-left:4px solid var(--red);color:var(--red-dark)}
+.aviso.ojo{background:var(--amber-pale);border-left:4px solid var(--amber)}
+.oculto{display:none}
+footer{margin-top:44px;padding:22px;text-align:center;border-top:3px double var(--amber);font-family:var(--f-m);font-size:.72rem;color:var(--muted);letter-spacing:.1em}
+@media(max-width:560px){body{font-size:16px}.wrap{padding:0 16px}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">Morfología General 2026-II · Optometría</div>
+  <h1>Resultado del I Parcial</h1>
+  <p>Consulta tu propio resultado</p>
+</header>
+
+<div class="wrap">
+  <div id="aviso"></div>
+
+  <div class="tarjeta" id="formulario">
+    <h2>Identifícate</h2>
+    <p style="color:var(--soft);font-size:.95rem">Los tres datos tienen que coincidir con el
+      listado del curso. Solo verás tu propia fila.</p>
+    <label for="alumno">Tu nombre</label>
+    <select id="alumno"><option value="">Cargando el listado…</option></select>
+    <label for="codigo">Tu código</label>
+    <input id="codigo" inputmode="numeric" autocomplete="off" placeholder="El número de tu documento">
+    <label for="correo">Tu correo institucional</label>
+    <input id="correo" type="email" autocomplete="off" placeholder="usuario@unisalle.edu.co">
+    <button id="btn" disabled>Ver mi resultado</button>
+    <p style="color:var(--muted);font-size:.86rem;margin-top:14px">Cada consulta queda
+      registrada con la hora. Consultar la nota de otra persona es una falta.</p>
+  </div>
+
+  <div class="oculto" id="salida">
+    <div class="marcador">
+      <div class="quien" id="quien"></div>
+      <div class="nota" id="nota">—</div>
+      <div class="de" id="de"></div>
+    </div>
+    <div class="bloques" id="bloques"></div>
+
+    <div class="tarjeta">
+      <h2>Por tema</h2>
+      <p style="color:var(--soft);font-size:.94rem;margin-bottom:14px">Dónde estuvo lo tuyo y
+        dónde no. Esto es lo que conviene mirar para el siguiente corte.</p>
+      <div id="temas"></div>
+    </div>
+
+    <div class="tarjeta">
+      <h2>Pregunta por pregunta</h2>
+      <div id="preguntas"></div>
+    </div>
+
+    <div class="tarjeta">
+      <h2>Si algo no cuadra</h2>
+      <p>Escríbeme o hablamos en la clase de socialización de notas. Lleva anotado el número de
+        las preguntas que quieras revisar.</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  Universidad de La Salle · Facultad de Ciencias de la Salud · Optometría<br>
+  Dr. Jorge Bogoya · Morfología General 2026-II
+</footer>
+
+<script>
+/* El token de consulta solo permite pedir LA FILA PROPIA tras validar
+   identidad. No devuelve el curso ni la clave de respuestas. */
+const CONFIG = {
+  TOKEN_CONSULTA: "CON_PARCIAL1_MORF_2026II_e94a26bd",
+  TOKEN_LISTADO : "PARCIAL1_MORF_2026II_a7f3d9e2",
+  ENDPOINT      : "https://script.google.com/macros/s/AKfycbwf17G622ehXQzurxP7qesEPLlYTMMt3CuzqfPTCEQ2Ru70ozgGdAJciXHHZwBElgjOKw/exec"
+};
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s === undefined || s === null ? "" : s)
+  .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+
+const MENSAJE = {
+  aun_no_publicado     : "Los resultados todavía no están publicados.",
+  no_esta_en_el_listado: "Ese nombre no aparece en el listado del curso.",
+  codigo_incorrecto    : "El código no coincide con el del listado.",
+  falta_codigo         : "Falta el código.",
+  correo_no_corresponde: "El correo no coincide con el del listado.",
+  sin_entrega          : "No encontramos un parcial entregado a tu nombre.",
+  falta_alumno         : "Elige tu nombre en la lista."
+};
+
+function avisar(clase, texto){
+  $("aviso").innerHTML = texto ? '<div class="aviso ' + clase + '">' + texto + '</div>' : "";
+}
+
+async function pedir(token, params){
+  const u = new URL(CONFIG.ENDPOINT);
+  u.searchParams.set("token", token);
+  Object.entries(params).forEach(([k, v]) => u.searchParams.set(k, v));
+  return (await fetch(u)).json();
+}
+
+async function arrancar(){
+  try{
+    const r = await pedir(CONFIG.TOKEN_LISTADO, {action:"roster"});
+    if(!r.ok) return avisar("malo", "No se pudo cargar el listado.");
+    $("alumno").innerHTML = '<option value="">— elige tu nombre —</option>' +
+      r.roster.map(n => '<option>' + esc(n) + '</option>').join("");
+    const revisar = () => { $("btn").disabled = !$("alumno").value || !$("codigo").value.trim(); };
+    ["alumno","codigo","correo"].forEach(id => $(id).addEventListener("input", revisar));
+    $("alumno").addEventListener("change", revisar);
+    $("btn").addEventListener("click", consultar);
+  }catch(e){ avisar("malo", "No hay conexión con el servidor. Vuelve a cargar la página."); }
+}
+
+async function consultar(){
+  $("btn").disabled = true; $("btn").textContent = "Consultando…";
+  avisar("", "");
+  let r;
+  try{
+    r = await pedir(CONFIG.TOKEN_CONSULTA, {
+      action:"resultado", alumno:$("alumno").value,
+      codigo:$("codigo").value.trim(), correo:$("correo").value.trim()
+    });
+  }catch(e){
+    $("btn").disabled = false; $("btn").textContent = "Ver mi resultado";
+    return avisar("malo", "No hay conexión con el servidor.");
+  }
+  $("btn").disabled = false; $("btn").textContent = "Ver mi resultado";
+
+  if(!r.ok){
+    let m = MENSAJE[r.error] || ("No se pudo consultar (" + esc(r.error) + ").");
+    if(r.error === "aun_no_publicado" && r.desde)
+      m += " Se abren el " + esc(String(r.desde).slice(0, 16).replace("T", " ")) + ".";
+    return avisar(r.error === "aun_no_publicado" ? "ojo" : "malo", m);
+  }
+  pintar(r);
+}
+
+function pintar(r){
+  $("formulario").classList.add("oculto");
+  $("salida").classList.remove("oculto");
+  window.scrollTo({top:0, behavior:"smooth"});
+
+  const nota = Number(r.nota);
+  $("quien").textContent = r.alumno;
+  $("nota").textContent = nota.toFixed(2);
+  $("nota").classList.toggle("baja", nota < 3);
+  $("de").textContent = r.aciertos + " de " + r.max + " · " + r.porcentaje + " %";
+
+  const b = r.bloques || {};
+  $("bloques").innerHTML = [
+    ["Opción múltiple", b.mc], ["Verdadero-falso", b.vf], ["Selección múltiple", b.sm]
+  ].map(([et, v]) =>
+    '<div class="bloque"><div class="v">' + esc(String(v || "—").replace(/^'/, "")) +
+    '</div><div class="r">' + esc(et) + "</div></div>").join("");
+
+  /* Por tema: se agrupa lo que el servidor mando pregunta a pregunta.
+     Es lo mas util de toda la pagina — dice donde estudiar. */
+  const porTema = {};
+  (r.preguntas || []).forEach(p => {
+    const t = p.tema || "Sin tema";
+    porTema[t] = porTema[t] || {ok:0, n:0};
+    porTema[t].n++;
+    if(p.acertada === true) porTema[t].ok++;
+  });
+  $("temas").innerHTML = Object.keys(porTema).sort().map(t => {
+    const d = porTema[t], pct = Math.round(100 * d.ok / d.n);
+    const cl = pct >= 70 ? "bien" : (pct >= 40 ? "regular" : "mal");
+    return '<div class="tema ' + cl + '"><span class="n">' + esc(t) +
+      '</span><span class="p">' + d.ok + " de " + d.n + " · " + pct + " %</span></div>";
+  }).join("");
+
+  $("preguntas").innerHTML = (r.preguntas || []).map((p, i) => {
+    const cl = p.acertada === true ? "" : (p.acertada === null ? "blanco" : "fallo");
+    const cab = p.acertada === true ? "✓ Correcta"
+              : (p.acertada === null ? "— Sin responder" : "✗ Incorrecta");
+    let extra = "";
+    if(p.correcta !== undefined && p.opciones){
+      const idx = Array.isArray(p.correcta) ? p.correcta : [p.correcta];
+      const txt = idx.map(k => p.opciones[k]).filter(Boolean).join(" · ");
+      extra = '<div class="extra"><b>La correcta:</b> ' + esc(txt) +
+              (p.explicacion ? "<br>" + esc(p.explicacion) : "") + "</div>";
+    }
+    return '<div class="preg ' + cl + '"><div class="cab">' + (i + 1) + " · " + cab +
+      " · " + esc(p.tema || "") + '</div><div class="q">' + esc(p.enunciado) + "</div>" +
+      extra + "</div>";
+  }).join("");
+}
+
+arrancar();
+</script>
+</body>
+</html>
