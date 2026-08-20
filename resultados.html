@@ -65,8 +65,10 @@ button:focus-visible{outline:2px solid var(--amber-dark);outline-offset:2px}
 .preg{background:var(--card);border:1px solid var(--light);border-left:5px solid var(--green);border-radius:3px;padding:13px 18px;margin-bottom:9px}
 .preg.fallo{border-left-color:var(--red)}
 .preg.blanco{border-left-color:var(--muted)}
+.preg.anulada{border-left-color:var(--amber);background:var(--amber-pale)}
 .preg .cab{font-family:var(--f-m);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--green);margin-bottom:5px}
 .preg.fallo .cab{color:var(--red-dark)} .preg.blanco .cab{color:var(--muted)}
+.preg.anulada .cab{color:var(--amber-dark)}
 .preg .q{color:var(--ink);font-size:.96rem}
 .preg .extra{margin-top:9px;padding-top:9px;border-top:1px dotted var(--border);font-size:.92rem;color:var(--soft)}
 .preg .extra b{color:var(--ink)}
@@ -74,6 +76,23 @@ button:focus-visible{outline:2px solid var(--amber-dark);outline-offset:2px}
 .aviso{border-radius:3px;padding:15px 20px;margin-bottom:18px;font-size:.96rem}
 .aviso.malo{background:var(--red-bg);border-left:4px solid var(--red);color:var(--red-dark)}
 .aviso.ojo{background:var(--amber-pale);border-left:4px solid var(--amber)}
+.pestanas{display:flex;gap:0;margin-bottom:22px;border:1px solid var(--border);border-radius:4px;overflow:hidden;background:var(--card)}
+.pestanas button{flex:1;margin:0;border:none;border-right:1px solid var(--light);border-radius:0;
+  background:none;color:var(--soft);font-size:.98rem;padding:14px 10px;cursor:pointer}
+.pestanas button:last-child{border-right:none}
+.pestanas button:hover{background:var(--dark);color:var(--ink)}
+.pestanas button.viva{background:var(--amber-pale);color:var(--ink);font-weight:600;box-shadow:inset 0 -3px 0 var(--amber)}
+.hoja{display:none} .hoja.viva{display:block}
+
+.desglose{display:grid;gap:10px;margin-bottom:18px}
+.linea{background:var(--card);border:1px solid var(--light);border-radius:4px;padding:14px 18px;
+  display:flex;justify-content:space-between;gap:14px;align-items:baseline;flex-wrap:wrap}
+.linea .q{color:var(--ink)}
+.linea .q small{display:block;font-family:var(--f-m);font-size:.64rem;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);margin-top:2px}
+.linea .v{font-family:var(--f-m);font-size:1.05rem;font-weight:500;color:var(--ink);font-variant-numeric:tabular-nums}
+.linea.suma{background:var(--dark);border-color:var(--border)}
+.linea.suma .v{font-family:var(--f-d);font-size:1.3rem;font-weight:700}
 .oculto{display:none}
 footer{margin-top:44px;padding:22px;text-align:center;border-top:3px double var(--amber);font-family:var(--f-m);font-size:.72rem;color:var(--muted);letter-spacing:.1em}
 @media(max-width:560px){body{font-size:16px}.wrap{padding:0 16px}}
@@ -106,12 +125,41 @@ footer{margin-top:44px;padding:22px;text-align:center;border-top:3px double var(
   </div>
 
   <div class="oculto" id="salida">
+
+    <div class="pestanas" id="pestanas">
+      <button data-hoja="corte" class="viva">Nota del corte</button>
+      <button data-hoja="parcial">Detalle del parcial</button>
+    </div>
+
+    <!-- ─────────── corte ─────────── -->
+    <div class="hoja viva" id="hoja-corte">
+      <div class="marcador">
+        <div class="quien" id="c-quien"></div>
+        <div class="nota" id="c-nota">—</div>
+        <div class="de" id="c-de">Primer corte · 35 % del semestre</div>
+      </div>
+      <div class="desglose" id="c-desglose"></div>
+      <div id="c-obs"></div>
+      <div class="tarjeta">
+        <h2>Cómo se calcula</h2>
+        <p>El primer corte vale el <b>35 %</b> del semestre y se compone de dos partes:
+          el <b>seguimiento</b> —el promedio de los tres talleres— que pesa 20, y el
+          <b>I Parcial</b>, que pesa 15.</p>
+        <p>Los talleres se trabajaron en grupo, así que <b>la nota de la entrega es la de todos
+          los integrantes</b>. Si en algún taller no aparece nota, es que tu grupo no registró
+          entrega; en ese caso el seguimiento promedia los que sí tienes.</p>
+      </div>
+    </div>
+
+    <!-- ─────────── parcial ─────────── -->
+    <div class="hoja" id="hoja-parcial">
     <div class="marcador">
-      <div class="quien" id="quien"></div>
-      <div class="nota" id="nota">—</div>
-      <div class="de" id="de"></div>
+      <div class="quien" id="p-quien"></div>
+      <div class="nota" id="p-nota">—</div>
+      <div class="de" id="p-de"></div>
     </div>
     <div class="bloques" id="bloques"></div>
+    <div class="oculto" id="nota-anuladas"></div>
 
     <div class="tarjeta">
       <h2>Por tema</h2>
@@ -124,6 +172,8 @@ footer{margin-top:44px;padding:22px;text-align:center;border-top:3px double var(
       <h2>Pregunta por pregunta</h2>
       <div id="preguntas"></div>
     </div>
+
+    </div><!-- /hoja-parcial -->
 
     <div class="tarjeta">
       <h2>Si algo no cuadra</h2>
@@ -209,16 +259,69 @@ async function consultar(){
   pintar(r);
 }
 
+/* ── El corte ──────────────────────────────────────────────────────
+   Llega del servidor solo si la pestaña Corte1 esta importada. Si no,
+   se esconde la pestaña y la pagina se comporta como antes.        */
+function pintarCorte(r){
+  const c = r.corte;
+  if(!c){
+    document.querySelector('[data-hoja="corte"]').classList.add("oculto");
+    verHoja("parcial");
+    return;
+  }
+  const val = k => String(c[k] === undefined || c[k] === null ? "" : c[k]).replace(",", ".").trim();
+  const n = parseFloat(val("CORTE 1 (35%)"));
+  $("c-quien").textContent = r.alumno;
+  $("c-nota").textContent  = isNaN(n) ? "—" : n.toFixed(2);
+  $("c-nota").classList.toggle("baja", !isNaN(n) && n < 3);
+  $("c-de").textContent = "Primer corte · 35 % del semestre · " +
+    (val("Estado") || (isNaN(n) ? "" : (n >= 3 ? "Aprueba" : "Reprueba")));
+
+  const t = (et, k, sub) => {
+    const v = val(k);
+    return '<div class="linea"><span class="q">' + et +
+      (sub ? "<small>" + sub + "</small>" : "") + '</span>' +
+      '<span class="v">' + (v || "sin nota") + "</span></div>";
+  };
+  $("c-desglose").innerHTML =
+    t("Taller · nivel celular",  "Taller celular",     "en grupo") +
+    t("Taller · nivel tisular",  "Taller tisular",     "en grupo · provisional, falta el desarrollo") +
+    t("Taller · osteología",     "Taller osteologia",  "en grupo") +
+    '<div class="linea suma"><span class="q">Seguimiento<small>promedio de los talleres · pesa 20 de 35</small></span>' +
+      '<span class="v">' + (val("SEGUIMIENTO (20%)") || "—") + "</span></div>" +
+    '<div class="linea suma"><span class="q">I Parcial<small>' +
+      (val("Parcial aciertos") ? val("Parcial aciertos") + " de " + val("Parcial sobre") + " · " : "") +
+      'pesa 15 de 35</small></span>' +
+      '<span class="v">' + (val("PARCIAL (15%)") || "—") + "</span></div>";
+
+  const obs = val("Observaciones");
+  $("c-obs").innerHTML = obs
+    ? '<div class="aviso ojo"><b>Sobre tu caso:</b> ' + esc(obs) + "</div>" : "";
+}
+
+function verHoja(cual){
+  document.querySelectorAll(".hoja").forEach(h => h.classList.remove("viva"));
+  document.querySelectorAll(".pestanas button").forEach(b => b.classList.remove("viva"));
+  $("hoja-" + cual).classList.add("viva");
+  const b = document.querySelector('[data-hoja="' + cual + '"]');
+  if(b) b.classList.add("viva");
+  window.scrollTo({top:0, behavior:"smooth"});
+}
+document.querySelectorAll(".pestanas button").forEach(b =>
+  b.addEventListener("click", () => verHoja(b.dataset.hoja)));
+
 function pintar(r){
   $("formulario").classList.add("oculto");
   $("salida").classList.remove("oculto");
   window.scrollTo({top:0, behavior:"smooth"});
 
+  pintarCorte(r);
+
   const nota = Number(r.nota);
-  $("quien").textContent = r.alumno;
-  $("nota").textContent = nota.toFixed(2);
-  $("nota").classList.toggle("baja", nota < 3);
-  $("de").textContent = r.aciertos + " de " + r.max + " · " + r.porcentaje + " %";
+  $("p-quien").textContent = r.alumno;
+  $("p-nota").textContent = nota.toFixed(2);
+  $("p-nota").classList.toggle("baja", nota < 3);
+  $("p-de").textContent = r.aciertos + " de " + r.max + " · " + r.porcentaje + " %";
 
   const b = r.bloques || {};
   $("bloques").innerHTML = [
@@ -231,11 +334,23 @@ function pintar(r){
      Es lo mas util de toda la pagina — dice donde estudiar. */
   const porTema = {};
   (r.preguntas || []).forEach(p => {
+    if(p.anulada) return;              // no cuenta: no distorsiona el tema
     const t = p.tema || "Sin tema";
     porTema[t] = porTema[t] || {ok:0, n:0};
     porTema[t].n++;
     if(p.acertada === true) porTema[t].ok++;
   });
+  const anul = (r.preguntas || []).filter(p => p.anulada).length;
+  if(anul){
+    $("nota-anuladas").classList.remove("oculto");
+    $("nota-anuladas").innerHTML =
+      '<div class="aviso ojo"><b>' + anul + ' preguntas anuladas.</b> El bloque de selección ' +
+      'múltiple se calificaba todo o nada: había que marcar exactamente las cuatro correctas, ' +
+      'y acertar tres valía cero. Como resultado midió lo mismo que el azar, así que ' +
+      '<b>queda fuera de la nota</b>: tu parcial se califica sobre ' + r.max + ' preguntas, ' +
+      'no sobre 35. Las verás abajo marcadas, para que sepas cuáles eran.</div>';
+  }
+
   $("temas").innerHTML = Object.keys(porTema).sort().map(t => {
     const d = porTema[t], pct = Math.round(100 * d.ok / d.n);
     const cl = pct >= 70 ? "bien" : (pct >= 40 ? "regular" : "mal");
@@ -244,9 +359,11 @@ function pintar(r){
   }).join("");
 
   $("preguntas").innerHTML = (r.preguntas || []).map((p, i) => {
-    const cl = p.acertada === true ? "" : (p.acertada === null ? "blanco" : "fallo");
-    const cab = p.acertada === true ? "✓ Correcta"
-              : (p.acertada === null ? "— Sin responder" : "✗ Incorrecta");
+    const cl = p.anulada ? "anulada"
+             : (p.acertada === true ? "" : (p.acertada === null ? "blanco" : "fallo"));
+    const cab = p.anulada ? "⊘ Anulada · no cuenta para la nota"
+              : (p.acertada === true ? "✓ Correcta"
+              : (p.acertada === null ? "— Sin responder" : "✗ Incorrecta"));
     let extra = "";
     if(p.correcta !== undefined && p.opciones){
       const idx = Array.isArray(p.correcta) ? p.correcta : [p.correcta];
