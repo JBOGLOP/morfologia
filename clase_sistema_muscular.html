@@ -1,0 +1,2356 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sistema muscular I · Clase 7 · Morfología General 2026-II</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:#1a2a35;--text:#2c3e4f;--text-soft:#5a6b7a;--text-muted:#8a9aa8;
+  --parchment:#f8f3e8;--parchment-dark:#f0e8d4;--parchment-deep:#e8dcc0;
+  --bg-card:#fdfaf2;--border:#d4c8a8;--border-light:#e5dbc0;
+  --amber:#b8860b;--amber-dark:#8b6914;--amber-light:#d4a72c;--amber-pale:#f5e9c8;
+  --teal:#2a7a6e;--teal-dark:#1f5d54;
+  --rust:#a0522d;--rust-dark:#7d3f22;
+  --clinical:#b5413b;--clinical-dark:#8a2f2a;--clinical-bg:#fce8e6;
+  --blue:#1976a1;--blue-dark:#115670;--blue-bg:#e3f0f5;
+  --green:#2e7d32;--green-bg:#e8f5e9;
+  --purple:#6b4a8a;--purple-bg:#f0e8f4;--purple-dark:#4a2d6e;
+  --shadow-sm:0 2px 8px rgba(26,42,53,0.06);
+  --shadow-md:0 4px 20px rgba(26,42,53,0.10);
+  --font-display:'Playfair Display',Georgia,serif;
+  --font-body:'Source Serif 4',Georgia,serif;
+  --font-mono:'DM Mono','Courier New',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--parchment);color:var(--text);line-height:1.75;font-size:17px;
+  background-image:radial-gradient(at 12% 8%,rgba(184,134,11,.04) 0%,transparent 50%),radial-gradient(at 88% 92%,rgba(42,122,110,.04) 0%,transparent 50%);
+  background-attachment:fixed}
+
+/* HEADER */
+.header{text-align:center;padding:70px 30px 50px;border-bottom:3px double var(--amber);margin-bottom:50px;position:relative}
+.header::before{content:'';position:absolute;top:30px;left:50%;transform:translateX(-50%);width:80px;height:1px;background:var(--amber)}
+.eyebrow{font-family:var(--font-mono);font-size:.78rem;letter-spacing:.32em;text-transform:uppercase;color:var(--amber-dark);margin-bottom:14px}
+.header h1{font-family:var(--font-display);font-size:clamp(2.2rem,5vw,3.6rem);font-weight:900;color:var(--ink);line-height:1.05;margin-bottom:12px}
+.header h1 em{font-style:italic;font-weight:400;color:var(--amber-dark)}
+.header .subtitle{font-family:var(--font-body);font-style:italic;font-size:1.15rem;color:var(--text-soft);margin-bottom:22px;font-weight:300}
+.header .meta{font-family:var(--font-mono);font-size:.82rem;letter-spacing:.18em;color:var(--text-muted);text-transform:uppercase}
+
+/* TABS */
+.tab-bar{background:var(--bg-card);border:1px solid var(--border);border-radius:4px;padding:0;margin-bottom:50px;box-shadow:var(--shadow-sm);overflow:hidden;display:flex}
+.tab-btn{flex:1;padding:18px 24px;background:none;border:none;border-right:1px solid var(--border-light);font-family:var(--font-body);font-size:.95rem;color:var(--text-soft);cursor:pointer;transition:all .2s;text-align:center;line-height:1.4}
+.tab-btn:last-child{border-right:none}
+.tab-btn:hover{background:var(--parchment-dark);color:var(--ink)}
+.tab-btn.active{background:var(--amber-pale);color:var(--ink);font-weight:600;border-bottom:3px solid var(--amber)}
+.tab-btn .tab-date{display:block;font-family:var(--font-mono);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--amber-dark);margin-bottom:4px}
+.tab-pane{display:none}
+.tab-pane.active{display:block}
+
+/* CONTAINER */
+.container{max-width:1100px;margin:0 auto;padding:0 30px 80px}
+
+/* NAV INTERNA */
+.station-nav{background:var(--bg-card);border:1px solid var(--border);border-radius:4px;padding:24px 28px;margin-bottom:50px;box-shadow:var(--shadow-sm)}
+.station-nav h3{font-family:var(--font-mono);font-size:.75rem;letter-spacing:.25em;text-transform:uppercase;color:var(--amber-dark);margin-bottom:16px}
+.station-nav ol{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px 24px;counter-reset:stations}
+.station-nav li{counter-increment:stations;padding:4px 0}
+.station-nav li::before{content:counter(stations,decimal-leading-zero) '. ';font-family:var(--font-mono);color:var(--amber-dark);font-weight:500;margin-right:6px}
+.station-nav a{color:var(--text);text-decoration:none;font-style:italic;border-bottom:1px dotted var(--border);transition:color .2s,border-color .2s}
+.station-nav a:hover{color:var(--amber-dark);border-color:var(--amber-dark)}
+
+/* STATIONS */
+.station{margin-bottom:80px;scroll-margin-top:30px}
+.station-header{display:flex;align-items:baseline;gap:20px;margin-bottom:30px;padding-bottom:18px;border-bottom:2px solid var(--border)}
+.station-number{font-family:var(--font-display);font-style:italic;font-size:4rem;font-weight:400;color:var(--amber);line-height:1;flex-shrink:0}
+.station-titles{flex:1}
+.station-eyebrow{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--amber-dark);margin-bottom:6px}
+.station h2{font-family:var(--font-display);font-size:clamp(1.7rem,3.5vw,2.4rem);font-weight:700;color:var(--ink);line-height:1.15}
+
+/* CONTENT BLOCK */
+.content-block{background:var(--bg-card);border:1px solid var(--border-light);border-radius:4px;padding:28px 32px;margin-bottom:24px;box-shadow:var(--shadow-sm)}
+.content-block h3{font-family:var(--font-display);font-size:1.4rem;font-weight:700;color:var(--ink);margin-bottom:16px;padding-bottom:8px;border-bottom:1px dotted var(--border)}
+.content-block h4{font-family:var(--font-display);font-size:1.1rem;font-weight:700;color:var(--amber-dark);margin:20px 0 10px;font-style:italic}
+.content-block p{margin-bottom:14px}
+.content-block ul,.content-block ol{margin:12px 0 18px 24px}
+.content-block li{margin-bottom:8px;padding-left:6px}
+.content-block strong{color:var(--ink);font-weight:700}
+.content-block em.term{font-style:italic;color:var(--amber-dark);font-weight:600}
+
+/* TWO-COL / THREE-COL */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:20px 0}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin:20px 0}
+@media(max-width:900px){.two-col,.three-col{grid-template-columns:1fr}}
+.col-card{background:var(--parchment-dark);border-left:4px solid var(--amber);padding:18px 22px;border-radius:2px}
+.col-card.teal{border-color:var(--teal);background:#e8f0ee}
+.col-card.rust{border-color:var(--rust);background:#f3e8de}
+.col-card.blue{border-color:var(--blue);background:var(--blue-bg)}
+.col-card.green{border-color:var(--green);background:var(--green-bg)}
+.col-card h5{font-family:var(--font-display);font-weight:700;color:var(--ink);margin-bottom:8px;font-size:1.05rem}
+
+/* TABLE */
+table.data{width:100%;border-collapse:collapse;margin:18px 0;font-size:.95rem}
+table.data th{background:var(--amber-dark);color:var(--parchment);padding:10px 14px;text-align:left;font-family:var(--font-mono);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;font-weight:500}
+table.data td{padding:10px 14px;border-bottom:1px solid var(--border-light);vertical-align:top}
+table.data tr:nth-child(even) td{background:var(--parchment-dark)}
+table.data tr:hover td{background:var(--amber-pale)}
+
+/* CLINICAL BOX */
+.clinical-box{background:var(--clinical-bg);border-left:5px solid var(--clinical);padding:20px 26px;margin:22px 0;border-radius:2px;position:relative}
+.clinical-box::before{content:'👁 Interfaz optométrica';display:block;font-family:var(--font-mono);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--clinical-dark);margin-bottom:10px;font-weight:600}
+.clinical-box h5{font-family:var(--font-display);font-weight:700;color:var(--clinical-dark);font-size:1.1rem;margin-bottom:6px}
+
+/* PEARL */
+.pearl{background:var(--amber-pale);border:1px solid var(--amber-light);border-radius:2px;padding:16px 22px;margin:18px 0;font-style:italic;color:var(--text);position:relative;padding-left:50px}
+.pearl::before{content:'◆';position:absolute;left:18px;top:16px;color:var(--amber-dark);font-size:1.2rem;font-style:normal}
+
+/* SABER PRO */
+.saber-box{background:var(--purple-bg);border-left:5px solid var(--purple);padding:20px 26px;margin:22px 0;border-radius:2px}
+.saber-box::before{content:'★ Tipo Saber Pro';display:block;font-family:var(--font-mono);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--purple-dark);margin-bottom:10px;font-weight:600}
+
+/* FIGURE */
+.figure{margin:28px 0;background:var(--bg-card);border:1px solid var(--border-light);border-radius:4px;padding:20px;box-shadow:var(--shadow-sm);text-align:center}
+.figure svg{width:100%;max-width:800px;height:auto}
+.figure-caption{font-family:var(--font-mono);font-size:.78rem;color:var(--text-muted);margin-top:12px;letter-spacing:.06em;text-align:center}
+
+/* FLIP CARDS */
+.flip-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;margin:20px 0}
+.flip-card{height:160px;perspective:800px;cursor:pointer}
+.flip-inner{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform .5s ease}
+.flip-card:hover .flip-inner,.flip-card.flipped .flip-inner{transform:rotateY(180deg)}
+.flip-front,.flip-back{position:absolute;inset:0;border-radius:4px;padding:16px;backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.flip-front{background:var(--bg-card);border:2px solid var(--border)}
+.flip-back{background:var(--amber-pale);border:2px solid var(--amber);transform:rotateY(180deg)}
+.flip-front .term-label{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px}
+.flip-front .term-name{font-family:var(--font-display);font-size:1.15rem;font-weight:700;color:var(--ink);line-height:1.2}
+.flip-front .term-en{font-family:var(--font-mono);font-size:.75rem;color:var(--text-muted);margin-top:6px;font-style:italic}
+.flip-back .term-def{font-size:.88rem;color:var(--text);line-height:1.5;margin-bottom:8px}
+.flip-back .term-opto{font-family:var(--font-mono);font-size:.72rem;color:var(--clinical-dark);letter-spacing:.05em}
+
+/* CHECK QUESTION */
+.check-question{background:linear-gradient(180deg,#fdfaf2 0%,#f5ecd5 100%);border:2px dashed var(--amber);border-radius:4px;padding:28px 30px;margin:30px 0;position:relative}
+.check-question::before{content:'? Verificación';position:absolute;top:-12px;left:24px;background:var(--parchment);padding:2px 14px;font-family:var(--font-mono);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--amber-dark);font-weight:600}
+.check-question .question-text{font-family:var(--font-display);font-size:1.15rem;color:var(--ink);margin-bottom:18px;font-weight:400;font-style:italic}
+.options{list-style:none;margin:0}
+.options li{margin-bottom:10px;padding:12px 18px;background:var(--bg-card);border:1px solid var(--border);border-radius:3px;cursor:pointer;transition:all .2s;position:relative;padding-left:50px}
+.options li::before{content:attr(data-letter);position:absolute;left:16px;top:50%;transform:translateY(-50%);font-family:var(--font-mono);font-weight:500;color:var(--amber-dark)}
+.options li:hover{background:var(--amber-pale);border-color:var(--amber)}
+.options li.correct{background:#e8f5e8;border-color:#2e7d32;color:#1b5e20}
+.options li.correct::after{content:' ✓';color:#2e7d32;font-weight:700}
+.options li.incorrect{background:var(--clinical-bg);border-color:var(--clinical);color:var(--clinical-dark)}
+.options li.incorrect::after{content:' ✗';color:var(--clinical);font-weight:700}
+.feedback{display:none;margin-top:16px;padding:14px 18px;background:var(--bg-card);border-left:4px solid var(--amber);border-radius:2px;font-size:.96rem}
+.feedback.show{display:block}
+.feedback strong{color:var(--amber-dark)}
+
+/* PHOTO */
+.photo-grid{display:grid;gap:20px;margin:24px 0}
+@media(min-width:640px){.photo-grid.cols-2{grid-template-columns:1fr 1fr}.photo-grid.cols-3{grid-template-columns:1fr 1fr 1fr}}
+.photo-card{background:var(--bg-card);border:1px solid var(--border-light);border-radius:4px;padding:14px;box-shadow:var(--shadow-sm);transition:box-shadow .2s}
+.photo-card:hover{box-shadow:var(--shadow-md)}
+.photo-card .photo-frame{position:relative;background:repeating-linear-gradient(45deg,var(--parchment-dark) 0,var(--parchment-dark) 10px,var(--parchment-deep) 10px,var(--parchment-deep) 20px);border-radius:3px;overflow:hidden;min-height:200px;display:flex;align-items:center;justify-content:center}
+.photo-card img{display:block;width:100%;height:auto;border-radius:3px;cursor:zoom-in}
+.photo-card img.broken{display:none}
+.photo-card .photo-missing{display:none;font-family:var(--font-mono);font-size:.75rem;color:var(--text-muted);text-align:center;padding:40px 20px;letter-spacing:.08em;text-transform:uppercase}
+.photo-card img.broken+.photo-missing{display:block}
+.photo-card .photo-missing::before{content:'⏳ ';margin-right:4px}
+.photo-card .photo-caption{font-family:var(--font-body);font-size:.92rem;color:var(--text);margin-top:12px;line-height:1.5}
+.photo-card .photo-caption strong{font-family:var(--font-display);color:var(--ink);display:block;margin-bottom:4px;font-weight:700;font-size:.98rem}
+.photo-card .photo-credit{font-family:var(--font-mono);font-size:.7rem;color:var(--text-muted);margin-top:8px;letter-spacing:.06em;text-transform:uppercase}
+.photo-hero{background:var(--bg-card);border:1px solid var(--border-light);border-radius:4px;padding:18px;margin:24px 0;box-shadow:var(--shadow-sm);text-align:center}
+.photo-hero img{display:block;width:100%;max-width:720px;height:auto;margin:0 auto;border-radius:3px;cursor:zoom-in}
+.photo-hero img.broken{display:none}
+.photo-hero .photo-missing{display:none;font-family:var(--font-mono);font-size:.78rem;color:var(--text-muted);padding:60px 20px;letter-spacing:.1em;text-transform:uppercase}
+.photo-hero img.broken+.photo-missing{display:block}
+.photo-hero .photo-missing::before{content:'⏳ ';margin-right:4px}
+.photo-hero .photo-caption{font-family:var(--font-body);font-size:.92rem;color:var(--text);margin-top:14px;max-width:640px;margin-left:auto;margin-right:auto}
+.photo-hero .photo-caption strong{font-family:var(--font-display);color:var(--ink);font-weight:700}
+
+/* LIGHTBOX */
+.lightbox{display:none;position:fixed;inset:0;background:rgba(26,42,53,.92);z-index:9999;align-items:center;justify-content:center;padding:30px;cursor:zoom-out}
+.lightbox.open{display:flex}
+.lightbox img{max-width:95vw;max-height:90vh;border-radius:4px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.lightbox .lb-caption{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);color:var(--parchment);font-family:var(--font-mono);font-size:.82rem;background:rgba(26,42,53,.7);padding:8px 16px;border-radius:2px;max-width:90vw;text-align:center}
+.lightbox .lb-close{position:absolute;top:20px;right:30px;background:none;border:2px solid var(--parchment);color:var(--parchment);width:44px;height:44px;border-radius:50%;font-size:1.3rem;cursor:pointer;font-family:var(--font-mono)}
+.lightbox .lb-close:hover{background:rgba(255,255,255,.1)}
+
+/* FOOTER */
+.footer{margin-top:80px;padding:30px;text-align:center;border-top:3px double var(--amber);font-family:var(--font-mono);font-size:.78rem;color:var(--text-muted);letter-spacing:.12em}
+/* ACORDEONES — <details>/<summary> nativos: se despliegan sin JavaScript,
+   así que funcionan aunque el archivo se abra desde el disco o se imprima. */
+.acorde{background:var(--bg-card);border:1px solid var(--border-light);border-left:4px solid var(--teal);
+  border-radius:3px;margin:10px 0;overflow:hidden}
+.acorde > summary{cursor:pointer;padding:13px 18px;font-family:var(--font-display);font-weight:700;
+  color:var(--ink);font-size:1rem;list-style:none;display:flex;align-items:center;gap:10px;
+  background:var(--parchment-dark);transition:background .15s}
+.acorde > summary:hover{background:var(--amber-pale)}
+.acorde > summary::-webkit-details-marker{display:none}
+.acorde > summary::before{content:'+';font-family:var(--font-mono);font-size:1.15rem;color:var(--teal);
+  font-weight:400;width:16px;flex-shrink:0;text-align:center}
+.acorde[open] > summary::before{content:'−'}
+.acorde[open] > summary{border-bottom:1px solid var(--border-light)}
+.acorde > summary .pista{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);
+  font-weight:400;letter-spacing:.06em;margin-left:auto;text-transform:uppercase}
+.acorde .cuerpo{padding:16px 18px 18px}
+.acorde .cuerpo > *:last-child{margin-bottom:0}
+.acorde.rust{border-left-color:var(--rust)} .acorde.amber{border-left-color:var(--amber)}
+.acorde.blue{border-left-color:var(--blue)} .acorde.purple{border-left-color:var(--purple)}
+@media print{.acorde .cuerpo{display:block!important}.acorde > summary::before{content:''}}
+
+/* Ficha de tejido: la imagen del cuadro de Tortora más su texto */
+.ficha{margin:22px 0}
+.ficha > h4{font-family:var(--font-display);font-size:1.12rem;color:var(--ink);font-weight:700;
+  margin-bottom:4px;padding-bottom:5px;border-bottom:2px solid var(--amber-light)}
+.ficha .datos{display:grid;grid-template-columns:auto 1fr;gap:5px 14px;margin:10px 0 0;font-size:.93rem}
+.ficha .datos dt{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--amber-dark);padding-top:3px;font-weight:500}
+.ficha .datos dd{margin:0;color:var(--text)}
+.ficha .datos dd b{color:var(--ink)}
+@media(max-width:640px){.ficha .datos{grid-template-columns:1fr;gap:2px}
+  .ficha .datos dd{margin-bottom:8px}}
+
+@media print{body{background:white;font-size:11pt}.tab-bar{display:none}}
+
+/* ─── Añadidos de la clase 6 ─── */
+
+/* Fichas de hueso: nombre, cuántos son y qué aporta a la órbita */
+.huesos-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:12px;margin:18px 0}
+.hueso{background:var(--parchment-dark);border:1px solid var(--border-light);border-left:4px solid var(--teal);
+  border-radius:3px;padding:12px 15px}
+.hueso.orb{border-left-color:var(--clinical);background:#fbeeec}
+.hueso .nom{font-family:var(--font-display);font-weight:700;color:var(--ink);font-size:1.02rem}
+.hueso .par{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--text-muted);display:block;margin-bottom:5px}
+.hueso .que{font-size:.87rem;color:var(--text-soft);line-height:1.45;margin-top:4px}
+.hueso .marca{display:inline-block;font-family:var(--font-mono);font-size:.62rem;letter-spacing:.1em;
+  text-transform:uppercase;background:var(--clinical);color:#fff;padding:1px 7px;border-radius:9px;margin-top:7px}
+
+/* Puntos craneométricos: cada punto con su traducción de campo */
+.puntos{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;margin:16px 0}
+.punto{background:var(--bg-card);border:1px solid var(--border-light);border-radius:3px;padding:11px 14px;font-size:.9rem}
+.punto b{font-family:var(--font-display);color:var(--amber-dark);font-size:1rem;display:block}
+.punto.clave{background:var(--amber-pale);border-color:var(--amber-light)}
+
+/* Recorrido: una cadena de pasos con flecha, para el drenaje de la lágrima */
+.recorrido{display:flex;flex-wrap:wrap;align-items:stretch;gap:0;margin:20px 0;font-size:.86rem}
+.recorrido .paso{background:var(--blue-bg);border:1px solid var(--blue);color:var(--blue-dark);
+  padding:9px 14px;border-radius:3px;display:flex;align-items:center;text-align:center;line-height:1.35}
+.recorrido .flecha{display:flex;align-items:center;color:var(--blue);padding:0 8px;font-size:1.15rem}
+@media(max-width:720px){.recorrido{flex-direction:column}
+  .recorrido .flecha{padding:3px 0;transform:rotate(90deg)}}
+
+/* Aviso de que un tema se retoma en otra clase, para no invadir el temario */
+.adelanto{background:var(--parchment-dark);border:1px dashed var(--teal);border-radius:3px;
+  padding:14px 20px;margin:20px 0;font-size:.93rem;color:var(--text-soft)}
+.adelanto::before{content:'→ Se retoma más adelante';display:block;font-family:var(--font-mono);
+  font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--teal-dark);
+  margin-bottom:7px;font-weight:600}
+.adelanto strong{color:var(--ink)}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="eyebrow">Clase 7 · Morfología General 2026-II</div>
+  <h1>Sistema muscular I: la fibra, la contracción y <em>la cara</em></h1>
+  <p class="subtitle">Cómo un músculo se acorta, cómo mueve un hueso —y cómo mueve una piel, que es lo que hace la cara</p>
+  <div class="meta">Dr. Jorge Bogoya &middot; Universidad de La Salle &middot; Optometría &middot; Primer semestre</div>
+</header>
+
+<div class="container">
+
+<div class="tab-bar" role="tablist">
+  <button class="tab-btn active" role="tab" onclick="showTab('s1',this)">
+    <span class="tab-date">Jue. 3 sep · 09:00–11:00</span>
+    Sesión 1 · El músculo por dentro
+  </button>
+  <button class="tab-btn" role="tab" onclick="showTab('s2',this)">
+    <span class="tab-date">Jue. 3 sep · 11:00–13:00</span>
+    Sesión 2 · La máquina y la cara
+  </button>
+</div>
+
+<!-- ═══════════════════════ SESIÓN 1 ═══════════════════════ -->
+<div class="tab-pane active" id="s1">
+
+<nav class="station-nav">
+  <h3>Contenido · Sesión 1</h3>
+  <ol>
+    <li><a href="#s1e0">Para empezar: cinco preguntas</a></li>
+    <li><a href="#s1e1">Tres tejidos, un solo oficio</a></li>
+    <li><a href="#s1e2">Las cuatro propiedades</a></li>
+    <li><a href="#s1e3">Del músculo a la fibra: tres vainas</a></li>
+    <li><a href="#s1e4">La fibra por dentro y la tríada</a></li>
+    <li><a href="#s1e5">El sarcómero: leer las bandas</a></li>
+    <li><a href="#s1e6">Las proteínas del sarcómero</a></li>
+    <li><a href="#s1e7">El deslizamiento de los filamentos</a></li>
+    <li><a href="#s1e8">El ciclo, el calcio y el ATP</a></li>
+    <li><a href="#s1e9">La unión neuromuscular</a></li>
+    <li><a href="#s1e10">Los tres tipos de fibra</a></li>
+    <li><a href="#s1e11">Términos TA2 de la sesión</a></li>
+    <li><a href="#s1e12">Comprueba lo que aprendiste</a></li>
+  </ol>
+</nav>
+
+<!-- ─────────── 00 ─────────── -->
+<section class="station" id="s1e0">
+  <div class="station-header">
+    <div class="station-number">00</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Para empezar · Conversación</div>
+      <h2>Cinco preguntas antes de abrir el libro</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Como siempre: responde con lo que ya tienes. No hay nota. Al final de la mañana volvemos
+      sobre las cinco y verás cuántas contestas distinto.</p>
+
+    <div class="two-col">
+      <div class="col-card">
+        <h5>1 · El músculo que no se encoge</h5>
+        <p>Cuando un músculo se contrae, se acorta. Pero los filamentos que lleva dentro
+          <strong>miden lo mismo antes y después</strong>. ¿Cómo puede acortarse algo cuyas piezas
+          no se acortan?</p>
+      </div>
+      <div class="col-card teal">
+        <h5>2 · El cadáver rígido</h5>
+        <p>El <em>rigor mortis</em> deja los músculos duros y contraídos horas después de la muerte.
+          Si contraerse gasta energía y el cadáver no produce ninguna, ¿por qué se quedan agarrados?</p>
+      </div>
+      <div class="col-card">
+        <h5>3 · Una cara sin articulaciones</h5>
+        <p>Todos los músculos que hemos visto mueven huesos. Los de la cara mueven
+          <strong>piel</strong>. ¿Qué tiene que cambiar en su inserción para que eso funcione?</p>
+      </div>
+      <div class="col-card amber">
+        <h5>4 · El párpado que no cierra</h5>
+        <p>Una persona con parálisis facial no puede cerrar un ojo. A las 48 horas le duele y ve
+          borroso por ese ojo. ¿Qué se dañó, si el ojo estaba sano?</p>
+      </div>
+      <div class="col-card teal">
+        <h5>5 · Fuerza o recorrido</h5>
+        <p>Dos músculos del mismo tamaño: uno con las fibras largas y paralelas, otro con fibras
+          cortas y oblicuas. ¿Cuál levanta más peso? ¿Cuál mueve más lejos? ¿Por qué no puede ser
+          el mismo?</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 01 ─────────── -->
+<section class="station" id="s1e1">
+  <div class="station-header">
+    <div class="station-number">01</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Punto de partida</div>
+      <h2>Tres tejidos, un solo oficio</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>En la clase de nivel tisular ya viste los cuatro tejidos básicos, y el muscular era uno.
+      Hoy lo abrimos. Hay <strong>tres tipos</strong>, y conviene separarlos desde el principio
+      porque se parecen menos de lo que sugiere el nombre común.</p>
+
+    <div class="three-col">
+      <div class="col-card">
+        <h5>Esquelético</h5>
+        <p><strong>Estriado</strong> y de control <strong>voluntario</strong>. Mueve los huesos —y
+          en la cara, la piel. Sus células son largas, multinucleadas, y se llaman
+          <em>fibras</em>.</p>
+      </div>
+      <div class="col-card">
+        <h5>Cardíaco</h5>
+        <p><strong>Estriado</strong> pero <strong>involuntario</strong>, y con automatismo propio.
+          Solo está en la pared del corazón. Lo verás en la clase de circulatorio.</p>
+      </div>
+      <div class="col-card">
+        <h5>Liso</h5>
+        <p><strong>No estriado</strong> e involuntario. Paredes de vísceras y vasos, y también
+          <em>dentro del ojo</em>: iris y cuerpo ciliar. De ahí que la pupila no obedezca.</p>
+      </div>
+    </div>
+
+    <p>El adjetivo «estriado» no es decorativo: describe lo que se ve al microscopio, y esa imagen
+      es la consecuencia directa de cómo están ordenadas las proteínas por dentro. Cuando lleguemos
+      al sarcómero, la estría dejará de ser un dato para convertirse en una explicación.</p>
+
+    <div class="photo-hero">
+      <img src="img/cuadro_10_5_tres_tejidos.png" alt="Cuadro comparativo de los tres tipos de tejido muscular: esquelético, cardíaco y liso"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>Los tres, lado a lado.</strong> Fíjate en las tres columnas
+        que de verdad importan: si es estriado, si es voluntario y dónde está. Tortora &amp;
+        Derrickson, Cuadro 10.5.</div>
+    </div>
+
+    <h3>Las cuatro funciones del tejido muscular</h3>
+    <p>Antes de entrar en el detalle, conviene saber para qué sirve todo esto. Tortora enumera
+      cuatro, y ninguna sobra:</p>
+    <ol style="margin-left:22px">
+      <li><strong>Producir movimiento</strong> — caminar, hablar, parpadear.</li>
+      <li><strong>Estabilizar posiciones</strong> — mantenerte sentado y con la cabeza recta también
+        es trabajo muscular, y constante.</li>
+      <li><strong>Almacenar y movilizar sustancias</strong> — los esfínteres retienen; el músculo
+        liso de los vasos y las vísceras empuja.</li>
+      <li><strong>Generar calor</strong> — contraerse produce calor, y tiritar es exactamente eso
+        usado a propósito.</li>
+    </ol>
+
+    <div class="check-question" data-question="q1s1">
+      <p class="question-text">1. El músculo del iris que contrae la pupila es de tipo liso. ¿Qué
+        predice eso sobre tu examen en consulta?</p>
+      <ul class="options">
+        <li data-letter="A">Que el paciente puede contraer la pupila si se lo pides</li>
+        <li data-letter="B">Que la pupila solo se mueve cuando el paciente está dormido</li>
+        <li data-letter="C" data-correct="true">Que no responde a la voluntad: hay que provocarlo con un estímulo</li>
+        <li data-letter="D">Que el iris se fatiga en pocos segundos, como el esquelético</li>
+        <li data-letter="E">Que la respuesta pupilar depende del entrenamiento del paciente</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: C.</strong> El músculo liso es involuntario, así que
+        la pupila no se «pide»: se provoca. Por eso el reflejo fotomotor se explora con una luz y no
+        con una instrucción. Que responda al estímulo y no a la voluntad es justamente lo que lo
+        convierte en un signo fiable — un paciente no puede fingirlo. Las opciones que hablan de
+        entrenamiento o de sueño le atribuyen al liso propiedades del esquelético.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 02 ─────────── -->
+<section class="station" id="s1e2">
+  <div class="station-header">
+    <div class="station-number">02</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Propiedades</div>
+      <h2>Las cuatro propiedades: qué sabe hacer una fibra</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Las cuatro se enuncian en dos líneas cada una, pero conviene no leerlas como una lista de
+      vocabulario. Cada una es una capacidad distinta, y las lesiones las pierden por separado.</p>
+
+    <div class="two-col">
+      <div class="col-card">
+        <h5>Excitabilidad eléctrica</h5>
+        <p>Responder a un estímulo produciendo un <strong>potencial de acción</strong>. La comparte
+          con la neurona, y es lo primero que se pierde cuando falla la unión neuromuscular.</p>
+      </div>
+      <div class="col-card teal">
+        <h5>Contractilidad</h5>
+        <p>Generar <strong>tensión</strong> al ser estimulada. Ojo: tensión, no necesariamente
+          acortamiento — sostener un libro quieto es contracción sin movimiento.</p>
+      </div>
+      <div class="col-card">
+        <h5>Extensibilidad</h5>
+        <p>Dejarse <strong>estirar</strong> sin romperse. Un músculo relajado se alarga cuando su
+          antagonista tira del otro lado.</p>
+      </div>
+      <div class="col-card amber">
+        <h5>Elasticidad</h5>
+        <p><strong>Volver</strong> a su longitud de reposo tras estirarse o contraerse. Es lo que
+          aporta la titina, la proteína que veremos en la estación 06.</p>
+      </div>
+    </div>
+
+    <div class="check-question" data-question="q2s1">
+      <p class="question-text">2. Sostienes un libro con el brazo quieto durante un minuto. ¿Qué
+        propiedad estás usando, y qué NO estás haciendo?</p>
+      <ul class="options">
+        <li data-letter="A">Extensibilidad; no estoy generando tensión</li>
+        <li data-letter="B">Elasticidad; no estoy gastando energía</li>
+        <li data-letter="C">Excitabilidad; no hay potenciales de acción implicados</li>
+        <li data-letter="D" data-correct="true">Contractilidad; hay tensión sin acortamiento</li>
+        <li data-letter="E">Ninguna: sin movimiento no hay actividad muscular</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: D.</strong> Contractilidad es la capacidad de generar
+        <em>tensión</em>, y esa tensión puede o no acortar el músculo. Aquí la tensión iguala al peso
+        del libro y la longitud no cambia: es una contracción isométrica. La opción que dice «sin
+        movimiento no hay actividad» es la intuición que hay que romper — mantener una postura es de
+        las cosas que más trabajo muscular consumen al día. Y la que niega los potenciales de acción
+        se equivoca: sin ellos no habría contracción alguna.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 03 ─────────── -->
+<section class="station" id="s1e3">
+  <div class="station-header">
+    <div class="station-number">03</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Organización macroscópica</div>
+      <h2>Del músculo a la fibra: tres vainas encajadas</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Un músculo no es un bloque de células: es un <strong>manojo de manojos</strong>. Tres capas
+      de tejido conectivo lo organizan, y las tres se continúan al final en el tendón. Ese detalle
+      —que la vaina se convierte en tendón— es lo que explica cómo la fuerza llega al hueso.</p>
+
+    <div class="three-col">
+      <div class="col-card">
+        <h5>Epimisio</h5>
+        <p><em>epi-</em>, sobre. Envuelve <strong>el músculo entero</strong>. Es la capa más externa,
+          de conectivo denso irregular.</p>
+      </div>
+      <div class="col-card">
+        <h5>Perimisio</h5>
+        <p><em>peri-</em>, alrededor. Rodea grupos de <strong>10 a 100 o más fibras</strong> y los
+          separa en <strong>fascículos</strong>. Son los haces que se ven a simple vista en un corte
+          de carne.</p>
+      </div>
+      <div class="col-card">
+        <h5>Endomisio</h5>
+        <p><em>endo-</em>, dentro. Entra en el fascículo y separa <strong>cada fibra</strong> de su
+          vecina. Es casi todo fibras reticulares.</p>
+      </div>
+    </div>
+
+    <div class="photo-grid">
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_10_1_cubiertas_conectivas.png" alt="Organización del músculo esquelético: epimisio, perimisio y endomisio"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>Las tres vainas.</strong> Sigue con el dedo cómo el
+          epimisio, el perimisio y el endomisio convergen y se continúan en el tendón. Tortora, Fig. 10.1.</div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/cuadro_10_3_niveles.png" alt="Cuadro de los niveles de organización dentro de un músculo esquelético"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>La escalera completa.</strong> Músculo → fascículo →
+          fibra → miofibrilla → filamento. Cada peldaño con su vaina. Tortora, Cuadro 10.3.</div>
+      </div>
+    </div>
+
+    <div class="pearl">
+      <p>Cuando el conectivo se prolonga más allá del vientre muscular, puede hacerlo como un
+        <strong>tendón</strong> —un cordón— o como una <strong>aponeurosis</strong>, una lámina
+        ancha y plana. En la cabeza vas a encontrar la más famosa: la <em>aponeurosis epicraneal</em>
+        o galea, que une el vientre frontal con el occipital sobre la bóveda del cráneo que viste la
+        semana pasada.</p>
+    </div>
+
+    <div class="check-question" data-question="q3s1">
+      <p class="question-text">3. Un cirujano describe una lesión que separó «los haces visibles» de
+        un músculo sin dañar las fibras individuales. ¿Qué capa cedió?</p>
+      <ul class="options">
+        <li data-letter="A" data-correct="true">El perimisio, que delimita los fascículos</li>
+        <li data-letter="B">El epimisio, porque envuelve el músculo entero</li>
+        <li data-letter="C">El endomisio, que separa fibras vecinas</li>
+        <li data-letter="D">El sarcolema, que es la vaina de cada fascículo</li>
+        <li data-letter="E">La fascia, que es sinónimo de perimisio</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: A.</strong> Los «haces visibles» son los
+        <strong>fascículos</strong>, y quien los delimita es el perimisio. El epimisio habría dejado
+        el músculo entero suelto, no separado en haces. El endomisio actúa un piso más abajo, entre
+        fibras. Y cuidado con la última: el <strong>sarcolema es la membrana de la fibra</strong>, no
+        de un fascículo — es un error de nivel, no de nombre.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 04 ─────────── -->
+<section class="station" id="s1e4">
+  <div class="station-header">
+    <div class="station-number">04</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Microscopía</div>
+      <h2>La fibra por dentro, y la tríada que dispara todo</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Una fibra muscular esquelética es una <strong>célula</strong>, aunque cueste llamarla así:
+      puede medir varios centímetros de largo y tiene <strong>muchos núcleos</strong>, empujados
+      contra la periferia. Se forma por fusión de células precursoras, y de ahí los núcleos.</p>
+
+    <p>Cambia también el vocabulario, porque las estructuras habituales reciben nombres propios:</p>
+
+    <div class="three-col">
+      <div class="col-card">
+        <h5>Sarcolema</h5>
+        <p>La <strong>membrana plasmática</strong> de la fibra. De él se hunden hacia dentro los
+          túbulos T.</p>
+      </div>
+      <div class="col-card">
+        <h5>Sarcoplasma</h5>
+        <p>El <strong>citoplasma</strong>. Guarda glucógeno y <strong>mioglobina</strong>, la
+          proteína que almacena oxígeno y da el color rojo.</p>
+      </div>
+      <div class="col-card">
+        <h5>Retículo sarcoplásmico</h5>
+        <p>El <strong>retículo liso</strong> de la fibra. Su única mercancía importante:
+          <strong>Ca²⁺</strong>, almacenado y listo para soltarse.</p>
+      </div>
+    </div>
+
+    <h3>La tríada: cómo entra la orden hasta el fondo de la célula</h3>
+    <p>Aquí hay un problema de ingeniería que conviene ver antes de nombrar las piezas. La orden de
+      contraerse llega como un impulso eléctrico <strong>a la superficie</strong> de la fibra. Pero
+      la fibra es gruesa, y las miofibrillas del centro están lejos de esa superficie. Si la señal
+      tuviera que difundir hacia dentro, el centro se contraería tarde y el músculo tironearía de
+      sí mismo.</p>
+
+    <p>La solución es meter la superficie hacia dentro. Los <strong>túbulos transversos</strong> o
+      <strong>túbulos T</strong> son invaginaciones del sarcolema que atraviesan la fibra de lado a
+      lado. A cada lado de un túbulo T, el retículo sarcoplásmico se dilata en
+      <strong>cisternas terminales</strong>. Un túbulo T más sus dos cisternas es una
+      <strong>tríada</strong>.</p>
+
+    <div class="pearl">
+      <p><strong>El potencial de acción viaja por el túbulo T hasta el interior, y allí ordena a las
+        cisternas que suelten el calcio.</strong> Toda la fibra se entera a la vez. Esa es la razón
+        de ser de la tríada, y explica por qué una fibra muscular se contrae como un bloque.</p>
+    </div>
+
+    <div class="photo-grid">
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_10_2_organizacion_micro.png" alt="Organización microscópica del músculo esquelético: fascículo, fibra, miofibrilla"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>Del fascículo a la miofibrilla.</strong> Localiza el
+          sarcolema, los núcleos periféricos y las miofibrillas apretadas dentro. Tortora, Fig. 10.2.</div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_10_2_organizacion_micro_b.png" alt="Detalle de la fibra muscular: túbulo transverso, cisternas terminales y tríada"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>La tríada, ampliada.</strong> Un túbulo T en el centro y
+          dos cisternas terminales flanqueándolo. Las bombas y los canales de Ca²⁺ están marcados en
+          la clave. Tortora, Fig. 10.2.</div>
+      </div>
+    </div>
+
+    <div class="check-question" data-question="q4s1">
+      <p class="question-text">4. ¿Para qué sirve que los túbulos T sean una invaginación del
+        sarcolema y no un orgánulo independiente?</p>
+      <ul class="options">
+        <li data-letter="A">Para que la fibra pueda alimentarse desde el interior</li>
+        <li data-letter="B" data-correct="true">Para llevar el potencial de acción hasta el centro</li>
+        <li data-letter="C">Para almacenar el calcio más cerca de las miofibrillas</li>
+        <li data-letter="D">Para dar salida a los desechos de la contracción</li>
+        <li data-letter="E">Para separar unas miofibrillas de otras dentro de la fibra</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: B.</strong> Siendo continuación de la membrana, el
+        túbulo T <em>conduce</em> el potencial de acción: lleva la señal eléctrica al interior en vez
+        de esperar a que difunda. Quien almacena el calcio no es el túbulo sino el
+        <strong>retículo sarcoplásmico</strong> en sus cisternas terminales — confundir los dos es
+        el error más frecuente aquí, porque están pegados. Y separar miofibrillas no es tarea de
+        ninguna membrana: eso es organización, no un tabique.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 05 ─────────── -->
+<section class="station" id="s1e5">
+  <div class="station-header">
+    <div class="station-number">05</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">La unidad funcional</div>
+      <h2>El sarcómero: aprender a leer las bandas</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Dentro de cada fibra hay <strong>miofibrillas</strong>, y dentro de cada miofibrilla, una
+      cadena de <strong>sarcómeros</strong> puestos en fila. El sarcómero es
+      <strong>la unidad funcional</strong> del músculo: la porción más pequeña que puede contraerse.
+      Va de un disco Z al siguiente.</p>
+
+    <p>Las «estrías» que dan nombre al músculo estriado son estos sarcómeros alineados. Y sus
+      bandas, que parecen un jeroglífico, son en realidad una descripción de qué filamentos hay en
+      cada tramo:</p>
+
+    <div class="two-col">
+      <div class="col-card">
+        <h5>Banda A</h5>
+        <p>Toda la longitud de los <strong>filamentos gruesos</strong>. Como los gruesos no cambian
+          de longitud, <strong>la banda A tampoco</strong>. Recuérdalo: es la clave de la pregunta
+          del examen.</p>
+      </div>
+      <div class="col-card teal">
+        <h5>Banda I</h5>
+        <p>Solo <strong>filamentos finos</strong>, sin gruesos. Es la zona clara, y el disco Z la
+          cruza por el medio.</p>
+      </div>
+      <div class="col-card">
+        <h5>Zona H</h5>
+        <p>El centro de la banda A: solo <strong>gruesos</strong>, sin finos que se superpongan.</p>
+      </div>
+      <div class="col-card amber">
+        <h5>Disco Z y línea M</h5>
+        <p>El <strong>disco Z</strong> delimita el sarcómero y ancla los filamentos finos. La
+          <strong>línea M</strong> está en el centro y sostiene los gruesos.</p>
+      </div>
+    </div>
+
+    <div class="photo-grid">
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_10_3_sarcomero.png" alt="Disposición de los filamentos dentro de un sarcómero, con bandas A e I, zona H y línea M"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>El mapa del sarcómero.</strong> Recórrelo de disco Z a
+          disco Z e identifica cada banda por lo que contiene, no por su color. Tortora, Fig. 10.3.</div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/cuadro_10_1_componentes_sarcomero.png" alt="Cuadro con los componentes de un sarcómero"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>Componente por componente.</strong> Úsalo para
+          autoevaluarte: tapa la columna derecha y define cada banda por su contenido. Tortora,
+          Cuadro 10.1.</div>
+      </div>
+    </div>
+
+    <div class="check-question" data-question="q5s1">
+      <p class="question-text">5. Al contraerse el músculo, ¿qué le pasa a la banda A?</p>
+      <ul class="options">
+        <li data-letter="A">Se acorta, igual que la banda I y la zona H</li>
+        <li data-letter="B">Se ensancha, porque entran más filamentos finos</li>
+        <li data-letter="C">Desaparece por completo en la contracción máxima</li>
+        <li data-letter="D" data-correct="true">No cambia: mide lo que miden los filamentos gruesos</li>
+        <li data-letter="E">Se acorta solo si la contracción es isométrica</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: D.</strong> La banda A es la longitud de los filamentos
+        gruesos, y ningún filamento cambia de longitud durante la contracción. Lo que sí se estrechan
+        —y pueden desaparecer— son la <strong>banda I</strong> y la <strong>zona H</strong>, porque
+        ambas se definen por la <em>ausencia</em> de superposición: al deslizarse los finos hacia el
+        centro, esa ausencia se acaba. Ésta es la observación de los años cincuenta que derrumbó la
+        idea de que el músculo se plegaba como un acordeón.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 06 ─────────── -->
+<section class="station" id="s1e6">
+  <div class="station-header">
+    <div class="station-number">06</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Bioquímica con forma</div>
+      <h2>Las proteínas: quién tira, quién manda y quién sostiene</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Tortora agrupa las proteínas del sarcómero en tres oficios. La agrupación no es un capricho
+      de clasificación: cada grupo falla de una manera distinta y produce una enfermedad distinta.</p>
+
+    <div class="three-col">
+      <div class="col-card">
+        <h5>Contráctiles</h5>
+        <p><strong>Miosina</strong> — el filamento grueso; sus cabezas son los puentes cruzados y
+          además son la ATPasa.<br>
+          <strong>Actina</strong> — el filamento fino; lleva el sitio donde la cabeza se agarra.</p>
+      </div>
+      <div class="col-card teal">
+        <h5>Regulatorias</h5>
+        <p><strong>Tropomiosina</strong> — tapa el sitio de unión mientras el músculo descansa.<br>
+          <strong>Troponina</strong> — sujeta la tropomiosina en su sitio, y es
+          <strong>quien recibe el calcio</strong>.</p>
+      </div>
+      <div class="col-card">
+        <h5>Estructurales</h5>
+        <p><strong>Titina</strong> — el muelle: va del disco Z a la línea M y devuelve el sarcómero a
+          su longitud.<br>
+          <strong>Distrofina</strong> — une la miofibrilla al sarcolema.</p>
+      </div>
+    </div>
+
+    <div class="photo-grid">
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_10_4_filamentos.png" alt="Estructura de los filamentos gruesos y finos: miosina, actina, troponina y tropomiosina"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>Grueso y fino, por dentro.</strong> Observa dónde se
+          apoya la tropomiosina sobre la actina: justo encima del sitio que la cabeza de miosina
+          necesita. Tortora, Fig. 10.4.</div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/cuadro_10_2_proteinas.png" alt="Cuadro resumen de las proteínas de las fibras de músculo esquelético"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>Las once proteínas.</strong> No hay que memorizarlas
+          todas; sí saber a qué grupo pertenece cada una de las seis que nombramos arriba. Tortora,
+          Cuadro 10.2.</div>
+      </div>
+    </div>
+
+    <div class="clinical-box">
+      <h5>Para qué sirve en consulta</h5>
+      <p>La <strong>distrofina</strong> parece un detalle estructural hasta que falta: su ausencia
+        causa la <strong>distrofia muscular de Duchenne</strong>. Sin ella, cada contracción
+        desgarra un poco el sarcolema y la fibra acaba muriendo. Es el ejemplo más claro de que las
+        proteínas «que solo sostienen» no son accesorias — y de que en morfología, la estructura
+        <em>es</em> la función.</p>
+    </div>
+
+    <div class="check-question" data-question="q6s1">
+      <p class="question-text">6. En reposo, ¿qué impide que las cabezas de miosina se peguen a la
+        actina?</p>
+      <ul class="options">
+        <li data-letter="A">Que las cabezas no tienen ATP suficiente para intentarlo</li>
+        <li data-letter="B">Que la titina mantiene los filamentos demasiado separados</li>
+        <li data-letter="C">Que el calcio está unido a la actina y la bloquea</li>
+        <li data-letter="D">Que el disco Z impide que los filamentos se acerquen</li>
+        <li data-letter="E" data-correct="true">Que la tropomiosina cubre el sitio de unión de la actina</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: E.</strong> El músculo en reposo no está apagado: está
+        <em>bloqueado</em>. La tropomiosina tapa físicamente el sitio y la troponina la mantiene ahí.
+        Contraerse no es «encender» nada, es <strong>quitar el bloqueo</strong> — y de eso se encarga
+        el calcio, que se une a la troponina, no a la actina. La opción del ATP invierte las cosas:
+        en reposo la cabeza sí está cargada de energía, esperando.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 07 ─────────── -->
+<section class="station" id="s1e7">
+  <div class="station-header">
+    <div class="station-number">07</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">El mecanismo</div>
+      <h2>Deslizamiento: cómo se acorta lo que no se acorta</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Ésta era la pregunta 1 de la mañana, y la respuesta es más elegante que la intuición.
+      Cuando en los años cincuenta se miraron las primeras microfotografías electrónicas, se
+      esperaba encontrar filamentos plegados como un acordeón. Lo que se encontró fue que
+      <strong>los filamentos medían lo mismo relajados y contraídos</strong>.</p>
+
+    <p>El músculo se acorta porque los filamentos <strong>se deslizan unos sobre otros</strong>. Los
+      finos, anclados en los discos Z, son arrastrados hacia la línea M. Los discos Z se acercan
+      entre sí. El sarcómero se acorta; sus piezas, no. Eso es el
+      <strong>mecanismo de deslizamiento de los filamentos</strong>.</p>
+
+    <div class="photo-hero">
+      <img src="img/fig_10_5_deslizamiento.png" alt="Mecanismo de deslizamiento de los filamentos en dos sarcómeros adyacentes: relajado, parcialmente contraído y máximamente contraído"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>Tres momentos.</strong> Relajado, parcialmente contraído,
+        máximamente contraído. Mide con el ojo la banda A en los tres: no cambia. Ahora mide la banda
+        I y la zona H. Tortora, Fig. 10.5.</div>
+    </div>
+
+    <div class="pearl">
+      <p>Un sarcómero que se acorta unas décimas de micra no impresiona. Pero hay
+        <strong>miles en fila</strong> dentro de cada miofibrilla, y todos se acortan a la vez: los
+        acortamientos se suman a lo largo de la cadena. Por eso una fibra puede acortarse en torno
+        al <strong>70 %</strong> de su longitud de reposo.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 08 ─────────── -->
+<section class="station" id="s1e8">
+  <div class="station-header">
+    <div class="station-number">08</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">El ciclo</div>
+      <h2>Cuatro pasos, un ion y una molécula de ATP</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>El deslizamiento no ocurre de un tirón: es el resultado de miles de cabezas de miosina
+      repitiendo un ciclo de cuatro pasos, cada una a su ritmo, como manos tirando de una cuerda.</p>
+
+    <div class="recorrido">
+      <ol>
+        <li><strong>Hidrólisis del ATP.</strong> La cabeza de miosina rompe ATP en ADP + P y queda
+          <em>cargada</em>, en posición erguida. Ojo: la energía se gasta <strong>antes</strong> de
+          tirar, no durante.</li>
+        <li><strong>Unión.</strong> La cabeza se pega a la actina y forma un
+          <strong>puente cruzado</strong>. Solo puede si el sitio está descubierto — es decir, si
+          hay calcio.</li>
+        <li><strong>Golpe de fuerza.</strong> La cabeza gira hacia la línea M y arrastra el filamento
+          fino. Se suelta el ADP.</li>
+        <li><strong>Separación.</strong> Llega <strong>otro ATP</strong>, la cabeza se despega y
+          vuelve a empezar.</li>
+      </ol>
+    </div>
+
+    <div class="pearl">
+      <p><strong>Aquí está la respuesta a la pregunta del cadáver.</strong> El ATP no hace falta solo
+        para tirar: hace falta para <em>soltarse</em>. Sin ATP, las cabezas se quedan pegadas a la
+        actina y el músculo se bloquea en contracción. Eso es el <strong>rigor mortis</strong>: no
+        una contracción, sino la imposibilidad de terminarla.</p>
+    </div>
+
+    <h3>El papel del calcio</h3>
+    <p>El calcio no tira de nada. Su trabajo es abrir la puerta. El potencial de acción llega por el
+      túbulo T, las cisternas terminales sueltan <strong>Ca²⁺</strong> al sarcoplasma, el calcio se
+      une a la <strong>troponina</strong>, la troponina arrastra a la <strong>tropomiosina</strong>
+      y el sitio de la actina queda descubierto. El ciclo puede empezar.</p>
+    <p>Para relajarse, al revés: unas bombas devuelven el calcio al retículo gastando ATP, la
+      tropomiosina vuelve a su sitio y las cabezas ya no encuentran dónde agarrarse.
+      <strong>Relajarse también cuesta energía.</strong></p>
+
+    <div class="photo-grid">
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_10_6_ciclo_contraccion.png" alt="El ciclo de contracción: hidrólisis del ATP, unión, golpe de fuerza y separación"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>El ciclo de los cuatro pasos.</strong> Localiza en qué
+          paso entra cada una de las dos moléculas de ATP: una se hidroliza, la otra despega.
+          Tortora, Fig. 10.6.</div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_10_7_calcio_troponina.png" alt="Papel del calcio en la regulación de la contracción por troponina y tropomiosina"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>El calcio destapa.</strong> Compara el panel de reposo con
+          el de contracción y fíjate solo en dónde está la tropomiosina. Tortora, Fig. 10.7.</div>
+      </div>
+    </div>
+
+    <div class="photo-hero">
+      <img src="img/fig_10_10_resumen_contraccion.png" alt="Resumen de los eventos de contracción y relajación en una fibra del músculo esquelético"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>Todo junto.</strong> Del impulso nervioso a la relajación.
+        Si puedes narrar este esquema en voz alta sin mirarlo, tienes la estación entera. Tortora,
+        Fig. 10.10.</div>
+    </div>
+
+    <div class="check-question" data-question="q7s1">
+      <p class="question-text">7. ¿Por qué el rigor mortis produce músculos rígidos y no flácidos?</p>
+      <ul class="options">
+        <li data-letter="A">Porque el calcio queda atrapado dentro del retículo sarcoplásmico</li>
+        <li data-letter="B" data-correct="true">Porque sin ATP las cabezas de miosina no pueden soltarse de la actina</li>
+        <li data-letter="C">Porque las fibras se acortan al deshidratarse el cadáver</li>
+        <li data-letter="D">Porque la tropomiosina se fija de forma permanente sobre la actina</li>
+        <li data-letter="E">Porque el impulso nervioso persiste unas horas tras la muerte</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: B.</strong> El paso que exige ATP para
+        <em>terminar</em> es la separación. Sin producción de ATP las cabezas quedan enganchadas y el
+        músculo se queda duro. Ojo con dos trampas: el calcio no queda encerrado sino que
+        <em>escapa</em> al sarcoplasma, porque las bombas que lo devuelven también necesitan ATP; y
+        el impulso nervioso cesa de inmediato — lo que persiste es el enganche mecánico, no la
+        orden.</div>
+    </div>
+
+    <div class="check-question" data-question="q8s1">
+      <p class="question-text">8. Un fármaco impide que el retículo sarcoplásmico recapture el
+        calcio. ¿Qué le pasa al músculo?</p>
+      <ul class="options">
+        <li data-letter="A" data-correct="true">Le cuesta relajarse: el calcio sigue en el sarcoplasma</li>
+        <li data-letter="B">No puede contraerse, porque le falta calcio libre</li>
+        <li data-letter="C">Se contrae más débilmente, pero se relaja normal</li>
+        <li data-letter="D">No cambia nada: el calcio se degrada solo</li>
+        <li data-letter="E">Se rompe el sarcolema por exceso de presión osmótica</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: A.</strong> Contraerse le sale bien —calcio le
+        sobra—; lo que no puede es parar. Mientras haya calcio unido a la troponina, el sitio sigue
+        descubierto y el ciclo continúa. Es el mecanismo de fondo de la
+        <strong>hipertermia maligna</strong>, donde el músculo no se relaja y el calor generado
+        dispara la temperatura corporal. La opción A confunde el sentido del transporte: la bomba
+        <em>retira</em> calcio, no lo aporta.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 09 ─────────── -->
+<section class="station" id="s1e9">
+  <div class="station-header">
+    <div class="station-number">09</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Donde el nervio toca el músculo</div>
+      <h2>La unión neuromuscular</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Todo lo anterior empieza en un solo sitio: la sinapsis entre una <strong>neurona motora
+      somática</strong> y la fibra muscular. Tres piezas y un mensajero:</p>
+
+    <div class="three-col">
+      <div class="col-card">
+        <h5>Bulbos sinápticos</h5>
+        <p>El extremo del axón, cargado de vesículas con <strong>acetilcolina (ACh)</strong>.</p>
+      </div>
+      <div class="col-card">
+        <h5>Hendidura sináptica</h5>
+        <p>El espacio entre los dos. La ACh lo cruza por difusión.</p>
+      </div>
+      <div class="col-card">
+        <h5>Placa motora</h5>
+        <p>La región del sarcolema cargada de <strong>receptores colinérgicos</strong>.</p>
+      </div>
+    </div>
+
+    <div class="recorrido">
+      <ol>
+        <li>Llega el impulso nervioso y se abren canales de <strong>Ca²⁺ dependientes de voltaje</strong>
+          en el terminal.</li>
+        <li>El calcio dispara la <strong>exocitosis</strong> de las vesículas: se libera ACh.</li>
+        <li>La ACh cruza la hendidura y se une a los receptores de la placa motora.</li>
+        <li>Se abren canales, entra Na⁺ y nace el <strong>potencial de acción muscular</strong>,
+          que corre por el sarcolema y se mete por los túbulos T.</li>
+        <li>La <strong>acetilcolinesterasa</strong> degrada la ACh y apaga la señal.</li>
+      </ol>
+    </div>
+
+    <div class="photo-grid">
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_10_9_union_neuromuscular.png" alt="Estructura de la unión neuromuscular: bulbos sinápticos, hendidura y placa motora"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>La unión, por partes.</strong> Identifica los tres
+          elementos y en cuál está cada uno de los cinco pasos. Tortora, Fig. 10.9.</div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_10_9_union_neuromuscular_b.png" alt="Microfotografía electrónica de barrido de una unión neuromuscular"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>La misma unión, real.</strong> Una neurona motora se
+          ramifica y toca varias fibras: todas ellas forman su <em>unidad motora</em>. Tortora,
+          Fig. 10.9d.</div>
+      </div>
+    </div>
+
+    <div class="clinical-box">
+      <h5>👁 Interfaz optométrica</h5>
+      <p>Esta sinapsis explica dos cuadros que vas a ver, y los dos empiezan por el ojo.</p>
+      <p>En la <strong>miastenia grave</strong> el sistema inmune destruye los receptores de ACh de
+        la placa motora. La señal llega, pero encuentra menos puertas: el músculo se fatiga con el
+        uso y se recupera con el reposo. Y como <strong>los músculos del ojo son los primeros en
+        delatarlo</strong>, el motivo de consulta suele ser <strong>ptosis</strong> —el párpado que
+        cae a lo largo del día— y <strong>diplopía</strong> que empeora al leer y mejora tras una
+        siesta. Muchas veces el primero en sospecharla es el optómetra.</p>
+      <p>Del otro lado, la <strong>toxina botulínica</strong> impide la liberación de ACh. Aplicada a
+        propósito, relaja el músculo que no debe contraerse: es el tratamiento del
+        <strong>blefaroespasmo</strong>. El mismo mecanismo, usado al revés.</p>
+    </div>
+
+    <div class="check-question" data-question="q9s1">
+      <p class="question-text">9. En la miastenia grave el paciente ve doble por la tarde y bien por
+        la mañana. ¿Qué explica ese horario?</p>
+      <ul class="options">
+        <li data-letter="A">Que el nervio se inflama progresivamente durante el día</li>
+        <li data-letter="B" data-correct="true">Que quedan pocos receptores y el uso los agota</li>
+        <li data-letter="C">Que la luz de la tarde exige más acomodación</li>
+        <li data-letter="D">Que el músculo pierde calcio a lo largo de la jornada</li>
+        <li data-letter="E">Que la acetilcolinesterasa deja de funcionar por la tarde</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: B.</strong> El defecto está en la placa motora, no en
+        el nervio ni en el músculo. Con menos receptores el margen de seguridad de la sinapsis es
+        estrecho: las primeras contracciones salen bien y las repetidas fallan. Por eso
+        <strong>mejora con el reposo</strong>, y por eso los fármacos que inhiben la
+        acetilcolinesterasa —la neostigmina— la alivian: dejan la ACh más tiempo en la hendidura.
+        Justo lo contrario de lo que dice la última opción.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 10 ─────────── -->
+<section class="station" id="s1e10">
+  <div class="station-header">
+    <div class="station-number">10</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Variedad</div>
+      <h2>Los tres tipos de fibra</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>No todas las fibras esqueléticas son iguales. Se clasifican por cómo fabrican el ATP y por lo
+      rápido que su ATPasa lo consume. Ningún músculo real es de un solo tipo: son mezclas, y la
+      proporción cambia según el trabajo.</p>
+
+    <div class="three-col">
+      <div class="col-card">
+        <h5>Oxidativas lentas (OL)</h5>
+        <p>Diámetro pequeño, mucha <strong>mioglobina</strong>, muchas mitocondrias y capilares.
+          Rojas. Resisten la fatiga: son las de la postura.</p>
+      </div>
+      <div class="col-card teal">
+        <h5>Oxidativas-glucolíticas rápidas</h5>
+        <p>Intermedias, también rojizas. Rápidas y con resistencia moderada. Caminar, correr una
+          distancia media.</p>
+      </div>
+      <div class="col-card amber">
+        <h5>Glucolíticas rápidas (GR)</h5>
+        <p>Las más gruesas y potentes, blancas, con poca mioglobina. Mucha fuerza durante poco
+          tiempo, y se fatigan pronto.</p>
+      </div>
+    </div>
+
+    <div class="photo-hero">
+      <img src="img/cuadro_10_4_tipos_fibra.png" alt="Cuadro de características de los tres tipos de fibras musculares esqueléticas"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>Las tres columnas.</strong> Fíjate en la fila de la
+        mioglobina y en la del número de mitocondrias: explican a la vez el color y la resistencia.
+        Tortora, Cuadro 10.4.</div>
+    </div>
+
+    <div class="pearl">
+      <p>Los <strong>extraoculares</strong> —que veremos la semana que viene— son un caso extremo:
+        de los músculos más rápidos del cuerpo, y de los más resistentes a la fatiga a la vez. Tienen
+        que serlo. Hacen varios movimientos sacádicos por segundo, durante todas las horas que pasas
+        despierto, sin descansar nunca.</p>
+    </div>
+
+    <div class="photo-hero">
+      <img src="img/fig_10_16_musculo_liso.png" alt="Tejido muscular liso: fibras fusiformes con un solo núcleo central"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>Y el liso, para cerrar.</strong> Fibras fusiformes, un solo
+        núcleo central, sin estriaciones — porque sus filamentos no se ordenan en sarcómeros. Es el
+        del iris y el cuerpo ciliar. Tortora, Fig. 10.16.</div>
+    </div>
+
+    <div class="check-question" data-question="q10s1">
+      <p class="question-text">10. Un músculo de la postura, activo casi todo el día, ¿de qué tipo
+        de fibra esperarías que fuera mayoritariamente, y de qué color?</p>
+      <ul class="options">
+        <li data-letter="A" data-correct="true">Oxidativas lentas, y rojo por la mucha mioglobina</li>
+        <li data-letter="B">Glucolíticas rápidas, y blanco por la poca mioglobina</li>
+        <li data-letter="C">Glucolíticas rápidas, y rojo por los muchos capilares</li>
+        <li data-letter="D">Oxidativas lentas, y blanco porque gastan poco oxígeno</li>
+        <li data-letter="E">Mitad y mitad, porque el color no depende del tipo de fibra</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: A.</strong> Sostener una postura durante horas exige
+        resistencia, no potencia: fibras oxidativas lentas, que fabrican ATP por respiración aeróbica
+        y aguantan. El color va con el mismo paquete — la <strong>mioglobina</strong> almacena
+        oxígeno y es roja, así que la fibra que más depende del oxígeno es la más roja. Las dos
+        opciones que separan el color del metabolismo rompen justo esa relación.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 11 ─────────── -->
+<section class="station" id="s1e11">
+  <div class="station-header">
+    <div class="station-number">11</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Vocabulario</div>
+      <h2>Términos TA2 de la sesión</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Toca la tarjeta para voltearla. El español y el latín de la <em>Terminologia Anatomica</em>,
+      y debajo por qué te importa a ti.</p>
+
+    <div class="flip-grid">
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Fibra muscular</span><span class="term-en">Myofibra</span></div>
+        <div class="flip-back"><p class="term-def">La célula del músculo esquelético: larga, cilíndrica y con muchos núcleos periféricos, porque nace de la fusión de varias células.</p><p class="term-opto">👁 «Fibra» aquí significa célula, no filamento. Es la confusión número uno.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Epimisio</span><span class="term-en">Epimysium</span></div>
+        <div class="flip-back"><p class="term-def">Vaina de conectivo denso irregular que envuelve el músculo entero y se continúa en el tendón.</p><p class="term-opto">👁 <em>epi-</em> = sobre. El de fuera.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Perimisio</span><span class="term-en">Perimysium</span></div>
+        <div class="flip-back"><p class="term-def">Vaina que agrupa de 10 a 100 o más fibras en fascículos. Son los haces visibles a simple vista.</p><p class="term-opto">👁 <em>peri-</em> = alrededor. El que hace los manojos.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Endomisio</span><span class="term-en">Endomysium</span></div>
+        <div class="flip-back"><p class="term-def">Vaina de fibras reticulares que separa cada fibra muscular de su vecina dentro del fascículo.</p><p class="term-opto">👁 <em>endo-</em> = dentro. El más íntimo de los tres.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Fascículo muscular</span><span class="term-en">Fasciculus musculi</span></div>
+        <div class="flip-back"><p class="term-def">Haz de fibras musculares envuelto por perimisio. Su disposición decide si el músculo es potente o de gran recorrido.</p><p class="term-opto">👁 Es el nivel donde se decide fuerza contra amplitud.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Sarcolema</span><span class="term-en">Sarcolemma</span></div>
+        <div class="flip-back"><p class="term-def">La membrana plasmática de la fibra muscular. De ella nacen los túbulos transversos.</p><p class="term-opto">👁 Es donde vive la placa motora y por donde corre el potencial de acción.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Sarcoplasma</span><span class="term-en">Sarcoplasma</span></div>
+        <div class="flip-back"><p class="term-def">El citoplasma de la fibra. Contiene glucógeno como combustible y mioglobina como reserva de oxígeno.</p><p class="term-opto">👁 La mioglobina es la que da el color rojo del músculo.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Retículo sarcoplásmico</span><span class="term-en">Reticulum sarcoplasmicum</span></div>
+        <div class="flip-back"><p class="term-def">Red de sacos membranosos que almacena Ca²⁺ y lo libera desde sus cisternas terminales al llegar el estímulo.</p><p class="term-opto">👁 El almacén del calcio. Ni el túbulo T ni la mitocondria.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Túbulo transverso</span><span class="term-en">Tubulus transversus</span></div>
+        <div class="flip-back"><p class="term-def">Invaginación del sarcolema que atraviesa la fibra y conduce el potencial de acción hasta el interior.</p><p class="term-opto">👁 Conduce, no almacena. Ésa es la diferencia con el retículo.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Tríada</span><span class="term-en">Triad</span></div>
+        <div class="flip-back"><p class="term-def">Un túbulo transverso con una cisterna terminal a cada lado. Es el punto donde la señal eléctrica se convierte en liberación de calcio.</p><p class="term-opto">👁 Tres piezas, un solo oficio: acoplar excitación y contracción.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Miofibrilla</span><span class="term-en">Myofibrilla</span></div>
+        <div class="flip-back"><p class="term-def">Estructura cilíndrica dentro de la fibra, formada por sarcómeros en fila. Es la que produce las estriaciones.</p><p class="term-opto">👁 Un peldaño por debajo de la fibra, uno por encima del sarcómero.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Sarcómero</span><span class="term-en">Sarcomerus</span></div>
+        <div class="flip-back"><p class="term-def">La unidad funcional del músculo: el segmento entre dos discos Z consecutivos.</p><p class="term-opto">👁 Lo más pequeño que puede contraerse por sí solo.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Disco Z</span><span class="term-en">Linea Z</span></div>
+        <div class="flip-back"><p class="term-def">Placa que delimita el sarcómero y ancla los extremos de los filamentos finos.</p><p class="term-opto">👁 Al contraerse, los discos Z se acercan entre sí. El sarcómero se acorta ahí.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Banda A</span><span class="term-en">Stria A</span></div>
+        <div class="flip-back"><p class="term-def">Toda la longitud de los filamentos gruesos, incluida la zona donde se superponen con los finos.</p><p class="term-opto">👁 No cambia de longitud al contraerse. Es la pregunta clásica.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Banda I</span><span class="term-en">Stria I</span></div>
+        <div class="flip-back"><p class="term-def">Zona clara con filamentos finos únicamente; el disco Z la atraviesa por el medio.</p><p class="term-opto">👁 Se estrecha al contraerse, porque se define por la ausencia de gruesos.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Miosina</span><span class="term-en">Myosin</span></div>
+        <div class="flip-back"><p class="term-def">Proteína contráctil del filamento grueso. Sus cabezas forman los puentes cruzados y además hidrolizan el ATP.</p><p class="term-opto">👁 Es motor y enzima a la vez: tira y paga su propia energía.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Actina</span><span class="term-en">Actin</span></div>
+        <div class="flip-back"><p class="term-def">Proteína contráctil del filamento fino; lleva el sitio de unión al que se engancha la cabeza de miosina.</p><p class="term-opto">👁 No se mueve sola: es arrastrada hacia la línea M.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Troponina</span><span class="term-en">Troponin</span></div>
+        <div class="flip-back"><p class="term-def">Proteína regulatoria que sujeta la tropomiosina y que recibe el Ca²⁺, desencadenando el desbloqueo.</p><p class="term-opto">👁 El calcio se une AQUÍ, no a la actina.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Tropomiosina</span><span class="term-en">Tropomyosin</span></div>
+        <div class="flip-back"><p class="term-def">Proteína regulatoria que en reposo cubre el sitio de unión de la actina e impide la contracción.</p><p class="term-opto">👁 El músculo en reposo está bloqueado, no apagado.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Titina</span><span class="term-en">Titin</span></div>
+        <div class="flip-back"><p class="term-def">Proteína estructural elástica que va del disco Z a la línea M; devuelve el sarcómero a su longitud de reposo.</p><p class="term-opto">👁 Es la responsable de la elasticidad del músculo.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Unión neuromuscular</span><span class="term-en">Junctio neuromuscularis</span></div>
+        <div class="flip-back"><p class="term-def">Sinapsis entre la neurona motora somática y la fibra muscular: bulbos terminales, hendidura y placa motora.</p><p class="term-opto">👁 Donde falla la miastenia grave y donde actúa la toxina botulínica.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Placa motora</span><span class="term-en">Lamina terminalis motoria</span></div>
+        <div class="flip-back"><p class="term-def">Región del sarcolema frente al terminal axónico, cargada de receptores colinérgicos.</p><p class="term-opto">👁 Es el blanco de los anticuerpos en la miastenia.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Unidad motora</span><span class="term-en">Unitas motoria</span></div>
+        <div class="flip-back"><p class="term-def">Una neurona motora y todas las fibras musculares que inerva. Todas se contraen a la vez.</p><p class="term-opto">👁 Cuantas menos fibras por unidad, más fino el control. En los extraoculares son poquísimas.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Mioglobina</span><span class="term-en">Myoglobin</span></div>
+        <div class="flip-back"><p class="term-def">Proteína del sarcoplasma que almacena oxígeno. Abundante en las fibras oxidativas lentas.</p><p class="term-opto">👁 Explica a la vez el color rojo y la resistencia a la fatiga.</p></div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 12 ─────────── -->
+<section class="station" id="s1e12">
+  <div class="station-header">
+    <div class="station-number">12</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Recuperación</div>
+      <h2>Comprueba lo que aprendiste</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Sin mirar arriba. Estas cinco no repiten las anteriores: piden reconstruir, no reconocer.</p>
+
+    <div class="check-question" data-question="q11s1">
+      <p class="question-text">11. Ordena de mayor a menor: fascículo, miofibrilla, sarcómero, fibra
+        muscular.</p>
+      <ul class="options">
+        <li data-letter="A">Fibra → fascículo → miofibrilla → sarcómero</li>
+        <li data-letter="B">Fascículo → miofibrilla → fibra → sarcómero</li>
+        <li data-letter="C" data-correct="true">Fascículo → fibra → miofibrilla → sarcómero</li>
+        <li data-letter="D">Fibra → miofibrilla → fascículo → sarcómero</li>
+        <li data-letter="E">Miofibrilla → fascículo → fibra → sarcómero</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: C.</strong> El fascículo es un manojo de fibras; la
+        fibra es la célula; dentro hay miofibrillas y dentro de éstas, sarcómeros en fila. El error
+        habitual es colar la miofibrilla por encima de la fibra, y viene de que ambas empiezan por
+        «mio-». Recuerda la regla del vocabulario: <strong>fibra = célula</strong>.</div>
+    </div>
+
+    <div class="check-question" data-question="q12s1">
+      <p class="question-text">12. Un veneno bloquea los receptores de acetilcolina de la placa
+        motora sin tocar nada más. ¿Qué observas?</p>
+      <ul class="options">
+        <li data-letter="A">Contracción sostenida, porque la ACh se acumula</li>
+        <li data-letter="B" data-correct="true">Parálisis fláccida: el músculo no responde</li>
+        <li data-letter="C">Contracción normal pero relajación imposible</li>
+        <li data-letter="D">Rigidez, como en el rigor mortis</li>
+        <li data-letter="E">Nada: el potencial de acción viaja igual por el túbulo T</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: B.</strong> Es el mecanismo del <strong>curare</strong>.
+        La orden llega al terminal y la ACh se libera, pero no encuentra receptores libres: no nace
+        el potencial de acción muscular, no se libera calcio, no hay contracción. El músculo queda
+        <em>fláccido</em>, que es lo contrario de la rigidez. Y no: sin potencial de acción muscular
+        no hay nada que viaje por el túbulo T.</div>
+    </div>
+
+    <div class="check-question" data-question="q13s1">
+      <p class="question-text">13. Explica en una frase por qué la zona H desaparece en la
+        contracción máxima pero la banda A no.</p>
+      <ul class="options">
+        <li data-letter="A">Porque los filamentos gruesos se acortan y los finos no</li>
+        <li data-letter="B">Porque la zona H pertenece al disco Z y la banda A a la línea M</li>
+        <li data-letter="C" data-correct="true">Porque la zona H es una ausencia y la banda A una presencia</li>
+        <li data-letter="D">Porque en la zona H no hay titina que la sostenga</li>
+        <li data-letter="E">Porque la banda A se define por la longitud del sarcómero entero</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: C.</strong> Aquí está la idea que hay que llevarse: las
+        bandas se definen por <em>lo que contienen</em>. La banda A existe mientras existan filamentos
+        gruesos, y éstos no cambian de longitud. La zona H existe solo mientras <strong>falte</strong>
+        superposición; cuando los finos llegan al centro, se acaba lo que la definía. Nada se acortó:
+        cambió el solapamiento.</div>
+    </div>
+
+    <div class="check-question" data-question="q14s1">
+      <p class="question-text">14. Señala la afirmación <strong>falsa</strong> sobre el ATP en la
+        contracción.</p>
+      <ul class="options">
+        <li data-letter="A">Se hidroliza antes del golpe de fuerza, no durante</li>
+        <li data-letter="B">Hace falta una molécula nueva para despegar la cabeza de la actina</li>
+        <li data-letter="C">Las bombas que devuelven el calcio al retículo también lo consumen</li>
+        <li data-letter="D" data-correct="true">Relajarse es un proceso pasivo que no gasta energía</li>
+        <li data-letter="E">Sin ATP el músculo queda enganchado, no fláccido</li>
+      </ul>
+      <div class="feedback"><strong>La falsa es D.</strong> Relajarse cuesta energía por partida
+        doble: hay que <em>despegar</em> las cabezas —con un ATP nuevo— y hay que
+        <em>recoger</em> el calcio, que se bombea contra gradiente. Las otras cuatro son ciertas, y
+        la última es la que explica el rigor mortis. Que un proceso «vuelva al reposo» no significa
+        que sea gratis.</div>
+    </div>
+
+    <div class="saber-box">
+      <strong>Pregunta tipo Saber Pro · Lectura de cuadro</strong>
+      <div class="check-question" style="margin-top:16px;border-color:var(--purple)" data-question="q15s1">
+        <p class="question-text">15. Según el Cuadro 10.4, dos fibras se describen como «rápidas».
+          ¿Qué comparten exactamente y en qué se separan?</p>
+        <ul class="options">
+        <li data-letter="A">Comparten el color; se separan en la velocidad de la ATPasa</li>
+        <li data-letter="B">Comparten el diámetro; se separan en el número de núcleos</li>
+        <li data-letter="C">Comparten la resistencia a la fatiga; se separan en el color</li>
+        <li data-letter="D">No comparten nada: «rápida» describe dos cosas distintas en cada una</li>
+        <li data-letter="E" data-correct="true">Comparten la velocidad de la ATPasa; se separan en cómo obtienen el ATP</li>
+      </ul>
+        <div class="feedback"><strong>Correcta: E.</strong> «Rápida» siempre significa lo mismo: la
+          ATPasa de las cabezas de miosina hidroliza el ATP deprisa y el ciclo va rápido. Lo que
+          separa a la oxidativa-glucolítica de la glucolítica es la <strong>fuente</strong> del ATP
+          —aeróbica y anaeróbica frente a casi solo anaeróbica—, y de ahí salen las diferencias de
+          color y de fatiga. Leer un cuadro es exactamente esto: distinguir qué columna define la
+          categoría y cuál solo la acompaña.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div><!-- fin sesión 1 -->
+
+<!-- ═══════════════════════ SESIÓN 2 ═══════════════════════ -->
+<div class="tab-pane" id="s2">
+
+<nav class="station-nav">
+  <h3>Contenido · Sesión 2</h3>
+  <ol>
+    <li><a href="#s2e0">Origen, inserción y vientre</a></li>
+    <li><a href="#s2e1">El músculo como palanca</a></li>
+    <li><a href="#s2e2">La disposición de los fascículos</a></li>
+    <li><a href="#s2e3">Cómo se nombran los músculos</a></li>
+    <li><a href="#s2e4">Agonista, antagonista, sinergista</a></li>
+    <li><a href="#s2e5">Los músculos de la expresión facial</a></li>
+    <li><a href="#s2e6">El orbicular de los ojos y el parpadeo</a></li>
+    <li><a href="#s2e7">Cuando el nervio falla</a></li>
+    <li><a href="#s2e8">Adelanto: los extraoculares</a></li>
+    <li><a href="#s2e9">Términos TA2 de la cara</a></li>
+    <li><a href="#s2e10">Comprueba lo que aprendiste</a></li>
+    <li><a href="#s2e11">Volvemos a las cinco preguntas</a></li>
+  </ol>
+</nav>
+
+<!-- ─────────── 00 ─────────── -->
+<section class="station" id="s2e0">
+  <div class="station-header">
+    <div class="station-number">00</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Mecánica</div>
+      <h2>Origen, inserción y vientre</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Cambiamos de escala. Toda la mañana estuvimos dentro de la fibra; ahora salimos y miramos el
+      músculo como una <strong>máquina montada sobre el esqueleto</strong>.</p>
+
+    <p>Un músculo tira de sus dos extremos por igual —la física no distingue—, pero
+      <strong>los dos huesos no se mueven igual</strong>, porque otros músculos estabilizan uno de
+      ellos. De ahí los tres términos:</p>
+
+    <div class="three-col">
+      <div class="col-card">
+        <h5>Origen</h5>
+        <p>La fijación al hueso que <strong>permanece quieto</strong>. Suele ser el proximal.</p>
+      </div>
+      <div class="col-card teal">
+        <h5>Inserción</h5>
+        <p>La fijación al hueso que <strong>se mueve</strong>. Suele ser el distal — y en la cara,
+          suele ser la piel.</p>
+      </div>
+      <div class="col-card">
+        <h5>Vientre</h5>
+        <p>La porción carnosa entre los dos. Es donde están las fibras que se contraen.</p>
+      </div>
+    </div>
+
+    <div class="pearl">
+      <p>Origen e inserción <strong>pueden intercambiarse</strong> según el movimiento. Al flexionar
+        el codo, la mano sube hacia el hombro; si estás colgado de una barra, el mismo músculo sube
+        el hombro hacia la mano. Lo que decide cuál es cuál no es la anatomía, es
+        <strong>qué extremo está fijado</strong> en ese momento.</p>
+    </div>
+
+    <div class="photo-hero">
+      <img src="img/fig_11_1_origen_insercion.png" alt="Relación de los músculos esqueléticos con los huesos: origen, vientre e inserción"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>Origen, vientre, inserción.</strong> El músculo cruza la
+        articulación: sin cruzarla no podría moverla. Tortora, Fig. 11.1.</div>
+    </div>
+
+    <div class="check-question" data-question="q1s2">
+      <p class="question-text">1. ¿Por qué la mayoría de los músculos cruzan al menos una
+        articulación?</p>
+      <ul class="options">
+        <li data-letter="A" data-correct="true">Porque si no la cruzaran, al acortarse no podrían moverla</li>
+        <li data-letter="B">Para repartir su peso entre dos huesos</li>
+        <li data-letter="C">Porque así reciben irrigación de los dos lados</li>
+        <li data-letter="D">Para que el tendón quede protegido dentro de la cápsula</li>
+        <li data-letter="E">Porque el origen debe estar siempre en un hueso distinto al de la inserción</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: A.</strong> Es pura geometría: para acercar dos huesos
+        hay que estar anclado a los dos, y eso obliga a pasar por encima de la articulación que los
+        une. Fíjate en la consecuencia que viene después — <strong>los músculos de la cara son la
+        excepción</strong>, y lo son justamente porque no mueven articulaciones: mueven piel, y les
+        basta con anclarse en ella.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 01 ─────────── -->
+<section class="station" id="s2e1">
+  <div class="station-header">
+    <div class="station-number">01</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Física aplicada</div>
+      <h2>El músculo como palanca</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Hueso, articulación y músculo forman una <strong>palanca</strong> con sus tres elementos de
+      siempre: el <strong>fulcro</strong> (la articulación), el <strong>esfuerzo</strong> (la
+      contracción) y la <strong>carga</strong> (el peso a mover). Lo que cambia entre los tres tipos
+      es el orden en que están.</p>
+
+    <div class="three-col">
+      <div class="col-card">
+        <h5>Primera clase</h5>
+        <p>El <strong>fulcro en el medio</strong>. Como un balancín. Ejemplo: la cabeza sobre la
+          columna, sostenida por los músculos de la nuca.</p>
+      </div>
+      <div class="col-card teal">
+        <h5>Segunda clase</h5>
+        <p>La <strong>carga en el medio</strong>. Como una carretilla. Favorece la fuerza. Ejemplo:
+          ponerse de puntillas.</p>
+      </div>
+      <div class="col-card amber">
+        <h5>Tercera clase</h5>
+        <p>El <strong>esfuerzo en el medio</strong>. Es la más común del cuerpo. Favorece la
+          <strong>velocidad y la amplitud</strong>, no la fuerza. Ejemplo: el bíceps flexionando el
+          codo.</p>
+      </div>
+    </div>
+
+    <div class="photo-grid">
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_11_2_palancas.png" alt="Estructura de la palanca y los tres tipos de palanca en el cuerpo humano"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>Los tres tipos.</strong> No memorices los ejemplos:
+          aprende a localizar el fulcro y ver qué queda en el medio. Tortora, Fig. 11.2.</div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/lat_3_4_palancas.png" alt="Esquema de Latarjet de los tipos de palanca relacionados con la acción mecánica de los músculos"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>El mismo asunto en Latarjet.</strong> Vale la pena verlo
+          dos veces: los dibujos cambian, la lógica no. Latarjet, Fig. 3-4.</div>
+      </div>
+    </div>
+
+    <div class="pearl">
+      <p>Que el cuerpo esté lleno de palancas de tercera clase parece un mal diseño: se pierde
+        fuerza. Pero se gana lo otro — <strong>un pequeño acortamiento del músculo produce un
+        recorrido grande y rápido del extremo</strong>. El cuerpo prefiere casi siempre la velocidad
+        y la amplitud a la potencia bruta.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 02 ─────────── -->
+<section class="station" id="s2e2">
+  <div class="station-header">
+    <div class="station-number">02</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Arquitectura</div>
+      <h2>La disposición de los fascículos: fuerza contra recorrido</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Ésta era la pregunta 5 de la mañana. Dentro de un fascículo las fibras siempre van paralelas;
+      lo que cambia es cómo se disponen los <strong>fascículos respecto al tendón</strong>. Tortora
+      describe cinco patrones: <strong>paralelo, fusiforme, circular, triangular y peniforme</strong>.</p>
+
+    <p>Y la disposición no es decorativa, porque hay dos reglas que tiran en direcciones opuestas:</p>
+
+    <div class="two-col">
+      <div class="col-card teal">
+        <h5>El recorrido depende de la longitud</h5>
+        <p>Una fibra se acorta alrededor del <strong>70 %</strong> de su longitud de reposo. Fibras
+          largas → más recorrido.</p>
+      </div>
+      <div class="col-card amber">
+        <h5>La fuerza depende del área</h5>
+        <p>La fuerza <strong>no</strong> depende de la longitud, sino del <strong>área transversal
+          total</strong>: cuantas más fibras por sección, más fuerza. Una fibra corta tira tan fuerte
+          como una larga.</p>
+      </div>
+    </div>
+
+    <p>De ahí que un músculo <strong>peniforme</strong> —fibras cortas y oblicuas, como las barbas
+      de una pluma— quepa muchas más fibras en el mismo volumen: es potente pero de recorrido corto.
+      Y un músculo <strong>paralelo</strong>, con fibras largas, recorre mucho pero con menos fuerza.
+      <strong>La disposición fascicular es siempre un compromiso.</strong></p>
+
+    <div class="photo-hero">
+      <img src="img/cuadro_11_1_fasciculos.png" alt="Cuadro de las disposiciones de los fascículos: paralelo, fusiforme, circular, triangular y peniforme"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>Los cinco patrones.</strong> Localiza el <em>circular</em>:
+        su ejemplo es el <strong>orbicular de los ojos</strong>, y lo vamos a necesitar en dos
+        estaciones. Tortora, Cuadro 11.1.</div>
+    </div>
+
+    <div class="photo-grid">
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/lat_3_1_disposicion_fibras.png" alt="Disposición de las fibras musculares con respecto a los tendones, según Latarjet"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>Fibras y tendones.</strong> La versión de Latarjet, con
+          los peniformes bien dibujados. Latarjet, Fig. 3-1.</div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/lat_3_2_corte_brazo.png" alt="Corte horizontal del brazo izquierdo mostrando la disposición de los músculos"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>Un corte real.</strong> Aquí se ve el área transversal de
+          la que hablábamos: es lo que determina la fuerza. Latarjet, Fig. 3-2.</div>
+      </div>
+    </div>
+
+    <div class="check-question" data-question="q2s2">
+      <p class="question-text">2. Dos músculos ocupan el mismo volumen. Uno es peniforme, el otro
+        paralelo. ¿Qué es cierto?</p>
+      <ul class="options">
+        <li data-letter="A">El paralelo es más fuerte y de mayor recorrido</li>
+        <li data-letter="B" data-correct="true">El peniforme es más fuerte; el paralelo tiene más recorrido</li>
+        <li data-letter="C">El peniforme es más fuerte y de mayor recorrido</li>
+        <li data-letter="D">El paralelo es más fuerte; el peniforme tiene más recorrido</li>
+        <li data-letter="E">Son equivalentes: a igual volumen, igual fuerza y recorrido</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: B.</strong> Son las dos reglas enfrentadas. El
+        peniforme mete muchas fibras cortas y oblicuas en el mismo volumen: más área transversal, más
+        fuerza, pero cada fibra recorre poco. El paralelo tiene fibras largas: recorre mucho, con
+        menos fibras por sección. <strong>No existe el músculo que gane en las dos</strong> — y por
+        eso la forma del músculo te dice para qué está hecho antes de que leas su nombre.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 03 ─────────── -->
+<section class="station" id="s2e3">
+  <div class="station-header">
+    <div class="station-number">03</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Nomenclatura</div>
+      <h2>Cómo se nombran los músculos: el nombre es la ficha técnica</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Hay más de seiscientos músculos y nadie los memoriza uno a uno. No hace falta: los nombres
+      están construidos con criterios, y quien conoce los criterios <strong>deduce</strong> gran
+      parte de la información.</p>
+
+    <div class="three-col">
+      <div class="col-card">
+        <h5>Dirección de las fibras</h5>
+        <p><em>Recto</em> (paralelas a la línea media), <em>oblicuo</em>, <em>transverso</em>.</p>
+      </div>
+      <div class="col-card">
+        <h5>Tamaño</h5>
+        <p><em>Mayor</em> y <em>menor</em>, <em>largo</em> y <em>corto</em>, <em>máximo</em>.</p>
+      </div>
+      <div class="col-card">
+        <h5>Forma</h5>
+        <p><em>Deltoides</em> (triangular), <em>trapecio</em>, <em>orbicular</em> (circular),
+          <em>digástrico</em> (dos vientres).</p>
+      </div>
+      <div class="col-card">
+        <h5>Acción</h5>
+        <p><em>Flexor</em>, <em>extensor</em>, <em>elevador</em>, <em>depresor</em>,
+          <em>constrictor</em>.</p>
+      </div>
+      <div class="col-card">
+        <h5>Número de orígenes</h5>
+        <p><em>Bíceps</em> (dos cabezas), <em>tríceps</em>, <em>cuádriceps</em>.</p>
+      </div>
+      <div class="col-card">
+        <h5>Localización, origen e inserción</h5>
+        <p><em>Temporal</em>, <em>frontal</em>; o los dos extremos, como
+          <em>esternocleidomastoideo</em>.</p>
+      </div>
+    </div>
+
+    <div class="photo-hero">
+      <img src="img/cuadro_11_2_nomenclatura.png" alt="Cuadro de características utilizadas para dar nombre a los músculos"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>Los criterios, con ejemplos.</strong> Tortora, Cuadro 11.2.</div>
+    </div>
+
+    <div class="pearl">
+      <p>Prueba el método con un nombre que ya conoces: <strong>elevador del párpado superior</strong>.
+        Acción —eleva—, y estructura sobre la que actúa —el párpado superior—. Dos criterios y sabes
+        exactamente qué hace sin haberlo estudiado. Ahora prueba con
+        <strong>orbicular de los ojos</strong>: forma circular, y alrededor de los ojos. Si es
+        circular y rodea un orificio, <strong>lo cierra</strong>.</p>
+    </div>
+
+    <div class="check-question" data-question="q3s2">
+      <p class="question-text">3. Sin haberlo estudiado nunca: ¿qué hace el músculo
+        <em>depresor del ángulo de la boca</em>?</p>
+      <ul class="options">
+        <li data-letter="A">Cierra la boca apretando los labios</li>
+        <li data-letter="B">Eleva la comisura, como al sonreír</li>
+        <li data-letter="C">Aprieta la mejilla contra los dientes</li>
+        <li data-letter="D">Abre la mandíbula tirando de ella hacia abajo</li>
+        <li data-letter="E" data-correct="true">Baja la comisura de la boca</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: E.</strong> Dos criterios: <em>depresor</em> = baja, y
+        <em>del ángulo de la boca</em> = la comisura. Nada más. Ojo con la última opción: bajar
+        <strong>la comisura</strong> no es lo mismo que bajar <strong>la mandíbula</strong> — la
+        precisión del complemento importa tanto como la del verbo. Quien aprieta la mejilla es el
+        buccinador, y quien cierra los labios es el orbicular de la boca.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 04 ─────────── -->
+<section class="station" id="s2e4">
+  <div class="station-header">
+    <div class="station-number">04</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Trabajo en equipo</div>
+      <h2>Agonista, antagonista, sinergista y fijador</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Ningún músculo trabaja solo. Un movimiento cualquiera reparte cuatro papeles, y el mismo
+      músculo cambia de papel según el movimiento —igual que el origen y la inserción se
+      intercambiaban.</p>
+
+    <div class="two-col">
+      <div class="col-card">
+        <h5>Agonista (motor primario)</h5>
+        <p>El que <strong>produce</strong> el movimiento con su contracción.</p>
+      </div>
+      <div class="col-card teal">
+        <h5>Antagonista</h5>
+        <p>El que hace lo contrario. Se <strong>relaja de forma controlada</strong> mientras el
+          agonista trabaja: si no cediera, no habría movimiento.</p>
+      </div>
+      <div class="col-card">
+        <h5>Sinergista</h5>
+        <p>Ayuda al agonista y sobre todo <strong>evita los movimientos no deseados</strong> en
+          articulaciones intermedias.</p>
+      </div>
+      <div class="col-card amber">
+        <h5>Fijador</h5>
+        <p>Estabiliza el <strong>origen</strong> para que el agonista tenga desde dónde tirar.</p>
+      </div>
+    </div>
+
+    <div class="pearl">
+      <p>El antagonista no es el enemigo. Su relajación gradual es lo que hace que el movimiento sea
+        <strong>suave y frenable</strong> en vez de un tirón. Cuando esa coordinación falla —por
+        ejemplo en algunos trastornos del sistema nervioso— el movimiento se vuelve brusco aunque la
+        fuerza sea normal.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 05 ─────────── -->
+<section class="station" id="s2e5">
+  <div class="station-header">
+    <div class="station-number">05</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">La cara</div>
+      <h2>Los músculos de la expresión facial</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Ésta era la pregunta 3 de la mañana, y la respuesta cabe en una frase: los músculos de la
+      expresión facial <strong>se originan en el hueso o la fascia del cráneo y se insertan en la
+      piel</strong>. Viven en la capa subcutánea. Al contraerse <strong>mueven la piel, no una
+      articulación</strong> — y por eso hacen gestos en lugar de movimientos.</p>
+
+    <p>Es la excepción a la regla de la estación 00, y no es una rareza menor: toda la comunicación
+      no verbal humana depende de ella.</p>
+
+    <h3>Los que rodean los orificios</h3>
+    <p>Los más importantes para ti son los que rodean las aberturas de la cara, porque funcionan por
+      parejas de sentido contrario:</p>
+
+    <div class="two-col">
+      <div class="col-card teal">
+        <h5>Esfínteres — cierran</h5>
+        <p><strong>Orbicular de los ojos</strong> cierra el ojo.<br>
+          <strong>Orbicular de la boca</strong> cierra y frunce los labios.</p>
+      </div>
+      <div class="col-card amber">
+        <h5>Dilatadores — abren</h5>
+        <p><strong>Elevador del párpado superior</strong> abre el ojo.<br>
+          Los <strong>cigomáticos</strong>, el <strong>risorio</strong> y los elevadores tiran de la
+          comisura.</p>
+      </div>
+    </div>
+
+    <p>Vale la pena fijar unos cuantos más, porque aparecen constantemente:</p>
+    <ul style="margin-left:22px">
+      <li><strong>Occipitofrontal</strong> — atípico: dos vientres, uno <em>frontal</em> sobre el
+        hueso frontal y otro <em>occipital</em> detrás, unidos por la
+        <strong>aponeurosis epicraneal</strong> o galea. El frontal eleva las cejas y arruga la
+        frente.</li>
+      <li><strong>Corrugador superciliar</strong> — junta las cejas: el ceño fruncido.</li>
+      <li><strong>Buccinador</strong> — la pared muscular de la mejilla. Comprime al soplar y empuja
+        el alimento entre los dientes al masticar. El conducto de la parótida lo atraviesa.</li>
+      <li><strong>Platisma</strong> — lámina delgada del cuello que tensa la piel y baja la
+        mandíbula.</li>
+      <li><strong>Mentoniano, depresor del labio inferior, depresor del ángulo de la boca</strong> —
+        el grupo del gesto de tristeza.</li>
+    </ul>
+
+    <div class="photo-grid">
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_11_4_expresion_facial.png" alt="Músculos de la cabeza que producen expresiones faciales, vista anterior superficial"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>Vista superficial.</strong> Localiza el orbicular de los
+          ojos rodeando la órbita y el orbicular de la boca rodeando los labios: los dos anillos que
+          organizan la cara. Tortora, Fig. 11.4a.</div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_11_4_expresion_facial_b.png" alt="Músculos de la expresión facial, vista anterior profunda"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>Vista profunda.</strong> Aparecen el elevador del párpado
+          superior y el corrugador superciliar, y se ve el <strong>nervio facial (VII)</strong>
+          repartiéndose por todos ellos. Tortora, Fig. 11.4b.</div>
+      </div>
+    </div>
+
+    <div class="photo-grid">
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_11_3_musculos_superficiales.png" alt="Principales músculos esqueléticos superficiales del cuerpo, vista anterior"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>Para situarse.</strong> El mapa general del cuerpo: úsalo
+          para ver dónde encaja la cabeza en el conjunto. Tortora, Fig. 11.3.</div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_11_3_musculos_superficiales_b.png" alt="Principales músculos esqueléticos superficiales del cuerpo, vista posterior"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>Vista posterior.</strong> Se aprecia el vientre occipital
+          del occipitofrontal, al otro extremo de la galea. Tortora, Fig. 11.3.</div>
+      </div>
+    </div>
+
+    <div class="check-question" data-question="q4s2">
+      <p class="question-text">4. ¿Por qué los músculos de la expresión facial mueven la piel en
+        lugar de mover una articulación?</p>
+      <ul class="options">
+        <li data-letter="A">Porque son demasiado débiles para desplazar un hueso</li>
+        <li data-letter="B">Porque carecen de tendón y no pueden fijarse a nada duro</li>
+        <li data-letter="C" data-correct="true">Porque su inserción está en la piel, no en un segundo hueso</li>
+        <li data-letter="D">Porque están inervados por un par craneal y no por un nervio raquídeo</li>
+        <li data-letter="E">Porque el cráneo no tiene articulaciones móviles</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: C.</strong> Todo está en la inserción: nacen del hueso
+        o la fascia y terminan <em>en la dermis</em>. Al acortarse arrastran la piel. Cuidado con la
+        última, que es tentadora y casi cierta: el cráneo sí tiene una articulación móvil —la
+        <strong>temporomandibular</strong>—, y hay músculos de la cabeza que sí la mueven, como el
+        temporal y el masetero. Lo que los separa de los de la mímica no es el cráneo: es dónde
+        terminan.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 06 ─────────── -->
+<section class="station" id="s2e6">
+  <div class="station-header">
+    <div class="station-number">06</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">El músculo que más te importa</div>
+      <h2>El orbicular de los ojos y el parpadeo</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>De los cuarenta y tantos músculos de la cara, hay uno que vas a explorar en cada consulta de
+      tu vida profesional. Conviene mirarlo despacio.</p>
+
+    <p>El <strong>orbicular de los ojos</strong> es el ejemplo de libro del músculo
+      <strong>circular</strong>: sus fascículos forman anillos concéntricos alrededor de la órbita.
+      Y como todo músculo circular que rodea un orificio, funciona como
+      <strong>esfínter: lo cierra</strong>. Tiene dos porciones que hacen cosas distintas:</p>
+
+    <div class="two-col">
+      <div class="col-card teal">
+        <h5>Porción palpebral</h5>
+        <p>La del propio párpado. Cierra el ojo <strong>suavemente</strong>: es la del
+          <strong>parpadeo</strong> espontáneo y la del sueño.</p>
+      </div>
+      <div class="col-card amber">
+        <h5>Porción orbitaria</h5>
+        <p>El anillo periférico, sobre el reborde óseo. Cierra con <strong>fuerza</strong> —apretar
+          los ojos— y arruga la piel alrededor.</p>
+      </div>
+    </div>
+
+    <p>Su antagonista es el <strong>elevador del párpado superior</strong>, que abre el ojo. Y
+      fíjate en un detalle que va a importar: <strong>los dos están inervados por nervios
+      distintos</strong>. El orbicular, por el <strong>facial (VII)</strong>; el elevador, por el
+      <strong>oculomotor (III)</strong>. Dos músculos antagonistas y dos nervios: por eso las
+      lesiones dan cuadros opuestos y bien distinguibles.</p>
+
+    <div class="clinical-box">
+      <h5>👁 Interfaz optométrica · Por qué el parpadeo es un asunto de la córnea</h5>
+      <p>Parpadeas del orden de <strong>15 a 20 veces por minuto</strong>, y cada parpadeo hace tres
+        cosas a la vez: <strong>reparte la película lagrimal</strong> sobre la córnea,
+        <strong>arrastra</strong> los restos hacia el ángulo interno y <strong>bombea</strong> la
+        lágrima hacia la vía lagrimal que viste la semana pasada.</p>
+      <p>La córnea es avascular —lo repasamos en el quiz— y se nutre en buena parte del oxígeno
+        disuelto en la lágrima. Así que el orbicular de los ojos no es un músculo «de la expresión»
+        para ti: <strong>es parte del sistema que mantiene viva la superficie ocular</strong>. Cuando
+        el parpadeo falla —por parálisis, o simplemente porque baja la frecuencia frente a una
+        pantalla— aparece el ojo seco.</p>
+    </div>
+
+    <div class="check-question" data-question="q5s2">
+      <p class="question-text">5. Un paciente pasa ocho horas frente a la pantalla y refiere ardor y
+        visión borrosa que mejora al parpadear. ¿Cuál es el mecanismo más probable?</p>
+      <ul class="options">
+        <li data-letter="A">Fatiga del elevador del párpado superior por sobreuso</li>
+        <li data-letter="B">El orbicular de los ojos se contractura por trabajo sostenido</li>
+        <li data-letter="C">La córnea pierde su irrigación sanguínea al fijar la mirada</li>
+        <li data-letter="D">El músculo liso del iris se fatiga por la luz de la pantalla</li>
+        <li data-letter="E" data-correct="true">Baja el parpadeo y la lágrima se reparte mal</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: E.</strong> Mirando una pantalla la frecuencia de
+        parpadeo cae, la película lagrimal no se renueva y la superficie se irregulariza: de ahí el
+        ardor y una borrosidad que <strong>mejora justo al parpadear</strong>, porque el parpadeo
+        rehace la película. Ese detalle del enunciado es el que orienta. Y ojo con la D: la córnea
+        <strong>no tiene irrigación que perder</strong> — es avascular, y de eso trata precisamente
+        el asunto.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 07 ─────────── -->
+<section class="station" id="s2e7">
+  <div class="station-header">
+    <div class="station-number">07</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Cuando falla</div>
+      <h2>Cuando el nervio falla: la cara que no obedece</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Todos los músculos de la mímica dependen de un solo nervio: el <strong>facial (VII)</strong>.
+      Un único nervio para toda la expresión de media cara. Eso los hace eficientes y
+      <strong>vulnerables</strong>.</p>
+
+    <h3>Parálisis de Bell</h3>
+    <p>Es la parálisis <strong>unilateral</strong> de los músculos de la expresión facial por daño o
+      enfermedad del nervio facial. Tortora enumera las causas posibles: inflamación del nervio
+      durante una infección del oído, cirugía ótica que lo lesiona, o infección por virus del herpes
+      simple. En los casos graves cae todo ese lado de la cara: la persona
+      <strong>no puede arrugar la frente, ni cerrar el ojo, ni fruncir los labios</strong> de ese
+      lado, y puede haber babeo y dificultad para tragar. Alrededor del
+      <strong>80 % se recupera por completo</strong> en semanas o pocos meses.</p>
+
+    <div class="clinical-box">
+      <h5>👁 Interfaz optométrica · El ojo es la urgencia, no la sonrisa</h5>
+      <p>Aquí está la respuesta a la pregunta 4 de la mañana. En una parálisis facial el paciente
+        consulta por la asimetría de la cara, pero <strong>lo que corre peligro es el ojo</strong>.</p>
+      <p>Sin orbicular, el párpado no cierra: es el <strong>lagoftalmos</strong>. La córnea queda
+        expuesta al aire, la lágrima se evapora, deja de repartirse con el parpadeo — y en 24 o 48
+        horas aparece una <strong>queratitis por exposición</strong>, que puede ulcerar y dejar
+        cicatriz. Por eso, ante una parálisis facial, la protección corneal —lubricación, oclusión
+        nocturna— es lo primero, antes que cualquier consideración estética.</p>
+      <p>Fíjate en la lógica completa: se dañó un <strong>nervio motor</strong>, el ojo estaba
+        perfectamente sano, y el resultado es una lesión de la <strong>córnea</strong>. Nada de eso
+        se entiende sin saber para qué sirve el parpadeo.</p>
+    </div>
+
+    <h3>Dos nervios, dos cuadros distintos</h3>
+    <p>Como el orbicular y el elevador dependen de nervios diferentes, las lesiones son fáciles de
+      separar si tienes la anatomía clara:</p>
+
+    <div class="two-col">
+      <div class="col-card">
+        <h5>Lesión del facial (VII)</h5>
+        <p>Falla el <strong>orbicular</strong>. El ojo <strong>no cierra</strong> — lagoftalmos. La
+          hendidura queda demasiado abierta.</p>
+      </div>
+      <div class="col-card teal">
+        <h5>Lesión del oculomotor (III)</h5>
+        <p>Falla el <strong>elevador del párpado</strong>. El ojo <strong>no abre</strong> —
+          ptosis. El párpado cae.</p>
+      </div>
+    </div>
+
+    <div class="check-question" data-question="q6s2">
+      <p class="question-text">6. Llega un paciente con el párpado superior caído que no logra
+        levantar, y que sí cierra el ojo con normalidad. ¿Qué está fallando?</p>
+      <ul class="options">
+        <li data-letter="A">El orbicular de los ojos, por lesión del nervio facial</li>
+        <li data-letter="B" data-correct="true">El elevador del párpado superior</li>
+        <li data-letter="C">El corrugador superciliar, que sostiene la ceja</li>
+        <li data-letter="D">El vientre frontal del occipitofrontal, que eleva la frente</li>
+        <li data-letter="E">El músculo liso del iris, que regula la abertura</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: B.</strong> La clave está en lo que <em>sí</em>
+        funciona: si cierra bien el ojo, el orbicular y su nervio facial están intactos. Lo que falla
+        es el músculo antagonista, el elevador del párpado superior, inervado por el
+        <strong>oculomotor (III)</strong>. Eso es una <strong>ptosis</strong>, no un lagoftalmos, y
+        apunta a otro nervio por completo. Que dos músculos antagonistas tengan inervación distinta
+        es justo lo que permite localizar la lesión desde la puerta del consultorio.</div>
+    </div>
+
+    <div class="check-question" data-question="q7s2">
+      <p class="question-text">7. ¿Por qué en una parálisis facial hay que actuar sobre el ojo en
+        las primeras horas, aunque el ojo esté sano?</p>
+      <ul class="options">
+        <li data-letter="A" data-correct="true">Porque sin cierre palpebral la córnea se seca y puede ulcerarse</li>
+        <li data-letter="B">Porque el nervio facial también lleva la visión</li>
+        <li data-letter="C">Porque la pupila queda dilatada y entra demasiada luz</li>
+        <li data-letter="D">Porque el globo ocular se desplaza hacia adelante al faltar el músculo</li>
+        <li data-letter="E">Porque la glándula lagrimal deja de producir lágrima de inmediato</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: A.</strong> El daño no lo hace la parálisis en sí, lo
+        hace <strong>la exposición</strong>: sin parpadeo la película lagrimal no se renueva ni se
+        reparte, la córnea se deseca y aparece la queratitis por exposición. Descarta las otras por
+        anatomía — el facial no lleva la visión (eso es el II), no mueve la pupila (eso es el III) ni
+        sostiene el globo. Lo único que se perdió fue <strong>el cierre</strong>, y con eso basta
+        para perder una córnea.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 08 ─────────── -->
+<section class="station" id="s2e8">
+  <div class="station-header">
+    <div class="station-number">08</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Puente a la próxima clase</div>
+      <h2>Adelanto: los músculos que mueven el ojo</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <div class="adelanto">
+      <p style="margin-bottom:10px">Hoy vimos los músculos que mueven <strong>la piel de la cara</strong>
+        y el que mueve <strong>el párpado</strong>. Quedan los que mueven <strong>el globo</strong>:
+        cuatro rectos y dos oblicuos, alojados dentro de la órbita que estudiaste la semana pasada.
+        Son la clase 8, y son el corazón anatómico de tu carrera.</p>
+      <p style="margin-bottom:10px">Ve mirando esta lámina desde ahora. Fíjate en dos cosas que ya
+        puedes entender con lo de hoy: todos los rectos comparten un mismo <strong>origen</strong> en
+        el vértice de la órbita, y el elevador del párpado superior aparece aquí otra vez —porque
+        pertenece a los dos grupos a la vez.</p>
+      <div class="photo-hero" style="margin:0">
+        <img src="img/fig_11_5_extraoculares.png" alt="Músculos de la cabeza que mueven los globos oculares y el párpado superior"
+             onerror="this.classList.add('broken')">
+        <div class="photo-missing">No disponible</div>
+        <div class="photo-caption"><strong>Los extraoculares.</strong> Recto superior, inferior,
+          medial y lateral; oblicuo superior e inferior; y el elevador del párpado superior. Tortora,
+          Fig. 11.5. <em>Clase 8 · 10 de septiembre.</em></div>
+      </div>
+    </div>
+
+    <div class="photo-hero">
+      <img src="img/lat_3_3_accion_mecanica.png" alt="Acción mecánica de los músculos según Latarjet"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>Y para cerrar la mecánica.</strong> Latarjet resume la
+        acción muscular: dirección de la tracción, brazo de palanca y ángulo de aplicación. Todo lo
+        de la sesión 2 en una lámina. Latarjet, Fig. 3-3.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 09 ─────────── -->
+<section class="station" id="s2e9">
+  <div class="station-header">
+    <div class="station-number">09</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Vocabulario</div>
+      <h2>Términos TA2 de la mecánica y de la cara</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <div class="flip-grid">
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Origen</span><span class="term-en">Origo</span></div>
+        <div class="flip-back"><p class="term-def">Fijación del músculo al hueso que permanece quieto durante el movimiento.</p><p class="term-opto">👁 No es fijo por naturaleza: depende de qué extremo esté estabilizado.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Inserción</span><span class="term-en">Insertio</span></div>
+        <div class="flip-back"><p class="term-def">Fijación al hueso —o a la piel— que se desplaza cuando el músculo se contrae.</p><p class="term-opto">👁 En la cara la inserción es la dermis. De ahí que haga gestos.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Vientre</span><span class="term-en">Venter</span></div>
+        <div class="flip-back"><p class="term-def">Porción carnosa del músculo, entre el origen y la inserción.</p><p class="term-opto">👁 El occipitofrontal tiene dos, unidos por la galea.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Tendón</span><span class="term-en">Tendo</span></div>
+        <div class="flip-back"><p class="term-def">Cordón de conectivo denso regular que continúa las tres vainas del músculo y transmite su fuerza al hueso.</p><p class="term-opto">👁 Es la prolongación del epimisio, el perimisio y el endomisio juntos.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Aponeurosis</span><span class="term-en">Aponeurosis</span></div>
+        <div class="flip-back"><p class="term-def">Tendón en forma de lámina ancha y plana en lugar de cordón.</p><p class="term-opto">👁 La epicraneal (galea) une los dos vientres del occipitofrontal sobre la bóveda.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Agonista</span><span class="term-en">Musculus agonista</span></div>
+        <div class="flip-back"><p class="term-def">Motor primario: el músculo cuya contracción produce el movimiento.</p><p class="term-opto">👁 El papel cambia con el movimiento, no con el músculo.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Antagonista</span><span class="term-en">Musculus antagonista</span></div>
+        <div class="flip-back"><p class="term-def">El que produce el movimiento contrario y cede de forma controlada mientras el agonista trabaja.</p><p class="term-opto">👁 Su relajación gradual es lo que hace el gesto suave y frenable.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Músculo peniforme</span><span class="term-en">Musculus pennatus</span></div>
+        <div class="flip-back"><p class="term-def">Fascículos cortos y oblicuos a lo largo del tendón, como las barbas de una pluma. Mucha fuerza, poco recorrido.</p><p class="term-opto">👁 Más fibras por área transversal = más fuerza.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Músculo orbicular</span><span class="term-en">Musculus orbicularis</span></div>
+        <div class="flip-back"><p class="term-def">Músculo circular cuyos fascículos rodean un orificio en anillos concéntricos y lo cierran.</p><p class="term-opto">👁 Circular + rodea un orificio = esfínter. Siempre.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Orbicular de los ojos</span><span class="term-en">M. orbicularis oculi</span></div>
+        <div class="flip-back"><p class="term-def">Esfínter de la hendidura palpebral. Porción palpebral: parpadeo suave. Porción orbitaria: cierre forzado.</p><p class="term-opto">👁 Inervado por el <strong>facial (VII)</strong>. Si falla → lagoftalmos.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Elevador del párpado superior</span><span class="term-en">M. levator palpebrae superioris</span></div>
+        <div class="flip-back"><p class="term-def">Abre la hendidura palpebral elevando el párpado superior. Antagonista del orbicular.</p><p class="term-opto">👁 Inervado por el <strong>oculomotor (III)</strong>. Si falla → ptosis.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Occipitofrontal</span><span class="term-en">M. occipitofrontalis</span></div>
+        <div class="flip-back"><p class="term-def">Músculo de dos vientres —frontal y occipital— unidos por la aponeurosis epicraneal. El frontal eleva las cejas y arruga la frente.</p><p class="term-opto">👁 «No poder arrugar la frente» es un signo clásico de parálisis facial.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Corrugador superciliar</span><span class="term-en">M. corrugator supercilii</span></div>
+        <div class="flip-back"><p class="term-def">Aproxima las cejas y produce arrugas verticales en el entrecejo: el ceño fruncido.</p><p class="term-opto">👁 Su nombre lo dice: <em>corruga</em> el <em>supercilio</em>, la ceja.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Buccinador</span><span class="term-en">M. buccinator</span></div>
+        <div class="flip-back"><p class="term-def">Pared muscular de la mejilla. Comprime al soplar y mantiene el alimento entre los dientes al masticar. Lo atraviesa el conducto parotídeo.</p><p class="term-opto">👁 Del latín <em>buccinator</em>, el que toca la trompeta.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Orbicular de la boca</span><span class="term-en">M. orbicularis oris</span></div>
+        <div class="flip-back"><p class="term-def">Esfínter que cierra y frunce los labios. El otro gran anillo de la cara.</p><p class="term-opto">👁 «No poder fruncir los labios» acompaña al lagoftalmos en la parálisis facial.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Nervio facial (VII)</span><span class="term-en">N. facialis</span></div>
+        <div class="flip-back"><p class="term-def">Par craneal que inerva todos los músculos de la expresión facial.</p><p class="term-opto">👁 Un solo nervio para media cara: eficiente y vulnerable. Es el de la parálisis de Bell.</p></div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 10 ─────────── -->
+<section class="station" id="s2e10">
+  <div class="station-header">
+    <div class="station-number">10</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Recuperación</div>
+      <h2>Comprueba lo que aprendiste</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Cinco más, y ninguna se contesta buscando arriba.</p>
+
+    <div class="check-question" data-question="q8s2">
+      <p class="question-text">8. Un músculo circular rodea un orificio. Sin saber cuál es, ¿qué
+        puedes afirmar de su acción?</p>
+      <ul class="options">
+        <li data-letter="A">Que lo dilata, tirando de sus bordes hacia fuera</li>
+        <li data-letter="B">Que lo desplaza lateralmente sin cambiar su tamaño</li>
+        <li data-letter="C">Que solo lo cierra si está inervado por el facial</li>
+        <li data-letter="D" data-correct="true">Que lo cierra: es un esfínter</li>
+        <li data-letter="E">Nada: la forma no permite deducir la acción</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: D.</strong> Un anillo que se acorta se estrecha: la
+        geometría decide la función. Por eso la disposición circular aparece siempre que hay que
+        cerrar un orificio, y por eso el nombre <em>orbicular</em> ya te dice qué hace. La opción E es
+        exactamente la creencia que esta estación viene a desmontar: <strong>en morfología la forma
+        casi siempre permite deducir la acción</strong>.</div>
+    </div>
+
+    <div class="check-question" data-question="q9s2">
+      <p class="question-text">9. ¿Qué tienen en común el orbicular de los ojos, el buccinador y el
+        occipitofrontal, que NO comparte el masetero?</p>
+      <ul class="options">
+        <li data-letter="A" data-correct="true">Que se insertan en la piel</li>
+        <li data-letter="B">Que los tres son circulares</li>
+        <li data-letter="C">Que los tres están en la cabeza</li>
+        <li data-letter="D">Que los tres son peniformes y por tanto potentes</li>
+        <li data-letter="E">Que ninguno de los tres tiene origen óseo</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: A.</strong> Los tres son músculos de la mímica: mueven
+        piel. El masetero también está en la cabeza —descarta B— pero mueve la
+        <strong>articulación temporomandibular</strong>, que es otra cosa. Ojo con E: los de la
+        mímica <em>sí</em> tienen origen óseo o en la fascia; lo que tienen de particular es dónde
+        <strong>terminan</strong>, no dónde empiezan.</div>
+    </div>
+
+    <div class="check-question" data-question="q10s2">
+      <p class="question-text">10. Un paciente no puede arrugar la frente ni cerrar el ojo del lado
+        derecho, y babea por esa comisura. ¿Qué se lesionó y qué hay que vigilar?</p>
+      <ul class="options">
+        <li data-letter="A">El oculomotor derecho; vigilar la pupila</li>
+        <li data-letter="B">El trigémino derecho; vigilar la sensibilidad corneal</li>
+        <li data-letter="C" data-correct="true">El facial derecho; vigilar la córnea por exposición</li>
+        <li data-letter="D">El facial izquierdo; vigilar la deglución</li>
+        <li data-letter="E">El oculomotor derecho; vigilar la ptosis</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: C.</strong> Frente, párpado y comisura del mismo lado
+        es el territorio completo del <strong>facial</strong>, y la parálisis es
+        <em>ipsilateral</em> — del mismo lado, no del contrario. Lo que hay que vigilar no es lo que
+        se ve, es lo que duele después: sin cierre palpebral, la córnea se seca. El trigémino
+        llevaría la sensibilidad, no el movimiento; el oculomotor daría ptosis, y aquí el problema
+        es justo el contrario.</div>
+    </div>
+
+    <div class="check-question" data-question="q11s2">
+      <p class="question-text">11. ¿Cuál de estas afirmaciones sobre las palancas del cuerpo es
+        <strong>falsa</strong>?</p>
+      <ul class="options">
+        <li data-letter="A">En la de primera clase el fulcro está entre el esfuerzo y la carga</li>
+        <li data-letter="B">La de tercera clase favorece la velocidad sobre la fuerza</li>
+        <li data-letter="C">La articulación hace de fulcro en las tres</li>
+        <li data-letter="D" data-correct="true">La de tercera clase es la más rara en el cuerpo humano</li>
+        <li data-letter="E">En la de segunda clase la carga queda entre el fulcro y el esfuerzo</li>
+      </ul>
+      <div class="feedback"><strong>La falsa es D.</strong> Es al revés: la de tercera clase es
+        <strong>la más frecuente</strong> del cuerpo, con el bíceps braquial como ejemplo típico. El
+        cuerpo acepta perder fuerza a cambio de ganar velocidad y amplitud, que es lo que suele
+        necesitar. Las otras cuatro describen correctamente la mecánica.</div>
+    </div>
+
+    <div class="saber-box">
+      <strong>Pregunta tipo Saber Pro · In English</strong>
+      <div class="check-question" style="margin-top:16px;border-color:var(--purple)" data-question="q12s2">
+        <p class="question-text">12. A patient with Bell's palsy cannot close the right eye. Which
+          single statement best explains why this is an urgent problem for the cornea?</p>
+        <ul class="options">
+        <li data-letter="A">The cornea loses its blood supply when the eyelid stays open</li>
+        <li data-letter="B">The facial nerve also carries visual information to the brain</li>
+        <li data-letter="C">The pupil dilates and admits an excessive amount of light</li>
+        <li data-letter="D">The lacrimal gland stops producing tears within a few hours</li>
+        <li data-letter="E" data-correct="true">Without blinking the tear film is not spread</li>
+      </ul>
+        <div class="feedback"><strong>Correct answer: E.</strong> The cornea is
+          <strong>avascular</strong>, so option A describes a blood supply it never had. Blinking is
+          what spreads and renews the tear film; without it the surface dries and exposure keratitis
+          follows. The facial nerve is motor to the mimetic muscles — it carries no vision (that is
+          the optic nerve, II) and does not move the pupil (that is the oculomotor, III). The gland
+          keeps producing tears; the problem is that <strong>nothing distributes them</strong>.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 11 ─────────── -->
+<section class="station" id="s2e11">
+  <div class="station-header">
+    <div class="station-number">11</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Para cerrar</div>
+      <h2>Volvemos a las cinco preguntas</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Las mismas de esta mañana. Léelas otra vez y comprueba cuántas contestas ahora con
+      seguridad.</p>
+
+    <div class="acorde">
+      <details>
+        <summary>1 · ¿Cómo se acorta un músculo cuyas piezas no se acortan?</summary>
+        <p>No se acortan: <strong>se deslizan</strong>. Los filamentos finos, anclados en los discos
+          Z, son arrastrados hacia la línea M por las cabezas de miosina. El sarcómero se estrecha
+          porque sus dos discos Z se acercan, no porque nada encoja. Se comprueba mirando la
+          <strong>banda A</strong>, que mide siempre lo mismo, frente a la banda I y la zona H, que
+          se estrechan. Miles de sarcómeros en fila suman sus acortamientos y la fibra se acorta
+          hasta un 70 %.</p>
+      </details>
+      <details>
+        <summary>2 · ¿Por qué el rigor mortis endurece los músculos si no hay energía?</summary>
+        <p>Porque el ATP no hace falta solo para tirar: hace falta para <strong>soltarse</strong>. La
+          separación de la cabeza de miosina de la actina exige una molécula nueva de ATP. Sin
+          producción de ATP las cabezas quedan enganchadas y el músculo se bloquea en contracción. Y
+          se suma un segundo efecto: las bombas que devuelven el calcio al retículo también gastan
+          ATP, así que el calcio se queda fuera y el sitio de la actina, descubierto.</p>
+      </details>
+      <details>
+        <summary>3 · ¿Qué cambia en un músculo que mueve piel en vez de hueso?</summary>
+        <p>La <strong>inserción</strong>. Los músculos de la expresión facial nacen del hueso o la
+          fascia del cráneo pero terminan <strong>en la dermis</strong>, dentro de la capa
+          subcutánea. Al contraerse arrastran la piel, y por eso producen gestos en lugar de
+          movimientos articulares. Es la excepción a la regla de que un músculo debe cruzar una
+          articulación para moverla — no cruzan ninguna porque no mueven ninguna.</p>
+      </details>
+      <details>
+        <summary>4 · El párpado que no cierra: ¿qué se dañó si el ojo estaba sano?</summary>
+        <p>El <strong>nervio facial (VII)</strong>, que inerva el orbicular de los ojos. Sin
+          orbicular no hay cierre palpebral: es el <strong>lagoftalmos</strong>. Y sin parpadeo la
+          película lagrimal ni se reparte ni se renueva, así que la córnea —que es avascular y se
+          nutre en buena parte de la lágrima— se deseca y desarrolla una
+          <strong>queratitis por exposición</strong> en 24 o 48 horas. Se lesionó un nervio motor y
+          el resultado es una lesión corneal: por eso ante una parálisis facial lo primero es
+          proteger el ojo.</p>
+      </details>
+      <details>
+        <summary>5 · Fuerza o recorrido: ¿por qué no pueden ser el mismo músculo?</summary>
+        <p>Porque dependen de cosas distintas y enfrentadas. El <strong>recorrido</strong> depende de
+          la <strong>longitud</strong> de las fibras —cada una se acorta cerca del 70 % de su
+          longitud de reposo—. La <strong>fuerza</strong> no depende de la longitud sino del
+          <strong>área transversal total</strong>: cuantas más fibras por sección, más fuerza. En un
+          volumen dado no puedes tener a la vez fibras muy largas y muchísimas fibras. El
+          <strong>peniforme</strong> elige fuerza; el <strong>paralelo</strong>, recorrido. La
+          disposición fascicular es siempre un compromiso.</p>
+      </details>
+    </div>
+
+    <div class="pearl">
+      <p><strong>Lo que hay que llevarse de hoy.</strong> Un músculo se acorta porque sus filamentos
+        se deslizan, y para eso hace falta calcio que destape y ATP que enganche y suelte. Ese
+        mecanismo microscópico se convierte en movimiento gracias a una arquitectura —vainas,
+        fascículos, tendones, palancas— cuya forma anuncia su función. Y en la cara ese mismo diseño
+        se usa para algo distinto: mover piel. De ahí que un nervio motor dañado pueda acabar en una
+        úlcera de córnea.</p>
+    </div>
+  </div>
+</section>
+
+</div><!-- fin sesión 2 -->
+</div><!-- fin container -->
+
+<footer class="footer">
+  <p><strong>Morfología General · Optometría · Universidad de La Salle · 2026-II</strong></p>
+  <p>Clase 7 · Sistema muscular I: la fibra, la contracción y la cara · Jueves 3 de septiembre de 2026</p>
+  <p>Fuentes: Tortora &amp; Derrickson, <em>Principios de Anatomía y Fisiología</em>, capítulos 10 y 11 ·
+     Latarjet &amp; Ruiz Liard, <em>Anatomía Humana</em>, capítulo 3 (Miología, generalidades)</p>
+</footer>
+
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" aria-label="Cerrar">✕</button>
+  <img src="" alt="">
+  <div class="lb-caption"></div>
+</div>
+
+<script>
+function showTab(id,btn){
+  document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+document.querySelectorAll('.check-question').forEach(block=>{
+  const options=block.querySelectorAll('.options li');
+  const feedback=block.querySelector('.feedback');
+  const correctLetter=Array.from(options).find(o=>o.dataset.correct==='true')?.dataset.letter;
+  let answered=false;
+  options.forEach(opt=>{
+    opt.addEventListener('click',()=>{
+      if(answered)return;
+      answered=true;
+      options.forEach(o=>{
+        if(o.dataset.letter===correctLetter)o.classList.add('correct');
+        else if(o===opt&&opt.dataset.letter!==correctLetter)o.classList.add('incorrect');
+      });
+      feedback.classList.add('show');
+      feedback.scrollIntoView({behavior:'smooth',block:'nearest'});
+    });
+  });
+});
+document.querySelectorAll('.flip-card').forEach(card=>{
+  card.addEventListener('click',()=>card.classList.toggle('flipped'));
+});
+
+/* Lupa: las láminas del sarcómero y de la cara llevan rótulos que no se leen
+   a tamaño de columna. Ampliar no es un adorno. */
+(function(){
+  const lb=document.getElementById('lightbox');
+  const lbImg=lb.querySelector('img'), lbCap=lb.querySelector('.lb-caption');
+  document.querySelectorAll('.photo-card img, .photo-hero img').forEach(img=>{
+    img.addEventListener('click',()=>{
+      if(img.classList.contains('broken'))return;
+      lbImg.src=img.src;
+      lbImg.alt=img.alt||'';
+      const cap=img.closest('.photo-card,.photo-hero').querySelector('.photo-caption');
+      lbCap.textContent=cap?cap.textContent.trim().replace(/\s+/g,' ').slice(0,220):'';
+      lb.classList.add('open');
+    });
+  });
+  const cerrar=()=>{lb.classList.remove('open');lbImg.src='';};
+  lb.addEventListener('click',cerrar);
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')cerrar();});
+})();
+</script>
+
+</body>
+</html>
