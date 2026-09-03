@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<!-- Taller individual de la clase 7. Se publica: no lleva tokens de lectura.
+     La clave de las 18 cerradas SÍ viaja en este archivo, como en los talleres
+     anteriores: es formativo y corrige en el acto. Las 4 de desarrollo no tienen
+     respuesta modelo aquí — ésas las califica el docente. -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Taller de sistema muscular · Morfología General 2026-II</title>
+<style>
+  :root{
+    --azul:#1f5673; --azul2:#2b7a9b; --acento:#c8532b; --acento2:#e07a4f;
+    --verde:#2e7d5b; --verde-bg:#e6f4ec; --rojo:#b23a2e; --rojo-bg:#fbe9e7;
+    --tinta:#22303a; --gris:#5a6b75; --linea:#dfe6ea; --papel:#f4f7f9; --blanco:#ffffff;
+    --sombra:0 1px 3px rgba(20,40,55,.08),0 6px 20px rgba(20,40,55,.06);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--papel);color:var(--tinta);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.55;font-size:16px}
+  .wrap{max-width:920px;margin:0 auto;padding:0 18px 80px}
+  header.hero{background:linear-gradient(135deg,var(--azul),var(--azul2));color:#fff;
+    padding:34px 0 30px;box-shadow:var(--sombra)}
+  header.hero .wrap{padding-bottom:0}
+  .eyebrow{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;opacity:.9;font-weight:700}
+  header.hero h1{margin:8px 0 6px;font-size:27px;line-height:1.2}
+  header.hero p.sub{margin:0;opacity:.94;font-size:15px;max-width:640px}
+  .meta{margin-top:16px;display:flex;flex-wrap:wrap;gap:8px}
+  .chip{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28);
+    padding:5px 11px;border-radius:999px;font-size:12.5px;font-weight:600}
+  .studentbox{margin-top:18px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);
+    border-radius:12px;padding:12px 14px;display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+  .studentbox label{font-size:13px;font-weight:600;display:flex;flex-direction:column;gap:4px;flex:1;min-width:160px}
+  .studentbox input{border:none;border-radius:8px;padding:8px 10px;font-size:14px;color:var(--tinta)}
+  .instrucciones{background:var(--blanco);border:1px solid var(--linea);border-left:5px solid var(--acento);
+    border-radius:12px;padding:16px 18px;margin:24px 0;box-shadow:var(--sombra);font-size:14.5px}
+  .instrucciones h2{margin:0 0 8px;font-size:16px;color:var(--acento)}
+  .instrucciones ul{margin:6px 0 0;padding-left:20px}
+  .instrucciones li{margin:3px 0}
+
+  .barra-fija{position:sticky;top:0;z-index:30;background:rgba(244,247,249,.94);
+    backdrop-filter:blur(6px);border-bottom:1px solid var(--linea);padding:10px 0;margin-bottom:8px}
+  .barra-fija .wrap{padding-bottom:0;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .progreso{flex:1;min-width:150px;height:10px;background:#e2eaee;border-radius:999px;overflow:hidden}
+  .progreso > span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--verde),#3fa47a);
+    transition:width .35s ease}
+  .marcador{font-size:13.5px;font-weight:700;color:var(--azul)}
+  .marcador b{color:var(--verde)}
+
+  section.bloque{background:var(--blanco);border:1px solid var(--linea);border-radius:14px;
+    padding:20px 20px 8px;margin:22px 0;box-shadow:var(--sombra)}
+  .bloque > h2{margin:0 0 2px;font-size:19px;color:var(--azul);display:flex;align-items:center;gap:10px}
+  .bloque > h2 .n{background:var(--azul);color:#fff;width:30px;height:30px;border-radius:8px;
+    display:inline-flex;align-items:center;justify-content:center;font-size:15px;flex:none}
+  .bloque > p.desc{margin:2px 0 6px;color:var(--gris);font-size:13.5px}
+
+  .q{border-top:1px solid var(--linea);padding:18px 0 16px}
+  .q:first-of-type{border-top:none}
+  .q .enun{font-weight:600;margin:0 0 4px;display:flex;gap:8px}
+  .q .enun .qn{color:var(--acento);font-weight:800;flex:none}
+  .q .tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.03em;text-transform:uppercase;
+    color:var(--azul2);background:#e9f2f6;border-radius:6px;padding:2px 8px;margin-bottom:8px}
+
+  .opciones{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:8px}
+  .opciones li{border:1.5px solid var(--linea);border-radius:10px;padding:10px 12px;cursor:pointer;
+    display:flex;gap:10px;align-items:flex-start;transition:.15s;background:#fbfdfe;font-size:15px}
+  .opciones li:hover{border-color:var(--azul2);background:#f2f8fb}
+  .opciones li .letra{font-weight:800;color:var(--azul);flex:none;width:20px}
+  .opciones li.sel{border-color:var(--azul2);background:#e9f4f9}
+  .opciones li.ok{border-color:var(--verde);background:var(--verde-bg)}
+  .opciones li.no{border-color:var(--rojo);background:var(--rojo-bg)}
+  .opciones li.correcta-marcada{border-color:var(--verde);background:var(--verde-bg)}
+  .opciones li.bloq{cursor:default;pointer-events:none}
+
+  .fb{margin-top:10px;font-size:14px;border-radius:9px;padding:10px 12px;display:none}
+  .fb.show{display:block}
+  .fb.bien{background:var(--verde-bg);border:1px solid #b6ddc7;color:#215c40}
+  .fb.mal{background:var(--rojo-bg);border:1px solid #eec3bd;color:#8a2b22}
+  .fb b{font-weight:700}
+
+  input.gap{border:1.5px solid var(--linea);border-radius:8px;padding:6px 9px;font-size:15px;
+    min-width:150px;margin:0 3px;font-family:inherit}
+  input.gap:focus{outline:none;border-color:var(--azul2)}
+  input.gap.ok{border-color:var(--verde);background:var(--verde-bg)}
+  input.gap.no{border-color:var(--rojo);background:var(--rojo-bg)}
+  .completar p{margin:6px 0}
+
+  table.match{width:100%;border-collapse:collapse;margin-top:8px}
+  table.match td{padding:7px 6px;border-bottom:1px solid var(--linea);vertical-align:middle;font-size:14.5px}
+  table.match td.term{font-weight:600;width:44%}
+  table.match select{width:100%;padding:7px 8px;border:1.5px solid var(--linea);border-radius:8px;
+    font-size:14px;font-family:inherit;background:#fbfdfe}
+  table.match select.ok{border-color:var(--verde);background:var(--verde-bg)}
+  table.match select.no{border-color:var(--rojo);background:var(--rojo-bg)}
+  .banco{font-size:13px;color:var(--gris);background:#f3f7f9;border:1px dashed var(--linea);
+    border-radius:9px;padding:10px 12px;margin-top:10px}
+  .banco b{color:var(--azul)}
+
+  .orden{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:7px;counter-reset:o}
+  .orden li{display:flex;gap:10px;align-items:center;border:1.5px solid var(--linea);border-radius:10px;
+    padding:8px 10px;background:#fbfdfe;font-size:14.5px}
+  .orden li select{width:64px;padding:6px;border:1.5px solid var(--linea);border-radius:8px;font-family:inherit;font-weight:700;text-align:center}
+  .orden li select.ok{border-color:var(--verde);background:var(--verde-bg)}
+  .orden li select.no{border-color:var(--rojo);background:var(--rojo-bg)}
+
+  .abierta textarea{width:100%;min-height:90px;border:1.5px solid var(--linea);border-radius:10px;
+    padding:10px 12px;font-family:inherit;font-size:14.5px;resize:vertical}
+  .abierta textarea:focus{outline:none;border-color:var(--azul2)}
+  .modelo{margin-top:10px;background:#eef5f8;border:1px solid #cfe2ea;border-radius:9px;padding:12px 14px;
+    font-size:14px;display:none}
+  .modelo.show{display:block}
+  .modelo h4{margin:0 0 5px;color:var(--azul);font-size:13.5px;text-transform:uppercase;letter-spacing:.04em}
+
+  .btn{border:none;border-radius:9px;padding:9px 16px;font-size:14px;font-weight:700;cursor:pointer;
+    font-family:inherit;transition:.15s}
+  .btn.primary{background:var(--azul);color:#fff}
+  .btn.primary:hover{background:#17475e}
+  .btn.ghost{background:#eef3f6;color:var(--azul);border:1px solid var(--linea)}
+  .btn.ghost:hover{background:#e2edf1}
+  .btn.small{padding:6px 12px;font-size:13px}
+  .q .acciones{margin-top:12px;display:flex;gap:8px;flex-wrap:wrap}
+
+  .final{background:linear-gradient(135deg,#eaf3f7,#f4f7f9);border:1px solid var(--linea);
+    border-radius:14px;padding:24px;margin:26px 0;text-align:center;box-shadow:var(--sombra)}
+  .final h2{margin:0 0 6px;color:var(--azul)}
+  .final .puntaje{font-size:40px;font-weight:800;color:var(--verde);margin:6px 0}
+  .final .msg{font-size:15px;color:var(--gris)}
+  .acciones-globales{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+
+  footer{color:var(--gris);font-size:12.5px;text-align:center;margin-top:34px;line-height:1.6}
+  a{color:var(--azul2)}
+  @media print{
+    .barra-fija,.acciones-globales,.acciones{display:none!important}
+    body{background:#fff}
+    .fb,.modelo{display:block!important}
+    section.bloque{break-inside:avoid;box-shadow:none}
+    .glosario,.guardado,#modalConf{display:none!important}
+  }
+
+  /* ── Estado de guardado ─────────────────────────────────────────── */
+  .guardado{font-size:.78rem;padding:.15rem .55rem;border-radius:999px;
+    background:var(--verde-bg);color:var(--verde);border:1px solid var(--verde);
+    margin-left:.5rem;white-space:nowrap}
+  .guardado.pend{background:#fff6e5;color:#a06a12;border-color:#d9a441}
+  #estadoNube{font-size:.8rem;color:var(--gris)}
+  #estadoNube.ok{color:var(--verde)} #estadoNube.err{color:var(--rojo)}
+
+  /* ── Aviso de intento recuperable ───────────────────────────────── */
+  .recuperar{background:#fff6e5;border:1px solid #d9a441;border-radius:12px;
+    padding:.9rem 1rem;margin:1rem 0;font-size:.92rem}
+  .recuperar .btn{margin-top:.6rem}
+
+  /* ── Glosario ───────────────────────────────────────────────────── */
+  .glosario{background:var(--blanco);border:1px solid var(--linea);border-radius:14px;
+    padding:1rem 1.2rem;margin:1.4rem 0;box-shadow:var(--sombra)}
+  .glosario>summary{cursor:pointer;font-weight:700;font-size:1.05rem;color:var(--azul2);
+    list-style:none;display:flex;align-items:center;gap:.5rem}
+  .glosario>summary::-webkit-details-marker{display:none}
+  .glosario>summary::before{content:"▸";transition:transform .15s;display:inline-block}
+  .glosario[open]>summary::before{transform:rotate(90deg)}
+  .glosario .gdesc{font-size:.88rem;color:var(--gris);margin:.5rem 0 .9rem}
+  .glosario dl{margin:0;display:grid;gap:.55rem}
+  .glosario dt{font-weight:700;color:var(--tinta)}
+  .glosario dt .en{font-weight:400;font-style:italic;color:var(--gris);font-size:.85rem;margin-left:.4rem}
+  .glosario dd{margin:.1rem 0 .55rem;padding-left:.9rem;border-left:2px solid var(--linea);
+    font-size:.93rem;color:var(--tinta)}
+
+  /* ── Confirmación de envío ──────────────────────────────────────── */
+  #modalConf{position:fixed;inset:0;background:rgba(15,25,35,.55);display:none;
+    align-items:center;justify-content:center;padding:1rem;z-index:50}
+  #modalConf.show{display:flex}
+  #modalConf .caja{background:var(--blanco);border-radius:16px;max-width:520px;width:100%;
+    padding:1.4rem 1.5rem;box-shadow:0 20px 50px rgba(0,0,0,.3)}
+  #modalConf h3{margin:0 0 .6rem;font-size:1.2rem}
+  #modalConf .resumen{background:var(--papel);border-radius:10px;padding:.8rem 1rem;margin:.8rem 0;
+    font-size:.93rem;line-height:1.7}
+  #modalConf .aviso{font-size:.88rem;color:var(--rojo);margin:.6rem 0 0}
+  #modalConf .acciones-modal{display:flex;gap:.6rem;justify-content:flex-end;margin-top:1rem;flex-wrap:wrap}
+
+/* ── añadidos propios de este taller ─────────────────────────────
+   El resto del CSS viene del taller de nivel celular, para que no haya que
+   aprender una interfaz nueva cada quince días. */
+.porque{background:linear-gradient(180deg,#fdfaf2 0%,#f6efdd 100%);border:1px solid var(--linea);
+  border-left:5px solid var(--acento);border-radius:6px;padding:24px 28px;margin:26px 0}
+.porque h2{font-size:1.2rem;margin-bottom:12px}
+.porque p{margin-bottom:12px;line-height:1.65}
+.porque p:last-child{margin-bottom:0}
+.porque .remate{font-style:italic;color:var(--verde);border-top:1px dotted var(--linea);padding-top:12px;margin-top:14px}
+.mapa{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:14px;margin:20px 0}
+.mapa .paso{background:var(--blanco);border:1px solid var(--linea);border-radius:5px;padding:14px 16px;position:relative}
+.mapa .paso b{display:block;color:var(--tinta);margin-bottom:5px;font-size:.97rem}
+.mapa .paso span{font-size:.87rem;color:var(--gris);line-height:1.45}
+.mapa .paso::after{content:'\2192';position:absolute;right:-11px;top:50%;transform:translateY(-50%);
+  color:var(--acento);font-weight:700;font-size:1.1rem}
+.mapa .paso:last-child::after{content:''}
+@media(max-width:780px){.mapa .paso::after{content:''}}
+.lamina{margin:14px 0;border:1px solid var(--linea);border-radius:5px;overflow:hidden;background:var(--blanco)}
+.lamina img{width:100%;display:block;cursor:zoom-in}
+.lamina figcaption{font-size:.82rem;color:var(--gris);padding:10px 14px;border-top:1px solid var(--linea);line-height:1.5}
+.q.abierta .cuenta{font-family:ui-monospace,Consolas,monospace;font-size:.76rem;color:var(--gris);text-align:right;margin-top:6px}
+.q.abierta .cuenta.corta{color:var(--rojo)}
+.puntos{display:inline-block;font-family:ui-monospace,Consolas,monospace;font-size:.72rem;
+  background:var(--verde-bg);color:var(--verde);padding:2px 9px;border-radius:9px;margin-left:8px}
+.lb{display:none;position:fixed;inset:0;background:rgba(26,42,53,.92);z-index:9999;
+  align-items:center;justify-content:center;padding:28px;cursor:zoom-out}
+.lb.open{display:flex}
+.lb img{max-width:95vw;max-height:92vh;border-radius:4px}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Morfología General · Optometría · U. de La Salle · 2026-II</div>
+    <h1>Taller de sistema muscular</h1>
+    <p class="sub">Del sarcómero al parpadeo · <strong>taller individual</strong>. Construido sobre
+      la clase 7 y sus láminas: Tortora &amp; Derrickson capítulos 10 y 11, y Latarjet capítulo 3.</p>
+    <div class="meta">
+      <span class="chip">18 ítems cerrados</span>
+      <span class="chip">4 de desarrollo</span>
+      <span class="chip">0,6 objetivo + 0,4 desarrollo</span>
+      <span class="chip">Individual</span>
+    </div>
+    <div class="studentbox" id="cajaIngreso">
+      <label>Nombre del estudiante
+        <select id="nombre"><option value="">Cargando listado…</option></select>
+      </label>
+      <label>Código estudiantil
+        <input type="text" id="codigo" inputmode="numeric" placeholder="Tu código" autocomplete="off">
+      </label>
+      <label style="align-self:end">
+        <button class="btn primary" id="btnIngresar" disabled>Ingresar</button>
+      </label>
+    </div>
+    <div class="studentbox" id="cajaIdentificado" style="display:none">
+      <div><b id="quienSoy"></b><br>
+        <span style="font-size:.85rem;color:var(--gris)">Tu avance se está guardando.</span></div>
+      <label style="align-self:end">
+        <button class="btn ghost small" id="btnSalir">No soy yo</button>
+      </label>
+    </div>
+    <p id="idErr" style="margin:.6rem 0 0;font-size:.88rem;color:#a0522d"></p>
+  </div>
+</header>
+
+<div class="barra-fija">
+  <div class="wrap">
+    <span class="marcador" id="mk-resp">Respondidas: 0</span>
+    <div class="progreso"><span id="prog"></span></div>
+    <span class="marcador" id="mk-score">Aciertos: <b>0</b></span>
+    <span id="estadoNube">·</span>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="porque">
+    <h2>Para qué sirve esto — léelo antes de empezar</h2>
+    <p>Es legítimo preguntarse por qué un futuro optómetra tiene que saber cómo se acorta un
+      sarcómero. La respuesta de este taller es que <strong>saber dónde está una estructura te
+      permite nombrarla; saber cómo funciona te permite decidir qué hacer con un paciente</strong>.
+      Y esa diferencia no se ve en ninguna parte tan bien como en la cara.</p>
+
+    <p>Piensa en el caso de la última pregunta. Alguien llega a tu consulta porque «tiene la cara
+      torcida». Si solo sabes ubicación, describes qué músculos no se mueven y remites. Si sabes
+      función, sigues esta cadena:</p>
+
+    <div class="mapa">
+      <div class="paso"><b>Nervio facial (VII)</b><span>Se lesionó. Es el que inerva toda la mímica de ese lado.</span></div>
+      <div class="paso"><b>Orbicular de los ojos</b><span>Deja de funcionar. Es el esfínter que cierra el ojo.</span></div>
+      <div class="paso"><b>Parpadeo</b><span>Se pierde, y con él el reparto de la película lagrimal.</span></div>
+      <div class="paso"><b>Córnea</b><span>Avascular y dependiente de la lágrima: se deseca.</span></div>
+      <div class="paso"><b>Queratitis</b><span>En 24–48 h. Puede ulcerar y dejar cicatriz.</span></div>
+    </div>
+
+    <p>Se lesionó un <strong>nervio motor</strong>, el ojo estaba <strong>perfectamente sano</strong>,
+      y el desenlace posible es una <strong>cicatriz corneal</strong> que cuesta visión. Nada de esa
+      cadena se ve si uno solo memorizó dónde está cada músculo. La urgencia no es la simetría de la
+      cara: es el ojo — y quien tiene que saberlo eres tú.</p>
+
+    <p class="remate">Ése es el fin de la anatomía en tu carrera: no describir el cuerpo, sino
+      anticipar lo que le va a pasar. Por eso este taller te pide sobre todo que
+      <strong>expliques mecanismos</strong>, no que reconozcas nombres.</p>
+  </div>
+
+  <div class="instrucciones">
+    <h2>Cómo funciona</h2>
+    Tres bloques de preguntas cerradas que se corrigen solas —al comprobar verás la explicación, la
+    aciertes o no— y cuatro de desarrollo que <strong>califico yo</strong> leyéndolas. Puedes cerrar
+    la página: tu avance se guarda en este navegador y en el servidor.
+    <ul>
+      <li><strong>Bloque 1:</strong> opción múltiple, 10 ítems &nbsp;·&nbsp;
+          <strong>Bloque 2:</strong> verdadero/falso, 4 &nbsp;·&nbsp;
+          <strong>Bloque 3:</strong> selección múltiple, 4</li>
+      <li><strong>Bloque 4:</strong> desarrollo, 4 preguntas con lámina. Aquí no hay respuesta
+        modelo a la vista: se califica <strong>tu</strong> explicación.</li>
+      <li><strong>La nota:</strong> los 18 cerrados valen el <strong>60 %</strong> y las cuatro
+        abiertas el <strong>40 %</strong> — la misma fórmula del taller celular. <strong>Es
+        individual</strong>: se responde solo y la nota es de quien lo entrega.</li>
+      <li>Puedes <strong>ampliar cualquier lámina</strong> haciendo clic sobre ella.</li>
+    </ul>
+  </div>
+
+  <div id="avisoRecuperar"></div>
+
+  <div id="app"></div>
+
+</div><!-- wrap -->
+
+<div class="lb" id="lb"><img src="" alt=""></div>
+
+<script>
+/* ══════════════════════════════════════════════════════════════════
+   BANCO · Taller de sistema muscular · 18 cerradas + 4 de desarrollo
+
+   Ninguna repite los 27 autodiagnósticos de clase_sistema_muscular.html.
+   El HTML de clase muestra su respuesta: un ítem copiado mediría memoria
+   del archivo, no recuperación del contenido. Antes de añadir aquí,
+   contrastar con los data-question de la clase.
+
+   El taller es INDIVIDUAL. La nota final es
+       0,6 × objetivo (las 18 cerradas)  +  0,4 × desarrollo (las 4 abiertas)
+   ══════════════════════════════════════════════════════════════════ */
+
+const MULTIPLE = [
+  { q:"Estás mirando al microscopio un tejido muscular estriado, con fibras ramificadas y un solo núcleo central por célula. ¿Qué tejido es y dónde lo encontrarías?",
+    tag:"Los tres tejidos",
+    op:["Cardíaco, únicamente en la pared del corazón",
+        "Esquelético, en los músculos de la cara",
+        "Liso, en el iris y el cuerpo ciliar",
+        "Esquelético, en los músculos extraoculares",
+        "Liso, en la pared de los vasos sanguíneos"],
+    c:0,
+    fb:"Estriado descarta el liso; ramificado y con un solo núcleo central descarta el esquelético, cuyas fibras son cilíndricas, no ramificadas, y tienen muchos núcleos periféricos. Solo queda el cardíaco, que además está exclusivamente en el corazón." },
+
+  { q:"Un músculo tiene fascículos cortos y oblicuos que se insertan a lo largo de casi todo un tendón central. ¿Qué puedes predecir de él antes de saber su nombre?",
+    tag:"Disposición fascicular",
+    op:["Que tiene mucho recorrido y poca fuerza",
+        "Que es circular y funciona como esfínter",
+        "Que su acción depende de una palanca de primera clase",
+        "Que tiene mucha fuerza y poco recorrido",
+        "Que sus fibras son todas oxidativas lentas"],
+    c:3,
+    fb:"Es un músculo peniforme. Al ser las fibras cortas y oblicuas caben muchas más por sección transversal, y la fuerza depende del área transversal total: mucha fuerza. Pero cada fibra se acorta solo un 70 % de su longitud, y siendo cortas, el recorrido total es pequeño." },
+
+  { q:"En una fibra muscular relajada, ¿dónde está la mayor parte del calcio?",
+    tag:"Acoplamiento excitación-contracción",
+    op:["En las cisternas del retículo sarcoplásmico",
+        "Unido a la troponina, esperando la señal",
+        "Dentro de los túbulos transversos",
+        "En las mitocondrias del sarcoplasma",
+        "Unido a la tropomiosina, manteniéndola en su sitio"],
+    c:0,
+    fb:"El retículo sarcoplásmico almacena el calcio y lo concentra en sus cisternas terminales, pegadas a cada túbulo T. El túbulo T conduce la señal eléctrica pero no almacena calcio: confundirlos es el error más común, precisamente porque forman juntos la tríada." },
+
+  { q:"El buccinador se llama así porque comprime las mejillas al soplar. ¿Qué criterio de nomenclatura se está usando?",
+    tag:"Cómo se nombran los músculos",
+    op:["La forma del músculo",
+        "La dirección de sus fibras",
+        "El número de sus orígenes",
+        "Su localización respecto al hueso",
+        "Su acción"],
+    c:4,
+    fb:"El nombre describe lo que hace: del latín buccinator, «el que toca la trompeta». Compáralo con deltoides, que se nombra por su forma triangular, o con bíceps, que se nombra por sus dos cabezas de origen." },
+
+  { q:"Un paciente refiere que hacia el final del día ve doble y se le cae un párpado, y que después de dormir la siesta mejora. La fuerza del resto del cuerpo es normal. ¿Dónde está el problema?",
+    tag:"Unión neuromuscular · optometría",
+    op:["En el músculo, que ha perdido sarcómeros",
+        "En el nervio óptico, que conduce peor con el cansancio",
+        "En la placa motora, con pocos receptores",
+        "En el retículo sarcoplásmico, que no libera calcio",
+        "En la córnea, que se reseca a lo largo del día"],
+    c:2,
+    fb:"Es el patrón de la miastenia grave: síntomas que empeoran con el uso y mejoran con el reposo, empezando por los músculos del ojo. El defecto está en la placa motora —hay menos receptores para la acetilcolina— así que las primeras contracciones salen bien y las repetidas fallan. El nervio óptico no mueve nada: es sensitivo." },
+
+  { q:"¿Qué le ocurre a la distancia entre dos discos Z consecutivos durante la contracción?",
+    tag:"Sarcómero",
+    op:["Aumenta, porque los filamentos se separan",
+        "No cambia, porque el disco Z es rígido",
+        "Disminuye, porque los filamentos gruesos se acortan",
+        "Disminuye: los filamentos finos van al centro",
+        "Varía según el tipo de fibra muscular"],
+    c:3,
+    fb:"La distancia entre dos discos Z es el sarcómero, y se acorta. Pero ojo al motivo: no porque algo encoja, sino porque las cabezas de miosina arrastran los filamentos finos hacia la línea M. Los filamentos gruesos mantienen su longitud, y por eso la banda A tampoco cambia." },
+
+  { q:"Comparado con el resto de músculos del cuerpo, ¿qué hace especial la inserción de los músculos de la expresión facial?",
+    tag:"Músculos de la cara",
+    op:["Que se insertan en cartílago en lugar de en hueso",
+        "Que se insertan en la piel de la cara",
+        "Que no tienen inserción, solo origen",
+        "Que se insertan en el hueso por dos tendones",
+        "Que se insertan en la fascia profunda del cuello"],
+    c:1,
+    fb:"Nacen del hueso o de la fascia del cráneo y terminan en la dermis. Por eso mueven piel y producen gestos, en vez de mover una articulación. Es también la razón de que no crucen ninguna articulación, al contrario que casi todos los demás músculos." },
+
+  { q:"Un fármaco impide que la acetilcolinesterasa degrade la acetilcolina en la hendidura sináptica. ¿Qué efecto inmediato tiene sobre la transmisión?",
+    tag:"Unión neuromuscular",
+    op:["El nervio deja de liberar acetilcolina",
+        "El calcio deja de entrar en el terminal axónico",
+        "La acetilcolina dura más y prolonga el estímulo",
+        "La placa motora pierde sus receptores",
+        "El potencial de acción deja de recorrer el túbulo T"],
+    c:2,
+    fb:"La acetilcolinesterasa es la que apaga la señal. Inhibirla deja el mensajero más tiempo actuando sobre los receptores, así que la transmisión se refuerza. Es exactamente por eso que la neostigmina se usa para tratar la miastenia grave, donde el problema es que quedan pocos receptores." },
+
+  { q:"¿Por qué el músculo cardíaco y el liso NO obedecen a la voluntad, mientras el esquelético sí?",
+    tag:"Los tres tejidos",
+    op:["Porque no tienen sarcómeros organizados",
+        "Porque los regula el sistema nervioso autónomo",
+        "Porque carecen de retículo sarcoplásmico",
+        "Porque sus fibras son demasiado pequeñas para responder",
+        "Porque no reciben ninguna inervación"],
+    c:1,
+    fb:"El control es la clave, no la estructura. Cardíaco y liso dependen del sistema nervioso autónomo y de hormonas; el esquelético, de neuronas motoras somáticas que sí obedecen la voluntad. Fíjate en que el cardíaco sí tiene sarcómeros —es estriado— y sin embargo tampoco obedece." },
+
+  { q:"Al flexionar el codo, la articulación es el fulcro, el bíceps aporta el esfuerzo y el peso del antebrazo es la carga. ¿Qué tipo de palanca es, y qué favorece?",
+    tag:"Palancas",
+    op:["De primera clase; favorece el equilibrio",
+        "De segunda clase; favorece la fuerza",
+        "De tercera clase; favorece la fuerza sobre la velocidad",
+        "De segunda clase; favorece la amplitud de movimiento",
+        "De tercera clase; favorece la velocidad y la amplitud"],
+    c:4,
+    fb:"El esfuerzo queda entre el fulcro y la carga: tercera clase, la más frecuente del cuerpo. Se pierde fuerza y se gana recorrido y velocidad, que es lo que el cuerpo suele necesitar. Un pequeño acortamiento del bíceps mueve la mano una distancia grande." }
+];
+
+const VF = [
+  { q:"La banda A conserva su longitud durante toda la contracción muscular.", tag:"Sarcómero", c:true,
+    fb:"Verdadero. La banda A es la longitud de los filamentos gruesos, y ningún filamento cambia de longitud: lo que cambia es cuánto se superponen. Las que se estrechan son la banda I y la zona H, porque las dos se definen por la ausencia de superposición." },
+  { q:"El orbicular de los ojos y el elevador del párpado superior están inervados por el mismo nervio.", tag:"Cara · optometría", c:false,
+    fb:"Falso, y la diferencia es clínicamente decisiva. El orbicular depende del nervio facial (VII) y el elevador del oculomotor (III). Por eso una lesión del VII deja el ojo abierto —lagoftalmos— y una del III lo deja cerrado —ptosis—: dos cuadros opuestos que se distinguen a simple vista." },
+  { q:"Relajar un músculo es un proceso pasivo que no consume energía.", tag:"Ciclo de contracción", c:false,
+    fb:"Falso. Relajarse cuesta ATP dos veces: hace falta una molécula nueva para despegar cada cabeza de miosina de la actina, y las bombas que devuelven el calcio al retículo también lo gastan. El rigor mortis es justamente lo que pasa cuando ese ATP falta." },
+  { q:"En un músculo peniforme la fuerza depende de la longitud de sus fibras.", tag:"Disposición fascicular", c:false,
+    fb:"Falso. La fuerza depende del área transversal total —cuántas fibras hay por sección—, no de su longitud: una fibra corta tira con tanta fuerza como una larga. Lo que sí depende de la longitud es el recorrido." }
+];
+
+const MULTI = [
+  { q:"Selecciona TODO lo que es cierto sobre la tríada de la fibra muscular esquelética.",
+    tag:"Tríada",
+    op:["La forman un túbulo transverso y dos cisternas terminales",
+        "El túbulo transverso es una invaginación del sarcolema",
+        "Las cisternas terminales almacenan y liberan calcio",
+        "El túbulo transverso almacena el calcio de la fibra",
+        "Sirve para que la señal eléctrica llegue al interior de la fibra"],
+    c:[0,1,2,4],
+    fb:"Las cuatro correctas describen la misma idea desde ángulos distintos: la tríada existe para convertir una señal eléctrica de superficie en liberación de calcio en el interior. La falsa es la del almacenamiento en el túbulo T: el túbulo conduce, el retículo almacena." },
+
+  { q:"Selecciona TODAS las estructuras u observaciones que corresponden a los músculos de la expresión facial.",
+    tag:"Cara",
+    op:["Se insertan en la piel",
+        "Están inervados por el nervio facial (VII)",
+        "Mueven articulaciones de la cara",
+        "El occipitofrontal tiene dos vientres unidos por una aponeurosis",
+        "El orbicular de los ojos es un músculo circular"],
+    c:[0,1,3,4],
+    fb:"La única falsa es la de las articulaciones: los músculos de la mímica mueven piel, no articulaciones. Cuidado con no confundirlos con el masetero y el temporal, que sí están en la cabeza y sí mueven una articulación, la temporomandibular." },
+
+  { q:"Selecciona TODAS las proteínas que participan directamente en el bloqueo y desbloqueo del sitio de unión de la actina.",
+    tag:"Proteínas del sarcómero",
+    op:["Tropomiosina",
+        "Troponina",
+        "Titina",
+        "Distrofina",
+        "Mioglobina"],
+    c:[0,1],
+    fb:"Solo las dos regulatorias. La tropomiosina cubre físicamente el sitio y la troponina la sujeta y recibe el calcio. La titina es estructural —el muelle elástico—, la distrofina une la miofibrilla al sarcolema y la mioglobina almacena oxígeno: ninguna de las tres regula el bloqueo." },
+
+  { q:"Un paciente con parálisis facial no cierra el ojo derecho. Selecciona TODO lo que es consecuencia directa de esa pérdida.",
+    tag:"Parálisis facial · optometría",
+    op:["La película lagrimal deja de repartirse",
+        "La córnea queda expuesta y se deseca",
+        "Aumenta el riesgo de queratitis por exposición",
+        "La pupila deja de responder a la luz",
+        "El paciente pierde la sensibilidad de la córnea"],
+    c:[0,1,2],
+    fb:"Las tres primeras son la misma cadena: sin cierre no hay parpadeo, sin parpadeo la lágrima no se reparte, y sin lágrima la córnea se seca y puede ulcerarse. Las dos falsas cambian de nervio: la pupila la mueve el oculomotor (III) y la sensibilidad corneal viaja por el trigémino (V₁). El facial es motor de la mímica." }
+];
+
+/* ── Desarrollo · 40 % de la nota. Se califican a mano ────────────
+   Cada una vale 5,0. La nota de desarrollo es su promedio.
+   Piden EXPLICAR, no reconocer: es justo la brecha que venimos midiendo. */
+const ABIERTAS = [
+  { n:1, tag:"Del sarcómero al movimiento", puntos:5,
+    img:"img/fig_10_5_deslizamiento.png",
+    pie:"Mecanismo de deslizamiento de los filamentos en dos sarcómeros: relajado, parcialmente contraído y máximamente contraído (Tortora, Fig. 10.5).",
+    q:"Mira la lámina. Describe qué le ocurre a la <strong>banda A</strong>, a la <strong>banda I</strong> y a la <strong>zona H</strong> al pasar del panel relajado al máximamente contraído. Después explica, en tus palabras, <strong>por qué unas cambian y otra no</strong>. Termina diciendo qué observación de los años cincuenta hizo abandonar la idea de que el músculo se plegaba como un acordeón.",
+    guia:"Se espera: banda I y zona H se estrechan o desaparecen, banda A no cambia; el motivo es que la A se define por la presencia de filamentos gruesos y las otras dos por la ausencia de superposición; y que los filamentos medían lo mismo relajados y contraídos." },
+
+  { n:2, tag:"La orden que llega hasta el fondo", puntos:5,
+    img:"img/fig_10_9_union_neuromuscular.png",
+    pie:"Estructura de la unión neuromuscular: bulbos sinápticos, hendidura sináptica y placa motora (Tortora, Fig. 10.9).",
+    q:"Narra el recorrido completo de la orden de contraerse, desde que el impulso nervioso llega al terminal del axón hasta que la cabeza de miosina da su golpe de fuerza. Nombra <strong>al menos</strong>: acetilcolina, placa motora, túbulo transverso, retículo sarcoplásmico, calcio, troponina y tropomiosina. Señala en qué punto exacto interviene el <strong>ATP</strong> y por qué hace falta también para <em>soltarse</em>.",
+    guia:"Se espera la cadena completa y ordenada, y sobre todo dos ideas: que el calcio desbloquea (no tira), y que el ATP se gasta antes del golpe de fuerza y otra vez para despegar la cabeza — de ahí el rigor mortis." },
+
+  { n:3, tag:"Por qué esto es anatomía de optometría", puntos:5,
+    img:"img/fig_11_4_expresion_facial.png",
+    pie:"Músculos de la cabeza que producen las expresiones faciales, vista anterior superficial (Tortora, Fig. 11.4).",
+    q:"Llega a tu consulta una persona con parálisis facial derecha de dos días. Consulta porque «tiene la cara torcida». Tú miras el ojo. <strong>Construye la cadena completa</strong>: qué nervio se lesionó, qué músculo dejó de funcionar, qué función se perdió, qué le pasa a la superficie ocular y en cuánto tiempo. Explica después <strong>por qué la urgencia es el ojo y no la simetría de la cara</strong>, y qué le recomendarías esta misma noche.",
+    guia:"Se espera: facial (VII) → orbicular de los ojos → cierre palpebral y parpadeo → sin reparto de la película lagrimal → desecación corneal → queratitis por exposición en 24-48 h, con riesgo de úlcera y cicatriz. La recomendación: lubricación y oclusión nocturna. Se valora que mencione que la córnea es avascular y depende de la lágrima." },
+
+  { n:4, tag:"El sentido de la clase", puntos:5,
+    img:"img/cuadro_11_1_fasciculos.png",
+    pie:"Disposiciones de los fascículos: paralelo, fusiforme, circular, triangular y peniforme (Tortora, Cuadro 11.1).",
+    q:"Un compañero de otro programa te dice: «para ser optómetra no necesitas saber cómo funciona un sarcómero; con saber dónde está cada músculo del ojo basta». <strong>Responde argumentando</strong>, y usa al menos <strong>dos ejemplos concretos de este taller</strong> en los que entender el mecanismo —y no solo la ubicación— cambia lo que harías con un paciente. Puedes apoyarte en la lámina: explica también qué te dice la <em>forma</em> de un músculo sobre su función antes de saber su nombre.",
+    guia:"No hay una única respuesta correcta; se califica el argumento. Se valora que use casos como la miastenia (mecanismo en la placa motora → explica el horario de los síntomas y orienta la anamnesis) y la parálisis facial (mecanismo del parpadeo → explica por qué urge proteger la córnea), y que conecte forma y función: circular = esfínter, peniforme = fuerza, paralelo = recorrido." }
+];
+
+
+/* ══════════════════════ MOTOR DE PINTADO ══════════════════════
+   Tres bloques cerrados con corrección inmediata y uno de desarrollo.
+   Los ids son mc1..mc10, vf1..vf4, sm1..sm4 — los mismos que espera
+   bloqueDe_() en taller_muscular.gs. Si cambias uno, cambia el otro. */
+
+const LET = ["A","B","C","D","E"];
+const respondidas = new Set();
+const aciertosMap = {};
+let totalCalificables = 0;
+let montado = false;
+
+function actualizarBarra(){
+  const r = respondidas.size;
+  const ac = Object.values(aciertosMap).filter(Boolean).length;
+  document.getElementById('mk-resp').textContent = "Respondidas: " + r + " / " + totalCalificables;
+  document.getElementById('mk-score').innerHTML  = "Aciertos: <b>" + ac + "</b>";
+  document.getElementById('prog').style.width = (totalCalificables ? (r/totalCalificables*100) : 0) + "%";
+}
+
+function marcarResultado(id, ok){
+  respondidas.add(id);
+  aciertosMap[id] = ok;
+  actualizarBarra();
+  alResponder(id);
+}
+
+function seccion(num, titulo, desc){
+  const s = document.createElement('section'); s.className = 'bloque';
+  s.innerHTML = '<h2><span class="n">' + num + '</span>' + titulo + '</h2>' +
+                '<p class="desc">' + desc + '</p>';
+  return s;
+}
+
+function pieAcciones(id){
+  return '<div class="acciones"><button class="btn primary small" data-comprobar="' + id +
+         '">Comprobar</button></div><div class="fb" id="fb-' + id + '"></div>';
+}
+
+/* ---- Bloques 1 y 2: una sola respuesta correcta ---- */
+function pintarUnica(host, lista, pref, num, titulo, desc, desde){
+  const sec = seccion(num, titulo, desc);
+  lista.forEach((item, i) => {
+    const id = pref + (i + 1); totalCalificables++;
+    const opciones = (item.op || ["Verdadero", "Falso"]);
+    const ops = opciones.map((t, k) =>
+      '<li data-op="' + k + '"><span class="letra">' + LET[k] + '</span><span>' + t + '</span></li>').join("");
+    const q = document.createElement('div'); q.className = 'q';
+    q.innerHTML = '<span class="tag">' + item.tag + '</span>' +
+      '<div class="enun"><span class="qn">' + (desde + i) + '.</span><span>' + item.q + '</span></div>' +
+      '<ul class="opciones" id="ops-' + id + '">' + ops + '</ul>' + pieAcciones(id);
+    sec.appendChild(q);
+  });
+  host.appendChild(sec);
+}
+
+/* ---- Bloque 3: varias correctas ---- */
+function pintarSM(host, num, desde){
+  const sec = seccion(num, "Selección múltiple",
+    'Varias respuestas son correctas. Solo cuenta si marcas <b>todas</b> las correctas y <b>ninguna</b> incorrecta.');
+  MULTI.forEach((item, i) => {
+    const id = "sm" + (i + 1); totalCalificables++;
+    const ops = item.op.map((t, k) =>
+      '<li data-op="' + k + '"><span class="letra">' + LET[k] + '</span><span>' + t + '</span></li>').join("");
+    const q = document.createElement('div'); q.className = 'q';
+    q.innerHTML = '<span class="tag">' + item.tag + '</span>' +
+      '<div class="enun"><span class="qn">' + (desde + i) + '.</span><span>' + item.q + '</span></div>' +
+      '<ul class="opciones" id="ops-' + id + '" data-multi="1">' + ops + '</ul>' + pieAcciones(id);
+    sec.appendChild(q);
+  });
+  host.appendChild(sec);
+}
+
+/* ---- Bloque 4: desarrollo, con lámina y sin respuesta modelo ----
+   No se muestra respuesta modelo a propósito: estas cuatro las califico yo,
+   y verla antes de escribir convertiría la pregunta en un ejercicio de copia. */
+function pintarAbiertas(host, num){
+  const sec = seccion(num, "Preguntas de desarrollo",
+    'Valen el <b>40 %</b> de la nota del taller. Se califica que <b>expliques el mecanismo</b>, ' +
+    'no que acumules términos. Escribe con tus palabras; una respuesta corta y bien razonada vale ' +
+    'más que un párrafo de vocabulario suelto.');
+  ABIERTAS.forEach((item, i) => {
+    const q = document.createElement('div'); q.className = 'q abierta';
+    q.innerHTML = '<span class="tag">' + item.tag + '</span>' +
+      '<span class="puntos">' + item.puntos + ',0 puntos</span>' +
+      '<div class="enun"><span class="qn">' + item.n + '.</span><span>' + item.q + '</span></div>' +
+      '<figure class="lamina"><img src="' + item.img + '" alt="' + item.tag +
+        '" onerror="this.parentNode.style.display=\'none\'">' +
+        '<figcaption>' + item.pie + '</figcaption></figure>' +
+      '<textarea rows="7" placeholder="Escribe aquí tu respuesta…"></textarea>' +
+      '<div class="cuenta corta">0 palabras</div>';
+    const ta = q.querySelector('textarea'), cta = q.querySelector('.cuenta');
+    ta.addEventListener('input', () => {
+      const n = ta.value.trim() ? ta.value.trim().split(/\s+/).length : 0;
+      cta.textContent = n + (n === 1 ? " palabra" : " palabras");
+      cta.classList.toggle('corta', n < 40);
+      sucio = true; guardarLocal();
+    });
+    sec.appendChild(q);
+  });
+  host.appendChild(sec);
+
+  const cierre = document.createElement('div');
+  cierre.className = 'acciones-globales';
+  cierre.innerHTML =
+    '<button class="btn primary" id="btnEntregar">Entregar el taller</button>' +
+    '<span class="desc" style="margin-left:12px">Al entregar se cierra: revisa antes las cuatro de desarrollo.</span>' +
+    '<div class="fb" id="fbFinal"></div>';
+  host.appendChild(cierre);
+}
+
+function datosDe(id){
+  const n = parseInt(id.replace(/\D/g, ""), 10) - 1;
+  if(id.indexOf("sm") === 0) return {item: MULTI[n],    multi: true,  correctas: MULTI[n].c};
+  if(id.indexOf("vf") === 0) return {item: VF[n],       multi: false, correctas: [VF[n].c ? 0 : 1]};
+  return                            {item: MULTIPLE[n], multi: false, correctas: [MULTIPLE[n].c]};
+}
+
+function comprobar(id){
+  if(entregado) return;
+  const ul = document.getElementById('ops-' + id);
+  if(ul.classList.contains('bloq')) return;
+  const d = datosDe(id);
+  const marcadas = [...ul.querySelectorAll('li.sel')].map(li => +li.dataset.op).sort((a,b)=>a-b);
+  if(!marcadas.length){
+    document.getElementById('fb-' + id).innerHTML =
+      '<span class="mal">Marca una opción antes de comprobar.</span>';
+    document.getElementById('fb-' + id).classList.add('show');
+    return;
+  }
+  const esperadas = d.correctas.slice().sort((a,b)=>a-b);
+  const ok = marcadas.length === esperadas.length &&
+             marcadas.every((v, k) => v === esperadas[k]);
+
+  ul.classList.add('bloq');
+  ul.querySelectorAll('li').forEach(li => {
+    const k = +li.dataset.op;
+    if(esperadas.indexOf(k) >= 0) li.classList.add('ok');
+    else if(li.classList.contains('sel')) li.classList.add('no');
+  });
+  const fb = document.getElementById('fb-' + id);
+  fb.innerHTML = '<b class="' + (ok ? 'bien' : 'mal') + '">' +
+    (ok ? 'Correcto.' : 'No es la respuesta.') + '</b> ' + d.item.fb;
+  fb.classList.add('show');
+  marcarResultado(id, ok);
+}
+
+function montar(){
+  if(montado) return;
+  const app = document.getElementById('app'); app.innerHTML = "";
+  pintarUnica(app, MULTIPLE, "mc", 1, "Opción múltiple",
+    "Una sola respuesta correcta entre cinco.", 1);
+  pintarUnica(app, VF, "vf", 2, "Verdadero o falso",
+    "Decide si el enunciado es verdadero o falso.", MULTIPLE.length + 1);
+  pintarSM(app, 3, MULTIPLE.length + VF.length + 1);
+  pintarAbiertas(app, 4);
+
+  app.querySelectorAll('.opciones').forEach(ul => {
+    const multi = ul.dataset.multi === "1";
+    ul.querySelectorAll('li').forEach(li => {
+      li.addEventListener('click', () => {
+        if(ul.classList.contains('bloq') || entregado) return;
+        if(multi) li.classList.toggle('sel');
+        else { ul.querySelectorAll('li').forEach(o => o.classList.remove('sel')); li.classList.add('sel'); }
+      });
+    });
+  });
+  app.querySelectorAll('[data-comprobar]').forEach(b =>
+    b.addEventListener('click', () => comprobar(b.dataset.comprobar)));
+
+  document.getElementById('btnEntregar').addEventListener('click', entregar);
+
+  /* Lupa: las láminas del sarcómero y de la cara llevan rótulos que no se
+     leen a tamaño de columna. */
+  const lb = document.getElementById('lb');
+  app.querySelectorAll('.lamina img').forEach(img => {
+    img.addEventListener('click', () => {
+      lb.querySelector('img').src = img.src;
+      lb.classList.add('open');
+    });
+  });
+  lb.addEventListener('click', () => { lb.classList.remove('open'); lb.querySelector('img').src = ""; });
+  document.addEventListener('keydown', e => {
+    if(e.key === 'Escape'){ lb.classList.remove('open'); lb.querySelector('img').src = ""; }
+  });
+
+  montado = true;
+  actualizarBarra();
+}
+
+
+/* ══════════════════════ IDENTIDAD, RESPALDO Y ENTREGA ══════════════════════
+   Tres capas de respaldo, como en los talleres anteriores:
+     1. localStorage — en cada cambio. Sobrevive a recargar y a cerrar.
+     2. Servidor     — al comprobar cada ítem, cada 90 s si hay cambios, y al
+                       salir de la página (sendBeacon).
+     3. Entrega final — explícita, con confirmación.
+
+   El listado de estudiantes se pide al servidor: aquí no se escribe ningún
+   nombre, porque este archivo se publica en un repositorio público. */
+
+const CONFIG = {
+  TOKEN   : "TALLER_MUS_MORF_2026II_4e7ba2",
+  ENDPOINT: "https://script.google.com/macros/s/AKfycbweD1wtH-1JGwqgKf0sEpQpgRngx0OLMDBPXbzA81I6F0Ih5_VFardq474mYCammHoNDw/exec",
+  LS_PREFIJO: "taller_muscular_2026II::",
+  AUTOGUARDADO_MS: 90000
+};
+
+const MOTIVOS = {
+  taller_cerrado: "El taller ya está cerrado a envíos.",
+  token_invalido: "Este enlace no es válido. Pídeme el correcto.",
+  alumno_no_esta_en_el_listado: "Tu nombre no está en el listado del curso. Avísame.",
+  codigo_incorrecto: "Ese código no corresponde. Revísalo; si sigue fallando, avísame.",
+  falta_codigo: "Escribe tu código para poder registrarte.",
+  falta_alumno: "Selecciona tu nombre en la lista."
+};
+
+let ingresado = "";
+let entregado = false;
+let sucio = false;
+let ultimoEnvio = 0;
+
+const $id = s => document.getElementById(s);
+const abiertasActuales = () =>
+  [...document.querySelectorAll('.q.abierta textarea')].map(t => t.value.trim());
+
+function estadoNube(txt, clase){
+  const el = $id('estadoNube');
+  if(!el) return;
+  el.textContent = txt;
+  el.className = clase || "";
+}
+
+/* ── red ── */
+async function enviarServidor(payload, conBeacon){
+  const cuerpo = JSON.stringify(Object.assign({token: CONFIG.TOKEN}, payload));
+  if(conBeacon && navigator.sendBeacon){
+    try{ navigator.sendBeacon(CONFIG.ENDPOINT, new Blob([cuerpo], {type:"text/plain"})); return {ok:true}; }catch(e){}
+  }
+  const r = await fetch(CONFIG.ENDPOINT, {method:"POST", body:cuerpo,
+    headers:{"Content-Type":"text/plain;charset=utf-8"}});
+  return r.json();
+}
+
+/* ── capa 1 · el navegador ── */
+function claveLocal(){ return CONFIG.LS_PREFIJO + (ingresado || "sin-nombre"); }
+
+function guardarLocal(){
+  try{
+    localStorage.setItem(claveLocal(), JSON.stringify({
+      alumno: ingresado, items: aciertosMap,
+      abiertas: abiertasActuales(), ts: new Date().toISOString()
+    }));
+  }catch(e){ /* modo privado o cuota llena: no es crítico */ }
+}
+
+function ofrecerRecuperacion(){
+  let g = null;
+  try{ g = JSON.parse(localStorage.getItem(claveLocal()) || "null"); }catch(e){}
+  const caja = $id('avisoRecuperar');
+  caja.innerHTML = "";
+  if(!g || (!Object.keys(g.items || {}).length && !(g.abiertas || []).some(Boolean))) return;
+
+  const hora  = new Date(g.ts).toLocaleString('es-CO', {dateStyle:'short', timeStyle:'short'});
+  const nIt   = Object.keys(g.items || {}).length;
+  const nAb   = (g.abiertas || []).filter(Boolean).length;
+  caja.innerHTML = '<div class="recuperar"><b>Tienes un avance guardado en este navegador</b> (' +
+    hora + '): ' + nIt + ' ítem(s) comprobado(s) y ' + nAb + ' respuesta(s) de desarrollo. ' +
+    '<div><button class="btn primary small" id="btnRecuperar">Recuperar mi avance</button> ' +
+    '<button class="btn ghost small" id="btnDescartar">Empezar de cero</button></div></div>';
+
+  $id('btnRecuperar').addEventListener('click', () => {
+    Object.assign(aciertosMap, g.items || {});
+    Object.keys(g.items || {}).forEach(k => respondidas.add(k));
+    const tas = document.querySelectorAll('.q.abierta textarea');
+    (g.abiertas || []).forEach((v, i) => {
+      if(tas[i] && v){ tas[i].value = v; tas[i].dispatchEvent(new Event('input')); }
+    });
+    actualizarBarra();
+    caja.innerHTML = '<div class="recuperar">Avance recuperado. Los ítems que ya habías comprobado ' +
+      'cuentan en tu marcador; si quieres volver a ver una explicación, respóndelo otra vez.</div>';
+    sucio = true;
+  });
+  $id('btnDescartar').addEventListener('click', () => {
+    try{ localStorage.removeItem(claveLocal()); }catch(e){}
+    caja.innerHTML = "";
+  });
+}
+
+/* ── capa 2 · el servidor ── */
+async function snapshot(motivo, beacon){
+  if(!ingresado || entregado) return;
+  try{
+    estadoNube("guardando…");
+    await enviarServidor({evento:"snapshot", alumno: ingresado, motivo: motivo,
+                          items: aciertosMap, abiertas: abiertasActuales()}, beacon);
+    sucio = false; ultimoEnvio = Date.now();
+    estadoNube("guardado", "guardado");
+  }catch(e){ estadoNube("sin conexión — tu avance sigue en este navegador", "pend"); }
+}
+
+function alResponder(){
+  guardarLocal();
+  sucio = true;
+  if(Date.now() - ultimoEnvio > 8000) snapshot("respuesta");
+}
+
+setInterval(() => { if(sucio) snapshot("periodico"); }, CONFIG.AUTOGUARDADO_MS);
+window.addEventListener('pagehide', () => { if(sucio) snapshot("salida", true); });
+document.addEventListener('visibilitychange', () => {
+  if(document.visibilityState === 'hidden' && sucio) snapshot("oculto", true);
+});
+
+/* ── identidad ── */
+async function cargarRoster(){
+  const sel = $id('nombre');
+  try{
+    const r = await fetch(CONFIG.ENDPOINT + "?token=" + encodeURIComponent(CONFIG.TOKEN) + "&action=roster");
+    const d = await r.json();
+    if(!d.ok) throw new Error(d.error || "sin roster");
+    sel.innerHTML = '<option value="">Selecciona tu nombre…</option>' +
+      d.roster.map(n => '<option>' + n + '</option>').join("");
+    $id('btnIngresar').disabled = false;
+  }catch(e){
+    sel.innerHTML = '<option value="">No pude cargar el listado</option>';
+    $id('idErr').textContent = "No pude cargar el listado del curso. Revisa tu conexión y recarga.";
+  }
+}
+
+async function ingresar(){
+  const alumno = $id('nombre').value.trim();
+  const codigo = $id('codigo').value.trim();
+  $id('idErr').textContent = "";
+  if(!alumno){ $id('idErr').textContent = MOTIVOS.falta_alumno; return; }
+  $id('btnIngresar').disabled = true;
+  try{
+    const d = await enviarServidor({evento:"ingreso", alumno: alumno, codigo: codigo});
+    if(!d.ok){
+      $id('idErr').textContent = MOTIVOS[d.error] || ("No pude registrarte: " + d.error);
+      $id('btnIngresar').disabled = false;
+      return;
+    }
+    ingresado = d.alumno;
+    $id('cajaIngreso').style.display = "none";
+    $id('cajaIdentificado').style.display = "";
+    $id('quienSoy').textContent = ingresado;
+    montar();
+    ofrecerRecuperacion();
+    estadoNube("listo", "guardado");
+  }catch(e){
+    $id('idErr').textContent = "No pude conectarme. Revisa tu conexión e inténtalo otra vez.";
+    $id('btnIngresar').disabled = false;
+  }
+}
+
+/* ── entrega ── */
+async function entregar(){
+  if(entregado || !ingresado) return;
+  const sinResponder = totalCalificables - respondidas.size;
+  const abiertasVacias = abiertasActuales().filter(t => !t).length;
+  let aviso = "¿Entregar el taller?\n\n";
+  if(sinResponder) aviso += "· Te quedan " + sinResponder + " ítem(s) cerrados sin comprobar.\n";
+  if(abiertasVacias) aviso += "· Te quedan " + abiertasVacias + " pregunta(s) de desarrollo en blanco.\n";
+  aviso += "\nAl entregar se cierra y ya no podrás cambiar tus respuestas.";
+  if(!confirm(aviso)) return;
+
+  const btn = $id('btnEntregar');
+  btn.disabled = true; btn.textContent = "Enviando…";
+  try{
+    const d = await enviarServidor({evento:"envio", alumno: ingresado,
+                                    items: aciertosMap, abiertas: abiertasActuales()});
+    if(!d.ok){
+      $id('fbFinal').innerHTML = '<span class="mal">No pude registrar la entrega: ' +
+        (MOTIVOS[d.error] || d.error) + '</span>';
+      $id('fbFinal').classList.add('show');
+      btn.disabled = false; btn.textContent = "Entregar el taller";
+      return;
+    }
+    entregado = true;
+    const nObj = Math.round(d.aciertos / d.max * 500) / 100;
+    $id('fbFinal').innerHTML = '<b class="bien">Taller entregado.</b> Acertaste <b>' +
+      d.aciertos + ' de ' + d.max + '</b> en los ítems cerrados, que equivale a <b>' +
+      nObj.toFixed(2).replace('.', ',') + '</b> sobre 5,0 en la parte objetiva (el 60 % de la nota). ' +
+      'Las cuatro preguntas de desarrollo —el 40 % restante— las califico yo y te las devuelvo comentadas.';
+    $id('fbFinal').classList.add('show');
+    btn.textContent = "Entregado";
+    document.querySelectorAll('.q.abierta textarea').forEach(t => t.disabled = true);
+    estadoNube("entregado", "guardado");
+    try{ localStorage.removeItem(claveLocal()); }catch(e){}
+  }catch(e){
+    $id('fbFinal').innerHTML = '<span class="mal">No pude conectarme. Tu avance está guardado; ' +
+      'inténtalo otra vez en un momento.</span>';
+    $id('fbFinal').classList.add('show');
+    btn.disabled = false; btn.textContent = "Entregar el taller";
+  }
+}
+
+$id('btnIngresar').addEventListener('click', ingresar);
+$id('codigo').addEventListener('keydown', e => { if(e.key === 'Enter') ingresar(); });
+$id('btnSalir').addEventListener('click', () => location.reload());
+cargarRoster();
+</script>
+
+</body>
+</html>
