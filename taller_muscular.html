@@ -206,6 +206,8 @@
   align-items:center;justify-content:center;padding:28px;cursor:zoom-out}
 .lb.open{display:flex}
 .lb img{max-width:95vw;max-height:92vh;border-radius:4px}
+.pista-filtro{display:block;font-size:.78rem;color:var(--gris);margin-top:4px;min-height:1em}
+.pista-filtro.nada{color:var(--rojo)}
 </style>
 </head>
 <body>
@@ -224,7 +226,10 @@
     </div>
     <div class="studentbox" id="cajaIngreso">
       <label>Nombre del estudiante
-        <select id="nombre"><option value="">Cargando listado…</option></select>
+        <input type="text" id="filtro" placeholder="Escribe tu nombre o apellido…"
+               autocomplete="off" style="margin-bottom:6px">
+        <select id="nombre" size="1"><option value="">Cargando listado…</option></select>
+        <span id="pistaFiltro" class="pista-filtro"></span>
       </label>
       <label>Código estudiantil
         <input type="text" id="codigo" inputmode="numeric" placeholder="Tu código" autocomplete="off">
@@ -821,14 +826,64 @@ document.addEventListener('visibilitychange', () => {
 });
 
 /* ── identidad ── */
+
+/* El desplegable va ordenado por APELLIDO, que es como está el listado del
+   curso. Quien se busca por su nombre de pila no se encuentra: ya pasó el
+   3 de septiembre con dos personas. El filtro acepta cualquier trozo del
+   nombre, en cualquier orden y sin tildes, y si solo queda uno lo selecciona
+   solo para que baste con escribir y pulsar Ingresar. */
+let ROSTER = [];
+
+function sinTildes(t){
+  return String(t || "").toLowerCase()
+    .normalize("NFD").replace(/[̀-ͯ]/g, "");
+}
+
+function pintarLista(lista){
+  const sel = $id('nombre');
+  const previo = sel.value;
+  sel.innerHTML = '<option value="">' +
+    (lista.length ? 'Selecciona tu nombre…' : 'Ningún nombre coincide') + '</option>' +
+    lista.map(n => '<option>' + n + '</option>').join("");
+  if(lista.length === 1) sel.value = lista[0];
+  else if(previo && lista.indexOf(previo) >= 0) sel.value = previo;
+}
+
+function filtrar(){
+  const q = sinTildes($id('filtro').value).trim();
+  const pista = $id('pistaFiltro');
+  if(!q){
+    pintarLista(ROSTER);
+    pista.textContent = ROSTER.length + " estudiantes. Están ordenados por apellido.";
+    pista.className = "pista-filtro";
+    return;
+  }
+  const trozos = q.split(/\s+/);
+  const hallados = ROSTER.filter(n => {
+    const t = sinTildes(n);
+    return trozos.every(p => t.indexOf(p) >= 0);
+  });
+  pintarLista(hallados);
+  if(!hallados.length){
+    pista.textContent = "Ningún nombre coincide. Prueba solo con tu apellido.";
+    pista.className = "pista-filtro nada";
+  } else if(hallados.length === 1){
+    pista.textContent = "Seleccionado: " + hallados[0];
+    pista.className = "pista-filtro";
+  } else {
+    pista.textContent = hallados.length + " coinciden. Elige el tuyo en la lista.";
+    pista.className = "pista-filtro";
+  }
+}
+
 async function cargarRoster(){
   const sel = $id('nombre');
   try{
     const r = await fetch(CONFIG.ENDPOINT + "?token=" + encodeURIComponent(CONFIG.TOKEN) + "&action=roster");
     const d = await r.json();
     if(!d.ok) throw new Error(d.error || "sin roster");
-    sel.innerHTML = '<option value="">Selecciona tu nombre…</option>' +
-      d.roster.map(n => '<option>' + n + '</option>').join("");
+    ROSTER = d.roster;
+    pintarLista(ROSTER);
     $id('btnIngresar').disabled = false;
   }catch(e){
     sel.innerHTML = '<option value="">No pude cargar el listado</option>';
@@ -904,6 +959,8 @@ async function entregar(){
   }
 }
 
+$id('filtro').addEventListener('input', filtrar);
+$id('filtro').addEventListener('keydown', e => { if(e.key === 'Enter') ingresar(); });
 $id('btnIngresar').addEventListener('click', ingresar);
 $id('codigo').addEventListener('keydown', e => { if(e.key === 'Enter') ingresar(); });
 $id('btnSalir').addEventListener('click', () => location.reload());
