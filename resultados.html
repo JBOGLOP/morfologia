@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Resultado del I Parcial · Morfología General 2026-II</title>
+<title>Resultados · Morfología General 2026-II</title>
 <!--
   Se publica. No lleva clave de respuestas ni banco.
 
@@ -102,8 +102,8 @@ footer{margin-top:44px;padding:22px;text-align:center;border-top:3px double var(
 
 <header>
   <div class="eyebrow">Morfología General 2026-II · Optometría</div>
-  <h1>Resultado del I Parcial</h1>
-  <p>Consulta tu propio resultado</p>
+  <h1>Tus resultados</h1>
+  <p>Primer corte, avance del segundo y detalle del I Parcial</p>
 </header>
 
 <div class="wrap">
@@ -127,8 +127,31 @@ footer{margin-top:44px;padding:22px;text-align:center;border-top:3px double var(
   <div class="oculto" id="salida">
 
     <div class="pestanas" id="pestanas">
-      <button data-hoja="corte" class="viva">Nota del corte</button>
-      <button data-hoja="parcial">Detalle del parcial</button>
+      <button data-hoja="corte2" class="oculto">Corte 2 · avance</button>
+      <button data-hoja="corte" class="viva">Corte 1</button>
+      <button data-hoja="parcial">Detalle del I Parcial</button>
+    </div>
+
+    <!-- ─────────── corte 2 · avance ─────────── -->
+    <div class="hoja" id="hoja-corte2">
+      <div class="marcador">
+        <div class="quien" id="c2-quien"></div>
+        <div class="nota" id="c2-nota">—</div>
+        <div class="de">Segundo corte · promedio de quices · Quiz 2 y Quiz 3</div>
+      </div>
+      <div class="aviso ojo"><b>Esto es un avance, no la nota del corte.</b> El segundo corte
+        todavía no ha terminado: faltan talleres y el II Parcial.</div>
+      <div class="desglose" id="c2-desglose"></div>
+      <div id="c2-obs"></div>
+      <div class="tarjeta">
+        <h2>Cómo leerlo</h2>
+        <p>Los quices que cuentan en este corte son el <b>Quiz 2</b> (cabeza y cuello, 3
+          preguntas) y el <b>Quiz 3</b> (sistema muscular, 5 preguntas). <b>El Quiz 1 no se tiene
+          en cuenta.</b> La cifra grande es el promedio de los dos.</p>
+        <p>El <b>Quiz 3 también sirvió para conmutar el taller de sistema muscular</b>: quien
+          entregó el taller conserva su nota; quien no lo entregó recibe en el taller la nota del
+          Quiz 3.</p>
+      </div>
     </div>
 
     <!-- ─────────── corte ─────────── -->
@@ -266,8 +289,7 @@ function pintarCorte(r){
   const c = r.corte;
   if(!c){
     document.querySelector('[data-hoja="corte"]').classList.add("oculto");
-    verHoja("parcial");
-    return;
+    return false;
   }
   const val = k => String(c[k] === undefined || c[k] === null ? "" : c[k]).replace(",", ".").trim();
   const n = parseFloat(val("CORTE 1 (35%)"));
@@ -297,6 +319,37 @@ function pintarCorte(r){
   const obs = val("Observaciones");
   $("c-obs").innerHTML = obs
     ? '<div class="aviso ojo"><b>Sobre tu caso:</b> ' + esc(obs) + "</div>" : "";
+  return true;
+}
+
+/* ── Avance del corte 2 ────────────────────────────────────────────
+   Llega solo si la pestaña Corte2 esta pegada y el servidor es el
+   nuevo. Si no, la pestaña sigue escondida.                        */
+function pintarCorte2(r){
+  const c = r.corte2;
+  if(!c) return false;
+  document.querySelector('[data-hoja="corte2"]').classList.remove("oculto");
+  const val = k => String(c[k] === undefined || c[k] === null ? "" : c[k]).replace(",", ".").trim();
+  const nota = k => { const n = parseFloat(val(k)); return isNaN(n) ? "sin nota" : n.toFixed(2); };
+  const pr = parseFloat(val("PROMEDIO QUICES"));
+  $("c2-quien").textContent = r.alumno;
+  $("c2-nota").textContent  = isNaN(pr) ? "—" : pr.toFixed(2);
+  $("c2-nota").classList.toggle("baja", !isNaN(pr) && pr < 3);
+
+  const linea = (et, sub, v, suma) =>
+    '<div class="linea' + (suma ? " suma" : "") + '"><span class="q">' + et +
+    "<small>" + esc(sub) + '</small></span><span class="v">' + v + "</span></div>";
+  const ac = (k, de) => val(k) ? val(k) + " de " + de + " aciertos · " : "";
+  $("c2-desglose").innerHTML =
+    linea("Quiz 2 · cabeza y cuello", ac("Quiz 2 aciertos", 3) + "en papel", nota("Quiz 2")) +
+    linea("Quiz 3 · sistema muscular", ac("Quiz 3 aciertos", 5) + "en papel", nota("Quiz 3")) +
+    linea("Promedio de quices", "Quiz 2 y Quiz 3 · sin el Quiz 1", nota("PROMEDIO QUICES"), true) +
+    linea("Taller · sistema muscular", val("Regla taller") || "individual", nota("Taller muscular"), true);
+
+  const obs = val("Observaciones");
+  $("c2-obs").innerHTML = obs
+    ? '<div class="aviso ojo"><b>Sobre tu caso:</b> ' + esc(obs) + "</div>" : "";
+  return true;
 }
 
 function verHoja(cual){
@@ -315,7 +368,9 @@ function pintar(r){
   $("salida").classList.remove("oculto");
   window.scrollTo({top:0, behavior:"smooth"});
 
-  pintarCorte(r);
+  // Se abre en lo mas reciente que haya llegado del servidor.
+  const hay2 = pintarCorte2(r), hay1 = pintarCorte(r);
+  verHoja(hay2 ? "corte2" : (hay1 ? "corte" : "parcial"));
 
   const nota = Number(r.nota);
   $("p-quien").textContent = r.alumno;
