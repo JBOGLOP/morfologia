@@ -169,8 +169,8 @@ footer{margin-top:44px;padding:22px;text-align:center;border-top:3px double var(
           el <b>seguimiento</b> —el promedio de los tres talleres— que pesa 20, y el
           <b>I Parcial</b>, que pesa 15.</p>
         <p>Los talleres se trabajaron en grupo, así que <b>la nota de la entrega es la de todos
-          los integrantes</b>. Si en algún taller no aparece nota, es que tu grupo no registró
-          entrega; en ese caso el seguimiento promedia los que sí tienes.</p>
+          los integrantes</b>. El seguimiento se divide <b>siempre entre 3</b>: un taller sin
+          entrega cuenta como 0.</p>
       </div>
     </div>
 
@@ -299,24 +299,27 @@ function pintarCorte(r){
   $("c-de").textContent = "Primer corte · 35 % del semestre · " +
     (val("Estado") || (isNaN(n) ? "" : (n >= 3 ? "Aprueba" : "Reprueba")));
 
+  // Dos decimales siempre: la hoja manda 4.5 o 1 cuando el valor es redondo.
+  const dos = k => { const v = val(k), n = parseFloat(v); return isNaN(n) ? v : n.toFixed(2); };
   const t = (et, k, sub) => {
-    const v = val(k);
+    const v = dos(k);
     return '<div class="linea"><span class="q">' + et +
       (sub ? "<small>" + sub + "</small>" : "") + '</span>' +
       '<span class="v">' + (v || "sin nota") + "</span></div>";
   };
   $("c-desglose").innerHTML =
     t("Taller · nivel celular",  "Taller celular",     "en grupo") +
-    t("Taller · nivel tisular",  "Taller tisular",     "en grupo · provisional, falta el desarrollo") +
+    t("Taller · nivel tisular",  "Taller tisular",     "en grupo") +
     t("Taller · osteología",     "Taller osteologia",  "en grupo") +
-    '<div class="linea suma"><span class="q">Seguimiento<small>promedio de los talleres · pesa 20 de 35</small></span>' +
-      '<span class="v">' + (val("SEGUIMIENTO (20%)") || "—") + "</span></div>" +
+    '<div class="linea suma"><span class="q">Seguimiento<small>promedio de los tres talleres · pesa 20 de 35</small></span>' +
+      '<span class="v">' + (dos("SEGUIMIENTO (20%)") || "—") + "</span></div>" +
     '<div class="linea suma"><span class="q">I Parcial<small>' +
       (val("Parcial aciertos") ? val("Parcial aciertos") + " de " + val("Parcial sobre") + " · " : "") +
       'pesa 15 de 35</small></span>' +
-      '<span class="v">' + (val("PARCIAL (15%)") || "—") + "</span></div>";
+      '<span class="v">' + (dos("PARCIAL (15%)") || "—") + "</span></div>";
 
-  const obs = val("Observaciones");
+  // El texto va tal cual: val() cambia la coma por punto y altera «nota 1,0».
+  const obs = String(c.Observaciones || "").trim();
   $("c-obs").innerHTML = obs
     ? '<div class="aviso ojo"><b>Sobre tu caso:</b> ' + esc(obs) + "</div>" : "";
   return true;
@@ -346,7 +349,7 @@ function pintarCorte2(r){
     linea("Promedio de quices", "Quiz 2 y Quiz 3 · sin el Quiz 1", nota("PROMEDIO QUICES"), true) +
     linea("Taller · sistema muscular", val("Regla taller") || "individual", nota("Taller muscular"), true);
 
-  const obs = val("Observaciones");
+  const obs = String(c.Observaciones || "").trim();
   $("c2-obs").innerHTML = obs
     ? '<div class="aviso ojo"><b>Sobre tu caso:</b> ' + esc(obs) + "</div>" : "";
   return true;
