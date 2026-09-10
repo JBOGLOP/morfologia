@@ -378,6 +378,19 @@ function pintar(r){
   $("p-nota").classList.toggle("baja", nota < 3);
   $("p-de").textContent = r.aciertos + " de " + r.max + " · " + r.porcentaje + " %";
 
+  /* Parcial anulado a esta persona: el servidor manda solo la nota que
+     cuenta y ningun detalle. */
+  if(r.anulado){
+    $("p-de").textContent = "I Parcial anulado";
+    $("bloques").classList.add("oculto");
+    $("temas").closest(".tarjeta").classList.add("oculto");
+    $("preguntas").closest(".tarjeta").classList.add("oculto");
+    $("nota-anuladas").classList.remove("oculto");
+    $("nota-anuladas").innerHTML = '<div class="aviso malo"><b>Tu I Parcial fue anulado</b> ' +
+      "por decisión del docente. La nota que cuenta para el corte es " + nota.toFixed(2) + ".</div>";
+    return;
+  }
+
   const b = r.bloques || {};
   $("bloques").innerHTML = [
     ["Opción múltiple", b.mc], ["Verdadero-falso", b.vf], ["Selección múltiple", b.sm]
