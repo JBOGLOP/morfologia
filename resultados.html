@@ -137,7 +137,7 @@ footer{margin-top:44px;padding:22px;text-align:center;border-top:3px double var(
       <div class="marcador">
         <div class="quien" id="c2-quien"></div>
         <div class="nota" id="c2-nota">—</div>
-        <div class="de">Segundo corte · promedio de quices · Quiz 2 y Quiz 3</div>
+        <div class="de" id="c2-de">Segundo corte · promedio de quices</div>
       </div>
       <div class="aviso ojo"><b>Esto es un avance, no la nota del corte.</b> El segundo corte
         todavía no ha terminado: faltan talleres y el II Parcial.</div>
@@ -145,9 +145,9 @@ footer{margin-top:44px;padding:22px;text-align:center;border-top:3px double var(
       <div id="c2-obs"></div>
       <div class="tarjeta">
         <h2>Cómo leerlo</h2>
-        <p>Los quices que cuentan en este corte son el <b>Quiz 2</b> (cabeza y cuello, 3
-          preguntas) y el <b>Quiz 3</b> (sistema muscular, 5 preguntas). <b>El Quiz 1 no se tiene
-          en cuenta.</b> La cifra grande es el promedio de los dos.</p>
+        <p>Cuentan los quices en papel del segundo corte que ves arriba, y se irán sumando a medida
+          que se califiquen. <b>El Quiz 1 no se tiene en cuenta.</b> La cifra grande es el promedio
+          de todos ellos.</p>
         <p>El <b>Quiz 3 también sirvió para conmutar el taller de sistema muscular</b>: quien
           entregó el taller conserva su nota; quien no lo entregó recibe en el taller la nota del
           Quiz 3.</p>
@@ -343,10 +343,19 @@ function pintarCorte2(r){
     '<div class="linea' + (suma ? " suma" : "") + '"><span class="q">' + et +
     "<small>" + esc(sub) + '</small></span><span class="v">' + v + "</span></div>";
   const ac = (k, de) => val(k) ? val(k) + " de " + de + " aciertos · " : "";
+  // Los quices se leen de las columnas «Quiz N» que traiga la hoja: un quiz
+  // nuevo aparece solo al pegar su columna.
+  const TEMA = {2:"cabeza y cuello", 3:"sistema muscular", 4:"sistema nervioso", 5:"sistema circulatorio", 6:"sistema linfático"};
+  const ITEMS = {2:3};                      // el Quiz 2 tuvo 3 preguntas; los demás, 5
+  const nums = Object.keys(c).map(k => (k.match(/^Quiz (\d+)$/) || [])[1]).filter(Boolean)
+    .map(Number).filter(n => n !== 1).sort((a, b) => a - b);
+  const lista = nums.length > 1
+    ? "Quiz " + nums.slice(0, -1).join(", ") + " y " + nums[nums.length - 1] : "Quiz " + nums.join("");
+  $("c2-de").textContent = "Segundo corte · promedio de quices · " + lista;
   $("c2-desglose").innerHTML =
-    linea("Quiz 2 · cabeza y cuello", ac("Quiz 2 aciertos", 3) + "en papel", nota("Quiz 2")) +
-    linea("Quiz 3 · sistema muscular", ac("Quiz 3 aciertos", 5) + "en papel", nota("Quiz 3")) +
-    linea("Promedio de quices", "Quiz 2 y Quiz 3 · sin el Quiz 1", nota("PROMEDIO QUICES"), true) +
+    nums.map(n => linea("Quiz " + n + (TEMA[n] ? " · " + TEMA[n] : ""),
+      ac("Quiz " + n + " aciertos", ITEMS[n] || 5) + "en papel", nota("Quiz " + n))).join("") +
+    linea("Promedio de quices", lista + " · sin el Quiz 1", nota("PROMEDIO QUICES"), true) +
     linea("Taller · sistema muscular", val("Regla taller") || "individual", nota("Taller muscular"), true);
 
   const obs = String(c.Observaciones || "").trim();
