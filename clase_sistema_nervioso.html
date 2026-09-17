@@ -1,0 +1,2753 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sistema nervioso · Clase 8 · Morfología General 2026-II</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:#1a2a35;--text:#2c3e4f;--text-soft:#5a6b7a;--text-muted:#8a9aa8;
+  --parchment:#f8f3e8;--parchment-dark:#f0e8d4;--parchment-deep:#e8dcc0;
+  --bg-card:#fdfaf2;--border:#d4c8a8;--border-light:#e5dbc0;
+  --amber:#b8860b;--amber-dark:#8b6914;--amber-light:#d4a72c;--amber-pale:#f5e9c8;
+  --teal:#2a7a6e;--teal-dark:#1f5d54;
+  --rust:#a0522d;--rust-dark:#7d3f22;
+  --clinical:#b5413b;--clinical-dark:#8a2f2a;--clinical-bg:#fce8e6;
+  --blue:#1976a1;--blue-dark:#115670;--blue-bg:#e3f0f5;
+  --green:#2e7d32;--green-bg:#e8f5e9;
+  --purple:#6b4a8a;--purple-bg:#f0e8f4;--purple-dark:#4a2d6e;
+  --shadow-sm:0 2px 8px rgba(26,42,53,0.06);
+  --shadow-md:0 4px 20px rgba(26,42,53,0.10);
+  --font-display:'Playfair Display',Georgia,serif;
+  --font-body:'Source Serif 4',Georgia,serif;
+  --font-mono:'DM Mono','Courier New',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--parchment);color:var(--text);line-height:1.75;font-size:17px;
+  background-image:radial-gradient(at 12% 8%,rgba(184,134,11,.04) 0%,transparent 50%),radial-gradient(at 88% 92%,rgba(42,122,110,.04) 0%,transparent 50%);
+  background-attachment:fixed}
+
+/* HEADER */
+.header{text-align:center;padding:70px 30px 50px;border-bottom:3px double var(--amber);margin-bottom:50px;position:relative}
+.header::before{content:'';position:absolute;top:30px;left:50%;transform:translateX(-50%);width:80px;height:1px;background:var(--amber)}
+.eyebrow{font-family:var(--font-mono);font-size:.78rem;letter-spacing:.32em;text-transform:uppercase;color:var(--amber-dark);margin-bottom:14px}
+.header h1{font-family:var(--font-display);font-size:clamp(2.2rem,5vw,3.6rem);font-weight:900;color:var(--ink);line-height:1.05;margin-bottom:12px}
+.header h1 em{font-style:italic;font-weight:400;color:var(--amber-dark)}
+.header .subtitle{font-family:var(--font-body);font-style:italic;font-size:1.15rem;color:var(--text-soft);margin-bottom:22px;font-weight:300}
+.header .meta{font-family:var(--font-mono);font-size:.82rem;letter-spacing:.18em;color:var(--text-muted);text-transform:uppercase}
+
+/* TABS */
+.tab-bar{background:var(--bg-card);border:1px solid var(--border);border-radius:4px;padding:0;margin-bottom:50px;box-shadow:var(--shadow-sm);overflow:hidden;display:flex}
+.tab-btn{flex:1;padding:18px 24px;background:none;border:none;border-right:1px solid var(--border-light);font-family:var(--font-body);font-size:.95rem;color:var(--text-soft);cursor:pointer;transition:all .2s;text-align:center;line-height:1.4}
+.tab-btn:last-child{border-right:none}
+.tab-btn:hover{background:var(--parchment-dark);color:var(--ink)}
+.tab-btn.active{background:var(--amber-pale);color:var(--ink);font-weight:600;border-bottom:3px solid var(--amber)}
+.tab-btn .tab-date{display:block;font-family:var(--font-mono);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--amber-dark);margin-bottom:4px}
+.tab-pane{display:none}
+.tab-pane.active{display:block}
+
+/* CONTAINER */
+.container{max-width:1100px;margin:0 auto;padding:0 30px 80px}
+
+/* NAV INTERNA */
+.station-nav{background:var(--bg-card);border:1px solid var(--border);border-radius:4px;padding:24px 28px;margin-bottom:50px;box-shadow:var(--shadow-sm)}
+.station-nav h3{font-family:var(--font-mono);font-size:.75rem;letter-spacing:.25em;text-transform:uppercase;color:var(--amber-dark);margin-bottom:16px}
+.station-nav ol{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px 24px;counter-reset:stations}
+.station-nav li{counter-increment:stations;padding:4px 0}
+.station-nav li::before{content:counter(stations,decimal-leading-zero) '. ';font-family:var(--font-mono);color:var(--amber-dark);font-weight:500;margin-right:6px}
+.station-nav a{color:var(--text);text-decoration:none;font-style:italic;border-bottom:1px dotted var(--border);transition:color .2s,border-color .2s}
+.station-nav a:hover{color:var(--amber-dark);border-color:var(--amber-dark)}
+
+/* STATIONS */
+.station{margin-bottom:80px;scroll-margin-top:30px}
+.station-header{display:flex;align-items:baseline;gap:20px;margin-bottom:30px;padding-bottom:18px;border-bottom:2px solid var(--border)}
+.station-number{font-family:var(--font-display);font-style:italic;font-size:4rem;font-weight:400;color:var(--amber);line-height:1;flex-shrink:0}
+.station-titles{flex:1}
+.station-eyebrow{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--amber-dark);margin-bottom:6px}
+.station h2{font-family:var(--font-display);font-size:clamp(1.7rem,3.5vw,2.4rem);font-weight:700;color:var(--ink);line-height:1.15}
+
+/* CONTENT BLOCK */
+.content-block{background:var(--bg-card);border:1px solid var(--border-light);border-radius:4px;padding:28px 32px;margin-bottom:24px;box-shadow:var(--shadow-sm)}
+.content-block h3{font-family:var(--font-display);font-size:1.4rem;font-weight:700;color:var(--ink);margin-bottom:16px;padding-bottom:8px;border-bottom:1px dotted var(--border)}
+.content-block h4{font-family:var(--font-display);font-size:1.1rem;font-weight:700;color:var(--amber-dark);margin:20px 0 10px;font-style:italic}
+.content-block p{margin-bottom:14px}
+.content-block ul,.content-block ol{margin:12px 0 18px 24px}
+.content-block li{margin-bottom:8px;padding-left:6px}
+.content-block strong{color:var(--ink);font-weight:700}
+.content-block em.term{font-style:italic;color:var(--amber-dark);font-weight:600}
+
+/* TWO-COL / THREE-COL */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:20px 0}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin:20px 0}
+@media(max-width:900px){.two-col,.three-col{grid-template-columns:1fr}}
+.col-card{background:var(--parchment-dark);border-left:4px solid var(--amber);padding:18px 22px;border-radius:2px}
+.col-card.teal{border-color:var(--teal);background:#e8f0ee}
+.col-card.rust{border-color:var(--rust);background:#f3e8de}
+.col-card.blue{border-color:var(--blue);background:var(--blue-bg)}
+.col-card.green{border-color:var(--green);background:var(--green-bg)}
+.col-card h5{font-family:var(--font-display);font-weight:700;color:var(--ink);margin-bottom:8px;font-size:1.05rem}
+
+/* TABLE */
+table.data{width:100%;border-collapse:collapse;margin:18px 0;font-size:.95rem}
+table.data th{background:var(--amber-dark);color:var(--parchment);padding:10px 14px;text-align:left;font-family:var(--font-mono);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;font-weight:500}
+table.data td{padding:10px 14px;border-bottom:1px solid var(--border-light);vertical-align:top}
+table.data tr:nth-child(even) td{background:var(--parchment-dark)}
+table.data tr:hover td{background:var(--amber-pale)}
+
+/* CLINICAL BOX */
+.clinical-box{background:var(--clinical-bg);border-left:5px solid var(--clinical);padding:20px 26px;margin:22px 0;border-radius:2px;position:relative}
+.clinical-box::before{content:'👁 Interfaz optométrica';display:block;font-family:var(--font-mono);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--clinical-dark);margin-bottom:10px;font-weight:600}
+.clinical-box h5{font-family:var(--font-display);font-weight:700;color:var(--clinical-dark);font-size:1.1rem;margin-bottom:6px}
+
+/* PEARL */
+.pearl{background:var(--amber-pale);border:1px solid var(--amber-light);border-radius:2px;padding:16px 22px;margin:18px 0;font-style:italic;color:var(--text);position:relative;padding-left:50px}
+.pearl::before{content:'◆';position:absolute;left:18px;top:16px;color:var(--amber-dark);font-size:1.2rem;font-style:normal}
+
+/* SABER PRO */
+.saber-box{background:var(--purple-bg);border-left:5px solid var(--purple);padding:20px 26px;margin:22px 0;border-radius:2px}
+.saber-box::before{content:'★ Tipo Saber Pro';display:block;font-family:var(--font-mono);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--purple-dark);margin-bottom:10px;font-weight:600}
+
+/* FIGURE */
+.figure{margin:28px 0;background:var(--bg-card);border:1px solid var(--border-light);border-radius:4px;padding:20px;box-shadow:var(--shadow-sm);text-align:center}
+.figure svg{width:100%;max-width:800px;height:auto}
+.figure-caption{font-family:var(--font-mono);font-size:.78rem;color:var(--text-muted);margin-top:12px;letter-spacing:.06em;text-align:center}
+
+/* FLIP CARDS */
+.flip-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;margin:20px 0}
+.flip-card{height:160px;perspective:800px;cursor:pointer}
+.flip-inner{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform .5s ease}
+.flip-card:hover .flip-inner,.flip-card.flipped .flip-inner{transform:rotateY(180deg)}
+.flip-front,.flip-back{position:absolute;inset:0;border-radius:4px;padding:16px;backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.flip-front{background:var(--bg-card);border:2px solid var(--border)}
+.flip-back{background:var(--amber-pale);border:2px solid var(--amber);transform:rotateY(180deg)}
+.flip-front .term-label{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px}
+.flip-front .term-name{font-family:var(--font-display);font-size:1.15rem;font-weight:700;color:var(--ink);line-height:1.2}
+.flip-front .term-en{font-family:var(--font-mono);font-size:.75rem;color:var(--text-muted);margin-top:6px;font-style:italic}
+.flip-back .term-def{font-size:.88rem;color:var(--text);line-height:1.5;margin-bottom:8px}
+.flip-back .term-opto{font-family:var(--font-mono);font-size:.72rem;color:var(--clinical-dark);letter-spacing:.05em}
+
+/* CHECK QUESTION */
+.check-question{background:linear-gradient(180deg,#fdfaf2 0%,#f5ecd5 100%);border:2px dashed var(--amber);border-radius:4px;padding:28px 30px;margin:30px 0;position:relative}
+.check-question::before{content:'? Verificación';position:absolute;top:-12px;left:24px;background:var(--parchment);padding:2px 14px;font-family:var(--font-mono);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--amber-dark);font-weight:600}
+.check-question .question-text{font-family:var(--font-display);font-size:1.15rem;color:var(--ink);margin-bottom:18px;font-weight:400;font-style:italic}
+.options{list-style:none;margin:0}
+.options li{margin-bottom:10px;padding:12px 18px;background:var(--bg-card);border:1px solid var(--border);border-radius:3px;cursor:pointer;transition:all .2s;position:relative;padding-left:50px}
+.options li::before{content:attr(data-letter);position:absolute;left:16px;top:50%;transform:translateY(-50%);font-family:var(--font-mono);font-weight:500;color:var(--amber-dark)}
+.options li:hover{background:var(--amber-pale);border-color:var(--amber)}
+.options li.correct{background:#e8f5e8;border-color:#2e7d32;color:#1b5e20}
+.options li.correct::after{content:' ✓';color:#2e7d32;font-weight:700}
+.options li.incorrect{background:var(--clinical-bg);border-color:var(--clinical);color:var(--clinical-dark)}
+.options li.incorrect::after{content:' ✗';color:var(--clinical);font-weight:700}
+.feedback{display:none;margin-top:16px;padding:14px 18px;background:var(--bg-card);border-left:4px solid var(--amber);border-radius:2px;font-size:.96rem}
+.feedback.show{display:block}
+.feedback strong{color:var(--amber-dark)}
+
+/* PHOTO */
+.photo-grid{display:grid;gap:20px;margin:24px 0}
+@media(min-width:640px){.photo-grid.cols-2{grid-template-columns:1fr 1fr}.photo-grid.cols-3{grid-template-columns:1fr 1fr 1fr}}
+.photo-card{background:var(--bg-card);border:1px solid var(--border-light);border-radius:4px;padding:14px;box-shadow:var(--shadow-sm);transition:box-shadow .2s}
+.photo-card:hover{box-shadow:var(--shadow-md)}
+.photo-card .photo-frame{position:relative;background:repeating-linear-gradient(45deg,var(--parchment-dark) 0,var(--parchment-dark) 10px,var(--parchment-deep) 10px,var(--parchment-deep) 20px);border-radius:3px;overflow:hidden;min-height:200px;display:flex;align-items:center;justify-content:center}
+.photo-card img{display:block;width:100%;height:auto;border-radius:3px;cursor:zoom-in}
+.photo-card img.broken{display:none}
+.photo-card .photo-missing{display:none;font-family:var(--font-mono);font-size:.75rem;color:var(--text-muted);text-align:center;padding:40px 20px;letter-spacing:.08em;text-transform:uppercase}
+.photo-card img.broken+.photo-missing{display:block}
+.photo-card .photo-missing::before{content:'⏳ ';margin-right:4px}
+.photo-card .photo-caption{font-family:var(--font-body);font-size:.92rem;color:var(--text);margin-top:12px;line-height:1.5}
+.photo-card .photo-caption strong{font-family:var(--font-display);color:var(--ink);display:block;margin-bottom:4px;font-weight:700;font-size:.98rem}
+.photo-card .photo-credit{font-family:var(--font-mono);font-size:.7rem;color:var(--text-muted);margin-top:8px;letter-spacing:.06em;text-transform:uppercase}
+.photo-hero{background:var(--bg-card);border:1px solid var(--border-light);border-radius:4px;padding:18px;margin:24px 0;box-shadow:var(--shadow-sm);text-align:center}
+.photo-hero img{display:block;width:100%;max-width:720px;height:auto;margin:0 auto;border-radius:3px;cursor:zoom-in}
+.photo-hero img.broken{display:none}
+.photo-hero .photo-missing{display:none;font-family:var(--font-mono);font-size:.78rem;color:var(--text-muted);padding:60px 20px;letter-spacing:.1em;text-transform:uppercase}
+.photo-hero img.broken+.photo-missing{display:block}
+.photo-hero .photo-missing::before{content:'⏳ ';margin-right:4px}
+.photo-hero .photo-caption{font-family:var(--font-body);font-size:.92rem;color:var(--text);margin-top:14px;max-width:640px;margin-left:auto;margin-right:auto}
+.photo-hero .photo-caption strong{font-family:var(--font-display);color:var(--ink);font-weight:700}
+
+/* LIGHTBOX */
+.lightbox{display:none;position:fixed;inset:0;background:rgba(26,42,53,.92);z-index:9999;align-items:center;justify-content:center;padding:30px;cursor:zoom-out}
+.lightbox.open{display:flex}
+.lightbox img{max-width:95vw;max-height:90vh;border-radius:4px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.lightbox .lb-caption{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);color:var(--parchment);font-family:var(--font-mono);font-size:.82rem;background:rgba(26,42,53,.7);padding:8px 16px;border-radius:2px;max-width:90vw;text-align:center}
+.lightbox .lb-close{position:absolute;top:20px;right:30px;background:none;border:2px solid var(--parchment);color:var(--parchment);width:44px;height:44px;border-radius:50%;font-size:1.3rem;cursor:pointer;font-family:var(--font-mono)}
+.lightbox .lb-close:hover{background:rgba(255,255,255,.1)}
+
+/* FOOTER */
+.footer{margin-top:80px;padding:30px;text-align:center;border-top:3px double var(--amber);font-family:var(--font-mono);font-size:.78rem;color:var(--text-muted);letter-spacing:.12em}
+/* ACORDEONES — <details>/<summary> nativos: se despliegan sin JavaScript,
+   así que funcionan aunque el archivo se abra desde el disco o se imprima. */
+.acorde{background:var(--bg-card);border:1px solid var(--border-light);border-left:4px solid var(--teal);
+  border-radius:3px;margin:10px 0;overflow:hidden}
+.acorde > summary{cursor:pointer;padding:13px 18px;font-family:var(--font-display);font-weight:700;
+  color:var(--ink);font-size:1rem;list-style:none;display:flex;align-items:center;gap:10px;
+  background:var(--parchment-dark);transition:background .15s}
+.acorde > summary:hover{background:var(--amber-pale)}
+.acorde > summary::-webkit-details-marker{display:none}
+.acorde > summary::before{content:'+';font-family:var(--font-mono);font-size:1.15rem;color:var(--teal);
+  font-weight:400;width:16px;flex-shrink:0;text-align:center}
+.acorde[open] > summary::before{content:'−'}
+.acorde[open] > summary{border-bottom:1px solid var(--border-light)}
+.acorde > summary .pista{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);
+  font-weight:400;letter-spacing:.06em;margin-left:auto;text-transform:uppercase}
+.acorde .cuerpo{padding:16px 18px 18px}
+.acorde .cuerpo > *:last-child{margin-bottom:0}
+.acorde.rust{border-left-color:var(--rust)} .acorde.amber{border-left-color:var(--amber)}
+.acorde.blue{border-left-color:var(--blue)} .acorde.purple{border-left-color:var(--purple)}
+@media print{.acorde .cuerpo{display:block!important}.acorde > summary::before{content:''}}
+
+/* Ficha de tejido: la imagen del cuadro de Tortora más su texto */
+.ficha{margin:22px 0}
+.ficha > h4{font-family:var(--font-display);font-size:1.12rem;color:var(--ink);font-weight:700;
+  margin-bottom:4px;padding-bottom:5px;border-bottom:2px solid var(--amber-light)}
+.ficha .datos{display:grid;grid-template-columns:auto 1fr;gap:5px 14px;margin:10px 0 0;font-size:.93rem}
+.ficha .datos dt{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--amber-dark);padding-top:3px;font-weight:500}
+.ficha .datos dd{margin:0;color:var(--text)}
+.ficha .datos dd b{color:var(--ink)}
+@media(max-width:640px){.ficha .datos{grid-template-columns:1fr;gap:2px}
+  .ficha .datos dd{margin-bottom:8px}}
+
+@media print{body{background:white;font-size:11pt}.tab-bar{display:none}}
+
+/* ─── Añadidos de la clase 6 ─── */
+
+/* Fichas de hueso: nombre, cuántos son y qué aporta a la órbita */
+.huesos-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:12px;margin:18px 0}
+.hueso{background:var(--parchment-dark);border:1px solid var(--border-light);border-left:4px solid var(--teal);
+  border-radius:3px;padding:12px 15px}
+.hueso.orb{border-left-color:var(--clinical);background:#fbeeec}
+.hueso .nom{font-family:var(--font-display);font-weight:700;color:var(--ink);font-size:1.02rem}
+.hueso .par{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--text-muted);display:block;margin-bottom:5px}
+.hueso .que{font-size:.87rem;color:var(--text-soft);line-height:1.45;margin-top:4px}
+.hueso .marca{display:inline-block;font-family:var(--font-mono);font-size:.62rem;letter-spacing:.1em;
+  text-transform:uppercase;background:var(--clinical);color:#fff;padding:1px 7px;border-radius:9px;margin-top:7px}
+
+/* Puntos craneométricos: cada punto con su traducción de campo */
+.puntos{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;margin:16px 0}
+.punto{background:var(--bg-card);border:1px solid var(--border-light);border-radius:3px;padding:11px 14px;font-size:.9rem}
+.punto b{font-family:var(--font-display);color:var(--amber-dark);font-size:1rem;display:block}
+.punto.clave{background:var(--amber-pale);border-color:var(--amber-light)}
+
+/* Recorrido: una cadena de pasos con flecha, para el drenaje de la lágrima */
+.recorrido{display:flex;flex-wrap:wrap;align-items:stretch;gap:0;margin:20px 0;font-size:.86rem}
+.recorrido .paso{background:var(--blue-bg);border:1px solid var(--blue);color:var(--blue-dark);
+  padding:9px 14px;border-radius:3px;display:flex;align-items:center;text-align:center;line-height:1.35}
+.recorrido .flecha{display:flex;align-items:center;color:var(--blue);padding:0 8px;font-size:1.15rem}
+@media(max-width:720px){.recorrido{flex-direction:column}
+  .recorrido .flecha{padding:3px 0;transform:rotate(90deg)}}
+
+/* Aviso de que un tema se retoma en otra clase, para no invadir el temario */
+.adelanto{background:var(--parchment-dark);border:1px dashed var(--teal);border-radius:3px;
+  padding:14px 20px;margin:20px 0;font-size:.93rem;color:var(--text-soft)}
+.adelanto::before{content:'→ Se retoma más adelante';display:block;font-family:var(--font-mono);
+  font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--teal-dark);
+  margin-bottom:7px;font-weight:600}
+.adelanto strong{color:var(--ink)}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="eyebrow">Clase 8 · Morfología General 2026-II</div>
+  <h1>Sistema nervioso: el encéfalo, la médula y <em>los doce pares</em></h1>
+  <p class="subtitle">El órgano que ve, decide y mueve — y los doce nervios que salen del cráneo, cinco de ellos camino del ojo</p>
+  <div class="meta">Dr. Jorge Bogoya &middot; Universidad de La Salle &middot; Optometría &middot; Primer semestre</div>
+</header>
+
+<div class="container">
+
+<div class="tab-bar" role="tablist">
+  <button class="tab-btn active" role="tab" onclick="showTab('s1',this)">
+    <span class="tab-date">Jue. 17 sep · 09:00–11:00</span>
+    Sesión 1 · El sistema nervioso central
+  </button>
+  <button class="tab-btn" role="tab" onclick="showTab('s2',this)">
+    <span class="tab-date">Jue. 17 sep · 11:00–13:00</span>
+    Sesión 2 · El nervio y los doce pares
+  </button>
+</div>
+
+<!-- ═══════════════════════ SESIÓN 1 ═══════════════════════ -->
+<div class="tab-pane active" id="s1">
+
+<nav class="station-nav">
+  <h3>Contenido · Sesión 1</h3>
+  <ol>
+    <li><a href="#s1e0">Para empezar: cinco preguntas</a></li>
+    <li><a href="#s1e1">El mapa del sistema nervioso</a></li>
+    <li><a href="#s1e2">Las células: neurona y neuroglia</a></li>
+    <li><a href="#s1e3">Gris y blanca, núcleo y ganglio</a></li>
+    <li><a href="#s1e4">La protección: meninges, LCR y barrera</a></li>
+    <li><a href="#s1e5">La médula espinal</a></li>
+    <li><a href="#s1e6">El arco reflejo</a></li>
+    <li><a href="#s1e7">El tronco del encéfalo y el cerebelo</a></li>
+    <li><a href="#s1e8">El diencéfalo y el cerebro</a></li>
+    <li><a href="#s1e9">Términos TA2 de la sesión</a></li>
+    <li><a href="#s1e10">Comprueba lo que aprendiste</a></li>
+  </ol>
+</nav>
+
+<!-- ─────────── 00 ─────────── -->
+<section class="station" id="s1e0">
+  <div class="station-header">
+    <div class="station-number">00</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Para empezar · Conversación</div>
+      <h2>Cinco preguntas antes de abrir el libro</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Como siempre: responde con lo que ya tienes. No hay nota. Al final de la mañana volvemos
+      sobre las cinco y verás cuántas contestas distinto.</p>
+
+    <div class="two-col">
+      <div class="col-card">
+        <h5>1 · Dos por ciento, veinte por ciento</h5>
+        <p>El encéfalo pesa el 2 % del cuerpo y gasta el 20 % del oxígeno y de la glucosa, incluso
+          en reposo. ¿Por qué te mareas si te levantas de golpe después de estar mucho rato
+          sentado?</p>
+      </div>
+      <div class="col-card teal">
+        <h5>2 · La mano del otro lado</h5>
+        <p>Una lesión en el hemisferio cerebral <strong>izquierdo</strong> debilita la mano
+          <strong>derecha</strong>. ¿Por qué el lado contrario?</p>
+      </div>
+      <div class="col-card">
+        <h5>3 · La aguja que no toca la médula</h5>
+        <p>En la punción lumbar se clava una aguja dentro del conducto vertebral, entre L3 y L4, y
+          no se lesiona la médula. ¿Cómo es posible, si la médula va por dentro de la columna?</p>
+      </div>
+      <div class="col-card amber">
+        <h5>4 · Antes de sentirlo</h5>
+        <p>Retiras la mano de una olla caliente <strong>antes</strong> de notar que quema. ¿Quién
+          tomó esa decisión, si todavía no te habías enterado?</p>
+      </div>
+      <div class="col-card teal">
+        <h5>5 · El antibiótico que no llega</h5>
+        <p>Muchos antibióticos que curan una infección del pulmón no sirven para una del encéfalo,
+          aunque la sangre llegue a los dos. ¿Qué los detiene?</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 01 ─────────── -->
+<section class="station" id="s1e1">
+  <div class="station-header">
+    <div class="station-number">01</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Punto de partida</div>
+      <h2>El mapa del sistema nervioso</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Pesa unos 2 kg —el 3 % del cuerpo— y es de los sistemas más pequeños y más complejos a la
+      vez. Antes de entrar en las piezas conviene tener el mapa, porque casi todo lo que viene
+      después es saber <strong>de qué lado del mapa</strong> está cada estructura.</p>
+
+    <div class="two-col">
+      <div class="col-card">
+        <h5>Sistema nervioso central (SNC)</h5>
+        <p>El <strong>encéfalo</strong>, dentro del cráneo, y la <strong>médula espinal</strong>,
+          dentro de la columna. Se unen a través del foramen magno. Aquí se procesa la
+          información, se decide, se piensa y se recuerda.</p>
+      </div>
+      <div class="col-card teal">
+        <h5>Sistema nervioso periférico (SNP)</h5>
+        <p>Todo el tejido nervioso <strong>fuera</strong> del SNC: los <strong>12 pares de nervios
+          craneales</strong>, los <strong>31 pares de nervios espinales</strong>, los ganglios y los
+          receptores sensitivos. Es el cableado que conecta el SNC con el resto del cuerpo.</p>
+      </div>
+    </div>
+
+    <h3>El periférico, según a quién obedece</h3>
+    <div class="three-col">
+      <div class="col-card">
+        <h5>Somático</h5>
+        <p><strong>Voluntario.</strong> Lleva al SNC lo que perciben la piel, los músculos y los
+          sentidos especiales —la visión incluida— y manda órdenes solo al músculo
+          esquelético.</p>
+      </div>
+      <div class="col-card">
+        <h5>Autónomo</h5>
+        <p><strong>Involuntario.</strong> Gobierna el músculo liso, el cardíaco y las glándulas.
+          Tiene dos divisiones que casi siempre actúan en sentido opuesto: la
+          <strong>simpática</strong>, de «lucha o huida», y la <strong>parasimpática</strong>, de
+          «reposo y digestión».</p>
+      </div>
+      <div class="col-card">
+        <h5>Entérico</h5>
+        <p>Una red de neuronas en la pared del tubo digestivo que funciona casi por su cuenta.
+          Tortora lo llama el «cerebro visceral». Hoy solo lo nombramos.</p>
+      </div>
+    </div>
+
+    <div class="pearl">
+      <p>En el ojo conviven los dos sistemas motores. El músculo que gira el globo hacia afuera es
+        esquelético y obedece al <strong>somático</strong>; el esfínter de la pupila es liso y lo
+        gobierna el <strong>autónomo</strong>. En la clase 7 lo viste desde el músculo; hoy lo vas a
+        ver desde el nervio.</p>
+    </div>
+
+    <h3>Tres funciones, siempre en el mismo orden</h3>
+    <div class="recorrido">
+      <ol>
+        <li><strong>Sensitiva.</strong> Los receptores detectan un estímulo. Ves venir un balón: la
+          retina lo registra.</li>
+        <li><strong>Integradora.</strong> El SNC analiza la información y decide. El encéfalo calcula
+          hacia dónde va el balón.</li>
+        <li><strong>Motora.</strong> El SNC activa efectores —músculos y glándulas—. Apartas la
+          cabeza.</li>
+      </ol>
+    </div>
+
+    <div class="photo-grid">
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_12_1_organizacion_sn.png" alt="Organización del sistema nervioso: subdivisiones central y periférica"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>El mapa completo.</strong> Encéfalo y médula a un lado;
+          nervios, ganglios y receptores al otro. Tortora, Fig. 12.1.</div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_12_10_funciones_sn.png" alt="Funciones sensitiva, integradora y motora del sistema nervioso"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>Sentir, decidir, responder.</strong> Sigue las flechas:
+          entran por un lado, salen por el otro. Tortora, Fig. 12.10.</div>
+      </div>
+    </div>
+
+    <div class="photo-hero">
+      <img src="img/cuadro_15_1_somatico_autonomo.png" alt="Cuadro comparativo entre el sistema nervioso somático y el autónomo"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>Somático frente a autónomo.</strong> Fíjate solo en dos
+        filas: qué efectores controla cada uno y si su acción es voluntaria. Tortora, Cuadro 15.1.</div>
+    </div>
+
+    <h3>No trabaja solo</h3>
+    <p>El sistema nervioso regula, junto con las hormonas, a casi todos los demás sistemas del
+      cuerpo: el corazón, la respiración, la digestión, los músculos. No hace falta memorizar la tabla
+      de abajo; basta con ver que no hay una sola fila vacía.</p>
+
+    <div class="photo-hero">
+      <img src="img/homeostasis_sistema_nervioso.png" alt="Contribuciones del sistema nervioso a la homeostasis de los demás aparatos y sistemas"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>Una fila por sistema.</strong> Busca la del sistema muscular:
+        es lo que viste la semana pasada, visto ahora desde el nervio. Tortora, Homeostasis ·
+        el sistema nervioso.</div>
+    </div>
+
+    <div class="check-question" data-question="q1s1">
+      <p class="question-text">1. ¿Cuál de estas estructuras pertenece al sistema nervioso
+        periférico?</p>
+      <ul class="options">
+        <li data-letter="A">El tálamo, dentro del diencéfalo</li>
+        <li data-letter="B">El cerebelo, detrás del tronco</li>
+        <li data-letter="C" data-correct="true">Un ganglio de la raíz posterior</li>
+        <li data-letter="D">El bulbo raquídeo, sobre la médula</li>
+        <li data-letter="E">La médula espinal cervical</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: C.</strong> Un ganglio es un grupo de cuerpos
+        neuronales <em>fuera</em> del encéfalo y de la médula, y eso lo pone en el SNP. Todos los
+        demás están dentro del cráneo o de la columna y forman parte del SNC. La pista está en la
+        palabra: si es ganglio, es periférico.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 02 ─────────── -->
+<section class="station" id="s1e2">
+  <div class="station-header">
+    <div class="station-number">02</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Histología básica</div>
+      <h2>Las células: la neurona y quien la cuida</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>El tejido nervioso tiene dos tipos de células. Las <strong>neuronas</strong> hacen el
+      trabajo —sentir, pensar, recordar, mover— y, a cambio de especializarse tanto,
+      <strong>perdieron la capacidad de dividirse</strong>. La <strong>neuroglia</strong> las
+      sostiene, las alimenta y las protege.</p>
+
+    <h3>La neurona en tres partes</h3>
+    <div class="three-col">
+      <div class="col-card">
+        <h5>Cuerpo celular</h5>
+        <p>Tiene el núcleo y los orgánulos. Fabrica las proteínas que la neurona necesita.</p>
+      </div>
+      <div class="col-card teal">
+        <h5>Dendritas</h5>
+        <p>Prolongaciones cortas y ramificadas que <strong>reciben</strong> la señal.</p>
+      </div>
+      <div class="col-card amber">
+        <h5>Axón</h5>
+        <p>Una sola prolongación, a veces muy larga, que <strong>conduce</strong> la señal hacia otra
+          célula.</p>
+      </div>
+    </div>
+
+    <h3>Tres formas, según cuántas prolongaciones salen del cuerpo</h3>
+    <ul style="margin-left:22px">
+      <li><strong>Multipolar</strong> — varias dendritas y un axón. Son casi todas las del encéfalo
+        y la médula, y todas las motoras.</li>
+      <li><strong>Bipolar</strong> — una dendrita y un axón. Están en <strong>la retina</strong>, el
+        oído interno y el área olfatoria.</li>
+      <li><strong>Unipolar</strong> —más exactamente, seudounipolar— una sola prolongación que se
+        divide en dos. Son las sensitivas de los ganglios de las raíces posteriores.</li>
+    </ul>
+
+    <div class="photo-grid">
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_12_2_neurona_multipolar.png" alt="Estructura de una neurona multipolar: cuerpo celular, dendritas y axón"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>Una neurona multipolar.</strong> Localiza las tres partes
+          y el sentido en que viaja la señal. Tortora, Fig. 12.2.</div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_12_3_clasificacion_neuronas.png" alt="Clasificación estructural de las neuronas: multipolar, bipolar y unipolar"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>Multipolar, bipolar, unipolar.</strong> Cuenta las
+          prolongaciones que salen del cuerpo: eso es todo el criterio. Tortora, Fig. 12.3.</div>
+      </div>
+    </div>
+
+    <div class="clinical-box">
+      <h5>👁 Interfaz optométrica</h5>
+      <p>La neurona bipolar del libro es la de tu especialidad. En la retina, los
+        <strong>conos y bastones</strong> captan la luz y pasan la señal a las <strong>células
+        bipolares</strong>; éstas la entregan a las <strong>células ganglionares</strong>, y los axones
+        de todas las ganglionares de una retina se reúnen para formar el <strong>nervio óptico</strong>.
+        La retina, en otras palabras, ya es tejido nervioso trabajando.</p>
+    </div>
+
+    <h3>La neuroglia: seis tipos, dos territorios</h3>
+    <div class="two-col">
+      <div class="col-card">
+        <h5>En el SNC</h5>
+        <p><strong>Astrocitos</strong> — sostienen las neuronas y rodean los capilares: forman parte
+          de la barrera hematoencefálica.<br>
+          <strong>Oligodendrocitos</strong> — fabrican la mielina del SNC.<br>
+          <strong>Microglía</strong> — defensa: fagocitan restos y microbios.<br>
+          <strong>Células ependimarias</strong> — tapizan los ventrículos y producen líquido
+          cefalorraquídeo.</p>
+      </div>
+      <div class="col-card teal">
+        <h5>En el SNP</h5>
+        <p><strong>Células de Schwann</strong> — fabrican la mielina del SNP; cada una envuelve un
+          solo axón.<br>
+          <strong>Células satélite</strong> — rodean los cuerpos neuronales dentro de los
+          ganglios.</p>
+      </div>
+    </div>
+
+    <div class="photo-grid">
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_12_6_neuroglia_snc.png" alt="Neuroglia del sistema nervioso central"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>La glía del SNC.</strong> Busca el astrocito tocando un
+          capilar: ahí empieza la barrera hematoencefálica. Tortora, Fig. 12.6.</div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_12_7_neuroglia_snp.png" alt="Neuroglia del sistema nervioso periférico: células de Schwann y satélite"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>La glía del SNP.</strong> Solo dos tipos: la de Schwann
+          en el nervio y la satélite en el ganglio. Tortora, Fig. 12.7.</div>
+      </div>
+    </div>
+
+    <h3>La mielina</h3>
+    <p>Es una vaina de muchas capas de lípidos y proteínas que envuelve el axón. Funciona como
+      <strong>aislante</strong> y hace que la señal viaje <strong>más rápido</strong>. La fabrican
+      dos células distintas según el territorio: la de Schwann en el SNP y el oligodendrocito en el
+      SNC. Un oligodendrocito mieliniza varios axones a la vez; una célula de Schwann, uno solo.</p>
+
+    <div class="photo-hero">
+      <img src="img/fig_12_8_mielina.png" alt="Axones mielínicos y amielínicos"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>Con y sin mielina.</strong> Mira cómo la célula de Schwann
+        se enrolla varias veces sobre el axón. Tortora, Fig. 12.8.</div>
+    </div>
+
+    <h3>Ejercicio · Nómbrala sin mirar</h3>
+    <p>Esta neurona no lleva rótulos a propósito. Antes de abrir la respuesta, nombra en voz alta
+      cada parte que reconozcas.</p>
+    <div class="photo-hero">
+      <img src="img/neurona_sin_rotulos.png" alt="Neurona mielinizada sin rótulos, para identificar sus partes"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>Sin nombres.</strong> Empieza por el extremo de las
+        ramificaciones y recorre la célula hasta el otro.</div>
+    </div>
+    <div class="acorde">
+      <details>
+        <summary>Ver las respuestas</summary>
+        <p>Arriba a la derecha, las <strong>dendritas</strong> y el <strong>cuerpo celular</strong>
+          con su núcleo. De él sale el <strong>axón</strong>, envuelto en segmentos por
+          <strong>células de Schwann</strong> que forman la <strong>vaina de mielina</strong> —en el
+          tramo abierto se ven sus capas enrolladas—. Los estrechamientos entre dos células de
+          Schwann son los <strong>nódulos</strong>, donde el axón queda al descubierto. Abajo a la
+          izquierda, las <strong>terminales del axón</strong>. Como la mielina la hace la célula de
+          Schwann, esta neurona es del <strong>SNP</strong>.</p>
+        <div class="photo-hero" style="margin-bottom:0">
+          <img src="img/cuadro_12_3_neurona.png" alt="Cuadro resumen de las estructuras y funciones de la neurona"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+          <div class="photo-caption"><strong>Para comprobar.</strong> Cada estructura con su función.
+            Tortora, Cuadro 12.3.</div>
+        </div>
+      </details>
+    </div>
+
+    <div class="check-question" data-question="q2s1">
+      <p class="question-text">2. En la retina, una neurona recibe la señal por una sola dendrita y
+        la entrega por un solo axón. ¿Qué tipo estructural es?</p>
+      <ul class="options">
+        <li data-letter="A">Multipolar</li>
+        <li data-letter="B">Unipolar</li>
+        <li data-letter="C">Seudounipolar</li>
+        <li data-letter="D" data-correct="true">Bipolar</li>
+        <li data-letter="E">Ependimaria</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: D.</strong> Una dendrita y un axón son dos
+        prolongaciones: bipolar. Unipolar y seudounipolar son la misma cosa —una sola prolongación—,
+        y multipolar tiene muchas dendritas. «Ependimaria» es la trampa de nivel: no es una neurona,
+        es una célula de la glía que tapiza los ventrículos.</div>
+    </div>
+
+    <div class="check-question" data-question="q3s1">
+      <p class="question-text">3. ¿Qué célula forma la vaina de mielina de un nervio espinal?</p>
+      <ul class="options">
+        <li data-letter="A">El oligodendrocito</li>
+        <li data-letter="B" data-correct="true">La célula de Schwann</li>
+        <li data-letter="C">El astrocito</li>
+        <li data-letter="D">La microglía</li>
+        <li data-letter="E">La célula satélite</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: B.</strong> El nervio espinal está fuera del encéfalo y
+        de la médula: es SNP, y en el SNP la mielina la hace la célula de Schwann. El
+        oligodendrocito hace exactamente lo mismo, pero dentro del SNC — por eso es el distractor más
+        fuerte. La célula satélite también es glía del SNP, pero rodea cuerpos neuronales en los
+        ganglios, no axones.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 03 ─────────── -->
+<section class="station" id="s1e3">
+  <div class="station-header">
+    <div class="station-number">03</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Vocabulario que ordena</div>
+      <h2>Gris y blanca, núcleo y ganglio, tracto y nervio</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Tres pares de palabras que se confunden todo el semestre. Vale la pena fijarlos hoy, porque
+      con ellos se lee cualquier lámina del sistema nervioso.</p>
+
+    <div class="two-col">
+      <div class="col-card">
+        <h5>Sustancia gris</h5>
+        <p>Donde están los <strong>cuerpos neuronales</strong>, las dendritas, axones sin mielina y
+          glía. Se ve grisácea porque no hay mielina.</p>
+      </div>
+      <div class="col-card teal">
+        <h5>Sustancia blanca</h5>
+        <p>Donde van los <strong>axones con mielina</strong>. Se ve blanca porque la mielina, que es
+          grasa, es blanca.</p>
+      </div>
+    </div>
+
+    <p>Y se reparten al revés en los dos grandes órganos del SNC: en la <strong>médula</strong> la
+      gris está <strong>dentro</strong>, en forma de H, rodeada de blanca; en el <strong>cerebro</strong>
+      y el cerebelo la gris está <strong>fuera</strong> —es la corteza— y la blanca dentro.</p>
+
+    <div class="photo-hero">
+      <img src="img/fig_12_9_sustancia_gris_blanca.png" alt="Distribución de las sustancias gris y blanca en la médula espinal y en el encéfalo"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>Al revés en cada órgano.</strong> Compara el corte de la
+        médula con el del encéfalo: la gris cambia de sitio. Tortora, Fig. 12.9.</div>
+    </div>
+
+    <h3>El mismo objeto con dos nombres, según dónde esté</h3>
+    <div class="two-col">
+      <div class="col-card">
+        <h5>Núcleo · ganglio</h5>
+        <p>Un grupo de cuerpos neuronales se llama <strong>núcleo</strong> si está dentro del SNC y
+          <strong>ganglio</strong> si está fuera, en el SNP.</p>
+      </div>
+      <div class="col-card amber">
+        <h5>Tracto · nervio</h5>
+        <p>Un haz de axones se llama <strong>tracto</strong> si va dentro del SNC y
+          <strong>nervio</strong> si va fuera, en el SNP.</p>
+      </div>
+    </div>
+
+    <div class="pearl">
+      <p><strong>La regla cabe en una línea: SNC → núcleo y tracto; SNP → ganglio y nervio.</strong>
+        En la sesión 2 vas a encontrar el <em>ganglio ciliar</em>: está dentro de la órbita, fuera
+        del encéfalo, y por eso es ganglio y no núcleo.</p>
+    </div>
+
+    <div class="check-question" data-question="q4s1">
+      <p class="question-text">4. En el mesencéfalo hay un grupo de cuerpos neuronales del que nacen
+        los axones del nervio oculomotor. ¿Cómo se llama correctamente esa agrupación?</p>
+      <ul class="options">
+        <li data-letter="A">Ganglio oculomotor</li>
+        <li data-letter="B">Tracto oculomotor</li>
+        <li data-letter="C">Plexo oculomotor</li>
+        <li data-letter="D">Nervio oculomotor</li>
+        <li data-letter="E" data-correct="true">Núcleo oculomotor</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: E.</strong> Son cuerpos neuronales y están dentro del
+        SNC —el mesencéfalo es parte del tronco del encéfalo—: núcleo. «Ganglio» sería el nombre si
+        estuvieran fuera. «Tracto» y «nervio» describen haces de axones, no cuerpos: el nervio
+        oculomotor es lo que <em>sale</em> de ese núcleo.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 04 ─────────── -->
+<section class="station" id="s1e4">
+  <div class="station-header">
+    <div class="station-number">04</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Protección</div>
+      <h2>Hueso, meninges, líquido y una barrera</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>El tejido nervioso es muy delicado y se repara mal, así que está protegido en capas: primero
+      el <strong>hueso</strong> —el cráneo y la columna—, después las <strong>meninges</strong>,
+      luego un <strong>líquido</strong> que amortigua, y por último una <strong>barrera
+      química</strong> que decide qué entra desde la sangre.</p>
+
+    <h3>Las meninges: tres membranas, de fuera hacia dentro</h3>
+    <div class="three-col">
+      <div class="col-card">
+        <h5>Duramadre</h5>
+        <p>La externa, gruesa y dura. En el cráneo tiene <strong>dos capas</strong> que se separan en
+          algunos puntos para formar los <strong>senos venosos</strong>, por donde sale la sangre del
+          encéfalo. En la columna tiene una sola capa y forma un saco que llega hasta S2.</p>
+      </div>
+      <div class="col-card teal">
+        <h5>Aracnoides</h5>
+        <p>La media. Delgada y <strong>sin vasos</strong>; sus fibras finas recuerdan una tela de
+          araña, de ahí el nombre.</p>
+      </div>
+      <div class="col-card">
+        <h5>Piamadre</h5>
+        <p>La interna, finísima y <strong>pegada</strong> a la superficie del encéfalo y de la médula.
+          Lleva muchos vasos. En la médula forma los <strong>ligamentos dentados</strong>, que la
+          mantienen suspendida.</p>
+      </div>
+    </div>
+
+    <p>Entre las capas quedan espacios, y conviene saber cuál contiene qué:</p>
+    <ul style="margin-left:22px">
+      <li><strong>Epidural</strong> — entre la duramadre y el hueso, con grasa. Existe
+        <strong>solo en la columna</strong>: alrededor del encéfalo no hay espacio epidural.</li>
+      <li><strong>Subdural</strong> — entre la duramadre y la aracnoides, muy estrecho.</li>
+      <li><strong>Subaracnoideo</strong> — entre la aracnoides y la piamadre. Aquí circula el
+        <strong>líquido cefalorraquídeo</strong>.</li>
+    </ul>
+
+    <p>En el cráneo, la duramadre forma además tres tabiques que separan partes del encéfalo: la
+      <strong>hoz del cerebro</strong>, entre los dos hemisferios; la <strong>hoz del cerebelo</strong>,
+      entre los dos lados del cerebelo; y la <strong>tienda del cerebelo</strong>, que separa el
+      cerebro del cerebelo.</p>
+
+    <div class="photo-hero">
+      <img src="img/fig_14_2_meninges_craneales.png" alt="Membranas protectoras del encéfalo: meninges craneales y extensiones de la duramadre"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>Las meninges del cráneo.</strong> Arriba, las tres capas y
+        el seno sagital superior; abajo, la hoz y la tienda. Tortora, Fig. 14.2.</div>
+    </div>
+
+    <div class="photo-grid">
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_13_1_medula_meninges.png" alt="Anatomía macroscópica de la médula espinal con sus meninges"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>Las mismas tres, en la médula.</strong> Localiza el
+          espacio subaracnoideo y los ligamentos dentados. Tortora, Fig. 13.1.</div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_13_1_medula_meninges_b.png" alt="Corte transversal de la médula espinal dentro de una vértebra"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>Dentro de la vértebra.</strong> Aquí sí aparece el
+          espacio epidural, con su grasa. Tortora, Fig. 13.1.</div>
+      </div>
+    </div>
+
+    <h3>El líquido cefalorraquídeo (LCR)</h3>
+    <p>Es un líquido claro e incoloro, casi todo agua: entre 80 y 150 mL en el adulto. Tiene tres
+      funciones: <strong>amortigua</strong> los golpes —el encéfalo literalmente flota—, mantiene el
+      <strong>medio químico</strong> estable y sirve para <strong>intercambiar</strong> nutrientes y
+      desechos con el tejido nervioso.</p>
+
+    <p>Se fabrica en los <strong>plexos coroideos</strong>, redes de capilares en las paredes de los
+      ventrículos cubiertas por células ependimarias. Los <strong>ventrículos</strong> son cuatro
+      cavidades dentro del encéfalo: dos laterales, uno en cada hemisferio; el tercero, en la línea
+      media; y el cuarto, entre el tronco del encéfalo y el cerebelo.</p>
+
+    <div class="recorrido">
+      <ol>
+        <li>Se forma sobre todo en los <strong>ventrículos laterales</strong>.</li>
+        <li>Pasa al <strong>tercer ventrículo</strong> por los forámenes interventriculares.</li>
+        <li>Baja al <strong>cuarto ventrículo</strong> por el acueducto del mesencéfalo.</li>
+        <li>Sale al <strong>espacio subaracnoideo</strong> por tres aberturas del cuarto ventrículo, y
+          baja también por el conducto central de la médula.</li>
+        <li>Se <strong>reabsorbe</strong> en las vellosidades aracnoideas, que desembocan en el seno
+          sagital superior y devuelven el líquido a la sangre venosa.</li>
+      </ol>
+    </div>
+
+    <div class="pearl">
+      <p>Se forma a unos <strong>20 mL por hora</strong> —casi medio litro al día— y se reabsorbe
+        exactamente al mismo ritmo. Por eso el volumen y la <strong>presión</strong> se mantienen
+        constantes. Todo el sistema depende de ese equilibrio.</p>
+    </div>
+
+    <div class="photo-grid">
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_14_3_ventriculos.png" alt="Localización de los ventrículos en un encéfalo transparente"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>Los cuatro ventrículos.</strong> Sigue el camino del
+          lateral al cuarto sin salirte. Tortora, Fig. 14.3.</div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_14_4_circulacion_lcr.png" alt="Plexos coroideos y circulación del líquido cefalorraquídeo"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>Dónde se fabrica.</strong> El plexo coroideo y la célula
+          ependimaria que filtra el plasma. Tortora, Fig. 14.4.</div>
+      </div>
+    </div>
+
+    <div class="photo-hero">
+      <img src="img/fig_14_4_circulacion_lcr_b.png" alt="Corte sagital con el recorrido completo del líquido cefalorraquídeo"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>El recorrido entero.</strong> Del plexo coroideo a la
+        vellosidad aracnoidea. Si puedes narrarlo mirando esta lámina, tienes la estación. Tortora,
+        Fig. 14.4.</div>
+    </div>
+
+    <div class="clinical-box">
+      <h5>Para qué sirve saberlo</h5>
+      <p><strong>Punción lumbar.</strong> La médula termina en L2, pero las meninges y el LCR siguen
+        hasta S2. Entre esas dos alturas hay LCR y no hay médula, así que la aguja se introduce
+        entre <strong>L3 y L4</strong> o entre <strong>L4 y L5</strong>: se obtiene líquido sin riesgo
+        de tocar la médula. La línea que une los puntos más altos de las crestas ilíacas pasa por
+        L4 y sirve de referencia.</p>
+      <p><strong>Hidrocefalia.</strong> Si el LCR no puede salir de los ventrículos, o no se
+        reabsorbe, se acumula y su presión sube. En un lactante, con las fontanelas abiertas, la
+        cabeza se abomba; en un adulto, con el cráneo ya cerrado, es una urgencia.</p>
+    </div>
+
+    <h3>La barrera hematoencefálica</h3>
+    <p>Los capilares del encéfalo son distintos a los del resto del cuerpo: sus células están unidas
+      por <strong>uniones estrechas</strong>, rodeadas por una membrana basal gruesa y por
+      prolongaciones de <strong>astrocitos</strong>. El resultado es un filtro. Pasan con facilidad
+      las sustancias <strong>liposolubles</strong> —oxígeno, dióxido de carbono, alcohol, la mayoría
+      de los anestésicos—, y la glucosa entra por transporte activo. No pasan las proteínas ni
+      <strong>muchos antibióticos</strong>.</p>
+
+    <p>Y el encéfalo lo necesita todo continuamente: pesa el 2 % del cuerpo y consume el 20 % del
+      oxígeno y de la glucosa, porque sus neuronas fabrican energía casi solo con glucosa y oxígeno
+      y apenas la almacenan. Le llega la sangre por las carótidas internas y las vertebrales. Uno o
+      dos minutos sin irrigación ya alteran su función; cuatro sin oxígeno pueden dañarlo para
+      siempre.</p>
+
+    <div class="check-question" data-question="q5s1">
+      <p class="question-text">5. ¿Por qué espacio circula el líquido cefalorraquídeo alrededor del
+        encéfalo y de la médula?</p>
+      <ul class="options">
+        <li data-letter="A">El epidural, junto al hueso</li>
+        <li data-letter="B">El subdural, bajo la duramadre</li>
+        <li data-letter="C" data-correct="true">El subaracnoideo</li>
+        <li data-letter="D">Los senos venosos de la duramadre</li>
+        <li data-letter="E">El interior de la piamadre</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: C.</strong> El LCR va entre la aracnoides y la
+        piamadre: el espacio subaracnoideo, que es justamente de donde lo saca la punción lumbar.
+        Los senos venosos llevan sangre, no LCR —aunque al final el LCR desemboque en ellos para
+        volver a la sangre—. Y el espacio epidural ni siquiera existe alrededor del encéfalo.</div>
+    </div>
+
+    <div class="check-question" data-question="q6s1">
+      <p class="question-text">6. ¿Qué hay alrededor de la médula espinal pero NO alrededor del
+        encéfalo?</p>
+      <ul class="options">
+        <li data-letter="A">La aracnoides</li>
+        <li data-letter="B" data-correct="true">Un espacio epidural con grasa</li>
+        <li data-letter="C">El espacio subaracnoideo con LCR</li>
+        <li data-letter="D">La piamadre adherida al tejido</li>
+        <li data-letter="E">Una duramadre que la envuelve</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: B.</strong> En el cráneo, la capa externa de la
+        duramadre está pegada al hueso, así que no queda espacio entre ambos. En la columna sí: el
+        espacio epidural, relleno de grasa y tejido conectivo que amortigua. Las tres meninges y el
+        espacio subaracnoideo existen en los dos sitios — son continuos a través del foramen
+        magno.</div>
+    </div>
+
+    <div class="check-question" data-question="q7s1">
+      <p class="question-text">7. ¿Por qué la presión del LCR se mantiene normalmente constante?</p>
+      <ul class="options">
+        <li data-letter="A">Porque no se renueva nunca</li>
+        <li data-letter="B">Porque la duramadre se estira</li>
+        <li data-letter="C">Porque solo ocupa los ventrículos</li>
+        <li data-letter="D" data-correct="true">Porque se forma y se reabsorbe al mismo ritmo</li>
+        <li data-letter="E">Porque la barrera lo retiene en la sangre</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: D.</strong> Se forma a unos 20 mL por hora en los plexos
+        coroideos y se reabsorbe a la misma velocidad en las vellosidades aracnoideas. Si ese
+        equilibrio se rompe —porque sale mal o se reabsorbe mal—, la presión sube: es la
+        hidrocefalia. La primera opción es lo contrario de lo que pasa: el LCR se renueva varias
+        veces al día.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 05 ─────────── -->
+<section class="station" id="s1e5">
+  <div class="station-header">
+    <div class="station-number">05</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Médula espinal</div>
+      <h2>La médula por fuera y por dentro</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <h3>Por fuera</h3>
+    <p>Es un cilindro de unos <strong>42 a 45 cm</strong> y 2 cm de grosor que sale del bulbo
+      raquídeo y baja por el conducto vertebral hasta el borde superior de <strong>L2</strong>. En el
+      recién nacido llega más abajo, hasta L3 o L4: la columna sigue creciendo después de que la
+      médula se detiene, alrededor de los cuatro o cinco años.</p>
+
+    <ul style="margin-left:22px">
+      <li><strong>Dos engrosamientos</strong>: el <strong>cervical</strong> (C4–T1), de donde salen
+        los nervios de los miembros superiores, y el <strong>lumbar</strong> (T9–T12), para los
+        inferiores.</li>
+      <li><strong>Cono medular</strong>: el extremo afilado donde termina, entre L1 y L2.</li>
+      <li><strong>Filum terminale</strong>: una prolongación de la piamadre que la ancla al
+        cóccix.</li>
+      <li><strong>Cola de caballo</strong>: las raíces lumbares y sacras, que bajan por el conducto
+        antes de salir, como mechones de pelo.</li>
+    </ul>
+
+    <p>De ella salen <strong>31 pares de nervios espinales</strong>: 8 cervicales, 12 torácicos, 5
+      lumbares, 5 sacros y 1 coccígeo. Cada nervio se une a la médula por dos
+      <strong>raíces</strong>:</p>
+
+    <div class="two-col">
+      <div class="col-card">
+        <h5>Raíz posterior (dorsal)</h5>
+        <p><strong>Sensitiva.</strong> Trae la información de la piel, los músculos y los órganos.
+          Tiene un engrosamiento, el <strong>ganglio de la raíz posterior</strong>, donde están los
+          cuerpos de las neuronas sensitivas.</p>
+      </div>
+      <div class="col-card teal">
+        <h5>Raíz anterior (ventral)</h5>
+        <p><strong>Motora.</strong> Lleva las órdenes hacia los músculos y las glándulas. Al unirse
+          las dos raíces, el nervio espinal resultante es <strong>mixto</strong>.</p>
+      </div>
+    </div>
+
+    <div class="photo-hero">
+      <img src="img/fig_13_2_medula_externa.png" alt="Anatomía externa de la médula espinal y de los 31 pares de nervios espinales"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>La médula entera.</strong> Localiza los dos engrosamientos,
+        el cono medular en L1–L2 y la cola de caballo que sigue bajando. Tortora, Fig. 13.2.</div>
+    </div>
+
+    <h3>Por dentro</h3>
+    <p>En un corte, la <strong>sustancia gris</strong> dibuja una H o una mariposa en el centro, y la
+      <strong>blanca</strong> la rodea. En medio de la H está el <strong>conducto central</strong>,
+      lleno de LCR, que se continúa hacia arriba con el cuarto ventrículo.</p>
+
+    <div class="three-col">
+      <div class="col-card">
+        <h5>Astas posteriores</h5>
+        <p>Reciben lo sensitivo que entra por la raíz posterior.</p>
+      </div>
+      <div class="col-card">
+        <h5>Astas anteriores</h5>
+        <p>Tienen los cuerpos de las neuronas <strong>motoras somáticas</strong>, que mueven el
+          músculo esquelético.</p>
+      </div>
+      <div class="col-card">
+        <h5>Astas laterales</h5>
+        <p>Las neuronas motoras <strong>autónomas</strong>. Solo existen en los segmentos torácicos y
+          lumbares altos.</p>
+      </div>
+    </div>
+
+    <p>La sustancia blanca se organiza en columnas —anterior, posterior y lateral— recorridas por
+      <strong>tractos</strong>: los <strong>ascendentes</strong> llevan información sensitiva hacia el
+      encéfalo y los <strong>descendentes</strong> traen órdenes motoras desde él. Por eso la médula
+      hace dos trabajos: <strong>conduce</strong> señales entre el cuerpo y el encéfalo e
+      <strong>integra</strong> respuestas por su cuenta, como vas a ver en la siguiente estación.</p>
+
+    <div class="photo-grid">
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_13_3_medula_interna.png" alt="Anatomía interna de la médula espinal: sustancia gris y sustancia blanca"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>La H por dentro.</strong> Identifica las tres astas y las
+          tres columnas de cada lado. Tortora, Fig. 13.3.</div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_13_4_medula_vias.png" alt="Procesamiento de las aferencias sensitivas y de las eferencias motoras por la médula espinal"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>Lo que entra y lo que sale.</strong> Lo sensitivo por
+          detrás, lo motor por delante. Tortora, Fig. 13.4.</div>
+      </div>
+    </div>
+
+    <div class="check-question" data-question="q8s1">
+      <p class="question-text">8. Un corte daña solo la raíz posterior de un nervio espinal. ¿Qué
+        pierde la región que inerva?</p>
+      <ul class="options">
+        <li data-letter="A">El movimiento, pero no la sensibilidad</li>
+        <li data-letter="B">Las dos cosas, por igual</li>
+        <li data-letter="C" data-correct="true">La sensibilidad, pero no el movimiento</li>
+        <li data-letter="D">Nada: la raíz anterior la sustituye</li>
+        <li data-letter="E">Solo el control de las glándulas</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: C.</strong> La raíz posterior es la puerta de entrada
+        de lo sensitivo; la anterior, la de salida de lo motor. Si se corta solo la posterior, las
+        órdenes motoras siguen saliendo, pero la información de esa zona ya no llega. Las dos raíces
+        no se sustituyen: hacen trabajos distintos, y por eso el nervio que forman es mixto.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 06 ─────────── -->
+<section class="station" id="s1e6">
+  <div class="station-header">
+    <div class="station-number">06</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">La médula decide sola</div>
+      <h2>El arco reflejo</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Un <strong>reflejo</strong> es una respuesta rápida, involuntaria y predecible ante un
+      estímulo. El circuito que lo produce se llama <strong>arco reflejo</strong>, y tiene siempre
+      las mismas cinco piezas:</p>
+
+    <div class="recorrido">
+      <ol>
+        <li><strong>Receptor sensitivo</strong> — detecta el estímulo.</li>
+        <li><strong>Neurona sensitiva</strong> — lleva la señal al SNC.</li>
+        <li><strong>Centro integrador</strong> — dentro del SNC, decide la respuesta. Si hay una sola
+          sinapsis el reflejo es <strong>monosináptico</strong>; si hay varias, polisináptico.</li>
+        <li><strong>Neurona motora</strong> — lleva la orden desde el SNC.</li>
+        <li><strong>Efector</strong> — el músculo o la glándula que responde.</li>
+      </ol>
+    </div>
+
+    <p>Si el centro integrador está en la médula es un reflejo <strong>espinal</strong>; si está en
+      el tronco del encéfalo, un reflejo <strong>craneal</strong>. Aquí está la respuesta a la
+      pregunta 4 de la mañana: cuando retiras la mano de la olla, <strong>la médula ya respondió</strong>
+      antes de que la información llegara a la corteza cerebral, que es donde «te enteras».</p>
+
+    <div class="photo-hero">
+      <img src="img/fig_13_13_arco_reflejo.png" alt="Vista general de un arco reflejo con sus cinco componentes"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>Las cinco piezas.</strong> Recórrelas en orden siguiendo las
+        flechas, del receptor al efector. Tortora, Fig. 13.13.</div>
+    </div>
+
+    <div class="photo-grid">
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_13_14_reflejo_estiramiento.png" alt="Reflejo de estiramiento, monosináptico"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>Una sola sinapsis.</strong> El reflejo de estiramiento es
+          el que se explora al golpear la rodilla. Tortora, Fig. 13.14.</div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_13_15_reflejo_tendinoso.png" alt="Reflejo tendinoso, polisináptico"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>Varias sinapsis.</strong> Mismas cinco piezas, con
+          interneuronas en medio. Tortora, Fig. 13.15.</div>
+      </div>
+    </div>
+
+    <div class="pearl">
+      <p>Guárdate estas cinco piezas: en la sesión 2 vas a ver que <strong>el reflejo de la pupila
+        tiene exactamente las mismas</strong>. Su receptor está en la retina y su centro integrador,
+        en el tronco del encéfalo.</p>
+    </div>
+
+    <div class="check-question" data-question="q9s1">
+      <p class="question-text">9. De las cinco piezas del arco reflejo, ¿cuál está siempre dentro
+        del SNC?</p>
+      <ul class="options">
+        <li data-letter="A" data-correct="true">El centro integrador</li>
+        <li data-letter="B">El receptor sensitivo</li>
+        <li data-letter="C">El efector</li>
+        <li data-letter="D">El receptor y el efector</li>
+        <li data-letter="E">Ninguna: el reflejo es periférico</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: A.</strong> Es la parte que «decide», y decidir es trabajo
+        del SNC: en la médula para los reflejos espinales, en el tronco del encéfalo para los
+        craneales. El receptor y el efector están en la periferia —la piel, el músculo—. La última
+        opción es la trampa: el reflejo es involuntario, no periférico.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 07 ─────────── -->
+<section class="station" id="s1e7">
+  <div class="station-header">
+    <div class="station-number">07</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Encéfalo · parte 1</div>
+      <h2>El tronco del encéfalo y el cerebelo</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>El encéfalo tiene <strong>cuatro partes</strong>: el tronco del encéfalo, el cerebelo, el
+      diencéfalo y el cerebro. Las recorremos de abajo arriba, en el orden en que la médula se va
+      convirtiendo en encéfalo.</p>
+
+    <div class="photo-hero">
+      <img src="img/fig_14_1_encefalo.png" alt="El encéfalo y sus cuatro partes principales en un corte sagital"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>Las cuatro partes.</strong> Tronco del encéfalo, cerebelo
+        detrás, diencéfalo encima y el cerebro cubriéndolo todo. Tortora, Fig. 14.1.</div>
+    </div>
+
+    <h3>El tronco del encéfalo: tres pisos</h3>
+    <p>Se continúa con la médula y está formado, de abajo arriba, por el <strong>bulbo
+      raquídeo</strong>, la <strong>protuberancia</strong> y el <strong>mesencéfalo</strong>. Por él
+      pasan todas las vías que suben y bajan entre la médula y el resto del encéfalo, y de él salen
+      <strong>diez de los doce pares craneales</strong>.</p>
+
+    <div class="three-col">
+      <div class="col-card">
+        <h5>Bulbo raquídeo</h5>
+        <p>Unos 3 cm, desde el foramen magno. Tiene los centros <strong>vitales</strong>: el
+          cardiovascular y el del ritmo respiratorio, y los reflejos de tos, deglución, vómito,
+          estornudo e hipo. En su cara anterior, las <strong>pirámides</strong>.</p>
+      </div>
+      <div class="col-card teal">
+        <h5>Protuberancia (puente)</h5>
+        <p>Unos 2,5 cm. Hace de puente entre el cerebro y el cerebelo, y ayuda a controlar la
+          respiración. Tiene los núcleos de los pares <strong>V, VI, VII y VIII</strong>.</p>
+      </div>
+      <div class="col-card amber">
+        <h5>Mesencéfalo</h5>
+        <p>Unos 2,5 cm, atravesado por el acueducto. Por delante, los pedúnculos cerebrales, con las
+          vías motoras. Por detrás, cuatro relieves: los <strong>colículos</strong>. Tiene los núcleos
+          de los pares <strong>III y IV</strong>.</p>
+      </div>
+    </div>
+
+    <div class="pearl">
+      <p><strong>Por qué cada hemisferio mueve el lado contrario.</strong> Justo encima de la unión
+        con la médula, cerca del 90 % de los axones motores de cada pirámide cruza al otro lado. Ese
+        cruce se llama <strong>decusación de las pirámides</strong>, y es la respuesta a la pregunta 2
+        de la mañana: la lesión del hemisferio izquierdo debilita la mano derecha.</p>
+    </div>
+
+    <p>Los dos colículos de arriba, los <strong>superiores</strong>, son centros de
+      <strong>reflejos visuales</strong>. Por circuitos que van de la retina al colículo y de él a los
+      músculos del ojo, te permiten <strong>seguir con la mirada</strong> un objeto que se mueve —un
+      auto que pasa— o fijarla en uno quieto, como esta línea. También giran la cabeza y los ojos
+      hacia un estímulo visual. Los dos de abajo, los <strong>inferiores</strong>, hacen lo mismo con
+      el sonido.</p>
+
+    <p>A lo largo de todo el tronco se extiende la <strong>formación reticular</strong>, una red de
+      sustancia gris y blanca. Su parte ascendente —el sistema activador reticular— mantiene la
+      <strong>conciencia</strong> y el estado de alerta, y filtra la información sin importancia.
+      Cuando se inactiva, dormimos; cuando se daña, aparece el coma. Los anestésicos generales
+      actúan sobre ella. Curiosamente, no recibe información del olfato.</p>
+
+    <div class="photo-hero">
+      <img src="img/fig_14_5_tronco_encefalo.png" alt="El bulbo raquídeo en relación con el resto del tronco del encéfalo, cara inferior"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>El tronco por delante.</strong> Localiza las pirámides, la
+        protuberancia y los pedúnculos cerebrales. Tortora, Fig. 14.5.</div>
+    </div>
+
+    <div class="photo-grid">
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_14_7_mesencefalo.png" alt="Vista posterior del mesencéfalo con los colículos superiores e inferiores"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>Los cuatro colículos.</strong> Vista posterior: los dos
+          superiores son visuales. Tortora, Fig. 14.7.</div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_14_7_mesencefalo_b.png" alt="Corte transversal del mesencéfalo y formación reticular"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>Por dentro.</strong> El núcleo oculomotor junto al
+          acueducto, y la formación reticular. Tortora, Fig. 14.7.</div>
+      </div>
+    </div>
+
+    <div class="clinical-box">
+      <h5>👁 Interfaz optométrica</h5>
+      <p>El tronco del encéfalo es la sala de máquinas del ojo. De él salen los nervios que mueven
+        el globo —el <strong>III y el IV</strong> del mesencéfalo, el <strong>VI</strong> de la
+        protuberancia—, el que da sensibilidad a la córnea —el <strong>V</strong>— y el que cierra el
+        párpado —el <strong>VII</strong>—. Y en él están los <strong>colículos superiores</strong>,
+        que conectan lo que ve la retina con esos músculos. En la sesión 2 seguimos cada uno de
+        esos cables.</p>
+    </div>
+
+    <h3>El cerebelo</h3>
+    <p>Está detrás del bulbo y la protuberancia, y la <strong>tienda del cerebelo</strong> lo separa
+      del cerebro. Es el segundo en tamaño: una décima parte de la masa del encéfalo, pero con
+      <strong>la mitad de sus neuronas</strong>. Visto desde arriba parece una mariposa: el
+      <strong>vermis</strong> en el centro y los dos <strong>hemisferios</strong> a los lados. Su
+      corteza gris muy plegada cubre una sustancia blanca ramificada, el <strong>árbol de la
+      vida</strong>, y se une al tronco por tres pares de pedúnculos.</p>
+
+    <p>Su trabajo es <strong>comparar</strong> el movimiento que el cerebro ordenó con el que de
+      verdad está ocurriendo, y <strong>corregirlo</strong> sobre la marcha. Además es la región
+      principal del encéfalo para la <strong>postura y el equilibrio</strong>. Cuando falla aparece
+      la <strong>ataxia</strong>: movimientos torpes y descoordinados, aunque la fuerza sea normal.
+      El alcohol inhibe el cerebelo, y por eso las pruebas de sobriedad piden tocarse la nariz con
+      los ojos cerrados.</p>
+
+    <div class="photo-hero">
+      <img src="img/fig_14_8_cerebelo.png" alt="Cerebelo: vermis, hemisferios, árbol de la vida y pedúnculos"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>La mariposa y su árbol.</strong> El vermis, los hemisferios
+        y, en el corte, el árbol de la vida. Tortora, Fig. 14.8.</div>
+    </div>
+
+    <div class="check-question" data-question="q10s1">
+      <p class="question-text">10. Una lesión de las vías motoras del hemisferio cerebral derecho
+        debilita sobre todo:</p>
+      <ul class="options">
+        <li data-letter="A">El brazo derecho</li>
+        <li data-letter="B">Los dos brazos por igual</li>
+        <li data-letter="C">Solo los músculos de la cara</li>
+        <li data-letter="D" data-correct="true">El brazo izquierdo</li>
+        <li data-letter="E">Nada: el cerebelo lo compensa</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: D.</strong> Las vías motoras cruzan al otro lado en la
+        decusación de las pirámides, en el bulbo: el hemisferio derecho mueve el lado izquierdo del
+        cuerpo. El cerebelo coordina y corrige movimientos, pero no puede generar los que el cerebro
+        ya no ordena.</div>
+    </div>
+
+    <div class="check-question" data-question="q11s1">
+      <p class="question-text">11. Una persona tiene fuerza normal, pero no logra tocarse la punta de
+        la nariz con los ojos cerrados y camina tambaleándose. ¿Qué región es la más probable?</p>
+      <ul class="options">
+        <li data-letter="A">El bulbo raquídeo</li>
+        <li data-letter="B" data-correct="true">El cerebelo</li>
+        <li data-letter="C">La médula cervical</li>
+        <li data-letter="D">El hipotálamo</li>
+        <li data-letter="E">El lóbulo occipital</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: B.</strong> Fuerza normal con movimientos descoordinados
+        y equilibrio alterado es el cuadro de la ataxia, y apunta al cerebelo, que compara y corrige
+        los movimientos y gobierna la postura. Una lesión de la médula o de las vías motoras quitaría
+        fuerza, y aquí la fuerza está intacta.</div>
+    </div>
+
+    <div class="check-question" data-question="q12s1">
+      <p class="question-text">12. Sigues con la mirada un auto que pasa sin proponértelo. ¿Qué
+        estructura coordina ese reflejo visual?</p>
+      <ul class="options">
+        <li data-letter="A">Los colículos inferiores</li>
+        <li data-letter="B">El cerebelo</li>
+        <li data-letter="C">El bulbo raquídeo</li>
+        <li data-letter="D">El hipotálamo</li>
+        <li data-letter="E" data-correct="true">Los colículos superiores</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: E.</strong> Los colículos superiores del mesencéfalo
+        reciben información de la retina y la envían a los músculos que mueven el ojo: son centros de
+        reflejos visuales. Los inferiores son sus vecinos, pero trabajan con el sonido — es la trampa
+        de la pregunta.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 08 ─────────── -->
+<section class="station" id="s1e8">
+  <div class="station-header">
+    <div class="station-number">08</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Encéfalo · parte 2</div>
+      <h2>El diencéfalo y el cerebro</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <h3>El diencéfalo</h3>
+    <p>Está encima del mesencéfalo, casi completamente rodeado por los hemisferios cerebrales, y
+      rodea el tercer ventrículo. Tiene tres partes:</p>
+
+    <div class="three-col">
+      <div class="col-card">
+        <h5>Tálamo</h5>
+        <p>El 80 % del diencéfalo: dos masas ovaladas de sustancia gris. Es la <strong>estación de
+          relevo</strong>: casi toda la información sensitiva hace escala aquí antes de llegar a la
+          corteza. Uno de sus núcleos, el <strong>cuerpo geniculado lateral</strong>, lleva lo que ve
+          la retina hasta el área visual.</p>
+      </div>
+      <div class="col-card teal">
+        <h5>Hipotálamo</h5>
+        <p>Pequeño, debajo del tálamo, y uno de los grandes reguladores del cuerpo: controla el
+          <strong>sistema autónomo</strong>, produce hormonas —conectado con la hipófisis— y regula la
+          temperatura, el hambre, la sed, las emociones y el reloj biológico.</p>
+      </div>
+      <div class="col-card">
+        <h5>Epitálamo</h5>
+        <p>Detrás y encima del tálamo. Su pieza principal es la <strong>glándula pineal</strong>, que
+          secreta melatonina, más en la oscuridad que en la luz.</p>
+      </div>
+    </div>
+
+    <div class="photo-hero">
+      <img src="img/fig_14_9_talamo.png" alt="Tálamo: posición y núcleos talámicos"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>El tálamo.</strong> Busca el núcleo geniculado lateral: por
+        ahí pasa todo lo que ves. Tortora, Fig. 14.9.</div>
+    </div>
+
+    <h3>El cerebro</h3>
+    <p>Es la parte más grande del encéfalo y, en palabras de Tortora, el «asiento de la
+      inteligencia». Por fuera tiene la <strong>corteza cerebral</strong>, sustancia gris de solo
+      2 a 4 mm de espesor; debajo, sustancia blanca, y en la profundidad, más núcleos grises.</p>
+
+    <p>Como la corteza crece más rápido que lo que la sostiene, se pliega: los pliegues son
+      <strong>giros</strong> o circunvoluciones, los surcos superficiales son <strong>surcos</strong>
+      y los profundos, <strong>fisuras</strong>. La <strong>fisura longitudinal</strong> lo divide en
+      dos <strong>hemisferios</strong> —con la hoz del cerebro dentro—, y el <strong>cuerpo
+      calloso</strong>, una gran banda de sustancia blanca, los une por debajo.</p>
+
+    <h3>Los lóbulos</h3>
+    <p>Llevan el nombre del hueso que los cubre: <strong>frontal</strong>, <strong>parietal</strong>,
+      <strong>temporal</strong> y <strong>occipital</strong>. Hay un quinto escondido en el fondo del
+      surco lateral, la <strong>ínsula</strong>. Tres surcos hacen de frontera:</p>
+    <ul style="margin-left:22px">
+      <li>El <strong>surco central</strong> separa el frontal del parietal. Justo delante está el
+        giro precentral, con el <strong>área motora primaria</strong>; justo detrás, el giro
+        poscentral, con el <strong>área somatosensitiva primaria</strong>.</li>
+      <li>El <strong>surco lateral</strong> separa el frontal del temporal.</li>
+      <li>El <strong>surco parietooccipital</strong> separa el parietal del occipital.</li>
+    </ul>
+
+    <div class="photo-grid">
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_14_11_cerebro_lobulos.png" alt="Cerebro: giros, surcos, fisuras y lóbulos, vista superior y lateral"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>Los lóbulos y sus fronteras.</strong> Encuentra primero el
+          surco central: todo lo demás se ordena a partir de él. Tortora, Fig. 14.11.</div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_14_11_cerebro_lobulos_b.png" alt="Vista lateral con el lóbulo temporal separado para mostrar la ínsula"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>La ínsula escondida.</strong> Aparece al apartar el lóbulo
+          temporal. Tortora, Fig. 14.11.</div>
+      </div>
+    </div>
+
+    <h3>Las áreas: recibir, interpretar, ordenar</h3>
+    <p>La corteza tiene áreas <strong>sensitivas</strong>, que reciben la información; áreas de
+      <strong>asociación</strong>, que la interpretan; y áreas <strong>motoras</strong>, que ordenan
+      movimientos. La que más te importa está en el polo posterior del lóbulo occipital: el
+      <strong>área visual primaria</strong>, también llamada área 17.</p>
+
+    <div class="photo-hero">
+      <img src="img/fig_14_15_areas_funcionales.png" alt="Áreas funcionales de la corteza cerebral"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>El mapa funcional.</strong> Localiza el área motora primaria,
+        la somatosensitiva y, al fondo del occipital, la visual primaria y su área de asociación.
+        Tortora, Fig. 14.15.</div>
+    </div>
+
+    <div class="clinical-box">
+      <h5>👁 Interfaz optométrica</h5>
+      <p>Ver y reconocer son dos cosas distintas, y ocurren en áreas distintas. Tortora lo explica
+        con dos pacientes. El que tiene dañada el <strong>área visual primaria</strong> pierde al
+        menos parte de la visión. El que tiene dañada el <strong>área de asociación visual</strong>
+        puede ver con normalidad y, sin embargo, <strong>no reconocer</strong> una lámpara o un cepillo
+        de dientes con solo mirarlos. Los ojos pueden estar perfectos y la visión, incompleta.</p>
+    </div>
+
+    <div class="photo-hero">
+      <img src="img/cuadro_14_2_funciones_encefalo.png" alt="Cuadro resumen de las funciones de las principales porciones del encéfalo"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>Todo el encéfalo en un cuadro.</strong> Úsalo para repasar:
+        tapa la columna de funciones y di qué hace cada parte. Tortora, Cuadro 14.2.</div>
+    </div>
+
+    <div class="check-question" data-question="q13s1">
+      <p class="question-text">13. ¿En qué lóbulo está el área visual primaria?</p>
+      <ul class="options">
+        <li data-letter="A">Frontal</li>
+        <li data-letter="B">Parietal</li>
+        <li data-letter="C" data-correct="true">Occipital</li>
+        <li data-letter="D">Temporal</li>
+        <li data-letter="E">Ínsula</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: C.</strong> Está en el polo posterior del lóbulo
+        occipital, sobre todo en su cara medial. Es decir, la visión se procesa en el punto del
+        cerebro más alejado de los ojos. En el frontal está el área motora; en el parietal, la
+        somatosensitiva; en el temporal, la auditiva.</div>
+    </div>
+
+    <div class="check-question" data-question="q14s1">
+      <p class="question-text">14. ¿Por qué se dice que el tálamo es una «estación de relevo»?</p>
+      <ul class="options">
+        <li data-letter="A">Porque produce las hormonas de la hipófisis</li>
+        <li data-letter="B">Porque separa los dos hemisferios</li>
+        <li data-letter="C">Porque fabrica el líquido cefalorraquídeo</li>
+        <li data-letter="D">Porque regula la temperatura corporal</li>
+        <li data-letter="E" data-correct="true">Porque la información sensitiva hace escala allí</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: E.</strong> Casi toda la información sensitiva que sube
+        de la médula y del tronco pasa por un núcleo del tálamo antes de llegar a su área de la
+        corteza; la visual lo hace por el cuerpo geniculado lateral. Las hormonas y la temperatura
+        son trabajo del hipotálamo, su vecino de abajo — la confusión más frecuente. El LCR sale de
+        los plexos coroideos.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 09 ─────────── -->
+<section class="station" id="s1e9">
+  <div class="station-header">
+    <div class="station-number">09</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Vocabulario</div>
+      <h2>Términos TA2 de la sesión</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Toca la tarjeta para voltearla. El término en español y en el latín de la <em>Terminologia
+      Anatomica</em>, y debajo por qué te importa a ti.</p>
+
+    <div class="flip-grid">
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Sistema nervioso central</span><span class="term-en">Systema nervosum centrale</span></div>
+        <div class="flip-back"><p class="term-def">El encéfalo y la médula espinal.</p><p class="term-opto">👁 Donde se decide. Todo lo demás es cableado.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Sistema nervioso periférico</span><span class="term-en">Systema nervosum periphericum</span></div>
+        <div class="flip-back"><p class="term-def">Todo el tejido nervioso fuera del SNC: nervios craneales y espinales, ganglios y receptores.</p><p class="term-opto">👁 Los doce pares craneales son SNP.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Neurona</span><span class="term-en">Neuron</span></div>
+        <div class="flip-back"><p class="term-def">La célula que conduce la señal: cuerpo celular, dendritas y axón. No se divide.</p><p class="term-opto">👁 Conos, bastones, bipolares y ganglionares: la retina está hecha de ellas.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Axón</span><span class="term-en">Axon</span></div>
+        <div class="flip-back"><p class="term-def">La prolongación única que conduce la señal hacia otra célula.</p><p class="term-opto">👁 Los axones de las ganglionares forman el nervio óptico.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Neuroglia</span><span class="term-en">Neuroglia</span></div>
+        <div class="flip-back"><p class="term-def">Las células que sostienen, nutren y protegen a las neuronas. Cuatro tipos en el SNC y dos en el SNP.</p><p class="term-opto">👁 Más pequeñas y más numerosas que las neuronas.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Astrocito</span><span class="term-en">Astrocytus</span></div>
+        <div class="flip-back"><p class="term-def">Glía del SNC en forma de estrella; sostiene neuronas y rodea los capilares.</p><p class="term-opto">👁 Mantiene la barrera hematoencefálica.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Oligodendrocito</span><span class="term-en">Oligodendrocytus</span></div>
+        <div class="flip-back"><p class="term-def">Glía que forma la mielina dentro del SNC; uno solo mieliniza varios axones.</p><p class="term-opto">👁 Mielina en el SNC → oligodendrocito.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Célula de Schwann</span><span class="term-en">Neurolemmocytus</span></div>
+        <div class="flip-back"><p class="term-def">Glía que forma la mielina en el SNP; cada una envuelve un solo axón.</p><p class="term-opto">👁 Mielina en el SNP → Schwann.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Vaina de mielina</span><span class="term-en">Stratum myelini</span></div>
+        <div class="flip-back"><p class="term-def">Capas de lípidos y proteínas que aíslan el axón y aceleran la conducción.</p><p class="term-opto">👁 Es blanca: por eso la sustancia blanca se llama así.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Sustancia gris</span><span class="term-en">Substantia grisea</span></div>
+        <div class="flip-back"><p class="term-def">Tejido con cuerpos neuronales, dendritas y axones sin mielina.</p><p class="term-opto">👁 Dentro en la médula, fuera en el cerebro.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Sustancia blanca</span><span class="term-en">Substantia alba</span></div>
+        <div class="flip-back"><p class="term-def">Tejido formado sobre todo por axones con mielina.</p><p class="term-opto">👁 Fuera en la médula, dentro en el cerebro.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Núcleo</span><span class="term-en">Nucleus</span></div>
+        <div class="flip-back"><p class="term-def">Grupo de cuerpos neuronales dentro del SNC.</p><p class="term-opto">👁 El núcleo oculomotor está en el mesencéfalo.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Ganglio</span><span class="term-en">Ganglion</span></div>
+        <div class="flip-back"><p class="term-def">Grupo de cuerpos neuronales fuera del SNC.</p><p class="term-opto">👁 El ganglio ciliar está en la órbita.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Tracto</span><span class="term-en">Tractus</span></div>
+        <div class="flip-back"><p class="term-def">Haz de axones dentro del SNC.</p><p class="term-opto">👁 Detrás del quiasma, el nervio óptico pasa a llamarse tracto óptico.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Duramadre</span><span class="term-en">Dura mater</span></div>
+        <div class="flip-back"><p class="term-def">La meninge externa y gruesa; en el cráneo forma los senos venosos, la hoz y la tienda.</p><p class="term-opto">👁 Se continúa con la envoltura externa de los nervios.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Aracnoides</span><span class="term-en">Arachnoidea mater</span></div>
+        <div class="flip-back"><p class="term-def">La meninge media, delgada y sin vasos, parecida a una tela de araña.</p><p class="term-opto">👁 Sus vellosidades devuelven el LCR a la sangre.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Piamadre</span><span class="term-en">Pia mater</span></div>
+        <div class="flip-back"><p class="term-def">La meninge interna, fina, con vasos y pegada al tejido nervioso.</p><p class="term-opto">👁 Entre ella y la aracnoides circula el LCR.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Espacio subaracnoideo</span><span class="term-en">Spatium subarachnoideum</span></div>
+        <div class="flip-back"><p class="term-def">El espacio entre la aracnoides y la piamadre, lleno de líquido cefalorraquídeo.</p><p class="term-opto">👁 Es donde entra la aguja de la punción lumbar.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Líquido cefalorraquídeo</span><span class="term-en">Liquor cerebrospinalis</span></div>
+        <div class="flip-back"><p class="term-def">Líquido claro que amortigua, mantiene el medio químico y permite el intercambio con el tejido nervioso.</p><p class="term-opto">👁 Se forma y se reabsorbe al mismo ritmo: presión constante.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Plexo coroideo</span><span class="term-en">Plexus choroideus</span></div>
+        <div class="flip-back"><p class="term-def">Red de capilares en la pared de los ventrículos, cubierta por células ependimarias, que fabrica el LCR.</p><p class="term-opto">👁 La fábrica del LCR.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Médula espinal</span><span class="term-en">Medulla spinalis</span></div>
+        <div class="flip-back"><p class="term-def">La parte del SNC dentro del conducto vertebral, del bulbo hasta L2; de ella salen 31 pares de nervios.</p><p class="term-opto">👁 Conduce señales e integra reflejos.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Cola de caballo</span><span class="term-en">Cauda equina</span></div>
+        <div class="flip-back"><p class="term-def">Raíces lumbares y sacras que bajan por el conducto vertebral por debajo del final de la médula.</p><p class="term-opto">👁 Por eso la punción lumbar no lesiona la médula.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Tronco del encéfalo</span><span class="term-en">Truncus encephali</span></div>
+        <div class="flip-back"><p class="term-def">Bulbo raquídeo, protuberancia y mesencéfalo, entre la médula y el diencéfalo.</p><p class="term-opto">👁 De él salen el III, el IV, el V, el VI y el VII.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Colículo superior</span><span class="term-en">Colliculus superior</span></div>
+        <div class="flip-back"><p class="term-def">Relieve posterior del mesencéfalo que actúa como centro de reflejos visuales.</p><p class="term-opto">👁 Te deja seguir con la mirada lo que se mueve.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Cerebelo</span><span class="term-en">Cerebellum</span></div>
+        <div class="flip-back"><p class="term-def">Parte posterior del encéfalo que coordina y corrige los movimientos y controla postura y equilibrio.</p><p class="term-opto">👁 Si falla: ataxia, con fuerza normal.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Tálamo</span><span class="term-en">Thalamus</span></div>
+        <div class="flip-back"><p class="term-def">Estación de relevo de casi toda la información sensitiva hacia la corteza.</p><p class="term-opto">👁 Su cuerpo geniculado lateral lleva la visión a la corteza.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Hipotálamo</span><span class="term-en">Hypothalamus</span></div>
+        <div class="flip-back"><p class="term-def">Regulador del sistema autónomo, de hormonas, temperatura, hambre, sed y reloj biológico.</p><p class="term-opto">👁 No confundirlo con el tálamo, su vecino de arriba.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Corteza cerebral</span><span class="term-en">Cortex cerebri</span></div>
+        <div class="flip-back"><p class="term-def">La capa de sustancia gris, de 2 a 4 mm, plegada en giros, surcos y fisuras.</p><p class="term-opto">👁 El área visual primaria está en su polo occipital.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Cuerpo calloso</span><span class="term-en">Corpus callosum</span></div>
+        <div class="flip-back"><p class="term-def">Gran banda de sustancia blanca que une los dos hemisferios.</p><p class="term-opto">👁 El haz de fibras más grueso del encéfalo.</p></div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 10 ─────────── -->
+<section class="station" id="s1e10">
+  <div class="station-header">
+    <div class="station-number">10</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Recuperación</div>
+      <h2>Comprueba lo que aprendiste</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Sin mirar arriba. Estas no repiten las anteriores: piden reconstruir, no reconocer.</p>
+
+    <div class="check-question" data-question="q15s1">
+      <p class="question-text">15. Ordena el tronco del encéfalo de abajo arriba.</p>
+      <ul class="options">
+        <li data-letter="A">Protuberancia → bulbo → mesencéfalo</li>
+        <li data-letter="B" data-correct="true">Bulbo → protuberancia → mesencéfalo</li>
+        <li data-letter="C">Mesencéfalo → protuberancia → bulbo</li>
+        <li data-letter="D">Bulbo → mesencéfalo → protuberancia</li>
+        <li data-letter="E">Mesencéfalo → bulbo → protuberancia</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: B.</strong> El bulbo se continúa con la médula; encima
+        está la protuberancia, y encima el mesencéfalo, que conecta con el diencéfalo. La opción C
+        es el mismo orden, pero de arriba abajo: fíjate siempre en la dirección que pide el
+        enunciado.</div>
+    </div>
+
+    <div class="check-question" data-question="q16s1">
+      <p class="question-text">16. Señala la afirmación <strong>falsa</strong> sobre las meninges.</p>
+      <ul class="options">
+        <li data-letter="A">La duramadre craneal forma los senos venosos</li>
+        <li data-letter="B">La piamadre está pegada al tejido nervioso</li>
+        <li data-letter="C">La tienda del cerebelo separa cerebro y cerebelo</li>
+        <li data-letter="D" data-correct="true">La aracnoides es la más gruesa y está llena de vasos</li>
+        <li data-letter="E">El espacio subaracnoideo contiene LCR</li>
+      </ul>
+      <div class="feedback"><strong>La falsa es D.</strong> La aracnoides es delgada y
+        <strong>no tiene vasos</strong>; la gruesa es la duramadre, y la que lleva vasos es la
+        piamadre. Las otras cuatro son ciertas. Truco para no confundirlas: «dura» por fuera y
+        «pía», que es tierna, por dentro.</div>
+    </div>
+
+    <div class="check-question" data-question="q17s1">
+      <p class="question-text">17. Un anestésico general deja a la persona inconsciente. ¿Sobre qué
+        estructura actúa, según lo visto?</p>
+      <ul class="options">
+        <li data-letter="A" data-correct="true">La formación reticular del tronco</li>
+        <li data-letter="B">El cerebelo</li>
+        <li data-letter="C">Los plexos coroideos</li>
+        <li data-letter="D">La médula espinal lumbar</li>
+        <li data-letter="E">El cuerpo calloso</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: A.</strong> La parte ascendente de la formación reticular
+        —el sistema activador reticular— mantiene la conciencia. Cuando se inactiva hay sueño; cuando
+        se deprime con fármacos, anestesia; cuando se daña, coma. Que el anestésico llegue hasta ahí
+        tiene sentido: es liposoluble y atraviesa la barrera hematoencefálica.</div>
+    </div>
+
+    <div class="saber-box">
+      <strong>Pregunta tipo Saber Pro · Caso</strong>
+      <div class="check-question" style="margin-top:16px;border-color:var(--purple)" data-question="q18s1">
+        <p class="question-text">18. Tras caer de espaldas sobre el hielo y golpearse la parte alta
+          del cuello, una persona respira de forma irregular y tiene alterado el ritmo del corazón.
+          ¿Qué región es la más comprometida?</p>
+        <ul class="options">
+          <li data-letter="A">El cerebelo</li>
+          <li data-letter="B">El lóbulo occipital</li>
+          <li data-letter="C">El tálamo</li>
+          <li data-letter="D">El cuerpo calloso</li>
+          <li data-letter="E" data-correct="true">El bulbo raquídeo</li>
+        </ul>
+        <div class="feedback"><strong>Correcta: E.</strong> El bulbo tiene el centro cardiovascular y el
+          área que marca el ritmo básico de la respiración, y está justo donde la cabeza se une al
+          cuello. Por eso Tortora advierte que un golpe fuerte en esa zona puede ser mortal. El
+          cerebelo, también posterior, alteraría el equilibrio y la coordinación, no el corazón ni la
+          respiración. Leer un caso es esto: buscar qué función se perdió y preguntarse dónde vive.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div><!-- fin sesión 1 -->
+
+<!-- ═══════════════════════ SESIÓN 2 ═══════════════════════ -->
+<div class="tab-pane" id="s2">
+
+<nav class="station-nav">
+  <h3>Contenido · Sesión 2</h3>
+  <ol>
+    <li><a href="#s2e0">El nervio por dentro</a></li>
+    <li><a href="#s2e1">Los doce pares craneales</a></li>
+    <li><a href="#s2e2">El II y la vía visual</a></li>
+    <li><a href="#s2e3">III, IV y VI: los que mueven el ojo</a></li>
+    <li><a href="#s2e4">La pupila y el enfoque</a></li>
+    <li><a href="#s2e5">V y VII: sentir y cerrar</a></li>
+    <li><a href="#s2e6">Los otros seis pares</a></li>
+    <li><a href="#s2e7">Términos TA2 de la sesión</a></li>
+    <li><a href="#s2e8">Comprueba lo que aprendiste</a></li>
+    <li><a href="#s2e9">Volvemos a las cinco preguntas</a></li>
+  </ol>
+</nav>
+
+<!-- ─────────── 00 ─────────── -->
+<section class="station" id="s2e0">
+  <div class="station-header">
+    <div class="station-number">00</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Del central al periférico</div>
+      <h2>El nervio por dentro</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Esta mañana estuvimos dentro del cráneo y de la columna. Ahora salimos con los cables. Un
+      <strong>nervio</strong> es un haz de axones fuera del SNC, y está organizado exactamente como
+      un músculo: en manojos de manojos, cada uno con su envoltura de tejido conectivo.</p>
+
+    <div class="three-col">
+      <div class="col-card">
+        <h5>Endoneuro</h5>
+        <p>Envuelve <strong>cada axón</strong>, tenga mielina o no. Es la capa más interna.</p>
+      </div>
+      <div class="col-card teal">
+        <h5>Perineuro</h5>
+        <p>Agrupa axones en <strong>fascículos</strong>. Es la capa media, más gruesa.</p>
+      </div>
+      <div class="col-card">
+        <h5>Epineuro</h5>
+        <p>Envuelve <strong>el nervio entero</strong> y rellena el espacio entre los fascículos. Es la
+          externa.</p>
+      </div>
+    </div>
+
+    <div class="pearl">
+      <p><strong>¿Te suena?</strong> Es el mismo esquema que viste en la clase 7 para el músculo:
+        endomisio alrededor de cada fibra, perimisio alrededor de cada fascículo, epimisio alrededor
+        de todo. Cambia la terminación —<em>-neuro</em> por <em>-misio</em>—, no la lógica. Y hay un
+        detalle que une esta sesión con la de la mañana: la <strong>duramadre se continúa con el
+        epineuro</strong> de los nervios cuando salen del cráneo y de la columna.</p>
+    </div>
+
+    <div class="photo-hero">
+      <img src="img/fig_13_5_envolturas_nervio.png" alt="Organización y envolturas de tejido conectivo de un nervio espinal: epineuro, perineuro y endoneuro"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>Tres envolturas.</strong> Recorre el corte de fuera hacia
+        dentro: epineuro, perineuro, endoneuro. Tortora, Fig. 13.5.</div>
+    </div>
+
+    <div class="check-question" data-question="q1s2">
+      <p class="question-text">1. Dentro de un nervio, ¿qué envoltura rodea a cada axón por
+        separado?</p>
+      <ul class="options">
+        <li data-letter="A">El epineuro</li>
+        <li data-letter="B">El perineuro</li>
+        <li data-letter="C">La duramadre</li>
+        <li data-letter="D" data-correct="true">El endoneuro</li>
+        <li data-letter="E">La piamadre</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: D.</strong> <em>Endo-</em> es «dentro»: el endoneuro es
+        la envoltura de cada axón. El perineuro agrupa axones en fascículos y el epineuro envuelve el
+        nervio entero. Si te sirve, piensa en el músculo: endomisio para cada fibra. Las meninges
+        envuelven el SNC, no los axones de un nervio.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 01 ─────────── -->
+<section class="station" id="s2e1">
+  <div class="station-header">
+    <div class="station-number">01</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">El sistema periférico de la cabeza</div>
+      <h2>Los doce pares craneales</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Se llaman craneales porque nacen del encéfalo, dentro de la cavidad craneal, y salen
+      atravesando <strong>forámenes del cráneo</strong> —los mismos que estudiaste en la clase 6—.
+      Son parte del <strong>SNP</strong>, igual que los 31 pares espinales, y son
+      <strong>pares</strong>: hay uno de cada lado.</p>
+
+    <p>Cada uno tiene un <strong>número romano</strong>, que indica el orden en que salen del
+      cráneo <strong>de adelante hacia atrás</strong>, y un <strong>nombre</strong>, que describe su
+      función o su recorrido. Por su contenido hay tres grupos:</p>
+
+    <div class="three-col">
+      <div class="col-card">
+        <h5>Sensitivos especiales</h5>
+        <p><strong>I, II y VIII.</strong> Llevan los sentidos especiales: olfato, vista, y audición y
+          equilibrio.</p>
+      </div>
+      <div class="col-card teal">
+        <h5>Motores</h5>
+        <p><strong>III, IV, VI, XI y XII.</strong> Salen del encéfalo solo con axones motores. Tres de
+          ellos —III, IV y VI— mueven el ojo.</p>
+      </div>
+      <div class="col-card amber">
+        <h5>Mixtos</h5>
+        <p><strong>V, VII, IX y X.</strong> Llevan axones sensitivos que entran al tronco del encéfalo
+          y motores que salen de él.</p>
+      </div>
+    </div>
+
+    <p>Cuatro de ellos llevan además fibras <strong>parasimpáticas</strong> del sistema autónomo: el
+      III, el VII, el IX y el X. Dos de esos cuatro trabajan en el ojo: el III en la pupila y el VII
+      en la glándula lagrimal.</p>
+
+    <div class="photo-hero">
+      <img src="img/cuadro_14_4_pares_craneales.png" alt="Cuadro resumen de los doce nervios craneales: componentes y funciones principales"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>Los doce en una tabla.</strong> Tu referencia para toda la
+        sesión: nombre, número, tipo y función. Tortora, Cuadro 14.4.</div>
+    </div>
+
+    <h3>Ejercicio · Ubícalos sin mirar</h3>
+    <p>La cara inferior del encéfalo, con los pares en amarillo y sin un solo nombre. Antes de abrir
+      la respuesta, intenta numerarlos: empiezan adelante, bajo el lóbulo frontal, y avanzan hacia la
+      médula.</p>
+    <div class="photo-hero">
+      <img src="img/encefalo_pares_sin_rotulos.png" alt="Cara inferior del encéfalo con los pares craneales resaltados, sin rótulos"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>Sin nombres.</strong> El orden de salida es el
+        número.</div>
+    </div>
+    <div class="acorde">
+      <details>
+        <summary>Ver las respuestas</summary>
+        <p>Arriba, bajo los lóbulos frontales, los <strong>bulbos y tractos olfatorios (I)</strong>.
+          Detrás, los dos <strong>nervios ópticos (II)</strong> que se unen en el quiasma. Saliendo del
+          mesencéfalo, entre los pedúnculos, el <strong>oculomotor (III)</strong>; y rodeando el tronco
+          desde atrás, el delgado <strong>troclear (IV)</strong>. A los lados de la protuberancia, el
+          grueso <strong>trigémino (V)</strong>. En el borde inferior de la protuberancia, el
+          <strong>abducens (VI)</strong> cerca de la línea media y, más lateral, el <strong>facial
+          (VII)</strong> y el <strong>vestibulococlear (VIII)</strong>. A los lados del bulbo, en fila, el
+          <strong>glosofaríngeo (IX)</strong>, el <strong>vago (X)</strong> y el <strong>accesorio
+          (XI)</strong>, que sube desde la médula; y por delante, entre la pirámide y la oliva, el
+          <strong>hipogloso (XII)</strong>.</p>
+      </details>
+    </div>
+
+    <div class="check-question" data-question="q2s2">
+      <p class="question-text">2. ¿Cuál de estos grupos está formado solo por nervios motores?</p>
+      <ul class="options">
+        <li data-letter="A">I, II y VIII</li>
+        <li data-letter="B">V, VII y IX</li>
+        <li data-letter="C" data-correct="true">III, IV y VI</li>
+        <li data-letter="D">II, III y V</li>
+        <li data-letter="E">VIII, IX y X</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: C.</strong> Los tres nervios que mueven el ojo salen del
+        tronco del encéfalo solo con axones motores. I, II y VIII son el grupo contrario, los
+        sensitivos especiales; V, VII y IX son mixtos. Un buen truco de estudio: el ojo tiene
+        <strong>un</strong> nervio para ver (II) y <strong>tres</strong> para moverse (III, IV y VI).</div>
+    </div>
+
+    <div class="check-question" data-question="q3s2">
+      <p class="question-text">3. ¿Qué indica el número romano de cada par craneal?</p>
+      <ul class="options">
+        <li data-letter="A">Su tamaño, del más grande al más pequeño</li>
+        <li data-letter="B">El orden en que se describieron</li>
+        <li data-letter="C">El número de ramas que tiene</li>
+        <li data-letter="D">Su importancia para la supervivencia</li>
+        <li data-letter="E" data-correct="true">El orden en que salen, de adelante atrás</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: E.</strong> El I es el más anterior —sobre la lámina
+        cribosa del etmoides— y el XII el más posterior, junto al foramen magno. Por eso el
+        ejercicio sin rótulos se resuelve recorriendo el encéfalo de adelante hacia atrás. El tamaño
+        no sigue el número: el más grande es el V y el más pequeño, el IV.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 02 ─────────── -->
+<section class="station" id="s2e2">
+  <div class="station-header">
+    <div class="station-number">02</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">El nervio de la visión</div>
+      <h2>El II y la vía visual</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>El <strong>nervio óptico (II)</strong> es enteramente sensitivo. Su recorrido empieza en la
+      retina: los <strong>conos y bastones</strong> captan la luz, pasan la señal a las células
+      <strong>bipolares</strong> y éstas a las <strong>ganglionares</strong>. Los axones de todas las
+      ganglionares de una retina salen del ojo por el disco óptico y forman el nervio óptico, que
+      atraviesa el <strong>conducto óptico</strong>.</p>
+
+    <div class="recorrido">
+      <ol>
+        <li><strong>Nervio óptico.</strong> Del ojo hacia atrás, uno de cada lado.</li>
+        <li><strong>Quiasma óptico.</strong> Unos 10 mm por detrás del globo, los dos nervios se
+          juntan en forma de X y parte de sus fibras cruza al otro lado.</li>
+        <li><strong>Tracto óptico.</strong> Detrás del quiasma las fibras se reagrupan y cambian de
+          nombre: ya están dentro del encéfalo.</li>
+        <li><strong>Cuerpo geniculado lateral del tálamo.</strong> Allí hace sinapsis la mayoría de
+          los axones.</li>
+        <li><strong>Radiaciones ópticas.</strong> Los axones de las neuronas del tálamo se abren en
+          abanico hacia atrás.</li>
+        <li><strong>Área visual primaria.</strong> En el lóbulo occipital —el área 17—, donde empieza
+          la percepción visual.</li>
+      </ol>
+    </div>
+
+    <h3>Qué fibras cruzan en el quiasma</h3>
+    <p>Cada retina tiene una mitad <strong>nasal</strong> —la del lado de la nariz— y una mitad
+      <strong>temporal</strong> —la del lado de la sien—. En el quiasma, las fibras de la
+      <strong>mitad nasal</strong> de cada retina <strong>cruzan</strong> al lado opuesto; las de la
+      <strong>mitad temporal</strong> siguen por el mismo lado.</p>
+
+    <p>El resultado parece enrevesado y es de una lógica perfecta: lo que está en la <strong>mitad
+      derecha del campo visual</strong> de los dos ojos acaba en el <strong>hemisferio
+      izquierdo</strong>, y lo de la mitad izquierda, en el derecho. Cada hemisferio ve la mitad
+      contraria del mundo — igual que cada hemisferio mueve la mitad contraria del cuerpo.</p>
+
+    <div class="pearl">
+      <p>No todas las fibras van a la corteza. Unas pocas se desvían antes hacia el
+        <strong>colículo superior</strong>, que controla los músculos que mueven el ojo, y hacia el
+        <strong>núcleo pretectal</strong>, que controla los reflejos de la pupila y del enfoque. De
+        esta desviación sale el reflejo pupilar de la estación 04.</p>
+    </div>
+
+    <div class="photo-grid">
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_14_18_optico.png" alt="Nervio óptico (II): retina, nervio óptico, quiasma y tracto óptico"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>Del ojo al quiasma.</strong> Arriba, las tres capas de
+          neuronas de la retina; abajo, el quiasma. Tortora, Fig. 14.18.</div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_17_17_via_visual.png" alt="La vía visual completa desde la retina hasta el área visual primaria"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>La vía entera.</strong> Sigue un color de principio a fin:
+          verás qué mitad cruza y cuál no. Tortora, Fig. 17.17.</div>
+      </div>
+    </div>
+
+    <div class="check-question" data-question="q4s2">
+      <p class="question-text">4. En el quiasma óptico, ¿qué fibras cruzan al lado opuesto?</p>
+      <ul class="options">
+        <li data-letter="A">Todas las de los dos ojos</li>
+        <li data-letter="B">Ninguna: cada ojo sigue por su lado</li>
+        <li data-letter="C">Las de la mitad temporal de cada retina</li>
+        <li data-letter="D">Solo las del ojo izquierdo</li>
+        <li data-letter="E" data-correct="true">Las de la mitad nasal de cada retina</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: E.</strong> Cruzan las fibras de la mitad nasal —la del
+        lado de la nariz— de cada retina; las temporales siguen por el mismo lado. Es un cruce
+        <em>parcial</em>: ni todo ni nada. Así cada hemisferio recibe la misma mitad del campo visual
+        desde los dos ojos.</div>
+    </div>
+
+    <div class="check-question" data-question="q5s2">
+      <p class="question-text">5. Antes de llegar a la corteza, la mayoría de los axones del tracto
+        óptico hacen sinapsis en:</p>
+      <ul class="options">
+        <li data-letter="A" data-correct="true">El cuerpo geniculado lateral</li>
+        <li data-letter="B">El colículo inferior</li>
+        <li data-letter="C">El hipotálamo</li>
+        <li data-letter="D">El cerebelo</li>
+        <li data-letter="E">El bulbo raquídeo</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: A.</strong> Es un núcleo del tálamo, la estación de relevo
+        de la mañana; de ahí salen las radiaciones ópticas hacia el área 17. El colículo que recibe
+        algunas fibras visuales es el <em>superior</em>; el inferior es auditivo.</div>
+    </div>
+
+    <div class="check-question" data-question="q6s2">
+      <p class="question-text">6. Un objeto está en la mitad derecha de tu campo visual. ¿A qué
+        hemisferio llega esa información?</p>
+      <ul class="options">
+        <li data-letter="A">Al derecho, por ser del mismo lado</li>
+        <li data-letter="B" data-correct="true">Al izquierdo</li>
+        <li data-letter="C">A los dos por igual</li>
+        <li data-letter="D">Al del ojo dominante</li>
+        <li data-letter="E">A ninguno: se queda en el tálamo</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: B.</strong> Lo de la mitad derecha del campo visual
+        converge en el hemisferio izquierdo, desde los dos ojos: por el ojo derecho llega en las
+        fibras nasales, que cruzan; por el izquierdo, en las temporales, que no cruzan. El tálamo es
+        una escala, no el destino.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 03 ─────────── -->
+<section class="station" id="s2e3">
+  <div class="station-header">
+    <div class="station-number">03</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Los nervios del movimiento ocular</div>
+      <h2>III, IV y VI: los que mueven el ojo</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Tres nervios <strong>motores</strong> controlan los músculos extrínsecos del ojo. Los tres
+      salen del tronco del encéfalo y entran en la órbita por la <strong>fisura orbitaria
+      superior</strong>. Aquí entra también lo que quedó pendiente de la clase de músculos: quién
+      mueve qué.</p>
+
+    <div class="three-col">
+      <div class="col-card">
+        <h5>Oculomotor (III)</h5>
+        <p>Núcleo en el <strong>mesencéfalo</strong>. Es el que más músculos inerva: recto superior,
+          recto medial, recto inferior, oblicuo inferior y el <strong>elevador del párpado
+          superior</strong>. Lleva además las fibras parasimpáticas de la pupila y del enfoque.</p>
+      </div>
+      <div class="col-card teal">
+        <h5>Troclear (IV)</h5>
+        <p>El <strong>más pequeño</strong> de los doce, y el único que sale por la <strong>cara
+          posterior</strong> del tronco; sus axones cruzan al lado opuesto al salir. Inerva un solo
+          músculo: el <strong>oblicuo superior</strong>.</p>
+      </div>
+      <div class="col-card amber">
+        <h5>Abducens (VI)</h5>
+        <p>Núcleo en la <strong>protuberancia</strong>. Inerva un solo músculo, el <strong>recto
+          lateral</strong>, que lleva el ojo hacia afuera: la <strong>abducción</strong>, de ahí el
+          nombre.</p>
+      </div>
+    </div>
+
+    <div class="pearl">
+      <p><strong>Para no olvidarlo:</strong> <em>recto lateral → 6, oblicuo superior → 4, todo lo
+        demás → 3</em>. Son dos excepciones y una regla. Y los músculos no trabajan solos: para mirar
+        a la derecha se contraen a la vez el recto lateral derecho y el recto medial izquierdo
+        mientras sus antagonistas se relajan. Los oblicuos mantienen estable la rotación del globo.
+        Circuitos del tronco del encéfalo y del cerebelo coordinan los dos ojos.</p>
+    </div>
+
+    <div class="photo-grid">
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_14_19_oculomotor_troclear_abducens.png" alt="Nervios oculomotor (III), troclear (IV) y abducens (VI) y los músculos que inervan"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>Los tres nervios.</strong> Sigue cada uno hasta su músculo:
+          el III se reparte en dos ramos; el IV y el VI van a uno solo. Tortora, Fig. 14.19.</div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_11_5_extraoculares.png" alt="Músculos extrínsecos del ojo y elevador del párpado superior"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>Los músculos, otra vez.</strong> La lámina que quedó de
+          adelanto en la clase 7: ahora cada músculo tiene su nervio. Tortora, Fig. 11.5.</div>
+      </div>
+    </div>
+
+    <div class="clinical-box">
+      <h5>👁 Interfaz optométrica · Cómo se ve la lesión de cada uno</h5>
+      <p>Tortora describe los tres cuadros, y se deducen del reparto de músculos:</p>
+      <p><strong>III:</strong> el ojo queda desviado <strong>hacia abajo y hacia afuera</strong>
+        —solo le quedan el recto lateral (VI) y el oblicuo superior (IV)—, con el párpado caído, la
+        pupila dilatada, sin enfoque de cerca y con visión doble.<br>
+        <strong>IV:</strong> estrabismo y visión doble.<br>
+        <strong>VI:</strong> el ojo no puede ir hacia afuera más allá de la línea media y queda
+        desviado hacia adentro; visión doble.<br>
+        Por eso estos pacientes inclinan la cabeza: buscan la posición en que los dos ojos vuelven a
+        apuntar al mismo sitio.</p>
+    </div>
+
+    <div class="check-question" data-question="q7s2">
+      <p class="question-text">7. ¿Qué nervio es el único que sale por la cara posterior del tronco
+        del encéfalo y cruza al lado opuesto?</p>
+      <ul class="options">
+        <li data-letter="A">El oculomotor (III)</li>
+        <li data-letter="B">El abducens (VI)</li>
+        <li data-letter="C">El trigémino (V)</li>
+        <li data-letter="D" data-correct="true">El troclear (IV)</li>
+        <li data-letter="E">El óptico (II)</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: D.</strong> El troclear es el más pequeño y el único que
+        emerge por detrás del tronco; sus axones cruzan al salir. Todos los demás pares salen por la
+        cara anterior o lateral. Inerva un único músculo, el oblicuo superior.</div>
+    </div>
+
+    <div class="check-question" data-question="q8s2">
+      <p class="question-text">8. Un paciente no puede llevar el ojo derecho hacia afuera y lo tiene
+        desviado hacia adentro. ¿Qué nervio está afectado?</p>
+      <ul class="options">
+        <li data-letter="A">El oculomotor derecho</li>
+        <li data-letter="B">El troclear derecho</li>
+        <li data-letter="C" data-correct="true">El abducens derecho</li>
+        <li data-letter="D">El abducens izquierdo</li>
+        <li data-letter="E">El facial derecho</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: C.</strong> Llevar el ojo hacia afuera es la abducción, y
+        la hace el recto lateral, inervado por el abducens (VI). Sin él, el recto medial —que es del
+        III y sigue funcionando— tira el ojo hacia adentro. Es del mismo lado porque el nervio
+        periférico no cruza; el único que cruza es el IV.</div>
+    </div>
+
+    <div class="check-question" data-question="q9s2">
+      <p class="question-text">9. Un ojo desviado hacia abajo y hacia afuera, con la pupila dilatada,
+        apunta a una lesión del:</p>
+      <ul class="options">
+        <li data-letter="A">Abducens (VI)</li>
+        <li data-letter="B" data-correct="true">Oculomotor (III)</li>
+        <li data-letter="C">Troclear (IV)</li>
+        <li data-letter="D">Facial (VII)</li>
+        <li data-letter="E">Trigémino (V)</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: B.</strong> Si falla el III, los únicos músculos que
+        siguen funcionando son el recto lateral (VI), que tira hacia afuera, y el oblicuo superior
+        (IV), que tira hacia abajo: por eso el ojo queda abajo y afuera. La pupila dilatada lo
+        confirma, porque las fibras que la contraen viajan con el III. Ningún otro par explica las
+        dos cosas a la vez.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 04 ─────────── -->
+<section class="station" id="s2e4">
+  <div class="station-header">
+    <div class="station-number">04</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">El autónomo en el ojo</div>
+      <h2>La pupila y el enfoque</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Dentro del ojo hay músculo <strong>liso</strong>, y el músculo liso no obedece al sistema
+      somático sino al <strong>autónomo</strong>. El iris tiene dos músculos que hacen cosas
+      opuestas, cada uno con su división:</p>
+
+    <div class="two-col">
+      <div class="col-card teal">
+        <h5>Esfínter de la pupila</h5>
+        <p>Fibras <strong>circulares</strong>. Con <strong>luz intensa</strong> se contrae y la pupila
+          se achica: <strong>constricción</strong>. Lo ordena la división
+          <strong>parasimpática</strong>, cuyas fibras viajan con el <strong>oculomotor (III)</strong>.</p>
+      </div>
+      <div class="col-card amber">
+        <h5>Dilatador de la pupila</h5>
+        <p>Fibras <strong>radiales</strong>. Con <strong>luz tenue</strong> se contrae y la pupila se
+          agranda: <strong>dilatación</strong>. Lo ordena la división <strong>simpática</strong>, la
+          misma de la «lucha o huida».</p>
+      </div>
+    </div>
+
+    <p>El III lleva fibras parasimpáticas también al <strong>músculo ciliar</strong>, que cambia la
+      forma del cristalino para ver de cerca: la <strong>acomodación</strong>. Todas estas fibras
+      hacen escala en el <strong>ganglio ciliar</strong>, un ganglio del autónomo que está en la
+      órbita, por fuera del nervio óptico. Recuerda la regla de la mañana: está fuera del SNC, así
+      que es ganglio y no núcleo.</p>
+
+    <h3>El reflejo pupilar a la luz, pieza por pieza</h3>
+    <p>Aquí vuelven las cinco piezas del arco reflejo de la sesión 1:</p>
+    <div class="recorrido">
+      <ol>
+        <li><strong>Receptor:</strong> los fotorreceptores de la retina.</li>
+        <li><strong>Vía sensitiva:</strong> el nervio óptico (II).</li>
+        <li><strong>Centro integrador:</strong> el núcleo pretectal, en el tronco del encéfalo —por
+          eso es un reflejo craneal—.</li>
+        <li><strong>Vía motora:</strong> fibras parasimpáticas del oculomotor (III), con escala en el
+          ganglio ciliar.</li>
+        <li><strong>Efector:</strong> el esfínter de la pupila.</li>
+      </ol>
+    </div>
+
+    <div class="photo-grid">
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_17_8_pupila.png" alt="Respuestas de la pupila a las variaciones de la iluminación"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>Luz intensa, luz tenue.</strong> Qué músculo se contrae en
+          cada caso y qué división lo ordena. Tortora, Fig. 17.8.</div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_15_3_parasimpatico.png" alt="Estructura de la división parasimpática del sistema nervioso autónomo"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>La división parasimpática.</strong> Busca arriba el NC III
+          y el ganglio ciliar, camino del ojo. Tortora, Fig. 15.3.</div>
+      </div>
+    </div>
+
+    <div class="photo-hero">
+      <img src="img/cuadro_15_4_simpatico_parasimpatico.png" alt="Efectos de las divisiones simpática y parasimpática del sistema nervioso autónomo"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>Simpático frente a parasimpático.</strong> Busca las tres
+        filas del ojo —esfínter de la pupila, dilatador y músculo ciliar— y qué hace cada división
+        sobre ellas. Tortora, Cuadro 15.4.</div>
+    </div>
+
+    <div class="check-question" data-question="q10s2">
+      <p class="question-text">10. Con luz tenue la pupila se dilata. ¿Qué división del autónomo lo
+        ordena y qué músculo se contrae?</p>
+      <ul class="options">
+        <li data-letter="A">La parasimpática; el esfínter</li>
+        <li data-letter="B">La parasimpática; el dilatador</li>
+        <li data-letter="C">La simpática; el esfínter</li>
+        <li data-letter="D">La somática; el músculo ciliar</li>
+        <li data-letter="E" data-correct="true">La simpática; el dilatador</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: E.</strong> Dilatar es trabajo del dilatador, de fibras
+        radiales, bajo la orden simpática. La parasimpática hace lo contrario: contrae el esfínter y
+        achica la pupila con luz intensa. La división somática no gobierna ningún músculo liso: la
+        opción D mezcla territorios.</div>
+    </div>
+
+    <div class="check-question" data-question="q11s2">
+      <p class="question-text">11. En el reflejo pupilar a la luz, ¿por dónde viaja la orden que
+        contrae el esfínter?</p>
+      <ul class="options">
+        <li data-letter="A">Por el nervio óptico</li>
+        <li data-letter="B">Por el ramo oftálmico del trigémino</li>
+        <li data-letter="C">Por el nervio facial</li>
+        <li data-letter="D" data-correct="true">Por fibras parasimpáticas del oculomotor</li>
+        <li data-letter="E">Por el nervio abducens</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: D.</strong> La orden sale del tronco del encéfalo por las
+        fibras parasimpáticas del III, hace escala en el ganglio ciliar y llega al esfínter. El nervio
+        óptico también participa, pero en el otro sentido: es la vía sensitiva que lleva la luz
+        <em>hacia</em> el centro. Distinguir la vía de entrada de la de salida es todo el
+        ejercicio.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 05 ─────────── -->
+<section class="station" id="s2e5">
+  <div class="station-header">
+    <div class="station-number">05</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Los dos mixtos de la cara</div>
+      <h2>V y VII: sentir y cerrar</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <h3>El trigémino (V)</h3>
+    <p>Es el <strong>más grande</strong> de los doce y es mixto. Sale de la protuberancia, tiene un
+      ganglio con los cuerpos de sus neuronas sensitivas —el ganglio del trigémino— y, como dice su
+      nombre, se divide en <strong>tres ramos</strong>:</p>
+
+    <div class="three-col">
+      <div class="col-card teal">
+        <h5>Oftálmico (V₁)</h5>
+        <p>El más pequeño. Entra en la órbita por la <strong>fisura orbitaria superior</strong>. Lleva
+          la sensibilidad del <strong>globo ocular</strong>, el párpado superior, la glándula
+          lagrimal, la frente y la mitad anterior del cuero cabelludo.</p>
+      </div>
+      <div class="col-card">
+        <h5>Maxilar (V₂)</h5>
+        <p>Sale por el foramen redondo. Lleva la sensibilidad del párpado inferior, la mucosa nasal,
+          los dientes superiores y el labio superior.</p>
+      </div>
+      <div class="col-card">
+        <h5>Mandibular (V₃)</h5>
+        <p>El más grande; sale por el foramen oval. Lleva la sensibilidad de la parte inferior de la
+          cara y es el único con parte <strong>motora</strong>: los músculos de la
+          <strong>masticación</strong>.</p>
+      </div>
+    </div>
+
+    <p>Sus axones sensitivos llevan <strong>tacto, dolor y temperatura</strong>. Cuando algo lo
+      presiona o lo inflama aparece la neuralgia del trigémino: un dolor agudo y cortante que dura de
+      segundos a un minuto.</p>
+
+    <div class="photo-hero">
+      <img src="img/fig_14_20_trigemino.png" alt="Nervio trigémino (V) y sus tres ramos: oftálmico, maxilar y mandibular"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>Tres ramos, tres salidas.</strong> Fisura orbitaria
+        superior, foramen redondo y foramen oval: los forámenes de la clase 6. Tortora, Fig. 14.20.</div>
+    </div>
+
+    <h3>El facial (VII)</h3>
+    <p>También mixto, sale de la protuberancia. Es el nervio del cuerpo que <strong>más músculos
+      inerva</strong>: todos los de la <strong>expresión facial</strong>, entre ellos el orbicular de
+      los ojos, como viste en la clase 7. Además lleva el <strong>gusto</strong> de los dos tercios
+      anteriores de la lengua y fibras <strong>parasimpáticas</strong> para la <strong>glándula
+      lagrimal</strong> —la que produce la lágrima— y para dos glándulas salivales.</p>
+
+    <div class="photo-hero">
+      <img src="img/fig_14_21_facial.png" alt="Nervio facial (VII): músculos de la expresión, gusto y glándulas"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>El nervio de la expresión.</strong> Sus ramos se abren en
+        abanico sobre la cara. Tortora, Fig. 14.21.</div>
+    </div>
+
+    <div class="clinical-box">
+      <h5>👁 Interfaz optométrica · El reparto del trabajo en el párpado y el ojo</h5>
+      <p>Cuatro pares se reparten el ojo y sus alrededores, y conviene tenerlos separados:
+        el <strong>II ve</strong>; el <strong>III, el IV y el VI mueven</strong> el globo, y el III
+        además <strong>abre</strong> el párpado; el <strong>V₁ siente</strong> —el globo, el párpado
+        superior y la frente—; y el <strong>VII cierra</strong> el párpado y hace llorar a la glándula
+        lagrimal. Casi todo lo que vas a explorar en consulta cae en uno de estos cinco.</p>
+    </div>
+
+    <div class="check-question" data-question="q12s2">
+      <p class="question-text">12. ¿Qué nervio lleva la sensibilidad del globo ocular, del párpado
+        superior y de la frente?</p>
+      <ul class="options">
+        <li data-letter="A">El nervio facial</li>
+        <li data-letter="B">El nervio oculomotor</li>
+        <li data-letter="C">El ramo maxilar del trigémino</li>
+        <li data-letter="D">El nervio óptico</li>
+        <li data-letter="E" data-correct="true">El ramo oftálmico del trigémino</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: E.</strong> Es el V₁, que entra en la órbita por la
+        fisura orbitaria superior. El maxilar (V₂) se ocupa del párpado inferior y la mejilla. El
+        óptico también es sensitivo, pero solo de la visión: no lleva tacto ni dolor. Y el facial y
+        el oculomotor son los que mueven, no los que sienten.</div>
+    </div>
+
+    <div class="check-question" data-question="q13s2">
+      <p class="question-text">13. ¿Qué par craneal lleva las fibras autónomas que hacen secretar a la
+        glándula lagrimal?</p>
+      <ul class="options">
+        <li data-letter="A">El trigémino (V)</li>
+        <li data-letter="B">El oculomotor (III)</li>
+        <li data-letter="C" data-correct="true">El facial (VII)</li>
+        <li data-letter="D">El glosofaríngeo (IX)</li>
+        <li data-letter="E">El vago (X)</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: C.</strong> Las fibras parasimpáticas del facial llegan a
+        la glándula lagrimal tras hacer escala en un ganglio. Ojo con el trigémino: su ramo oftálmico
+        lleva la <em>sensibilidad</em> de la glándula, no la orden de secretar. El III también es
+        parasimpático, pero sus fibras van a la pupila y al músculo ciliar.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 06 ─────────── -->
+<section class="station" id="s2e6">
+  <div class="station-header">
+    <div class="station-number">06</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Para completar el mapa</div>
+      <h2>Los otros seis pares</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>No se cruzan con el ojo, pero completan la lista y conviene reconocerlos. Una línea para cada
+      uno:</p>
+
+    <div class="two-col">
+      <div class="col-card">
+        <h5>Olfatorio (I) · sensitivo</h5>
+        <p>El <strong>olfato</strong>. Sus axones atraviesan la lámina cribosa del etmoides y terminan
+          en los bulbos olfatorios.</p>
+      </div>
+      <div class="col-card">
+        <h5>Vestibulococlear (VIII) · sensitivo</h5>
+        <p>La <strong>audición</strong> —ramo coclear— y el <strong>equilibrio</strong> —ramo
+          vestibular—, desde el oído interno.</p>
+      </div>
+      <div class="col-card">
+        <h5>Glosofaríngeo (IX) · mixto</h5>
+        <p>El gusto del tercio posterior de la lengua, la <strong>deglución</strong> y la saliva de la
+          parótida.</p>
+      </div>
+      <div class="col-card">
+        <h5>Vago (X) · mixto</h5>
+        <p>El de distribución más amplia: faringe y laringe, y las <strong>vísceras</strong> del tórax
+          y el abdomen. Disminuye la frecuencia cardíaca.</p>
+      </div>
+      <div class="col-card">
+        <h5>Accesorio (XI) · motor</h5>
+        <p>Nace en la médula cervical y sube por el foramen magno. Mueve el
+          <strong>esternocleidomastoideo y el trapecio</strong>: la cabeza y los hombros.</p>
+      </div>
+      <div class="col-card">
+        <h5>Hipogloso (XII) · motor</h5>
+        <p>Los músculos de la <strong>lengua</strong>, para hablar y tragar.</p>
+      </div>
+    </div>
+
+    <div class="photo-grid">
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_14_17_olfatorio.png" alt="Nervio olfatorio (I)" onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>Olfatorio (I).</strong> Tortora, Fig. 14.17.</div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_14_22_vestibulococlear.png" alt="Nervio vestibulococlear (VIII)" onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>Vestibulococlear (VIII).</strong> Tortora, Fig. 14.22.</div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_14_23_glosofaringeo.png" alt="Nervio glosofaríngeo (IX)" onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>Glosofaríngeo (IX).</strong> Tortora, Fig. 14.23.</div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_14_24_vago.png" alt="Nervio vago (X)" onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>Vago (X).</strong> Tortora, Fig. 14.24.</div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_14_25_accesorio.png" alt="Nervio accesorio (XI)" onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>Accesorio (XI).</strong> Tortora, Fig. 14.25.</div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_14_26_hipogloso.png" alt="Nervio hipogloso (XII)" onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>Hipogloso (XII).</strong> Tortora, Fig. 14.26.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 07 ─────────── -->
+<section class="station" id="s2e7">
+  <div class="station-header">
+    <div class="station-number">07</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Vocabulario</div>
+      <h2>Términos TA2 de la sesión</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <div class="flip-grid">
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Nervio craneal</span><span class="term-en">Nervus cranialis</span></div>
+        <div class="flip-back"><p class="term-def">Cada uno de los doce pares que nacen del encéfalo y salen por forámenes del cráneo.</p><p class="term-opto">👁 El número indica el orden de salida, de adelante atrás.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Endoneuro</span><span class="term-en">Endoneurium</span></div>
+        <div class="flip-back"><p class="term-def">La envoltura de tejido conectivo de cada axón dentro de un nervio.</p><p class="term-opto">👁 Como el endomisio del músculo.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Perineuro</span><span class="term-en">Perineurium</span></div>
+        <div class="flip-back"><p class="term-def">La envoltura que agrupa axones en fascículos.</p><p class="term-opto">👁 Como el perimisio.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Epineuro</span><span class="term-en">Epineurium</span></div>
+        <div class="flip-back"><p class="term-def">La envoltura externa del nervio entero.</p><p class="term-opto">👁 La duramadre se continúa con él.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Nervio óptico</span><span class="term-en">Nervus opticus</span></div>
+        <div class="flip-back"><p class="term-def">El par II: los axones de las células ganglionares de la retina, hasta el quiasma.</p><p class="term-opto">👁 Enteramente sensitivo: solo visión.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Quiasma óptico</span><span class="term-en">Chiasma opticum</span></div>
+        <div class="flip-back"><p class="term-def">El cruce en X de los dos nervios ópticos, donde cruzan las fibras de la mitad nasal de cada retina.</p><p class="term-opto">👁 Un cruce parcial: las temporales no cruzan.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Tracto óptico</span><span class="term-en">Tractus opticus</span></div>
+        <div class="flip-back"><p class="term-def">Las fibras visuales detrás del quiasma, ya dentro del encéfalo, camino del tálamo.</p><p class="term-opto">👁 Mismo cable, otro nombre: dentro del SNC es tracto.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Cuerpo geniculado lateral</span><span class="term-en">Corpus geniculatum laterale</span></div>
+        <div class="flip-back"><p class="term-def">Núcleo del tálamo donde hace sinapsis la mayoría de los axones del tracto óptico.</p><p class="term-opto">👁 La escala de la visión antes de la corteza.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Radiación óptica</span><span class="term-en">Radiatio optica</span></div>
+        <div class="flip-back"><p class="term-def">Los axones que van del cuerpo geniculado lateral al área visual primaria del lóbulo occipital.</p><p class="term-opto">👁 El último tramo de la vía visual.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Nervio oculomotor</span><span class="term-en">Nervus oculomotorius</span></div>
+        <div class="flip-back"><p class="term-def">El par III: rectos superior, medial e inferior, oblicuo inferior y elevador del párpado; y fibras parasimpáticas a la pupila y al músculo ciliar.</p><p class="term-opto">👁 Si falla: ojo abajo y afuera, pupila dilatada.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Nervio troclear</span><span class="term-en">Nervus trochlearis</span></div>
+        <div class="flip-back"><p class="term-def">El par IV: el más pequeño; sale por detrás del tronco, cruza e inerva el oblicuo superior.</p><p class="term-opto">👁 Oblicuo superior → 4.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Nervio abducens</span><span class="term-en">Nervus abducens</span></div>
+        <div class="flip-back"><p class="term-def">El par VI: nace en la protuberancia e inerva el recto lateral, que abduce el ojo.</p><p class="term-opto">👁 Recto lateral → 6. Si falla, el ojo no va hacia afuera.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Ganglio ciliar</span><span class="term-en">Ganglion ciliare</span></div>
+        <div class="flip-back"><p class="term-def">Ganglio parasimpático de la órbita donde hacen escala las fibras del III hacia la pupila y el músculo ciliar.</p><p class="term-opto">👁 Fuera del SNC: por eso es ganglio.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Músculo esfínter de la pupila</span><span class="term-en">Musculus sphincter pupillae</span></div>
+        <div class="flip-back"><p class="term-def">Músculo liso circular del iris; achica la pupila con luz intensa.</p><p class="term-opto">👁 Parasimpático, por el III.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Músculo dilatador de la pupila</span><span class="term-en">Musculus dilatator pupillae</span></div>
+        <div class="flip-back"><p class="term-def">Músculo liso radial del iris; agranda la pupila con luz tenue.</p><p class="term-opto">👁 Simpático.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Nervio trigémino</span><span class="term-en">Nervus trigeminus</span></div>
+        <div class="flip-back"><p class="term-def">El par V, el más grande: sensibilidad de la cara en tres ramos y motor de la masticación.</p><p class="term-opto">👁 Su ramo oftálmico siente el globo ocular.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Nervio oftálmico</span><span class="term-en">Nervus ophthalmicus</span></div>
+        <div class="flip-back"><p class="term-def">El ramo V₁ del trigémino; entra por la fisura orbitaria superior.</p><p class="term-opto">👁 Globo ocular, párpado superior, glándula lagrimal y frente.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Glándula lagrimal</span><span class="term-en">Glandula lacrimalis</span></div>
+        <div class="flip-back"><p class="term-def">La glándula que produce la lágrima, en la parte superolateral de la órbita.</p><p class="term-opto">👁 Secreta por orden del VII; siente por el V₁.</p></div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 08 ─────────── -->
+<section class="station" id="s2e8">
+  <div class="station-header">
+    <div class="station-number">08</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Recuperación</div>
+      <h2>Comprueba lo que aprendiste</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Cuatro más, y ninguna se contesta buscando arriba.</p>
+
+    <div class="check-question" data-question="q14s2">
+      <p class="question-text">14. ¿Cuál de estos músculos inerva el oculomotor (III)?</p>
+      <ul class="options">
+        <li data-letter="A">El recto lateral</li>
+        <li data-letter="B">El oblicuo superior</li>
+        <li data-letter="C">El orbicular de los ojos</li>
+        <li data-letter="D">El masetero</li>
+        <li data-letter="E" data-correct="true">El recto medial</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: E.</strong> Aplica la regla: recto lateral → 6, oblicuo
+        superior → 4, todo lo demás de los extraoculares → 3. El recto medial es «todo lo demás». El
+        orbicular es del facial (VII), y el masetero, del ramo mandibular del trigémino.</div>
+    </div>
+
+    <div class="check-question" data-question="q15s2">
+      <p class="question-text">15. Señala la afirmación <strong>falsa</strong> sobre los pares
+        craneales.</p>
+      <ul class="options">
+        <li data-letter="A">Forman parte del sistema nervioso periférico</li>
+        <li data-letter="B" data-correct="true">Todos salen del tronco del encéfalo</li>
+        <li data-letter="C">El II es enteramente sensitivo</li>
+        <li data-letter="D">El V es el más grande de los doce</li>
+        <li data-letter="E">El III lleva fibras parasimpáticas</li>
+      </ul>
+      <div class="feedback"><strong>La falsa es B.</strong> Del tronco salen diez, pero no todos: el
+        I termina en los bulbos olfatorios, bajo el lóbulo frontal; el II llega al diencéfalo; y el XI
+        nace en la médula cervical y sube por el foramen magno. Las otras cuatro afirmaciones son
+        ciertas.</div>
+    </div>
+
+    <div class="check-question" data-question="q16s2">
+      <p class="question-text">16. Ordena la vía visual desde la retina hasta la corteza.</p>
+      <ul class="options">
+        <li data-letter="A">Nervio óptico → tracto → quiasma → geniculado → radiaciones</li>
+        <li data-letter="B">Nervio óptico → quiasma → geniculado → tracto → radiaciones</li>
+        <li data-letter="C" data-correct="true">Nervio óptico → quiasma → tracto → geniculado → radiaciones</li>
+        <li data-letter="D">Quiasma → nervio óptico → tracto → radiaciones → geniculado</li>
+        <li data-letter="E">Nervio óptico → quiasma → radiaciones → tracto → geniculado</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: C.</strong> El nervio llega al quiasma; detrás del cruce
+        se llama tracto; el tracto termina en el cuerpo geniculado lateral del tálamo; y de ahí las
+        radiaciones ópticas llevan la señal al área 17. Una pista para ordenar: «tracto» solo existe
+        dentro del encéfalo, así que tiene que ir después del quiasma.</div>
+    </div>
+
+    <div class="saber-box">
+      <strong>Pregunta tipo Saber Pro · In English</strong>
+      <div class="check-question" style="margin-top:16px;border-color:var(--purple)" data-question="q17s2">
+        <p class="question-text">17. The trigeminal nerve (V) has three branches. Which one enters the
+          orbit through the superior orbital fissure?</p>
+        <ul class="options">
+          <li data-letter="A">The mandibular branch (V₃)</li>
+          <li data-letter="B">The maxillary branch (V₂)</li>
+          <li data-letter="C">None: all three pass through the foramen ovale</li>
+          <li data-letter="D" data-correct="true">The ophthalmic branch (V₁)</li>
+          <li data-letter="E">The facial branch of the trigeminal</li>
+        </ul>
+        <div class="feedback"><strong>Correct answer: D.</strong> The ophthalmic branch, the smallest
+          one, reaches the orbit through the superior orbital fissure. The maxillary branch leaves the
+          skull through the foramen rotundum and the mandibular branch through the foramen ovale —
+          each branch has its own exit. The last option is a trap: the trigeminal has no «facial
+          branch»; the facial nerve is a different cranial nerve, the VII.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 09 ─────────── -->
+<section class="station" id="s2e9">
+  <div class="station-header">
+    <div class="station-number">09</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Para cerrar</div>
+      <h2>Volvemos a las cinco preguntas</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Las mismas de esta mañana. Léelas otra vez y comprueba cuántas contestas ahora con
+      seguridad.</p>
+
+    <div class="acorde">
+      <details>
+        <summary>1 · ¿Por qué te mareas al levantarte de golpe?</summary>
+        <p>Porque el encéfalo no tiene reservas. Pesa el 2 % del cuerpo pero consume el 20 % del
+          oxígeno y de la glucosa, y sus neuronas fabrican energía casi solo con esas dos cosas, sin
+          almacenarlas. Al ponerte de pie de golpe, por un instante llega menos sangre a la cabeza, y
+          hasta una disminución leve del flujo produce desorientación o, si es mayor, pérdida del
+          conocimiento. Uno o dos minutos sin irrigación ya alteran su función.</p>
+      </details>
+      <details>
+        <summary>2 · ¿Por qué una lesión izquierda debilita la mano derecha?</summary>
+        <p>Por la <strong>decusación de las pirámides</strong>. En el bulbo raquídeo, justo encima de
+          la médula, cerca del 90 % de los axones motores de cada lado cruza al lado opuesto. Así, el
+          hemisferio izquierdo gobierna la mitad derecha del cuerpo. Y en la sesión 2 viste que la
+          visión hace algo parecido: cada hemisferio recibe la mitad contraria del campo visual.</p>
+      </details>
+      <details>
+        <summary>3 · ¿Cómo entra la aguja sin tocar la médula?</summary>
+        <p>Porque la médula es más corta que la columna: termina en L2, en el <strong>cono
+          medular</strong>, mientras que las meninges y el LCR siguen hasta S2. Por debajo de L2 solo
+          quedan las raíces de la <strong>cola de caballo</strong> flotando en el LCR. La aguja se
+          introduce entre L3 y L4 o entre L4 y L5, en el espacio subaracnoideo, donde hay líquido y
+          no hay médula.</p>
+      </details>
+      <details>
+        <summary>4 · ¿Quién decidió retirar la mano antes de sentir el calor?</summary>
+        <p>La <strong>médula espinal</strong>, por un arco reflejo. El receptor de la piel manda la
+          señal por una neurona sensitiva a la médula; allí el centro integrador decide y una neurona
+          motora contrae el músculo. Todo ocurre antes de que la información llegue a la corteza,
+          que es donde «te enteras». El reflejo pupilar funciona igual, con el centro integrador en
+          el tronco del encéfalo.</p>
+      </details>
+      <details>
+        <summary>5 · ¿Qué detiene al antibiótico?</summary>
+        <p>La <strong>barrera hematoencefálica</strong>. Los capilares del encéfalo tienen sus células
+          unidas por uniones estrechas, una membrana basal gruesa y la cubierta de los astrocitos.
+          Dejan pasar lo liposoluble —oxígeno, alcohol, anestésicos— y la glucosa por transporte
+          activo, pero no las proteínas ni muchos antibióticos. Protege al encéfalo de lo nocivo y,
+          por lo mismo, le cierra el paso a muchos fármacos.</p>
+      </details>
+    </div>
+
+    <div class="pearl">
+      <p><strong>Lo que hay que llevarse de hoy.</strong> El sistema nervioso tiene un centro que
+        decide —encéfalo y médula, protegidos por hueso, meninges, líquido y una barrera— y una
+        periferia de nervios que entran y salen. En la cabeza, esa periferia son doce pares, y cinco
+        de ellos trabajan en el ojo: el II ve, el III, el IV y el VI lo mueven, el V₁ lo siente y el
+        VII cierra el párpado. Por eso un ojo que no se mueve, una pupila que no se contrae o un
+        párpado que no cierra pueden ser la primera señal de algo que ocurre dentro del
+        cráneo.</p>
+    </div>
+  </div>
+</section>
+
+</div><!-- fin sesión 2 -->
+</div><!-- fin container -->
+
+<footer class="footer">
+  <p><strong>Morfología General · Optometría · Universidad de La Salle · 2026-II</strong></p>
+  <p>Clase 8 · Sistema nervioso: el encéfalo, la médula y los doce pares · Jueves 17 de septiembre de 2026</p>
+  <p>Fuente: Tortora &amp; Derrickson, <em>Principios de Anatomía y Fisiología</em>, capítulos 12, 13, 14,
+     15 y 17</p>
+</footer>
+
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" aria-label="Cerrar">✕</button>
+  <img src="" alt="">
+  <div class="lb-caption"></div>
+</div>
+
+<script>
+function showTab(id,btn){
+  document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+document.querySelectorAll('.check-question').forEach(block=>{
+  const options=block.querySelectorAll('.options li');
+  const feedback=block.querySelector('.feedback');
+  const correctLetter=Array.from(options).find(o=>o.dataset.correct==='true')?.dataset.letter;
+  let answered=false;
+  options.forEach(opt=>{
+    opt.addEventListener('click',()=>{
+      if(answered)return;
+      answered=true;
+      options.forEach(o=>{
+        if(o.dataset.letter===correctLetter)o.classList.add('correct');
+        else if(o===opt&&opt.dataset.letter!==correctLetter)o.classList.add('incorrect');
+      });
+      feedback.classList.add('show');
+      feedback.scrollIntoView({behavior:'smooth',block:'nearest'});
+    });
+  });
+});
+document.querySelectorAll('.flip-card').forEach(card=>{
+  card.addEventListener('click',()=>card.classList.toggle('flipped'));
+});
+
+/* Lupa: las láminas del encéfalo y de los pares craneales llevan rótulos que no se leen
+   a tamaño de columna. Ampliar no es un adorno. */
+(function(){
+  const lb=document.getElementById('lightbox');
+  const lbImg=lb.querySelector('img'), lbCap=lb.querySelector('.lb-caption');
+  document.querySelectorAll('.photo-card img, .photo-hero img').forEach(img=>{
+    img.addEventListener('click',()=>{
+      if(img.classList.contains('broken'))return;
+      lbImg.src=img.src;
+      lbImg.alt=img.alt||'';
+      const cap=img.closest('.photo-card,.photo-hero').querySelector('.photo-caption');
+      lbCap.textContent=cap?cap.textContent.trim().replace(/\s+/g,' ').slice(0,220):'';
+      lb.classList.add('open');
+    });
+  });
+  const cerrar=()=>{lb.classList.remove('open');lbImg.src='';};
+  lb.addEventListener('click',cerrar);
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')cerrar();});
+})();
+</script>
+
+</body>
+</html>
