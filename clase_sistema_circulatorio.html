@@ -1,0 +1,2459 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sistema circulatorio · Clase 9 · Morfología General 2026-II</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:#1a2a35;--text:#2c3e4f;--text-soft:#5a6b7a;--text-muted:#8a9aa8;
+  --parchment:#f8f3e8;--parchment-dark:#f0e8d4;--parchment-deep:#e8dcc0;
+  --bg-card:#fdfaf2;--border:#d4c8a8;--border-light:#e5dbc0;
+  --amber:#b8860b;--amber-dark:#8b6914;--amber-light:#d4a72c;--amber-pale:#f5e9c8;
+  --teal:#2a7a6e;--teal-dark:#1f5d54;
+  --rust:#a0522d;--rust-dark:#7d3f22;
+  --clinical:#b5413b;--clinical-dark:#8a2f2a;--clinical-bg:#fce8e6;
+  --blue:#1976a1;--blue-dark:#115670;--blue-bg:#e3f0f5;
+  --green:#2e7d32;--green-bg:#e8f5e9;
+  --purple:#6b4a8a;--purple-bg:#f0e8f4;--purple-dark:#4a2d6e;
+  --shadow-sm:0 2px 8px rgba(26,42,53,0.06);
+  --shadow-md:0 4px 20px rgba(26,42,53,0.10);
+  --font-display:'Playfair Display',Georgia,serif;
+  --font-body:'Source Serif 4',Georgia,serif;
+  --font-mono:'DM Mono','Courier New',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--parchment);color:var(--text);line-height:1.75;font-size:17px;
+  background-image:radial-gradient(at 12% 8%,rgba(184,134,11,.04) 0%,transparent 50%),radial-gradient(at 88% 92%,rgba(42,122,110,.04) 0%,transparent 50%);
+  background-attachment:fixed}
+
+/* HEADER */
+.header{text-align:center;padding:70px 30px 50px;border-bottom:3px double var(--amber);margin-bottom:50px;position:relative}
+.header::before{content:'';position:absolute;top:30px;left:50%;transform:translateX(-50%);width:80px;height:1px;background:var(--amber)}
+.eyebrow{font-family:var(--font-mono);font-size:.78rem;letter-spacing:.32em;text-transform:uppercase;color:var(--amber-dark);margin-bottom:14px}
+.header h1{font-family:var(--font-display);font-size:clamp(2.2rem,5vw,3.6rem);font-weight:900;color:var(--ink);line-height:1.05;margin-bottom:12px}
+.header h1 em{font-style:italic;font-weight:400;color:var(--amber-dark)}
+.header .subtitle{font-family:var(--font-body);font-style:italic;font-size:1.15rem;color:var(--text-soft);margin-bottom:22px;font-weight:300}
+.header .meta{font-family:var(--font-mono);font-size:.82rem;letter-spacing:.18em;color:var(--text-muted);text-transform:uppercase}
+
+/* TABS */
+.tab-bar{background:var(--bg-card);border:1px solid var(--border);border-radius:4px;padding:0;margin-bottom:50px;box-shadow:var(--shadow-sm);overflow:hidden;display:flex}
+.tab-btn{flex:1;padding:18px 24px;background:none;border:none;border-right:1px solid var(--border-light);font-family:var(--font-body);font-size:.95rem;color:var(--text-soft);cursor:pointer;transition:all .2s;text-align:center;line-height:1.4}
+.tab-btn:last-child{border-right:none}
+.tab-btn:hover{background:var(--parchment-dark);color:var(--ink)}
+.tab-btn.active{background:var(--amber-pale);color:var(--ink);font-weight:600;border-bottom:3px solid var(--amber)}
+.tab-btn .tab-date{display:block;font-family:var(--font-mono);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--amber-dark);margin-bottom:4px}
+.tab-pane{display:none}
+.tab-pane.active{display:block}
+
+/* CONTAINER */
+.container{max-width:1100px;margin:0 auto;padding:0 30px 80px}
+
+/* NAV INTERNA */
+.station-nav{background:var(--bg-card);border:1px solid var(--border);border-radius:4px;padding:24px 28px;margin-bottom:50px;box-shadow:var(--shadow-sm)}
+.station-nav h3{font-family:var(--font-mono);font-size:.75rem;letter-spacing:.25em;text-transform:uppercase;color:var(--amber-dark);margin-bottom:16px}
+.station-nav ol{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px 24px;counter-reset:stations}
+.station-nav li{counter-increment:stations;padding:4px 0}
+.station-nav li::before{content:counter(stations,decimal-leading-zero) '. ';font-family:var(--font-mono);color:var(--amber-dark);font-weight:500;margin-right:6px}
+.station-nav a{color:var(--text);text-decoration:none;font-style:italic;border-bottom:1px dotted var(--border);transition:color .2s,border-color .2s}
+.station-nav a:hover{color:var(--amber-dark);border-color:var(--amber-dark)}
+
+/* STATIONS */
+.station{margin-bottom:80px;scroll-margin-top:30px}
+.station-header{display:flex;align-items:baseline;gap:20px;margin-bottom:30px;padding-bottom:18px;border-bottom:2px solid var(--border)}
+.station-number{font-family:var(--font-display);font-style:italic;font-size:4rem;font-weight:400;color:var(--amber);line-height:1;flex-shrink:0}
+.station-titles{flex:1}
+.station-eyebrow{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--amber-dark);margin-bottom:6px}
+.station h2{font-family:var(--font-display);font-size:clamp(1.7rem,3.5vw,2.4rem);font-weight:700;color:var(--ink);line-height:1.15}
+
+/* CONTENT BLOCK */
+.content-block{background:var(--bg-card);border:1px solid var(--border-light);border-radius:4px;padding:28px 32px;margin-bottom:24px;box-shadow:var(--shadow-sm)}
+.content-block h3{font-family:var(--font-display);font-size:1.4rem;font-weight:700;color:var(--ink);margin-bottom:16px;padding-bottom:8px;border-bottom:1px dotted var(--border)}
+.content-block h4{font-family:var(--font-display);font-size:1.1rem;font-weight:700;color:var(--amber-dark);margin:20px 0 10px;font-style:italic}
+.content-block p{margin-bottom:14px}
+.content-block ul,.content-block ol{margin:12px 0 18px 24px}
+.content-block li{margin-bottom:8px;padding-left:6px}
+.content-block strong{color:var(--ink);font-weight:700}
+.content-block em.term{font-style:italic;color:var(--amber-dark);font-weight:600}
+
+/* TWO-COL / THREE-COL */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:20px 0}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin:20px 0}
+@media(max-width:900px){.two-col,.three-col{grid-template-columns:1fr}}
+.col-card{background:var(--parchment-dark);border-left:4px solid var(--amber);padding:18px 22px;border-radius:2px}
+.col-card.teal{border-color:var(--teal);background:#e8f0ee}
+.col-card.rust{border-color:var(--rust);background:#f3e8de}
+.col-card.blue{border-color:var(--blue);background:var(--blue-bg)}
+.col-card.green{border-color:var(--green);background:var(--green-bg)}
+.col-card h5{font-family:var(--font-display);font-weight:700;color:var(--ink);margin-bottom:8px;font-size:1.05rem}
+
+/* TABLE */
+table.data{width:100%;border-collapse:collapse;margin:18px 0;font-size:.95rem}
+table.data th{background:var(--amber-dark);color:var(--parchment);padding:10px 14px;text-align:left;font-family:var(--font-mono);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;font-weight:500}
+table.data td{padding:10px 14px;border-bottom:1px solid var(--border-light);vertical-align:top}
+table.data tr:nth-child(even) td{background:var(--parchment-dark)}
+table.data tr:hover td{background:var(--amber-pale)}
+
+/* CLINICAL BOX */
+.clinical-box{background:var(--clinical-bg);border-left:5px solid var(--clinical);padding:20px 26px;margin:22px 0;border-radius:2px;position:relative}
+.clinical-box::before{content:'👁 Interfaz optométrica';display:block;font-family:var(--font-mono);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--clinical-dark);margin-bottom:10px;font-weight:600}
+.clinical-box h5{font-family:var(--font-display);font-weight:700;color:var(--clinical-dark);font-size:1.1rem;margin-bottom:6px}
+
+/* PEARL */
+.pearl{background:var(--amber-pale);border:1px solid var(--amber-light);border-radius:2px;padding:16px 22px;margin:18px 0;font-style:italic;color:var(--text);position:relative;padding-left:50px}
+.pearl::before{content:'◆';position:absolute;left:18px;top:16px;color:var(--amber-dark);font-size:1.2rem;font-style:normal}
+
+/* SABER PRO */
+.saber-box{background:var(--purple-bg);border-left:5px solid var(--purple);padding:20px 26px;margin:22px 0;border-radius:2px}
+.saber-box::before{content:'★ Tipo Saber Pro';display:block;font-family:var(--font-mono);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--purple-dark);margin-bottom:10px;font-weight:600}
+
+/* FIGURE */
+.figure{margin:28px 0;background:var(--bg-card);border:1px solid var(--border-light);border-radius:4px;padding:20px;box-shadow:var(--shadow-sm);text-align:center}
+.figure svg{width:100%;max-width:800px;height:auto}
+.figure-caption{font-family:var(--font-mono);font-size:.78rem;color:var(--text-muted);margin-top:12px;letter-spacing:.06em;text-align:center}
+
+/* FLIP CARDS */
+.flip-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;margin:20px 0}
+.flip-card{height:160px;perspective:800px;cursor:pointer}
+.flip-inner{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform .5s ease}
+.flip-card:hover .flip-inner,.flip-card.flipped .flip-inner{transform:rotateY(180deg)}
+.flip-front,.flip-back{position:absolute;inset:0;border-radius:4px;padding:16px;backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.flip-front{background:var(--bg-card);border:2px solid var(--border)}
+.flip-back{background:var(--amber-pale);border:2px solid var(--amber);transform:rotateY(180deg)}
+.flip-front .term-label{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px}
+.flip-front .term-name{font-family:var(--font-display);font-size:1.15rem;font-weight:700;color:var(--ink);line-height:1.2}
+.flip-front .term-en{font-family:var(--font-mono);font-size:.75rem;color:var(--text-muted);margin-top:6px;font-style:italic}
+.flip-back .term-def{font-size:.88rem;color:var(--text);line-height:1.5;margin-bottom:8px}
+.flip-back .term-opto{font-family:var(--font-mono);font-size:.72rem;color:var(--clinical-dark);letter-spacing:.05em}
+
+/* CHECK QUESTION */
+.check-question{background:linear-gradient(180deg,#fdfaf2 0%,#f5ecd5 100%);border:2px dashed var(--amber);border-radius:4px;padding:28px 30px;margin:30px 0;position:relative}
+.check-question::before{content:'? Verificación';position:absolute;top:-12px;left:24px;background:var(--parchment);padding:2px 14px;font-family:var(--font-mono);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--amber-dark);font-weight:600}
+.check-question .question-text{font-family:var(--font-display);font-size:1.15rem;color:var(--ink);margin-bottom:18px;font-weight:400;font-style:italic}
+.options{list-style:none;margin:0}
+.options li{margin-bottom:10px;padding:12px 18px;background:var(--bg-card);border:1px solid var(--border);border-radius:3px;cursor:pointer;transition:all .2s;position:relative;padding-left:50px}
+.options li::before{content:attr(data-letter);position:absolute;left:16px;top:50%;transform:translateY(-50%);font-family:var(--font-mono);font-weight:500;color:var(--amber-dark)}
+.options li:hover{background:var(--amber-pale);border-color:var(--amber)}
+.options li.correct{background:#e8f5e8;border-color:#2e7d32;color:#1b5e20}
+.options li.correct::after{content:' ✓';color:#2e7d32;font-weight:700}
+.options li.incorrect{background:var(--clinical-bg);border-color:var(--clinical);color:var(--clinical-dark)}
+.options li.incorrect::after{content:' ✗';color:var(--clinical);font-weight:700}
+.feedback{display:none;margin-top:16px;padding:14px 18px;background:var(--bg-card);border-left:4px solid var(--amber);border-radius:2px;font-size:.96rem}
+.feedback.show{display:block}
+.feedback strong{color:var(--amber-dark)}
+
+/* PHOTO */
+.photo-grid{display:grid;gap:20px;margin:24px 0}
+@media(min-width:640px){.photo-grid.cols-2{grid-template-columns:1fr 1fr}.photo-grid.cols-3{grid-template-columns:1fr 1fr 1fr}}
+.photo-card{background:var(--bg-card);border:1px solid var(--border-light);border-radius:4px;padding:14px;box-shadow:var(--shadow-sm);transition:box-shadow .2s}
+.photo-card:hover{box-shadow:var(--shadow-md)}
+.photo-card .photo-frame{position:relative;background:repeating-linear-gradient(45deg,var(--parchment-dark) 0,var(--parchment-dark) 10px,var(--parchment-deep) 10px,var(--parchment-deep) 20px);border-radius:3px;overflow:hidden;min-height:200px;display:flex;align-items:center;justify-content:center}
+.photo-card img{display:block;width:100%;height:auto;border-radius:3px;cursor:zoom-in}
+.photo-card img.broken{display:none}
+.photo-card .photo-missing{display:none;font-family:var(--font-mono);font-size:.75rem;color:var(--text-muted);text-align:center;padding:40px 20px;letter-spacing:.08em;text-transform:uppercase}
+.photo-card img.broken+.photo-missing{display:block}
+.photo-card .photo-missing::before{content:'⏳ ';margin-right:4px}
+.photo-card .photo-caption{font-family:var(--font-body);font-size:.92rem;color:var(--text);margin-top:12px;line-height:1.5}
+.photo-card .photo-caption strong{font-family:var(--font-display);color:var(--ink);display:block;margin-bottom:4px;font-weight:700;font-size:.98rem}
+.photo-card .photo-credit{font-family:var(--font-mono);font-size:.7rem;color:var(--text-muted);margin-top:8px;letter-spacing:.06em;text-transform:uppercase}
+.photo-hero{background:var(--bg-card);border:1px solid var(--border-light);border-radius:4px;padding:18px;margin:24px 0;box-shadow:var(--shadow-sm);text-align:center}
+.photo-hero img{display:block;width:100%;max-width:720px;height:auto;margin:0 auto;border-radius:3px;cursor:zoom-in}
+.photo-hero img.broken{display:none}
+.photo-hero .photo-missing{display:none;font-family:var(--font-mono);font-size:.78rem;color:var(--text-muted);padding:60px 20px;letter-spacing:.1em;text-transform:uppercase}
+.photo-hero img.broken+.photo-missing{display:block}
+.photo-hero .photo-missing::before{content:'⏳ ';margin-right:4px}
+.photo-hero .photo-caption{font-family:var(--font-body);font-size:.92rem;color:var(--text);margin-top:14px;max-width:640px;margin-left:auto;margin-right:auto}
+.photo-hero .photo-caption strong{font-family:var(--font-display);color:var(--ink);font-weight:700}
+
+/* LIGHTBOX */
+.lightbox{display:none;position:fixed;inset:0;background:rgba(26,42,53,.92);z-index:9999;align-items:center;justify-content:center;padding:30px;cursor:zoom-out}
+.lightbox.open{display:flex}
+.lightbox img{max-width:95vw;max-height:90vh;border-radius:4px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.lightbox .lb-caption{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);color:var(--parchment);font-family:var(--font-mono);font-size:.82rem;background:rgba(26,42,53,.7);padding:8px 16px;border-radius:2px;max-width:90vw;text-align:center}
+.lightbox .lb-close{position:absolute;top:20px;right:30px;background:none;border:2px solid var(--parchment);color:var(--parchment);width:44px;height:44px;border-radius:50%;font-size:1.3rem;cursor:pointer;font-family:var(--font-mono)}
+.lightbox .lb-close:hover{background:rgba(255,255,255,.1)}
+
+/* FOOTER */
+.footer{margin-top:80px;padding:30px;text-align:center;border-top:3px double var(--amber);font-family:var(--font-mono);font-size:.78rem;color:var(--text-muted);letter-spacing:.12em}
+/* ACORDEONES — <details>/<summary> nativos: se despliegan sin JavaScript,
+   así que funcionan aunque el archivo se abra desde el disco o se imprima. */
+.acorde{background:var(--bg-card);border:1px solid var(--border-light);border-left:4px solid var(--teal);
+  border-radius:3px;margin:10px 0;overflow:hidden}
+.acorde > summary{cursor:pointer;padding:13px 18px;font-family:var(--font-display);font-weight:700;
+  color:var(--ink);font-size:1rem;list-style:none;display:flex;align-items:center;gap:10px;
+  background:var(--parchment-dark);transition:background .15s}
+.acorde > summary:hover{background:var(--amber-pale)}
+.acorde > summary::-webkit-details-marker{display:none}
+.acorde > summary::before{content:'+';font-family:var(--font-mono);font-size:1.15rem;color:var(--teal);
+  font-weight:400;width:16px;flex-shrink:0;text-align:center}
+.acorde[open] > summary::before{content:'−'}
+.acorde[open] > summary{border-bottom:1px solid var(--border-light)}
+.acorde > summary .pista{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);
+  font-weight:400;letter-spacing:.06em;margin-left:auto;text-transform:uppercase}
+.acorde .cuerpo{padding:16px 18px 18px}
+.acorde .cuerpo > *:last-child{margin-bottom:0}
+.acorde.rust{border-left-color:var(--rust)} .acorde.amber{border-left-color:var(--amber)}
+.acorde.blue{border-left-color:var(--blue)} .acorde.purple{border-left-color:var(--purple)}
+@media print{.acorde .cuerpo{display:block!important}.acorde > summary::before{content:''}}
+
+/* Ficha de tejido: la imagen del cuadro de Tortora más su texto */
+.ficha{margin:22px 0}
+.ficha > h4{font-family:var(--font-display);font-size:1.12rem;color:var(--ink);font-weight:700;
+  margin-bottom:4px;padding-bottom:5px;border-bottom:2px solid var(--amber-light)}
+.ficha .datos{display:grid;grid-template-columns:auto 1fr;gap:5px 14px;margin:10px 0 0;font-size:.93rem}
+.ficha .datos dt{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--amber-dark);padding-top:3px;font-weight:500}
+.ficha .datos dd{margin:0;color:var(--text)}
+.ficha .datos dd b{color:var(--ink)}
+@media(max-width:640px){.ficha .datos{grid-template-columns:1fr;gap:2px}
+  .ficha .datos dd{margin-bottom:8px}}
+
+@media print{body{background:white;font-size:11pt}.tab-bar{display:none}}
+
+/* ─── Añadidos de la clase 6 ─── */
+
+/* Fichas de hueso: nombre, cuántos son y qué aporta a la órbita */
+.huesos-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:12px;margin:18px 0}
+.hueso{background:var(--parchment-dark);border:1px solid var(--border-light);border-left:4px solid var(--teal);
+  border-radius:3px;padding:12px 15px}
+.hueso.orb{border-left-color:var(--clinical);background:#fbeeec}
+.hueso .nom{font-family:var(--font-display);font-weight:700;color:var(--ink);font-size:1.02rem}
+.hueso .par{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--text-muted);display:block;margin-bottom:5px}
+.hueso .que{font-size:.87rem;color:var(--text-soft);line-height:1.45;margin-top:4px}
+.hueso .marca{display:inline-block;font-family:var(--font-mono);font-size:.62rem;letter-spacing:.1em;
+  text-transform:uppercase;background:var(--clinical);color:#fff;padding:1px 7px;border-radius:9px;margin-top:7px}
+
+/* Puntos craneométricos: cada punto con su traducción de campo */
+.puntos{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;margin:16px 0}
+.punto{background:var(--bg-card);border:1px solid var(--border-light);border-radius:3px;padding:11px 14px;font-size:.9rem}
+.punto b{font-family:var(--font-display);color:var(--amber-dark);font-size:1rem;display:block}
+.punto.clave{background:var(--amber-pale);border-color:var(--amber-light)}
+
+/* Recorrido: una cadena de pasos con flecha, para el drenaje de la lágrima */
+.recorrido{display:flex;flex-wrap:wrap;align-items:stretch;gap:0;margin:20px 0;font-size:.86rem}
+.recorrido .paso{background:var(--blue-bg);border:1px solid var(--blue);color:var(--blue-dark);
+  padding:9px 14px;border-radius:3px;display:flex;align-items:center;text-align:center;line-height:1.35}
+.recorrido .flecha{display:flex;align-items:center;color:var(--blue);padding:0 8px;font-size:1.15rem}
+@media(max-width:720px){.recorrido{flex-direction:column}
+  .recorrido .flecha{padding:3px 0;transform:rotate(90deg)}}
+
+/* Aviso de que un tema se retoma en otra clase, para no invadir el temario */
+.adelanto{background:var(--parchment-dark);border:1px dashed var(--teal);border-radius:3px;
+  padding:14px 20px;margin:20px 0;font-size:.93rem;color:var(--text-soft)}
+.adelanto::before{content:'→ Se retoma más adelante';display:block;font-family:var(--font-mono);
+  font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--teal-dark);
+  margin-bottom:7px;font-weight:600}
+.adelanto strong{color:var(--ink)}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="eyebrow">Clase 9 · Morfología General 2026-II</div>
+  <h1>Sistema circulatorio: el corazón, los vasos y <em>el camino al ojo</em></h1>
+  <p class="subtitle">Una bomba de 300 gramos, cien mil latidos al día y una sola arteria delgada que mantiene viva la retina</p>
+  <div class="meta">Dr. Jorge Bogoya &middot; Universidad de La Salle &middot; Optometría &middot; Primer semestre</div>
+</header>
+
+<div class="container">
+
+<div class="tab-bar" role="tablist">
+  <button class="tab-btn active" role="tab" onclick="showTab('s1',this)">
+    <span class="tab-date">Jue. 24 sep · 09:00–11:00</span>
+    Sesión 1 · El corazón
+  </button>
+  <button class="tab-btn" role="tab" onclick="showTab('s2',this)">
+    <span class="tab-date">Jue. 24 sep · 11:00–13:00</span>
+    Sesión 2 · Los vasos y el camino al ojo
+  </button>
+</div>
+
+<!-- ═══════════════════════ SESIÓN 1 ═══════════════════════ -->
+<div class="tab-pane active" id="s1">
+
+<nav class="station-nav">
+  <h3>Contenido · Sesión 1</h3>
+  <ol>
+    <li><a href="#s1e0">Para empezar: cinco preguntas</a></li>
+    <li><a href="#s1e1">El mapa: dos circulaciones</a></li>
+    <li><a href="#s1e2">Dónde está y qué lo envuelve</a></li>
+    <li><a href="#s1e3">El corazón por fuera</a></li>
+    <li><a href="#s1e4">El corazón por dentro</a></li>
+    <li><a href="#s1e5">Las cuatro válvulas</a></li>
+    <li><a href="#s1e6">Ejercicio: el viaje de una gota</a></li>
+    <li><a href="#s1e7">Las coronarias y el infarto</a></li>
+    <li><a href="#s1e8">El sistema de conducción</a></li>
+    <li><a href="#s1e9">El ciclo cardíaco en palabras</a></li>
+    <li><a href="#s1e10">Términos TA2 de la sesión</a></li>
+    <li><a href="#s1e11">Comprueba lo que aprendiste</a></li>
+  </ol>
+</nav>
+
+<!-- ─────────── 00 ─────────── -->
+<section class="station" id="s1e0">
+  <div class="station-header">
+    <div class="station-number">00</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Para empezar · Conversación</div>
+      <h2>Cinco preguntas antes de abrir el libro</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Como siempre: responde con lo que ya sabes, sin buscar. No hay nota. Al final de la mañana
+      volvemos sobre las cinco.</p>
+
+    <div class="two-col">
+      <div class="col-card">
+        <h5>1 · La misma cantidad, distinto esfuerzo</h5>
+        <p>Los dos ventrículos expulsan en cada latido exactamente la misma cantidad de sangre. Sin
+          embargo, la pared del izquierdo es mucho más gruesa que la del derecho. ¿Por qué?</p>
+      </div>
+      <div class="col-card teal">
+        <h5>2 · ¿Arteria es igual a sangre roja?</h5>
+        <p>En los dibujos las arterias van en rojo y las venas en azul. ¿Hay alguna arteria que lleve
+          sangre pobre en oxígeno?</p>
+      </div>
+      <div class="col-card">
+        <h5>3 · Lub-dub</h5>
+        <p>Cuando alguien te ausculta con un estetoscopio oye dos ruidos por latido. ¿Qué es lo que
+          suena: el músculo al contraerse, la sangre al correr o algo más?</p>
+      </div>
+      <div class="col-card amber">
+        <h5>4 · Un problema en el cuello, un ojo que no ve</h5>
+        <p>Una persona pierde de golpe la visión de un solo ojo, sin dolor, y la causa resulta estar
+          en una arteria del cuello. ¿Cómo llega un problema del cuello hasta la retina?</p>
+      </div>
+      <div class="col-card teal">
+        <h5>5 · La ventana</h5>
+        <p>La hipertensión y la diabetes dañan los vasos de todo el cuerpo, pero hay un único lugar
+          donde se pueden mirar directamente, sin cortar nada. ¿Cuál es, y quién lo mira?</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 01 ─────────── -->
+<section class="station" id="s1e1">
+  <div class="station-header">
+    <div class="station-number">01</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Punto de partida</div>
+      <h2>El mapa: dos circulaciones, una detrás de la otra</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>El aparato cardiovascular tiene tres piezas: la <strong>sangre</strong>, que transporta; los
+      <strong>vasos</strong>, que la conducen, y el <strong>corazón</strong>, que la empuja. Hoy
+      estudiamos las dos últimas. La sangre queda para otra ocasión.</p>
+
+    <p>Lo primero que conviene tener claro es que el corazón son <strong>dos bombas pegadas</strong>.
+      La mitad derecha y la mitad izquierda no se comunican entre sí en el adulto: cada una atiende
+      un circuito distinto, y la sangre pasa de un circuito al otro dando la vuelta completa.</p>
+
+    <div class="two-col">
+      <div class="col-card teal">
+        <h5>Circulación pulmonar (menor)</h5>
+        <p>El <strong>lado derecho</strong> recibe la sangre que vuelve del cuerpo, pobre en oxígeno,
+          y la manda por el <strong>tronco pulmonar</strong> a los pulmones. Allí suelta dióxido de
+          carbono y toma oxígeno, y vuelve por las <strong>venas pulmonares</strong> a la aurícula
+          izquierda. Es un recorrido corto y de baja presión.</p>
+      </div>
+      <div class="col-card">
+        <h5>Circulación sistémica (mayor)</h5>
+        <p>El <strong>lado izquierdo</strong> recibe esa sangre oxigenada y la expulsa por la
+          <strong>aorta</strong> hacia todo el cuerpo —el encéfalo y el ojo incluidos—. En los
+          capilares de los tejidos entrega oxígeno, recoge desechos y regresa por las venas cavas a
+          la aurícula derecha.</p>
+      </div>
+    </div>
+
+    <div class="pearl">
+      <p><strong>Arteria y vena no se definen por el color, sino por la dirección.</strong> Arteria es
+        todo vaso que <strong>sale</strong> del corazón; vena, todo vaso que <strong>llega</strong> a
+        él. Por eso las arterias pulmonares llevan sangre pobre en oxígeno y las venas pulmonares la
+        llevan rica. En los dibujos del libro, rojo significa «oxigenada» y azul «desoxigenada», no
+        «arteria» y «vena».</p>
+    </div>
+
+    <div class="photo-hero">
+      <img src="img/fig_20_7_circulaciones.png" alt="Circulación pulmonar y sistémica: recorrido numerado de la sangre por el corazón, los pulmones y los tejidos"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>Los dos circuitos numerados.</strong> Sigue los números del 1
+        al 10 en el diagrama de la derecha: empiezan en la aurícula derecha y terminan en ella. Los
+        pasos 2 a 5 son la circulación pulmonar; del 6 al 10, la sistémica. Tortora, Fig. 20.7.</div>
+    </div>
+
+    <div class="check-question" data-question="q1s1">
+      <p class="question-text">1. ¿A qué cavidad del corazón llega la sangre que vuelve oxigenada de
+        los pulmones?</p>
+      <ul class="options">
+        <li data-letter="A">Al tronco pulmonar</li>
+        <li data-letter="B">A la aurícula derecha</li>
+        <li data-letter="C">Al ventrículo derecho</li>
+        <li data-letter="D">Al ventrículo izquierdo</li>
+        <li data-letter="E" data-correct="true">A la aurícula izquierda</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: E.</strong> Las cuatro venas pulmonares desembocan en la
+        aurícula izquierda. De ahí la sangre baja al ventrículo izquierdo, que la expulsa por la aorta.
+        La aurícula derecha es la que recibe la sangre del cuerpo, y el tronco pulmonar es la salida
+        del ventrículo derecho, no una llegada.</div>
+    </div>
+
+    <div class="check-question" data-question="q2s1">
+      <p class="question-text">2. ¿Qué lleva el tronco pulmonar y hacia dónde?</p>
+      <ul class="options">
+        <li data-letter="A">Sangre rica en oxígeno, hacia el corazón</li>
+        <li data-letter="B">Sangre rica en oxígeno, hacia los pulmones</li>
+        <li data-letter="C">Sangre rica en oxígeno, hacia el cuerpo</li>
+        <li data-letter="D">Sangre pobre en oxígeno, hacia el corazón</li>
+        <li data-letter="E" data-correct="true">Sangre pobre en oxígeno, hacia los pulmones</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: E.</strong> Es una arteria porque sale del corazón —del
+        ventrículo derecho—, pero la sangre que lleva es la que volvió del cuerpo, pobre en oxígeno.
+        Va a los pulmones justamente a oxigenarse. Es el ejemplo que obliga a definir arteria por la
+        dirección y no por el color.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 02 ─────────── -->
+<section class="station" id="s1e2">
+  <div class="station-header">
+    <div class="station-number">02</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Ubicación</div>
+      <h2>Dónde está y qué lo envuelve</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>El corazón tiene más o menos el tamaño de un puño cerrado: unos <strong>12 cm</strong> de
+      largo, 9 cm de ancho y 6 cm de espesor. Pesa alrededor de <strong>250 g</strong> en la mujer
+      adulta y <strong>300 g</strong> en el hombre.</p>
+
+    <h3>En el mediastino, cargado a la izquierda</h3>
+    <p>Está en el <strong>mediastino</strong>, el bloque de tejido que ocupa el centro del tórax entre
+      los dos pulmones, desde el esternón hasta la columna y desde la primera costilla hasta el
+      diafragma. Apoya sobre el diafragma y tiene <strong>dos tercios de su masa a la izquierda</strong>
+      de la línea media.</p>
+    <p>Imagínalo como un cono acostado. La <strong>punta</strong> (ápex) la forma el ventrículo
+      izquierdo, mira hacia adelante, abajo y a la izquierda, y apoya en el diafragma. La
+      <strong>base</strong> es la cara opuesta, arriba y atrás, formada sobre todo por las aurículas y
+      de donde salen y entran los grandes vasos.</p>
+
+    <div class="photo-hero">
+      <img src="img/fig_20_1_posicion_corazon.png" alt="Posición del corazón en el mediastino: corte transversal del tórax y vista anterior del corazón entre los pulmones"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>Entre los dos pulmones.</strong> Arriba, un corte transversal:
+        fíjate en que el corazón queda detrás del esternón y delante del esófago y la aorta. Abajo, la
+        vista anterior: busca la punta del corazón apoyada en el diafragma, a la izquierda. Tortora,
+        Fig. 20.1.</div>
+    </div>
+
+    <h3>El pericardio: un saco con dos partes</h3>
+    <div class="two-col">
+      <div class="col-card">
+        <h5>Pericardio fibroso</h5>
+        <p>La capa externa: tejido conectivo denso, resistente y poco elástico. Protege, evita que el
+          corazón se distienda de más y lo ancla al diafragma y a los grandes vasos.</p>
+      </div>
+      <div class="col-card teal">
+        <h5>Pericardio seroso</h5>
+        <p>Una membrana doble y delgada. La <strong>hoja parietal</strong> tapiza por dentro el fibroso;
+          la <strong>hoja visceral</strong> se pega al corazón. Entre las dos queda la
+          <strong>cavidad pericárdica</strong>, con unos pocos mililitros de <strong>líquido
+          pericárdico</strong> que disminuye la fricción en cada latido.</p>
+      </div>
+    </div>
+
+    <h3>La pared: tres capas</h3>
+    <div class="three-col">
+      <div class="col-card">
+        <h5>Epicardio</h5>
+        <p>La capa externa. Es la misma hoja visceral del pericardio seroso. Lleva grasa y los vasos
+          coronarios.</p>
+      </div>
+      <div class="col-card amber">
+        <h5>Miocardio</h5>
+        <p>La capa media y la más gruesa: <strong>músculo cardíaco</strong>. Es la que bombea. Estriado
+          como el esquelético, pero involuntario.</p>
+      </div>
+      <div class="col-card teal">
+        <h5>Endocardio</h5>
+        <p>La capa interna: un endotelio liso que tapiza las cavidades y las válvulas y se continúa
+          con el revestimiento interno de los grandes vasos.</p>
+      </div>
+    </div>
+
+    <div class="photo-hero">
+      <img src="img/fig_20_2_pericardio_pared.png" alt="Pericardio fibroso y seroso, cavidad pericárdica y capas de la pared cardíaca"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>De fuera hacia dentro.</strong> En (a) recorre la pared con el
+        dedo: pericardio fibroso, hoja parietal, cavidad pericárdica, epicardio, miocardio, endocardio.
+        En (b), el truco para entender el pericardio seroso: un puño que se hunde en un globo y queda
+        cubierto por dos hojas. Tortora, Fig. 20.2.</div>
+    </div>
+
+    <div class="pearl">
+      <p><strong>Recuerda la clase 3.</strong> El músculo cardíaco tiene fibras ramificadas, un núcleo
+        central y <strong>discos intercalares</strong> que las unen: por ellos la señal eléctrica pasa
+        de una fibra a la siguiente y las aurículas, o los ventrículos, se contraen como una sola
+        unidad. Y de la clase 7: el esquelético obedece a la voluntad; el cardíaco, no.</p>
+    </div>
+
+    <div class="check-question" data-question="q3s1">
+      <p class="question-text">3. ¿Qué cavidad forma la punta (ápex) del corazón?</p>
+      <ul class="options">
+        <li data-letter="A">El ventrículo derecho</li>
+        <li data-letter="B" data-correct="true">El ventrículo izquierdo</li>
+        <li data-letter="C">La aurícula izquierda</li>
+        <li data-letter="D">La aurícula derecha</li>
+        <li data-letter="E">La orejuela derecha</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: B.</strong> La punta la forma el ventrículo izquierdo y
+        se apoya en el diafragma, hacia la izquierda: por eso el latido se palpa bajo la tetilla
+        izquierda. Las aurículas forman la base, arriba y atrás. El ventrículo derecho ocupa casi toda
+        la cara anterior, pero no llega a la punta.</div>
+    </div>
+
+    <div class="check-question" data-question="q4s1">
+      <p class="question-text">4. ¿Qué hay dentro de la cavidad pericárdica?</p>
+      <ul class="options">
+        <li data-letter="A">Sangre venosa del seno coronario</li>
+        <li data-letter="B">Grasa que amortigua los golpes</li>
+        <li data-letter="C" data-correct="true">Unos mililitros de líquido que reducen la fricción</li>
+        <li data-letter="D">El músculo cardíaco</li>
+        <li data-letter="E">Aire que separa el corazón del pulmón</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: C.</strong> La cavidad pericárdica es el espacio entre
+        las dos hojas del pericardio seroso, y contiene solo unos pocos mililitros de líquido
+        pericárdico: lubrica para que el corazón se mueva sin roce. La grasa está en el epicardio, el
+        músculo es el miocardio y el seno coronario es una vena, no un espacio pericárdico.</div>
+    </div>
+
+    <div class="check-question" data-question="q5s1">
+      <p class="question-text">5. ¿Qué capa de la pared cardíaca es la que bombea la sangre?</p>
+      <ul class="options">
+        <li data-letter="A">El epicardio</li>
+        <li data-letter="B" data-correct="true">El miocardio</li>
+        <li data-letter="C">El endocardio</li>
+        <li data-letter="D">El pericardio fibroso</li>
+        <li data-letter="E">La hoja parietal del pericardio</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: B.</strong> <em>Mio-</em> significa músculo: el
+        miocardio es el músculo cardíaco y es el que se contrae. El epicardio lo cubre por fuera y el
+        endocardio lo tapiza por dentro. El pericardio no es pared del corazón: es el saco que lo
+        envuelve.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 03 ─────────── -->
+<section class="station" id="s1e3">
+  <div class="station-header">
+    <div class="station-number">03</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Anatomía de superficie</div>
+      <h2>El corazón por fuera</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Tiene cuatro cavidades: dos <strong>aurículas</strong> arriba, que reciben la sangre, y dos
+      <strong>ventrículos</strong> abajo, que la expulsan. Desde fuera no se ven las cavidades, pero
+      se adivinan sus límites.</p>
+
+    <div class="three-col">
+      <div class="col-card">
+        <h5>Orejuelas</h5>
+        <p>Cada aurícula tiene por delante una bolsa arrugada, la <strong>orejuela</strong>, llamada así
+          por su parecido con la oreja de un perro. Aumenta un poco su capacidad.</p>
+      </div>
+      <div class="col-card teal">
+        <h5>Surco coronario</h5>
+        <p>Rodea casi todo el corazón y marca el límite entre las aurículas, arriba, y los ventrículos,
+          abajo. Por él corren arterias y venas.</p>
+      </div>
+      <div class="col-card amber">
+        <h5>Surcos interventriculares</h5>
+        <p>Uno <strong>anterior</strong> y uno <strong>posterior</strong>. Señalan dónde está, por
+          dentro, el tabique que separa los dos ventrículos.</p>
+      </div>
+    </div>
+
+    <p>Los surcos no están vacíos: están rellenos de <strong>grasa</strong> y llevan los vasos
+      coronarios. Por eso en el cadáver, y en la cirugía, la forma de los surcos se reconoce por el
+      recorrido de la grasa.</p>
+
+    <h3>Los grandes vasos, uno por uno</h3>
+    <div class="two-col">
+      <div class="col-card teal">
+        <h5>Llegan al corazón (venas)</h5>
+        <p><strong>Vena cava superior</strong> y <strong>vena cava inferior</strong>, a la aurícula
+          derecha.<br>
+          <strong>Cuatro venas pulmonares</strong>, a la aurícula izquierda.</p>
+      </div>
+      <div class="col-card">
+        <h5>Salen del corazón (arterias)</h5>
+        <p><strong>Tronco pulmonar</strong>, desde el ventrículo derecho; se divide en arterias pulmonares
+          derecha e izquierda.<br>
+          <strong>Aorta</strong>, desde el ventrículo izquierdo; sube, forma un arco y baja.</p>
+      </div>
+    </div>
+
+    <div class="photo-hero">
+      <img src="img/fig_20_3_corazon_superficie.png" alt="Vista anterior del corazón: orejuelas, surcos, grandes vasos y ventrículos"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>Vista anterior.</strong> Casi toda la cara que ves es el
+        ventrículo derecho; el izquierdo apenas asoma a la derecha de la imagen y forma la punta. Busca
+        el ligamento arterioso entre el tronco pulmonar y el arco aórtico: es el resto de un vaso que
+        funcionó antes de nacer. Tortora, Fig. 20.3.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 04 ─────────── -->
+<section class="station" id="s1e4">
+  <div class="station-header">
+    <div class="station-number">04</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Anatomía interna</div>
+      <h2>El corazón por dentro</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Abierto por un corte frontal, el corazón muestra sus cuatro cavidades y los dos tabiques que
+      separan la mitad derecha de la izquierda.</p>
+
+    <div class="two-col">
+      <div class="col-card teal">
+        <h5>Aurícula derecha</h5>
+        <p>Recibe sangre de tres venas: la <strong>cava superior</strong>, la <strong>cava
+          inferior</strong> y el <strong>seno coronario</strong>, que trae la sangre del propio
+          corazón. En su pared, que la separa de la izquierda —el <strong>tabique
+          interauricular</strong>—, hay una depresión ovalada: la <strong>fosa oval</strong>, cicatriz de
+          un orificio que comunicaba las dos aurículas antes de nacer.</p>
+      </div>
+      <div class="col-card teal">
+        <h5>Ventrículo derecho</h5>
+        <p>Recibe la sangre de la aurícula derecha a través de la <strong>válvula tricúspide</strong> y
+          la expulsa por la <strong>válvula pulmonar</strong> hacia el tronco pulmonar. Su interior está
+          lleno de relieves musculares, las <strong>trabéculas carnosas</strong>.</p>
+      </div>
+      <div class="col-card">
+        <h5>Aurícula izquierda</h5>
+        <p>Recibe la sangre oxigenada de las <strong>cuatro venas pulmonares</strong> y la pasa al
+          ventrículo izquierdo a través de la <strong>válvula bicúspide</strong>, también llamada
+          <strong>mitral</strong> porque se parece a la mitra de un obispo.</p>
+      </div>
+      <div class="col-card">
+        <h5>Ventrículo izquierdo</h5>
+        <p>La cavidad de pared más gruesa. Forma la punta del corazón y expulsa la sangre por la
+          <strong>válvula aórtica</strong> hacia la aorta. Lo separa del derecho el <strong>tabique
+          interventricular</strong>.</p>
+      </div>
+    </div>
+
+    <h3>Por qué las paredes no miden lo mismo</h3>
+    <p>El grosor de cada cavidad depende del trabajo que hace. Las <strong>aurículas</strong>, de pared
+      delgada, solo empujan la sangre al ventrículo que tienen justo debajo. Los
+      <strong>ventrículos</strong> la mandan lejos, y entre ellos hay otra diferencia: los dos expulsan
+      <strong>el mismo volumen</strong> en cada latido, pero el <strong>derecho</strong> lo manda a los
+      pulmones, que están cerca y ofrecen poca resistencia, mientras que el <strong>izquierdo</strong> lo
+      manda a todo el cuerpo, contra una resistencia mucho mayor. Hace más fuerza y por eso tiene más
+      músculo.</p>
+
+    <div class="photo-hero">
+      <img src="img/fig_20_4_corazon_interno.png" alt="Corte frontal del corazón: aurículas, ventrículos, tabiques, válvulas, cuerdas tendinosas y músculos papilares"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>Corte frontal.</strong> Compara el grosor de la pared del
+        ventrículo izquierdo con la del derecho. Después sigue una válvula auriculoventricular hacia
+        abajo: verás los hilos (cuerdas tendinosas) que la atan a unos músculos en forma de cono
+        (músculos papilares). Tortora, Fig. 20.4.</div>
+    </div>
+
+    <div class="check-question" data-question="q6s1">
+      <p class="question-text">6. ¿De qué tres vasos recibe sangre la aurícula derecha?</p>
+      <ul class="options">
+        <li data-letter="A">Cava superior, cava inferior y aorta</li>
+        <li data-letter="B">Las cuatro venas pulmonares</li>
+        <li data-letter="C" data-correct="true">Cava superior, cava inferior y seno coronario</li>
+        <li data-letter="D">Cava superior, cava inferior y tronco pulmonar</li>
+        <li data-letter="E">Seno coronario y las dos venas pulmonares derechas</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: C.</strong> Las dos cavas traen la sangre de todo el
+        cuerpo y el seno coronario, la del propio músculo cardíaco. Las venas pulmonares, incluidas las
+        del pulmón derecho, llegan todas a la aurícula izquierda: el lado del pulmón no decide la
+        aurícula. La aorta y el tronco pulmonar salen del corazón, no llegan.</div>
+    </div>
+
+    <div class="check-question" data-question="q7s1">
+      <p class="question-text">7. Los dos ventrículos expulsan el mismo volumen por latido. ¿Por qué el
+        izquierdo tiene la pared más gruesa?</p>
+      <ul class="options">
+        <li data-letter="A">Tiene que mandar la sangre a los pulmones</li>
+        <li data-letter="B">Recibe más sangre en cada latido</li>
+        <li data-letter="C" data-correct="true">Bombea a todo el cuerpo, contra más resistencia</li>
+        <li data-letter="D">Tiene dos válvulas y el derecho, una</li>
+        <li data-letter="E">Late más veces por minuto que el derecho</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: C.</strong> El volumen es el mismo y la frecuencia
+        también —los dos ventrículos se contraen a la vez—. Lo que cambia es la resistencia: el circuito
+        sistémico es largo y ramificado, el pulmonar corto. A más resistencia, más fuerza, y a más
+        fuerza, más músculo. La que manda a los pulmones es la del derecho, y cada ventrículo tiene dos
+        válvulas: una de entrada y una de salida.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 05 ─────────── -->
+<section class="station" id="s1e5">
+  <div class="station-header">
+    <div class="station-number">05</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Flujo en un solo sentido</div>
+      <h2>Las cuatro válvulas</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Cada vez que una cavidad se contrae, empuja la sangre hacia adelante. Para que no se devuelva,
+      el corazón tiene <strong>cuatro válvulas</strong>. No tienen músculo propio: se abren y se cierran
+      solas, por la <strong>diferencia de presión</strong> entre un lado y otro.</p>
+
+    <div class="two-col">
+      <div class="col-card teal">
+        <h5>Auriculoventriculares (AV)</h5>
+        <p>Entre cada aurícula y su ventrículo. La <strong>tricúspide</strong>, a la derecha, tiene tres
+          valvas; la <strong>bicúspide o mitral</strong>, a la izquierda, dos. Cuando el ventrículo se
+          contrae, la sangre empuja las valvas hacia arriba y las cierra. Las <strong>cuerdas
+          tendinosas</strong> y los <strong>músculos papilares</strong>, que se contraen a la vez, las
+          sujetan para que no se volteen hacia la aurícula, como un paraguas con el viento.</p>
+      </div>
+      <div class="col-card">
+        <h5>Semilunares</h5>
+        <p>A la salida de cada ventrículo: la <strong>pulmonar</strong>, hacia el tronco pulmonar, y la
+          <strong>aórtica</strong>, hacia la aorta. Tienen tres valvas en forma de media luna. Se abren
+          cuando el ventrículo empuja y se cierran cuando se relaja y la sangre intenta volver: las
+          valvas se llenan como bolsillos y sellan el paso. No necesitan cuerdas.</p>
+      </div>
+    </div>
+
+    <div class="photo-hero">
+      <img src="img/fig_20_6_valvulas.png" alt="Funcionamiento de la válvula bicúspide abierta y cerrada, y fotografía de la válvula tricúspide con cuerdas tendinosas"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>Abierta y cerrada.</strong> En (a) el ventrículo está relajado:
+        las cuerdas están flojas y la sangre baja. En (b) se contrae: los músculos papilares tiran, las
+        cuerdas se tensan y las valvas se juntan. La fotografía muestra cómo es de verdad. Tortora,
+        Fig. 20.6.</div>
+    </div>
+
+    <h3>El esqueleto fibroso</h3>
+    <p>Las cuatro válvulas están en un mismo plano, sujetas por <strong>cuatro anillos de tejido
+      conectivo denso</strong> que se unen entre sí. Ese esqueleto fibroso hace dos cosas: da un punto
+      de apoyo firme a las válvulas y al músculo, y <strong>aísla eléctricamente</strong> las aurículas
+      de los ventrículos. Lo segundo parece un detalle; en la estación 08 verás por qué no lo es.</p>
+
+    <div class="photo-hero">
+      <img src="img/fig_20_5_esqueleto_fibroso.png" alt="Esqueleto fibroso del corazón visto desde arriba, con las cuatro válvulas en un mismo plano"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>Las cuatro válvulas vistas desde arriba</strong>, con las
+        aurículas retiradas. La pulmonar queda por delante; la aórtica, en el centro; la tricúspide y la
+        bicúspide, detrás. Tortora, Fig. 20.5.</div>
+    </div>
+
+    <h3>Lub-dub: lo que suena es el cierre</h3>
+    <p>Los ruidos del corazón no son el músculo al contraerse. Son la turbulencia que produce la sangre
+      cuando <strong>se cierran las válvulas</strong>.</p>
+    <div class="two-col">
+      <div class="col-card teal">
+        <h5>Primer ruido · «lub»</h5>
+        <p>Más fuerte y un poco más largo. Es el cierre de las <strong>válvulas AV</strong> al empezar
+          la contracción de los ventrículos.</p>
+      </div>
+      <div class="col-card">
+        <h5>Segundo ruido · «dub»</h5>
+        <p>Más corto. Es el cierre de las <strong>válvulas semilunares</strong> al terminar la
+          contracción, cuando los ventrículos se relajan.</p>
+      </div>
+    </div>
+
+    <div class="photo-hero">
+      <img src="img/fig_20_15_ruidos.png" alt="Ubicación de las válvulas cardíacas y focos de auscultación sobre el tórax"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>Dónde se escucha cada válvula.</strong> Los círculos rojos no
+        están encima de las válvulas, sino donde su sonido llega mejor a la piel. Vuelve al corte frontal
+        de la estación 04 y ubica las cuatro: dos entre aurícula y ventrículo, dos a la salida de los
+        ventrículos. Tortora, Fig. 20.15.</div>
+    </div>
+
+    <div class="clinical-box">
+      <h5>👁 Interfaz optométrica</h5>
+      <p>Una válvula enferma no solo suena distinto: sobre sus valvas se pueden formar pequeños
+        <strong>coágulos o depósitos de calcio</strong>. Si uno se suelta del lado izquierdo del corazón,
+        sale por la aorta y puede subir por una carótida hacia la cabeza. Uno de sus destinos posibles es
+        la <strong>arteria central de la retina</strong>. En la sesión 2 seguimos ese camino hasta el
+        ojo.</p>
+    </div>
+
+    <div class="check-question" data-question="q8s1">
+      <p class="question-text">8. ¿Para qué sirven las cuerdas tendinosas y los músculos papilares?</p>
+      <ul class="options">
+        <li data-letter="A">Para llevar sangre oxigenada al miocardio</li>
+        <li data-letter="B">Para abrir las válvulas semilunares</li>
+        <li data-letter="C">Para generar el impulso eléctrico del latido</li>
+        <li data-letter="D" data-correct="true">Para que las valvas AV no se volteen hacia la aurícula</li>
+        <li data-letter="E">Para separar la aurícula derecha de la izquierda</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: D.</strong> Cuando el ventrículo se contrae, la presión
+        empuja las valvas AV hacia arriba. Los músculos papilares se contraen a la vez, tensan las
+        cuerdas y las sujetan: las valvas se juntan pero no se dan la vuelta. Las semilunares no tienen
+        cuerdas, el impulso lo genera el nodo sinoauricular y la sangre del miocardio la llevan las
+        coronarias.</div>
+    </div>
+
+    <div class="check-question" data-question="q9s1">
+      <p class="question-text">9. ¿Qué produce el primer ruido cardíaco, el «lub»?</p>
+      <ul class="options">
+        <li data-letter="A">El paso de la sangre por las arterias coronarias</li>
+        <li data-letter="B">El cierre de las válvulas semilunares</li>
+        <li data-letter="C">La apertura de las válvulas auriculoventriculares</li>
+        <li data-letter="D">La contracción del músculo de las aurículas</li>
+        <li data-letter="E" data-correct="true">El cierre de las válvulas auriculoventriculares</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: E.</strong> Lo que suena es el cierre de una válvula, no
+        el músculo ni su apertura. El primero, «lub», es el cierre de la tricúspide y la bicúspide al
+        comenzar la contracción ventricular. El cierre de las semilunares es el segundo, «dub».</div>
+    </div>
+
+    <div class="check-question" data-question="q10s1">
+      <p class="question-text">10. ¿Qué válvula está entre el ventrículo izquierdo y la aorta?</p>
+      <ul class="options">
+        <li data-letter="A">La tricúspide</li>
+        <li data-letter="B">La bicúspide o mitral</li>
+        <li data-letter="C" data-correct="true">La aórtica</li>
+        <li data-letter="D">La pulmonar</li>
+        <li data-letter="E">La del seno coronario</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: C.</strong> Las semilunares llevan el nombre del vaso al
+        que dan paso: aórtica hacia la aorta, pulmonar hacia el tronco pulmonar. La mitral también
+        pertenece al ventrículo izquierdo, pero a su entrada, entre la aurícula y el ventrículo. Ese es
+        el distractor fuerte.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 06 ─────────── -->
+<section class="station" id="s1e6">
+  <div class="station-header">
+    <div class="station-number">06</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Ejercicio · Recuperación</div>
+      <h2>El viaje de una gota</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Una gota de sangre sale de un capilar del dedo gordo del pie y vuelve al mismo capilar. Escribe
+      en orden, <strong>sin mirar</strong>, cada cavidad, válvula y vaso grande por el que pasa. Cuando
+      termines, abre la respuesta y corrige con otro color.</p>
+
+    <div class="recorrido">
+      <ol>
+        <li>Venas del miembro inferior → …</li>
+        <li>… → aurícula … → válvula … → ventrículo …</li>
+        <li>… → válvula … → tronco … → arterias … → capilares de …</li>
+        <li>… → venas … → aurícula … → válvula … → ventrículo …</li>
+        <li>… → válvula … → arteria … → arterias del miembro inferior → capilar del dedo</li>
+      </ol>
+    </div>
+
+    <div class="acorde">
+      <details>
+        <summary>Ver el recorrido completo</summary>
+        <p>Venas del miembro inferior → <strong>vena cava inferior</strong> → <strong>aurícula
+          derecha</strong> → <strong>válvula tricúspide</strong> → <strong>ventrículo derecho</strong> →
+          <strong>válvula pulmonar</strong> → <strong>tronco pulmonar</strong> → <strong>arterias
+          pulmonares</strong> → capilares de los pulmones, donde se oxigena → <strong>venas
+          pulmonares</strong> → <strong>aurícula izquierda</strong> → <strong>válvula bicúspide
+          (mitral)</strong> → <strong>ventrículo izquierdo</strong> → <strong>válvula aórtica</strong> →
+          <strong>aorta</strong> → arterias del miembro inferior → capilar del dedo.</p>
+        <p>Si te equivocaste de lado en alguna válvula, usa esta pista: <strong>tri</strong> y
+          <strong>derecha</strong> tienen una <em>r</em>; <strong>bi</strong>cúspide va a la izquierda.
+          Y la sangre pasa <strong>siempre</strong> por el pulmón entre el lado derecho y el izquierdo:
+          en el adulto no hay atajo.</p>
+      </details>
+    </div>
+
+    <div class="check-question" data-question="q11s1">
+      <p class="question-text">11. Una gota acaba de cruzar la válvula tricúspide. ¿Dónde está ahora?</p>
+      <ul class="options">
+        <li data-letter="A">En la aurícula izquierda</li>
+        <li data-letter="B" data-correct="true">En el ventrículo derecho</li>
+        <li data-letter="C">En el tronco pulmonar</li>
+        <li data-letter="D">En el ventrículo izquierdo</li>
+        <li data-letter="E">En la vena cava inferior</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: B.</strong> La tricúspide es la válvula de entrada del
+        ventrículo derecho: separa la aurícula derecha de su ventrículo. Para llegar al tronco pulmonar
+        todavía le falta cruzar la válvula pulmonar, y para llegar al lado izquierdo, pasar por el
+        pulmón.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 07 ─────────── -->
+<section class="station" id="s1e7">
+  <div class="station-header">
+    <div class="station-number">07</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">El corazón también come</div>
+      <h2>Las coronarias y el infarto</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Toda la sangre del cuerpo pasa por dentro del corazón, pero el músculo cardíaco no se alimenta de
+      ella: su pared es demasiado gruesa para que el oxígeno difunda desde las cavidades. Tiene sus
+      propios vasos, que corren por la superficie. Es la <strong>circulación coronaria</strong>.</p>
+
+    <div class="two-col">
+      <div class="col-card">
+        <h5>Arterias: nacen de la aorta</h5>
+        <p>Las dos <strong>arterias coronarias</strong> salen de la aorta ascendente, justo por encima de
+          la válvula aórtica.<br>
+          La <strong>izquierda</strong> se divide en la <strong>rama interventricular anterior</strong>,
+          por el surco del mismo nombre, que irriga las paredes de los dos ventrículos, y la
+          <strong>rama circunfleja</strong>, por el surco coronario, hacia la aurícula y el ventrículo
+          izquierdos.<br>
+          La <strong>derecha</strong> da la <strong>rama marginal</strong>, para el ventrículo derecho, y
+          la <strong>interventricular posterior</strong>.</p>
+      </div>
+      <div class="col-card teal">
+        <h5>Venas: acaban en el seno coronario</h5>
+        <p>La <strong>gran vena cardíaca</strong> sube por el surco interventricular anterior y la
+          <strong>vena cardíaca media</strong> por el posterior. Casi todas desembocan en el
+          <strong>seno coronario</strong>, una vena ancha que corre por detrás, en el surco coronario, y
+          se vacía en la <strong>aurícula derecha</strong>. Es la tercera vena que recibe esa aurícula.</p>
+      </div>
+    </div>
+
+    <div class="photo-hero">
+      <img src="img/fig_20_8_coronarias.png" alt="Arterias coronarias y venas cardíacas vistas desde adelante"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>Arterias a la izquierda, venas a la derecha.</strong> El corazón
+        está dibujado como si fuera transparente, para que se vean también los vasos de la cara
+        posterior. Busca dónde nacen las dos coronarias y dónde termina el seno coronario. Tortora,
+        Fig. 20.8.</div>
+    </div>
+
+    <h3>Cuando una coronaria se cierra</h3>
+    <p>La causa más común es la <strong>aterosclerosis</strong>: en la pared de las arterias se acumulan
+      colesterol, células inflamatorias y tejido fibroso, y forman una <strong>placa</strong> que va
+      estrechando la luz del vaso. Los factores que la favorecen son conocidos: tabaquismo, hipertensión,
+      diabetes, colesterol elevado, obesidad, sedentarismo, la edad y los antecedentes familiares.</p>
+
+    <div class="three-col">
+      <div class="col-card">
+        <h5>Isquemia</h5>
+        <p>El flujo disminuye y el músculo recibe menos oxígeno del que necesita. Se debilita, pero no
+          muere.</p>
+      </div>
+      <div class="col-card amber">
+        <h5>Angina de pecho</h5>
+        <p>El dolor de la isquemia: opresión en el pecho que puede irradiarse al cuello, la mandíbula o el
+          brazo izquierdo. Aparece con el esfuerzo y cede con el reposo.</p>
+      </div>
+      <div class="col-card">
+        <h5>Infarto de miocardio</h5>
+        <p>La obstrucción es completa y dura lo suficiente: la zona que irrigaba esa arteria
+          <strong>muere</strong> y se reemplaza por una cicatriz que ya no se contrae.</p>
+      </div>
+    </div>
+
+    <div class="photo-hero">
+      <img src="img/fig_20_21_aterosclerosis.png" alt="Microfotografías de una arteria normal y de una arteria obstruida por una placa de ateroma"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>Una arteria sana y una obstruida.</strong> Compara el tamaño de la
+        luz, el espacio claro por donde pasa la sangre. En la de la derecha, la placa ocupa más de la
+        mitad. Tortora, Fig. 20.21.</div>
+    </div>
+
+    <div class="clinical-box">
+      <h5>👁 Interfaz optométrica</h5>
+      <p>La aterosclerosis no es una enfermedad del corazón: es de las arterias de todo el cuerpo, y las
+        carótidas son de sus lugares preferidos. A veces, al examinar el fondo de ojo, se ve dentro de una
+        arteriola de la retina un <strong>punto brillante y amarillento</strong>: un fragmento de colesterol
+        que se desprendió de una placa de la carótida y quedó atascado allí. Quien ve eso no está viendo
+        un problema del ojo; está viendo una placa en el cuello que puede causar un accidente
+        cerebrovascular, y debe remitir.</p>
+    </div>
+
+    <div class="check-question" data-question="q12s1">
+      <p class="question-text">12. ¿De qué arteria sale la rama interventricular anterior?</p>
+      <ul class="options">
+        <li data-letter="A">Del tronco pulmonar</li>
+        <li data-letter="B">De la coronaria derecha</li>
+        <li data-letter="C">Del seno coronario</li>
+        <li data-letter="D" data-correct="true">De la coronaria izquierda</li>
+        <li data-letter="E">De la rama circunfleja</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: D.</strong> La coronaria izquierda se divide en dos: la
+        interventricular anterior y la circunfleja. Son hermanas, no madre e hija, y por eso la
+        circunfleja no es la respuesta. La coronaria derecha da la marginal y la interventricular
+        posterior, y el seno coronario es una vena.</div>
+    </div>
+
+    <div class="check-question" data-question="q13s1">
+      <p class="question-text">13. ¿Qué diferencia un infarto de miocardio de una angina de pecho?</p>
+      <ul class="options">
+        <li data-letter="A" data-correct="true">En el infarto, una parte del músculo muere</li>
+        <li data-letter="B">En el infarto no hay dolor</li>
+        <li data-letter="C">La angina afecta a las venas, y el infarto a las arterias</li>
+        <li data-letter="D">La angina ocurre en el pericardio</li>
+        <li data-letter="E">El infarto solo ocurre en el ventrículo derecho</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: A.</strong> Las dos son consecuencia de la falta de flujo
+        por una coronaria. En la angina el músculo sufre pero se recupera cuando baja el esfuerzo; en el
+        infarto la obstrucción es completa y prolongada, y el tejido muere y se vuelve cicatriz. Ambos
+        casos son de las arterias, y el infarto puede afectar cualquier zona del miocardio.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 08 ─────────── -->
+<section class="station" id="s1e8">
+  <div class="station-header">
+    <div class="station-number">08</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">La electricidad del latido</div>
+      <h2>El sistema de conducción</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>El corazón late solo. Si se corta todo nervio que llega a él, sigue latiendo: la orden la generan
+      unas fibras musculares especiales, las <strong>fibras autorrítmicas</strong>, que se excitan por sí
+      mismas una y otra vez y conducen la señal por un camino fijo.</p>
+
+    <div class="recorrido">
+      <ol>
+        <li><strong>Nodo sinoauricular (SA).</strong> En la pared de la aurícula derecha, bajo la entrada de
+          la cava superior. Es el <strong>marcapasos natural</strong>: marca el ritmo de todo el corazón.
+          La señal se extiende por las dos aurículas y las contrae.</li>
+        <li><strong>Nodo auriculoventricular (AV).</strong> En el tabique interauricular. Aquí la señal se
+          <strong>retrasa</strong> un poco, y ese retraso da tiempo a que las aurículas terminen de vaciarse
+          antes de que se contraigan los ventrículos.</li>
+        <li><strong>Haz auriculoventricular, o haz de His.</strong> Es el <strong>único puente
+          eléctrico</strong> entre aurículas y ventrículos. Todo lo demás lo aísla el esqueleto
+          fibroso.</li>
+        <li><strong>Ramas derecha e izquierda del haz.</strong> Bajan por el tabique interventricular hacia
+          la punta.</li>
+        <li><strong>Fibras de Purkinje.</strong> Suben desde la punta por las paredes de los ventrículos.
+          Por eso los ventrículos se contraen <strong>de abajo hacia arriba</strong> y exprimen la sangre
+          hacia las válvulas de salida, como un tubo de crema dental.</li>
+      </ol>
+    </div>
+
+    <div class="photo-hero">
+      <img src="img/fig_20_10_conduccion.png" alt="Sistema de conducción cardíaco: nodo sinoauricular, nodo auriculoventricular, haz de His, ramas y fibras de Purkinje"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>Cinco pasos numerados.</strong> Sigue los círculos azules del 1 al
+        5 y fíjate en que el único camino de las aurículas a los ventrículos pasa por el 2 y el 3.
+        Tortora, Fig. 20.10.</div>
+    </div>
+
+    <h3>El sistema nervioso no enciende el corazón: lo acelera o lo frena</h3>
+    <p>Por su cuenta, el nodo SA descargaría unas <strong>100 veces por minuto</strong>. En reposo el
+      corazón late más despacio, unas <strong>75</strong>, porque el <strong>nervio vago (X)</strong>
+      —parasimpático— lo frena todo el tiempo. Cuando haces ejercicio o te asustas, los nervios
+      <strong>simpáticos</strong> lo aceleran y aumentan la fuerza de la contracción. Ambos obedecen al
+      <strong>centro cardiovascular del bulbo raquídeo</strong>, el mismo que viste en la clase 8.</p>
+
+    <h3>El electrocardiograma: tres ondas que hay que reconocer</h3>
+    <p>La actividad eléctrica del corazón llega a la piel, y unos electrodos la registran. Ese trazado es
+      el <strong>electrocardiograma (ECG)</strong>. No se trata de interpretarlo, sino de saber qué
+      representa cada parte.</p>
+    <div class="three-col">
+      <div class="col-card">
+        <h5>Onda P</h5>
+        <p>La <strong>despolarización de las aurículas</strong>: la señal que las recorre justo antes de
+          que se contraigan.</p>
+      </div>
+      <div class="col-card amber">
+        <h5>Complejo QRS</h5>
+        <p>La <strong>despolarización de los ventrículos</strong>, justo antes de su contracción. Es la
+          parte más alta porque los ventrículos tienen mucho más músculo.</p>
+      </div>
+      <div class="col-card teal">
+        <h5>Onda T</h5>
+        <p>La <strong>repolarización de los ventrículos</strong>: se preparan para relajarse y recibir el
+          siguiente latido.</p>
+      </div>
+    </div>
+
+    <div class="photo-hero">
+      <img src="img/fig_20_12_ecg.png" alt="Electrocardiograma normal con onda P, complejo QRS y onda T"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>Un latido en el papel.</strong> La barra azul de arriba marca
+        cuándo se contraen las aurículas; la amarilla, cuándo lo hacen los ventrículos. Fíjate en que
+        cada contracción empieza <em>después</em> de su onda eléctrica. Y si te preguntas por qué la señal
+        solo cruza por el haz de His, vuelve al esqueleto fibroso de la estación 05: sus anillos no
+        conducen la electricidad. Tortora, Fig. 20.12.</div>
+    </div>
+
+    <div class="check-question" data-question="q14s1">
+      <p class="question-text">14. ¿Qué estructura marca el ritmo del corazón en condiciones normales?</p>
+      <ul class="options">
+        <li data-letter="A">El haz de His</li>
+        <li data-letter="B">El nodo auriculoventricular</li>
+        <li data-letter="C" data-correct="true">El nodo sinoauricular</li>
+        <li data-letter="D">Las fibras de Purkinje</li>
+        <li data-letter="E">Los músculos papilares</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: C.</strong> El nodo SA es el que se excita más rápido, y por
+        eso impone su ritmo a los demás: es el marcapasos. El nodo AV, el haz de His y las fibras de
+        Purkinje conducen la señal que él genera. Los músculos papilares no son parte del sistema de
+        conducción: sujetan las válvulas.</div>
+    </div>
+
+    <div class="check-question" data-question="q15s1">
+      <p class="question-text">15. En el electrocardiograma, ¿qué representa el complejo QRS?</p>
+      <ul class="options">
+        <li data-letter="A">El cierre de las válvulas semilunares</li>
+        <li data-letter="B">La despolarización de las aurículas</li>
+        <li data-letter="C">La repolarización de los ventrículos</li>
+        <li data-letter="D" data-correct="true">La despolarización de los ventrículos</li>
+        <li data-letter="E">La contracción de las arterias coronarias</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: D.</strong> El ECG registra electricidad, no ruidos ni
+        movimiento de válvulas. La onda P es la despolarización de las aurículas; el QRS, la de los
+        ventrículos, y la onda T, su repolarización. El QRS es el más alto porque los ventrículos tienen
+        más masa muscular.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 09 ─────────── -->
+<section class="station" id="s1e9">
+  <div class="station-header">
+    <div class="station-number">09</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Fisiología mínima</div>
+      <h2>El ciclo cardíaco en palabras</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Todo lo que pasa en un latido, desde que empieza hasta que empieza el siguiente, es un
+      <strong>ciclo cardíaco</strong>. Con el corazón a 75 latidos por minuto dura unos
+      <strong>0,8 segundos</strong>. Tiene dos tiempos, y los dos se refieren sobre todo a los
+      ventrículos.</p>
+
+    <div class="two-col">
+      <div class="col-card amber">
+        <h5>Sístole · contracción</h5>
+        <p>Primero se contraen las aurículas y terminan de llenar los ventrículos. Después se contraen los
+          ventrículos: la presión cierra las válvulas AV —primer ruido—, abre las semilunares y la sangre
+          sale hacia la aorta y el tronco pulmonar.</p>
+      </div>
+      <div class="col-card teal">
+        <h5>Diástole · relajación</h5>
+        <p>Los ventrículos se relajan y la presión cae: las semilunares se cierran —segundo ruido—, las AV
+          se abren y la sangre que se acumuló en las aurículas vuelve a llenar los ventrículos. En reposo,
+          el corazón pasa más tiempo relajado que contraído.</p>
+      </div>
+    </div>
+
+    <h3>Cuánta sangre mueve el corazón</h3>
+    <p>En cada latido, cada ventrículo expulsa unos <strong>70 mL</strong>: es el <strong>volumen
+      sistólico</strong>. No se vacía del todo: le quedan dentro unos 60 mL. Si multiplicas el volumen
+      sistólico por la <strong>frecuencia cardíaca</strong> obtienes el <strong>gasto cardíaco</strong>, la
+      sangre que sale del ventrículo en un minuto.</p>
+
+    <div class="pearl">
+      <p><strong>Gasto cardíaco = volumen sistólico × frecuencia cardíaca</strong><br>
+        70 mL por latido × 75 latidos por minuto = 5250 mL/min, es decir, unos <strong>5,25 litros por
+        minuto</strong>. Es más o menos todo el volumen de sangre de un adulto: en reposo, toda tu sangre
+        da una vuelta completa cada minuto. Durante el ejercicio intenso el gasto puede multiplicarse
+        varias veces, subiendo a la vez la frecuencia y el volumen de cada latido.</p>
+    </div>
+
+    <div class="check-question" data-question="q16s1">
+      <p class="question-text">16. Un corazón late a 60 latidos por minuto y expulsa 80 mL en cada latido.
+        ¿Cuál es su gasto cardíaco?</p>
+      <ul class="options">
+        <li data-letter="A" data-correct="true">4,8 litros por minuto</li>
+        <li data-letter="B">140 mililitros por minuto</li>
+        <li data-letter="C">4,8 mililitros por minuto</li>
+        <li data-letter="D">1,3 litros por minuto</li>
+        <li data-letter="E">48 litros por minuto</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: A.</strong> Se multiplica, no se suma: 80 mL × 60 latidos =
+        4800 mL por minuto, que son 4,8 litros. Sumar los dos números da 140, y dividirlos da 1,3. Las
+        otras dos opciones tienen bien los dígitos pero la unidad o la coma mal puestas: vale la pena
+        comprobar que el resultado tenga sentido, y todo el volumen de sangre de un adulto son unos
+        5 litros.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 10 ─────────── -->
+<section class="station" id="s1e10">
+  <div class="station-header">
+    <div class="station-number">10</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Vocabulario</div>
+      <h2>Términos TA2 de la sesión</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Toca la tarjeta para voltearla. El término en español y en el latín de la <em>Terminologia
+      Anatomica</em>, y debajo por qué te importa a ti.</p>
+
+    <div class="flip-grid">
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Corazón</span><span class="term-en">Cor</span></div>
+        <div class="flip-back"><p class="term-def">Órgano muscular hueco con cuatro cavidades que bombea la sangre por dos circuitos.</p><p class="term-opto">👁 De «cor» vienen coronaria y cardíaco.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Mediastino</span><span class="term-en">Mediastinum</span></div>
+        <div class="flip-back"><p class="term-def">El bloque central del tórax, entre los dos pulmones, donde está el corazón.</p><p class="term-opto">👁 Por él suben la aorta y las arterias que llevan sangre a la cabeza.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Pericardio seroso</span><span class="term-en">Pericardium serosum</span></div>
+        <div class="flip-back"><p class="term-def">Membrana doble —hoja parietal y visceral— con líquido lubricante entre las dos.</p><p class="term-opto">👁 La hoja visceral es el epicardio.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Miocardio</span><span class="term-en">Myocardium</span></div>
+        <div class="flip-back"><p class="term-def">La capa muscular de la pared cardíaca; la que bombea.</p><p class="term-opto">👁 Muere en el infarto; el ojo tolera aún menos minutos sin sangre.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Aurícula derecha</span><span class="term-en">Atrium dextrum</span></div>
+        <div class="flip-back"><p class="term-def">Recibe la sangre de las dos cavas y del seno coronario.</p><p class="term-opto">👁 Aquí vuelve la sangre de la vena central de la retina.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Ventrículo izquierdo</span><span class="term-en">Ventriculus sinister</span></div>
+        <div class="flip-back"><p class="term-def">La cavidad de pared más gruesa; expulsa la sangre a la aorta y forma la punta.</p><p class="term-opto">👁 De su fuerza depende la presión que llega a la retina.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Tabique interventricular</span><span class="term-en">Septum interventriculare</span></div>
+        <div class="flip-back"><p class="term-def">La pared que separa los dos ventrículos. Por él bajan las ramas del haz de His.</p><p class="term-opto">👁 Afuera se adivina por los surcos interventriculares.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Válvula tricúspide</span><span class="term-en">Valva atrioventricularis dextra</span></div>
+        <div class="flip-back"><p class="term-def">Válvula de tres valvas entre la aurícula y el ventrículo derechos.</p><p class="term-opto">👁 Tri y derecha: las dos con «r».</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Válvula mitral</span><span class="term-en">Valva atrioventricularis sinistra</span></div>
+        <div class="flip-back"><p class="term-def">Válvula de dos valvas entre la aurícula y el ventrículo izquierdos. También bicúspide.</p><p class="term-opto">👁 Una mitral enferma puede soltar émbolos hacia la cabeza.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Válvula aórtica</span><span class="term-en">Valva aortae</span></div>
+        <div class="flip-back"><p class="term-def">Válvula semilunar a la salida del ventrículo izquierdo.</p><p class="term-opto">👁 Su cierre es parte del segundo ruido.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Cuerdas tendinosas</span><span class="term-en">Chordae tendineae</span></div>
+        <div class="flip-back"><p class="term-def">Cordones que unen las valvas AV con los músculos papilares.</p><p class="term-opto">👁 Evitan que la válvula se voltee como un paraguas.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Músculo papilar</span><span class="term-en">Musculus papillaris</span></div>
+        <div class="flip-back"><p class="term-def">Relieve muscular en forma de cono dentro del ventrículo, del que salen las cuerdas.</p><p class="term-opto">👁 No confundir con la papila del nervio óptico.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Arteria coronaria izquierda</span><span class="term-en">Arteria coronaria sinistra</span></div>
+        <div class="flip-back"><p class="term-def">Nace de la aorta ascendente y se divide en interventricular anterior y circunfleja.</p><p class="term-opto">👁 La aterosclerosis que la cierra también afecta a la carótida.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Seno coronario</span><span class="term-en">Sinus coronarius</span></div>
+        <div class="flip-back"><p class="term-def">Vena ancha que recoge la sangre del corazón y la vacía en la aurícula derecha.</p><p class="term-opto">👁 Seno venoso aquí; en la sesión 2 verás el seno cavernoso.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Nodo sinoauricular</span><span class="term-en">Nodus sinuatrialis</span></div>
+        <div class="flip-back"><p class="term-def">El marcapasos natural, en la pared de la aurícula derecha.</p><p class="term-opto">👁 El vago lo frena; el simpático lo acelera.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Tronco pulmonar</span><span class="term-en">Truncus pulmonalis</span></div>
+        <div class="flip-back"><p class="term-def">La arteria que sale del ventrículo derecho y lleva sangre pobre en oxígeno a los pulmones.</p><p class="term-opto">👁 Arteria por dirección, no por color.</p></div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 11 ─────────── -->
+<section class="station" id="s1e11">
+  <div class="station-header">
+    <div class="station-number">11</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Autoevaluación</div>
+      <h2>Comprueba lo que aprendiste</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Dos preguntas que obligan a juntar varias estaciones. Contesta antes de mirar la
+      retroalimentación.</p>
+
+    <div class="check-question" data-question="q17s1">
+      <p class="question-text">17. Si el nodo sinoauricular deja de funcionar, ¿qué es lo más probable?</p>
+      <ul class="options">
+        <li data-letter="A">El corazón se detiene de inmediato y para siempre</li>
+        <li data-letter="B" data-correct="true">El nodo AV asume el ritmo, pero más lento</li>
+        <li data-letter="C">Las aurículas y los ventrículos laten más rápido</li>
+        <li data-letter="D">El nervio vago pasa a generar cada latido</li>
+        <li data-letter="E">Los músculos papilares toman el relevo</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: B.</strong> Otras fibras autorrítmicas también pueden
+        excitarse solas, pero a menor frecuencia; el nodo SA manda porque es el más rápido. Si falla, el
+        nodo AV toma el relevo con un ritmo más lento, y cuando ese ritmo no alcanza se implanta un
+        <strong>marcapasos artificial</strong>. El vago no genera latidos, solo frena los que genera el
+        nodo, y los músculos papilares no conducen electricidad.</div>
+    </div>
+
+    <div class="saber-box">
+      <strong>Pregunta tipo Saber Pro · Caso</strong>
+      <div class="check-question" style="margin-top:16px;border-color:var(--purple)" data-question="q18s1">
+        <p class="question-text">18. Un hombre de 58 años, fumador y con colesterol alto, siente una
+          opresión en el pecho que se extiende al brazo izquierdo cada vez que sube escaleras. El dolor
+          desaparece a los pocos minutos de reposo. ¿Cuál es la explicación más probable?</p>
+        <ul class="options">
+        <li data-letter="A">Una falla del nodo sinoauricular</li>
+        <li data-letter="B" data-correct="true">Una coronaria estrechada por aterosclerosis</li>
+        <li data-letter="C">Una válvula tricúspide que no cierra</li>
+        <li data-letter="D">Líquido acumulado en la cavidad pericárdica</li>
+        <li data-letter="E">Un infarto con muerte del miocardio</li>
+        </ul>
+        <div class="feedback"><strong>Correcta: B.</strong> El dolor aparece con el esfuerzo, cuando el
+          corazón necesita más oxígeno, y cede en reposo: es la <strong>angina de pecho</strong>. Una
+          coronaria estrechada deja pasar sangre suficiente en reposo pero no durante el ejercicio, y los
+          factores de riesgo apuntan a la aterosclerosis. En un infarto el dolor no cede con unos minutos de
+          descanso, porque el músculo ya no se recupera. Leer un caso es esto: fijarse en qué desencadena
+          el síntoma y qué lo alivia.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div><!-- fin sesión 1 -->
+
+<!-- ═══════════════════════ SESIÓN 2 ═══════════════════════ -->
+<div class="tab-pane" id="s2">
+
+<nav class="station-nav">
+  <h3>Contenido · Sesión 2</h3>
+  <ol>
+    <li><a href="#s2e0">Tres paredes y tres capilares</a></li>
+    <li><a href="#s2e1">Las venas: reservorio y regreso</a></li>
+    <li><a href="#s2e2">La presión arterial</a></li>
+    <li><a href="#s2e3">La aorta y las arterias de la cabeza</a></li>
+    <li><a href="#s2e4">Del corazón al ojo</a></li>
+    <li><a href="#s2e5">El regreso: venas del ojo y seno cavernoso</a></li>
+    <li><a href="#s2e6">La circulación pulmonar y el mapa completo</a></li>
+    <li><a href="#s2e7">Términos TA2 de la sesión</a></li>
+    <li><a href="#s2e8">Comprueba lo que aprendiste</a></li>
+    <li><a href="#s2e9">Volvemos a las cinco preguntas</a></li>
+  </ol>
+</nav>
+
+<!-- ─────────── 00 ─────────── -->
+<section class="station" id="s2e0">
+  <div class="station-header">
+    <div class="station-number">00</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Histología de los vasos</div>
+      <h2>Tres paredes y tres capilares</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>La sangre sale del corazón por <strong>arterias</strong>, que se ramifican en
+      <strong>arteriolas</strong>; éstas terminan en <strong>capilares</strong>, donde ocurre el
+      intercambio con los tejidos; los capilares se reúnen en <strong>vénulas</strong>, y éstas en
+      <strong>venas</strong> que regresan al corazón.</p>
+
+    <h3>Las tres túnicas</h3>
+    <p>Arterias y venas tienen la pared en tres capas. Cambia el grosor de cada una, no el plan.</p>
+    <div class="three-col">
+      <div class="col-card teal">
+        <h5>Túnica interna</h5>
+        <p>El <strong>endotelio</strong>, un epitelio plano simple que está en contacto con la sangre,
+          sobre su membrana basal. Es el mismo revestimiento del endocardio.</p>
+      </div>
+      <div class="col-card amber">
+        <h5>Túnica media</h5>
+        <p><strong>Músculo liso</strong> y fibras elásticas. El músculo liso, gobernado sobre todo por el
+          simpático, <strong>estrecha</strong> (vasoconstricción) o <strong>ensancha</strong>
+          (vasodilatación) la luz del vaso.</p>
+      </div>
+      <div class="col-card">
+        <h5>Túnica externa</h5>
+        <p>Tejido conectivo con fibras elásticas y colágenas. Ancla el vaso a lo que lo rodea y lleva los
+          nervios y los pequeños vasos de la propia pared.</p>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="col-card">
+        <h5>Arterias</h5>
+        <p>Pared gruesa, sobre todo la túnica media, porque soportan presión alta. Las grandes, como la
+          aorta, son <strong>elásticas</strong>: se estiran en cada latido y, al recuperarse, siguen
+          empujando la sangre mientras el corazón se relaja. Las <strong>arteriolas</strong> son las que
+          más regulan cuánta sangre llega a cada tejido.</p>
+      </div>
+      <div class="col-card teal">
+        <h5>Venas</h5>
+        <p>Las mismas tres capas, pero más delgadas y con la luz más ancha. Por eso un corte de vena suele
+          verse aplastado. Muchas, sobre todo las de los miembros, tienen <strong>válvulas</strong>.</p>
+      </div>
+    </div>
+
+    <div class="photo-hero">
+      <img src="img/fig_21_1_estructura_vasos.png" alt="Estructura comparada de una arteria, una vena y un capilar con sus túnicas"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>Arteria, vena y capilar.</strong> Compara el grosor de la túnica
+        media de la arteria con la de la vena, y busca la válvula de la vena. El capilar, abajo, es solo
+        endotelio y membrana basal. Tortora, Fig. 21.1.</div>
+    </div>
+
+    <h3>Los capilares: donde ocurre todo</h3>
+    <p>Su pared es una sola capa de endotelio, y por eso permiten el intercambio de gases, nutrientes y
+      desechos. Según qué tan cerrada sea esa pared hay tres tipos.</p>
+    <div class="three-col">
+      <div class="col-card">
+        <h5>Continuos</h5>
+        <p>Las células endoteliales forman un tubo sin poros, solo con pequeñas hendiduras entre ellas.
+          Son la mayoría: en el <strong>sistema nervioso central</strong>, los pulmones, la piel y los
+          músculos.</p>
+      </div>
+      <div class="col-card teal">
+        <h5>Fenestrados</h5>
+        <p>Tienen <strong>poros</strong> en las células. Dejan pasar más cosas. Están en los riñones, el
+          intestino, los plexos coroideos del encéfalo, las glándulas endocrinas y los <strong>procesos
+          ciliares del ojo</strong>.</p>
+      </div>
+      <div class="col-card amber">
+        <h5>Sinusoides</h5>
+        <p>Anchos y tortuosos, con grandes huecos entre las células y la membrana basal incompleta. Están
+          en el hígado, la médula ósea y el bazo.</p>
+      </div>
+    </div>
+
+    <div class="photo-hero">
+      <img src="img/fig_21_4_capilares.png" alt="Tipos de capilares: continuo, fenestrado y sinusoide"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>De más cerrado a más abierto.</strong> Arriba el continuo, en el
+        medio el fenestrado con sus poros, abajo el sinusoide. Tortora, Fig. 21.4.</div>
+    </div>
+
+    <div class="clinical-box">
+      <h5>👁 Interfaz optométrica</h5>
+      <p>En el ojo conviven dos tipos de capilar, y la diferencia importa. Los <strong>procesos
+        ciliares</strong> tienen capilares fenestrados: por esos poros sale el líquido con el que se forma
+        el <strong>humor acuoso</strong>. Los capilares de la <strong>retina</strong>, en cambio, son
+        continuos y con las células muy unidas, igual que los del encéfalo: forman una <strong>barrera
+        hematorretiniana</strong>, hermana de la hematoencefálica de la clase 8. Cuando la diabetes daña
+        esa barrera, los capilares dejan escapar líquido y sangre, y la retina crea
+        <strong>vasos nuevos</strong> frágiles que sangran con facilidad: es la retinopatía diabética.</p>
+    </div>
+
+    <div class="check-question" data-question="q1s2">
+      <p class="question-text">1. ¿Qué capa de la pared arterial contiene el músculo liso que cambia su
+        calibre?</p>
+      <ul class="options">
+        <li data-letter="A">El endotelio</li>
+        <li data-letter="B">La túnica interna</li>
+        <li data-letter="C">La túnica externa</li>
+        <li data-letter="D" data-correct="true">La túnica media</li>
+        <li data-letter="E">La membrana basal</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: D.</strong> La túnica media es la capa muscular: su músculo
+        liso se contrae para estrechar el vaso y se relaja para ensancharlo. La interna es el endotelio con
+        su membrana basal, y la externa es tejido conectivo de sostén.</div>
+    </div>
+
+    <div class="check-question" data-question="q2s2">
+      <p class="question-text">2. Los procesos ciliares, que producen el humor acuoso, tienen capilares:</p>
+      <ul class="options">
+        <li data-letter="A">Sinusoides</li>
+        <li data-letter="B">Continuos</li>
+        <li data-letter="C" data-correct="true">Fenestrados</li>
+        <li data-letter="D">Linfáticos</li>
+        <li data-letter="E">Sin endotelio</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: C.</strong> Tortora los pone en la lista de los fenestrados,
+        junto con los riñones y los plexos coroideos que producen el líquido cefalorraquídeo: en todos, el
+        tejido tiene que <em>fabricar</em> un líquido, y los poros lo facilitan. Los continuos son los de la
+        retina y el encéfalo, y ningún capilar sanguíneo carece de endotelio.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 01 ─────────── -->
+<section class="station" id="s2e1">
+  <div class="station-header">
+    <div class="station-number">01</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Retorno venoso</div>
+      <h2>Las venas: reservorio y regreso</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>En reposo, alrededor del <strong>64 %</strong> de toda la sangre está en las venas y vénulas del
+      circuito sistémico. Las arterias tienen cerca del 13 %, los capilares el 7 %. Por eso las venas
+      funcionan como un <strong>reservorio</strong>: cuando hace falta más sangre en otra parte —en una
+      hemorragia o durante el ejercicio—, el simpático las contrae y la moviliza.</p>
+
+    <h3>¿Cómo sube la sangre desde los pies?</h3>
+    <p>Cuando la sangre llega a las vénulas casi no le queda presión: no hay un corazón empujando desde
+      atrás que alcance para subirla un metro y medio. La ayudan dos cosas.</p>
+
+    <div class="two-col">
+      <div class="col-card teal">
+        <h5>Válvulas venosas</h5>
+        <p>Pliegues de la túnica interna en forma de bolsillo, que miran hacia el corazón. Dejan pasar la
+          sangre hacia arriba y se cierran si intenta devolverse. Son más numerosas en las venas de las
+          piernas.</p>
+      </div>
+      <div class="col-card amber">
+        <h5>Bomba muscular</h5>
+        <p>Al caminar, los músculos de la pantorrilla se contraen y <strong>exprimen</strong> las venas que
+          pasan entre ellos. La válvula de arriba se abre, la de abajo se cierra, y la sangre sube un
+          tramo. La respiración ayuda de forma parecida desde el tórax.</p>
+      </div>
+    </div>
+
+    <div class="photo-grid">
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_21_5_valvulas_venosas.png" alt="Válvulas venosas en corte transversal y longitudinal"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>Una válvula por dentro.</strong> En el corte longitudinal se ven
+          las dos cúspides abiertas como bolsillos. Tortora, Fig. 21.5.</div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_21_9_bomba_muscular.png" alt="Bomba de músculo esquelético: la contracción de la pantorrilla empuja la sangre venosa hacia el corazón"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>Tres tiempos.</strong> En reposo (1), las dos válvulas abiertas;
+          al contraerse la pantorrilla (2), la proximal se abre y la distal se cierra; al relajarse (3), al
+          revés. Tortora, Fig. 21.9.</div>
+      </div>
+    </div>
+
+    <div class="pearl">
+      <p><strong>Cuando las válvulas fallan</strong>, la sangre se acumula, la vena se estira y se vuelve
+        tortuosa: son las <strong>várices</strong>. Y cuando una persona está mucho tiempo de pie sin
+        moverse, sin bomba muscular, la sangre se estanca en las piernas: es la razón por la que alguien se
+        desmaya en una formación.</p>
+    </div>
+
+    <div class="check-question" data-question="q3s2">
+      <p class="question-text">3. En reposo, ¿dónde está la mayor parte del volumen de sangre?</p>
+      <ul class="options">
+        <li data-letter="A" data-correct="true">En las venas y vénulas sistémicas</li>
+        <li data-letter="B">En las arterias y arteriolas sistémicas</li>
+        <li data-letter="C">En los capilares de los tejidos</li>
+        <li data-letter="D">Dentro de las cavidades del corazón</li>
+        <li data-letter="E">En los vasos de los pulmones</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: A.</strong> Casi dos tercios de la sangre, alrededor del
+        64 %, están en el lado venoso sistémico, que por su pared delgada y su luz amplia funciona como
+        depósito. Las arterias sistémicas tienen cerca del 13 %, los vasos pulmonares el 9 %, y el corazón y
+        los capilares el 7 % cada uno.</div>
+    </div>
+
+    <div class="check-question" data-question="q4s2">
+      <p class="question-text">4. ¿Qué dos cosas permiten que la sangre venosa suba desde las piernas?</p>
+      <ul class="options">
+        <li data-letter="A">La presión arterial y los capilares sinusoides</li>
+        <li data-letter="B">La contracción de la túnica externa y la gravedad</li>
+        <li data-letter="C">Las válvulas semilunares y las cuerdas tendinosas</li>
+        <li data-letter="D" data-correct="true">La contracción muscular y las válvulas venosas</li>
+        <li data-letter="E">El nodo sinoauricular y las fibras de Purkinje</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: D.</strong> Los músculos exprimen las venas y las válvulas
+        impiden que la sangre se devuelva: juntas funcionan como una bomba. La gravedad juega en contra, la
+        túnica externa no se contrae y las válvulas semilunares y las cuerdas tendinosas son del corazón,
+        no de las venas.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 02 ─────────── -->
+<section class="station" id="s2e2">
+  <div class="station-header">
+    <div class="station-number">02</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Hemodinámica básica</div>
+      <h2>La presión arterial</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>La <strong>presión arterial</strong> es la fuerza que ejerce la sangre contra la pared de las
+      arterias. Sube y baja con cada latido, y por eso se expresa con dos números.</p>
+
+    <div class="two-col">
+      <div class="col-card amber">
+        <h5>Presión sistólica · el número de arriba</h5>
+        <p>La más alta: se alcanza cuando los ventrículos se contraen. En un adulto joven en reposo, unos
+          <strong>110 mm Hg</strong>.</p>
+      </div>
+      <div class="col-card teal">
+        <h5>Presión diastólica · el número de abajo</h5>
+        <p>La más baja: la que queda en las arterias mientras los ventrículos se relajan. Unos
+          <strong>70 mm Hg</strong>. Si no llega a cero es gracias a la elasticidad de las grandes
+          arterias.</p>
+      </div>
+    </div>
+
+    <p>Así, «110/70» se lee «ciento diez sobre setenta». La presión va cayendo a lo largo del circuito:
+      es máxima en la aorta, cae mucho en las arteriolas, llega a los capilares ya sin pulsaciones y es
+      casi cero cuando la sangre entra en la aurícula derecha. La sangre siempre corre de donde hay más
+      presión hacia donde hay menos.</p>
+
+    <div class="photo-hero">
+      <img src="img/fig_21_8_presiones.png" alt="Presión sanguínea en las distintas regiones del circuito sistémico, de la aorta a las venas cavas"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>De la aorta a las cavas.</strong> Las oscilaciones son los
+        latidos: altas en la aorta, desaparecen al llegar a los capilares. La mayor caída ocurre en las
+        arteriolas. Tortora, Fig. 21.8.</div>
+    </div>
+
+    <h3>Quién la mantiene: el centro cardiovascular y los barorreceptores</h3>
+    <p>El control está en el <strong>centro cardiovascular del bulbo raquídeo</strong>. Recibe información
+      de unos sensores de estiramiento, los <strong>barorreceptores</strong>, situados en dos lugares
+      estratégicos:</p>
+    <div class="two-col">
+      <div class="col-card">
+        <h5>Seno carotídeo</h5>
+        <p>Una pequeña dilatación de la carótida interna, justo donde nace. Vigila la presión de la sangre
+          que va al encéfalo y al ojo. Su información viaja por el <strong>nervio glosofaríngeo
+          (IX)</strong>.</p>
+      </div>
+      <div class="col-card">
+        <h5>Arco aórtico</h5>
+        <p>Vigila la presión que sale hacia todo el cuerpo. Su información viaja por el <strong>nervio vago
+          (X)</strong>.</p>
+      </div>
+    </div>
+
+    <div class="recorrido">
+      <ol>
+        <li>Te levantas de golpe. La gravedad retiene sangre en las piernas y la presión en la cabeza
+          baja.</li>
+        <li>Las paredes del seno carotídeo y del arco aórtico se estiran menos, y los barorreceptores mandan
+          menos impulsos al bulbo.</li>
+        <li>El centro cardiovascular aumenta la actividad <strong>simpática</strong> y reduce la
+          parasimpática: el corazón late más rápido y con más fuerza, y las arteriolas se contraen.</li>
+        <li>La presión vuelve a lo normal en pocos segundos. Si el reflejo tarda, sientes el mareo del que
+          hablamos en la clase 8.</li>
+      </ol>
+    </div>
+
+    <div class="photo-grid">
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_21_12_centro_cardiovascular.png" alt="Centro cardiovascular en el bulbo raquídeo con sus aferencias y eferencias"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>Qué entra y qué sale del bulbo.</strong> A la derecha, en azul,
+          lo que le informa; en rojo, lo que ordena al corazón y a los vasos. Tortora, Fig. 21.12.</div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_21_13_barorreceptores.png" alt="Reflejos barorreceptores del seno carotídeo y del arco aórtico, con los nervios IX y X"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>Dos sensores, dos nervios craneales.</strong> Sigue la línea azul
+          desde el seno carotídeo (IX) y desde el arco aórtico (X) hasta el bulbo. Tortora, Fig. 21.13.</div>
+      </div>
+    </div>
+
+    <div class="clinical-box">
+      <h5>👁 Interfaz optométrica</h5>
+      <p>La retina es el único lugar del cuerpo donde se pueden ver <strong>arteriolas y vénulas
+        directamente</strong>, y Tortora lo dice así: por eso el examen del fondo de ojo sirve para
+        detectar los daños de la hipertensión y de la diabetes. Cuando la presión se mantiene alta durante
+        años, las arteriolas de la retina se <strong>estrechan</strong> y se vuelven rígidas; donde una
+        arteriola cruza por encima de una vénula, la aprieta y la vena parece interrumpida —el <strong>cruce
+        arteriovenoso</strong>—. En los casos graves aparecen hemorragias y exudados. Quien mira ese fondo
+        de ojo está viendo cómo están las arteriolas del riñón y del encéfalo.</p>
+    </div>
+
+    <div class="check-question" data-question="q5s2">
+      <p class="question-text">5. En una presión arterial de 120/80, ¿qué representa el 80?</p>
+      <ul class="options">
+        <li data-letter="A">El volumen expulsado en cada latido</li>
+        <li data-letter="B">La presión mientras los ventrículos se contraen</li>
+        <li data-letter="C">Los latidos del corazón en un minuto</li>
+        <li data-letter="D">La presión de la sangre en las venas cavas</li>
+        <li data-letter="E" data-correct="true">La presión mientras los ventrículos se relajan</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: E.</strong> El número de abajo es la presión diastólica: la
+        más baja, la que se mantiene en las arterias durante la relajación ventricular. La de arriba es la
+        sistólica, durante la contracción. La frecuencia y el volumen sistólico se miden en otras unidades,
+        y la presión de las cavas es casi cero.</div>
+    </div>
+
+    <div class="check-question" data-question="q6s2">
+      <p class="question-text">6. ¿Por qué nervio llega al bulbo la información de los barorreceptores del
+        seno carotídeo?</p>
+      <ul class="options">
+        <li data-letter="A">Por el oculomotor (III)</li>
+        <li data-letter="B">Por el vago (X)</li>
+        <li data-letter="C">Por el facial (VII)</li>
+        <li data-letter="D" data-correct="true">Por el glosofaríngeo (IX)</li>
+        <li data-letter="E">Por el hipogloso (XII)</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: D.</strong> El seno carotídeo informa por el glosofaríngeo y
+        el arco aórtico, por el vago. Los dos son pares craneales mixtos de los que viste en la clase 8. El
+        vago es el distractor fuerte: también lleva barorreceptores, pero los del arco aórtico, y además es
+        la vía parasimpática que frena el corazón.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 03 ─────────── -->
+<section class="station" id="s2e3">
+  <div class="station-header">
+    <div class="station-number">03</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Circulación sistémica</div>
+      <h2>La aorta y las arterias de la cabeza</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Todas las arterias del circuito sistémico salen de la <strong>aorta</strong>. Tiene cuatro tramos:
+      la <strong>aorta ascendente</strong>, que nace del ventrículo izquierdo y da las coronarias; el
+      <strong>arco aórtico</strong>, que se curva hacia la izquierda y atrás; la <strong>aorta
+      torácica</strong>, que baja por detrás del corazón, y la <strong>aorta abdominal</strong>, desde el
+      diafragma hasta la pelvis. No hace falta aprender todas sus ramas: la del mapa completo es para
+      ubicarse.</p>
+
+    <div class="photo-hero">
+      <img src="img/fig_21_18_aorta.png" alt="La aorta y sus principales ramas en todo el cuerpo"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>El árbol arterial completo.</strong> Solo para orientarse: sigue
+        la aorta desde el corazón hasta la pelvis y fíjate en que todo sale de ella. Lo que nos importa
+        está arriba, en el arco. Tortora, Fig. 21.18.</div>
+    </div>
+
+    <h3>Las tres ramas del arco</h3>
+    <div class="recorrido">
+      <ol>
+        <li><strong>Tronco braquiocefálico</strong>, el primero y el más grueso. Se divide pronto en la
+          <strong>subclavia derecha</strong> y la <strong>carótida común derecha</strong>.</li>
+        <li><strong>Carótida común izquierda</strong>, directamente del arco.</li>
+        <li><strong>Subclavia izquierda</strong>, también directamente del arco.</li>
+      </ol>
+    </div>
+    <p>La asimetría es la que suele confundir: a la derecha, carótida y subclavia comparten un tronco; a la
+      izquierda, cada una sale por su cuenta.</p>
+
+    <h3>Dos caminos hacia la cabeza</h3>
+    <div class="two-col">
+      <div class="col-card">
+        <h5>Las carótidas</h5>
+        <p>Cada <strong>carótida común</strong> sube por el cuello y, a la altura del borde superior del
+          cartílago tiroides, se divide en dos. La <strong>carótida externa</strong> irriga la cara, el cuero
+          cabelludo y el cuello. La <strong>carótida interna</strong> no da ramas en el cuello: entra al
+          cráneo, atraviesa el <strong>seno cavernoso</strong> y da su primera rama importante, la
+          <strong>arteria oftálmica</strong>. Termina irrigando buena parte del cerebro.</p>
+      </div>
+      <div class="col-card teal">
+        <h5>Las vertebrales</h5>
+        <p>Nacen de las subclavias, suben por los agujeros de las vértebras cervicales y entran al cráneo
+          por el foramen magno. Sobre el tronco del encéfalo se unen en una sola, la <strong>arteria
+          basilar</strong>, que irriga el tronco, el cerebelo y, por las cerebrales posteriores, los
+          <strong>lóbulos occipitales</strong>, donde está el área visual.</p>
+      </div>
+    </div>
+
+    <div class="photo-grid">
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_21_19b_carotidas.png" alt="Vista lateral de las carótidas común, interna y externa y de la arteria vertebral"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>La bifurcación carotídea.</strong> Busca dónde la carótida común se
+          divide en interna, que sube sin ramas, y externa, que se reparte por la cara. Tortora,
+          Fig. 21.19b.</div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_21_19c_poligono_willis.png" alt="Círculo arterial cerebral o polígono de Willis en la base del cerebro"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>El polígono de Willis.</strong> Recorre el anillo: cerebrales
+          anteriores y comunicante anterior adelante, carótidas internas a los lados, comunicantes
+          posteriores y cerebrales posteriores atrás, y la basilar en el centro. Fíjate en lo cerca que está
+          del quiasma. Tortora, Fig. 21.19c.</div>
+      </div>
+    </div>
+
+    <h3>El círculo arterial cerebral</h3>
+    <p>En la base del cerebro, las ramas de las dos carótidas internas y de la basilar se unen en un
+      <strong>anillo</strong>: el <strong>círculo arterial cerebral</strong> o polígono de Willis. Es una
+      <strong>anastomosis</strong>, una conexión entre arterias. Si una se obstruye poco a poco, la sangre
+      puede llegar a la misma zona por otro camino. Queda justo alrededor del <strong>quiasma óptico</strong>
+      y de la hipófisis.</p>
+
+    <div class="clinical-box">
+      <h5>👁 Interfaz optométrica</h5>
+      <p>La <strong>arteria comunicante posterior</strong> corre pegada al <strong>nervio oculomotor
+        (III)</strong>. Cuando se forma allí un aneurisma —una dilatación de la pared arterial—, puede
+        comprimir el nervio. Las fibras parasimpáticas que contraen la pupila van por la superficie del III,
+        así que muchas veces lo primero que aparece es una <strong>pupila dilatada</strong> que no reacciona
+        a la luz, a veces con párpado caído y el ojo desviado. Es una urgencia: el aneurisma puede
+        romperse.</p>
+    </div>
+
+    <div class="check-question" data-question="q7s2">
+      <p class="question-text">7. ¿Cuáles son las tres ramas del arco aórtico, en orden de derecha a
+        izquierda?</p>
+      <ul class="options">
+        <li data-letter="A">Carótida común derecha, carótida común izquierda, subclavia izquierda</li>
+        <li data-letter="B" data-correct="true">Tronco braquiocefálico, carótida común izquierda, subclavia izquierda</li>
+        <li data-letter="C">Subclavia derecha, tronco braquiocefálico, carótida común izquierda</li>
+        <li data-letter="D">Tronco braquiocefálico, subclavia izquierda, carótida común izquierda</li>
+        <li data-letter="E">Carótida interna, carótida externa, arteria vertebral</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: B.</strong> La carótida común derecha y la subclavia derecha
+        no salen del arco: salen del tronco braquiocefálico. Del lado izquierdo, en cambio, las dos salen
+        directamente, primero la carótida y después la subclavia. Carótida interna, externa y vertebral son
+        ramas más lejanas.</div>
+    </div>
+
+    <div class="check-question" data-question="q8s2">
+      <p class="question-text">8. ¿Qué une el círculo arterial cerebral (polígono de Willis)?</p>
+      <ul class="options">
+        <li data-letter="A">Las venas oftálmicas con el seno cavernoso</li>
+        <li data-letter="B">Las carótidas externas con las venas yugulares</li>
+        <li data-letter="C">La aorta con el tronco pulmonar</li>
+        <li data-letter="D" data-correct="true">Las carótidas internas con la arteria basilar</li>
+        <li data-letter="E">Las arterias coronarias con las subclavias</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: D.</strong> Es un anillo de arterias en la base del cerebro
+        que conecta el territorio de las dos carótidas internas con el de la basilar, que viene de las
+        vertebrales. Por eso funciona como un desvío si una arteria se va cerrando lentamente. Las venas
+        oftálmicas sí drenan en el seno cavernoso, pero eso es del lado venoso.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 04 ─────────── -->
+<section class="station" id="s2e4">
+  <div class="station-header">
+    <div class="station-number">04</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">El tramo que nos toca</div>
+      <h2>Del corazón al ojo</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Ya tienes el camino hasta la cabeza: ventrículo izquierdo → aorta → arco aórtico → carótida común →
+      carótida interna. Desde aquí el recorrido es corto y lo describe el Latarjet.</p>
+
+    <h3>La arteria oftálmica</h3>
+    <p>Es la <strong>primera rama importante de la carótida interna</strong>, que la da al salir del seno
+      cavernoso, dentro del cráneo. Entra a la órbita por el <strong>conducto óptico</strong>, junto al
+      nervio óptico, y allí se reparte. De sus ramas, cuatro grupos te importan:</p>
+
+    <div class="two-col">
+      <div class="col-card amber">
+        <h5>Arteria central de la retina</h5>
+        <p>Se mete dentro del <strong>nervio óptico</strong>, detrás del globo, y viaja por su centro hasta
+          salir en el <strong>disco óptico</strong>. Allí se divide en una rama superior y una inferior, y
+          cada una en nasal y temporal. Irriga las <strong>capas internas de la retina</strong>. El Latarjet
+          subraya que es <strong>independiente de los vasos de la coroides</strong>: sus anastomosis son
+          muy finas y raras.</p>
+      </div>
+      <div class="col-card teal">
+        <h5>Arterias ciliares posteriores</h5>
+        <p>Atraviesan la esclera alrededor del nervio óptico. Las <strong>cortas</strong>, numerosas, van a
+          la <strong>coroides</strong>, que nutre las capas externas de la retina —los conos y los
+          bastones—. Las <strong>largas</strong> avanzan hasta el cuerpo ciliar y forman con otras ramas el
+          <strong>círculo arterial mayor del iris</strong>.</p>
+      </div>
+      <div class="col-card">
+        <h5>Musculares y ciliares anteriores</h5>
+        <p>Irrigan los músculos extraoculares de la clase 7 y, desde ellos, dan las ciliares anteriores,
+          que llegan a la parte anterior del globo.</p>
+      </div>
+      <div class="col-card">
+        <h5>Lagrimal y ramas de la cara</h5>
+        <p>La <strong>lagrimal</strong> va a la glándula lagrimal y a los párpados. Otras salen de la órbita
+          hacia la frente y la nariz, y una de ellas se une con la arteria angular, rama de la facial: un
+          pequeño puente entre la carótida interna y la externa.</p>
+      </div>
+    </div>
+
+    <div class="pearl">
+      <p><strong>La retina tiene dos proveedores.</strong> Las capas internas dependen de la arteria central
+        de la retina; los fotorreceptores, de la coroides. Por eso una misma retina puede quedarse sin sangre
+        en una parte y no en la otra, y por eso interesa saber cuál de los dos proveedores falló.</p>
+    </div>
+
+    <div class="photo-grid">
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/lat_44_10_arteria_oftalmica.png" alt="Ramas de la arteria oftálmica en el nervio óptico: arteria central de la retina y ciliar posterior larga"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>Dentro del nervio óptico.</strong> Sigue la arteria central de la
+          retina desde que entra en el nervio hasta que sale en el disco, a la izquierda. Latarjet y Ruiz
+          Liard, Fig. 44-10.</div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/lat_44_8_arterias_globo_ocular.png" alt="Vascularización arterial del globo ocular: arterias ciliares, arteria central de la retina y círculo arterial mayor del iris"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>Los dos sistemas del globo.</strong> Las ciliares van por la
+          coroides hacia adelante; la central de la retina, por dentro. Busca el círculo arterial mayor del
+          iris. Latarjet y Ruiz Liard, Fig. 44-8.</div>
+      </div>
+    </div>
+
+    <h3>Lo que se ve en el fondo de ojo</h3>
+    <p>Con el oftalmoscopio se ve el final de este recorrido. Del <strong>disco óptico</strong> salen las
+      arteriolas y entran las vénulas, en cuatro grandes ramas: temporal superior, temporal inferior, nasal
+      superior y nasal inferior. Las <strong>arteriolas</strong> son más delgadas y de un rojo más claro; las
+      <strong>vénulas</strong>, más gruesas y oscuras. Todas rodean la <strong>mácula</strong> sin entrar en
+      su centro.</p>
+
+    <div class="photo-hero">
+      <img src="img/lat_44_9_fondo_de_ojo.png" alt="Esquema de un fondo de ojo normal del ojo derecho con disco óptico, mácula, arteriolas y vénulas"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>Fondo de ojo derecho.</strong> El disco está a la derecha, del lado
+        nasal, y la mácula a la izquierda, del lado temporal. Distingue arteriolas de vénulas por el grosor y
+        el color, y fíjate en que ningún vaso cruza el centro de la mácula. Latarjet y Ruiz Liard,
+        Fig. 44-9.</div>
+    </div>
+
+    <div class="clinical-box">
+      <h5>👁 Interfaz optométrica</h5>
+      <p>Si un émbolo —de una placa de la carótida o del corazón— tapa la <strong>arteria central de la
+        retina</strong>, como es prácticamente terminal, las capas internas se quedan sin sangre de golpe. La
+        persona pierde la visión de ese ojo en segundos y <strong>sin dolor</strong>. En el fondo de ojo la
+        retina se ve pálida e hinchada, y en el centro de la mácula queda una <strong>mancha rojo
+        cereza</strong>: ahí la retina es tan delgada que deja ver el color de la coroides, que sigue
+        irrigada. Es una urgencia. A veces avisa antes: una pérdida de visión de un ojo que dura unos
+        minutos y se recupera sola, la <strong>amaurosis fugaz</strong>. Quien la cuenta debe estudiarse las
+        carótidas, porque el siguiente émbolo puede ir al cerebro.</p>
+    </div>
+
+    <div class="check-question" data-question="q9s2">
+      <p class="question-text">9. ¿De qué arteria es rama la arteria oftálmica?</p>
+      <ul class="options">
+        <li data-letter="A">De la arteria basilar</li>
+        <li data-letter="B">De la carótida externa</li>
+        <li data-letter="C">De la arteria facial</li>
+        <li data-letter="D">De la arteria vertebral</li>
+        <li data-letter="E" data-correct="true">De la carótida interna</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: E.</strong> La oftálmica es la primera rama importante de la
+        carótida interna, y por eso un émbolo que sube por esa carótida puede terminar en el ojo. La facial,
+        rama de la externa, solo se une con una rama pequeña de la oftálmica cerca del ángulo del ojo. Las
+        vertebrales y la basilar irrigan el tronco, el cerebelo y los lóbulos occipitales.</div>
+    </div>
+
+    <div class="check-question" data-question="q10s2">
+      <p class="question-text">10. ¿Qué arterias nutren la coroides, de la que dependen los conos y los
+        bastones?</p>
+      <ul class="options">
+        <li data-letter="A">La vena central de la retina</li>
+        <li data-letter="B">La arteria central de la retina</li>
+        <li data-letter="C">La arteria lagrimal</li>
+        <li data-letter="D">La arteria angular</li>
+        <li data-letter="E" data-correct="true">Las ciliares posteriores cortas</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: E.</strong> Las ciliares posteriores cortas atraviesan la
+        esclera y forman la coroides, que nutre las capas externas de la retina, donde están los
+        fotorreceptores. La central de la retina irriga las capas internas: es el otro proveedor, y el
+        distractor más fuerte. La vena central no nutre nada: drena.</div>
+    </div>
+
+    <div class="check-question" data-question="q11s2">
+      <p class="question-text">11. Al mirar un fondo de ojo, ¿de dónde salen las arteriolas de la retina?</p>
+      <ul class="options">
+        <li data-letter="A" data-correct="true">Del disco óptico</li>
+        <li data-letter="B">Del centro de la mácula</li>
+        <li data-letter="C">De la ora serrata</li>
+        <li data-letter="D">Del cuerpo ciliar</li>
+        <li data-letter="E">Del borde de la córnea</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: A.</strong> La arteria central de la retina viaja dentro del
+        nervio óptico y aparece en el disco, desde donde se reparte hacia la periferia, hasta la ora serrata.
+        El centro de la mácula es precisamente la zona que los vasos rodean sin cruzar.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 05 ─────────── -->
+<section class="station" id="s2e5">
+  <div class="station-header">
+    <div class="station-number">05</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Drenaje venoso</div>
+      <h2>El regreso: venas del ojo y seno cavernoso</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>La sangre de la retina se recoge en la <strong>vena central de la retina</strong>, que acompaña a la
+      arteria dentro del nervio óptico y va a drenar en la <strong>vena oftálmica</strong>. Hay dos venas
+      oftálmicas, superior e inferior, y las dos llevan la sangre de la órbita hacia atrás, al <strong>seno
+      cavernoso</strong>.</p>
+
+    <h3>Los senos de la duramadre, otra vez</h3>
+    <p>En la clase 8 viste que la duramadre forma conductos venosos, los senos. Recogen la sangre del
+      encéfalo y del ojo y la llevan a la <strong>vena yugular interna</strong>. El <strong>seno
+      cavernoso</strong> está a cada lado del hueso esfenoides, junto a la silla turca, y tiene algo que lo
+      hace único: lo atraviesan la <strong>carótida interna</strong> y el <strong>nervio abducens
+      (VI)</strong>, y por su pared pasan el <strong>oculomotor (III)</strong>, el <strong>troclear
+      (IV)</strong> y las ramas <strong>oftálmica y maxilar del trigémino</strong>.</p>
+
+    <div class="recorrido">
+      <ol>
+        <li>Vena central de la retina → vena oftálmica</li>
+        <li>Vena oftálmica → seno cavernoso</li>
+        <li>Seno cavernoso → senos petrosos → vena yugular interna</li>
+        <li>Yugular interna → vena braquiocefálica → vena cava superior → aurícula derecha</li>
+      </ol>
+    </div>
+
+    <div class="photo-grid">
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_21_24_venas_cabeza_cuello.png" alt="Principales venas de la cabeza y del cuello, con los senos venosos, la vena oftálmica y las yugulares"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>Todo baja a las yugulares.</strong> Busca la vena oftálmica y
+          síguela hasta el seno cavernoso. Tortora, Fig. 21.24.</div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/lat_25_12_drenaje_venoso_orbita.png" alt="Drenaje venoso de la órbita: venas oftálmicas, seno cavernoso, vena angular, plexo pterigoideo y vena facial"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>La órbita conectada por delante y por detrás.</strong> Hacia atrás,
+          las oftálmicas van al seno cavernoso; hacia adelante, se unen con la vena angular y la facial.
+          Latarjet y Ruiz Liard, Fig. 25-12.</div>
+      </div>
+    </div>
+
+    <div class="pearl">
+      <p><strong>Un puente sin válvulas.</strong> Las venas oftálmicas se comunican por delante con la
+        <strong>vena angular</strong>, rama de la facial, que drena la piel de la nariz y del labio superior.
+        Estas venas de la cabeza no tienen válvulas que impidan el reflujo, así que la sangre —y una
+        infección— puede ir en cualquier dirección: desde la cara, por la órbita, hasta el seno cavernoso.</p>
+    </div>
+
+    <div class="clinical-box">
+      <h5>👁 Interfaz optométrica</h5>
+      <p><strong>Oclusión de la vena central de la retina.</strong> Si la vena se tapa, la sangre sigue
+        entrando por la arteria pero no puede salir. Las venas se ven dilatadas y tortuosas, y aparecen
+        hemorragias en toda la retina. La pérdida de visión suele ser menos brusca que en la oclusión
+        arterial. Se asocia con la hipertensión, la diabetes, el glaucoma y la edad.<br><br>
+        <strong>Trombosis del seno cavernoso.</strong> Una infección de la piel de la cara puede llegar al
+        seno cavernoso por el puente venoso. Como por ahí pasan el III, el IV, el VI y el V₁, el cuadro se ve
+        en el ojo: globo empujado hacia adelante, párpados hinchados, dolor y movimientos oculares
+        limitados. Es una urgencia.</p>
+    </div>
+
+    <div class="check-question" data-question="q12s2">
+      <p class="question-text">12. ¿En qué estructura drenan las venas oftálmicas?</p>
+      <ul class="options">
+        <li data-letter="A">Directamente en la aurícula derecha</li>
+        <li data-letter="B">En el seno sagital superior</li>
+        <li data-letter="C">Directamente en la vena cava superior</li>
+        <li data-letter="D">En la arteria carótida interna</li>
+        <li data-letter="E" data-correct="true">En el seno cavernoso</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: E.</strong> Las venas oftálmicas van hacia atrás, al seno
+        cavernoso, y de allí la sangre sigue por los senos petrosos hasta la yugular interna. Llega a la cava
+        superior y a la aurícula derecha, pero no directamente. Que la carótida interna atraviese el mismo
+        seno no la convierte en destino de una vena.</div>
+    </div>
+
+    <div class="check-question" data-question="q13s2">
+      <p class="question-text">13. ¿Por qué una infección de la piel de la nariz puede llegar al seno
+        cavernoso?</p>
+      <ul class="options">
+        <li data-letter="A">El nervio óptico transporta los microbios</li>
+        <li data-letter="B">La arteria facial desemboca en el seno cavernoso</li>
+        <li data-letter="C" data-correct="true">Sus venas se comunican con las oftálmicas y no tienen válvulas</li>
+        <li data-letter="D">El líquido cefalorraquídeo drena hacia la nariz</li>
+        <li data-letter="E">Los capilares de la piel son sinusoides</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: C.</strong> La vena angular, que drena esa zona, se comunica
+        con las venas oftálmicas, y éstas desembocan en el seno cavernoso. Sin válvulas que marquen la
+        dirección, el contenido puede viajar hacia atrás. Las arterias no desembocan en senos venosos, y los
+        nervios no son vías de drenaje.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 06 ─────────── -->
+<section class="station" id="s2e6">
+  <div class="station-header">
+    <div class="station-number">06</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Circulación menor</div>
+      <h2>La circulación pulmonar y el mapa completo</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>El circuito pulmonar es corto. Del ventrículo derecho sale el <strong>tronco pulmonar</strong>, que se
+      divide en las <strong>arterias pulmonares derecha e izquierda</strong>. En los capilares que rodean
+      los alvéolos la sangre suelta dióxido de carbono y toma oxígeno, y vuelve por las <strong>cuatro venas
+      pulmonares</strong> a la aurícula izquierda.</p>
+
+    <p>Es un circuito de <strong>baja presión</strong>: el ventrículo derecho alcanza unos 25 mm Hg, frente a
+      los 120 del izquierdo. Los pulmones están cerca y sus vasos ofrecen poca resistencia, y además la
+      presión baja evita que el líquido se salga de los capilares hacia los alvéolos.</p>
+
+    <div class="photo-hero">
+      <img src="img/fig_21_29_circulacion_pulmonar.png" alt="Circulación pulmonar: tronco pulmonar, arterias pulmonares, capilares alveolares y venas pulmonares"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>Arterias en azul, venas en rojo.</strong> Aquí los colores se
+        invierten respecto al resto del cuerpo, y el esquema de abajo lo resume en cuatro flechas. Tortora,
+        Fig. 21.29.</div>
+    </div>
+
+    <h3>El mapa completo</h3>
+    <p>Para cerrar, vuelve a mirar todo junto. Además de la sistémica y la pulmonar, verás un tercer circuito
+      en el abdomen, la <strong>circulación portal hepática</strong>: la sangre del intestino pasa por el
+      hígado antes de volver al corazón. Hoy solo la nombramos.</p>
+
+    <div class="photo-hero">
+      <img src="img/fig_21_17_vias_circulatorias.png" alt="Vías circulatorias: circulación sistémica, pulmonar y portal hepática"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>Todas las vías en una lámina.</strong> Arriba, los capilares de la
+        cabeza, donde está el ojo; en el centro, los pulmones y el corazón; abajo, el hígado y los miembros.
+        Tortora, Fig. 21.17.</div>
+    </div>
+
+    <div class="check-question" data-question="q14s2">
+      <p class="question-text">14. <em>In English.</em> After birth, which are the only arteries that carry
+        deoxygenated blood?</p>
+      <ul class="options">
+        <li data-letter="A" data-correct="true">The pulmonary arteries</li>
+        <li data-letter="B">The coronary arteries</li>
+        <li data-letter="C">The internal carotid arteries</li>
+        <li data-letter="D">The ophthalmic arteries</li>
+        <li data-letter="E">The vertebral arteries</li>
+      </ul>
+      <div class="feedback"><strong>Correct: A.</strong> The pulmonary arteries leave the right ventricle
+        and take oxygen-poor blood to the lungs. An artery is defined by its direction —away from the
+        heart— not by the oxygen it carries. All the others carry oxygen-rich blood from the aorta.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 07 ─────────── -->
+<section class="station" id="s2e7">
+  <div class="station-header">
+    <div class="station-number">07</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Vocabulario</div>
+      <h2>Términos TA2 de la sesión</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Toca la tarjeta para voltearla.</p>
+
+    <div class="flip-grid">
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Túnica media</span><span class="term-en">Tunica media</span></div>
+        <div class="flip-back"><p class="term-def">La capa de músculo liso de la pared vascular; estrecha o ensancha el vaso.</p><p class="term-opto">👁 Se engruesa en la hipertensión: lo ves como arteriolas retinianas estrechas.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Capilar</span><span class="term-en">Vas capillare</span></div>
+        <div class="flip-back"><p class="term-def">Vaso de una sola capa de endotelio donde ocurre el intercambio.</p><p class="term-opto">👁 Continuo en la retina, fenestrado en los procesos ciliares.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Arco de la aorta</span><span class="term-en">Arcus aortae</span></div>
+        <div class="flip-back"><p class="term-def">Tramo curvo de la aorta del que salen las arterias de la cabeza y los miembros superiores.</p><p class="term-opto">👁 Sus barorreceptores informan por el vago.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Tronco braquiocefálico</span><span class="term-en">Truncus brachiocephalicus</span></div>
+        <div class="flip-back"><p class="term-def">Primera rama del arco; da la subclavia y la carótida común derechas.</p><p class="term-opto">👁 Solo existe del lado derecho.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Arteria carótida interna</span><span class="term-en">Arteria carotis interna</span></div>
+        <div class="flip-back"><p class="term-def">Rama de la carótida común que entra al cráneo, cruza el seno cavernoso e irriga el cerebro.</p><p class="term-opto">👁 De ella nace la oftálmica.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Seno carotídeo</span><span class="term-en">Sinus caroticus</span></div>
+        <div class="flip-back"><p class="term-def">Dilatación del inicio de la carótida interna con barorreceptores.</p><p class="term-opto">👁 Informa por el glosofaríngeo (IX).</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Arteria vertebral</span><span class="term-en">Arteria vertebralis</span></div>
+        <div class="flip-back"><p class="term-def">Rama de la subclavia que sube por las vértebras cervicales y forma la basilar.</p><p class="term-opto">👁 Su territorio incluye el lóbulo occipital y el área visual.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Círculo arterial cerebral</span><span class="term-en">Circulus arteriosus cerebri</span></div>
+        <div class="flip-back"><p class="term-def">Anillo arterial en la base del cerebro que une las carótidas internas con la basilar.</p><p class="term-opto">👁 Rodea el quiasma; su comunicante posterior va junto al III.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Arteria oftálmica</span><span class="term-en">Arteria ophthalmica</span></div>
+        <div class="flip-back"><p class="term-def">Primera rama importante de la carótida interna; entra a la órbita por el conducto óptico.</p><p class="term-opto">👁 Toda la irrigación del ojo sale de ella.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Arteria central de la retina</span><span class="term-en">Arteria centralis retinae</span></div>
+        <div class="flip-back"><p class="term-def">Viaja dentro del nervio óptico, sale en el disco e irriga las capas internas de la retina.</p><p class="term-opto">👁 Su oclusión: pérdida súbita e indolora, mancha rojo cereza.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Arterias ciliares posteriores cortas</span><span class="term-en">Arteriae ciliares posteriores breves</span></div>
+        <div class="flip-back"><p class="term-def">Atraviesan la esclera junto al nervio óptico y forman la coroides.</p><p class="term-opto">👁 Nutren los fotorreceptores.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Vena central de la retina</span><span class="term-en">Vena centralis retinae</span></div>
+        <div class="flip-back"><p class="term-def">Recoge la sangre de la retina, viaja en el nervio óptico y drena en la vena oftálmica.</p><p class="term-opto">👁 Su oclusión: venas tortuosas y hemorragias en toda la retina.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Vena oftálmica superior</span><span class="term-en">Vena ophthalmica superior</span></div>
+        <div class="flip-back"><p class="term-def">Drena la órbita hacia el seno cavernoso y se comunica con la vena angular.</p><p class="term-opto">👁 El puente sin válvulas entre la cara y el cráneo.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Seno cavernoso</span><span class="term-en">Sinus cavernosus</span></div>
+        <div class="flip-back"><p class="term-def">Seno venoso de la duramadre a cada lado del esfenoides.</p><p class="term-opto">👁 Lo cruzan la carótida interna y el VI; en su pared, III, IV, V₁ y V₂.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Vena yugular interna</span><span class="term-en">Vena jugularis interna</span></div>
+        <div class="flip-back"><p class="term-def">Recibe la sangre de los senos de la duramadre y la lleva hacia el corazón.</p><p class="term-opto">👁 Por ella baja la sangre que salió del ojo.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Venas pulmonares</span><span class="term-en">Venae pulmonales</span></div>
+        <div class="flip-back"><p class="term-def">Cuatro venas que llevan sangre oxigenada de los pulmones a la aurícula izquierda.</p><p class="term-opto">👁 Venas con sangre roja: la dirección manda.</p></div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 08 ─────────── -->
+<section class="station" id="s2e8">
+  <div class="station-header">
+    <div class="station-number">08</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Autoevaluación</div>
+      <h2>Comprueba lo que aprendiste</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Tres preguntas que juntan las dos sesiones.</p>
+
+    <div class="check-question" data-question="q15s2">
+      <p class="question-text">15. ¿Cuál es el camino correcto de la sangre desde el ventrículo izquierdo
+        hasta la retina?</p>
+      <ul class="options">
+        <li data-letter="A" data-correct="true">Aorta → carótida común → carótida interna → oftálmica → central de la retina</li>
+        <li data-letter="B">Aorta → carótida común → carótida externa → oftálmica → central de la retina</li>
+        <li data-letter="C">Tronco pulmonar → carótida común → carótida interna → oftálmica → central de la retina</li>
+        <li data-letter="D">Aorta → vertebral → basilar → oftálmica → central de la retina</li>
+        <li data-letter="E">Aorta → carótida común → carótida interna → central de la retina → oftálmica</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: A.</strong> El ventrículo izquierdo expulsa a la aorta; del
+        arco sale la carótida común, que da la interna; la interna da la oftálmica, y la oftálmica, la central
+        de la retina. La carótida externa se queda en la cara, el tronco pulmonar va a los pulmones y la
+        basilar irriga el tronco del encéfalo y la parte posterior del cerebro. En la última opción el orden
+        está invertido: la central de la retina es rama de la oftálmica, no al revés.</div>
+    </div>
+
+    <div class="check-question" data-question="q16s2">
+      <p class="question-text">16. Al ponerse de pie de golpe baja la presión que llega a la cabeza. ¿Qué
+        hace el reflejo barorreceptor?</p>
+      <ul class="options">
+        <li data-letter="A">Aumenta la actividad del vago: baja la frecuencia cardíaca</li>
+        <li data-letter="B" data-correct="true">Aumenta la actividad simpática: sube la frecuencia y contrae las arteriolas</li>
+        <li data-letter="C">Dilata las arteriolas para que llegue más sangre</li>
+        <li data-letter="D">Cierra las válvulas venosas de las piernas</li>
+        <li data-letter="E">Detiene el nodo sinoauricular unos segundos</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: B.</strong> Los barorreceptores del seno carotídeo y del arco
+        aórtico se estiran menos y avisan al bulbo, que responde con más simpático: más frecuencia, más
+        fuerza y vasoconstricción. Así sube la presión. Frenar el corazón o dilatar las arteriolas la bajaría
+        todavía más, y las válvulas venosas no las controla ningún reflejo.</div>
+    </div>
+
+    <div class="saber-box">
+      <strong>Pregunta tipo Saber Pro · Caso</strong>
+      <div class="check-question" style="margin-top:16px;border-color:var(--purple)" data-question="q17s2">
+        <p class="question-text">17. Una mujer de 67 años, hipertensa y con una placa en la carótida
+          derecha, consulta porque hace una hora dejó de ver por el ojo derecho de un momento a otro, sin
+          dolor. En el fondo de ojo la retina está pálida y en el centro de la mácula se ve una mancha rojo
+          cereza. ¿Qué vaso se obstruyó con mayor probabilidad?</p>
+        <ul class="options">
+        <li data-letter="A" data-correct="true">La arteria central de la retina</li>
+        <li data-letter="B">La vena central de la retina</li>
+        <li data-letter="C">Las arterias ciliares posteriores cortas</li>
+        <li data-letter="D">La arteria cerebral posterior</li>
+        <li data-letter="E">El seno cavernoso</li>
+        </ul>
+        <div class="feedback"><strong>Correcta: A.</strong> Pérdida súbita, indolora y de un solo ojo, con la
+          retina pálida, es la falta de sangre en las capas internas: la arteria central de la retina, una
+          arteria terminal. La mancha rojo cereza lo confirma, porque la coroides —irrigada por las
+          ciliares— sigue sana y se transparenta por la fóvea. Una oclusión venosa daría venas tortuosas y
+          hemorragias, y una lesión de la cerebral posterior afectaría la mitad del campo visual de los dos
+          ojos, no uno solo. La placa carotídea del mismo lado explica de dónde vino el émbolo.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 09 ─────────── -->
+<section class="station" id="s2e9">
+  <div class="station-header">
+    <div class="station-number">09</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Para cerrar</div>
+      <h2>Volvemos a las cinco preguntas</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Las mismas de esta mañana. Léelas otra vez y comprueba cuántas contestas ahora con seguridad.</p>
+
+    <div class="acorde">
+      <details>
+        <summary>1 · ¿Por qué el ventrículo izquierdo es más grueso, si expulsa lo mismo?</summary>
+        <p>Porque el volumen es igual pero el esfuerzo no. El ventrículo derecho manda su sangre a los
+          pulmones, un circuito corto y de poca resistencia, con unos 25 mm Hg. El izquierdo la manda a todo
+          el cuerpo, contra una resistencia mucho mayor, y alcanza unos 120 mm Hg. Más fuerza exige más
+          músculo.</p>
+      </details>
+      <details>
+        <summary>2 · ¿Hay arterias con sangre pobre en oxígeno?</summary>
+        <p>Sí: las <strong>arterias pulmonares</strong>. Llevan la sangre que volvió del cuerpo desde el
+          ventrículo derecho hasta los pulmones. Arteria es todo vaso que sale del corazón, y vena todo vaso
+          que llega; el color de los dibujos indica oxígeno, no tipo de vaso. Por eso las venas pulmonares
+          llevan sangre oxigenada.</p>
+      </details>
+      <details>
+        <summary>3 · ¿Qué suena en el lub-dub?</summary>
+        <p>El cierre de las válvulas. El «lub» es el cierre de las auriculoventriculares, tricúspide y mitral,
+          al empezar la contracción de los ventrículos. El «dub» es el cierre de las semilunares, aórtica y
+          pulmonar, cuando los ventrículos se relajan. Ni el músculo ni la sangre que corre producen esos dos
+          sonidos.</p>
+      </details>
+      <details>
+        <summary>4 · ¿Cómo deja ciego un ojo un problema del cuello?</summary>
+        <p>Por el camino que recorriste en la sesión 2. Una placa de aterosclerosis en la carótida suelta un
+          fragmento que sube por la <strong>carótida interna</strong>, entra en la <strong>oftálmica</strong> y
+          se atasca en la <strong>arteria central de la retina</strong>. Como esa arteria es prácticamente
+          terminal, las capas internas de la retina se quedan sin sangre de golpe. A veces el aviso llega antes,
+          como una pérdida de visión de pocos minutos: la amaurosis fugaz.</p>
+      </details>
+      <details>
+        <summary>5 · ¿Dónde se miran los vasos sin cortar nada?</summary>
+        <p>En la <strong>retina</strong>. Es el único lugar del cuerpo donde se pueden ver arteriolas y vénulas
+          directamente, y se miran con el oftalmoscopio en el examen del fondo de ojo. Por eso lo que ve un
+          optómetra —arteriolas estrechas, cruces arteriovenosos, hemorragias, vasos nuevos— informa del
+          estado de los vasos del riñón, del encéfalo y del corazón.</p>
+      </details>
+    </div>
+
+    <div class="pearl">
+      <p><strong>Lo que hay que llevarse de hoy.</strong> El corazón son dos bombas en serie, con cuatro
+        válvulas que obligan a la sangre a ir en un solo sentido, sus propias arterias y un marcapasos
+        eléctrico. De su lado izquierdo sale la aorta, y del arco suben las carótidas: la interna da la
+        oftálmica, y ésta la arteria central de la retina, delgada y sin desvíos. La sangre vuelve por las
+        venas oftálmicas al seno cavernoso. Por eso lo que le pasa al corazón y a las arterias de todo el
+        cuerpo —la aterosclerosis, la hipertensión, la diabetes— puede verse primero en un fondo de ojo.</p>
+    </div>
+  </div>
+</section>
+
+</div><!-- fin sesión 2 -->
+</div><!-- fin container -->
+
+<footer class="footer">
+  <p><strong>Morfología General · Optometría · Universidad de La Salle · 2026-II</strong></p>
+  <p>Clase 9 · Sistema circulatorio: el corazón, los vasos y el camino al ojo · Jueves 24 de septiembre de 2026</p>
+  <p>Fuentes: Tortora &amp; Derrickson, <em>Principios de Anatomía y Fisiología</em>, capítulos 20 y 21 ·
+     Latarjet &amp; Ruiz Liard, <em>Anatomía Humana</em>, tomo 1, capítulos 25 y 44</p>
+</footer>
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" aria-label="Cerrar">✕</button>
+  <img src="" alt="">
+  <div class="lb-caption"></div>
+</div>
+
+<script>
+function showTab(id,btn){
+  document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+document.querySelectorAll('.check-question').forEach(block=>{
+  const options=block.querySelectorAll('.options li');
+  const feedback=block.querySelector('.feedback');
+  const correctLetter=Array.from(options).find(o=>o.dataset.correct==='true')?.dataset.letter;
+  let answered=false;
+  options.forEach(opt=>{
+    opt.addEventListener('click',()=>{
+      if(answered)return;
+      answered=true;
+      options.forEach(o=>{
+        if(o.dataset.letter===correctLetter)o.classList.add('correct');
+        else if(o===opt&&opt.dataset.letter!==correctLetter)o.classList.add('incorrect');
+      });
+      feedback.classList.add('show');
+      feedback.scrollIntoView({behavior:'smooth',block:'nearest'});
+    });
+  });
+});
+document.querySelectorAll('.flip-card').forEach(card=>{
+  card.addEventListener('click',()=>card.classList.toggle('flipped'));
+});
+
+/* Lupa: las láminas del corazón, del arco aórtico y del fondo de ojo llevan rótulos que no
+   se leen a tamaño de columna. Ampliar no es un adorno. */
+(function(){
+  const lb=document.getElementById('lightbox');
+  const lbImg=lb.querySelector('img'), lbCap=lb.querySelector('.lb-caption');
+  document.querySelectorAll('.photo-card img, .photo-hero img').forEach(img=>{
+    img.addEventListener('click',()=>{
+      if(img.classList.contains('broken'))return;
+      lbImg.src=img.src;
+      lbImg.alt=img.alt||'';
+      const cap=img.closest('.photo-card,.photo-hero').querySelector('.photo-caption');
+      lbCap.textContent=cap?cap.textContent.trim().replace(/\s+/g,' ').slice(0,220):'';
+      lb.classList.add('open');
+    });
+  });
+  const cerrar=()=>{lb.classList.remove('open');lbImg.src='';};
+  lb.addEventListener('click',cerrar);
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')cerrar();});
+})();
+</script>
+
+</body>
+</html>
