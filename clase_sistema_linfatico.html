@@ -1,0 +1,2128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sistema linfático · Clase 10 · Morfología General 2026-II</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:#1a2a35;--text:#2c3e4f;--text-soft:#5a6b7a;--text-muted:#8a9aa8;
+  --parchment:#f8f3e8;--parchment-dark:#f0e8d4;--parchment-deep:#e8dcc0;
+  --bg-card:#fdfaf2;--border:#d4c8a8;--border-light:#e5dbc0;
+  --amber:#b8860b;--amber-dark:#8b6914;--amber-light:#d4a72c;--amber-pale:#f5e9c8;
+  --teal:#2a7a6e;--teal-dark:#1f5d54;
+  --rust:#a0522d;--rust-dark:#7d3f22;
+  --clinical:#b5413b;--clinical-dark:#8a2f2a;--clinical-bg:#fce8e6;
+  --blue:#1976a1;--blue-dark:#115670;--blue-bg:#e3f0f5;
+  --green:#2e7d32;--green-bg:#e8f5e9;
+  --purple:#6b4a8a;--purple-bg:#f0e8f4;--purple-dark:#4a2d6e;
+  --shadow-sm:0 2px 8px rgba(26,42,53,0.06);
+  --shadow-md:0 4px 20px rgba(26,42,53,0.10);
+  --font-display:'Playfair Display',Georgia,serif;
+  --font-body:'Source Serif 4',Georgia,serif;
+  --font-mono:'DM Mono','Courier New',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--parchment);color:var(--text);line-height:1.75;font-size:17px;
+  background-image:radial-gradient(at 12% 8%,rgba(184,134,11,.04) 0%,transparent 50%),radial-gradient(at 88% 92%,rgba(42,122,110,.04) 0%,transparent 50%);
+  background-attachment:fixed}
+
+/* HEADER */
+.header{text-align:center;padding:70px 30px 50px;border-bottom:3px double var(--amber);margin-bottom:50px;position:relative}
+.header::before{content:'';position:absolute;top:30px;left:50%;transform:translateX(-50%);width:80px;height:1px;background:var(--amber)}
+.eyebrow{font-family:var(--font-mono);font-size:.78rem;letter-spacing:.32em;text-transform:uppercase;color:var(--amber-dark);margin-bottom:14px}
+.header h1{font-family:var(--font-display);font-size:clamp(2.2rem,5vw,3.6rem);font-weight:900;color:var(--ink);line-height:1.05;margin-bottom:12px}
+.header h1 em{font-style:italic;font-weight:400;color:var(--amber-dark)}
+.header .subtitle{font-family:var(--font-body);font-style:italic;font-size:1.15rem;color:var(--text-soft);margin-bottom:22px;font-weight:300}
+.header .meta{font-family:var(--font-mono);font-size:.82rem;letter-spacing:.18em;color:var(--text-muted);text-transform:uppercase}
+
+/* TABS */
+.tab-bar{background:var(--bg-card);border:1px solid var(--border);border-radius:4px;padding:0;margin-bottom:50px;box-shadow:var(--shadow-sm);overflow:hidden;display:flex}
+.tab-btn{flex:1;padding:18px 24px;background:none;border:none;border-right:1px solid var(--border-light);font-family:var(--font-body);font-size:.95rem;color:var(--text-soft);cursor:pointer;transition:all .2s;text-align:center;line-height:1.4}
+.tab-btn:last-child{border-right:none}
+.tab-btn:hover{background:var(--parchment-dark);color:var(--ink)}
+.tab-btn.active{background:var(--amber-pale);color:var(--ink);font-weight:600;border-bottom:3px solid var(--amber)}
+.tab-btn .tab-date{display:block;font-family:var(--font-mono);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--amber-dark);margin-bottom:4px}
+.tab-pane{display:none}
+.tab-pane.active{display:block}
+
+/* CONTAINER */
+.container{max-width:1100px;margin:0 auto;padding:0 30px 80px}
+
+/* NAV INTERNA */
+.station-nav{background:var(--bg-card);border:1px solid var(--border);border-radius:4px;padding:24px 28px;margin-bottom:50px;box-shadow:var(--shadow-sm)}
+.station-nav h3{font-family:var(--font-mono);font-size:.75rem;letter-spacing:.25em;text-transform:uppercase;color:var(--amber-dark);margin-bottom:16px}
+.station-nav ol{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px 24px;counter-reset:stations}
+.station-nav li{counter-increment:stations;padding:4px 0}
+.station-nav li::before{content:counter(stations,decimal-leading-zero) '. ';font-family:var(--font-mono);color:var(--amber-dark);font-weight:500;margin-right:6px}
+.station-nav a{color:var(--text);text-decoration:none;font-style:italic;border-bottom:1px dotted var(--border);transition:color .2s,border-color .2s}
+.station-nav a:hover{color:var(--amber-dark);border-color:var(--amber-dark)}
+
+/* STATIONS */
+.station{margin-bottom:80px;scroll-margin-top:30px}
+.station-header{display:flex;align-items:baseline;gap:20px;margin-bottom:30px;padding-bottom:18px;border-bottom:2px solid var(--border)}
+.station-number{font-family:var(--font-display);font-style:italic;font-size:4rem;font-weight:400;color:var(--amber);line-height:1;flex-shrink:0}
+.station-titles{flex:1}
+.station-eyebrow{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--amber-dark);margin-bottom:6px}
+.station h2{font-family:var(--font-display);font-size:clamp(1.7rem,3.5vw,2.4rem);font-weight:700;color:var(--ink);line-height:1.15}
+
+/* CONTENT BLOCK */
+.content-block{background:var(--bg-card);border:1px solid var(--border-light);border-radius:4px;padding:28px 32px;margin-bottom:24px;box-shadow:var(--shadow-sm)}
+.content-block h3{font-family:var(--font-display);font-size:1.4rem;font-weight:700;color:var(--ink);margin-bottom:16px;padding-bottom:8px;border-bottom:1px dotted var(--border)}
+.content-block h4{font-family:var(--font-display);font-size:1.1rem;font-weight:700;color:var(--amber-dark);margin:20px 0 10px;font-style:italic}
+.content-block p{margin-bottom:14px}
+.content-block ul,.content-block ol{margin:12px 0 18px 24px}
+.content-block li{margin-bottom:8px;padding-left:6px}
+.content-block strong{color:var(--ink);font-weight:700}
+.content-block em.term{font-style:italic;color:var(--amber-dark);font-weight:600}
+
+/* TWO-COL / THREE-COL */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:20px 0}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin:20px 0}
+@media(max-width:900px){.two-col,.three-col{grid-template-columns:1fr}}
+.col-card{background:var(--parchment-dark);border-left:4px solid var(--amber);padding:18px 22px;border-radius:2px}
+.col-card.teal{border-color:var(--teal);background:#e8f0ee}
+.col-card.rust{border-color:var(--rust);background:#f3e8de}
+.col-card.blue{border-color:var(--blue);background:var(--blue-bg)}
+.col-card.green{border-color:var(--green);background:var(--green-bg)}
+.col-card h5{font-family:var(--font-display);font-weight:700;color:var(--ink);margin-bottom:8px;font-size:1.05rem}
+
+/* TABLE */
+table.data{width:100%;border-collapse:collapse;margin:18px 0;font-size:.95rem}
+table.data th{background:var(--amber-dark);color:var(--parchment);padding:10px 14px;text-align:left;font-family:var(--font-mono);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;font-weight:500}
+table.data td{padding:10px 14px;border-bottom:1px solid var(--border-light);vertical-align:top}
+table.data tr:nth-child(even) td{background:var(--parchment-dark)}
+table.data tr:hover td{background:var(--amber-pale)}
+
+/* CLINICAL BOX */
+.clinical-box{background:var(--clinical-bg);border-left:5px solid var(--clinical);padding:20px 26px;margin:22px 0;border-radius:2px;position:relative}
+.clinical-box::before{content:'👁 Interfaz optométrica';display:block;font-family:var(--font-mono);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--clinical-dark);margin-bottom:10px;font-weight:600}
+.clinical-box h5{font-family:var(--font-display);font-weight:700;color:var(--clinical-dark);font-size:1.1rem;margin-bottom:6px}
+
+/* PEARL */
+.pearl{background:var(--amber-pale);border:1px solid var(--amber-light);border-radius:2px;padding:16px 22px;margin:18px 0;font-style:italic;color:var(--text);position:relative;padding-left:50px}
+.pearl::before{content:'◆';position:absolute;left:18px;top:16px;color:var(--amber-dark);font-size:1.2rem;font-style:normal}
+
+/* SABER PRO */
+.saber-box{background:var(--purple-bg);border-left:5px solid var(--purple);padding:20px 26px;margin:22px 0;border-radius:2px}
+.saber-box::before{content:'★ Tipo Saber Pro';display:block;font-family:var(--font-mono);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--purple-dark);margin-bottom:10px;font-weight:600}
+
+/* FIGURE */
+.figure{margin:28px 0;background:var(--bg-card);border:1px solid var(--border-light);border-radius:4px;padding:20px;box-shadow:var(--shadow-sm);text-align:center}
+.figure svg{width:100%;max-width:800px;height:auto}
+.figure-caption{font-family:var(--font-mono);font-size:.78rem;color:var(--text-muted);margin-top:12px;letter-spacing:.06em;text-align:center}
+
+/* FLIP CARDS */
+.flip-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;margin:20px 0}
+.flip-card{height:160px;perspective:800px;cursor:pointer}
+.flip-inner{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform .5s ease}
+.flip-card:hover .flip-inner,.flip-card.flipped .flip-inner{transform:rotateY(180deg)}
+.flip-front,.flip-back{position:absolute;inset:0;border-radius:4px;padding:16px;backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.flip-front{background:var(--bg-card);border:2px solid var(--border)}
+.flip-back{background:var(--amber-pale);border:2px solid var(--amber);transform:rotateY(180deg)}
+.flip-front .term-label{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px}
+.flip-front .term-name{font-family:var(--font-display);font-size:1.15rem;font-weight:700;color:var(--ink);line-height:1.2}
+.flip-front .term-en{font-family:var(--font-mono);font-size:.75rem;color:var(--text-muted);margin-top:6px;font-style:italic}
+.flip-back .term-def{font-size:.88rem;color:var(--text);line-height:1.5;margin-bottom:8px}
+.flip-back .term-opto{font-family:var(--font-mono);font-size:.72rem;color:var(--clinical-dark);letter-spacing:.05em}
+
+/* CHECK QUESTION */
+.check-question{background:linear-gradient(180deg,#fdfaf2 0%,#f5ecd5 100%);border:2px dashed var(--amber);border-radius:4px;padding:28px 30px;margin:30px 0;position:relative}
+.check-question::before{content:'? Verificación';position:absolute;top:-12px;left:24px;background:var(--parchment);padding:2px 14px;font-family:var(--font-mono);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--amber-dark);font-weight:600}
+.check-question .question-text{font-family:var(--font-display);font-size:1.15rem;color:var(--ink);margin-bottom:18px;font-weight:400;font-style:italic}
+.options{list-style:none;margin:0}
+.options li{margin-bottom:10px;padding:12px 18px;background:var(--bg-card);border:1px solid var(--border);border-radius:3px;cursor:pointer;transition:all .2s;position:relative;padding-left:50px}
+.options li::before{content:attr(data-letter);position:absolute;left:16px;top:50%;transform:translateY(-50%);font-family:var(--font-mono);font-weight:500;color:var(--amber-dark)}
+.options li:hover{background:var(--amber-pale);border-color:var(--amber)}
+.options li.correct{background:#e8f5e8;border-color:#2e7d32;color:#1b5e20}
+.options li.correct::after{content:' ✓';color:#2e7d32;font-weight:700}
+.options li.incorrect{background:var(--clinical-bg);border-color:var(--clinical);color:var(--clinical-dark)}
+.options li.incorrect::after{content:' ✗';color:var(--clinical);font-weight:700}
+.feedback{display:none;margin-top:16px;padding:14px 18px;background:var(--bg-card);border-left:4px solid var(--amber);border-radius:2px;font-size:.96rem}
+.feedback.show{display:block}
+.feedback strong{color:var(--amber-dark)}
+
+/* PHOTO */
+.photo-grid{display:grid;gap:20px;margin:24px 0}
+@media(min-width:640px){.photo-grid.cols-2{grid-template-columns:1fr 1fr}.photo-grid.cols-3{grid-template-columns:1fr 1fr 1fr}}
+.photo-card{background:var(--bg-card);border:1px solid var(--border-light);border-radius:4px;padding:14px;box-shadow:var(--shadow-sm);transition:box-shadow .2s}
+.photo-card:hover{box-shadow:var(--shadow-md)}
+.photo-card .photo-frame{position:relative;background:repeating-linear-gradient(45deg,var(--parchment-dark) 0,var(--parchment-dark) 10px,var(--parchment-deep) 10px,var(--parchment-deep) 20px);border-radius:3px;overflow:hidden;min-height:200px;display:flex;align-items:center;justify-content:center}
+.photo-card img{display:block;width:100%;height:auto;border-radius:3px;cursor:zoom-in}
+.photo-card img.broken{display:none}
+.photo-card .photo-missing{display:none;font-family:var(--font-mono);font-size:.75rem;color:var(--text-muted);text-align:center;padding:40px 20px;letter-spacing:.08em;text-transform:uppercase}
+.photo-card img.broken+.photo-missing{display:block}
+.photo-card .photo-missing::before{content:'⏳ ';margin-right:4px}
+.photo-card .photo-caption{font-family:var(--font-body);font-size:.92rem;color:var(--text);margin-top:12px;line-height:1.5}
+.photo-card .photo-caption strong{font-family:var(--font-display);color:var(--ink);display:block;margin-bottom:4px;font-weight:700;font-size:.98rem}
+.photo-card .photo-credit{font-family:var(--font-mono);font-size:.7rem;color:var(--text-muted);margin-top:8px;letter-spacing:.06em;text-transform:uppercase}
+.photo-hero{background:var(--bg-card);border:1px solid var(--border-light);border-radius:4px;padding:18px;margin:24px 0;box-shadow:var(--shadow-sm);text-align:center}
+.photo-hero img{display:block;width:100%;max-width:720px;height:auto;margin:0 auto;border-radius:3px;cursor:zoom-in}
+.photo-hero img.broken{display:none}
+.photo-hero .photo-missing{display:none;font-family:var(--font-mono);font-size:.78rem;color:var(--text-muted);padding:60px 20px;letter-spacing:.1em;text-transform:uppercase}
+.photo-hero img.broken+.photo-missing{display:block}
+.photo-hero .photo-missing::before{content:'⏳ ';margin-right:4px}
+.photo-hero .photo-caption{font-family:var(--font-body);font-size:.92rem;color:var(--text);margin-top:14px;max-width:640px;margin-left:auto;margin-right:auto}
+.photo-hero .photo-caption strong{font-family:var(--font-display);color:var(--ink);font-weight:700}
+
+/* LIGHTBOX */
+.lightbox{display:none;position:fixed;inset:0;background:rgba(26,42,53,.92);z-index:9999;align-items:center;justify-content:center;padding:30px;cursor:zoom-out}
+.lightbox.open{display:flex}
+.lightbox img{max-width:95vw;max-height:90vh;border-radius:4px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.lightbox .lb-caption{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);color:var(--parchment);font-family:var(--font-mono);font-size:.82rem;background:rgba(26,42,53,.7);padding:8px 16px;border-radius:2px;max-width:90vw;text-align:center}
+.lightbox .lb-close{position:absolute;top:20px;right:30px;background:none;border:2px solid var(--parchment);color:var(--parchment);width:44px;height:44px;border-radius:50%;font-size:1.3rem;cursor:pointer;font-family:var(--font-mono)}
+.lightbox .lb-close:hover{background:rgba(255,255,255,.1)}
+
+/* FOOTER */
+.footer{margin-top:80px;padding:30px;text-align:center;border-top:3px double var(--amber);font-family:var(--font-mono);font-size:.78rem;color:var(--text-muted);letter-spacing:.12em}
+/* ACORDEONES — <details>/<summary> nativos: se despliegan sin JavaScript,
+   así que funcionan aunque el archivo se abra desde el disco o se imprima. */
+.acorde{background:var(--bg-card);border:1px solid var(--border-light);border-left:4px solid var(--teal);
+  border-radius:3px;margin:10px 0;overflow:hidden}
+.acorde > summary{cursor:pointer;padding:13px 18px;font-family:var(--font-display);font-weight:700;
+  color:var(--ink);font-size:1rem;list-style:none;display:flex;align-items:center;gap:10px;
+  background:var(--parchment-dark);transition:background .15s}
+.acorde > summary:hover{background:var(--amber-pale)}
+.acorde > summary::-webkit-details-marker{display:none}
+.acorde > summary::before{content:'+';font-family:var(--font-mono);font-size:1.15rem;color:var(--teal);
+  font-weight:400;width:16px;flex-shrink:0;text-align:center}
+.acorde[open] > summary::before{content:'−'}
+.acorde[open] > summary{border-bottom:1px solid var(--border-light)}
+.acorde > summary .pista{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);
+  font-weight:400;letter-spacing:.06em;margin-left:auto;text-transform:uppercase}
+.acorde .cuerpo{padding:16px 18px 18px}
+.acorde .cuerpo > *:last-child{margin-bottom:0}
+.acorde.rust{border-left-color:var(--rust)} .acorde.amber{border-left-color:var(--amber)}
+.acorde.blue{border-left-color:var(--blue)} .acorde.purple{border-left-color:var(--purple)}
+@media print{.acorde .cuerpo{display:block!important}.acorde > summary::before{content:''}}
+
+/* Ficha de tejido: la imagen del cuadro de Tortora más su texto */
+.ficha{margin:22px 0}
+.ficha > h4{font-family:var(--font-display);font-size:1.12rem;color:var(--ink);font-weight:700;
+  margin-bottom:4px;padding-bottom:5px;border-bottom:2px solid var(--amber-light)}
+.ficha .datos{display:grid;grid-template-columns:auto 1fr;gap:5px 14px;margin:10px 0 0;font-size:.93rem}
+.ficha .datos dt{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--amber-dark);padding-top:3px;font-weight:500}
+.ficha .datos dd{margin:0;color:var(--text)}
+.ficha .datos dd b{color:var(--ink)}
+@media(max-width:640px){.ficha .datos{grid-template-columns:1fr;gap:2px}
+  .ficha .datos dd{margin-bottom:8px}}
+
+@media print{body{background:white;font-size:11pt}.tab-bar{display:none}}
+
+/* ─── Añadidos de la clase 6 ─── */
+
+/* Fichas de hueso: nombre, cuántos son y qué aporta a la órbita */
+.huesos-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:12px;margin:18px 0}
+.hueso{background:var(--parchment-dark);border:1px solid var(--border-light);border-left:4px solid var(--teal);
+  border-radius:3px;padding:12px 15px}
+.hueso.orb{border-left-color:var(--clinical);background:#fbeeec}
+.hueso .nom{font-family:var(--font-display);font-weight:700;color:var(--ink);font-size:1.02rem}
+.hueso .par{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--text-muted);display:block;margin-bottom:5px}
+.hueso .que{font-size:.87rem;color:var(--text-soft);line-height:1.45;margin-top:4px}
+.hueso .marca{display:inline-block;font-family:var(--font-mono);font-size:.62rem;letter-spacing:.1em;
+  text-transform:uppercase;background:var(--clinical);color:#fff;padding:1px 7px;border-radius:9px;margin-top:7px}
+
+/* Puntos craneométricos: cada punto con su traducción de campo */
+.puntos{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;margin:16px 0}
+.punto{background:var(--bg-card);border:1px solid var(--border-light);border-radius:3px;padding:11px 14px;font-size:.9rem}
+.punto b{font-family:var(--font-display);color:var(--amber-dark);font-size:1rem;display:block}
+.punto.clave{background:var(--amber-pale);border-color:var(--amber-light)}
+
+/* Recorrido: una cadena de pasos con flecha, para el drenaje de la lágrima */
+.recorrido{display:flex;flex-wrap:wrap;align-items:stretch;gap:0;margin:20px 0;font-size:.86rem}
+.recorrido .paso{background:var(--blue-bg);border:1px solid var(--blue);color:var(--blue-dark);
+  padding:9px 14px;border-radius:3px;display:flex;align-items:center;text-align:center;line-height:1.35}
+.recorrido .flecha{display:flex;align-items:center;color:var(--blue);padding:0 8px;font-size:1.15rem}
+@media(max-width:720px){.recorrido{flex-direction:column}
+  .recorrido .flecha{padding:3px 0;transform:rotate(90deg)}}
+
+/* Aviso de que un tema se retoma en otra clase, para no invadir el temario */
+.adelanto{background:var(--parchment-dark);border:1px dashed var(--teal);border-radius:3px;
+  padding:14px 20px;margin:20px 0;font-size:.93rem;color:var(--text-soft)}
+.adelanto::before{content:'→ Se retoma más adelante';display:block;font-family:var(--font-mono);
+  font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--teal-dark);
+  margin-bottom:7px;font-weight:600}
+.adelanto strong{color:var(--ink)}
+</style>
+<body>
+
+<header class="header">
+  <div class="eyebrow">Clase 10 · Morfología General 2026-II</div>
+  <h1>Sistema linfático: el líquido que vuelve y <em>el ojo que no drena</em></h1>
+  <p class="subtitle">Tres litros al día que la sangre no sabe recuperar, seiscientos filtros repartidos por el cuerpo, y un órgano que quedó fuera de la red a propósito</p>
+  <div class="meta">Dr. Jorge Bogoya &middot; Universidad de La Salle &middot; Optometría &middot; Primer semestre</div>
+</header>
+
+<div class="container">
+
+<div class="tab-bar" role="tablist">
+  <button class="tab-btn active" role="tab" onclick="showTab('s1',this)">
+    <span class="tab-date">Jue. 1 oct · 09:00–11:00</span>
+    Sesión 1 · La red y sus filtros
+  </button>
+  <button class="tab-btn" role="tab" onclick="showTab('s2',this)">
+    <span class="tab-date">Jue. 1 oct · 11:00–13:00</span>
+    Sesión 2 · Los órganos y el ojo
+  </button>
+</div>
+
+<!-- ═══════════════════════ SESIÓN 1 ═══════════════════════ -->
+<div class="tab-pane active" id="s1">
+<nav class="station-nav">
+  <h3>Contenido · Sesión 1</h3>
+  <ol>
+    <li><a href="#s1e0">Para empezar: cinco preguntas</a></li>
+    <li><a href="#s1e1">Por qué existe un segundo sistema de vasos</a></li>
+    <li><a href="#s1e2">Cómo empieza: los capilares linfáticos</a></li>
+    <li><a href="#s1e3">El camino de vuelta: vasos, troncos, conductos</a></li>
+    <li><a href="#s1e4">El ganglio linfático por dentro</a></li>
+    <li><a href="#s1e5">Los ganglios de la cabeza y el cuello</a></li>
+    <li><a href="#s1e6">Términos TA2 de la sesión</a></li>
+    <li><a href="#s1e7">Comprueba lo que aprendiste</a></li>
+  </ol>
+</nav>
+
+<!-- ─────────── 00 ─────────── -->
+<section class="station" id="s1e0">
+  <div class="station-header">
+    <div class="station-number">00</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Para empezar · Conversación</div>
+      <h2>Cinco preguntas antes de abrir el libro</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Responde con lo que ya sabes, sin buscar. No hay nota. Al final de la segunda sesión volvemos
+      sobre las cinco: la última solo se puede contestar entera cuando lleguemos al ojo.</p>
+
+    <div class="two-col">
+      <div class="col-card">
+        <h5>1 · El dedo hinchado</h5>
+        <p>Te haces un corte pequeño en un dedo y al rato está hinchado. Ese líquido salió de alguna
+          parte y tendrá que irse por alguna parte. ¿De dónde sale y por dónde se va?</p>
+      </div>
+      <div class="col-card">
+        <h5>2 · Un circuito que no cierra</h5>
+        <p>El sistema circulatorio es un circuito cerrado: la sangre sale del corazón y vuelve al
+          corazón. El linfático no: empieza en fondo de saco, como una calle sin salida, y desemboca en
+          una vena. ¿Por qué esa diferencia?</p>
+      </div>
+      <div class="col-card">
+        <h5>3 · Por qué le tocan el cuello</h5>
+        <p>Cuando alguien llega con fiebre y dolor de garganta, el médico le palpa el cuello antes que
+          nada. ¿Qué está buscando, y por qué ahí?</p>
+      </div>
+      <div class="col-card amber">
+        <h5>4 · El brazo que no desinflama</h5>
+        <p>Después de una cirugía de mama, a algunas mujeres se les hincha el brazo de ese lado y ya no
+          vuelve a la normalidad. ¿Qué se quitó en la cirugía para que eso pase?</p>
+      </div>
+      <div class="col-card teal">
+        <h5>5 · La córnea que nadie rechaza</h5>
+        <p>Un trasplante de riñón necesita un donante compatible y medicamentos de por vida. Un
+          trasplante de córnea se hace sin buscar compatibilidad y casi nunca se rechaza. ¿Qué tiene la
+          córnea que no tiene el riñón? <em>(Esta queda abierta hasta la sesión 2.)</em></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 01 ─────────── -->
+<section class="station" id="s1e1">
+  <div class="station-header">
+    <div class="station-number">01</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">El problema que resuelve</div>
+      <h2>Por qué existe un segundo sistema de vasos</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <h3>Las cuentas no cuadran</h3>
+    <p>En la clase pasada vimos el capilar sanguíneo. En su extremo arterial la presión empuja líquido
+      hacia fuera; en el extremo venoso, las proteínas del plasma lo vuelven a llamar hacia dentro. Pero
+      las dos cantidades <strong>no son iguales</strong>: cada día salen de los capilares unos
+      <strong>20 litros</strong> y regresan por las vénulas unos <strong>17</strong>.</p>
+
+    <div class="pearl">
+      <p><strong>Sobran tres litros al día.</strong> Si esos tres litros se quedaran en los tejidos, en
+        pocas horas habría edema generalizado y el volumen de sangre circulante caería a niveles
+        incompatibles con la vida. El sistema linfático es el que los devuelve. No es un sistema
+        accesorio: es el que cierra las cuentas del líquido corporal.</p>
+    </div>
+
+    <h3>Tres funciones, no una</h3>
+    <div class="three-col">
+      <div class="col-card">
+        <h5>1 · Drenaje</h5>
+        <p>Devuelve a la sangre el líquido y, sobre todo, <strong>las proteínas</strong> que se escaparon
+          del plasma. Las proteínas son demasiado grandes para volver a entrar en el capilar sanguíneo:
+          solo pueden regresar por la vía linfática.</p>
+      </div>
+      <div class="col-card amber">
+        <h5>2 · Transporte de grasas</h5>
+        <p>Las grasas de la dieta no pasan a los capilares sanguíneos del intestino. Entran en unos
+          capilares linfáticos especiales, los <strong>quilíferos</strong>, y forman un líquido blanco
+          lechoso: el <strong>quilo</strong>.</p>
+      </div>
+      <div class="col-card teal">
+        <h5>3 · Defensa</h5>
+        <p>Toda la linfa pasa obligatoriamente por al menos un <strong>ganglio</strong> antes de volver a
+          la sangre. El ganglio es un filtro donde lo que viene del tejido queda expuesto a las células
+          de defensa.</p>
+      </div>
+    </div>
+
+    <div class="photo-hero">
+      <img src="img/fig_22_4_linfatico_cardiovascular.png"
+           alt="Esquema de la relación entre el sistema linfático y el sistema cardiovascular: el líquido sale de los capilares sanguíneos, entra en los capilares linfáticos y vuelve a la vena subclavia"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>El linfático es un desvío, no un circuito.</strong> Sigue el
+        verde: nace en los tejidos, atraviesa ganglios y desemboca en la vena subclavia. Nunca vuelve al
+        punto de partida. Tortora, Fig. 22.4.</div>
+    </div>
+
+    <p>Fíjate en la forma del dibujo. El circuito sanguíneo es un anillo cerrado; el linfático es un
+      <strong>ramal de una sola dirección</strong> que arranca en el tejido y termina en una vena grande,
+      cerca del corazón. Esa asimetría explica todo lo demás: si no es un anillo, no hace falta una bomba
+      central, pero sí hacen falta muchas válvulas.</p>
+  </div>
+</section>
+
+<!-- ─────────── 02 ─────────── -->
+<section class="station" id="s1e2">
+  <div class="station-header">
+    <div class="station-number">02</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">El origen</div>
+      <h2>Cómo empieza: los capilares linfáticos</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>El capilar linfático empieza <strong>en fondo ciego</strong>, cerrado por un extremo, entre las
+      células. Es más ancho que el sanguíneo y de calibre irregular. Su pared es un endotelio muy fino,
+      sin membrana basal continua.</p>
+
+    <div class="photo-hero">
+      <img src="img/fig_22_2_capilares_linfaticos.png"
+           alt="Capilares linfáticos: relación con los capilares sanguíneos y detalle del endotelio con filamentos de fijación y brechas entre células"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>La puerta de una sola dirección.</strong> A la derecha, el
+        detalle: las células endoteliales se <em>solapan</em> como tejas. Cuando el líquido intersticial
+        empuja desde fuera, las levanta y entra; cuando la linfa empuja desde dentro, las cierra contra
+        la de al lado y no puede salir. Tortora, Fig. 22.2.</div>
+    </div>
+
+    <h3>Dos detalles que valen por todo el dibujo</h3>
+    <div class="two-col">
+      <div class="col-card">
+        <h5>El solapamiento es la válvula</h5>
+        <p>No hay una válvula fabricada aparte: son las propias células endoteliales, montadas unas sobre
+          otras, las que dejan entrar y no dejan salir. La válvula <em>es</em> la arquitectura.</p>
+      </div>
+      <div class="col-card">
+        <h5>Los filamentos de fijación</h5>
+        <p>Unos filamentos anclan el endotelio al tejido de alrededor. Cuando el tejido se hincha, los
+          filamentos <strong>tiran</strong> y abren las brechas. Es decir: el capilar linfático se abre
+          más justo cuando más se le necesita.</p>
+      </div>
+    </div>
+
+    <h3>Dónde no hay capilares linfáticos</h3>
+    <p>Esta lista importa más que la de dónde sí los hay, y una de sus entradas es la razón de ser de
+      media sesión 2:</p>
+    <ul>
+      <li>Los <strong>tejidos avasculares</strong>: epidermis, cartílago, <strong>córnea</strong> y
+        cristalino.</li>
+      <li>El <strong>sistema nervioso central</strong> —con un matiz reciente que veremos mañana—.</li>
+      <li>La <strong>médula ósea</strong> y parte del bazo.</li>
+      <li>La <strong>placenta</strong>.</li>
+    </ul>
+
+    <div class="clinical-box">
+      <h5>👁 Interfaz optométrica</h5>
+      <p>Anota ya el dato: <strong>la córnea no tiene vasos sanguíneos ni linfáticos</strong>. Es la
+        única parte del cuerpo con esa doble ausencia en una superficie tan expuesta. Todavía no vamos a
+        explicar qué consecuencias tiene —eso es la sesión 2—, pero conviene que la palabra «córnea»
+        quede pegada a la palabra «alinfática» desde hoy.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 03 ─────────── -->
+<section class="station" id="s1e3">
+  <div class="station-header">
+    <div class="station-number">03</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">El trayecto</div>
+      <h2>El camino de vuelta: vasos, troncos, conductos</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>El calibre va creciendo por etapas, y en cada salto cambia el nombre:</p>
+
+    <div class="recorrido">
+      <p><strong>capilar linfático</strong> → <strong>vaso linfático</strong> (atraviesa uno o más
+        <strong>ganglios</strong>) → <strong>tronco linfático</strong> → <strong>conducto</strong> →
+        <strong>vena</strong></p>
+    </div>
+
+    <h3>Los vasos: venas en miniatura, con más válvulas</h3>
+    <p>Los vasos linfáticos se parecen mucho a las venas: endotelio, una túnica media fibromuscular
+      delgada y una adventicia. Pero llevan <strong>muchas más válvulas</strong>, y muy juntas. Entre dos
+      válvulas la pared se dilata, así que el vaso lleno tiene aspecto <strong>arrosariado</strong>, como
+      un collar de cuentas. Ese segmento entre dos válvulas —el <strong>linfangión</strong>— se contrae
+      por su cuenta y empuja la linfa al siguiente.</p>
+
+    <h3>Los troncos</h3>
+    <p>Al final de cada región los vasos confluyen en troncos. Son estos, y conviene aprenderlos por la
+      región que drenan, no como lista suelta:</p>
+    <ul>
+      <li><strong>Tronco yugular</strong> — cabeza y cuello. <em>El nuestro.</em></li>
+      <li><strong>Tronco subclavio</strong> — miembro superior y parte de la pared torácica.</li>
+      <li><strong>Tronco broncomediastínico</strong> — pulmones, corazón, mediastino.</li>
+      <li><strong>Troncos lumbares</strong>, derecho e izquierdo — miembros inferiores, pelvis, riñones.</li>
+      <li><strong>Tronco intestinal</strong> — estómago, intestino, hígado, bazo, páncreas.</li>
+    </ul>
+
+    <h3>Los dos conductos y la regla del cuadrante</h3>
+    <div class="photo-grid">
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_22_3_vias_drenaje.png"
+               alt="Vías de drenaje de la linfa en el tórax: troncos linfáticos, cisterna del quilo, conducto torácico y conducto linfático derecho"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>El mapa completo.</strong> La cisterna del quilo abajo, el
+          conducto torácico subiendo por delante de la columna, y arriba las dos desembocaduras. Tortora,
+          Fig. 22.3a.</div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_22_1b_areas_drenaje.png"
+               alt="Esquema del cuerpo con el área drenada por el conducto linfático derecho en naranja y la drenada por el conducto torácico en verde"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>La regla, en un solo dibujo.</strong> Naranja: conducto
+          linfático derecho. Verde: conducto torácico. Tortora, Fig. 22.1b.</div>
+      </div>
+    </div>
+
+    <div class="pearl">
+      <p><strong>La regla del cuadrante superior derecho.</strong> El <strong>conducto linfático
+        derecho</strong> —apenas 1,2 cm— recoge la linfa de la <strong>mitad derecha de la cabeza y el
+        cuello, el miembro superior derecho y el hemitórax derecho</strong>. <strong>Todo lo demás, las
+        tres cuartas partes del cuerpo, va al conducto torácico</strong>: las dos piernas, el abdomen, el
+        hemitórax izquierdo y la mitad izquierda de la cabeza.</p>
+    </div>
+
+    <h3>El conducto torácico, de abajo arriba</h3>
+    <p>Es el vaso linfático más grande del cuerpo: <strong>38 a 45 cm</strong> de largo y unos 5 mm de
+      calibre.</p>
+    <ul>
+      <li><strong>Origen:</strong> la <strong>cisterna del quilo</strong>, una dilatación situada a la
+        altura de la <strong>segunda vértebra lumbar</strong>, por detrás de la aorta, entre sus pilares.
+        Recibe los dos troncos lumbares y el intestinal.</li>
+      <li><strong>Trayecto:</strong> sube por el mediastino posterior, <em>por detrás</em> de la aorta,
+        atravesando el diafragma por el <strong>hiato aórtico</strong>. A la altura de la 4.ª o 5.ª
+        vértebra torácica se desvía hacia la izquierda.</li>
+      <li><strong>Terminación:</strong> describe un arco por encima de la clavícula y desemboca en la
+        <strong>confluencia yugulosubclavia izquierda</strong>, el ángulo entre la vena yugular interna
+        izquierda y la subclavia izquierda.</li>
+    </ul>
+
+    <div class="photo-hero">
+      <img src="img/fig_22_3b_confluencia.png"
+           alt="Detalle de la desembocadura de los conductos linfáticos: el conducto linfático derecho y el conducto torácico llegando a la confluencia de la vena yugular interna con la subclavia de cada lado"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>Las dos desembocaduras, lado a lado.</strong> A la izquierda de
+        la imagen, el conducto linfático derecho, corto, recibiendo los troncos yugular, subclavio y
+        broncomediastínico derechos. A la derecha, el conducto torácico haciendo lo mismo del lado
+        izquierdo. Tortora, Fig. 22.3b.</div>
+    </div>
+
+    <h3>¿Quién la empuja, si no hay corazón linfático?</h3>
+    <p>Nada bombea la linfa. Sube por la suma de cuatro cosas, tres de las cuales ya conoces de las
+      venas:</p>
+    <div class="three-col">
+      <div class="col-card">
+        <h5>Las válvulas</h5>
+        <p>Impiden el retroceso. Sin ellas, ninguna de las otras tres serviría de nada.</p>
+      </div>
+      <div class="col-card">
+        <h5>La bomba muscular</h5>
+        <p>El músculo esquelético al contraerse ordeña los vasos linfáticos, igual que hace con las
+          venas.</p>
+      </div>
+      <div class="col-card">
+        <h5>La bomba respiratoria</h5>
+        <p>Al inspirar, la presión abdominal sube y la torácica baja: la linfa es aspirada hacia el
+          tórax.</p>
+      </div>
+    </div>
+    <p>Y la cuarta, que las venas no tienen: <strong>el propio linfangión se contrae</strong>. El músculo
+      liso de la pared responde a la distensión contrayéndose, de segmento en segmento.</p>
+
+    <div class="clinical-box">
+      <h5>👁 Interfaz optométrica</h5>
+      <p>Aquí está la respuesta a la cuarta pregunta del principio. En la cirugía de mama se extirpan
+        <strong>ganglios axilares</strong>: se corta la vía de drenaje del brazo y el líquido se queda,
+        produciendo un <strong>linfedema</strong> que no cede con reposo ni con diuréticos, porque no es
+        un problema de exceso de líquido sino de <em>cañería</em>. Verás lo mismo, en pequeño, en el
+        párpado: un edema que no cede de la noche a la mañana orienta a obstrucción del drenaje, no a
+        inflamación aguda.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 04 ─────────── -->
+<section class="station" id="s1e4">
+  <div class="station-header">
+    <div class="station-number">04</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">La estación de filtrado</div>
+      <h2>El ganglio linfático por dentro</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Hay unos <strong>600 ganglios</strong> en el cuerpo. Miden de <strong>1 a 25 mm</strong> y tienen
+      forma de alubia o de riñón: una cara convexa y una escotadura, el <strong>hilio</strong>. Están
+      dispersos, pero se agrupan en cadenas y en grupos regionales —cuello, axila, ingle, mediastino,
+      mesenterio—.</p>
+
+    <div class="photo-hero">
+      <img src="img/fig_22_6_ganglio_linfatico.png"
+           alt="Ganglio linfático parcialmente seccionado: cápsula, trabéculas, corteza externa con centros germinales, corteza interna, médula, senos, vasos aferentes por la convexidad y eferentes por el hilio"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>Todo el ganglio en una lámina.</strong> Fíjate en las flechas
+        verdes: entran <em>varias</em> por la superficie convexa y salen <em>pocas</em> por el hilio. El
+        recuadro naranja da la trayectoria en cinco pasos. Tortora, Fig. 22.6a.</div>
+    </div>
+
+    <h3>De fuera hacia dentro</h3>
+    <ul>
+      <li><strong>Cápsula</strong> de tejido conectivo denso, de la que parten hacia el interior las
+        <strong>trabéculas</strong>, que lo dividen en compartimentos y guían los vasos sanguíneos.</li>
+      <li>Dentro, una red de <strong>fibras reticulares</strong> hace de andamio: es el estroma.</li>
+      <li><strong>Corteza externa</strong>: los <strong>folículos</strong> o nódulos linfáticos. Cuando
+        están activos muestran un <strong>centro germinal</strong> más claro.</li>
+      <li><strong>Corteza interna</strong> o paracorteza, sin folículos.</li>
+      <li><strong>Médula</strong>, la parte central, organizada en cordones.</li>
+    </ul>
+
+    <h3>El recorrido de la linfa, y la asimetría que lo explica todo</h3>
+    <div class="recorrido">
+      <p><strong>vaso aferente</strong> → <strong>seno subcapsular</strong> → <strong>seno
+        trabecular</strong> → <strong>seno medular</strong> → <strong>vaso eferente</strong></p>
+    </div>
+
+    <div class="pearl">
+      <p><strong>Entran muchos, sale uno.</strong> Los vasos <strong>aferentes</strong> son varios y
+        llegan por toda la superficie convexa. Los <strong>eferentes</strong> son pocos —a veces uno
+        solo— y salen por el <strong>hilio</strong>. Como la sección de entrada es mucho mayor que la de
+        salida, la linfa <strong>se remansa</strong> dentro del ganglio. Esa lentitud es justamente lo
+        que da tiempo a que el contenido sea revisado: un filtro no funciona si el líquido pasa
+        deprisa.</p>
+    </div>
+
+    <p>Por el hilio, además, <strong>entran y salen los vasos sanguíneos</strong> del ganglio. No
+      confundas las dos circulaciones: la linfa atraviesa el ganglio y sigue su camino; la sangre lo
+      irriga y vuelve por su vena.</p>
+
+    <div class="photo-grid">
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_90_1_nodo_linfatico.png"
+               alt="Corte esquemático de un nodo linfático: cápsula, tabiques de tejido conectivo, folículos linfáticos, vías cavernosas, hilio, vaso linfático aferente y eferente"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>El mismo ganglio, dibujo clásico.</strong> Aquí se ven bien los
+          tabiques y las vías cavernosas por donde circula la linfa. Latarjet, Fig. 90-1.</div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_22_6b_ganglio_histologia.png"
+               alt="Microfotografía de una porción de ganglio linfático con cápsula, seno subcapsular, corteza externa, centro germinal, trabécula, corteza interna, seno medular y médula"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>Y al microscopio.</strong> Reconoce de arriba abajo: cápsula,
+          seno subcapsular, corteza con un centro germinal claro, y abajo la médula. Tortora, Fig.
+          22.6b.</div>
+      </div>
+    </div>
+
+    <div class="clinical-box">
+      <h5>👁 Interfaz optométrica</h5>
+      <p>Un ganglio <strong>se palpa</strong> cuando crece, y cómo crece dice mucho. <strong>Blando,
+        móvil y doloroso</strong> orienta a una causa <strong>inflamatoria o infecciosa</strong>
+        reciente: es el ganglio que se palpa en una conjuntivitis viral. <strong>Duro, fijo al plano
+        profundo, indoloro y de más de 2 cm</strong> obliga a pensar en otra cosa y a remitir. La regla
+        práctica: un ganglio que duele suele ser mejor noticia que uno que no duele.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 05 ─────────── -->
+<section class="station" id="s1e5">
+  <div class="station-header">
+    <div class="station-number">05</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">La región que nos toca</div>
+      <h2>Los ganglios de la cabeza y el cuello</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Esta es la lámina que hay que salir sabiendo leer. Todo lo que drena la cara, el cuero cabelludo
+      y —lo veremos en la segunda sesión— los anexos del ojo, termina en alguno de estos grupos.</p>
+
+    <div class="photo-hero">
+      <img src="img/fig_90_2_ganglios_cabeza_cuello.png"
+           alt="Ganglios linfáticos de la cabeza y del cuello y su drenaje: nodos parotídeos superficiales, mastoideos, occipitales, buccinador, submandibulares, submentonianos, profundos superiores, yugulares anteriores, supraclaviculares y el conducto linfático derecho"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>El collar y la cadena.</strong> Arriba, en semicírculo, el collar
+        pericervical. Abajo, bajando por el cuello, la cadena yugular que lo recoge todo y termina en el
+        conducto linfático derecho. Latarjet, Fig. 90-2, según Rouvière.</div>
+    </div>
+
+    <h3>El collar pericervical</h3>
+    <p>En el límite entre la cabeza y el cuello los ganglios se disponen formando un
+      <strong>anillo</strong>. De atrás hacia delante:</p>
+    <ul>
+      <li><strong>Occipitales</strong> — la nuca y el cuero cabelludo posterior.</li>
+      <li><strong>Mastoideos</strong> o retroauriculares — detrás de la oreja; recogen el pabellón y el
+        cuero cabelludo de encima.</li>
+      <li><strong>Parotídeos</strong> — dentro y sobre la glándula parótida. Los
+        <strong>superficiales</strong>, situados por delante del trago, son los que la clínica llama
+        <strong>preauriculares</strong>. <em>Recuerda este nombre: en la sesión 2 es el protagonista.</em></li>
+      <li><strong>Buccinadores</strong> — sobre el músculo buccinador, en la mejilla.</li>
+      <li><strong>Submandibulares</strong> — bajo el borde de la mandíbula.</li>
+      <li><strong>Submentonianos</strong> — bajo el mentón, en la línea media.</li>
+    </ul>
+
+    <h3>Las cadenas cervicales</h3>
+    <div class="two-col">
+      <div class="col-card">
+        <h5>Superficiales</h5>
+        <p>Acompañan a la <strong>vena yugular externa</strong>. Recogen la parte inferior del pabellón
+          auricular y la región parotídea.</p>
+      </div>
+      <div class="col-card">
+        <h5>Profundos</h5>
+        <p>Acompañan a la <strong>vena yugular interna</strong>, por debajo del esternocleidomastoideo.
+          Son la <strong>vía final</strong>: todo lo del collar termina aquí.</p>
+      </div>
+    </div>
+    <p>Dentro de los profundos hay dos con nombre propio, porque se palpan y porque se agrandan mucho: el
+      <strong>yugulodigástrico</strong> —el ganglio de la amígdala, en el cruce de la yugular interna con
+      el vientre posterior del digástrico— y el <strong>yuguloomohioideo</strong>, más abajo.</p>
+
+    <div class="recorrido">
+      <p>collar pericervical → <strong>cadena yugular interna</strong> → <strong>tronco yugular</strong> →
+        conducto linfático derecho <em>(lado derecho)</em> · conducto torácico <em>(lado izquierdo)</em></p>
+    </div>
+
+    <h3>Los niveles de Robbins</h3>
+    <p>En la práctica clínica y quirúrgica el cuello se divide en <strong>seis niveles</strong>
+      numerados. No hace falta memorizarlos hoy, pero sí saber que existen y que los vas a ver escritos
+      en informes:</p>
+    <div class="two-col">
+      <div class="col-card">
+        <h5>I · Submentonianos y submandibulares</h5>
+        <p>Labio, mentón, piso de la boca, lengua anterior.</p>
+      </div>
+      <div class="col-card">
+        <h5>II · Yugulares superiores</h5>
+        <p>Faringe, amígdala y <strong>parte de la cara</strong>. Aquí está el yugulodigástrico.</p>
+      </div>
+      <div class="col-card">
+        <h5>III · Yugulares medios</h5>
+        <p>Laringe e hipofaringe.</p>
+      </div>
+      <div class="col-card">
+        <h5>IV · Yugulares inferiores</h5>
+        <p>Laringe, tiroides, esófago. Incluye la región supraclavicular.</p>
+      </div>
+      <div class="col-card">
+        <h5>V · Triángulo posterior</h5>
+        <p>Cuero cabelludo posterior y nasofaringe.</p>
+      </div>
+      <div class="col-card">
+        <h5>VI · Compartimento central</h5>
+        <p>Tiroides y tráquea.</p>
+      </div>
+    </div>
+
+    <div class="clinical-box">
+      <h5>👁 Interfaz optométrica</h5>
+      <p>Un ganglio <strong>supraclavicular</strong> —justo encima de la clavícula— es el que más
+        preocupa de todo el cuello: por ahí desemboca el drenaje del tórax y del abdomen, y del lado
+        izquierdo está la terminación del conducto torácico. Si en una consulta de optometría se palpa un
+        ganglio ahí, no es un hallazgo ocular: es una remisión.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 06 ─────────── -->
+<section class="station" id="s1e6">
+  <div class="station-header">
+    <div class="station-number">06</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Terminología</div>
+      <h2>Términos TA2 de la sesión</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Toca la tarjeta para ver la definición. El nombre en latín es el de la <em>Terminologia
+      Anatomica</em>; es el que aparece en los atlas y en los informes.</p>
+    <div class="flip-grid">
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Sistema linfático</span><span class="term-en">Systema lymphoideum</span></div>
+        <div class="flip-back"><p class="term-def">Conjunto de linfa, vasos linfáticos, ganglios y órganos linfoides.</p><p class="term-opto">👁 Devuelve a la sangre lo que el capilar dejó en el tejido.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Linfa</span><span class="term-en">Lympha</span></div>
+        <div class="flip-back"><p class="term-def">Líquido claro contenido en los vasos linfáticos; procede del líquido intersticial.</p><p class="term-opto">👁 Del latín <em>lympha</em>, agua clara.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Capilar linfático</span><span class="term-en">Vas lymphocapillare</span></div>
+        <div class="flip-back"><p class="term-def">Vaso de origen, cerrado en fondo ciego, con endotelio solapado y filamentos de fijación.</p><p class="term-opto">👁 Falta en la córnea y en el cristalino.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Vaso linfático</span><span class="term-en">Vas lymphaticum</span></div>
+        <div class="flip-back"><p class="term-def">Conducto de pared fina y muy valvulado que transporta la linfa hacia los troncos.</p><p class="term-opto">👁 Lleno, tiene aspecto arrosariado.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Linfangión</span><span class="term-en">Lymphangion</span></div>
+        <div class="flip-back"><p class="term-def">Segmento de vaso comprendido entre dos válvulas; se contrae de forma autónoma.</p><p class="term-opto">👁 Es la unidad que bombea, a falta de corazón linfático.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Ganglio linfático</span><span class="term-en">Nodus lymphoideus</span></div>
+        <div class="flip-back"><p class="term-def">Órgano encapsulado, en forma de alubia, intercalado en el trayecto de los vasos linfáticos.</p><p class="term-opto">👁 La TA2 prefiere «nodo»; la clínica dice «ganglio».</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Cápsula</span><span class="term-en">Capsula</span></div>
+        <div class="flip-back"><p class="term-def">Envoltura de tejido conectivo denso del ganglio, de la que parten las trabéculas.</p><p class="term-opto">👁 Su presencia distingue al ganglio del tejido linfoide difuso.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Trabécula</span><span class="term-en">Trabecula</span></div>
+        <div class="flip-back"><p class="term-def">Prolongación de la cápsula hacia el interior; divide el ganglio y guía los vasos sanguíneos.</p><p class="term-opto">👁 Entre trabéculas quedan los senos trabeculares.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Corteza</span><span class="term-en">Cortex</span></div>
+        <div class="flip-back"><p class="term-def">Parte periférica del ganglio; la externa contiene los folículos con centro germinal.</p><p class="term-opto">👁 Es lo primero que encuentra la linfa tras el seno subcapsular.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Médula</span><span class="term-en">Medulla</span></div>
+        <div class="flip-back"><p class="term-def">Parte central del ganglio, organizada en cordones separados por senos medulares.</p><p class="term-opto">👁 Último tramo antes de salir por el hilio.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Hilio</span><span class="term-en">Hilum</span></div>
+        <div class="flip-back"><p class="term-def">Escotadura del ganglio por donde salen los eferentes y entran y salen los vasos sanguíneos.</p><p class="term-opto">👁 Puerta de salida, nunca de entrada de la linfa.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Vaso aferente</span><span class="term-en">Vas afferens</span></div>
+        <div class="flip-back"><p class="term-def">Vaso que lleva la linfa al ganglio; son varios y llegan por la cara convexa.</p><p class="term-opto">👁 <em>Ad-ferre</em>, llevar hacia.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Vaso eferente</span><span class="term-en">Vas efferens</span></div>
+        <div class="flip-back"><p class="term-def">Vaso que saca la linfa del ganglio por el hilio; son pocos, a veces uno solo.</p><p class="term-opto">👁 Que entren más de los que salen es lo que remansa la linfa.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Cisterna del quilo</span><span class="term-en">Cisterna chyli</span></div>
+        <div class="flip-back"><p class="term-def">Dilatación de origen del conducto torácico, a la altura de la segunda vértebra lumbar.</p><p class="term-opto">👁 Recibe los troncos lumbares y el intestinal.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Quilo</span><span class="term-en">Chylus</span></div>
+        <div class="flip-back"><p class="term-def">Linfa intestinal cargada de grasa absorbida, de aspecto blanco lechoso.</p><p class="term-opto">👁 Se recoge en los quilíferos de las vellosidades.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Conducto torácico</span><span class="term-en">Ductus thoracicus</span></div>
+        <div class="flip-back"><p class="term-def">Vaso linfático mayor del cuerpo; drena las tres cuartas partes y termina a la izquierda.</p><p class="term-opto">👁 De 38 a 45 cm; sube por detrás de la aorta.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Conducto linfático derecho</span><span class="term-en">Ductus lymphaticus dexter</span></div>
+        <div class="flip-back"><p class="term-def">Conducto de 1,2 cm que drena el cuadrante superior derecho del cuerpo.</p><p class="term-opto">👁 Mitad derecha de cabeza y cuello, brazo y hemitórax derechos.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Tronco yugular</span><span class="term-en">Truncus jugularis</span></div>
+        <div class="flip-back"><p class="term-def">Tronco que recoge toda la linfa de la cabeza y el cuello de su lado.</p><p class="term-opto">👁 La vía final de todo lo que drena el ojo y sus anexos.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Ganglios parotídeos superficiales</span><span class="term-en">Nodi parotidei superficiales</span></div>
+        <div class="flip-back"><p class="term-def">Grupo situado por delante del trago, sobre la glándula parótida.</p><p class="term-opto">👁 Son los «preauriculares» de la clínica.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Ganglios submandibulares</span><span class="term-en">Nodi submandibulares</span></div>
+        <div class="flip-back"><p class="term-def">Grupo situado bajo el borde inferior de la mandíbula.</p><p class="term-opto">👁 Recogen el ángulo interno del ojo y el párpado medial.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Ganglios cervicales profundos</span><span class="term-en">Nodi cervicales profundi</span></div>
+        <div class="flip-back"><p class="term-def">Cadena que acompaña a la vena yugular interna; vía final del drenaje cervicofacial.</p><p class="term-opto">👁 Contiene el yugulodigástrico y el yuguloomohioideo.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Folículo linfático</span><span class="term-en">Folliculus lymphoideus</span></div>
+        <div class="flip-back"><p class="term-def">Agregado esférico de tejido linfoide; cuando está activo muestra un centro germinal claro.</p><p class="term-opto">👁 Los hay también fuera del ganglio, en las mucosas.</p></div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 07 ─────────── -->
+<section class="station" id="s1e7">
+  <div class="station-header">
+    <div class="station-number">07</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Práctica de recuperación</div>
+      <h2>Comprueba lo que aprendiste</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Contesta sin volver arriba. Cada pregunta se responde una sola vez: elige y luego lee la
+      explicación, la aciertes o no.</p>
+
+    <div class="check-question" data-question="q1s1">
+      <p class="question-text">1. ¿Cuánto líquido devuelve cada día el sistema linfático a la sangre?</p>
+      <ul class="options">
+        <li data-letter="A">Unos veinte litros</li>
+        <li data-letter="B">Unos diecisiete litros</li>
+        <li data-letter="C" data-correct="true">Unos tres litros</li>
+        <li data-letter="D">Medio litro escaso</li>
+        <li data-letter="E">Unos diez litros</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: C.</strong> De los capilares sanguíneos salen unos 20 litros
+        al día y por las vénulas regresan unos 17. La diferencia —cerca de 3 litros— es exactamente lo que
+        el sistema linfático recoge y devuelve. Los 20 y los 17 son los extremos del balance, no lo que
+        circula por la linfa.</div>
+    </div>
+
+    <div class="check-question" data-question="q2s1">
+      <p class="question-text">2. ¿Por qué las proteínas que se escapan del plasma solo pueden volver a la
+        sangre por la vía linfática?</p>
+      <ul class="options">
+        <li data-letter="A" data-correct="true">No caben de vuelta en el capilar sanguíneo</li>
+        <li data-letter="B">El capilar linfático las atrae químicamente</li>
+        <li data-letter="C">Se destruyen en el líquido intersticial</li>
+        <li data-letter="D">La presión de la vénula se lo impide</li>
+        <li data-letter="E">El hígado las recoge desde el tejido</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: A.</strong> Es una cuestión de tamaño: la proteína salió por
+        una brecha del capilar sanguíneo, pero no puede reentrar por él. El capilar linfático, en cambio,
+        tiene un endotelio discontinuo y sin membrana basal completa, así que la admite sin dificultad. No
+        hay atracción química ni destrucción: hay una puerta que solo existe de un lado.</div>
+    </div>
+
+    <div class="check-question" data-question="q3s1">
+      <p class="question-text">3. ¿Qué hace que el capilar linfático se abra más justo cuando el tejido se
+        hincha?</p>
+      <ul class="options">
+        <li data-letter="A">La contracción del músculo liso de la pared del capilar</li>
+        <li data-letter="B">El aumento de la presión arterial en la zona inflamada</li>
+        <li data-letter="C">Una válvula situada en su extremo ciego</li>
+        <li data-letter="D">La rotura de la membrana basal continua</li>
+        <li data-letter="E" data-correct="true">Los filamentos de fijación tiran del endotelio</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: E.</strong> Los filamentos de fijación anclan las células
+        endoteliales al tejido de alrededor. Al acumularse líquido, el tejido se expande, los filamentos
+        tiran y las brechas entre células se abren más. Es un mecanismo puramente mecánico: el capilar se
+        vuelve más permeable en el momento exacto en que hace falta.</div>
+    </div>
+
+    <div class="check-question" data-question="q4s1">
+      <p class="question-text">4. ¿Cuál de estos tejidos <strong>NO</strong> tiene capilares
+        linfáticos?</p>
+      <ul class="options">
+        <li data-letter="A">La dermis de la piel del párpado</li>
+        <li data-letter="B" data-correct="true">La córnea</li>
+        <li data-letter="C">La mucosa del intestino delgado</li>
+        <li data-letter="D">El tejido pulmonar</li>
+        <li data-letter="E">La mucosa de la lengua</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: B.</strong> La córnea es avascular y también alinfática: no
+        tiene ni vasos sanguíneos ni linfáticos. Comparte esa condición con el cartílago, la epidermis y el
+        cristalino. Todos los demás tejidos de la lista están bien provistos; el intestino, de hecho, tiene
+        capilares linfáticos especializados —los quilíferos—.</div>
+    </div>
+
+    <div class="check-question" data-question="q5s1">
+      <p class="question-text">5. ¿Dónde se encuentra la cisterna del quilo?</p>
+      <ul class="options">
+        <li data-letter="A">En el cuello, junto a la vena yugular interna</li>
+        <li data-letter="B">En el mediastino, por delante del esófago</li>
+        <li data-letter="C">A la altura de la quinta vértebra torácica</li>
+        <li data-letter="D" data-correct="true">A la altura de la segunda vértebra lumbar</li>
+        <li data-letter="E">En la pelvis, junto a los vasos ilíacos internos</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: D.</strong> Es una dilatación situada por detrás de la aorta,
+        entre sus pilares, a la altura de L2. Ahí confluyen los dos troncos lumbares y el tronco
+        intestinal, y de ahí arranca hacia arriba el conducto torácico. Lo que está en el cuello es la
+        terminación del conducto, no su origen.</div>
+    </div>
+
+    <div class="check-question" data-question="q6s1">
+      <p class="question-text">6. La linfa del miembro inferior izquierdo llega a la sangre a través
+        de…</p>
+      <ul class="options">
+        <li data-letter="A" data-correct="true">El conducto torácico</li>
+        <li data-letter="B">El conducto linfático derecho</li>
+        <li data-letter="C">El tronco subclavio derecho</li>
+        <li data-letter="D">La vena cava inferior, directamente</li>
+        <li data-letter="E">El tronco broncomediastínico derecho</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: A.</strong> Toda la mitad inferior del cuerpo —las dos
+        piernas incluidas— drena al conducto torácico, sea cual sea el lado. El conducto linfático derecho
+        solo se ocupa del cuadrante superior derecho. Y la linfa nunca desemboca directamente en una vena
+        cava: lo hace en la confluencia yugulosubclavia.</div>
+    </div>
+
+    <div class="check-question" data-question="q7s1">
+      <p class="question-text">7. ¿Qué estructura recoge la linfa del hemitórax derecho y del miembro
+        superior derecho?</p>
+      <ul class="options">
+        <li data-letter="A">El conducto torácico</li>
+        <li data-letter="B">La cisterna del quilo</li>
+        <li data-letter="C">El tronco lumbar derecho</li>
+        <li data-letter="D" data-correct="true">El conducto linfático derecho</li>
+        <li data-letter="E">La vena ácigos</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: D.</strong> El conducto linfático derecho mide apenas 1,2 cm
+        y recoge tres troncos: yugular, subclavio y broncomediastínico derechos. Es decir, la mitad derecha
+        de la cabeza y el cuello, el brazo derecho y el hemitórax derecho. La vena ácigos pertenece al
+        sistema venoso, no al linfático.</div>
+    </div>
+
+    <div class="check-question" data-question="q8s1">
+      <p class="question-text">8. ¿Por dónde abandonan el ganglio los vasos linfáticos eferentes?</p>
+      <ul class="options">
+        <li data-letter="A">Por toda la superficie convexa</li>
+        <li data-letter="B">Atravesando la cápsula en cualquier punto</li>
+        <li data-letter="C" data-correct="true">Por el hilio</li>
+        <li data-letter="D">Por los senos subcapsulares</li>
+        <li data-letter="E">Por el interior de las trabéculas</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: C.</strong> Los eferentes salen exclusivamente por el hilio,
+        la escotadura del ganglio. Los que llegan por toda la superficie convexa son los aferentes. Por el
+        hilio entran y salen además los vasos sanguíneos del ganglio, que son otra circulación
+        distinta.</div>
+    </div>
+
+    <div class="check-question" data-question="q9s1">
+      <p class="question-text">9. ¿Cuál es el recorrido de la linfa dentro del ganglio?</p>
+      <ul class="options">
+        <li data-letter="A">aferente → hilio → corteza externa → eferente</li>
+        <li data-letter="B" data-correct="true">aferente → seno subcapsular → seno medular → eferente</li>
+        <li data-letter="C">eferente → seno trabecular → seno medular → aferente</li>
+        <li data-letter="D">aferente → médula → corteza externa → eferente</li>
+        <li data-letter="E">hilio → seno medular → corteza externa → aferente</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: B.</strong> La secuencia completa es: vaso aferente, seno
+        subcapsular, seno trabecular, seno medular y vaso eferente. Siempre de la periferia hacia el
+        centro y de ahí al hilio. Las opciones que empiezan por el hilio o por el eferente invierten la
+        dirección, y la linfa no puede recorrerla al revés: hay válvulas.</div>
+    </div>
+
+    <div class="check-question" data-question="q10s1">
+      <p class="question-text">10. ¿Por qué la linfa circula despacio dentro del ganglio?</p>
+      <ul class="options">
+        <li data-letter="A">Porque el ganglio carece por completo de válvulas</li>
+        <li data-letter="B">Porque el músculo liso del ganglio se relaja</li>
+        <li data-letter="C">Porque la cápsula comprime los senos desde fuera</li>
+        <li data-letter="D">Porque la linfa se coagula parcialmente al entrar</li>
+        <li data-letter="E" data-correct="true">Porque entran más vasos de los que salen</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: E.</strong> Varios aferentes vierten en el ganglio y solo uno
+        o unos pocos eferentes lo vacían. Al ser la sección de entrada mucho mayor que la de salida, la
+        linfa se remansa. Esa lentitud no es un defecto: es la condición para que el ganglio funcione como
+        filtro, porque un filtro atravesado a gran velocidad no filtra nada.</div>
+    </div>
+
+    <div class="check-question" data-question="q11s1">
+      <p class="question-text">11. Los ganglios que la clínica llama «preauriculares» corresponden,
+        anatómicamente, a los…</p>
+      <ul class="options">
+        <li data-letter="A">Ganglios mastoideos</li>
+        <li data-letter="B">Ganglios submentonianos</li>
+        <li data-letter="C">Ganglios occipitales</li>
+        <li data-letter="D" data-correct="true">Parotídeos superficiales</li>
+        <li data-letter="E">Cervicales profundos superiores</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: D.</strong> Están por delante del trago, apoyados sobre la
+        glándula parótida. Los mastoideos quedan detrás de la oreja y los occipitales en la nuca. La
+        distinción importa porque en la sesión 2 veremos que el párpado y la conjuntiva laterales drenan
+        precisamente a este grupo.</div>
+    </div>
+
+    <div class="check-question" data-question="q12s1">
+      <p class="question-text">12. Un ganglio cervical duro, fijo al plano profundo, indoloro y de 3 cm
+        sugiere…</p>
+      <ul class="options">
+        <li data-letter="A">Una conjuntivitis viral reciente</li>
+        <li data-letter="B" data-correct="true">Un proceso que exige estudio y remisión</li>
+        <li data-letter="C">Una faringitis bacteriana aguda</li>
+        <li data-letter="D">Un hallazgo normal en el adulto joven</li>
+        <li data-letter="E">Una reacción a una vacuna reciente</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: B.</strong> Los cuatro rasgos juntos —duro, fijo, indoloro y
+        grande— son los que obligan a descartar una causa distinta de la inflamatoria. El ganglio de una
+        infección reciente, en cambio, es blando, móvil y duele. Conviene recordar la regla: un ganglio que
+        duele suele ser mejor noticia que uno que no duele.</div>
+    </div>
+
+    <div class="check-question" data-question="q13s1">
+      <p class="question-text">13. ¿Qué segmento de la pared del vaso linfático se contrae por su cuenta y
+        empuja la linfa al siguiente tramo?</p>
+      <ul class="options">
+        <li data-letter="A" data-correct="true">El linfangión</li>
+        <li data-letter="B">La válvula bicúspide</li>
+        <li data-letter="C">El seno subcapsular</li>
+        <li data-letter="D">La túnica adventicia</li>
+        <li data-letter="E">El filamento de fijación</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: A.</strong> El linfangión es el segmento comprendido entre
+        dos válvulas. Su músculo liso responde a la distensión contrayéndose, de modo que la linfa avanza
+        de segmento en segmento. Es la única de las cuatro fuerzas de propulsión que las venas no tienen;
+        las otras tres —válvulas, bomba muscular y bomba respiratoria— son compartidas.</div>
+    </div>
+
+    <div class="check-question" data-question="q14s1">
+      <p class="question-text">14. ¿Qué es el quilo?</p>
+      <ul class="options">
+        <li data-letter="A">La linfa del conducto linfático derecho</li>
+        <li data-letter="B">El líquido intersticial del tejido muscular</li>
+        <li data-letter="C">El plasma que se filtra dentro del ganglio</li>
+        <li data-letter="D">La linfa antes de atravesar un ganglio</li>
+        <li data-letter="E" data-correct="true">La linfa cargada de grasa intestinal</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: E.</strong> Las grasas absorbidas en el intestino no entran en
+        los capilares sanguíneos sino en los quilíferos de las vellosidades. La linfa que sale de ahí es
+        blanca y lechosa: eso es el quilo, y por eso el reservorio donde se recoge se llama cisterna del
+        quilo. El nombre describe el contenido, no la localización.</div>
+    </div>
+
+    <div class="check-question" data-question="q15s1">
+      <p class="question-text">15. ¿Dónde desemboca el conducto torácico?</p>
+      <ul class="options">
+        <li data-letter="A">En la confluencia yugulosubclavia derecha</li>
+        <li data-letter="B">En la vena cava superior</li>
+        <li data-letter="C" data-correct="true">En la confluencia yugulosubclavia izquierda</li>
+        <li data-letter="D">En la aurícula derecha</li>
+        <li data-letter="E">En la vena ácigos, a la derecha</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: C.</strong> Termina en el ángulo que forman la vena yugular
+        interna izquierda y la subclavia izquierda, después de describir un arco por encima de la
+        clavícula. La confluencia derecha es la del conducto linfático derecho. La linfa entra siempre en
+        el sistema venoso por una de esas dos confluencias, nunca directamente en una cava ni en el
+        corazón.</div>
+    </div>
+
+    <div class="saber-box">
+      <strong>Pregunta tipo Saber Pro · Caso</strong>
+      <div class="check-question" style="margin-top:16px;border-color:var(--purple)" data-question="q16s1">
+        <p class="question-text">16. Una mujer de 45 años, operada de mama derecha hace dos años con
+          extirpación de los ganglios de la axila, consulta porque el brazo derecho se le hincha de forma
+          permanente y no mejora al elevarlo durante la noche. ¿Cuál es la explicación morfológica más
+          probable?</p>
+        <ul class="options">
+          <li data-letter="A" data-correct="true">Se interrumpió el drenaje linfático del miembro</li>
+          <li data-letter="B">La vena subclavia derecha está trombosada</li>
+          <li data-letter="C">El corazón derecho falla y la sangre se remansa</li>
+          <li data-letter="D">La albúmina del plasma está por debajo de lo normal</li>
+          <li data-letter="E">Hay una infección activa en los tejidos del brazo</li>
+        </ul>
+        <div class="feedback"><strong>Correcta: A.</strong> Al extirpar los ganglios axilares se secciona
+          la vía por la que el brazo devuelve su linfa, y el líquido con proteínas se queda en el tejido:
+          es un <em>linfedema</em>. Se distingue del edema venoso o cardíaco justamente en que no cede con
+          la postura ni con diuréticos, porque el problema no es cuánto líquido llega sino que no hay por
+          dónde sacarlo. Una trombosis o una insuficiencia cardíaca habrían dado un cuadro agudo y con
+          otros signos; la hipoalbuminemia daría un edema generalizado, no de un solo brazo.</div>
+      </div>
+    </div>
+
+    <div class="pearl">
+      <p><strong>Lo que hay que llevarse de esta sesión.</strong> El linfático no es un circuito sino un
+        desagüe de una sola dirección: empieza ciego en el tejido, recoge los tres litros y las proteínas
+        que el capilar sanguíneo no puede recuperar, los hace pasar obligatoriamente por ganglios que
+        funcionan como filtros, y los devuelve a la vena en la base del cuello. Dos conductos reparten el
+        cuerpo: el derecho se ocupa de un cuadrante, el torácico de todo lo demás. Y en la cabeza, todo
+        converge en la cadena yugular interna. En la sesión 2 llevamos ese mapa al ojo, que es el lugar
+        donde el sistema linfático resulta más interesante <em>por lo que le falta</em>.</p>
+    </div>
+  </div>
+</section>
+
+</div><!-- fin sesión 1 -->
+
+<!-- ═══════════════════════ SESIÓN 2 ═══════════════════════ -->
+<div class="tab-pane" id="s2">
+<nav class="station-nav">
+  <h3>Contenido · Sesión 2</h3>
+  <ol>
+    <li><a href="#s2e0">Órganos linfoides: primarios y secundarios</a></li>
+    <li><a href="#s2e1">Los primarios: médula ósea y timo</a></li>
+    <li><a href="#s2e2">El bazo</a></li>
+    <li><a href="#s2e3">Amígdalas y el tejido linfoide de las mucosas</a></li>
+    <li><a href="#s2e4">El tejido linfoide del ojo: CALT, LDALT, EALT</a></li>
+    <li><a href="#s2e5">Lo que el ojo no tiene: el privilegio inmune</a></li>
+    <li><a href="#s2e6">Cómo drena el ojo: la regla de los dos grupos</a></li>
+    <li><a href="#s2e7">El cerebro, el sueño y los linfáticos que no existían</a></li>
+    <li><a href="#s2e8">Términos TA2 de la sesión</a></li>
+    <li><a href="#s2e9">Comprueba lo que aprendiste</a></li>
+    <li><a href="#s2e10">Volvemos a las cinco preguntas</a></li>
+  </ol>
+</nav>
+
+<!-- ─────────── 00 ─────────── -->
+<section class="station" id="s2e0">
+  <div class="station-header">
+    <div class="station-number">00</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Clasificación</div>
+      <h2>Órganos linfoides: primarios y secundarios</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>En la primera sesión vimos la <em>cañería</em>. Ahora vemos los <em>órganos</em> que están
+      intercalados en ella o conectados a ella. Se dividen en dos grupos según lo que ocurre dentro.</p>
+
+    <div class="two-col">
+      <div class="col-card amber">
+        <h5>Primarios · donde se fabrican</h5>
+        <p>Es donde las células de defensa nacen y <strong>maduran</strong>, antes de haber visto nada.
+          Son dos: la <strong>médula ósea roja</strong> y el <strong>timo</strong>.</p>
+      </div>
+      <div class="col-card teal">
+        <h5>Secundarios · donde se trabaja</h5>
+        <p>Es donde esas células ya maduras <strong>se encuentran con lo que llega de fuera</strong>. Son
+          los <strong>ganglios</strong>, el <strong>bazo</strong> y el <strong>tejido linfoide de las
+          mucosas</strong>.</p>
+      </div>
+    </div>
+
+    <div class="pearl">
+      <p><strong>El criterio morfológico que los separa es la cápsula.</strong> El ganglio y el bazo
+        tienen cápsula de tejido conectivo: son órganos. El tejido linfoide de las mucosas
+        <strong>no la tiene</strong>: son agregados difusos de células dentro de la pared de un tubo. Por
+        eso a los ganglios y al bazo se les llama órganos, y a los nódulos de las mucosas, tejido.</p>
+    </div>
+
+    <div class="photo-hero">
+      <img src="img/fig_22_1_componentes_linfatico.png"
+           alt="Vista anterior de los componentes del sistema linfático: amígdala palatina, ganglios submandibulares y cervicales, conducto torácico, bazo, ganglios axilares, cisterna del quilo, placas de Peyer, apéndice, ganglios inguinales y médula ósea"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>Todo el sistema en un cuerpo.</strong> Localiza antes de seguir:
+        arriba las amígdalas y los ganglios del cuello; en el tórax el conducto torácico; a la izquierda
+        el bazo; en el abdomen la cisterna del quilo y las placas de Peyer; abajo la médula ósea. Tortora,
+        Fig. 22.1a.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 01 ─────────── -->
+<section class="station" id="s2e1">
+  <div class="station-header">
+    <div class="station-number">01</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Órganos primarios</div>
+      <h2>Los primarios: médula ósea y timo</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <h3>La médula ósea roja</h3>
+    <p>Ocupa el interior de los <strong>huesos planos</strong> —esternón, costillas, ilíaco, cráneo— y las
+      <strong>epífisis de los huesos largos</strong>. En el recién nacido está en casi todos los huesos;
+      con la edad va siendo sustituida por médula amarilla, grasa. De ella salen todas las células de la
+      sangre, incluidas las linfáticas.</p>
+    <p>Curiosamente, <strong>la médula ósea no tiene vasos linfáticos</strong>, aunque sea el origen del
+      sistema: lo que produce, lo entrega directamente a la sangre.</p>
+
+    <h3>El timo</h3>
+    <p>Órgano <strong>bilobulado</strong> situado en el <strong>mediastino superior</strong>, por detrás
+      del manubrio del esternón y por delante de los grandes vasos. Cada lóbulo tiene una cápsula de la
+      que parten trabéculas que lo dividen en lobulillos, y cada lobulillo tiene
+      <strong>corteza</strong> —densa y oscura— y <strong>médula</strong> —más clara—.</p>
+
+    <div class="pearl">
+      <p><strong>El timo es el único órgano que se encoge a propósito.</strong> Pesa unos 70 gramos en el
+        lactante, empieza a reducirse tras la <strong>pubertad</strong> y en el anciano apenas conserva
+        3 gramos de tejido activo: el resto se ha sustituido por grasa. Fíjate en el detalle fino:
+        <strong>la cápsula no cambia de tamaño</strong>, así que el órgano parece el mismo por fuera
+        mientras por dentro se vacía. Es lo que se llama <em>involución tímica</em>, y es normal, no
+        patológico.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 02 ─────────── -->
+<section class="station" id="s2e2">
+  <div class="station-header">
+    <div class="station-number">02</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Órgano secundario</div>
+      <h2>El bazo</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Es la <strong>masa de tejido linfoide más grande del cuerpo</strong>: unos 12 cm de largo. Está en
+      el <strong>hipocondrio izquierdo</strong>, entre la 9.ª y la 11.ª costillas, por detrás del estómago
+      y por encima del riñón izquierdo.</p>
+
+    <div class="photo-grid">
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_22_7_bazo.png"
+               alt="Superficie visceral del bazo: arteria y vena esplénicas, hilio, impresión gástrica, impresión cólica e impresión renal"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>La cara visceral.</strong> Las impresiones dicen con qué está en
+          contacto: el estómago, el colon y el riñón. En medio, el hilio, por donde entran y salen los
+          vasos esplénicos. Tortora, Fig. 22.7a.</div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_22_7b_bazo_interior.png"
+               alt="Estructura interna del bazo: pulpa blanca alrededor de la arteria central, pulpa roja con senos venosos y cordones esplénicos, trabéculas y cápsula"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>Por dentro: dos pulpas.</strong> La blanca, en manguito
+          alrededor de la arteria central; la roja, con senos venosos y cordones esplénicos. Tortora, Fig.
+          22.7b.</div>
+      </div>
+    </div>
+
+    <h3>Las dos pulpas</h3>
+    <div class="two-col">
+      <div class="col-card">
+        <h5>Pulpa blanca</h5>
+        <p>Tejido linfoide dispuesto como un <strong>manguito alrededor de las arterias centrales</strong>.
+          Es la parte «linfática» del bazo.</p>
+      </div>
+      <div class="col-card">
+        <h5>Pulpa roja</h5>
+        <p><strong>Senos venosos</strong> llenos de sangre y <strong>cordones esplénicos</strong> entre
+          ellos. Es la parte que trabaja con los glóbulos rojos.</p>
+      </div>
+    </div>
+
+    <div class="pearl">
+      <p><strong>El bazo filtra sangre, no linfa.</strong> Es la diferencia decisiva con el ganglio. Por
+        eso <strong>el bazo no tiene vasos linfáticos aferentes</strong>: no está intercalado en la vía
+        linfática, sino en la sanguínea. Retira los eritrocitos viejos, guarda plaquetas y, antes de
+        nacer, fabrica células sanguíneas.</p>
+    </div>
+
+    <div class="clinical-box">
+      <h5>👁 Interfaz optométrica</h5>
+      <p>El bazo es <strong>frágil</strong>: está cubierto por una cápsula fina y muy vascularizado, así
+        que un traumatismo en el costado izquierdo puede romperlo y provocar una hemorragia grave. No es
+        un tema ocular, pero sí un dato que conviene tener: en un paciente politraumatizado que llega con
+        una contusión orbitaria, el ojo puede no ser lo más urgente.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 03 ─────────── -->
+<section class="station" id="s2e3">
+  <div class="station-header">
+    <div class="station-number">03</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Tejido sin cápsula</div>
+      <h2>Amígdalas y el tejido linfoide de las mucosas</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Donde el exterior toca al interior —boca, faringe, intestino, vías respiratorias, superficie
+      ocular— hay tejido linfoide. No encapsulado, sino incrustado en la pared, en la lámina propia de la
+      mucosa. Se le llama <strong>MALT</strong>, por sus siglas en inglés: tejido linfoide asociado a
+      mucosas.</p>
+
+    <h3>El anillo de Waldeyer</h3>
+    <p>En la entrada de la faringe, las amígdalas forman un anillo incompleto que rodea el paso del aire y
+      del alimento:</p>
+    <ul>
+      <li><strong>Amígdala faríngea</strong> (la <em>adenoide</em>), impar, en el techo de la
+        nasofaringe.</li>
+      <li><strong>Amígdalas palatinas</strong>, las que se ven al abrir la boca, entre los pilares.</li>
+      <li><strong>Amígdalas linguales</strong>, en la base de la lengua.</li>
+      <li><strong>Amígdalas tubáricas</strong>, alrededor del orificio de la trompa auditiva.</li>
+    </ul>
+
+    <h3>Y por el resto del tubo</h3>
+    <p>Las <strong>placas de Peyer</strong> del íleon y el <strong>apéndice vermiforme</strong> son los
+      acúmulos más visibles de MALT en el intestino. La estrategia es siempre la misma: poner vigilancia
+      donde hay una puerta.</p>
+
+    <div class="pearl">
+      <p><strong>Una frase que vale para todo lo que sigue.</strong> Si un epitelio está expuesto al
+        exterior y húmedo, hay tejido linfoide debajo. La superficie del ojo cumple las dos condiciones.
+        Lo que viene ahora es la aplicación de esta regla al ojo.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 04 ─────────── -->
+<section class="station" id="s2e4">
+  <div class="station-header">
+    <div class="station-number">04</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">El ojo, primera parte</div>
+      <h2>El tejido linfoide del ojo: CALT, LDALT, EALT</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>La superficie ocular es una mucosa: está cubierta por un epitelio húmedo, bañado por la lágrima y
+      abierto al exterior cada vez que abres los ojos. Cumple la regla, y por tanto tiene su propio
+      MALT.</p>
+
+    <div class="three-col">
+      <div class="col-card">
+        <h5>CALT</h5>
+        <p>Tejido linfoide asociado a la <strong>conjuntiva</strong>. Folículos sin cápsula bajo el
+          epitelio, sobre todo en la <strong>conjuntiva tarsal</strong> y en los
+          <strong>fórnices</strong>.</p>
+      </div>
+      <div class="col-card">
+        <h5>LDALT</h5>
+        <p>El de las <strong>vías lagrimales</strong>: canalículos, saco y conducto nasolagrimal. Vigila
+          la lágrima <em>de salida</em>, camino de la nariz.</p>
+      </div>
+      <div class="col-card">
+        <h5>EALT</h5>
+        <p>El concepto que reúne a los dos anteriores <strong>más la glándula lagrimal</strong> como una
+          sola unidad continua, conectada por la película lagrimal.</p>
+      </div>
+    </div>
+
+    <p>La idea de <strong>EALT</strong> —tejido linfoide asociado al ojo— es la que conviene entender: la
+      glándula que produce la lágrima, la superficie que baña y el conducto por el que se va no son tres
+      sitios separados, sino <strong>un circuito continuo</strong> con vigilancia repartida a lo largo de
+      todo su recorrido.</p>
+
+    <div class="clinical-box">
+      <h5>👁 Interfaz optométrica</h5>
+      <p>Cuando evierte el párpado y ve <strong>folículos</strong> en la conjuntiva tarsal —elevaciones
+        redondeadas, translúcidas, con un vaso que las rodea por fuera—, está viendo <strong>CALT
+        reactivo</strong>: tejido propio del paciente que ha respondido. Es el signo de las
+        conjuntivitis <strong>virales</strong> y de las causadas por clamidia.</p>
+      <p>No lo confunda con las <strong>papilas</strong>, que son elevaciones poligonales con un
+        <strong>vaso central</strong> y orientan a causa <strong>alérgica</strong> o mecánica. La
+        diferencia es puramente morfológica y está en dónde queda el vaso: <strong>por fuera</strong> en
+        el folículo, <strong>en el centro</strong> en la papila. Se distinguen con la lámpara de
+        hendidura y cambian el diagnóstico.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 05 ─────────── -->
+<section class="station" id="s2e5">
+  <div class="station-header">
+    <div class="station-number">05</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">El ojo, segunda parte</div>
+      <h2>Lo que el ojo no tiene: el privilegio inmune</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Aquí está la pregunta 5 del principio. Y la respuesta es una <strong>ausencia</strong>.</p>
+
+    <div class="pearl">
+      <p><strong>El globo ocular no tiene vasos linfáticos.</strong> Ni la córnea, ni el cristalino, ni el
+        humor acuoso, ni el vítreo, ni la retina, ni la coroides, ni la esclera. El tejido linfoide del
+        ojo está <em>fuera</em> del globo: en la conjuntiva, en los párpados y en las vías lagrimales. El
+        interior del ojo está fuera de la red.</p>
+    </div>
+
+    <h3>Qué consecuencia tiene</h3>
+    <p>Un tejido que no tiene vasos linfáticos es un tejido del que <strong>no sale material hacia un
+      ganglio</strong>. Y si nada de lo que hay ahí dentro llega a un ganglio, el sistema de defensa
+      apenas se entera de lo que ocurre en ese lugar. Eso es, en términos anatómicos, el
+      <strong>privilegio inmune</strong>.</p>
+
+    <p>En la córnea se suman cuatro condiciones:</p>
+    <div class="two-col">
+      <div class="col-card">
+        <h5>Es avascular</h5>
+        <p>No llegan vasos sanguíneos: se nutre del humor acuoso, de la lágrima y del limbo.</p>
+      </div>
+      <div class="col-card">
+        <h5>Es alinfática</h5>
+        <p>No hay vasos linfáticos que saquen material hacia los ganglios preauriculares.</p>
+      </div>
+      <div class="col-card">
+        <h5>Hay una barrera</h5>
+        <p>El endotelio y el epitelio la aíslan del resto del organismo.</p>
+      </div>
+      <div class="col-card">
+        <h5>Su centro está poco vigilado</h5>
+        <p>Las células capaces de presentar material al sistema de defensa son escasas en el centro de la
+          córnea y abundantes en el limbo.</p>
+      </div>
+    </div>
+
+    <div class="clinical-box">
+      <h5>👁 Interfaz optométrica</h5>
+      <p><strong>Por eso el trasplante de córnea funciona sin buscar donante compatible</strong> y sin
+        inmunosupresión de por vida, con tasas de éxito que ningún otro trasplante alcanza. El injerto se
+        coloca en un tejido del que nada sale hacia un ganglio.</p>
+      <p>Y por eso mismo, <strong>cuando aparecen vasos en la córnea, el privilegio se pierde</strong>. La
+        neovascularización corneal —por hipoxia crónica de lente de contacto, por quemadura química, por
+        inflamación mantenida— trae consigo vasos sanguíneos <em>y también linfáticos</em>. A partir de
+        ahí el injerto sí se ve, sí drena a un ganglio y sí puede rechazarse. Lo que usted mide con la
+        lámpara de hendidura en un usuario de lentes de contacto no es solo un signo de hipoxia: es un
+        dato de pronóstico si ese paciente necesita un trasplante algún día.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 06 ─────────── -->
+<section class="station" id="s2e6">
+  <div class="station-header">
+    <div class="station-number">06</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">El ojo, tercera parte</div>
+      <h2>Cómo drena el ojo: la regla de los dos grupos</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>El globo no drena. Pero los <strong>párpados y la conjuntiva sí</strong>, y bastante. Su linfa va a
+      dos grupos del collar pericervical que vimos en la sesión 1, y el reparto sigue una regla sencilla
+      de lateralidad.</p>
+
+    <div class="recorrido">
+      <p>mitad <strong>lateral</strong> → <strong>ganglios preauriculares</strong> (parotídeos
+        superficiales) &nbsp;·&nbsp; mitad <strong>medial</strong> → <strong>ganglios
+        submandibulares</strong> &nbsp;→&nbsp; cadena <strong>cervical profunda</strong></p>
+    </div>
+
+    <div class="two-col">
+      <div class="col-card amber">
+        <h5>Hacia el preauricular</h5>
+        <p>Los <strong>dos tercios laterales</strong> del párpado superior y del inferior, y la conjuntiva
+          correspondiente. Es decir, el lado de la sien.</p>
+      </div>
+      <div class="col-card teal">
+        <h5>Hacia el submandibular</h5>
+        <p>El <strong>tercio medial</strong> de ambos párpados y la conjuntiva del ángulo interno, junto
+          con el saco lagrimal. Es decir, el lado de la nariz.</p>
+      </div>
+    </div>
+
+    <div class="photo-hero">
+      <img src="img/fig_90_2_ganglios_cabeza_cuello.png"
+           alt="Ganglios linfáticos de la cabeza y del cuello: localización de los nodos parotídeos superficiales por delante del trago y de los nodos submandibulares bajo la mandíbula, con su drenaje hacia la cadena cervical profunda"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>Vuelve a la lámina de la sesión 1, ahora con el ojo en la
+        cabeza.</strong> Localiza los <em>parotídeos superficiales</em>, por delante del trago: ahí llega
+        lo lateral. Y los <em>submandibulares</em>, bajo la mandíbula: ahí llega lo medial. De los dos, a
+        la cadena profunda del cuello. Latarjet, Fig. 90-2.</div>
+    </div>
+
+    <h3>Tres cuadros clínicos que se explican con este mapa</h3>
+    <div class="three-col">
+      <div class="col-card">
+        <h5>Adenopatía preauricular</h5>
+        <p>Ojo rojo con un ganglio palpable y doloroso por delante de la oreja: es el sello de la
+          <strong>conjuntivitis viral</strong> por adenovirus. Casi ninguna otra conjuntivitis lo
+          produce, así que palpar ahí orienta el diagnóstico en diez segundos y sin instrumentos.</p>
+      </div>
+      <div class="col-card">
+        <h5>Síndrome oculoglandular</h5>
+        <p>Conjuntivitis granulomatosa en un ojo <strong>más</strong> adenopatía preauricular marcada.
+          Descrito por Parinaud, se asocia clásicamente a la enfermedad por arañazo de gato. La
+          combinación de los dos hallazgos es lo que tiene nombre.</p>
+      </div>
+      <div class="col-card">
+        <h5>Linfoma del CALT</h5>
+        <p>Una lesión <strong>color salmón</strong>, lisa, indolora y de crecimiento lento en el fórnix
+          conjuntival. Nace del propio tejido linfoide de la conjuntiva. Es infrecuente, pero el aspecto
+          es tan característico que conviene conocerlo: no duele, no se inflama y no se va.</p>
+      </div>
+    </div>
+
+    <div class="clinical-box">
+      <h5>👁 Interfaz optométrica</h5>
+      <p>La palpación de los ganglios <strong>preauricular y submandibular</strong> debería ser parte de
+        la exploración de todo ojo rojo. Es gratis, dura veinte segundos y separa dos grupos de causas.
+        Además, la regla de lateralidad permite razonar al revés: si el ganglio que crece es el
+        submandibular y no el preauricular, mire hacia el <strong>ángulo interno</strong> y hacia el
+        <strong>saco lagrimal</strong>, no hacia la sien.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 07 ─────────── -->
+<section class="station" id="s2e7">
+  <div class="station-header">
+    <div class="station-number">07</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Un matiz reciente</div>
+      <h2>El cerebro, el sueño y los linfáticos que no existían</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>En la sesión 1 escribimos que el sistema nervioso central no tiene vasos linfáticos. Durante más de
+      un siglo eso fue un dogma. En la última década ha dejado de serlo del todo, y conviene que lo sepas
+      porque es un ejemplo de anatomía que todavía se está escribiendo.</p>
+
+    <div class="two-col">
+      <div class="col-card">
+        <h5>El sistema glinfático</h5>
+        <p>Un sistema de <strong>espacios perivasculares</strong> por los que circula líquido
+          cefalorraquídeo hacia el tejido nervioso y vuelve arrastrando desechos. Se llama así por las
+          células <strong>gliales</strong> que lo delimitan. Se describió en 2012, y parece funcionar
+          sobre todo <strong>durante el sueño</strong>.</p>
+      </div>
+      <div class="col-card">
+        <h5>Los linfáticos meníngeos</h5>
+        <p>En 2015 se describieron auténticos <strong>vasos linfáticos en la duramadre</strong>, junto a
+          los senos venosos. Drenan —esto es lo interesante para nosotros— a los <strong>ganglios
+          cervicales profundos</strong>: la misma cadena a la que llega el ojo.</p>
+      </div>
+    </div>
+
+    <p>La <strong>vaina del nervio óptico</strong> es una prolongación de las meninges y contiene líquido
+      cefalorraquídeo, así que la pregunta de si el ojo participa en alguna medida de estas vías está
+      abierta y se investiga activamente.</p>
+
+    <div class="pearl">
+      <p><strong>Cómo tomarse esto.</strong> No lo estudies como un hecho cerrado ni lo descartes como
+        curiosidad. Es el estado actual de un campo que se está moviendo: hace quince años el enunciado
+        «el encéfalo carece de linfáticos» se daba por definitivo y hoy tiene excepciones con nombre. La
+        anatomía tampoco es una lista terminada.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 08 ─────────── -->
+<section class="station" id="s2e8">
+  <div class="station-header">
+    <div class="station-number">08</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Terminología</div>
+      <h2>Términos TA2 de la sesión</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Toca la tarjeta para ver la definición.</p>
+    <div class="flip-grid">
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Órganos linfoides primarios</span><span class="term-en">Organa lymphoidea primaria</span></div>
+        <div class="flip-back"><p class="term-def">Aquellos donde las células de defensa se forman y maduran: médula ósea roja y timo.</p><p class="term-opto">👁 Los secundarios son ganglios, bazo y MALT.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Médula ósea roja</span><span class="term-en">Medulla ossium rubra</span></div>
+        <div class="flip-back"><p class="term-def">Tejido hematopoyético de los huesos planos y de las epífisis de los huesos largos.</p><p class="term-opto">👁 Origina todas las células de la sangre y carece de vasos linfáticos.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Timo</span><span class="term-en">Thymus</span></div>
+        <div class="flip-back"><p class="term-def">Órgano bilobulado del mediastino superior, con corteza y médula en cada lobulillo.</p><p class="term-opto">👁 Involuciona tras la pubertad sin que la cápsula cambie de tamaño.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Bazo</span><span class="term-en">Splen · Lien</span></div>
+        <div class="flip-back"><p class="term-def">Mayor órgano linfoide; hipocondrio izquierdo, entre la novena y la undécima costillas.</p><p class="term-opto">👁 Filtra sangre, no linfa: no tiene vasos aferentes.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Pulpa blanca</span><span class="term-en">Pulpa alba</span></div>
+        <div class="flip-back"><p class="term-def">Tejido linfoide del bazo, dispuesto como manguito en torno a las arterias centrales.</p><p class="term-opto">👁 Es la parte propiamente linfática del órgano.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Pulpa roja</span><span class="term-en">Pulpa rubra</span></div>
+        <div class="flip-back"><p class="term-def">Senos venosos y cordones esplénicos que ocupan el resto del parénquima del bazo.</p><p class="term-opto">👁 Donde se retiran los eritrocitos envejecidos.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Anillo linfoide faríngeo</span><span class="term-en">Anulus lymphoideus pharyngis</span></div>
+        <div class="flip-back"><p class="term-def">Conjunto de amígdalas que rodea la entrada de la faringe; anillo de Waldeyer.</p><p class="term-opto">👁 Faríngea, palatinas, linguales y tubáricas.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Amígdala palatina</span><span class="term-en">Tonsilla palatina</span></div>
+        <div class="flip-back"><p class="term-def">Masa de tejido linfoide alojada entre los pilares del paladar, a cada lado.</p><p class="term-opto">👁 Su ganglio de drenaje es el yugulodigástrico.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Amígdala faríngea</span><span class="term-en">Tonsilla pharyngealis</span></div>
+        <div class="flip-back"><p class="term-def">Masa impar del techo de la nasofaringe; la «adenoide» de la clínica.</p><p class="term-opto">👁 Al crecer obstruye la trompa auditiva y la vía nasal.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Nódulos linfoides agregados</span><span class="term-en">Noduli lymphoidei aggregati</span></div>
+        <div class="flip-back"><p class="term-def">Acúmulos de tejido linfoide sin cápsula en la pared del íleon; placas de Peyer.</p><p class="term-opto">👁 El mismo principio que el CALT, en otra mucosa.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Conjuntiva</span><span class="term-en">Tunica conjunctiva</span></div>
+        <div class="flip-back"><p class="term-def">Mucosa que tapiza la cara posterior de los párpados y la superficie anterior de la esclera.</p><p class="term-opto">👁 Sí tiene vasos linfáticos, a diferencia del globo.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Fórnix conjuntival</span><span class="term-en">Fornix conjunctivae</span></div>
+        <div class="flip-back"><p class="term-def">Fondo de saco donde la conjuntiva palpebral se continúa con la bulbar.</p><p class="term-opto">👁 Zona de mayor densidad de CALT.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Córnea</span><span class="term-en">Cornea</span></div>
+        <div class="flip-back"><p class="term-def">Segmento transparente anterior de la túnica fibrosa del ojo.</p><p class="term-opto">👁 Avascular y alinfática: de ahí su privilegio inmune.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Limbo de la córnea</span><span class="term-en">Limbus corneae</span></div>
+        <div class="flip-back"><p class="term-def">Zona de transición entre córnea y esclera, con arcadas vasculares y células madre.</p><p class="term-opto">👁 Frontera del privilegio: de aquí hacia dentro ya no hay vasos.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Glándula lagrimal</span><span class="term-en">Glandula lacrimalis</span></div>
+        <div class="flip-back"><p class="term-def">Glándula del ángulo superolateral de la órbita que produce la porción acuosa de la lágrima.</p><p class="term-opto">👁 Forma parte del EALT junto con conjuntiva y vías lagrimales.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Saco lagrimal</span><span class="term-en">Saccus lacrimalis</span></div>
+        <div class="flip-back"><p class="term-def">Dilatación de la vía lagrimal alojada en la fosa del hueso lagrimal.</p><p class="term-opto">👁 Su tejido linfoide es el LDALT; drena a los submandibulares.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Duramadre</span><span class="term-en">Dura mater</span></div>
+        <div class="flip-back"><p class="term-def">Meninge más externa, fibrosa, que contiene los senos venosos craneales.</p><p class="term-opto">👁 En ella se describieron en 2015 vasos linfáticos meníngeos.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Vaina del nervio óptico</span><span class="term-en">Vagina nervi optici</span></div>
+        <div class="flip-back"><p class="term-def">Prolongación de las meninges que envuelve al nervio óptico y contiene líquido cefalorraquídeo.</p><p class="term-opto">👁 Vía de conexión entre el ojo y el espacio subaracnoideo.</p></div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 09 ─────────── -->
+<section class="station" id="s2e9">
+  <div class="station-header">
+    <div class="station-number">09</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Práctica de recuperación</div>
+      <h2>Comprueba lo que aprendiste</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Igual que en la sesión anterior: una sola respuesta por pregunta, y lee la explicación aunque
+      aciertes.</p>
+
+    <div class="check-question" data-question="q1s2">
+      <p class="question-text">1. ¿Cuáles son los órganos linfoides primarios?</p>
+      <ul class="options">
+        <li data-letter="A">El bazo y los ganglios linfáticos</li>
+        <li data-letter="B" data-correct="true">La médula ósea roja y el timo</li>
+        <li data-letter="C">Las amígdalas y las placas de Peyer</li>
+        <li data-letter="D">El timo y el bazo</li>
+        <li data-letter="E">Los ganglios y el tejido linfoide mucoso</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: B.</strong> Primario significa «donde se forman y maduran»
+        las células de defensa, antes de encontrarse con nada del exterior. Solo la médula ósea roja y el
+        timo cumplen eso. El bazo, los ganglios y el MALT son secundarios: ahí esas células ya maduras
+        entran en contacto con el material que llega.</div>
+    </div>
+
+    <div class="check-question" data-question="q2s2">
+      <p class="question-text">2. ¿Qué criterio morfológico separa un órgano linfoide de un tejido
+        linfoide?</p>
+      <ul class="options">
+        <li data-letter="A">El tamaño que alcanza en el adulto</li>
+        <li data-letter="B">La presencia de centros germinales activos</li>
+        <li data-letter="C">Que reciba o no vasos linfáticos aferentes</li>
+        <li data-letter="D" data-correct="true">Tener una cápsula de tejido conectivo</li>
+        <li data-letter="E">Su localización dentro o fuera del tórax</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: D.</strong> El ganglio y el bazo están rodeados por una
+        cápsula: son órganos. El tejido linfoide de las mucosas —amígdalas, placas de Peyer, CALT— no la
+        tiene: son agregados difusos dentro de la pared. Los centros germinales aparecen en ambos, y el
+        criterio de los aferentes falla precisamente con el bazo, que es un órgano y no los tiene.</div>
+    </div>
+
+    <div class="check-question" data-question="q3s2">
+      <p class="question-text">3. ¿Qué le ocurre al timo después de la pubertad?</p>
+      <ul class="options">
+        <li data-letter="A">Aumenta de tamaño de forma progresiva</li>
+        <li data-letter="B">Desaparece por completo, cápsula incluida</li>
+        <li data-letter="C" data-correct="true">Se sustituye por grasa sin cambiar su cápsula</li>
+        <li data-letter="D">Se desplaza hacia el mediastino posterior</li>
+        <li data-letter="E">Se transforma en un ganglio linfático más</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: C.</strong> Es la <em>involución tímica</em>, y es normal. De
+        unos 70 gramos en el lactante se pasa a unos 3 gramos de tejido activo en el anciano, mientras el
+        resto se reemplaza por tejido adiposo. El detalle fino: la cápsula conserva su tamaño, de modo que
+        el órgano parece intacto por fuera mientras por dentro se ha vaciado.</div>
+    </div>
+
+    <div class="check-question" data-question="q4s2">
+      <p class="question-text">4. ¿Por qué el bazo carece de vasos linfáticos aferentes?</p>
+      <ul class="options">
+        <li data-letter="A">Porque su cápsula no permite atravesarla</li>
+        <li data-letter="B">Porque está envuelto por el peritoneo</li>
+        <li data-letter="C">Porque su pulpa blanca ya filtra la linfa</li>
+        <li data-letter="D">Porque el conducto torácico no llega tan abajo</li>
+        <li data-letter="E" data-correct="true">Porque filtra sangre, no linfa</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: E.</strong> Es la diferencia decisiva con el ganglio. El
+        ganglio está intercalado en la vía linfática y por eso recibe aferentes; el bazo está intercalado
+        en la vía <em>sanguínea</em>, así que lo que le llega viene por la arteria esplénica y lo que sale
+        se va por la vena. Tiene vasos linfáticos eferentes, pero ninguno que le traiga linfa.</div>
+    </div>
+
+    <div class="check-question" data-question="q5s2">
+      <p class="question-text">5. ¿Cómo se dispone la pulpa blanca del bazo?</p>
+      <ul class="options">
+        <li data-letter="A">En la periferia del órgano, justo bajo la cápsula</li>
+        <li data-letter="B" data-correct="true">Como manguito en torno a las arterias centrales</li>
+        <li data-letter="C">En cordones situados entre los senos venosos</li>
+        <li data-letter="D">Únicamente alrededor del hilio esplénico</li>
+        <li data-letter="E">Formando folículos con cápsula propia</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: B.</strong> La pulpa blanca es tejido linfoide envainando las
+        arterias centrales, lo que le da al corte ese punteado claro sobre fondo rojo. Los cordones entre
+        senos venosos son la pulpa <em>roja</em>. Y ningún folículo del bazo tiene cápsula propia: la
+        cápsula es la del órgano entero.</div>
+    </div>
+
+    <div class="check-question" data-question="q6s2">
+      <p class="question-text">6. ¿Qué es el CALT?</p>
+      <ul class="options">
+        <li data-letter="A">El tejido linfoide de las vías lagrimales</li>
+        <li data-letter="B">El conjunto de los ganglios preauriculares</li>
+        <li data-letter="C" data-correct="true">El tejido linfoide de la conjuntiva</li>
+        <li data-letter="D">La cápsula del ganglio parotídeo</li>
+        <li data-letter="E">Un vaso linfático del párpado superior</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: C.</strong> Son folículos sin cápsula bajo el epitelio
+        conjuntival, sobre todo en la conjuntiva tarsal y en los fórnices. El de las vías lagrimales se
+        llama LDALT, y el término que engloba a los dos junto con la glándula lagrimal es EALT. Los tres
+        nombres describen el mismo principio en tramos distintos de la misma superficie.</div>
+    </div>
+
+    <div class="check-question" data-question="q7s2">
+      <p class="question-text">7. Al evertir el párpado se ven elevaciones redondeadas y translúcidas, con
+        un vaso que las rodea por fuera. ¿Qué son?</p>
+      <ul class="options">
+        <li data-letter="A">Papilas, propias de la causa alérgica</li>
+        <li data-letter="B">Un linfoma del tejido conjuntival</li>
+        <li data-letter="C">Una hipertrofia de la glándula lagrimal</li>
+        <li data-letter="D" data-correct="true">Folículos, propios de la causa viral</li>
+        <li data-letter="E">Quistes de retención del fórnix inferior</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: D.</strong> La clave está en dónde queda el vaso: en el
+        folículo lo rodea <em>por fuera</em>, porque el agregado linfoide empuja el epitelio desde abajo.
+        En la papila el vaso está <em>en el centro</em> y la forma es poligonal. Folículos orientan a
+        infección viral o por clamidia; papilas, a alergia o a causa mecánica.</div>
+    </div>
+
+    <div class="check-question" data-question="q8s2">
+      <p class="question-text">8. ¿Cuál de estas estructuras del ojo <strong>SÍ</strong> tiene vasos
+        linfáticos?</p>
+      <ul class="options">
+        <li data-letter="A" data-correct="true">La conjuntiva</li>
+        <li data-letter="B">La córnea</li>
+        <li data-letter="C">La retina</li>
+        <li data-letter="D">El cristalino</li>
+        <li data-letter="E">La coroides</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: A.</strong> El globo ocular carece de vasos linfáticos en
+        todas sus capas y contenidos. El tejido linfático del ojo está <em>fuera</em> del globo: conjuntiva,
+        párpados y vías lagrimales. Por eso la conjuntiva drena a ganglios palpables y la córnea, que está
+        a milímetros de ella, no drena a ninguno.</div>
+    </div>
+
+    <div class="check-question" data-question="q9s2">
+      <p class="question-text">9. El trasplante de córnea se acepta sin buscar compatibilidad sobre todo
+        porque la córnea…</p>
+      <ul class="options">
+        <li data-letter="A">Se regenera con rapidez por sí sola</li>
+        <li data-letter="B">Carece de terminaciones nerviosas</li>
+        <li data-letter="C">Está protegida por los párpados</li>
+        <li data-letter="D">Se lava continuamente con la lágrima</li>
+        <li data-letter="E" data-correct="true">No tiene vasos sanguíneos ni linfáticos</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: E.</strong> Sin vasos linfáticos no sale material del injerto
+        hacia ningún ganglio, y sin vasos sanguíneos tampoco llegan células desde fuera: el tejido queda
+        fuera del alcance del sistema de defensa. Eso es el privilegio inmune. La córnea, por cierto, es
+        de los tejidos con <em>más</em> terminaciones nerviosas del cuerpo: la opción B es falsa por partida
+        doble.</div>
+    </div>
+
+    <div class="check-question" data-question="q10s2">
+      <p class="question-text">10. En un usuario de lentes de contacto aparecen vasos que invaden la
+        córnea. De cara a un futuro trasplante, esto significa que…</p>
+      <ul class="options">
+        <li data-letter="A">La córnea se ha vuelto más resistente</li>
+        <li data-letter="B">El injerto se integrará con más rapidez</li>
+        <li data-letter="C" data-correct="true">El riesgo de rechazo aumenta</li>
+        <li data-letter="D">No tiene ninguna consecuencia práctica</li>
+        <li data-letter="E">Esa córnea ya no podrá trasplantarse nunca</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: C.</strong> La neovascularización trae vasos sanguíneos y
+        también linfáticos, y con ellos se pierde justamente lo que daba el privilegio: el injerto pasa a
+        drenar hacia un ganglio y puede ser rechazado. No lo impide para siempre, pero cambia el
+        pronóstico. Por eso el grado de neovascularización que usted anota en la lámpara de hendidura es
+        un dato clínico, no un detalle cosmético.</div>
+    </div>
+
+    <div class="check-question" data-question="q11s2">
+      <p class="question-text">11. El tercio medial de los párpados drena a los ganglios…</p>
+      <ul class="options">
+        <li data-letter="A">Preauriculares</li>
+        <li data-letter="B" data-correct="true">Submandibulares</li>
+        <li data-letter="C">Occipitales</li>
+        <li data-letter="D">Mastoideos</li>
+        <li data-letter="E">Supraclaviculares</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: B.</strong> La regla es de lateralidad: lo que está del lado
+        de la nariz —tercio medial de ambos párpados, ángulo interno, saco lagrimal— va a los
+        submandibulares; lo que está del lado de la sien —los dos tercios laterales— va a los
+        preauriculares. De ambos grupos, la linfa sigue a la cadena cervical profunda.</div>
+    </div>
+
+    <div class="check-question" data-question="q12s2">
+      <p class="question-text">12. Un paciente con ojo rojo, lagrimeo abundante y un ganglio doloroso por
+        delante de la oreja tiene, con mayor probabilidad…</p>
+      <ul class="options">
+        <li data-letter="A">Una conjuntivitis alérgica estacional</li>
+        <li data-letter="B">Un ojo seco de grado moderado</li>
+        <li data-letter="C">Una uveítis anterior aguda</li>
+        <li data-letter="D" data-correct="true">Una conjuntivitis viral</li>
+        <li data-letter="E">Un glaucoma agudo de ángulo cerrado</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: D.</strong> La adenopatía preauricular es el sello de la
+        conjuntivitis por adenovirus: casi ninguna otra causa de ojo rojo la produce. La alérgica da
+        papilas y picor sin ganglio; el ojo seco no da adenopatía; la uveítis y el glaucoma agudo cursan
+        con dolor profundo y alteración de la visión, también sin ganglio. Palpar ahí resuelve mucho en
+        veinte segundos.</div>
+    </div>
+
+    <div class="check-question" data-question="q13s2">
+      <p class="question-text">13. Los vasos linfáticos meníngeos descritos en 2015 drenan hacia…</p>
+      <ul class="options">
+        <li data-letter="A">El conducto linfático derecho, directamente</li>
+        <li data-letter="B">Los ganglios occipitales</li>
+        <li data-letter="C">Los senos venosos de la duramadre</li>
+        <li data-letter="D">La cisterna del quilo</li>
+        <li data-letter="E" data-correct="true">Los ganglios cervicales profundos</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: E.</strong> Discurren en la duramadre, junto a los senos
+        venosos —pero no <em>hacia</em> ellos: los acompañan—, y terminan en la cadena cervical profunda,
+        la misma a la que llega el drenaje del ojo y de la cara. Que el encéfalo y el ojo compartan
+        estación final es lo que hace interesante este hallazgo para la optometría.</div>
+    </div>
+
+    <div class="check-question" data-question="q14s2">
+      <p class="question-text">14. El anillo de Waldeyer está formado por…</p>
+      <ul class="options">
+        <li data-letter="A">Los ganglios del collar pericervical</li>
+        <li data-letter="B">Las placas de Peyer del íleon</li>
+        <li data-letter="C" data-correct="true">Las amígdalas de la entrada de la faringe</li>
+        <li data-letter="D">Los folículos de la conjuntiva tarsal</li>
+        <li data-letter="E">Los senos medulares del ganglio linfático</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: C.</strong> Lo componen la amígdala faríngea —la adenoide—,
+        las dos palatinas, las linguales y las tubáricas. Es tejido linfoide sin cápsula colocado
+        justamente donde el aire y el alimento entran en el cuerpo. El collar pericervical, que se le
+        parece en la idea de anillo, está formado por ganglios y queda por fuera, en el límite entre
+        cabeza y cuello.</div>
+    </div>
+
+    <div class="check-question" data-question="q15s2">
+      <p class="question-text">15. Una lesión lisa, de color salmón, indolora y de crecimiento lento en el
+        fórnix conjuntival sugiere…</p>
+      <ul class="options">
+        <li data-letter="A">Una conjuntivitis folicular por adenovirus</li>
+        <li data-letter="B" data-correct="true">Un linfoma originado en el CALT</li>
+        <li data-letter="C">Una hemorragia subconjuntival</li>
+        <li data-letter="D">Un pterigión en fase inicial</li>
+        <li data-letter="E">Una papila gigante por lente de contacto</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: B.</strong> Nace del propio tejido linfoide de la conjuntiva.
+        Los tres rasgos que lo delatan son que <em>no duele</em>, <em>no se inflama</em> y <em>no se
+        va</em>: cualquier proceso inflamatorio habría cambiado en días. La hemorragia subconjuntival es
+        roja y se reabsorbe sola; el pterigión crece desde el limbo y es blanquecino.</div>
+    </div>
+
+    <div class="saber-box">
+      <strong>Pregunta tipo Saber Pro · Caso</strong>
+      <div class="check-question" style="margin-top:16px;border-color:var(--purple)" data-question="q16s2">
+        <p class="question-text">16. Un hombre de 28 años consulta por ojo rojo derecho de cuatro días,
+          con lagrimeo abundante y sensación de cuerpo extraño. Al evertir el párpado se ven folículos en
+          la conjuntiva tarsal, y se palpa un ganglio doloroso por delante de la oreja derecha. ¿Cuál es
+          la explicación morfológica de ese ganglio?</p>
+        <ul class="options">
+          <li data-letter="A" data-correct="true">La conjuntiva lateral drena a los parotídeos superficiales</li>
+          <li data-letter="B">La córnea ha drenado material hacia ese ganglio</li>
+          <li data-letter="C">El humor acuoso sale del ojo por vía linfática</li>
+          <li data-letter="D">El ganglio recoge la linfa de la retina inflamada</li>
+          <li data-letter="E">La glándula lagrimal drena a los ganglios occipitales</li>
+        </ul>
+        <div class="feedback"><strong>Correcta: A.</strong> El ganglio preauricular <em>es</em> el
+          parotídeo superficial, y recibe la linfa de los dos tercios laterales de los párpados y de la
+          conjuntiva correspondiente. Las otras cuatro opciones proponen drenajes que no existen: ni la
+          córnea, ni el humor acuoso, ni la retina tienen vasos linfáticos, y la glándula lagrimal drena
+          también hacia los preauriculares, no hacia la nuca. El ganglio se explica por la conjuntiva
+          inflamada, que es la única estructura del cuadro que sí tiene por dónde drenar.</div>
+      </div>
+    </div>
+
+    <div class="saber-box">
+      <strong>Question in English · Terminology</strong>
+      <div class="check-question" style="margin-top:16px;border-color:var(--purple)" data-question="q17s2">
+        <p class="question-text">17. The cornea is described as an <em>immune-privileged</em> tissue.
+          Which anatomical feature best accounts for that privilege?</p>
+        <ul class="options">
+          <li data-letter="A">Its rich supply of sensory nerve endings</li>
+          <li data-letter="B">Its constant exposure to the tear film</li>
+          <li data-letter="C">Its high density of collagen fibres</li>
+          <li data-letter="D" data-correct="true">Its lack of blood and lymphatic vessels</li>
+          <li data-letter="E">Its position behind the eyelids</li>
+        </ul>
+        <div class="feedback"><strong>Correct answer: D.</strong> With no lymphatic vessels, antigens
+          cannot be carried from the cornea to a regional lymph node; with no blood vessels, immune cells
+          cannot easily reach it. <em>Alinfática</em> and <em>avascular</em> are the two words to keep.
+          The cornea does have a very rich sensory innervation, so option A is true as a statement but
+          irrelevant to immune privilege.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 10 ─────────── -->
+<section class="station" id="s2e10">
+  <div class="station-header">
+    <div class="station-number">10</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Cierre</div>
+      <h2>Volvemos a las cinco preguntas</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Las mismas de esta mañana. Intenta responderlas antes de abrir cada respuesta.</p>
+
+    <div class="acorde">
+      <details>
+        <summary>1 · ¿De dónde sale el líquido del dedo hinchado y por dónde se va?</summary>
+        <p>Sale de los <strong>capilares sanguíneos</strong>: la presión los hace filtrar más líquido del
+          que reabsorben, y la inflamación aumenta esa filtración. Se va por los <strong>capilares
+          linfáticos</strong>, que además son los únicos capaces de recuperar las proteínas que
+          escaparon. Y se van abriendo más cuanto más hinchado está el tejido, porque los filamentos de
+          fijación tiran de su endotelio.</p>
+      </details>
+      <details>
+        <summary>2 · ¿Por qué el linfático no es un circuito cerrado?</summary>
+        <p>Porque no tiene que llevar nada <em>hacia</em> los tejidos: solo tiene que
+          <strong>recoger</strong>. Un circuito cerrado hace falta cuando hay que repartir y volver a
+          buscar, como con la sangre. Aquí basta con un desagüe de una sola dirección: empieza donde está
+          el líquido sobrante y termina donde hay que devolverlo, en la vena. Por eso tampoco necesita una
+          bomba central, pero sí muchísimas válvulas.</p>
+      </details>
+      <details>
+        <summary>3 · ¿Qué busca el médico al palpar el cuello?</summary>
+        <p><strong>Ganglios agrandados.</strong> Toda la linfa de la cabeza y el cuello —incluida la de la
+          faringe y la de los párpados— pasa por el collar pericervical y termina en la cadena yugular
+          interna. Un ganglio que crece señala la región de la que le llega la linfa. Y cómo crece importa
+          tanto como que crezca: blando, móvil y doloroso apunta a infección; duro, fijo e indoloro obliga
+          a estudiar más.</p>
+      </details>
+      <details>
+        <summary>4 · ¿Qué se quitó en la cirugía para que el brazo no desinflame?</summary>
+        <p>Los <strong>ganglios axilares</strong>, que son la estación por la que el brazo devuelve su
+          linfa. Al quitarlos se interrumpe la vía, el líquido con proteínas se queda en el tejido y
+          aparece un <strong>linfedema</strong>. Se distingue de otros edemas porque no cede con la
+          postura ni con diuréticos: el problema no es cuánto líquido llega, sino que no hay por dónde
+          sacarlo.</p>
+      </details>
+      <details>
+        <summary>5 · ¿Qué tiene la córnea que no tiene el riñón?</summary>
+        <p>No es lo que tiene: es lo que <strong>le falta</strong>. La córnea no tiene vasos sanguíneos ni
+          vasos linfáticos. Sin linfáticos, nada del injerto llega a un ganglio; sin vasos sanguíneos, casi
+          nada llega desde fuera al injerto. El trasplante ocurre en un lugar del cuerpo que el sistema de
+          defensa apenas vigila, y por eso se hace sin tipificar y casi nunca se rechaza. El precio está en
+          la otra cara: si esa córnea se neovasculariza, el privilegio se pierde y el rechazo pasa a ser
+          posible.</p>
+      </details>
+    </div>
+
+    <div class="pearl">
+      <p><strong>Lo que hay que llevarse de hoy.</strong> El sistema linfático recoge lo que la sangre dejó
+        atrás, lo hace pasar por filtros y lo devuelve a la vena en la base del cuello. En la cabeza todo
+        converge en la cadena yugular interna, y los párpados y la conjuntiva reparten su drenaje entre dos
+        grupos según la lateralidad: preauriculares lo lateral, submandibulares lo medial. Pero lo más
+        característico del ojo no es lo que tiene, sino lo que no tiene: <strong>el globo ocular está fuera
+        de la red linfática</strong>, y de esa ausencia salen a la vez el éxito del trasplante de córnea y
+        el riesgo que aparece cuando la córnea se llena de vasos. En la próxima sesión, el II Parcial
+        recogerá el nervioso, el circulatorio y el linfático.</p>
+    </div>
+  </div>
+</section>
+
+</div><!-- fin sesión 2 -->
+</div><!-- fin container -->
+
+<footer class="footer">
+  <p><strong>Morfología General · Optometría · Universidad de La Salle · 2026-II</strong></p>
+  <p>Clase 10 · Sistema linfático: el líquido que vuelve y el ojo que no drena · Jueves 1 de octubre de 2026</p>
+  <p>Fuentes: Tortora &amp; Derrickson, <em>Principios de Anatomía y Fisiología</em>, capítulo 22 ·
+     Latarjet &amp; Ruiz Liard, <em>Anatomía Humana</em>, tomo 2, capítulo 90</p>
+</footer>
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" aria-label="Cerrar">✕</button>
+  <img src="" alt="">
+  <div class="lb-caption"></div>
+</div>
+
+<script>
+function showTab(id,btn){
+  document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+document.querySelectorAll('.check-question').forEach(block=>{
+  const options=block.querySelectorAll('.options li');
+  const feedback=block.querySelector('.feedback');
+  const correctLetter=Array.from(options).find(o=>o.dataset.correct==='true')?.dataset.letter;
+  let answered=false;
+  options.forEach(opt=>{
+    opt.addEventListener('click',()=>{
+      if(answered)return;
+      answered=true;
+      options.forEach(o=>{
+        if(o.dataset.letter===correctLetter)o.classList.add('correct');
+        else if(o===opt&&opt.dataset.letter!==correctLetter)o.classList.add('incorrect');
+      });
+      feedback.classList.add('show');
+      feedback.scrollIntoView({behavior:'smooth',block:'nearest'});
+    });
+  });
+});
+document.querySelectorAll('.flip-card').forEach(card=>{
+  card.addEventListener('click',()=>card.classList.toggle('flipped'));
+});
+
+/* Lupa: las láminas del ganglio y las de cabeza y cuello llevan rótulos que no se leen
+   a tamaño de columna. Ampliar no es un adorno. */
+(function(){
+  const lb=document.getElementById('lightbox');
+  const lbImg=lb.querySelector('img'), lbCap=lb.querySelector('.lb-caption');
+  document.querySelectorAll('.photo-card img, .photo-hero img').forEach(img=>{
+    img.addEventListener('click',()=>{
+      if(img.classList.contains('broken'))return;
+      lbImg.src=img.src;
+      lbImg.alt=img.alt||'';
+      const cap=img.closest('.photo-card,.photo-hero').querySelector('.photo-caption');
+      lbCap.textContent=cap?cap.textContent.trim().replace(/\s+/g,' ').slice(0,220):'';
+      lb.classList.add('open');
+    });
+  });
+  const cerrar=()=>{lb.classList.remove('open');lbImg.src='';};
+  lb.addEventListener('click',cerrar);
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')cerrar();});
+})();
+</script>
+
+</body>
+</html>
