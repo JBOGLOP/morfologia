@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Taller · Sistema linfático · Morfología General 2026-II</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--parchment:#f8f3e8;--parchment-dark:#efe7d6;--amber:#b8860b;--amber-light:#d4a437;
+--teal:#2a7a6e;--teal-light:#3d9b8d;--ink:#1a2a35;--ink-soft:#4a5a65;--purple:#6b5b95;
+--red:#a33a3a;--green:#2f7d4f;--border:#ddd0b8;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--parchment);color:var(--ink);font-family:'Source Serif 4',Georgia,serif;
+font-size:17px;line-height:1.65;-webkit-text-size-adjust:100%}
+.header{background:linear-gradient(180deg,#fdfaf3,var(--parchment));border-bottom:3px double var(--amber);
+padding:48px 16px 34px;text-align:center}
+.eyebrow{font-family:'DM Mono',monospace;font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;
+color:var(--amber);margin-bottom:14px}
+h1{font-family:'Playfair Display',serif;font-size:clamp(1.7rem,4.6vw,2.9rem);font-weight:900;line-height:1.14;
+max-width:900px;margin:0 auto 12px}
+h1 em{font-style:italic;font-weight:400;color:var(--amber)}
+.subtitle{font-style:italic;color:var(--ink-soft);max-width:680px;margin:0 auto 14px;font-size:1.02rem}
+.meta{font-family:'DM Mono',monospace;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)}
+.container{max-width:920px;margin:0 auto;padding:0 16px 80px}
+h2{font-family:'Playfair Display',serif;font-size:1.62rem;font-weight:700;line-height:1.2}
+h3{font-family:'Playfair Display',serif;font-size:1.2rem;margin:26px 0 10px}
+h5{font-family:'DM Mono',monospace;font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;
+color:var(--amber);margin-bottom:8px}
+p{margin-bottom:14px}
+ul,ol{margin:0 0 14px 22px}li{margin-bottom:6px}
+strong{font-weight:700}
+/* ─── navegación de bloques ─── */
+.tab-bar{display:flex;flex-wrap:wrap;gap:0;margin:26px 0 30px;border:1px solid var(--border);
+border-radius:8px;overflow:hidden;background:#fdfaf3}
+.tab-btn{flex:1 1 150px;min-width:150px;background:none;border:none;border-right:1px solid var(--border);
+padding:14px 10px;cursor:pointer;font-family:'Source Serif 4',serif;font-size:.94rem;color:var(--ink-soft);
+text-align:center;transition:.15s}
+.tab-btn:last-child{border-right:none}
+.tab-btn:hover{background:var(--parchment-dark)}
+.tab-btn.active{background:var(--parchment-dark);color:var(--ink);font-weight:700;box-shadow:inset 0 -3px 0 var(--amber)}
+.tab-note{display:block;font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.1em;
+text-transform:uppercase;color:var(--amber);margin-bottom:3px}
+.pane{display:none}.pane.active{display:block}
+/* ─── secciones ─── */
+.station{margin-bottom:44px}
+.station-header{display:flex;align-items:flex-start;gap:16px;margin-bottom:18px;
+border-bottom:1px solid var(--border);padding-bottom:12px}
+.station-number{font-family:'Playfair Display',serif;font-size:2.3rem;font-weight:900;color:var(--amber-light);
+line-height:1;opacity:.75}
+.station-eyebrow{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.16em;
+text-transform:uppercase;color:var(--teal);margin-bottom:3px}
+.content-block{background:#fdfaf3;border:1px solid var(--border);border-radius:10px;padding:24px}
+.pearl{background:var(--parchment-dark);border-left:4px solid var(--amber);border-radius:0 8px 8px 0;
+padding:16px 20px;margin:20px 0}
+.pearl p:last-child{margin-bottom:0}
+.clinical-box{background:#eef6f4;border-left:4px solid var(--teal);border-radius:0 8px 8px 0;padding:16px 20px;margin:20px 0}
+.clinical-box p:last-child{margin-bottom:0}
+.dato{background:#fdf6e8;border:1px solid var(--amber-light);border-radius:8px;padding:16px 20px;margin:20px 0}
+.two-col{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin:18px 0}
+.col-card{background:var(--parchment-dark);border-left:3px solid var(--amber);border-radius:0 7px 7px 0;padding:14px 16px}
+.col-card.teal{border-left-color:var(--teal);background:#eef6f4}
+.col-card.purple{border-left-color:var(--purple);background:#f0eef6}
+.col-card p:last-child{margin-bottom:0}
+.col-card h5{color:var(--ink)}
+/* ─── plan de estudio ─── */
+.plan{counter-reset:s}
+.plan-item{display:flex;gap:16px;align-items:flex-start;padding:16px 0;border-bottom:1px dashed var(--border)}
+.plan-item:last-child{border-bottom:none}
+.plan-n{flex:0 0 42px;height:42px;border-radius:50%;background:var(--amber);color:#fff;display:flex;
+align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:700;font-size:1.1rem}
+.plan-n.teal{background:var(--teal)}.plan-n.purple{background:var(--purple)}
+.plan-body p:last-child{margin-bottom:0}
+/* ─── bloque A ─── */
+.sys-bar{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px}
+.sys-btn{background:#fdfaf3;border:1px solid var(--border);border-radius:20px;padding:7px 15px;cursor:pointer;
+font-family:'Source Serif 4',serif;font-size:.88rem;color:var(--ink-soft);transition:.15s}
+.sys-btn:hover{border-color:var(--amber)}
+.sys-btn.active{background:var(--amber);border-color:var(--amber);color:#fff;font-weight:600}
+.sys-btn .n{font-family:'DM Mono',monospace;font-size:.72rem;opacity:.7;margin-left:5px}
+.progress-wrap{background:var(--parchment-dark);border-radius:10px;padding:14px 18px;margin-bottom:20px}
+.progress-line{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px;
+font-family:'DM Mono',monospace;font-size:.76rem;letter-spacing:.06em;color:var(--ink-soft)}
+.bar{height:8px;background:#e0d6c0;border-radius:4px;overflow:hidden}
+.bar span{display:block;height:100%;background:var(--teal);width:0;transition:width .3s}
+.q-card{background:#fdfaf3;border:1px solid var(--border);border-left:4px solid var(--amber-light);
+border-radius:0 9px 9px 0;padding:18px 20px;margin-bottom:16px}
+.q-num{font-family:'DM Mono',monospace;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;
+color:var(--amber);margin-bottom:7px}
+.q-text{font-weight:600;margin-bottom:13px}
+.opts{list-style:none;margin:0}
+.opts li{background:var(--parchment);border:1px solid var(--border);border-radius:7px;padding:10px 14px;
+margin-bottom:7px;cursor:pointer;transition:.13s;display:flex;gap:10px;align-items:flex-start}
+.opts li:hover{border-color:var(--amber);background:#fdf6e8}
+.opts li.locked{cursor:default}
+.opts li.locked:hover{border-color:var(--border);background:var(--parchment)}
+.opts li .letter{font-family:'DM Mono',monospace;font-size:.78rem;color:var(--amber);font-weight:500;flex:0 0 auto}
+.opts li.correct{background:#e8f4ec;border-color:var(--green)}
+.opts li.correct .letter{color:var(--green)}
+.opts li.incorrect{background:#f8e9e9;border-color:var(--red)}
+.opts li.incorrect .letter{color:var(--red)}
+.fb{display:none;margin-top:12px;padding:13px 16px;background:var(--parchment-dark);
+border-left:3px solid var(--teal);border-radius:0 7px 7px 0;font-size:.95rem}
+.fb.show{display:block}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px;align-items:center}
+.btn{background:var(--teal);color:#fff;border:none;border-radius:7px;padding:11px 22px;cursor:pointer;
+font-family:'Source Serif 4',serif;font-size:.95rem;font-weight:600;transition:.15s}
+.btn:hover{background:var(--teal-light)}
+.btn.amber{background:var(--amber)}.btn.amber:hover{background:var(--amber-light)}
+.btn.ghost{background:none;color:var(--ink-soft);border:1px solid var(--border)}
+.btn.ghost:hover{background:var(--parchment-dark);color:var(--ink)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.hint{font-family:'DM Mono',monospace;font-size:.74rem;color:var(--ink-soft)}
+/* ─── bloque B ─── */
+.exp-card{background:#fdfaf3;border:1px solid var(--border);border-left:4px solid var(--purple);
+border-radius:0 9px 9px 0;padding:20px 22px;margin-bottom:22px}
+.exp-tema{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;
+color:var(--purple);margin-bottom:8px}
+textarea{width:100%;min-height:150px;background:var(--parchment);border:1px solid var(--border);
+border-radius:7px;padding:13px;font-family:'Source Serif 4',serif;font-size:1rem;line-height:1.6;
+color:var(--ink);resize:vertical}
+textarea:focus{outline:none;border-color:var(--purple)}
+.char-count{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--ink-soft);text-align:right;margin-top:5px}
+details{background:var(--parchment-dark);border-radius:7px;padding:11px 15px;margin-top:11px}
+details summary{cursor:pointer;font-weight:600;font-size:.93rem;color:var(--teal)}
+details[open] summary{margin-bottom:9px}
+details ul{margin:9px 0 0 20px;font-size:.94rem}
+/* ─── bloque C ─── */
+.caso{background:#fdfaf3;border:1px solid var(--border);border-radius:10px;padding:22px;margin-bottom:26px}
+.caso-head{border-bottom:1px solid var(--border);padding-bottom:11px;margin-bottom:15px}
+.caso-sist{font-family:'DM Mono',monospace;font-size:.66rem;letter-spacing:.13em;text-transform:uppercase;color:var(--teal)}
+.caso-enun{background:var(--parchment-dark);border-radius:7px;padding:14px 17px;margin-bottom:17px;font-style:italic}
+.paso{border-left:3px solid var(--amber);padding:3px 0 3px 15px;margin-bottom:15px}
+.paso-p{font-weight:700;margin-bottom:5px}
+.paso p:last-child{margin-bottom:0}
+/* ─── cierre ─── */
+.score-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:12px;margin:20px 0}
+.score-cell{background:var(--parchment-dark);border-radius:8px;padding:14px;text-align:center}
+.score-cell .big{font-family:'Playfair Display',serif;font-size:1.9rem;font-weight:700;color:var(--teal);line-height:1.1}
+.score-cell .lbl{font-family:'DM Mono',monospace;font-size:.66rem;letter-spacing:.1em;
+text-transform:uppercase;color:var(--ink-soft);margin-top:4px}
+input[type=text],select{width:100%;background:var(--parchment);border:1px solid var(--border);border-radius:7px;
+padding:11px 13px;font-family:'Source Serif 4',serif;font-size:1rem;color:var(--ink)}
+input[type=text]:focus,select:focus{outline:none;border-color:var(--amber)}
+.ok-chip{display:inline-block;background:#e8f4ec;border:1px solid var(--green);color:var(--green);
+border-radius:20px;padding:4px 13px;font-family:'DM Mono',monospace;font-size:.75rem}
+.warn-chip{display:inline-block;background:#fdf0e3;border:1px solid var(--amber);color:#8a6508;
+border-radius:20px;padding:4px 13px;font-family:'DM Mono',monospace;font-size:.75rem}
+.sync{position:fixed;right:14px;bottom:14px;background:var(--ink);color:#fff;border-radius:20px;
+padding:7px 15px;font-family:'DM Mono',monospace;font-size:.72rem;opacity:0;transition:opacity .3s;
+pointer-events:none;z-index:50}
+.sync.on{opacity:.92}
+.footer{border-top:3px double var(--amber);margin-top:50px;padding:26px 16px;text-align:center;
+font-size:.85rem;color:var(--ink-soft)}
+@media print{.tab-bar,.sys-bar,.btn,.actions{display:none!important}.pane{display:block!important}}
+@media (max-width:600px){body{font-size:16px}.content-block{padding:17px}.station-number{font-size:1.8rem}}
+/* ─── v2: identificación, retroalimentación por opción, repaso de errores ─── */
+input[type=text]{margin-bottom:10px}
+.ident-row{display:grid;grid-template-columns:1fr;gap:10px;margin:14px 0 6px}
+@media (min-width:640px){.ident-row{grid-template-columns:2fr 1.2fr auto;align-items:start}
+.ident-row input[type=text]{margin-bottom:0}}
+.sys-btn:disabled{opacity:.55;cursor:not-allowed}
+.sys-btn:disabled:hover{border-color:var(--border)}
+.sys-btn.pseudo{border-style:dashed}
+.sys-btn.pseudo.active{border-style:solid}
+.fb-h{font-family:'DM Mono',monospace;font-size:.78rem;letter-spacing:.02em;margin:0 0 4px}
+.fb-h.ok{color:var(--green)}
+.fb-h.no{color:var(--red)}
+.fb p{margin-bottom:10px}
+.fb p:last-of-type{margin-bottom:6px}
+details.otras{background:#fdfaf3;margin-top:8px}
+details.otras ul{list-style:none;margin:8px 0 0 0}
+details.otras li{padding:6px 0;border-top:1px dashed var(--border)}
+details.otras li:first-child{border-top:none}
+.q-card.repaso{border-left-color:var(--purple)}
+.q-card.repaso .q-num{color:var(--purple)}
+.lock-card{background:var(--parchment-dark);border:1px dashed var(--border);border-radius:9px;
+padding:16px 20px;margin-bottom:18px;color:var(--ink-soft)}
+.lock-card strong{color:var(--ink)}
+.banner{position:sticky;top:0;z-index:60;background:var(--red);color:#fff;padding:10px 16px;
+text-align:center;font-size:.95rem;display:none}
+.banner.on{display:block}
+.banner button{margin-left:10px;background:#fff;color:var(--red);border:none;border-radius:6px;
+padding:4px 12px;font-family:'Source Serif 4',serif;font-weight:700;cursor:pointer}
+.rub{margin-top:11px}
+.rub .btn:disabled{width:100%;text-align:left}
+</style>
+</head>
+<body>
+
+<div class="banner" id="banner"></div>
+
+<header class="header">
+  <div class="eyebrow">Taller · Clase 10 · Morfología General 2026-II</div>
+  <h1>Sistema linfático: <em>aplicar lo que viste hoy</em></h1>
+  <p class="subtitle">Dieciocho situaciones para resolver con lo de la clase, y cuatro preguntas para explicar con tus palabras. No pregunta definiciones: pregunta qué harías y qué esperarías encontrar.</p>
+  <div class="meta">Dr. Jorge Bogoya &middot; Universidad de La Salle &middot; Optometría &middot; Primer semestre</div>
+</header>
+
+<div class="container">
+
+<div class="tab-bar" role="tablist">
+  <button class="tab-btn active" role="tab" onclick="tab('t0',this)"><span class="tab-note">Empieza aquí</span>Quién eres</button>
+  <button class="tab-btn" role="tab" onclick="tab('tA',this)"><span class="tab-note">Parte 1</span>Situaciones</button>
+  <button class="tab-btn" role="tab" onclick="tab('tB',this)"><span class="tab-note">Parte 2</span>Explicación</button>
+  <button class="tab-btn" role="tab" onclick="tab('tZ',this)"><span class="tab-note">Al terminar</span>Entregar</button>
+</div>
+
+<!-- ══════════ IDENTIFICACIÓN ══════════ -->
+<div class="pane active" id="t0">
+<section class="station">
+  <div class="station-header">
+    <div class="station-number">👤</div>
+    <div>
+      <div class="station-eyebrow">Identifícate antes de empezar</div>
+      <h2>¿Quién eres?</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Elige tu nombre y escribe tu número de documento, el mismo de los talleres anteriores.
+      <strong>Sin esto tu trabajo no se guarda en el servidor</strong> y no podrás entregarlo.</p>
+    <div class="ident-row">
+      <select id="selAlumno"><option value="">Cargando la lista del curso…</option></select>
+      <input type="text" id="docAlumno" inputmode="numeric" autocomplete="off" placeholder="Número de documento">
+      <button class="btn" id="btnEntrar">Entrar</button>
+    </div>
+    <div id="identEstado" class="hint" style="margin-top:6px"></div>
+    <div id="plazoAviso"></div>
+  </div>
+</section>
+
+<section class="station">
+  <div class="station-header">
+    <div class="station-number">00</div>
+    <div>
+      <div class="station-eyebrow">Antes de empezar</div>
+      <h2>Qué es esto y qué no</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Este es el <strong>tercer taller del segundo corte</strong>, sobre la clase de sistema
+      linfático. Cuenta para el seguimiento, junto con el taller de sistema muscular y el taller de
+      repaso del parcial.</p>
+
+    <div class="pearl">
+      <p><strong>No repite las preguntas de la clase.</strong> Los autodiagnósticos del HTML de clase
+        te preguntaban <em>qué es cada cosa</em>; aquí casi todas las preguntas describen un paciente
+        o una situación y te piden <strong>deducir</strong>. Si te sabes las definiciones pero no
+        logras aplicarlas, este taller te lo va a mostrar, y eso es justo para lo que sirve.</p>
+    </div>
+
+    <h3>Dos partes</h3>
+    <div class="two-col">
+      <div class="col-card">
+        <h5>1 · Situaciones</h5>
+        <p><strong>18 preguntas</strong> con respuesta inmediata. Cuando fallas, la página te dice
+          por qué falla <em>la opción que elegiste</em>, no solo cuál era la buena.</p>
+      </div>
+      <div class="col-card purple">
+        <h5>2 · Explicación</h5>
+        <p><strong>Cuatro preguntas para escribir.</strong> Piden aplicar lo visto a casos nuevos y
+          predecir qué pasará. Es la parte que lee y califica tu docente.</p>
+      </div>
+    </div>
+
+    <div class="dato">
+      <h5>Cómo se califica</h5>
+      <p>La fórmula de siempre del curso: <strong>0,6 × objetivo + 0,4 × desarrollo</strong>.
+        Cuenta tu <strong>primera respuesta</strong> a cada situación, así que responde antes de
+        mirar la clase; leer la explicación después es lo que hace que se quede.</p>
+    </div>
+
+    <div class="clinical-box">
+      <h5>👁 Y para el parcial</h5>
+      <p>El <a href="taller_repaso_ii_parcial.html">taller de repaso del II Parcial</a> incluye el
+        linfático junto con los otros cuatro sistemas del corte. Este taller y aquel no se repiten:
+        son preguntas distintas sobre el mismo contenido, y en momentos distintos.</p>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ══════════ PARTE 1 ══════════ -->
+<div class="pane" id="tA">
+<section class="station">
+  <div class="station-header">
+    <div class="station-number">1</div>
+    <div>
+      <div class="station-eyebrow">Aplicar lo de la clase</div>
+      <h2>Dieciocho situaciones</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Responde de corrido. <strong>Contesta antes de volver a la clase</strong>, aunque dudes:
+      cuenta la primera respuesta, y fallar con una explicación delante enseña más que acertar
+      por casualidad.</p>
+    <div class="progress-wrap">
+      <div class="progress-line"><span id="pgLabel">—</span><span id="pgScore"></span></div>
+      <div class="bar"><span id="pgBar"></span></div>
+    </div>
+    <div id="qList"></div>
+  </div>
+</section>
+</div>
+
+<!-- ══════════ PARTE 2 ══════════ -->
+<div class="pane" id="tB">
+<section class="station">
+  <div class="station-header">
+    <div class="station-number">2</div>
+    <div>
+      <div class="station-eyebrow">Esto lo lee tu docente</div>
+      <h2>Cuatro preguntas para escribir</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Aquí no hay opciones. Escribe con tus palabras, como si se lo explicaras a alguien que faltó a
+      clase. Cada pregunta pide <strong>predecir</strong> algo que no está resuelto en ninguna parte
+      del taller: copiar frases no sirve, razonar sí.</p>
+    <p class="hint">Cada respuesta: entre 100 y 250 palabras. Las pistas están si te atascas. La lista
+      de comprobación se abre al llegar a 80 palabras: escribe primero, compara después.</p>
+    <div id="expList"></div>
+  </div>
+</section>
+</div>
+
+<!-- ══════════ ENTREGA ══════════ -->
+<div class="pane" id="tZ">
+<section class="station">
+  <div class="station-header">
+    <div class="station-number">✓</div>
+    <div>
+      <div class="station-eyebrow">Entrega</div>
+      <h2>Enviar tu taller</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <div id="quienSoy"></div>
+    <div class="score-grid" id="scoreGrid"></div>
+    <div id="avisoFalta"></div>
+    <div id="envioResultado"></div>
+    <div class="actions">
+      <button class="btn amber" id="btnEnviar">Enviar mi taller</button>
+      <button class="btn ghost" id="btnDescargar">Descargar una copia</button>
+      <button class="btn ghost" id="btnBorrar">Borrar lo guardado en este navegador</button>
+    </div>
+    <p class="hint" style="margin-top:12px">Puedes enviar varias veces: cada envío actualiza el
+      anterior. Tu primera respuesta a cada situación queda fijada la primera vez que llega.</p>
+  </div>
+</section>
+</div>
+
+</div>
+
+<div class="sync" id="syncChip"></div>
+
+<footer class="footer">
+  <p><strong>Morfología General · Optometría · Universidad de La Salle · 2026-II</strong></p>
+  <p>Taller de la clase 10 · Sistema linfático · jueves 1 de octubre de 2026</p>
+</footer>
+
+<script>
+/* TALLER · Sistema linfático · clase 10 · 1 oct 2026
+   Tercer taller del seguimiento del segundo corte.
+
+   El reconocimiento del tema ya está cubierto: 33 autodiagnósticos en la clase y 25 ítems en el
+   banco del taller de repaso. Este taller va por otro lado —APLICAR y PREDECIR—, y por eso casi
+   todos los ítems describen una situación en vez de preguntar una definición.
+
+   Misma estructura del banco v2: o[0] siempre la correcta, el cliente baraja, y `x` explica por
+   qué falla cada distractor. */
+const BANCO_TALLER = [
+{t:"balance",q:"A una paciente le retiran los ganglios de la ingle derecha. Semanas después, esa pierna está hinchada y la piel, tirante. Comparada con el edema de una insuficiencia cardíaca, la hinchazón de esta paciente…",
+ o:["Es rica en proteínas, porque falta la vía que las recupera","Es pobre en proteínas, porque solo se acumula agua filtrada","Cede al elevar la pierna durante unas horas","Afecta a las dos piernas por igual, como todo edema","Desaparece sola cuando el corazón compensa"],
+ r:"Las proteínas que escapan del plasma no pueden volver por el capilar sanguíneo: la única vía de regreso es la linfática. Si se interrumpe, quedan retenidas en el intersticio y arrastran agua con ellas. Por eso el linfedema es un edema *rico en proteínas*, duro con el tiempo y que no cede con reposo ni con diuréticos, a diferencia del edema cardíaco.",
+ x:["Es al revés: el edema pobre en proteínas es el de causa cardíaca o el de la hipoalbuminemia, donde lo que se acumula es líquido filtrado en exceso. Aquí lo que falla es el drenaje de lo que ya salió.","Eso describe el edema venoso o el postural, que mejora con la elevación. El linfedema no cede con la postura, porque el problema no es cuánta sangre llega sino que no hay por dónde sacar el líquido.","El edema cardíaco sí es bilateral y empieza por las zonas declives. El linfedema sigue el territorio del drenaje interrumpido, así que es del lado operado.","No hay nada que compensar: el corazón de esta paciente está sano. Lo que falta es una vía de drenaje que no se regenera por sí sola."]},
+{t:"capilares",q:"En una zona inflamada, el tejido se hincha y los capilares linfáticos recogen más líquido que en reposo. El mecanismo que lo explica es que…",
+ o:["Los filamentos de fijación tiran del endotelio y abren las brechas","El músculo liso del capilar se relaja y lo ensancha","La presión arterial local empuja el líquido hacia el capilar","Las válvulas propias del capilar se abren por la inflamación","El endotelio se rompe por la presión y deja pasar el líquido"],
+ r:"Los filamentos de fijación anclan las células endoteliales al tejido de alrededor. Cuando el tejido se expande por el líquido acumulado, tiran de ellas y separan las uniones solapadas, así que el capilar se vuelve más permeable justo cuando más hay que recoger. Es un mecanismo puramente mecánico y automático.",
+ x:["El capilar linfático no tiene músculo liso: es solo endotelio sobre una membrana basal incompleta. El músculo aparece más adelante, en los colectores, y sirve para impulsar la linfa.","La presión arterial se disipa en los capilares sanguíneos. Lo que empuja el líquido hacia el capilar linfático es la presión del propio líquido intersticial acumulado, no la de la arteria.","Las válvulas de dos valvas están en los vasos colectores, no en el capilar. En el capilar, la función de válvula la hace el solapamiento del endotelio, y ese solapamiento no se abre «por la inflamación» sino por tracción.","Si el endotelio se rompiera, el vaso no podría retener la linfa ni darle dirección. La permeabilidad aumenta abriendo uniones que existen, no destruyendo la pared."]},
+{t:"conductos",q:"Un paciente tiene un tumor que comprime el conducto torácico justo antes de su desembocadura. ¿Qué territorio seguiría drenando con normalidad?",
+ o:["El miembro superior derecho","La pierna izquierda","El abdomen","El hemitórax izquierdo","La mitad izquierda de la cabeza"],
+ r:"El conducto torácico drena las tres cuartas partes del cuerpo, y el conducto linfático derecho solo el cuadrante superior derecho: mitad derecha de cabeza y cuello, brazo derecho y hemitórax derecho. Si se obstruye el torácico, ese cuadrante es el único que conserva su vía de salida, porque usa un conducto distinto.",
+ x:["Las dos piernas drenan por los troncos lumbares a la cisterna del quilo y de ahí al conducto torácico: quedarían represadas.","Las vísceras y la pared del abdomen drenan al conducto torácico a través de los troncos lumbares y del intestinal, así que también se verían afectadas.","El hemitórax izquierdo drena por el tronco broncomediastínico izquierdo, que termina en el conducto torácico. El que se salva es el derecho.","La mitad izquierda de la cabeza drena por el tronco yugular izquierdo, que también termina en el conducto torácico. La mitad que se salva es la derecha."]},
+{t:"quilo",q:"Tras una comida rica en grasa, la linfa del conducto torácico se vuelve blanca y lechosa. La razón es que…",
+ o:["Las grasas absorbidas entran en los quilíferos del intestino","Los glóbulos blancos aumentan mucho tras comer","La bilis pasa del hígado a la vía linfática intestinal","El quilo lleva plaquetas en suspensión desde el bazo","Las proteínas del plasma precipitan en la linfa"],
+ r:"Las grasas de la dieta no pasan a los capilares sanguíneos del intestino: entran en unos capilares linfáticos especializados de las vellosidades, los quilíferos. La linfa cargada de esa grasa es el quilo, y su aspecto lechoso es lo que da nombre a la cisterna del quilo.",
+ x:["El número de linfocitos de la linfa no cambia de forma apreciable con una comida, y además los linfocitos no le darían ese aspecto: la linfa normal, con ellos, es un líquido claro.","La bilis se vierte al duodeno por la vía biliar y actúa en la luz del intestino emulsionando las grasas; no entra en los vasos linfáticos ni tiñe la linfa.","Las plaquetas circulan en la sangre, no en la linfa, y en cualquier caso no darían color blanco. Lo que enturbia el quilo son las gotas de grasa absorbida.","Las proteínas del plasma que llegan a la linfa van disueltas, no precipitadas, y están ahí siempre, también en ayunas, cuando la linfa es transparente."]},
+{t:"propulsion",q:"Un paciente pasa doce horas sentado en un vuelo, sin moverse. Al bajar tiene los tobillos hinchados. Desde el punto de vista del sistema linfático, lo que ha fallado es…",
+ o:["La bomba muscular, que no comprimió los vasos de la pantorrilla","El linfangión, que dejó de contraerse por la altitud","La cisterna del quilo, que se llenó en exceso durante el vuelo","Las válvulas de los vasos, que se rompieron por la presión","El conducto torácico, que se colapsó al estar sentado"],
+ r:"La linfa de las piernas sube por la suma de cuatro fuerzas: las válvulas que impiden el retroceso, la bomba muscular, la bomba respiratoria y la contracción del propio linfangión. Doce horas de inmovilidad anulan sobre todo la bomba muscular, y la gravedad hace el resto. Es la misma razón por la que caminar deshincha los tobillos.",
+ x:["El linfangión sigue contrayéndose por su cuenta cuando se distiende; de hecho es la fuerza que queda cuando uno está quieto, y no basta por sí sola.","La cisterna es el reservorio de origen del conducto torácico y está en el abdomen; recibe la linfa que ya subió, y su llenado no explica que se hinchen los tobillos.","Las válvulas no se rompen por estar sentado. Cuando fallan de forma permanente, por otras causas, aparecen las varices, que es un cuadro crónico y distinto.","El conducto torácico corre por el mediastino posterior, protegido entre la aorta y la columna; estar sentado no lo colapsa."]},
+{t:"ganglio",q:"En un ganglio inflamado por una infección cercana, el dolor aparece pronto. La explicación morfológica más directa es que…",
+ o:["La cápsula se distiende deprisa al crecer el contenido","Los senos se llenan de linfa y comprimen el hilio","Los vasos aferentes se obstruyen y el ganglio se seca","La médula del ganglio se sustituye por tejido fibroso","El ganglio pierde su cápsula y roza los tejidos vecinos"],
+ r:"El ganglio está envuelto por una cápsula de tejido conectivo denso, que cede poco. Cuando sus linfocitos proliferan de golpe ante una infección, el volumen crece más rápido de lo que la cápsula puede acomodar, y esa distensión es lo que duele. Por eso el ganglio reactivo duele y el que crece despacio, aunque sea más grande, no.",
+ x:["Los senos sí se llenan, pero el hilio es una escotadura abierta por donde salen los eferentes y pasan los vasos sanguíneos: no es una estructura que se comprima y duela.","Ocurre lo contrario: en una infección llega más linfa por los aferentes, no menos. Un ganglio «seco» no se hincharía.","La fibrosis es un cambio lento, de semanas o meses, y no explica un dolor que aparece en días. Además, un ganglio fibrosado suele ser duro e indoloro.","La cápsula no se pierde en una infección. Perder el límite capsular y adherirse a lo de alrededor es precisamente lo que hace sospechoso a un ganglio duro y fijo."]},
+{t:"cabeza",q:"Un paciente tiene una lesión infectada en el cuero cabelludo, justo detrás de la oreja izquierda. El grupo ganglionar que primero debería palpar es…",
+ o:["El mastoideo izquierdo","El submentoniano","El parotídeo superficial derecho","El supraclavicular izquierdo","El submandibular derecho"],
+ r:"El collar pericervical reparte la cabeza por territorios, y los ganglios mastoideos o retroauriculares recogen la piel de detrás de la oreja y el cuero cabelludo de encima. La linfa drena siempre primero al grupo de su propia región y de su propio lado, antes de seguir a la cadena cervical profunda.",
+ x:["Los submentonianos están bajo el mentón, en la línea media, y recogen el labio inferior, el piso de la boca y la punta de la lengua: otro territorio y otra parte de la cabeza.","Además de ser del lado contrario, los parotídeos superficiales —los preauriculares— recogen la sien, el párpado lateral y la conjuntiva, no la región de detrás de la oreja.","Los supraclavicularesestán al final del recorrido, sobre la clavícula, y reciben el drenaje del tórax y el abdomen; a ellos llegaría la linfa mucho después, si es que llega.","Están bajo el borde de la mandíbula y recogen la cara media y el ángulo interno del ojo, y además son del lado opuesto a la lesión."]},
+{t:"ojo",q:"Una paciente consulta por un bulto doloroso bajo la mandíbula del lado derecho. En el ojo derecho tiene una conjuntivitis limitada al ángulo interno, junto a la nariz. La relación entre los dos hallazgos es que…",
+ o:["El ángulo interno drena a los ganglios submandibulares","El ángulo interno drena a los ganglios preauriculares","La conjuntiva no drena, así que no hay relación","El drenaje de todo el ojo va siempre a los submandibulares","La córnea drenó la infección hasta la mandíbula"],
+ r:"La regla del drenaje palpebral es de lateralidad: lo que está del lado de la nariz —el tercio medial de los párpados, el ángulo interno y el saco lagrimal— va a los ganglios submandibulares, y lo que está del lado de la sien, a los preauriculares. Saberla permite razonar al revés: por el ganglio que crece se deduce dónde mirar.",
+ x:["Los preauriculares recogen la mitad lateral, la del lado de la sien. Si el ganglio crecido fuera ese, habría que mirar hacia fuera, no hacia el ángulo interno.","La conjuntiva sí tiene vasos linfáticos y drena muy bien: es la córnea la que carece de ellos. Precisamente por eso una conjuntivitis puede dar un ganglio palpable.","El drenaje está repartido entre dos grupos según la lateralidad. Si todo fuera a los submandibulares, la adenopatía preauricular de la conjuntivitis viral no existiría.","La córnea es avascular y alinfática: no drena a ningún ganglio. Lo que drena en este cuadro es la conjuntiva inflamada del ángulo interno."]},
+{t:"organos",q:"Un niño nace sin timo. De los siguientes, el problema esperable es…",
+ o:["No madurarán sus linfocitos T","No se formarán sus ganglios linfáticos","No podrá producir linfa en los tejidos","Su bazo no filtrará la sangre","No tendrá amígdalas en la faringe"],
+ r:"El timo es un órgano linfoide primario: allí termina de madurar el precursor que nació en la médula ósea, y solo una fracción sale a circular como linfocito T. Sin timo, esa maduración no ocurre. Los órganos secundarios —ganglios, bazo, MALT— existen igual, pero les faltarían las células que deberían poblarlos.",
+ x:["Los ganglios se forman durante el desarrollo con independencia del timo; lo que les faltaría son los linfocitos T que deberían ocupar su corteza interna.","La linfa se forma en cualquier tejido con capilares sanguíneos y linfáticos: es líquido intersticial que entra en un capilar linfático, y no depende del timo.","El bazo seguiría filtrando la sangre y retirando los eritrocitos viejos en su pulpa roja, que es una función independiente de la maduración de los linfocitos T.","Las amígdalas se desarrollan en la pared de la faringe como tejido linfoide asociado a mucosa; su formación no depende del timo."]},
+{t:"bazo",q:"A un paciente le extirpan el bazo tras un traumatismo. De estas funciones, la que NO se pierde es…",
+ o:["El filtrado de la linfa antes de volver a la sangre","La retirada de los eritrocitos envejecidos","La reserva de plaquetas","La vigilancia de los antígenos que llegan por la sangre","La respuesta a bacterias encapsuladas de la sangre"],
+ r:"El bazo nunca filtró linfa: no tiene vasos linfáticos aferentes porque está intercalado en la vía sanguínea, no en la linfática. Esa tarea la hacen los ganglios, que siguen intactos. Lo que sí se pierde al extirparlo son sus funciones sobre la sangre, y por eso estos pacientes quedan más expuestos a ciertas infecciones.",
+ x:["Es una función propia del bazo: sus cordones esplénicos, en la pulpa roja, retienen los eritrocitos viejos para que los macrófagos los destruyan.","El bazo almacena plaquetas y puede devolverlas a la circulación; al extirparlo, esa reserva desaparece.","La pulpa blanca vigila la sangre que atraviesa el órgano: es el equivalente al ganglio, pero para la vía sanguínea, y se pierde con la esplenectomía.","Es la razón clínica por la que estos pacientes se vacunan: el bazo es clave frente a las bacterias encapsuladas que circulan por la sangre."]},
+{t:"malt",q:"El tejido linfoide asociado a mucosas se encuentra en la faringe, el íleon y la superficie ocular. Lo que tienen en común esos tres sitios es que…",
+ o:["Son epitelios húmedos abiertos al exterior","Son los tres tejidos sin vasos sanguíneos","Están los tres dentro de la cavidad torácica","Los tres carecen de epitelio de revestimiento","Los tres drenan al conducto linfático derecho"],
+ r:"La estrategia del MALT es poner vigilancia donde el exterior toca al interior. Faringe, intestino y superficie ocular son mucosas: epitelios húmedos en contacto con lo que entra al cuerpo. Por eso hay tejido linfoide bajo su epitelio, sin cápsula, y por eso la conjuntiva tiene su propio CALT.",
+ x:["Los tres están muy vascularizados. Los tejidos sin vasos son otros —córnea, cartílago, epidermis, cristalino— y precisamente en ellos no hay tejido linfoide.","El íleon está en el abdomen y la superficie ocular en la cara; solo una parte de la faringe se acerca al tórax. La localización no es lo que los agrupa.","Los tres tienen epitelio, y es justo eso lo que los define como mucosas: un epitelio húmedo con tejido conectivo debajo, donde se aloja el tejido linfoide.","Cada uno drena a los ganglios de su región: la faringe y el ojo a la cadena cervical, el íleon a los ganglios mesentéricos y de ahí al conducto torácico."]},
+{t:"ojo",q:"El CALT de la conjuntiva y las placas de Peyer del íleon se agrupan bajo el mismo nombre, MALT, porque los dos…",
+ o:["Son tejido linfoide sin cápsula bajo una mucosa","Están los dos en el tubo digestivo","Drenan los dos al conducto linfático derecho","Se forman los dos a partir del timo","Tienen los dos vasos linfáticos aferentes"],
+ r:"Lo que los agrupa no es dónde están, sino cómo están: agregados de linfocitos alojados en la lámina propia de una mucosa, sin cápsula que los envuelva. Esa falta de cápsula es lo que los separa de los órganos linfoides —ganglio, bazo, timo— y lo que justifica llamarlos tejido y no órgano.",
+ x:["La conjuntiva no pertenece al tubo digestivo: tapiza los párpados y la superficie del ojo. Lo que comparten es ser mucosas, no estar en el mismo aparato.","Cada uno drena a los ganglios de su región: la conjuntiva a los de la cara y el cuello, el íleon a los mesentéricos y de ahí al conducto torácico.","El timo es un órgano linfoide primario donde maduran los linfocitos T; el MALT se forma en la pared de cada mucosa y recibe células ya maduras.","Ni uno ni otro tienen aferentes: no están intercalados en la vía linfática. Los aferentes son propios del ganglio."]},
+{t:"privilegio",q:"Se comparan dos injertos de un donante no compatible: uno de córnea central y otro de piel. El de córnea se rechaza mucho menos porque en la córnea…",
+ o:["Falta la vía que lleva material del injerto hasta un ganglio","Las células del injerto se sustituyen por las del receptor","El epitelio impide por completo el paso de cualquier célula","La lágrima arrastra las células de defensa que se acercan","La transparencia impide que el sistema de defensa la localice"],
+ r:"Para rechazar un injerto hacen falta dos caminos: uno de ida, por el que material del injerto llega a un ganglio, y uno de vuelta, por el que las células de defensa llegan al injerto. La córnea central es alinfática —no hay ida— y avascular —apenas hay vuelta—. La piel tiene las dos vías abiertas, y por eso se rechaza.",
+ x:["El injerto conserva sus propias células, en particular el endotelio corneal, que no se regenera; si fueran sustituidas, el problema del rechazo ni se plantearía.","El epitelio no es una barrera absoluta: las células pueden entrar desde el limbo si aparecen vasos. Lo decisivo es que en la córnea sana no hay por dónde entrar ni salir.","La lágrima lubrica y nutre la superficie, pero no arrastra células de defensa: el privilegio viene de que esas células casi no llegan, no de que se las quite de encima.","El sistema de defensa no localiza por la vista: lo hace por el transporte de material hasta un ganglio. Lo que falta es ese transporte, no la visibilidad."]},
+{t:"privilegio",q:"Un usuario de lentes de contacto lleva años con hipoxia corneal crónica y en la lámpara de hendidura se ven vasos que invaden la córnea periférica. Si mañana necesitara un trasplante de córnea, lo esperable es que…",
+ o:["El riesgo de rechazo sea mayor que en una córnea sin vasos","El injerto se integre antes gracias a los vasos nuevos","No cambie nada, porque el rechazo depende del donante","La córnea ya no pueda recibir ningún injerto","El rechazo sea imposible, porque la córnea es privilegiada"],
+ r:"Los vasos que crecen desde el limbo por la hipoxia no son solo sanguíneos: los acompañan vasos linfáticos. Con ellos se abren las dos vías que el privilegio mantenía cerradas, y el injerto pasa a ser visible para el sistema de defensa. Por eso el grado de neovascularización que se anota en la lámpara de hendidura es un dato de pronóstico, no un detalle cosmético.",
+ x:["Los vasos no ayudan a integrar un injerto corneal: la córnea se nutre por difusión del humor acuoso y de la lágrima, y lo que traen los vasos nuevos es exposición al rechazo.","La compatibilidad del donante importa, pero lo que da al trasplante de córnea su tasa de éxito es la condición del lecho receptor: si está vascularizado, el pronóstico empeora.","Sí puede recibirlo, y de hecho se hace; lo que cambia es que hay que vigilar más y a veces tratar los vasos antes de operar.","El privilegio no es una propiedad permanente de la córnea: depende de que siga sin vasos. Cuando los tiene, se pierde."]},
+{t:"meninges",q:"Durante un siglo se enseñó que el encéfalo carecía de vasos linfáticos. Los linfáticos meníngeos descritos en 2015 obligan a matizarlo porque…",
+ o:["Corren en la duramadre y drenan a los ganglios cervicales profundos","Están dentro del tejido nervioso, entre las propias neuronas","Sustituyen a los senos venosos en el drenaje de la sangre","Conectan los ventrículos con la cavidad nasal por el etmoides","Aparecen solo cuando hay una infección del encéfalo"],
+ r:"Son vasos linfáticos verdaderos, alojados en la duramadre junto a los senos venosos, que drenan hacia la cadena cervical profunda: la misma a la que llega la linfa de la cara y del ojo. Que el encéfalo y el ojo compartan estación final es lo que hace interesante el hallazgo para la optometría, y un ejemplo de anatomía que todavía se está escribiendo.",
+ x:["No están entre las neuronas: el tejido nervioso sigue sin vasos linfáticos propios. Lo que recorre el parénquima son los espacios perivasculares del sistema glinfático, que es otra cosa.","Los senos venosos siguen drenando la sangre del encéfalo hacia las yugulares; los linfáticos meníngeos los acompañan, pero transportan linfa, no sangre.","Esa comunicación la tienen los filetes olfatorios al atravesar la lámina cribosa; los linfáticos meníngeos siguen a los senos venosos de la duramadre.","Son estructuras normales y permanentes, presentes en condiciones fisiológicas; su descripción tardía se debió a lo difícil que es verlos, no a que solo aparezcan en la enfermedad."]},
+{t:"integracion",q:"Un paciente llega con el párpado hinchado, fiebre y un ganglio doloroso por delante de la oreja. Antes de pensar en la causa, lo primero que conviene establecer es…",
+ o:["Si la infección está por delante o por detrás del septo orbitario","Si ese ganglio preauricular es duro o blando al tacto","Si el paciente usa lentes de contacto a diario","Cuál de los dos ojos tiene mejor agudeza visual","Si tiene antecedentes de alergia estacional"],
+ r:"El septo orbitario separa dos cuadros de gravedad muy distinta: la celulitis preseptal suele tratarse con antibiótico oral, y la orbitaria es una urgencia con riesgo para la visión y para la vida. Lo que lo decide no es el aspecto del párpado, que se hincha igual en los dos, sino la motilidad ocular, la proptosis y la visión del color.",
+ x:["Es un dato útil —blando y doloroso orienta a causa inflamatoria— pero no cambia la conducta inmediata; lo urgente es saber si el proceso ha entrado en la órbita.","Puede ayudar a explicar el origen, pero no decide la urgencia: un portador de lentes y alguien que no las usa pueden tener los dos una celulitis orbitaria.","La agudeza visual del ojo sano no aporta nada aquí; lo que importa es si la del ojo afectado y su visión del color están alteradas, que es un signo de compromiso orbitario.","La alergia produce picor y afecta a los dos ojos, sin fiebre ni ganglio; con este cuadro, el antecedente alérgico no es lo que hay que establecer primero."]},
+{t:"integracion",q:"De estas cinco estructuras del ojo y sus anexos, la ÚNICA que drena a un ganglio linfático es…",
+ o:["La conjuntiva bulbar","La retina y su epitelio pigmentario","El humor acuoso","El cristalino y su cápsula","La coroides"],
+ r:"El globo ocular está fuera de la red linfática en todas sus capas y contenidos. El tejido linfático del ojo vive *fuera* del globo: conjuntiva, párpados y vías lagrimales. Por eso una conjuntivitis da un ganglio palpable y una lesión de la retina, por grave que sea, no.",
+ x:["La retina no tiene vasos linfáticos; su drenaje de líquido es otro asunto, a través del epitelio pigmentario y la coroides, y no termina en ningún ganglio.","El humor acuoso sale del ojo por el ángulo iridocorneal hacia el conducto de Schlemm y las venas epiesclerales: es una vía venosa, no linfática.","El cristalino no tiene vasos de ningún tipo y se nutre del humor acuoso; está aislado incluso dentro del propio globo.","La coroides es la capa más vascularizada del ojo, pero de vasos sanguíneos; forma parte del globo y no drena a ganglios."]},
+{t:"integracion",q:"Comparando el ganglio linfático con el bazo, la diferencia que explica todas las demás es que…",
+ o:["Uno está intercalado en la vía linfática y el otro en la sanguínea","Uno tiene cápsula de tejido conectivo y el otro no","Uno está en el abdomen y el otro en el cuello","Uno pertenece a los órganos primarios y el otro a los secundarios","Uno tiene folículos y el otro no"],
+ r:"De ahí sale todo lo demás. El ganglio recibe vasos aferentes porque filtra linfa; el bazo no los tiene porque lo que le llega es sangre, por la arteria esplénica. Esa única diferencia de posición en el circuito explica su arquitectura, lo que filtran y qué se pierde al extirpar cada uno.",
+ x:["Los dos tienen cápsula: es precisamente lo que los distingue del tejido linfoide de las mucosas, que no la tiene.","Hay ganglios por todo el cuerpo, abdomen incluido; la localización no explica ninguna de sus diferencias funcionales.","Los dos son secundarios: en ellos las células ya maduras se encuentran con los antígenos. Los primarios son la médula ósea roja y el timo.","Los dos tienen folículos de linfocitos: en el ganglio, en la corteza externa; en el bazo, dentro de la pulpa blanca, alrededor de las arterias centrales."]},
+];
+
+/* Cuatro preguntas de desarrollo. Como en el taller de repaso, son de TRANSFERENCIA: no se
+   responden copiando la retroalimentación del bloque objetivo ni la clase. */
+const DESARROLLO = [
+{id:"d1", tema:"El líquido que vuelve",
+ q:"Dos pacientes tienen la pierna derecha hinchada. A la <strong>primera</strong> le extirparon los ganglios de la ingle hace un año. El <strong>segundo</strong> tiene una insuficiencia cardíaca. Explica <strong>en qué se diferencia el líquido acumulado</strong> en cada uno y <strong>predice</strong> cuál de los dos mejorará al elevar la pierna toda la noche, justificándolo.",
+ pistas:["¿Qué le pasa a las proteínas que escapan del capilar sanguíneo, y por dónde vuelven?",
+         "En uno falla cuánto líquido llega; en el otro, por dónde sale. ¿Cuál es cuál?",
+         "Elevar la pierna cambia la presión hidrostática. ¿Eso ayuda si el problema es la cañería?"],
+ rubrica:["Identifica que en la paciente operada el problema es de <em>drenaje</em>: se interrumpió la vía linfática.",
+          "Explica que las proteínas escapadas del plasma solo pueden volver por la vía linfática, así que el linfedema es un edema <em>rico en proteínas</em>.",
+          "Atribuye el edema cardíaco a un exceso de filtración por presión venosa alta: líquido <em>pobre en proteínas</em>.",
+          "Predice que mejora el del paciente cardíaco, porque la postura reduce la presión hidrostática; el linfedema no cede, porque la vía de salida sigue cortada."]},
+{id:"d2", tema:"El ganglio que habla",
+ q:"Dos pacientes con ojo rojo. Al <strong>primero</strong> se le palpa un ganglio doloroso por delante de la oreja derecha. Al <strong>segundo</strong>, uno doloroso bajo la mandíbula derecha. En los dos, la córnea está transparente. Explica <strong>qué parte del ojo está inflamada en cada uno</strong> y <strong>por qué la córnea no puede ser la responsable</strong> en ninguno de los dos casos.",
+ pistas:["Escribe la regla del drenaje palpebral en una línea: ¿qué va a cada grupo?",
+         "Del lado de la sien y del lado de la nariz: ¿qué estructuras hay en cada mitad?",
+         "¿Qué le falta a la córnea que tienen la conjuntiva y los párpados?"],
+ rubrica:["Aplica la regla de lateralidad: la mitad <em>lateral</em> de párpados y conjuntiva drena a los <em>parotídeos superficiales</em> (preauriculares).",
+          "Aplica la otra mitad: el tercio <em>medial</em>, el ángulo interno y el saco lagrimal drenan a los <em>submandibulares</em>.",
+          "Sitúa al primer paciente en la zona lateral y al segundo en la medial —ángulo interno o vía lagrimal—.",
+          "Explica que la córnea es <em>alinfática</em>: sin vasos linfáticos no envía material a ningún ganglio, así que nunca puede explicar una adenopatía."]},
+{id:"d3", tema:"Dos filtros distintos",
+ q:"El ganglio linfático y el bazo se describen los dos como filtros con cápsula. Explica <strong>qué filtra cada uno</strong>, y a partir de ahí <strong>deduce</strong> por qué el ganglio tiene vasos linfáticos aferentes y el bazo no. Después <strong>predice</strong> qué función se conserva y cuál se pierde en un paciente al que le extirpan el bazo.",
+ pistas:["Pregúntate qué líquido llega a cada uno y por qué vía entra.",
+         "Un vaso aferente trae linfa. ¿Le llega linfa al bazo?",
+         "Si lo que se pierde es un filtro de sangre, ¿qué tareas quedan huérfanas y cuáles no?"],
+ rubrica:["Dice que el ganglio filtra <em>linfa</em> y el bazo, <em>sangre</em>.",
+          "Deduce de ahí los aferentes: el ganglio está intercalado en la vía linfática y los necesita; al bazo le llega la sangre por la arteria esplénica, así que no tiene aferentes linfáticos.",
+          "Señala lo que se pierde con la esplenectomía: retirada de eritrocitos envejecidos, reserva de plaquetas y vigilancia de la sangre, con mayor exposición a bacterias encapsuladas.",
+          "Señala lo que se conserva: el filtrado de la linfa, que nunca fue tarea del bazo y siguen haciendo los ganglios."]},
+{id:"d4", tema:"El precio del privilegio",
+ q:"A dos pacientes se les va a trasplantar una córnea del mismo donante. El <strong>primero</strong> tiene la córnea transparente, sin vasos. El <strong>segundo</strong> lleva años con lentes de contacto y tiene vasos que entran unos milímetros desde el limbo. Explica <strong>por qué el privilegio inmune de la córnea depende de una ausencia</strong> y no de una defensa activa, y <strong>predice</strong> cuál de los dos injertos corre más riesgo de rechazo, nombrando la estructura que marca la diferencia.",
+ pistas:["Para rechazar hacen falta dos caminos: uno de ida y otro de vuelta. ¿Qué vaso es cada uno?",
+         "¿Qué hay en el limbo, y qué pasa cuando esos vasos avanzan hacia el centro?",
+         "Si el privilegio fuera una defensa activa, ¿podría perderse solo por crecer unos vasos?"],
+ rubrica:["Explica el privilegio como una <em>doble ausencia</em>: la córnea sana es avascular y alinfática.",
+          "Asigna cada camino: la <em>ida</em> —material hacia el ganglio— son los vasos linfáticos; la <em>vuelta</em> —células hacia el injerto— son los sanguíneos.",
+          "Predice mayor riesgo en el segundo paciente y nombra la <em>neovascularización desde el limbo</em>, que trae vasos sanguíneos y linfáticos a la vez.",
+          "Cierra la idea: si el privilegio dependiera de una defensa activa no se perdería por el mero crecimiento de unos vasos; que baste con eso demuestra que era una ausencia."]},
+];
+
+
+/* ═══ CONFIGURACIÓN ═══
+   BANCO_VERSION tiene que coincidir con CONFIG.BANCO del servidor. */
+const BANCO_VERSION = "linfatico-v1";
+const API   = "https://script.google.com/macros/s/AKfycbwWbujT4G9Ulsehce1b2CbrrFYv6i0aI7TiINxHmCYiw-KUR0LVscAv8PwkS-6eKOSA/exec";
+const TOKEN = "TALLER_LINF_MORF_2026II_23322c";                     // escritura: público por diseño
+const CLAVE = "morfo_taller_linfatico_2026II";
+
+BANCO_TALLER.forEach((it,i)=>it.id="a"+i);
+
+/* resp · primera respuesta de cada situación (índice ORIGINAL de la opción). No se sobrescribe.
+   exp  · textos del bloque de desarrollo.   rubW · palabras al abrir la lista de comprobación. */
+let S = {resp:{}, exp:{}, rubW:{}, nombre:"", codigo:""};
+try{ const g=localStorage.getItem(CLAVE); if(g) S=Object.assign(S,JSON.parse(g)); }catch(e){}
+const guardar = ()=>{ try{ localStorage.setItem(CLAVE, JSON.stringify(S)); }catch(e){} };
+
+const nPal = s => { s=String(s||"").trim(); return s ? s.split(/\s+/).length : 0; };
+const esc = s => String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function baraja(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
+
+function tab(id,btn){
+  document.querySelectorAll('.pane').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(id==='tZ') pintarCierre();
+}
+
+/* ═══ TARJETAS ═══
+   El índice de origen va en un WeakMap, no en un atributo, y la explicación se
+   escribe al responder: así no se leen con «Inspeccionar». */
+const OPC = new WeakMap();
+function tarjeta(it, n){
+  const card = document.createElement('div');
+  card.className = 'q-card'; card.dataset.id = it.id;
+  card.innerHTML = `<div class="q-num">Situación ${n} de ${BANCO_TALLER.length}</div>
+    <p class="q-text">${esc(it.q)}</p><ul class="opts"></ul><div class="fb"></div>`;
+  const ul = card.querySelector('.opts');
+  baraja(it.o.map((t,i)=>({t,i}))).forEach((o,k)=>{
+    const li = document.createElement('li');
+    li.innerHTML = `<span class="letter">${"ABCDE"[k]}</span><span>${esc(o.t)}</span>`;
+    OPC.set(li, o.i);
+    li.addEventListener('click', ()=>responder(card, it, li));
+    ul.appendChild(li);
+  });
+  return card;
+}
+function retro(it, oi){
+  const otras = it.o.map((t,i)=>({t,i})).filter(o=>o.i!==0 && o.i!==oi);
+  const lista = `<details class="otras"><summary>${oi===0?'¿Por qué no las otras?':'¿Y las demás opciones?'}</summary><ul>${
+    otras.map(o=>`<li><strong>${esc(o.t)}.</strong> ${esc(it.x[o.i-1])}</li>`).join('')}</ul></details>`;
+  if(oi===0) return `<p class="fb-h ok">✓ Correcto</p><p>${esc(it.r)}</p>${lista}`;
+  return `<p class="fb-h no">✗ Elegiste «${esc(it.o[oi])}»</p><p>${esc(it.x[oi-1])}</p>`
+       + `<p class="fb-h ok">✓ La correcta es «${esc(it.o[0])}»</p><p>${esc(it.r)}</p>${lista}`;
+}
+function responder(card, it, li){
+  if(card.dataset.hecho) return;
+  card.dataset.hecho = "1";
+  const oi = OPC.get(li);
+  card.querySelectorAll('.opts li').forEach(o=>{
+    o.classList.add('locked');
+    if(OPC.get(o)===0) o.classList.add('correct'); else if(o===li) o.classList.add('incorrect');
+  });
+  const fb = card.querySelector('.fb'); fb.innerHTML = retro(it, oi); fb.classList.add('show');
+  if(S.resp[it.id]===undefined) S.resp[it.id]=oi;      // solo la primera vez
+  guardar(); autoguardar(); progreso();
+}
+function pintarA(){
+  const lista = document.getElementById('qList'); lista.innerHTML='';
+  BANCO_TALLER.forEach((it,i)=>{
+    const card = tarjeta(it, i+1);
+    if(S.resp[it.id]!==undefined){        // ya respondida: se muestra resuelta
+      const li = [...card.querySelectorAll('.opts li')].find(x=>OPC.get(x)===S.resp[it.id]);
+      if(li){ card.dataset.hecho="1";
+        card.querySelectorAll('.opts li').forEach(o=>{ o.classList.add('locked');
+          if(OPC.get(o)===0) o.classList.add('correct'); else if(o===li) o.classList.add('incorrect'); });
+        const fb=card.querySelector('.fb'); fb.innerHTML=retro(it,S.resp[it.id]); fb.classList.add('show'); }
+    }
+    lista.appendChild(card);
+  });
+  progreso();
+}
+function progreso(){
+  const h = Object.keys(S.resp).length, ok = Object.values(S.resp).filter(v=>v===0).length;
+  document.getElementById('pgLabel').textContent = `${h} de ${BANCO_TALLER.length} respondidas`;
+  document.getElementById('pgScore').textContent = h ? `${ok} al primer intento · ${Math.round(ok/h*100)} %` : '';
+  document.getElementById('pgBar').style.width = (h/BANCO_TALLER.length*100)+'%';
+}
+
+/* ═══ DESARROLLO ═══ */
+function pintarB(){
+  document.getElementById('expList').innerHTML = DESARROLLO.map(b=>`
+    <div class="exp-card">
+      <div class="exp-tema">${esc(b.tema)}</div>
+      <p>${b.q}</p>
+      <textarea data-exp="${b.id}" placeholder="Escribe aquí tu explicación…">${esc(S.exp[b.id]||'')}</textarea>
+      <div class="char-count" data-cc="${b.id}"></div>
+      <details><summary>Me atasqué · dame una pista</summary><ul>${b.pistas.map(p=>`<li>${esc(p)}</li>`).join('')}</ul></details>
+      <div class="rub" data-rub="${b.id}"></div>
+    </div>`).join('');
+  document.querySelectorAll('textarea[data-exp]').forEach(t=>{
+    const id = t.dataset.exp, cc = document.querySelector(`[data-cc="${id}"]`);
+    const upd = ()=>{ const w = nPal(t.value);
+      cc.textContent = w + ' palabras' + (w>0 && w<100 ? ' · apunta a 100' : (w>250 ? ' · puedes acortar' : '')); pintarRub(id); };
+    t.addEventListener('input',()=>{ S.exp[id]=t.value; guardar(); upd(); autoguardar('abiertas'); });
+    upd();
+  });
+}
+function pintarRub(id){
+  const d = document.querySelector(`[data-rub="${id}"]`); if(!d) return;
+  const b = DESARROLLO.find(x=>x.id===id), w = nPal(S.exp[id]), yaVista = S.rubW[id]!==undefined;
+  if(w<80 && !yaVista){
+    if(!d.querySelector('button')) d.innerHTML = `<button class="btn ghost" disabled>Lista de comprobación · se abre al llegar a 80 palabras</button>`;
+    return;
+  }
+  if(d.querySelector('details')) return;
+  d.innerHTML = `<details${yaVista?' open':''}><summary>Ya escribí · ¿qué debería incluir?</summary>
+      <p style="font-size:.93rem;margin:6px 0 4px">Comprueba si tu respuesta contiene estas ideas. Si falta alguna, reescribe esa parte con tus palabras antes de entregar.</p>
+      <ul>${b.rubrica.map(r=>`<li>${r}</li>`).join('')}</ul></details>`;
+  d.querySelector('details').addEventListener('toggle', e=>{
+    if(e.target.open && S.rubW[id]===undefined){ S.rubW[id] = nPal(S.exp[id]); guardar(); }
+  });
+}
+
+/* ═══ SERVIDOR ═══ */
+function sync(txt){
+  const d = document.getElementById('syncChip');
+  d.textContent = txt; d.classList.add('on');
+  clearTimeout(sync._t); sync._t = setTimeout(()=>d.classList.remove('on'), 2200);
+}
+function banner(html){ const b=document.getElementById('banner'); b.innerHTML=html; b.classList.add('on'); }
+async function apiGet(action){
+  const r = await fetch(`${API}?token=${encodeURIComponent(TOKEN)}&action=${action}`);
+  return r.json();
+}
+/* Apps Script bloquea las peticiones con cabeceras personalizadas, así que va como texto plano. */
+async function apiPost(payload){
+  const r = await fetch(API, {method:'POST', redirect:'follow',
+    headers:{'Content-Type':'text/plain;charset=utf-8'},
+    body: JSON.stringify(Object.assign({token:TOKEN, banco:BANCO_VERSION}, payload))});
+  return r.json();
+}
+const crudas = ()=>{ const o={}; Object.keys(S.resp).forEach(k=>{ o[k.slice(1)] = S.resp[k]; }); return o; };
+const paquete = extra => Object.assign({alumno:S.nombre, codigo:S.codigo, crudas:crudas(),
+  abiertas:DESARROLLO.map(b=>S.exp[b.id]||""),
+  rubrica:DESARROLLO.map(b=>S.rubW[b.id]===undefined ? null : S.rubW[b.id])}, extra);
+
+function tratarError(r){
+  if(!r || r.ok) return false;
+  if(r.error==="version_antigua"){
+    banner('Hay una versión nueva del taller. Recarga la página para seguir guardando. <button onclick="location.reload()">Recargar</button>');
+    return true;
+  }
+  if(r.error==="codigo_incorrecto" || r.error==="alumno_desconocido"){
+    S.nombre=""; S.codigo=""; guardar();
+    document.getElementById('identEstado').innerHTML = '<span class="warn-chip">Vuelve a identificarte</span> El nombre y el documento no coinciden con la lista del curso.';
+    return true;
+  }
+  return false;
+}
+let agAuto = null;
+function autoguardar(motivo){
+  if(!S.nombre || !S.codigo) return;
+  clearTimeout(agAuto);
+  agAuto = setTimeout(async ()=>{
+    try{
+      const r = await apiPost(paquete({action:"progreso", motivo:motivo||"auto"}));
+      if(tratarError(r)) return;
+      sync(r.ok ? "guardado" : "no se pudo guardar · sigue aquí");
+    }catch(e){ sync("sin conexión · guardado aquí"); }
+  }, 1500);
+}
+
+/* ═══ IDENTIFICACIÓN ═══ */
+let PLAZO = null;
+async function cargarRoster(){
+  const sel = document.getElementById('selAlumno'), est = document.getElementById('identEstado');
+  try{
+    const r = await apiGet('roster');
+    if(!r.ok) throw new Error(r.error || 'respuesta_no_ok');
+    PLAZO = r.plazo || null;
+    sel.innerHTML = '<option value="">— elige tu nombre —</option>' +
+      r.roster.map(n=>`<option value="${esc(n)}"${n===S.nombre?' selected':''}>${esc(n)}</option>`).join('');
+    est.textContent = r.roster.length + ' estudiantes en la lista';
+    pintarPlazo();
+    if(S.nombre && S.codigo){
+      pintarIdent();
+      try{ const x = await apiPost({action:'ingreso', alumno:S.nombre, codigo:S.codigo}); tratarError(x); }catch(e){}
+    }
+  }catch(e){
+    sel.innerHTML = '<option value="">No se pudo cargar la lista</option>';
+    est.innerHTML = '<span class="warn-chip">Sin conexión con el servidor</span> ' +
+      'Puedes trabajar igual: todo se guarda en este navegador. Vuelve a abrir la página con conexión para identificarte y entregar.';
+  }
+}
+function pintarIdent(){
+  if(S.nombre) document.getElementById('identEstado').innerHTML =
+    `<span class="ok-chip">Identificado</span> Trabajando como <strong>${esc(S.nombre)}</strong>.`;
+}
+function pintarPlazo(){
+  if(!PLAZO) return;
+  const d = document.getElementById('plazoAviso');
+  const quedan = PLAZO.dias >= 1 ? `Quedan <strong>${PLAZO.dias} día${PLAZO.dias>1?'s':''}</strong>.`
+               : `Quedan <strong>${Math.max(PLAZO.horas,0)} hora${PLAZO.horas===1?'':'s'}</strong>.`;
+  d.innerHTML = PLAZO.abierto
+    ? `<div class="dato"><h5>Plazo</h5><p>La entrega cierra el <strong>${esc(PLAZO.cierra)}</strong>. ${quedan}</p></div>`
+    : `<div class="pearl"><p><strong>El plazo se cerró</strong> el ${esc(PLAZO.cierra)}. Todavía puedes enviar, pero quedará marcado como entrega tardía y tu docente decide qué hacer con ella.</p></div>`;
+}
+document.getElementById('btnEntrar').onclick = async ()=>{
+  const nom = document.getElementById('selAlumno').value;
+  const doc = document.getElementById('docAlumno').value.trim();
+  const est = document.getElementById('identEstado');
+  if(!nom || !doc){ est.innerHTML = '<span class="warn-chip">Falta un dato</span> Elige tu nombre y escribe tu número de documento.'; return; }
+  const tieneAlgo = Object.keys(S.resp).length || DESARROLLO.some(b=>nPal(S.exp[b.id]));
+  if(S.nombre && S.nombre!==nom && tieneAlgo &&
+     !confirm(`Este navegador tiene guardado el trabajo de ${S.nombre}. Si entras como ${nom}, ese trabajo se borrará de aquí (lo que ya se envió al servidor no se pierde). ¿Continuar?`)) return;
+  const b = document.getElementById('btnEntrar'); b.disabled = true; b.textContent = 'Comprobando…';
+  try{
+    const r = await apiPost({action:'ingreso', alumno:nom, codigo:doc});
+    if(r.ok){
+      if(S.nombre && S.nombre!==nom) S = {resp:{}, exp:{}, rubW:{}, nombre:"", codigo:""};
+      S.nombre = nom; S.codigo = doc; guardar(); pintarIdent(); sync('identificado');
+      if(r.plazo){ PLAZO = r.plazo; pintarPlazo(); }
+      document.getElementById('docAlumno').value = '';
+      pintarA(); pintarB(); autoguardar('ingreso');
+    }else if(r.error==="codigo_incorrecto"){
+      est.innerHTML = '<span class="warn-chip">No coincide</span> Ese documento no corresponde al nombre elegido. Revísalo; si estás seguro de que es el tuyo, avisa a tu docente.';
+    }else if(!tratarError(r)){
+      est.innerHTML = `<span class="warn-chip">No se pudo entrar</span> ${esc(r.detalle || r.error || '')}`;
+    }
+  }catch(e){
+    est.innerHTML = '<span class="warn-chip">Sin conexión</span> No se pudo comprobar. Inténtalo de nuevo en un momento.';
+  }
+  b.disabled = false; b.textContent = 'Entrar';
+};
+
+/* ═══ CIERRE ═══ */
+function marcadores(){
+  const tot = BANCO_TALLER.length, hechas = Object.keys(S.resp).length;
+  const ok = Object.values(S.resp).filter(v=>v===0).length;
+  const bHechas = DESARROLLO.filter(b=>nPal(S.exp[b.id])>=80).length;
+  return {tot,hechas,ok,bHechas};
+}
+function pintarCierre(){
+  const m = marcadores();
+  const celda = (big,lbl) => `<div class="score-cell"><div class="big">${big}</div><div class="lbl">${lbl}</div></div>`;
+  const sub = n => `<span style="font-size:1rem;color:var(--ink-soft)">/${n}</span>`;
+  document.getElementById('scoreGrid').innerHTML =
+    celda(m.hechas+sub(m.tot),'Situaciones hechas') +
+    celda(m.hechas ? Math.round(m.ok/m.hechas*100)+' %' : '—','Primer intento') +
+    celda(m.bHechas+sub(4),'Explicaciones');
+  const falta = [];
+  if(m.hechas < m.tot) falta.push(`te faltan situaciones (llevas ${m.hechas} de ${m.tot})`);
+  if(m.bHechas < 4) falta.push(`te faltan explicaciones con al menos 80 palabras (llevas ${m.bHechas} de 4)`);
+  document.getElementById('avisoFalta').innerHTML = falta.length
+    ? `<div class="pearl"><p><strong>Todavía no está completo:</strong> ${falta.join('; ')}. Puedes enviarlo igual y seguir después: cada envío actualiza el anterior.</p></div>`
+    : `<div class="clinical-box"><p><strong>Está completo.</strong> Envíalo con el botón de abajo.</p></div>`;
+  document.getElementById('quienSoy').innerHTML = S.nombre
+    ? `<p>Vas a entregar como <strong>${esc(S.nombre)}</strong>. Si no eres tú, identifícate en la primera pestaña.</p>`
+    : `<div class="pearl"><p><strong>Todavía no te has identificado.</strong> Vuelve a la primera pestaña: sin eso no se puede enviar.</p></div>`;
+}
+document.getElementById('btnEnviar').onclick = async ()=>{
+  const b = document.getElementById('btnEnviar'), out = document.getElementById('envioResultado');
+  if(!S.nombre || !S.codigo){ out.innerHTML = '<div class="pearl"><p>Primero identifícate en la primera pestaña.</p></div>'; return; }
+  b.disabled = true; b.textContent = 'Enviando…';
+  try{
+    const r = await apiPost(paquete({action:'envio'}));
+    if(tratarError(r)) throw new Error('Revisa el aviso de arriba');
+    if(!r.ok) throw new Error(r.detalle || r.error || 'error');
+    const tarde = r.estado === 'TARDE';
+    out.innerHTML = `<div class="${tarde?'pearl':'clinical-box'}">
+      <h5>${tarde?'Entregado fuera de plazo':'Entregado'}</h5>
+      <p>Recibido a nombre de <strong>${esc(S.nombre)}</strong>.
+      ${r.a.respondidas} de ${r.a.max} situaciones, ${r.a.aciertos} al primer intento.
+      <strong>Nota objetiva: ${String(r.objetivo).replace('.',',')} / 5,0</strong>, a la espera de las
+      cuatro explicaciones, que califica tu docente.</p>
+      ${tarde?'<p>Llegó después del cierre, así que queda marcada como tardía.</p>':''}
+      <p class="hint">Puedes seguir trabajando y volver a enviar.</p></div>`;
+    sync('entregado');
+  }catch(e){
+    out.innerHTML = `<div class="pearl"><p><strong>No se pudo enviar.</strong> ${esc(e.message||e)}.
+      Tus respuestas siguen guardadas en este navegador: vuelve a intentarlo, y si no funciona descarga
+      una copia con el otro botón y entrégasela a tu docente.</p></div>`;
+  }
+  b.disabled = false; b.textContent = 'Enviar mi taller';
+};
+document.getElementById('btnDescargar').onclick = ()=>{
+  const m = marcadores(), nom = (S.nombre||'').trim();
+  if(!nom){ document.getElementById('envioResultado').innerHTML = '<div class="pearl"><p>Primero identifícate en la primera pestaña.</p></div>'; return; }
+  const L = ['TALLER · SISTEMA LINFÁTICO · MORFOLOGÍA GENERAL 2026-II', '='.repeat(62),
+    'Estudiante: ' + nom, 'Generado:   ' + new Date().toLocaleString('es-CO'), '',
+    `Situaciones: ${m.hechas} de ${m.tot} · ${m.ok} al primer intento` + (m.hechas?` (${Math.round(m.ok/m.hechas*100)} %)`:''), ''];
+  L.push('EXPLICACIONES', '='.repeat(62));
+  DESARROLLO.forEach((b,i)=>{
+    const t = (S.exp[b.id]||'').trim();
+    L.push('', `${i+1}. ${b.tema}  [${nPal(t)} palabras]`, b.q.replace(/<[^>]+>/g,''), '-'.repeat(62), t || '(sin responder)');
+  });
+  L.push('', '='.repeat(62), 'Fin de la hoja.');
+  const blob = new Blob([L.join('\n')], {type:'text/plain;charset=utf-8'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'taller_linfatico_' + nom.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'')
+                 .replace(/[^a-z0-9]+/g,'_').replace(/^_|_$/g,'') + '.txt';
+  a.click(); setTimeout(()=>URL.revokeObjectURL(a.href), 1000);
+};
+document.getElementById('btnBorrar').onclick = ()=>{
+  if(!confirm('Esto borra lo guardado en ESTE navegador. Lo que ya llegó al servidor no se borra. ¿Seguro?')) return;
+  S = {resp:{}, exp:{}, rubW:{}, nombre:"", codigo:""}; guardar(); location.reload();
+};
+
+/* ═══ ARRANQUE ═══ */
+pintarA(); pintarB(); cargarRoster();
+
+</script>
+</body>
+</html>
