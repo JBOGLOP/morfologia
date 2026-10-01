@@ -183,6 +183,9 @@ text-align:center;font-size:.95rem;display:none}
 padding:4px 12px;font-family:'Source Serif 4',serif;font-weight:700;cursor:pointer}
 .rub{margin-top:11px}
 .rub .btn:disabled{width:100%;text-align:left}
+.btn.purple{background:var(--purple)}.btn.purple:hover{background:#7d6ca8}
+.vuelta-pie{margin-top:10px;display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center}
+.vuelta-pie .btn{padding:8px 16px;font-size:.92rem}
 </style>
 </head>
 <body>
@@ -253,7 +256,8 @@ padding:4px 12px;font-family:'Source Serif 4',serif;font-weight:700;cursor:point
       <div class="col-card">
         <h5>1 · Situaciones</h5>
         <p><strong>18 preguntas</strong> con respuesta inmediata. Cuando fallas, la página te dice
-          por qué falla <em>la opción que elegiste</em>, no solo cuál era la buena.</p>
+          por qué falla <em>la opción que elegiste</em>, no solo cuál era la buena, y desde el día
+          siguiente puedes volver a intentarla.</p>
       </div>
       <div class="col-card purple">
         <h5>2 · Explicación</h5>
@@ -266,7 +270,9 @@ padding:4px 12px;font-family:'Source Serif 4',serif;font-weight:700;cursor:point
       <h5>Cómo se califica</h5>
       <p>La fórmula de siempre del curso: <strong>0,6 × objetivo + 0,4 × desarrollo</strong>.
         Cuenta tu <strong>primera respuesta</strong> a cada situación, así que responde antes de
-        mirar la clase; leer la explicación después es lo que hace que se quede.</p>
+        mirar la clase; leer la explicación después es lo que hace que se quede. Las que falles
+        pasan a una <strong>segunda vuelta</strong> que se abre al día siguiente: no cambia la nota,
+        pero volver a ellas con un día de por medio es lo que más ayuda a recordarlas en el parcial.</p>
     </div>
 
     <div class="clinical-box">
@@ -297,6 +303,7 @@ padding:4px 12px;font-family:'Source Serif 4',serif;font-weight:700;cursor:point
       <div class="progress-line"><span id="pgLabel">—</span><span id="pgScore"></span></div>
       <div class="bar"><span id="pgBar"></span></div>
     </div>
+    <div id="vueltaAviso"></div>
     <div id="qList"></div>
   </div>
 </section>
@@ -359,149 +366,238 @@ padding:4px 12px;font-family:'Source Serif 4',serif;font-weight:700;cursor:point
 </footer>
 
 <script>
-/* TALLER · Sistema linfático · clase 10 · 1 oct 2026
+/* TALLER · Sistema linfático · clase 10 · 1 oct 2026 · banco v2 (25 sep)
    Tercer taller del seguimiento del segundo corte.
 
    El reconocimiento del tema ya está cubierto: 33 autodiagnósticos en la clase y 25 ítems en el
-   banco del taller de repaso. Este taller va por otro lado —APLICAR y PREDECIR—, y por eso casi
-   todos los ítems describen una situación en vez de preguntar una definición.
+   banco del taller de repaso, más el caso c4 y la pregunta b4. Este taller va por otro lado
+   —APLICAR y PREDECIR—: cada ítem pide usar una idea de la clase en una situación que ni la clase
+   ni el repaso resuelven. En la v2 se sustituyeron los ítems que repetían, con otras palabras, un
+   autodiagnóstico o un ítem del repaso, y los que el propio texto de la clase respondía al pie de
+   la letra (ver README, §4).
 
-   Misma estructura del banco v2: o[0] siempre la correcta, el cliente baraja, y `x` explica por
-   qué falla cada distractor. */
+   Misma estructura del banco del repaso: o[0] siempre la correcta, el cliente baraja, y `x`
+   explica por qué falla cada distractor, en el mismo orden que o[1]…o[4].
+   Sin HTML ni comillas rectas dentro de las cadenas; *así* se escribe una cursiva. */
 const BANCO_TALLER = [
-{t:"balance",q:"A una paciente le retiran los ganglios de la ingle derecha. Semanas después, esa pierna está hinchada y la piel, tirante. Comparada con el edema de una insuficiencia cardíaca, la hinchazón de esta paciente…",
- o:["Es rica en proteínas, porque falta la vía que las recupera","Es pobre en proteínas, porque solo se acumula agua filtrada","Cede al elevar la pierna durante unas horas","Afecta a las dos piernas por igual, como todo edema","Desaparece sola cuando el corazón compensa"],
- r:"Las proteínas que escapan del plasma no pueden volver por el capilar sanguíneo: la única vía de regreso es la linfática. Si se interrumpe, quedan retenidas en el intersticio y arrastran agua con ellas. Por eso el linfedema es un edema *rico en proteínas*, duro con el tiempo y que no cede con reposo ni con diuréticos, a diferencia del edema cardíaco.",
- x:["Es al revés: el edema pobre en proteínas es el de causa cardíaca o el de la hipoalbuminemia, donde lo que se acumula es líquido filtrado en exceso. Aquí lo que falla es el drenaje de lo que ya salió.","Eso describe el edema venoso o el postural, que mejora con la elevación. El linfedema no cede con la postura, porque el problema no es cuánta sangre llega sino que no hay por dónde sacar el líquido.","El edema cardíaco sí es bilateral y empieza por las zonas declives. El linfedema sigue el territorio del drenaje interrumpido, así que es del lado operado.","No hay nada que compensar: el corazón de esta paciente está sano. Lo que falta es una vía de drenaje que no se regenera por sí sola."]},
-{t:"capilares",q:"En una zona inflamada, el tejido se hincha y los capilares linfáticos recogen más líquido que en reposo. El mecanismo que lo explica es que…",
- o:["Los filamentos de fijación tiran del endotelio y abren las brechas","El músculo liso del capilar se relaja y lo ensancha","La presión arterial local empuja el líquido hacia el capilar","Las válvulas propias del capilar se abren por la inflamación","El endotelio se rompe por la presión y deja pasar el líquido"],
- r:"Los filamentos de fijación anclan las células endoteliales al tejido de alrededor. Cuando el tejido se expande por el líquido acumulado, tiran de ellas y separan las uniones solapadas, así que el capilar se vuelve más permeable justo cuando más hay que recoger. Es un mecanismo puramente mecánico y automático.",
- x:["El capilar linfático no tiene músculo liso: es solo endotelio sobre una membrana basal incompleta. El músculo aparece más adelante, en los colectores, y sirve para impulsar la linfa.","La presión arterial se disipa en los capilares sanguíneos. Lo que empuja el líquido hacia el capilar linfático es la presión del propio líquido intersticial acumulado, no la de la arteria.","Las válvulas de dos valvas están en los vasos colectores, no en el capilar. En el capilar, la función de válvula la hace el solapamiento del endotelio, y ese solapamiento no se abre «por la inflamación» sino por tracción.","Si el endotelio se rompiera, el vaso no podría retener la linfa ni darle dirección. La permeabilidad aumenta abriendo uniones que existen, no destruyendo la pared."]},
-{t:"conductos",q:"Un paciente tiene un tumor que comprime el conducto torácico justo antes de su desembocadura. ¿Qué territorio seguiría drenando con normalidad?",
- o:["El miembro superior derecho","La pierna izquierda","El abdomen","El hemitórax izquierdo","La mitad izquierda de la cabeza"],
- r:"El conducto torácico drena las tres cuartas partes del cuerpo, y el conducto linfático derecho solo el cuadrante superior derecho: mitad derecha de cabeza y cuello, brazo derecho y hemitórax derecho. Si se obstruye el torácico, ese cuadrante es el único que conserva su vía de salida, porque usa un conducto distinto.",
- x:["Las dos piernas drenan por los troncos lumbares a la cisterna del quilo y de ahí al conducto torácico: quedarían represadas.","Las vísceras y la pared del abdomen drenan al conducto torácico a través de los troncos lumbares y del intestinal, así que también se verían afectadas.","El hemitórax izquierdo drena por el tronco broncomediastínico izquierdo, que termina en el conducto torácico. El que se salva es el derecho.","La mitad izquierda de la cabeza drena por el tronco yugular izquierdo, que también termina en el conducto torácico. La mitad que se salva es la derecha."]},
-{t:"quilo",q:"Tras una comida rica en grasa, la linfa del conducto torácico se vuelve blanca y lechosa. La razón es que…",
- o:["Las grasas absorbidas entran en los quilíferos del intestino","Los glóbulos blancos aumentan mucho tras comer","La bilis pasa del hígado a la vía linfática intestinal","El quilo lleva plaquetas en suspensión desde el bazo","Las proteínas del plasma precipitan en la linfa"],
- r:"Las grasas de la dieta no pasan a los capilares sanguíneos del intestino: entran en unos capilares linfáticos especializados de las vellosidades, los quilíferos. La linfa cargada de esa grasa es el quilo, y su aspecto lechoso es lo que da nombre a la cisterna del quilo.",
- x:["El número de linfocitos de la linfa no cambia de forma apreciable con una comida, y además los linfocitos no le darían ese aspecto: la linfa normal, con ellos, es un líquido claro.","La bilis se vierte al duodeno por la vía biliar y actúa en la luz del intestino emulsionando las grasas; no entra en los vasos linfáticos ni tiñe la linfa.","Las plaquetas circulan en la sangre, no en la linfa, y en cualquier caso no darían color blanco. Lo que enturbia el quilo son las gotas de grasa absorbida.","Las proteínas del plasma que llegan a la linfa van disueltas, no precipitadas, y están ahí siempre, también en ayunas, cuando la linfa es transparente."]},
-{t:"propulsion",q:"Un paciente pasa doce horas sentado en un vuelo, sin moverse. Al bajar tiene los tobillos hinchados. Desde el punto de vista del sistema linfático, lo que ha fallado es…",
- o:["La bomba muscular, que no comprimió los vasos de la pantorrilla","El linfangión, que dejó de contraerse por la altitud","La cisterna del quilo, que se llenó en exceso durante el vuelo","Las válvulas de los vasos, que se rompieron por la presión","El conducto torácico, que se colapsó al estar sentado"],
- r:"La linfa de las piernas sube por la suma de cuatro fuerzas: las válvulas que impiden el retroceso, la bomba muscular, la bomba respiratoria y la contracción del propio linfangión. Doce horas de inmovilidad anulan sobre todo la bomba muscular, y la gravedad hace el resto. Es la misma razón por la que caminar deshincha los tobillos.",
- x:["El linfangión sigue contrayéndose por su cuenta cuando se distiende; de hecho es la fuerza que queda cuando uno está quieto, y no basta por sí sola.","La cisterna es el reservorio de origen del conducto torácico y está en el abdomen; recibe la linfa que ya subió, y su llenado no explica que se hinchen los tobillos.","Las válvulas no se rompen por estar sentado. Cuando fallan de forma permanente, por otras causas, aparecen las varices, que es un cuadro crónico y distinto.","El conducto torácico corre por el mediastino posterior, protegido entre la aorta y la columna; estar sentado no lo colapsa."]},
-{t:"ganglio",q:"En un ganglio inflamado por una infección cercana, el dolor aparece pronto. La explicación morfológica más directa es que…",
- o:["La cápsula se distiende deprisa al crecer el contenido","Los senos se llenan de linfa y comprimen el hilio","Los vasos aferentes se obstruyen y el ganglio se seca","La médula del ganglio se sustituye por tejido fibroso","El ganglio pierde su cápsula y roza los tejidos vecinos"],
- r:"El ganglio está envuelto por una cápsula de tejido conectivo denso, que cede poco. Cuando sus linfocitos proliferan de golpe ante una infección, el volumen crece más rápido de lo que la cápsula puede acomodar, y esa distensión es lo que duele. Por eso el ganglio reactivo duele y el que crece despacio, aunque sea más grande, no.",
- x:["Los senos sí se llenan, pero el hilio es una escotadura abierta por donde salen los eferentes y pasan los vasos sanguíneos: no es una estructura que se comprima y duela.","Ocurre lo contrario: en una infección llega más linfa por los aferentes, no menos. Un ganglio «seco» no se hincharía.","La fibrosis es un cambio lento, de semanas o meses, y no explica un dolor que aparece en días. Además, un ganglio fibrosado suele ser duro e indoloro.","La cápsula no se pierde en una infección. Perder el límite capsular y adherirse a lo de alrededor es precisamente lo que hace sospechoso a un ganglio duro y fijo."]},
-{t:"cabeza",q:"Un paciente tiene una lesión infectada en el cuero cabelludo, justo detrás de la oreja izquierda. El grupo ganglionar que primero debería palpar es…",
- o:["El mastoideo izquierdo","El submentoniano","El parotídeo superficial derecho","El supraclavicular izquierdo","El submandibular derecho"],
- r:"El collar pericervical reparte la cabeza por territorios, y los ganglios mastoideos o retroauriculares recogen la piel de detrás de la oreja y el cuero cabelludo de encima. La linfa drena siempre primero al grupo de su propia región y de su propio lado, antes de seguir a la cadena cervical profunda.",
- x:["Los submentonianos están bajo el mentón, en la línea media, y recogen el labio inferior, el piso de la boca y la punta de la lengua: otro territorio y otra parte de la cabeza.","Además de ser del lado contrario, los parotídeos superficiales —los preauriculares— recogen la sien, el párpado lateral y la conjuntiva, no la región de detrás de la oreja.","Los supraclavicularesestán al final del recorrido, sobre la clavícula, y reciben el drenaje del tórax y el abdomen; a ellos llegaría la linfa mucho después, si es que llega.","Están bajo el borde de la mandíbula y recogen la cara media y el ángulo interno del ojo, y además son del lado opuesto a la lesión."]},
-{t:"ojo",q:"Una paciente consulta por un bulto doloroso bajo la mandíbula del lado derecho. En el ojo derecho tiene una conjuntivitis limitada al ángulo interno, junto a la nariz. La relación entre los dos hallazgos es que…",
- o:["El ángulo interno drena a los ganglios submandibulares","El ángulo interno drena a los ganglios preauriculares","La conjuntiva no drena, así que no hay relación","El drenaje de todo el ojo va siempre a los submandibulares","La córnea drenó la infección hasta la mandíbula"],
- r:"La regla del drenaje palpebral es de lateralidad: lo que está del lado de la nariz —el tercio medial de los párpados, el ángulo interno y el saco lagrimal— va a los ganglios submandibulares, y lo que está del lado de la sien, a los preauriculares. Saberla permite razonar al revés: por el ganglio que crece se deduce dónde mirar.",
- x:["Los preauriculares recogen la mitad lateral, la del lado de la sien. Si el ganglio crecido fuera ese, habría que mirar hacia fuera, no hacia el ángulo interno.","La conjuntiva sí tiene vasos linfáticos y drena muy bien: es la córnea la que carece de ellos. Precisamente por eso una conjuntivitis puede dar un ganglio palpable.","El drenaje está repartido entre dos grupos según la lateralidad. Si todo fuera a los submandibulares, la adenopatía preauricular de la conjuntivitis viral no existiría.","La córnea es avascular y alinfática: no drena a ningún ganglio. Lo que drena en este cuadro es la conjuntiva inflamada del ángulo interno."]},
-{t:"organos",q:"Un niño nace sin timo. De los siguientes, el problema esperable es…",
- o:["No madurarán sus linfocitos T","No se formarán sus ganglios linfáticos","No podrá producir linfa en los tejidos","Su bazo no filtrará la sangre","No tendrá amígdalas en la faringe"],
- r:"El timo es un órgano linfoide primario: allí termina de madurar el precursor que nació en la médula ósea, y solo una fracción sale a circular como linfocito T. Sin timo, esa maduración no ocurre. Los órganos secundarios —ganglios, bazo, MALT— existen igual, pero les faltarían las células que deberían poblarlos.",
- x:["Los ganglios se forman durante el desarrollo con independencia del timo; lo que les faltaría son los linfocitos T que deberían ocupar su corteza interna.","La linfa se forma en cualquier tejido con capilares sanguíneos y linfáticos: es líquido intersticial que entra en un capilar linfático, y no depende del timo.","El bazo seguiría filtrando la sangre y retirando los eritrocitos viejos en su pulpa roja, que es una función independiente de la maduración de los linfocitos T.","Las amígdalas se desarrollan en la pared de la faringe como tejido linfoide asociado a mucosa; su formación no depende del timo."]},
-{t:"bazo",q:"A un paciente le extirpan el bazo tras un traumatismo. De estas funciones, la que NO se pierde es…",
- o:["El filtrado de la linfa antes de volver a la sangre","La retirada de los eritrocitos envejecidos","La reserva de plaquetas","La vigilancia de los antígenos que llegan por la sangre","La respuesta a bacterias encapsuladas de la sangre"],
- r:"El bazo nunca filtró linfa: no tiene vasos linfáticos aferentes porque está intercalado en la vía sanguínea, no en la linfática. Esa tarea la hacen los ganglios, que siguen intactos. Lo que sí se pierde al extirparlo son sus funciones sobre la sangre, y por eso estos pacientes quedan más expuestos a ciertas infecciones.",
- x:["Es una función propia del bazo: sus cordones esplénicos, en la pulpa roja, retienen los eritrocitos viejos para que los macrófagos los destruyan.","El bazo almacena plaquetas y puede devolverlas a la circulación; al extirparlo, esa reserva desaparece.","La pulpa blanca vigila la sangre que atraviesa el órgano: es el equivalente al ganglio, pero para la vía sanguínea, y se pierde con la esplenectomía.","Es la razón clínica por la que estos pacientes se vacunan: el bazo es clave frente a las bacterias encapsuladas que circulan por la sangre."]},
-{t:"malt",q:"El tejido linfoide asociado a mucosas se encuentra en la faringe, el íleon y la superficie ocular. Lo que tienen en común esos tres sitios es que…",
- o:["Son epitelios húmedos abiertos al exterior","Son los tres tejidos sin vasos sanguíneos","Están los tres dentro de la cavidad torácica","Los tres carecen de epitelio de revestimiento","Los tres drenan al conducto linfático derecho"],
- r:"La estrategia del MALT es poner vigilancia donde el exterior toca al interior. Faringe, intestino y superficie ocular son mucosas: epitelios húmedos en contacto con lo que entra al cuerpo. Por eso hay tejido linfoide bajo su epitelio, sin cápsula, y por eso la conjuntiva tiene su propio CALT.",
- x:["Los tres están muy vascularizados. Los tejidos sin vasos son otros —córnea, cartílago, epidermis, cristalino— y precisamente en ellos no hay tejido linfoide.","El íleon está en el abdomen y la superficie ocular en la cara; solo una parte de la faringe se acerca al tórax. La localización no es lo que los agrupa.","Los tres tienen epitelio, y es justo eso lo que los define como mucosas: un epitelio húmedo con tejido conectivo debajo, donde se aloja el tejido linfoide.","Cada uno drena a los ganglios de su región: la faringe y el ojo a la cadena cervical, el íleon a los ganglios mesentéricos y de ahí al conducto torácico."]},
-{t:"ojo",q:"El CALT de la conjuntiva y las placas de Peyer del íleon se agrupan bajo el mismo nombre, MALT, porque los dos…",
- o:["Son tejido linfoide sin cápsula bajo una mucosa","Están los dos en el tubo digestivo","Drenan los dos al conducto linfático derecho","Se forman los dos a partir del timo","Tienen los dos vasos linfáticos aferentes"],
- r:"Lo que los agrupa no es dónde están, sino cómo están: agregados de linfocitos alojados en la lámina propia de una mucosa, sin cápsula que los envuelva. Esa falta de cápsula es lo que los separa de los órganos linfoides —ganglio, bazo, timo— y lo que justifica llamarlos tejido y no órgano.",
- x:["La conjuntiva no pertenece al tubo digestivo: tapiza los párpados y la superficie del ojo. Lo que comparten es ser mucosas, no estar en el mismo aparato.","Cada uno drena a los ganglios de su región: la conjuntiva a los de la cara y el cuello, el íleon a los mesentéricos y de ahí al conducto torácico.","El timo es un órgano linfoide primario donde maduran los linfocitos T; el MALT se forma en la pared de cada mucosa y recibe células ya maduras.","Ni uno ni otro tienen aferentes: no están intercalados en la vía linfática. Los aferentes son propios del ganglio."]},
-{t:"privilegio",q:"Se comparan dos injertos de un donante no compatible: uno de córnea central y otro de piel. El de córnea se rechaza mucho menos porque en la córnea…",
- o:["Falta la vía que lleva material del injerto hasta un ganglio","Las células del injerto se sustituyen por las del receptor","El epitelio impide por completo el paso de cualquier célula","La lágrima arrastra las células de defensa que se acercan","La transparencia impide que el sistema de defensa la localice"],
- r:"Para rechazar un injerto hacen falta dos caminos: uno de ida, por el que material del injerto llega a un ganglio, y uno de vuelta, por el que las células de defensa llegan al injerto. La córnea central es alinfática —no hay ida— y avascular —apenas hay vuelta—. La piel tiene las dos vías abiertas, y por eso se rechaza.",
- x:["El injerto conserva sus propias células, en particular el endotelio corneal, que no se regenera; si fueran sustituidas, el problema del rechazo ni se plantearía.","El epitelio no es una barrera absoluta: las células pueden entrar desde el limbo si aparecen vasos. Lo decisivo es que en la córnea sana no hay por dónde entrar ni salir.","La lágrima lubrica y nutre la superficie, pero no arrastra células de defensa: el privilegio viene de que esas células casi no llegan, no de que se las quite de encima.","El sistema de defensa no localiza por la vista: lo hace por el transporte de material hasta un ganglio. Lo que falta es ese transporte, no la visibilidad."]},
-{t:"privilegio",q:"Un usuario de lentes de contacto lleva años con hipoxia corneal crónica y en la lámpara de hendidura se ven vasos que invaden la córnea periférica. Si mañana necesitara un trasplante de córnea, lo esperable es que…",
- o:["El riesgo de rechazo sea mayor que en una córnea sin vasos","El injerto se integre antes gracias a los vasos nuevos","No cambie nada, porque el rechazo depende del donante","La córnea ya no pueda recibir ningún injerto","El rechazo sea imposible, porque la córnea es privilegiada"],
- r:"Los vasos que crecen desde el limbo por la hipoxia no son solo sanguíneos: los acompañan vasos linfáticos. Con ellos se abren las dos vías que el privilegio mantenía cerradas, y el injerto pasa a ser visible para el sistema de defensa. Por eso el grado de neovascularización que se anota en la lámpara de hendidura es un dato de pronóstico, no un detalle cosmético.",
- x:["Los vasos no ayudan a integrar un injerto corneal: la córnea se nutre por difusión del humor acuoso y de la lágrima, y lo que traen los vasos nuevos es exposición al rechazo.","La compatibilidad del donante importa, pero lo que da al trasplante de córnea su tasa de éxito es la condición del lecho receptor: si está vascularizado, el pronóstico empeora.","Sí puede recibirlo, y de hecho se hace; lo que cambia es que hay que vigilar más y a veces tratar los vasos antes de operar.","El privilegio no es una propiedad permanente de la córnea: depende de que siga sin vasos. Cuando los tiene, se pierde."]},
-{t:"meninges",q:"Durante un siglo se enseñó que el encéfalo carecía de vasos linfáticos. Los linfáticos meníngeos descritos en 2015 obligan a matizarlo porque…",
- o:["Corren en la duramadre y drenan a los ganglios cervicales profundos","Están dentro del tejido nervioso, entre las propias neuronas","Sustituyen a los senos venosos en el drenaje de la sangre","Conectan los ventrículos con la cavidad nasal por el etmoides","Aparecen solo cuando hay una infección del encéfalo"],
- r:"Son vasos linfáticos verdaderos, alojados en la duramadre junto a los senos venosos, que drenan hacia la cadena cervical profunda: la misma a la que llega la linfa de la cara y del ojo. Que el encéfalo y el ojo compartan estación final es lo que hace interesante el hallazgo para la optometría, y un ejemplo de anatomía que todavía se está escribiendo.",
- x:["No están entre las neuronas: el tejido nervioso sigue sin vasos linfáticos propios. Lo que recorre el parénquima son los espacios perivasculares del sistema glinfático, que es otra cosa.","Los senos venosos siguen drenando la sangre del encéfalo hacia las yugulares; los linfáticos meníngeos los acompañan, pero transportan linfa, no sangre.","Esa comunicación la tienen los filetes olfatorios al atravesar la lámina cribosa; los linfáticos meníngeos siguen a los senos venosos de la duramadre.","Son estructuras normales y permanentes, presentes en condiciones fisiológicas; su descripción tardía se debió a lo difícil que es verlos, no a que solo aparezcan en la enfermedad."]},
-{t:"integracion",q:"Un paciente llega con el párpado hinchado, fiebre y un ganglio doloroso por delante de la oreja. Antes de pensar en la causa, lo primero que conviene establecer es…",
- o:["Si la infección está por delante o por detrás del septo orbitario","Si ese ganglio preauricular es duro o blando al tacto","Si el paciente usa lentes de contacto a diario","Cuál de los dos ojos tiene mejor agudeza visual","Si tiene antecedentes de alergia estacional"],
- r:"El septo orbitario separa dos cuadros de gravedad muy distinta: la celulitis preseptal suele tratarse con antibiótico oral, y la orbitaria es una urgencia con riesgo para la visión y para la vida. Lo que lo decide no es el aspecto del párpado, que se hincha igual en los dos, sino la motilidad ocular, la proptosis y la visión del color.",
- x:["Es un dato útil —blando y doloroso orienta a causa inflamatoria— pero no cambia la conducta inmediata; lo urgente es saber si el proceso ha entrado en la órbita.","Puede ayudar a explicar el origen, pero no decide la urgencia: un portador de lentes y alguien que no las usa pueden tener los dos una celulitis orbitaria.","La agudeza visual del ojo sano no aporta nada aquí; lo que importa es si la del ojo afectado y su visión del color están alteradas, que es un signo de compromiso orbitario.","La alergia produce picor y afecta a los dos ojos, sin fiebre ni ganglio; con este cuadro, el antecedente alérgico no es lo que hay que establecer primero."]},
-{t:"integracion",q:"De estas cinco estructuras del ojo y sus anexos, la ÚNICA que drena a un ganglio linfático es…",
- o:["La conjuntiva bulbar","La retina y su epitelio pigmentario","El humor acuoso","El cristalino y su cápsula","La coroides"],
- r:"El globo ocular está fuera de la red linfática en todas sus capas y contenidos. El tejido linfático del ojo vive *fuera* del globo: conjuntiva, párpados y vías lagrimales. Por eso una conjuntivitis da un ganglio palpable y una lesión de la retina, por grave que sea, no.",
- x:["La retina no tiene vasos linfáticos; su drenaje de líquido es otro asunto, a través del epitelio pigmentario y la coroides, y no termina en ningún ganglio.","El humor acuoso sale del ojo por el ángulo iridocorneal hacia el conducto de Schlemm y las venas epiesclerales: es una vía venosa, no linfática.","El cristalino no tiene vasos de ningún tipo y se nutre del humor acuoso; está aislado incluso dentro del propio globo.","La coroides es la capa más vascularizada del ojo, pero de vasos sanguíneos; forma parte del globo y no drena a ganglios."]},
-{t:"integracion",q:"Comparando el ganglio linfático con el bazo, la diferencia que explica todas las demás es que…",
- o:["Uno está intercalado en la vía linfática y el otro en la sanguínea","Uno tiene cápsula de tejido conectivo y el otro no","Uno está en el abdomen y el otro en el cuello","Uno pertenece a los órganos primarios y el otro a los secundarios","Uno tiene folículos y el otro no"],
- r:"De ahí sale todo lo demás. El ganglio recibe vasos aferentes porque filtra linfa; el bazo no los tiene porque lo que le llega es sangre, por la arteria esplénica. Esa única diferencia de posición en el circuito explica su arquitectura, lo que filtran y qué se pierde al extirpar cada uno.",
- x:["Los dos tienen cápsula: es precisamente lo que los distingue del tejido linfoide de las mucosas, que no la tiene.","Hay ganglios por todo el cuerpo, abdomen incluido; la localización no explica ninguna de sus diferencias funcionales.","Los dos son secundarios: en ellos las células ya maduras se encuentran con los antígenos. Los primarios son la médula ósea roja y el timo.","Los dos tienen folículos de linfocitos: en el ganglio, en la corteza externa; en el bazo, dentro de la pulpa blanca, alrededor de las arterias centrales."]},
+{t:"linfedema",q:"A una paciente le extirparon los ganglios de la ingle derecha hace un año y desde entonces tiene un linfedema en esa pierna. Le han advertido que una herida en ese pie se le infectará con más facilidad que en el otro. La explicación morfológica es que…",
+ o:["El líquido rico en proteínas se estanca sin pasar por un ganglio que lo revise","Sin los ganglios, la médula ósea roja deja de fabricar las células de defensa","El bazo deja de filtrar la sangre que regresa de esa pierna hinchada","Los capilares linfáticos del pie se cierran y dejan de recoger el líquido del tejido","La linfa de esa pierna se desvía al conducto linfático derecho, que es más lento"],
+ r:"En una pierna sana, lo que entra por una herida viaja con la linfa hasta los ganglios de la ingle, donde se detecta pronto. Sin esos ganglios falta esa estación de control, y el líquido que queda estancado en el tejido, rico en proteínas, es además un buen medio para las bacterias. Por eso a estos pacientes se les insiste en cuidar la piel del miembro afectado.",
+ x:["La médula ósea roja es un órgano primario y sigue fabricando células de defensa, falte lo que falte en la ingle. Los ganglios son secundarios: allí trabajan células que ya llegan hechas.",
+    "El bazo filtra la sangre de todo el cuerpo, y la de esa pierna le sigue llegando igual por las venas. Lo que se perdió en la ingle es un filtro de linfa, no de sangre.",
+    "Los capilares del pie siguen abiertos y recogiendo líquido; lo cortado está más arriba, en la ingle. Por eso lo que recogen no tiene adónde ir y la pierna se hincha.",
+    "La pierna drena por los troncos lumbares a la cisterna del quilo y al conducto torácico, y eso no cambia. Tampoco explicaría la infección: el problema está antes, en la ingle."]},
+
+{t:"capilares",q:"Durante una operación de hernia en la ingle, el cirujano encuentra varios ganglios teñidos del mismo color que la tinta de un tatuaje grande que el paciente tiene en el muslo desde hace años. Lo que mejor lo explica es que…",
+ o:["Parte de la tinta entró en los capilares linfáticos y quedó retenida en esos ganglios","La tinta pasó a la sangre y el ganglio la tomó de la arteria que lo irriga por el hilio","Los linfocitos del ganglio fabrican un pigmento de ese mismo color cuando reaccionan","La tinta se extendió desde el muslo por contigüidad, atravesando los tejidos","Las partículas de tinta subieron por las venas del muslo hasta la ingle"],
+ r:"El capilar linfático tiene un endotelio de uniones solapadas y una membrana basal incompleta: admite lo que no cabe en el capilar sanguíneo, proteínas y también partículas. La linfa de la piel del muslo lleva esa tinta a los ganglios de la ingle, que la retienen como filtro. Por eso los ganglios teñidos son un hallazgo frecuente en personas tatuadas, y pueden confundir durante una cirugía.",
+ x:["La sangre que entra por el hilio solo irriga el ganglio; no es lo que filtra. Si la tinta viajara por la sangre, se repartiría por todo el cuerpo, no se concentraría en los ganglios de la región del tatuaje.",
+    "Los linfocitos no fabrican pigmentos. Que el color sea el de la tinta, y solo en los ganglios de la región del tatuaje, indica que es la misma tinta, llevada hasta allí.",
+    "Si avanzara por contigüidad, teñiría todo el tejido entre el tatuaje y la ingle. Aparece concentrada en los ganglios porque viajó dentro de los vasos linfáticos.",
+    "Las venas del muslo llevan la sangre hacia el corazón y no desembocan en ganglios. La vía que une la piel del muslo con los ganglios de la ingle es la linfática."]},
+
+{t:"conductos",q:"En una revisión, un paciente de 60 años tiene un ganglio duro e indoloro justo encima de la clavícula DERECHA. Sabiendo qué recoge cada conducto, el órgano que con más lógica podría enviar ahí células de un tumor es…",
+ o:["El pulmón derecho, en el tórax","El estómago, en el abdomen","La piel de la pierna derecha","La conjuntiva del ojo derecho","La piel de la mano izquierda"],
+ r:"La linfa del pulmón derecho pasa por ganglios del tórax, que no se palpan, y sube por el tronco broncomediastínico derecho al conducto linfático derecho, que termina en la confluencia yugulosubclavia derecha, junto a ese ganglio. Es el espejo del ganglio de la clase: a la izquierda, el que avisa de un tumor lejano es el del conducto torácico, que recoge el abdomen.",
+ x:["Su linfa sube por la cisterna del quilo y el conducto torácico, que termina a la izquierda: el ganglio que delata un tumor del estómago es el supraclavicular izquierdo, no el derecho.",
+    "Estar a la derecha no la lleva al conducto derecho: las dos piernas drenan por los troncos lumbares al conducto torácico. Además, antes se palparía un ganglio en la ingle.",
+    "La conjuntiva drena a los preauriculares o a los submandibulares, según su parte. Esa primera estación, en la cara, se palparía mucho antes que un ganglio sobre la clavícula.",
+    "La mano izquierda drena a la axila y, por el tronco subclavio izquierdo, al conducto torácico. Está del otro lado y, además, antes daría un ganglio en la axila."]},
+
+{t:"quilo",q:"Una lesión del conducto torácico dentro del tórax hace que se acumule en la pleura un líquido blanco y lechoso. Si al paciente se le da durante unos días una dieta sin grasas, lo esperable es que ese líquido…",
+ o:["Se vuelva más claro, porque lo blanco era grasa que llegaba del intestino","Siga igual de blanco, porque lo que lo tiñe son los linfocitos de la linfa","Se vuelva rojo, porque sin grasa la linfa empieza a arrastrar eritrocitos","Deje de formarse del todo, porque sin grasa el intestino no produce linfa","Se vuelva más blanco, porque el hígado envía su grasa por el conducto"],
+ r:"El color lechoso del quilo lo dan las grasas de la dieta, absorbidas en los quilíferos, que suben por el tronco intestinal y la cisterna del quilo al conducto torácico. Sin grasa que absorber, la linfa intestinal sale mucho más clara y en menor cantidad, aunque no deja de formarse. Por eso la dieta forma parte del tratamiento: reduce el caudal que pasa por la fuga.",
+ x:["La linfa lleva linfocitos también en ayunas, y en ayunas es casi transparente. Unas células dispersas no dan ese aspecto: lo que lo da son gotas de grasa en suspensión.",
+    "Los eritrocitos van por la sangre y no entran en la linfa por quitar la grasa de la comida. Un líquido rojo haría pensar en un sangrado, no en quilo.",
+    "El intestino sigue formando linfa sin grasa, como cualquier tejido con capilares: el líquido intersticial se sigue recogiendo. Cambian su aspecto y su cantidad, pero no deja de formarse.",
+    "El hígado sí envía linfa al conducto torácico, pero la grasa que fabrica la saca por la sangre. Lo que vuelve blanco el quilo es la grasa de la dieta, absorbida en el intestino."]},
+
+{t:"propulsion",q:"En la fisioterapia del linfedema se enseña a respirar hondo y despacio, llevando el aire hacia abajo para que el abdomen se abombe al inspirar, en vez de mover solo el pecho. Esa forma de respirar ayuda a vaciar el conducto torácico porque…",
+ o:["El diafragma baja más: sube la presión del abdomen, donde está la cisterna, y baja la del tórax","El diafragma se relaja al abombar el abdomen y deja libre el conducto en el hiato aórtico","El abdomen abombado empuja el corazón hacia arriba y su latido arrastra la linfa","El diafragma es músculo liso, como el linfangión, y se contrae más cuanto más se estira","Al respirar despacio, la linfa pasa más tiempo en los ganglios y así avanza mejor"],
+ r:"Es la bomba respiratoria llevada al máximo. Cuanto más desciende el diafragma al inspirar, más sube la presión del abdomen, donde está la cisterna del quilo, y más baja la del tórax, por donde sube el conducto torácico. La linfa pasa de la zona de más presión a la de menos, y sus válvulas impiden que retroceda al espirar.",
+ x:["Al inspirar, el diafragma se contrae, no se relaja: es justo al contraerse y bajar cuando abomba el abdomen. Y el hiato aórtico no estrangula el conducto en la inspiración.",
+    "El latido no mueve la linfa: el sistema linfático no tiene bomba central. Lo que cambia al respirar con el abdomen son las presiones a uno y otro lado del diafragma.",
+    "El diafragma es músculo esquelético, el principal de la inspiración, y lo puedes mover a voluntad. El músculo liso que se contrae al estirarse es el de la pared del linfangión.",
+    "El remanso dentro del ganglio sirve para filtrar, no para empujar. Respirar hondo ayuda porque cada inspiración profunda crea una diferencia de presión mayor."]},
+
+{t:"ganglio",q:"Antes de operar un cáncer de mama, se inyecta un colorante junto al tumor y se extirpa solo el primer ganglio de la axila que se tiñe. Si ese ganglio no tiene células tumorales, los demás se dejan en su sitio. Esa decisión se apoya en que…",
+ o:["La linfa de esa zona llega primero a un ganglio concreto, y de él pasa a los siguientes","El colorante tiñe el ganglio con más linfocitos, que es el que mejor filtra","Todos los ganglios de la axila reciben a la vez la linfa de esa zona de la mama","El primer ganglio destruye todas las células tumorales que le van llegando","Cada ganglio de la axila drena una parte distinta de la mama, sin conexión con los demás"],
+ r:"La linfa de cada zona sigue un camino fijo y atraviesa los ganglios en serie. El primero que la recibe, el ganglio centinela, es la primera estación de una diseminación: si está limpio, es poco probable que los siguientes tengan células tumorales. Así se evita vaciar toda la axila y, con ello, buena parte del riesgo de linfedema del brazo que viste en la clase.",
+ x:["El colorante no busca linfocitos: viaja con la linfa y tiñe el ganglio al que esta llega primero. Por eso marca la primera estación, sea grande o pequeña.",
+    "Si todos la recibieran a la vez, se teñirían juntos y no habría un primero que extirpar. El colorante tiñe uno antes que los demás porque la linfa no llega en paralelo.",
+    "Si las destruyera todas, nunca tendría células tumorales y no valdría la pena revisarlo. El ganglio las retiene, y allí pueden quedarse y crecer: por eso es el que se examina.",
+    "Si cada ganglio trabajara aislado, que el primero estuviera limpio no diría nada de los demás. Los ganglios están conectados en serie: la linfa pasa de uno al siguiente."]},
+
+{t:"cabeza",q:"Un paciente tiene una herida infectada en el cuero cabelludo, justo detrás de la oreja izquierda. El grupo ganglionar que conviene palpar primero es…",
+ o:["El mastoideo izquierdo","El occipital izquierdo","El parotídeo superficial izquierdo","El submandibular izquierdo","El cervical profundo superior izquierdo"],
+ r:"El collar pericervical reparte la cabeza por territorios: los mastoideos, o retroauriculares, recogen el pabellón y el cuero cabelludo que tienen encima. La linfa va primero al grupo de su propia región y de su propio lado, y de ahí sigue a la cadena cervical profunda. Por eso, ante una herida del cuero cabelludo, se palpa primero el grupo del collar que corresponde a esa zona.",
+ x:["Los occipitales están en la nuca y recogen el cuero cabelludo posterior. Justo detrás de la oreja, sobre la apófisis mastoides, el primer grupo es el mastoideo.",
+    "Es el preauricular, delante del trago: recoge la sien, la parte lateral de los párpados y la conjuntiva lateral. La región de detrás de la oreja queda fuera de su territorio.",
+    "Está bajo el borde de la mandíbula y recoge la parte media de la cara, el labio y el ángulo interno del ojo, no el cuero cabelludo de detrás de la oreja.",
+    "Es la cadena final, junto a la yugular interna, a la que llega todo el collar. Esta linfa pasará por ella, pero después de su primera estación, que es el mastoideo."]},
+
+{t:"ojo",q:"Una paciente tiene un ganglio doloroso bajo el borde de la mandíbula, del lado derecho, y el ojo derecho algo rojo, sin lagrimeo. Antes de atribuir ese ganglio al ojo, conviene revisar también…",
+ o:["El labio y la mejilla de ese lado, cuya linfa también llega a ese grupo","La nuca, porque los ganglios occipitales vierten en los submandibulares","La conjuntiva del ángulo externo, que también drena a ese grupo","El ojo izquierdo, porque su ángulo interno drena a los dos lados","La córnea, porque es la parte más expuesta del ojo"],
+ r:"El submandibular no es un ganglio del ojo: recoge buena parte de la cara, el labio y el piso de la boca, y del ojo solo le llega el tercio medial. Por eso, ante un submandibular que crece, se mira el ángulo interno y el saco lagrimal, pero también el resto de su territorio en ese lado. Un ganglio señala una región, no un órgano.",
+ x:["Los occipitales recogen la nuca y vierten en la cadena profunda del cuello, no en los submandibulares, que están delante, bajo la mandíbula. La nuca no es su territorio.",
+    "La conjuntiva del lado de la sien drena a los preauriculares, delante del trago. Un ganglio bajo la mandíbula no es su primera estación.",
+    "El drenaje del ojo no cruza la línea media: el ángulo interno izquierdo lleva su linfa a los submandibulares izquierdos, no a los derechos.",
+    "La córnea es alinfática: no envía material a ningún ganglio, por expuesta que esté. Del ojo, al submandibular solo le llegan el tercio medial de párpados y conjuntiva y el saco lagrimal."]},
+
+{t:"organos",q:"Para estudiar cómo fabrica sus células de defensa un adulto de 45 años, se toma una muestra de médula ósea. Se punciona la cresta ilíaca o el esternón, y no la mitad del fémur. La razón morfológica es que…",
+ o:["En el adulto la médula roja queda en los huesos planos; la del centro del fémur es grasa","La diáfisis del fémur es hueso compacto macizo, sin cavidad donde pueda haber médula","La médula del esternón es un órgano secundario, donde se reúnen las células ya maduras","Las células de defensa nacen en el timo, y el esternón está justo por delante de él","La médula del ilíaco tiene vasos linfáticos que llevan sus células a los ganglios"],
+ r:"La médula ósea roja es el órgano primario donde nacen todas las células de la sangre, incluidas las de defensa. En el recién nacido ocupa casi todos los huesos, pero con la edad la de las diáfisis se sustituye por médula amarilla, que es grasa, y la roja queda en los huesos planos y en las epífisis. La muestra se toma donde sigue activa.",
+ x:["La diáfisis tiene una cavidad medular; en el adulto la ocupa médula amarilla, grasa, que ya no fabrica células. El problema no es que falte cavidad, sino que su médula ya no es roja.",
+    "Toda la médula ósea roja es un órgano primario, esté en el hueso que esté: allí nacen las células. Los secundarios son los ganglios, el bazo y el tejido linfoide de las mucosas.",
+    "Todas las células de la sangre nacen en la médula ósea roja; el timo solo termina de madurar una parte de las de defensa. Estar cerca del timo no cambia lo que hay en el esternón.",
+    "La médula ósea no tiene vasos linfáticos: entrega lo que produce directamente a la sangre. La diferencia entre el ilíaco y el fémur está en el tipo de médula."]},
+
+{t:"bazo",q:"A un paciente le extirpan el bazo tras un traumatismo. En las semanas siguientes, lo esperable es encontrar…",
+ o:["Más plaquetas en la sangre, porque ya no hay un órgano que guarde una parte","Menos linfocitos en la sangre, porque el bazo era el órgano que los fabricaba","Ganglios agrandados, porque ahora filtran la linfa que antes filtraba el bazo","Menos eritrocitos en la sangre, porque sin bazo se destruyen más deprisa","Ninguna respuesta de defensa nueva, porque sin bazo no hay dónde producirla"],
+ r:"El bazo guarda una parte de las plaquetas del cuerpo y las devuelve a la circulación cuando hacen falta. Sin él, esa reserva desaparece y esas plaquetas quedan circulando, así que el recuento sube, a menudo bastante, en las semanas siguientes. Por eso a estos pacientes se les vigila el recuento de plaquetas después de la cirugía.",
+ x:["Los linfocitos nacen en la médula ósea roja, un órgano primario. El bazo es secundario: allí trabajan células que ya llegan hechas, así que quitarlo no corta su fabricación.",
+    "El bazo nunca filtró linfa: no tiene vasos aferentes, porque está intercalado en la vía sanguínea. Los ganglios siguen recibiendo la misma linfa que antes.",
+    "Es al revés: el bazo es donde se retiran los eritrocitos viejos. Sin él, esa tarea la asumen sobre todo los macrófagos del hígado, y los eritrocitos no se destruyen más deprisa.",
+    "Los ganglios y el tejido linfoide de las mucosas siguen respondiendo. Lo que se pierde es la vigilancia de la sangre, y por eso estos pacientes se vacunan contra ciertas bacterias."]},
+
+{t:"malt",q:"La regla del MALT dice que bajo un epitelio húmedo y abierto al exterior hay tejido linfoide. De estas superficies, la que cumple esas dos condiciones y aun así NO lo tiene es…",
+ o:["El epitelio de la córnea","La conjuntiva tarsal","La mucosa del conducto nasolagrimal","La mucosa del íleon","La mucosa de la base de la lengua"],
+ r:"La córnea está bañada por la lágrima y expuesta cada vez que abres los ojos, pero es avascular. El tejido linfoide necesita vasos: por los sanguíneos llegan sus células y por los linfáticos sale lo que capturan. Sin ninguno de los dos, la regla no se cumple, y esa excepción es la misma que le da a la córnea su privilegio inmune.",
+ x:["Es la sede principal del CALT, junto con los fórnices: allí están los folículos que se ven al evertir el párpado en una conjuntivitis viral.",
+    "Tiene su propio tejido linfoide, el LDALT, que vigila la lágrima de salida camino de la nariz. Forma parte del EALT con la conjuntiva y la glándula lagrimal.",
+    "Ahí están las placas de Peyer, el acúmulo de tejido linfoide de mucosa más visible del intestino, que vigila lo que llega con el alimento.",
+    "Ahí están las amígdalas linguales, parte del anillo de Waldeyer que rodea la entrada de la faringe."]},
+
+{t:"cuello",q:"Un adolescente tiene un ganglio grande y doloroso justo debajo del ángulo de la mandíbula, por delante del esternocleidomastoideo. Lo primero que conviene mirar es…",
+ o:["Las amígdalas palatinas, al fondo de la boca","La conjuntiva del ángulo interno del ojo","El cuero cabelludo de la nuca","La piel de la mejilla, sobre el buccinador","La conjuntiva lateral, del lado de la sien"],
+ r:"Ahí, donde la vena yugular interna cruza el vientre posterior del digástrico, está el ganglio yugulodigástrico, de la cadena cervical profunda. Se le llama el ganglio de la amígdala porque es la primera estación de su linfa: en una amigdalitis es el que crece y duele. Saber qué drena cada ganglio permite hacer el camino al revés, del ganglio a la lesión.",
+ x:["Su linfa va primero a los submandibulares, bajo el borde de la mandíbula y más adelante. Al yugulodigástrico llegaría después, ya dentro de la cadena profunda.",
+    "Drena a los ganglios occipitales, en la parte posterior del collar pericervical, lejos del ángulo de la mandíbula.",
+    "La mejilla tiene su propio grupo en el collar, los buccinadores, y de ahí la linfa sigue a los submandibulares. No es el territorio de este ganglio.",
+    "Drena a los parotídeos superficiales, delante del trago. Un ganglio bajo el ángulo de la mandíbula no es su primera estación."]},
+
+{t:"privilegio",q:"La córnea se trasplanta sin buscar un donante compatible gracias a una doble ausencia. Aplicando esa misma lógica, el tejido de donante que cabría esperar que se rechace poco es…",
+ o:["El cartílago de una articulación","Un trozo de conjuntiva","Un injerto de piel de la mano","Un segmento de músculo esquelético","Un fragmento de mucosa de la boca"],
+ r:"El privilegio de la córnea es anatómico: sin vasos linfáticos no sale material hacia un ganglio, y sin vasos sanguíneos apenas llegan células de defensa. El cartílago comparte esa doble ausencia: se nutre por difusión y no tiene vasos de ningún tipo; además, su matriz densa envuelve a sus células. Por eso los injertos de cartílago de donante suelen colocarse sin buscar compatibilidad.",
+ x:["La conjuntiva está a milímetros de la córnea, pero es una mucosa con vasos de los dos tipos y su propio CALT: no comparte la doble ausencia que protege a la córnea.",
+    "La piel tiene una dermis con vasos sanguíneos y linfáticos. Aunque su epidermis sea avascular, el injerto completo lleva las dos vías abiertas.",
+    "El músculo es de los tejidos más vascularizados del cuerpo y tiene linfáticos: el material del injerto llega al ganglio y las células de defensa llegan al injerto.",
+    "La mucosa oral tiene vasos, linfáticos y además tejido linfoide propio, parte del MALT: es de los tejidos más vigilados del cuerpo."]},
+
+{t:"ojo",q:"Un melanoma que nace en la coroides, dentro del globo, casi nunca aparece en los ganglios del cuello: cuando se disemina, lo hace por la sangre, sobre todo al hígado. Un carcinoma del párpado, en cambio, se busca primero en los ganglios preauriculares o submandibulares. La diferencia se explica porque…",
+ o:["La coroides tiene muchos vasos sanguíneos, pero dentro del globo no hay linfáticos","Las células del melanoma son demasiado grandes para entrar en un capilar linfático","La coroides lleva su linfa al hígado por el conducto torácico, sin pasar por el cuello","Los ganglios del cuello destruyen el melanoma antes de que se llegue a palpar","Los ganglios del cuello reciben la linfa de la piel, pero no la de los órganos de la cabeza"],
+ r:"Un tumor sale de su tejido por las vías que ese tejido tiene. El párpado tiene vasos sanguíneos y linfáticos, y la linfa lleva sus células primero a un ganglio de la cara. La coroides es de los tejidos más vascularizados del cuerpo, pero, como todo el interior del globo, no tiene linfáticos: le queda la sangre, que lleva las células al hígado.",
+ x:["El capilar linfático, con su endotelio solapado y su membrana basal incompleta, deja pasar proteínas y células. Lo que falla aquí es que dentro del globo no hay capilares linfáticos.",
+    "El interior del globo no tiene linfáticos que salgan de él. Y el conducto torácico no va al hígado: sube desde la cisterna del quilo hasta la base del cuello.",
+    "Un ganglio que retiene células tumorales no las hace desaparecer: crece y se palpa, como en el carcinoma del párpado. Si no aparece, es porque no le llega nada.",
+    "Reciben también la de órganos como la amígdala, la parótida o la conjuntiva. El problema de la coroides no es a qué ganglio iría, sino que no tiene linfáticos por los que salir."]},
+
+{t:"meninges",q:"Un compañero resume así la clase: «Desde 2012 sabemos que el encéfalo tiene vasos linfáticos, y que funcionan sobre todo durante el sueño». La frase mezcla dos hallazgos. Lo correcto es que…",
+ o:["Lo de 2012 son espacios perivasculares, no vasos; los vasos de la duramadre son de 2015","Es correcta tal cual: los vasos linfáticos del tejido nervioso se describieron en 2012","Lo de 2012 son vasos de la duramadre, y lo de 2015 los espacios perivasculares del sueño","Ninguno de los dos existe: el encéfalo sigue sin ningún drenaje de su propio líquido","Son el mismo sistema con dos nombres: glinfático es el nombre moderno de los meníngeos"],
+ r:"Son dos hallazgos distintos. El sistema glinfático, de 2012, es una red de espacios perivasculares, delimitados por células gliales, por la que el líquido cefalorraquídeo lava el tejido nervioso, sobre todo durante el sueño. Los linfáticos meníngeos, de 2015, sí son vasos linfáticos verdaderos, pero están en la duramadre, junto a los senos venosos, y drenan a los ganglios cervicales profundos.",
+ x:["El hallazgo de 2012 es el sistema glinfático: espacios alrededor de los vasos, delimitados por glía, por los que circula líquido cefalorraquídeo. No son vasos linfáticos, y el tejido nervioso sigue sin tenerlos.",
+    "Invierte las fechas: los espacios perivasculares del sistema glinfático se describieron en 2012, y los vasos linfáticos de la duramadre, en 2015.",
+    "Los dos existen y están descritos. Lo que se mantiene es que el tejido nervioso no tiene vasos linfáticos propios; la duramadre, que lo envuelve, sí los tiene.",
+    "Son dos cosas distintas: uno circula por dentro del tejido nervioso, por espacios alrededor de los vasos; el otro son vasos verdaderos de la duramadre, que drenan al cuello."]},
+
+{t:"ojo",q:"Una conjuntivitis viral empieza en el ojo derecho y cuatro días después pasa al izquierdo. Si unos días más tarde se palpan los ganglios, lo esperable es encontrar…",
+ o:["Un ganglio preauricular a cada lado, porque cada ojo drena a los de su lado","Solo el preauricular derecho, porque el ojo izquierdo drena hacia el lado derecho","Un único ganglio submentoniano, en la línea media, que recoge los dos ojos","Un ganglio submandibular a cada lado, porque la infección viral es del ángulo interno","Ninguno, porque en la conjuntivitis viral la que se inflama es sobre todo la córnea"],
+ r:"Cada ojo drena a los ganglios de su propio lado: la linfa de los párpados y de la conjuntiva no cruza la línea media. Como la adenopatía preauricular es el sello de la conjuntivitis viral, cuando la infección pasa al otro ojo suele aparecer también el ganglio de ese lado, a veces más pequeño. Palpar los dos lados y compararlos forma parte de la exploración de todo ojo rojo.",
+ x:["El drenaje del ojo no cruza la línea media: cada ojo lleva su linfa a los ganglios de su propio lado. El ojo izquierdo tiene sus propios preauriculares.",
+    "El submentoniano está en la línea media, pero recoge el centro del labio inferior, el mentón y la punta de la lengua, no los ojos.",
+    "La adenopatía típica de la conjuntivitis viral es la preauricular: la infección afecta a toda la conjuntiva, y su mayor parte, la lateral, drena ahí.",
+    "La conjuntivitis es una inflamación de la conjuntiva, que tiene linfáticos y drena a ganglios palpables. La córnea, sin linfáticos, no daría ningún ganglio."]},
+
+{t:"integracion",q:"Una conjuntivitis bacteriana afecta a la parte lateral del ojo izquierdo. Camino de la sangre, la linfa de esa zona pasa, en este orden, por…",
+ o:["Parotídeos superficiales izquierdos → cervicales profundos → conducto torácico","Submandibulares izquierdos → cervicales profundos → conducto torácico","Parotídeos superficiales izquierdos → cervicales profundos → conducto linfático derecho","Cervicales profundos → parotídeos superficiales izquierdos → conducto torácico","Parotídeos superficiales izquierdos → cisterna del quilo → conducto torácico"],
+ r:"La linfa va primero al grupo del collar que corresponde a su territorio: la parte lateral de los párpados y de la conjuntiva, a los parotídeos superficiales o preauriculares. De ahí baja por la cadena cervical profunda, junto a la yugular interna, y por el tronco yugular izquierdo llega al conducto torácico, que desemboca en la confluencia yugulosubclavia izquierda.",
+ x:["El submandibular es la primera estación del tercio medial de los párpados y de la conjuntiva del ángulo interno. La parte lateral va primero a los parotídeos superficiales, delante del trago.",
+    "El lado izquierdo de la cabeza drena por el tronco yugular izquierdo al conducto torácico. El conducto linfático derecho solo recoge el cuadrante superior derecho.",
+    "Invierte el orden: la cadena cervical profunda es la vía final, que recoge lo que ya pasó por el collar pericervical. La primera estación es la del territorio.",
+    "La cisterna del quilo está en el abdomen, a la altura de L2, y es el origen del conducto torácico. La linfa de la cabeza entra en el conducto por arriba, sin bajar hasta ella."]},
+
+{t:"bazo",q:"Un motociclista llega tras un choque con un hematoma alrededor del ojo izquierdo y la visión conservada. Además le duele el costado izquierdo bajo las costillas, está pálido y tiene el pulso rápido. Lo primero que hay que descartar es…",
+ o:["Una rotura del bazo con sangrado interno","Una fractura del piso de la órbita izquierda","Un desgarro del hígado con sangrado interno","Una fractura de las costillas novena a undécima izquierdas","Un desprendimiento de la retina del ojo izquierdo"],
+ r:"El bazo está en el hipocondrio izquierdo, bajo las costillas novena a undécima, tiene una cápsula fina y está lleno de sangre. Un golpe en ese costado puede romperlo, y la hemorragia interna explica la palidez y el pulso rápido. Por eso, en un politraumatizado con una contusión orbitaria, el ojo puede no ser lo más urgente.",
+ x:["Es una lesión posible en un golpe orbitario y hay que buscarla, pero no sangra tanto como para dar palidez y pulso rápido. Primero va lo que puede costar la vida.",
+    "El hígado ocupa sobre todo el hipocondrio derecho. Un golpe en el costado izquierdo, bajo las costillas, apunta al órgano que está ahí: el bazo, de cápsula fina y lleno de sangre.",
+    "Puede explicar el dolor y hay que buscarla, pero una fractura de costillas sola no explica la palidez con pulso rápido, que indica pérdida de sangre. Y esas costillas cubren justo el bazo.",
+    "Afectaría a la visión, que aquí está conservada, y no explica la palidez ni el pulso rápido. Es una urgencia ocular, pero no la que amenaza la vida."]}
 ];
 
-/* Cuatro preguntas de desarrollo. Como en el taller de repaso, son de TRANSFERENCIA: no se
-   responden copiando la retroalimentación del bloque objetivo ni la clase. */
+/* Bloque de desarrollo. Cada pregunta pide una PREDICCIÓN que no está resuelta ni en la clase,
+   ni en las situaciones de este taller, ni en el taller de repaso: las situaciones dan las
+   piezas, la explicación pide juntarlas. Rúbrica: 5,0 los cuatro criterios con su mecanismo ·
+   4,0 tres · 3,0 dos · 2,0–2,5 uno · 0–1,5 ninguno o sin mecanismo. */
 const DESARROLLO = [
-{id:"d1", tema:"El líquido que vuelve",
- q:"Dos pacientes tienen la pierna derecha hinchada. A la <strong>primera</strong> le extirparon los ganglios de la ingle hace un año. El <strong>segundo</strong> tiene una insuficiencia cardíaca. Explica <strong>en qué se diferencia el líquido acumulado</strong> en cada uno y <strong>predice</strong> cuál de los dos mejorará al elevar la pierna toda la noche, justificándolo.",
- pistas:["¿Qué le pasa a las proteínas que escapan del capilar sanguíneo, y por dónde vuelven?",
-         "En uno falla cuánto líquido llega; en el otro, por dónde sale. ¿Cuál es cuál?",
-         "Elevar la pierna cambia la presión hidrostática. ¿Eso ayuda si el problema es la cañería?"],
- rubrica:["Identifica que en la paciente operada el problema es de <em>drenaje</em>: se interrumpió la vía linfática.",
-          "Explica que las proteínas escapadas del plasma solo pueden volver por la vía linfática, así que el linfedema es un edema <em>rico en proteínas</em>.",
-          "Atribuye el edema cardíaco a un exceso de filtración por presión venosa alta: líquido <em>pobre en proteínas</em>.",
-          "Predice que mejora el del paciente cardíaco, porque la postura reduce la presión hidrostática; el linfedema no cede, porque la vía de salida sigue cortada."]},
-{id:"d2", tema:"El ganglio que habla",
- q:"Dos pacientes con ojo rojo. Al <strong>primero</strong> se le palpa un ganglio doloroso por delante de la oreja derecha. Al <strong>segundo</strong>, uno doloroso bajo la mandíbula derecha. En los dos, la córnea está transparente. Explica <strong>qué parte del ojo está inflamada en cada uno</strong> y <strong>por qué la córnea no puede ser la responsable</strong> en ninguno de los dos casos.",
- pistas:["Escribe la regla del drenaje palpebral en una línea: ¿qué va a cada grupo?",
-         "Del lado de la sien y del lado de la nariz: ¿qué estructuras hay en cada mitad?",
-         "¿Qué le falta a la córnea que tienen la conjuntiva y los párpados?"],
- rubrica:["Aplica la regla de lateralidad: la mitad <em>lateral</em> de párpados y conjuntiva drena a los <em>parotídeos superficiales</em> (preauriculares).",
-          "Aplica la otra mitad: el tercio <em>medial</em>, el ángulo interno y el saco lagrimal drenan a los <em>submandibulares</em>.",
-          "Sitúa al primer paciente en la zona lateral y al segundo en la medial —ángulo interno o vía lagrimal—.",
-          "Explica que la córnea es <em>alinfática</em>: sin vasos linfáticos no envía material a ningún ganglio, así que nunca puede explicar una adenopatía."]},
-{id:"d3", tema:"Dos filtros distintos",
- q:"El ganglio linfático y el bazo se describen los dos como filtros con cápsula. Explica <strong>qué filtra cada uno</strong>, y a partir de ahí <strong>deduce</strong> por qué el ganglio tiene vasos linfáticos aferentes y el bazo no. Después <strong>predice</strong> qué función se conserva y cuál se pierde en un paciente al que le extirpan el bazo.",
- pistas:["Pregúntate qué líquido llega a cada uno y por qué vía entra.",
-         "Un vaso aferente trae linfa. ¿Le llega linfa al bazo?",
-         "Si lo que se pierde es un filtro de sangre, ¿qué tareas quedan huérfanas y cuáles no?"],
- rubrica:["Dice que el ganglio filtra <em>linfa</em> y el bazo, <em>sangre</em>.",
-          "Deduce de ahí los aferentes: el ganglio está intercalado en la vía linfática y los necesita; al bazo le llega la sangre por la arteria esplénica, así que no tiene aferentes linfáticos.",
-          "Señala lo que se pierde con la esplenectomía: retirada de eritrocitos envejecidos, reserva de plaquetas y vigilancia de la sangre, con mayor exposición a bacterias encapsuladas.",
-          "Señala lo que se conserva: el filtrado de la linfa, que nunca fue tarea del bazo y siguen haciendo los ganglios."]},
-{id:"d4", tema:"El precio del privilegio",
- q:"A dos pacientes se les va a trasplantar una córnea del mismo donante. El <strong>primero</strong> tiene la córnea transparente, sin vasos. El <strong>segundo</strong> lleva años con lentes de contacto y tiene vasos que entran unos milímetros desde el limbo. Explica <strong>por qué el privilegio inmune de la córnea depende de una ausencia</strong> y no de una defensa activa, y <strong>predice</strong> cuál de los dos injertos corre más riesgo de rechazo, nombrando la estructura que marca la diferencia.",
- pistas:["Para rechazar hacen falta dos caminos: uno de ida y otro de vuelta. ¿Qué vaso es cada uno?",
-         "¿Qué hay en el limbo, y qué pasa cuando esos vasos avanzan hacia el centro?",
-         "Si el privilegio fuera una defensa activa, ¿podría perderse solo por crecer unos vasos?"],
- rubrica:["Explica el privilegio como una <em>doble ausencia</em>: la córnea sana es avascular y alinfática.",
-          "Asigna cada camino: la <em>ida</em> —material hacia el ganglio— son los vasos linfáticos; la <em>vuelta</em> —células hacia el injerto— son los sanguíneos.",
-          "Predice mayor riesgo en el segundo paciente y nombra la <em>neovascularización desde el limbo</em>, que trae vasos sanguíneos y linfáticos a la vez.",
-          "Cierra la idea: si el privilegio dependiera de una defensa activa no se perdería por el mero crecimiento de unos vasos; que baste con eso demuestra que era una ausencia."]},
-];
+{id:"d1", tema:"Propulsión · el paciente que no se mueve ni respira solo",
+ q:"Un paciente lleva diez días en cuidados intensivos: sedado, <strong>sin moverse</strong>, y conectado a un ventilador que le <strong>empuja el aire</strong> dentro del pecho en cada respiración, en lugar de que él lo aspire. Con las cuatro fuerzas que mueven la linfa, <strong>predice cuáles conserva y cuáles pierde</strong> este paciente, explicando el mecanismo de cada una. Después <strong>predice dónde se le acumulará líquido</strong> y propón una medida sencilla, basada en esa anatomía, que podría ayudar.",
+ pistas:["Escribe las cuatro fuerzas y, al lado de cada una, qué necesita para funcionar.",
+         "Cuando uno respira solo, ¿la presión del tórax sube o baja al inspirar? ¿Y cuando una máquina empuja el aire hacia dentro?",
+         "De las cuatro, ¿cuáles dependen de lo que haga el paciente y cuáles funcionan solas?"],
+ rubrica:["Nombra las cuatro fuerzas: las <em>válvulas</em>, la <em>bomba muscular</em>, la <em>bomba respiratoria</em> y la contracción del <em>linfangión</em>.",
+          "Predice que pierde la <em>bomba muscular</em>: sin contracciones del músculo esquelético nadie comprime los vasos linfáticos de las piernas.",
+          "Predice que la <em>bomba respiratoria</em> deja de ayudar: con el ventilador la presión del tórax <em>sube</em> cuando entra el aire, en vez de bajar, así que ya no aspira la linfa desde el abdomen. Excelente si dice que incluso la frena.",
+          "Concluye que solo le quedan las válvulas y el linfangión, que no bastan: predice <em>edema</em> en las piernas, por falta de bomba muscular, y en las zonas declives —en un paciente acostado, la espalda y el sacro—, y propone una medida coherente, como moverle las piernas de forma pasiva, la compresión o los cambios de postura."]},
 
+{id:"d2", tema:"Drenaje del ojo · después de una cirugía",
+ q:"A un paciente le extirpan los <strong>ganglios parotídeos superficiales del lado derecho</strong> durante una cirugía de la parótida. Con la regla del drenaje del ojo y lo que sabes del linfedema, <strong>predice qué zona de los párpados derechos tendría más riesgo de hincharse y cuál no</strong>, y cómo sería ese edema. Meses después, el paciente tiene una <strong>conjuntivitis viral en el ojo derecho</strong>. <strong>Predice si se le palpará el ganglio que suele acompañarla</strong>, <strong>adónde irá la linfa de su conjuntiva lateral</strong> y <strong>qué consecuencia tiene eso para tu exploración</strong> de un ojo rojo en este paciente. Justifica cada predicción.",
+ pistas:["¿Qué parte de los párpados y de la conjuntiva drena a esos ganglios, y cuál drena a otros?",
+         "Si desaparece la primera estación de un territorio, ¿qué pasa con las proteínas que escapan del plasma en ese territorio?",
+         "Si falta la primera estación, ¿dónde está la siguiente en el camino de esa linfa?"],
+ rubrica:["Predice riesgo de edema en los <em>dos tercios laterales</em> de los dos párpados derechos y en la conjuntiva lateral, porque su primera estación eran los parotídeos superficiales, y lo describe como linfedema: rico en proteínas y persistente, porque falla la salida del líquido, no la cantidad que se filtra.",
+          "Predice que el <em>tercio medial</em>, el ángulo interno y el saco lagrimal no deberían hincharse por esta causa: drenan a los <em>submandibulares</em>, que siguen intactos.",
+          "Predice que <em>no</em> se palpará ganglio preauricular derecho, porque ya no existe, y que la linfa de la conjuntiva lateral seguirá hacia la siguiente estación, la <em>cadena cervical profunda</em> —o hacia los submandibulares—, donde podría aparecer un ganglio.",
+          "Concluye que en este paciente la falta de ganglio preauricular <em>no descarta</em> una conjuntivitis viral: el signo depende de que exista el ganglio. Excelente si añade que el ojo izquierdo conserva su patrón normal, porque cada lado drena a sus propios ganglios."]},
+
+{id:"d3", tema:"Órganos linfoides · tres vigilantes, tres entradas",
+ q:"El ganglio, el bazo y el tejido linfoide de las mucosas —por ejemplo, el CALT de la conjuntiva o el LDALT de la vía lagrimal— vigilan cosas distintas porque el material les llega <strong>por caminos distintos</strong>. Explica qué le llega a cada uno y por dónde. El tejido linfoide de las mucosas no tiene cápsula ni vasos aferentes: <strong>deduce de dónde le llega lo que vigila</strong>. Después <strong>predice qué vigilante reacciona primero, y cuál después</strong>, en cada caso: <strong>(a)</strong> una herida infectada en la piel del párpado superior, cerca del ángulo externo, con la conjuntiva sana; <strong>(b)</strong> unas bacterias que la lágrima arrastra hasta el saco lagrimal; <strong>(c)</strong> una herida infectada en el pie que, días después, deja pasar bacterias a la sangre.",
+ pistas:["¿Qué líquido le entra a cada uno, y por qué vaso?",
+         "Si a ese tejido no le llega ningún vaso aferente, ¿qué tiene justo encima?",
+         "En cada caso, pregúntate qué toca primero el material: ¿una mucosa húmeda, un capilar linfático de la piel o la sangre? ¿Y adónde lo lleva después ese camino?"],
+ rubrica:["El ganglio recibe <em>linfa</em> por sus aferentes, porque está intercalado en la vía linfática: vigila lo que drena su territorio.",
+          "El bazo recibe <em>sangre</em> por la arteria esplénica y no tiene aferentes linfáticos: vigila lo que circula por la sangre.",
+          "Deduce que al tejido linfoide de las mucosas, sin cápsula ni aferentes, el material le llega <em>directamente desde la superficie</em> del epitelio que lo cubre: vigila lo que toca la mucosa.",
+          "Asigna: <strong>(a)</strong> el ganglio <em>preauricular</em>, sin tejido linfoide de mucosa por delante, porque la piel del párpado es un epitelio seco y queratinizado que no cumple la regla del MALT; <strong>(b)</strong> el <em>LDALT</em> del saco y después los <em>submandibulares</em>; <strong>(c)</strong> primero los ganglios de la <em>ingle</em> y, cuando las bacterias llegan a la sangre, el <em>bazo</em>. Excelente si concluye que un mismo material puede pasar por varios vigilantes en serie."]},
+
+{id:"d4", tema:"Privilegio inmune · cuando se rompe",
+ q:"Un paciente sufre una <strong>herida penetrante</strong> en el ojo derecho: un fragmento metálico atraviesa la pared del globo y deja el interior del ojo en contacto con la conjuntiva. Explica <strong>por qué, en condiciones normales, el sistema de defensa apenas ha tenido contacto</strong> con lo que hay dentro del ojo. Después <strong>predice qué puede cambiar tras la herida</strong>, y <strong>si el ojo izquierdo, que está sano, podría verse afectado</strong> y por qué.",
+ pistas:["¿Qué hace falta para que algo del interior del ojo llegue a un ganglio? ¿Existe ese camino en un ojo sano?",
+         "La conjuntiva está a milímetros. ¿Qué tiene ella que no tiene el interior del globo, y adónde drena?",
+         "Una respuesta de defensa aprendida en un ganglio, ¿se queda en ese ganglio o sus células circulan por todo el cuerpo?"],
+ rubrica:["Explica que el interior del globo no tiene vasos linfáticos: nada de lo que hay dentro llega a un ganglio por la linfa, así que el sistema de defensa apenas lo ha encontrado.",
+          "Identifica el camino nuevo: la herida pone el interior en contacto con la <em>conjuntiva</em>, que sí tiene linfáticos y drena a los ganglios <em>preauriculares y submandibulares</em> derechos.",
+          "Predice que ese material, al llegar por primera vez a un ganglio, puede tratarse como extraño y desencadenar una respuesta de defensa contra él.",
+          "Predice que el ojo izquierdo <em>puede</em> verse afectado, porque contiene el mismo material que el derecho y las células de defensa circulan por todo el cuerpo. Excelente si nombra la oftalmía simpática o si lo relaciona con que el privilegio era una ausencia y no una defensa."]}
+];
 
 /* ═══ CONFIGURACIÓN ═══
-   BANCO_VERSION tiene que coincidir con CONFIG.BANCO del servidor. */
-const BANCO_VERSION = "linfatico-v1";
+   BANCO_VERSION tiene que coincidir con CONFIG.BANCO del servidor.
+   ABRE: antes de esa hora las dos partes muestran un aviso; el resto de la página funciona. */
+const BANCO_VERSION = "linfatico-v2";
+const ABRE  = "2026-10-01T13:00:00-05:00";
 const API   = "https://script.google.com/macros/s/AKfycbwWbujT4G9Ulsehce1b2CbrrFYv6i0aI7TiINxHmCYiw-KUR0LVscAv8PwkS-6eKOSA/exec";
 const TOKEN = "TALLER_LINF_MORF_2026II_23322c";                     // escritura: público por diseño
-const CLAVE = "morfo_taller_linfatico_2026II";
+const CLAVE = "morfo_taller_linfatico_2026II_v2";                  // otra clave que la v1: sin mezclas
 
 BANCO_TALLER.forEach((it,i)=>it.id="a"+i);
 
 /* resp · primera respuesta de cada situación (índice ORIGINAL de la opción). No se sobrescribe.
+   dia  · fecha de esa primera respuesta.   rep · fecha del último intento de segunda vuelta.
+   rec  · situaciones falladas y acertadas después en la segunda vuelta (no cambia la nota).
    exp  · textos del bloque de desarrollo.   rubW · palabras al abrir la lista de comprobación. */
-let S = {resp:{}, exp:{}, rubW:{}, nombre:"", codigo:""};
+const VACIO = ()=>({resp:{}, dia:{}, rep:{}, rec:{}, exp:{}, rubW:{}, nombre:"", codigo:""});
+let S = VACIO();
 try{ const g=localStorage.getItem(CLAVE); if(g) S=Object.assign(S,JSON.parse(g)); }catch(e){}
 const guardar = ()=>{ try{ localStorage.setItem(CLAVE, JSON.stringify(S)); }catch(e){} };
 
 const nPal = s => { s=String(s||"").trim(); return s ? s.split(/\s+/).length : 0; };
 const esc = s => String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fmt = s => esc(s).replace(/\*([^*]+)\*/g,'<em>$1</em>');       // *cursiva* en r y x
+const hoy = ()=>{ const d=new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); };
+const abierto = ()=> Date.now() >= Date.parse(ABRE) || /[?&]previa\b/.test(location.search);
+const fechaAbre = ()=> new Date(ABRE).toLocaleString('es-CO',{weekday:'long',day:'numeric',month:'long',
+  hour:'numeric',minute:'2-digit',timeZone:'America/Bogota'});
 function baraja(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
 
 function tab(id,btn){
@@ -517,10 +613,11 @@ function tab(id,btn){
    El índice de origen va en un WeakMap, no en un atributo, y la explicación se
    escribe al responder: así no se leen con «Inspeccionar». */
 const OPC = new WeakMap();
-function tarjeta(it, n){
+function tarjeta(it, n, vuelta){
   const card = document.createElement('div');
-  card.className = 'q-card'; card.dataset.id = it.id;
-  card.innerHTML = `<div class="q-num">Situación ${n} de ${BANCO_TALLER.length}</div>
+  card.className = 'q-card' + (vuelta ? ' repaso' : ''); card.dataset.id = it.id;
+  if(vuelta) card.dataset.vuelta = "1";
+  card.innerHTML = `<div class="q-num">${vuelta ? 'Segunda vuelta · s' : 'S'}ituación ${n} de ${BANCO_TALLER.length}</div>
     <p class="q-text">${esc(it.q)}</p><ul class="opts"></ul><div class="fb"></div>`;
   const ul = card.querySelector('.opts');
   baraja(it.o.map((t,i)=>({t,i}))).forEach((o,k)=>{
@@ -535,10 +632,31 @@ function tarjeta(it, n){
 function retro(it, oi){
   const otras = it.o.map((t,i)=>({t,i})).filter(o=>o.i!==0 && o.i!==oi);
   const lista = `<details class="otras"><summary>${oi===0?'¿Por qué no las otras?':'¿Y las demás opciones?'}</summary><ul>${
-    otras.map(o=>`<li><strong>${esc(o.t)}.</strong> ${esc(it.x[o.i-1])}</li>`).join('')}</ul></details>`;
-  if(oi===0) return `<p class="fb-h ok">✓ Correcto</p><p>${esc(it.r)}</p>${lista}`;
-  return `<p class="fb-h no">✗ Elegiste «${esc(it.o[oi])}»</p><p>${esc(it.x[oi-1])}</p>`
-       + `<p class="fb-h ok">✓ La correcta es «${esc(it.o[0])}»</p><p>${esc(it.r)}</p>${lista}`;
+    otras.map(o=>`<li><strong>${esc(o.t)}.</strong> ${fmt(it.x[o.i-1])}</li>`).join('')}</ul></details>`;
+  if(oi===0) return `<p class="fb-h ok">✓ Correcto</p><p>${fmt(it.r)}</p>${lista}`;
+  return `<p class="fb-h no">✗ Elegiste «${esc(it.o[oi])}»</p><p>${fmt(it.x[oi-1])}</p>`
+       + `<p class="fb-h ok">✓ La correcta es «${esc(it.o[0])}»</p><p>${fmt(it.r)}</p>${lista}`;
+}
+/* Segunda vuelta: lo fallado al primer intento se puede volver a intentar A PARTIR DEL DÍA
+   SIGUIENTE (recuperar tras un intervalo fija más que repetir en el momento). No cambia la nota. */
+const puedeVolver = id => S.resp[id]!==undefined && S.resp[id]!==0 && !S.rec[id] && hoy() > (S.rep[id] || S.dia[id] || "");
+function pieVuelta(card, it, n){
+  const id = it.id;
+  if(S.resp[id]===undefined || S.resp[id]===0) return;
+  const d = document.createElement('div'); d.className = 'vuelta-pie';
+  if(S.rec[id]){
+    d.innerHTML = `<span class="ok-chip">Recuperada</span> La acertaste en la segunda vuelta.`;
+  }else if(puedeVolver(id)){
+    d.innerHTML = `<button class="btn purple">Segunda vuelta · inténtala otra vez</button>
+      <span class="hint">No cambia la nota: cuenta la primera respuesta.</span>`;
+    d.querySelector('button').onclick = ()=>{
+      const nueva = tarjeta(it, n, true);
+      card.replaceWith(nueva); nueva.scrollIntoView({behavior:'smooth', block:'center'});
+    };
+  }else{
+    d.innerHTML = `<span class="hint">La fallaste. Desde mañana podrás intentarla otra vez, sin que cambie la nota: dejar pasar un día es lo que hace que se quede.</span>`;
+  }
+  card.appendChild(d);
 }
 function responder(card, it, li){
   if(card.dataset.hecho) return;
@@ -549,11 +667,27 @@ function responder(card, it, li){
     if(OPC.get(o)===0) o.classList.add('correct'); else if(o===li) o.classList.add('incorrect');
   });
   const fb = card.querySelector('.fb'); fb.innerHTML = retro(it, oi); fb.classList.add('show');
-  if(S.resp[it.id]===undefined) S.resp[it.id]=oi;      // solo la primera vez
+  if(card.dataset.vuelta){                              // segunda vuelta: no toca la primera respuesta
+    S.rep[it.id] = hoy();
+    if(oi===0) S.rec[it.id] = true;
+    const d = document.createElement('div'); d.className = 'vuelta-pie';
+    d.innerHTML = oi===0 ? `<span class="ok-chip">Recuperada</span> Esta vez sí.`
+      : `<span class="hint">Todavía no. Vuelve a intentarla otro día.</span>`;
+    card.appendChild(d);
+  }else if(S.resp[it.id]===undefined){                  // solo la primera vez
+    S.resp[it.id] = oi; S.dia[it.id] = hoy();
+    const n = BANCO_TALLER.findIndex(x=>x.id===it.id) + 1;
+    pieVuelta(card, it, n);
+  }
   guardar(); autoguardar(); progreso();
+}
+function cerrado(){
+  return `<div class="pearl"><p><strong>Esta parte se abre el ${esc(fechaAbre())}</strong>, después de la
+    clase. Puedes identificarte ya; cuando llegue la hora, recarga la página.</p></div>`;
 }
 function pintarA(){
   const lista = document.getElementById('qList'); lista.innerHTML='';
+  if(!abierto()){ lista.innerHTML = cerrado(); progreso(); return; }
   BANCO_TALLER.forEach((it,i)=>{
     const card = tarjeta(it, i+1);
     if(S.resp[it.id]!==undefined){        // ya respondida: se muestra resuelta
@@ -561,7 +695,8 @@ function pintarA(){
       if(li){ card.dataset.hecho="1";
         card.querySelectorAll('.opts li').forEach(o=>{ o.classList.add('locked');
           if(OPC.get(o)===0) o.classList.add('correct'); else if(o===li) o.classList.add('incorrect'); });
-        const fb=card.querySelector('.fb'); fb.innerHTML=retro(it,S.resp[it.id]); fb.classList.add('show'); }
+        const fb=card.querySelector('.fb'); fb.innerHTML=retro(it,S.resp[it.id]); fb.classList.add('show');
+        pieVuelta(card, it, i+1); }
     }
     lista.appendChild(card);
   });
@@ -569,13 +704,21 @@ function pintarA(){
 }
 function progreso(){
   const h = Object.keys(S.resp).length, ok = Object.values(S.resp).filter(v=>v===0).length;
+  const rec = Object.keys(S.rec).length, hoyVuelta = BANCO_TALLER.filter(it=>puedeVolver(it.id)).length;
   document.getElementById('pgLabel').textContent = `${h} de ${BANCO_TALLER.length} respondidas`;
-  document.getElementById('pgScore').textContent = h ? `${ok} al primer intento · ${Math.round(ok/h*100)} %` : '';
+  document.getElementById('pgScore').textContent = h ? `${ok} al primer intento · ${Math.round(ok/h*100)} %`
+    + (rec ? ` · ${rec} recuperada${rec>1?'s':''}` : '') : '';
   document.getElementById('pgBar').style.width = (h/BANCO_TALLER.length*100)+'%';
+  const v = document.getElementById('vueltaAviso');
+  if(v) v.innerHTML = hoyVuelta && abierto()
+    ? `<div class="dato"><h5>Segunda vuelta</h5><p>Hoy puedes volver a intentar <strong>${hoyVuelta}</strong>
+       situación${hoyVuelta>1?'es':''} que fallaste antes. Busca el botón morado debajo de cada una.
+       No cambia la nota; sirve para que se quede.</p></div>` : '';
 }
 
 /* ═══ DESARROLLO ═══ */
 function pintarB(){
+  if(!abierto()){ document.getElementById('expList').innerHTML = cerrado(); return; }
   document.getElementById('expList').innerHTML = DESARROLLO.map(b=>`
     <div class="exp-card">
       <div class="exp-tema">${esc(b.tema)}</div>
@@ -629,6 +772,7 @@ async function apiPost(payload){
 }
 const crudas = ()=>{ const o={}; Object.keys(S.resp).forEach(k=>{ o[k.slice(1)] = S.resp[k]; }); return o; };
 const paquete = extra => Object.assign({alumno:S.nombre, codigo:S.codigo, crudas:crudas(),
+  recuperados:Object.keys(S.rec).map(k=>k.slice(1)),
   abiertas:DESARROLLO.map(b=>S.exp[b.id]||""),
   rubrica:DESARROLLO.map(b=>S.rubW[b.id]===undefined ? null : S.rubW[b.id])}, extra);
 
@@ -705,7 +849,7 @@ document.getElementById('btnEntrar').onclick = async ()=>{
   try{
     const r = await apiPost({action:'ingreso', alumno:nom, codigo:doc});
     if(r.ok){
-      if(S.nombre && S.nombre!==nom) S = {resp:{}, exp:{}, rubW:{}, nombre:"", codigo:""};
+      if(S.nombre && S.nombre!==nom) S = VACIO();
       S.nombre = nom; S.codigo = doc; guardar(); pintarIdent(); sync('identificado');
       if(r.plazo){ PLAZO = r.plazo; pintarPlazo(); }
       document.getElementById('docAlumno').value = '';
@@ -776,7 +920,8 @@ document.getElementById('btnDescargar').onclick = ()=>{
   if(!nom){ document.getElementById('envioResultado').innerHTML = '<div class="pearl"><p>Primero identifícate en la primera pestaña.</p></div>'; return; }
   const L = ['TALLER · SISTEMA LINFÁTICO · MORFOLOGÍA GENERAL 2026-II', '='.repeat(62),
     'Estudiante: ' + nom, 'Generado:   ' + new Date().toLocaleString('es-CO'), '',
-    `Situaciones: ${m.hechas} de ${m.tot} · ${m.ok} al primer intento` + (m.hechas?` (${Math.round(m.ok/m.hechas*100)} %)`:''), ''];
+    `Situaciones: ${m.hechas} de ${m.tot} · ${m.ok} al primer intento` + (m.hechas?` (${Math.round(m.ok/m.hechas*100)} %)`:''),
+    `Segunda vuelta: ${Object.keys(S.rec).length} recuperadas`, ''];
   L.push('EXPLICACIONES', '='.repeat(62));
   DESARROLLO.forEach((b,i)=>{
     const t = (S.exp[b.id]||'').trim();
@@ -792,12 +937,14 @@ document.getElementById('btnDescargar').onclick = ()=>{
 };
 document.getElementById('btnBorrar').onclick = ()=>{
   if(!confirm('Esto borra lo guardado en ESTE navegador. Lo que ya llegó al servidor no se borra. ¿Seguro?')) return;
-  S = {resp:{}, exp:{}, rubW:{}, nombre:"", codigo:""}; guardar(); location.reload();
+  S = VACIO(); guardar(); location.reload();
 };
 
 /* ═══ ARRANQUE ═══ */
 pintarA(); pintarB(); cargarRoster();
-
+/* Si la página queda abierta al llegar la hora, se abre sola (solo si falta menos de un día). */
+{ const falta = Date.parse(ABRE) - Date.now();
+  if(falta > 0 && falta < 86400000) setTimeout(()=>{ pintarA(); pintarB(); }, falta + 1000); }
 </script>
 </body>
 </html>
