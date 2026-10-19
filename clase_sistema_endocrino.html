@@ -1,0 +1,1623 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sistema endocrino · Clase 11 · Morfología General 2026-II</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:#1a2a35;--text:#2c3e4f;--text-soft:#5a6b7a;--text-muted:#8a9aa8;
+  --parchment:#f8f3e8;--parchment-dark:#f0e8d4;--parchment-deep:#e8dcc0;
+  --bg-card:#fdfaf2;--border:#d4c8a8;--border-light:#e5dbc0;
+  --amber:#b8860b;--amber-dark:#8b6914;--amber-light:#d4a72c;--amber-pale:#f5e9c8;
+  --teal:#2a7a6e;--teal-dark:#1f5d54;
+  --rust:#a0522d;--rust-dark:#7d3f22;
+  --clinical:#b5413b;--clinical-dark:#8a2f2a;--clinical-bg:#fce8e6;
+  --blue:#1976a1;--blue-dark:#115670;--blue-bg:#e3f0f5;
+  --green:#2e7d32;--green-bg:#e8f5e9;
+  --purple:#6b4a8a;--purple-bg:#f0e8f4;--purple-dark:#4a2d6e;
+  --shadow-sm:0 2px 8px rgba(26,42,53,0.06);
+  --shadow-md:0 4px 20px rgba(26,42,53,0.10);
+  --font-display:'Playfair Display',Georgia,serif;
+  --font-body:'Source Serif 4',Georgia,serif;
+  --font-mono:'DM Mono','Courier New',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--parchment);color:var(--text);line-height:1.75;font-size:17px;
+  background-image:radial-gradient(at 12% 8%,rgba(184,134,11,.04) 0%,transparent 50%),radial-gradient(at 88% 92%,rgba(42,122,110,.04) 0%,transparent 50%);
+  background-attachment:fixed}
+
+/* HEADER */
+.header{text-align:center;padding:70px 30px 50px;border-bottom:3px double var(--amber);margin-bottom:50px;position:relative}
+.header::before{content:'';position:absolute;top:30px;left:50%;transform:translateX(-50%);width:80px;height:1px;background:var(--amber)}
+.eyebrow{font-family:var(--font-mono);font-size:.78rem;letter-spacing:.32em;text-transform:uppercase;color:var(--amber-dark);margin-bottom:14px}
+.header h1{font-family:var(--font-display);font-size:clamp(2.2rem,5vw,3.6rem);font-weight:900;color:var(--ink);line-height:1.05;margin-bottom:12px}
+.header h1 em{font-style:italic;font-weight:400;color:var(--amber-dark)}
+.header .subtitle{font-family:var(--font-body);font-style:italic;font-size:1.15rem;color:var(--text-soft);margin-bottom:22px;font-weight:300}
+.header .meta{font-family:var(--font-mono);font-size:.82rem;letter-spacing:.18em;color:var(--text-muted);text-transform:uppercase}
+
+/* TABS */
+.tab-bar{background:var(--bg-card);border:1px solid var(--border);border-radius:4px;padding:0;margin-bottom:50px;box-shadow:var(--shadow-sm);overflow:hidden;display:flex}
+.tab-btn{flex:1;padding:18px 24px;background:none;border:none;border-right:1px solid var(--border-light);font-family:var(--font-body);font-size:.95rem;color:var(--text-soft);cursor:pointer;transition:all .2s;text-align:center;line-height:1.4}
+.tab-btn:last-child{border-right:none}
+.tab-btn:hover{background:var(--parchment-dark);color:var(--ink)}
+.tab-btn.active{background:var(--amber-pale);color:var(--ink);font-weight:600;border-bottom:3px solid var(--amber)}
+.tab-btn .tab-date{display:block;font-family:var(--font-mono);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--amber-dark);margin-bottom:4px}
+.tab-pane{display:none}
+.tab-pane.active{display:block}
+
+/* CONTAINER */
+.container{max-width:1100px;margin:0 auto;padding:0 30px 80px}
+
+/* NAV INTERNA */
+.station-nav{background:var(--bg-card);border:1px solid var(--border);border-radius:4px;padding:24px 28px;margin-bottom:50px;box-shadow:var(--shadow-sm)}
+.station-nav h3{font-family:var(--font-mono);font-size:.75rem;letter-spacing:.25em;text-transform:uppercase;color:var(--amber-dark);margin-bottom:16px}
+.station-nav ol{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px 24px;counter-reset:stations}
+.station-nav li{counter-increment:stations;padding:4px 0}
+.station-nav li::before{content:counter(stations,decimal-leading-zero) '. ';font-family:var(--font-mono);color:var(--amber-dark);font-weight:500;margin-right:6px}
+.station-nav a{color:var(--text);text-decoration:none;font-style:italic;border-bottom:1px dotted var(--border);transition:color .2s,border-color .2s}
+.station-nav a:hover{color:var(--amber-dark);border-color:var(--amber-dark)}
+
+/* STATIONS */
+.station{margin-bottom:80px;scroll-margin-top:30px}
+.station-header{display:flex;align-items:baseline;gap:20px;margin-bottom:30px;padding-bottom:18px;border-bottom:2px solid var(--border)}
+.station-number{font-family:var(--font-display);font-style:italic;font-size:4rem;font-weight:400;color:var(--amber);line-height:1;flex-shrink:0}
+.station-titles{flex:1}
+.station-eyebrow{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--amber-dark);margin-bottom:6px}
+.station h2{font-family:var(--font-display);font-size:clamp(1.7rem,3.5vw,2.4rem);font-weight:700;color:var(--ink);line-height:1.15}
+
+/* CONTENT BLOCK */
+.content-block{background:var(--bg-card);border:1px solid var(--border-light);border-radius:4px;padding:28px 32px;margin-bottom:24px;box-shadow:var(--shadow-sm)}
+.content-block h3{font-family:var(--font-display);font-size:1.4rem;font-weight:700;color:var(--ink);margin-bottom:16px;padding-bottom:8px;border-bottom:1px dotted var(--border)}
+.content-block h4{font-family:var(--font-display);font-size:1.1rem;font-weight:700;color:var(--amber-dark);margin:20px 0 10px;font-style:italic}
+.content-block p{margin-bottom:14px}
+.content-block ul,.content-block ol{margin:12px 0 18px 24px}
+.content-block li{margin-bottom:8px;padding-left:6px}
+.content-block strong{color:var(--ink);font-weight:700}
+.content-block em.term{font-style:italic;color:var(--amber-dark);font-weight:600}
+
+/* TWO-COL / THREE-COL */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:20px 0}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin:20px 0}
+@media(max-width:900px){.two-col,.three-col{grid-template-columns:1fr}}
+.col-card{background:var(--parchment-dark);border-left:4px solid var(--amber);padding:18px 22px;border-radius:2px}
+.col-card.teal{border-color:var(--teal);background:#e8f0ee}
+.col-card.rust{border-color:var(--rust);background:#f3e8de}
+.col-card.blue{border-color:var(--blue);background:var(--blue-bg)}
+.col-card.green{border-color:var(--green);background:var(--green-bg)}
+.col-card h5{font-family:var(--font-display);font-weight:700;color:var(--ink);margin-bottom:8px;font-size:1.05rem}
+
+/* TABLE */
+table.data{width:100%;border-collapse:collapse;margin:18px 0;font-size:.95rem}
+table.data th{background:var(--amber-dark);color:var(--parchment);padding:10px 14px;text-align:left;font-family:var(--font-mono);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;font-weight:500}
+table.data td{padding:10px 14px;border-bottom:1px solid var(--border-light);vertical-align:top}
+table.data tr:nth-child(even) td{background:var(--parchment-dark)}
+table.data tr:hover td{background:var(--amber-pale)}
+
+/* CLINICAL BOX */
+.clinical-box{background:var(--clinical-bg);border-left:5px solid var(--clinical);padding:20px 26px;margin:22px 0;border-radius:2px;position:relative}
+.clinical-box::before{content:'👁 Interfaz optométrica';display:block;font-family:var(--font-mono);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--clinical-dark);margin-bottom:10px;font-weight:600}
+.clinical-box h5{font-family:var(--font-display);font-weight:700;color:var(--clinical-dark);font-size:1.1rem;margin-bottom:6px}
+
+/* PEARL */
+.pearl{background:var(--amber-pale);border:1px solid var(--amber-light);border-radius:2px;padding:16px 22px;margin:18px 0;font-style:italic;color:var(--text);position:relative;padding-left:50px}
+.pearl::before{content:'◆';position:absolute;left:18px;top:16px;color:var(--amber-dark);font-size:1.2rem;font-style:normal}
+
+/* SABER PRO */
+.saber-box{background:var(--purple-bg);border-left:5px solid var(--purple);padding:20px 26px;margin:22px 0;border-radius:2px}
+.saber-box::before{content:'★ Tipo Saber Pro';display:block;font-family:var(--font-mono);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--purple-dark);margin-bottom:10px;font-weight:600}
+
+/* FIGURE */
+.figure{margin:28px 0;background:var(--bg-card);border:1px solid var(--border-light);border-radius:4px;padding:20px;box-shadow:var(--shadow-sm);text-align:center}
+.figure svg{width:100%;max-width:800px;height:auto}
+.figure-caption{font-family:var(--font-mono);font-size:.78rem;color:var(--text-muted);margin-top:12px;letter-spacing:.06em;text-align:center}
+
+/* FLIP CARDS */
+.flip-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;margin:20px 0}
+.flip-card{height:160px;perspective:800px;cursor:pointer}
+.flip-inner{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform .5s ease}
+.flip-card:hover .flip-inner,.flip-card.flipped .flip-inner{transform:rotateY(180deg)}
+.flip-front,.flip-back{position:absolute;inset:0;border-radius:4px;padding:16px;backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.flip-front{background:var(--bg-card);border:2px solid var(--border)}
+.flip-back{background:var(--amber-pale);border:2px solid var(--amber);transform:rotateY(180deg)}
+.flip-front .term-label{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px}
+.flip-front .term-name{font-family:var(--font-display);font-size:1.15rem;font-weight:700;color:var(--ink);line-height:1.2}
+.flip-front .term-en{font-family:var(--font-mono);font-size:.75rem;color:var(--text-muted);margin-top:6px;font-style:italic}
+.flip-back .term-def{font-size:.88rem;color:var(--text);line-height:1.5;margin-bottom:8px}
+.flip-back .term-opto{font-family:var(--font-mono);font-size:.72rem;color:var(--clinical-dark);letter-spacing:.05em}
+
+/* CHECK QUESTION */
+.check-question{background:linear-gradient(180deg,#fdfaf2 0%,#f5ecd5 100%);border:2px dashed var(--amber);border-radius:4px;padding:28px 30px;margin:30px 0;position:relative}
+.check-question::before{content:'? Verificación';position:absolute;top:-12px;left:24px;background:var(--parchment);padding:2px 14px;font-family:var(--font-mono);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--amber-dark);font-weight:600}
+.check-question .question-text{font-family:var(--font-display);font-size:1.15rem;color:var(--ink);margin-bottom:18px;font-weight:400;font-style:italic}
+.options{list-style:none;margin:0}
+.options li{margin-bottom:10px;padding:12px 18px;background:var(--bg-card);border:1px solid var(--border);border-radius:3px;cursor:pointer;transition:all .2s;position:relative;padding-left:50px}
+.options li::before{content:attr(data-letter);position:absolute;left:16px;top:50%;transform:translateY(-50%);font-family:var(--font-mono);font-weight:500;color:var(--amber-dark)}
+.options li:hover{background:var(--amber-pale);border-color:var(--amber)}
+.options li.correct{background:#e8f5e8;border-color:#2e7d32;color:#1b5e20}
+.options li.correct::after{content:' ✓';color:#2e7d32;font-weight:700}
+.options li.incorrect{background:var(--clinical-bg);border-color:var(--clinical);color:var(--clinical-dark)}
+.options li.incorrect::after{content:' ✗';color:var(--clinical);font-weight:700}
+.feedback{display:none;margin-top:16px;padding:14px 18px;background:var(--bg-card);border-left:4px solid var(--amber);border-radius:2px;font-size:.96rem}
+.feedback.show{display:block}
+.feedback strong{color:var(--amber-dark)}
+
+/* PHOTO */
+.photo-grid{display:grid;gap:20px;margin:24px 0}
+@media(min-width:640px){.photo-grid.cols-2{grid-template-columns:1fr 1fr}.photo-grid.cols-3{grid-template-columns:1fr 1fr 1fr}}
+.photo-card{background:var(--bg-card);border:1px solid var(--border-light);border-radius:4px;padding:14px;box-shadow:var(--shadow-sm);transition:box-shadow .2s}
+.photo-card:hover{box-shadow:var(--shadow-md)}
+.photo-card .photo-frame{position:relative;background:repeating-linear-gradient(45deg,var(--parchment-dark) 0,var(--parchment-dark) 10px,var(--parchment-deep) 10px,var(--parchment-deep) 20px);border-radius:3px;overflow:hidden;min-height:200px;display:flex;align-items:center;justify-content:center}
+.photo-card img{display:block;width:100%;height:auto;border-radius:3px;cursor:zoom-in}
+.photo-card img.broken{display:none}
+.photo-card .photo-missing{display:none;font-family:var(--font-mono);font-size:.75rem;color:var(--text-muted);text-align:center;padding:40px 20px;letter-spacing:.08em;text-transform:uppercase}
+.photo-card img.broken+.photo-missing{display:block}
+.photo-card .photo-missing::before{content:'⏳ ';margin-right:4px}
+.photo-card .photo-caption{font-family:var(--font-body);font-size:.92rem;color:var(--text);margin-top:12px;line-height:1.5}
+.photo-card .photo-caption strong{font-family:var(--font-display);color:var(--ink);display:block;margin-bottom:4px;font-weight:700;font-size:.98rem}
+.photo-card .photo-credit{font-family:var(--font-mono);font-size:.7rem;color:var(--text-muted);margin-top:8px;letter-spacing:.06em;text-transform:uppercase}
+.photo-hero{background:var(--bg-card);border:1px solid var(--border-light);border-radius:4px;padding:18px;margin:24px 0;box-shadow:var(--shadow-sm);text-align:center}
+.photo-hero img{display:block;width:100%;max-width:720px;height:auto;margin:0 auto;border-radius:3px;cursor:zoom-in}
+.photo-hero img.broken{display:none}
+.photo-hero .photo-missing{display:none;font-family:var(--font-mono);font-size:.78rem;color:var(--text-muted);padding:60px 20px;letter-spacing:.1em;text-transform:uppercase}
+.photo-hero img.broken+.photo-missing{display:block}
+.photo-hero .photo-missing::before{content:'⏳ ';margin-right:4px}
+.photo-hero .photo-caption{font-family:var(--font-body);font-size:.92rem;color:var(--text);margin-top:14px;max-width:640px;margin-left:auto;margin-right:auto}
+.photo-hero .photo-caption strong{font-family:var(--font-display);color:var(--ink);font-weight:700}
+
+/* LIGHTBOX */
+.lightbox{display:none;position:fixed;inset:0;background:rgba(26,42,53,.92);z-index:9999;align-items:center;justify-content:center;padding:30px;cursor:zoom-out}
+.lightbox.open{display:flex}
+.lightbox img{max-width:95vw;max-height:90vh;border-radius:4px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.lightbox .lb-caption{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);color:var(--parchment);font-family:var(--font-mono);font-size:.82rem;background:rgba(26,42,53,.7);padding:8px 16px;border-radius:2px;max-width:90vw;text-align:center}
+.lightbox .lb-close{position:absolute;top:20px;right:30px;background:none;border:2px solid var(--parchment);color:var(--parchment);width:44px;height:44px;border-radius:50%;font-size:1.3rem;cursor:pointer;font-family:var(--font-mono)}
+.lightbox .lb-close:hover{background:rgba(255,255,255,.1)}
+
+/* FOOTER */
+.footer{margin-top:80px;padding:30px;text-align:center;border-top:3px double var(--amber);font-family:var(--font-mono);font-size:.78rem;color:var(--text-muted);letter-spacing:.12em}
+/* ACORDEONES — <details>/<summary> nativos: se despliegan sin JavaScript,
+   así que funcionan aunque el archivo se abra desde el disco o se imprima. */
+.acorde{background:var(--bg-card);border:1px solid var(--border-light);border-left:4px solid var(--teal);
+  border-radius:3px;margin:10px 0;overflow:hidden}
+.acorde > summary{cursor:pointer;padding:13px 18px;font-family:var(--font-display);font-weight:700;
+  color:var(--ink);font-size:1rem;list-style:none;display:flex;align-items:center;gap:10px;
+  background:var(--parchment-dark);transition:background .15s}
+.acorde > summary:hover{background:var(--amber-pale)}
+.acorde > summary::-webkit-details-marker{display:none}
+.acorde > summary::before{content:'+';font-family:var(--font-mono);font-size:1.15rem;color:var(--teal);
+  font-weight:400;width:16px;flex-shrink:0;text-align:center}
+.acorde[open] > summary::before{content:'−'}
+.acorde[open] > summary{border-bottom:1px solid var(--border-light)}
+.acorde > summary .pista{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);
+  font-weight:400;letter-spacing:.06em;margin-left:auto;text-transform:uppercase}
+.acorde .cuerpo{padding:16px 18px 18px}
+.acorde .cuerpo > *:last-child{margin-bottom:0}
+.acorde.rust{border-left-color:var(--rust)} .acorde.amber{border-left-color:var(--amber)}
+.acorde.blue{border-left-color:var(--blue)} .acorde.purple{border-left-color:var(--purple)}
+@media print{.acorde .cuerpo{display:block!important}.acorde > summary::before{content:''}}
+
+/* Ficha de tejido: la imagen del cuadro de Tortora más su texto */
+.ficha{margin:22px 0}
+.ficha > h4{font-family:var(--font-display);font-size:1.12rem;color:var(--ink);font-weight:700;
+  margin-bottom:4px;padding-bottom:5px;border-bottom:2px solid var(--amber-light)}
+.ficha .datos{display:grid;grid-template-columns:auto 1fr;gap:5px 14px;margin:10px 0 0;font-size:.93rem}
+.ficha .datos dt{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--amber-dark);padding-top:3px;font-weight:500}
+.ficha .datos dd{margin:0;color:var(--text)}
+.ficha .datos dd b{color:var(--ink)}
+@media(max-width:640px){.ficha .datos{grid-template-columns:1fr;gap:2px}
+  .ficha .datos dd{margin-bottom:8px}}
+
+@media print{body{background:white;font-size:11pt}.tab-bar{display:none}}
+
+/* ─── Añadidos de la clase 6 ─── */
+
+/* Fichas de hueso: nombre, cuántos son y qué aporta a la órbita */
+.huesos-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:12px;margin:18px 0}
+.hueso{background:var(--parchment-dark);border:1px solid var(--border-light);border-left:4px solid var(--teal);
+  border-radius:3px;padding:12px 15px}
+.hueso.orb{border-left-color:var(--clinical);background:#fbeeec}
+.hueso .nom{font-family:var(--font-display);font-weight:700;color:var(--ink);font-size:1.02rem}
+.hueso .par{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--text-muted);display:block;margin-bottom:5px}
+.hueso .que{font-size:.87rem;color:var(--text-soft);line-height:1.45;margin-top:4px}
+.hueso .marca{display:inline-block;font-family:var(--font-mono);font-size:.62rem;letter-spacing:.1em;
+  text-transform:uppercase;background:var(--clinical);color:#fff;padding:1px 7px;border-radius:9px;margin-top:7px}
+
+/* Puntos craneométricos: cada punto con su traducción de campo */
+.puntos{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;margin:16px 0}
+.punto{background:var(--bg-card);border:1px solid var(--border-light);border-radius:3px;padding:11px 14px;font-size:.9rem}
+.punto b{font-family:var(--font-display);color:var(--amber-dark);font-size:1rem;display:block}
+.punto.clave{background:var(--amber-pale);border-color:var(--amber-light)}
+
+/* Recorrido: una cadena de pasos con flecha, para el drenaje de la lágrima */
+.recorrido{display:flex;flex-wrap:wrap;align-items:stretch;gap:0;margin:20px 0;font-size:.86rem}
+.recorrido .paso{background:var(--blue-bg);border:1px solid var(--blue);color:var(--blue-dark);
+  padding:9px 14px;border-radius:3px;display:flex;align-items:center;text-align:center;line-height:1.35}
+.recorrido .flecha{display:flex;align-items:center;color:var(--blue);padding:0 8px;font-size:1.15rem}
+@media(max-width:720px){.recorrido{flex-direction:column}
+  .recorrido .flecha{padding:3px 0;transform:rotate(90deg)}}
+
+/* Aviso de que un tema se retoma en otra clase, para no invadir el temario */
+.adelanto{background:var(--parchment-dark);border:1px dashed var(--teal);border-radius:3px;
+  padding:14px 20px;margin:20px 0;font-size:.93rem;color:var(--text-soft)}
+.adelanto::before{content:'→ Se retoma más adelante';display:block;font-family:var(--font-mono);
+  font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--teal-dark);
+  margin-bottom:7px;font-weight:600}
+.adelanto strong{color:var(--ink)}
+</style>
+<body>
+
+<header class="header">
+  <div class="eyebrow">Clase 11 · Morfología General 2026-II</div>
+  <h1>Sistema endocrino: mensajes por la sangre y <em>una glándula al lado del quiasma</em></h1>
+  <p class="subtitle">Glándulas sin conductos que hablan a todo el cuerpo a la vez, un centro de mando escondido en la base del cráneo y tres enfermedades que el optómetra ve antes que nadie</p>
+  <div class="meta">Dr. Jorge Bogoya &middot; Universidad de La Salle &middot; Optometría &middot; Primer semestre</div>
+</header>
+
+<div class="container">
+
+<div class="tab-bar" role="tablist">
+  <button class="tab-btn active" role="tab" onclick="showTab('s1',this)">
+    <span class="tab-date">Jue. 22 oct · 09:00–11:00</span>
+    Sesión única · Las glándulas y el ojo
+  </button>
+</div>
+
+<!-- ═══════════════════════ SESIÓN ÚNICA ═══════════════════════ -->
+<div class="tab-pane active" id="s1">
+<nav class="station-nav">
+  <h3>Contenido</h3>
+  <ol>
+    <li><a href="#e0">Para empezar: cuatro pacientes</a></li>
+    <li><a href="#e1">Qué es una glándula endocrina</a></li>
+    <li><a href="#e2">El control: la retroalimentación negativa</a></li>
+    <li><a href="#e3">Hipotálamo e hipófisis: el centro de mando</a></li>
+    <li><a href="#e4">La hipófisis vive al lado del ojo</a></li>
+    <li><a href="#e5">Tiroides y paratiroides</a></li>
+    <li><a href="#e6">Graves: la tiroides que se ve en la órbita</a></li>
+    <li><a href="#e7">Las glándulas suprarrenales</a></li>
+    <li><a href="#e8">El páncreas endocrino</a></li>
+    <li><a href="#e9">La diabetes y el ojo</a></li>
+    <li><a href="#e10">El resto, en breve: pineal, timo y otros</a></li>
+    <li><a href="#e11">Términos TA2</a></li>
+    <li><a href="#e12">Comprueba lo que aprendiste</a></li>
+    <li><a href="#e13">Volvemos a los cuatro pacientes</a></li>
+  </ol>
+</nav>
+
+<!-- ─────────── 00 ─────────── -->
+<section class="station" id="e0">
+  <div class="station-header">
+    <div class="station-number">00</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Para empezar · Conversación</div>
+      <h2>Cuatro pacientes en la consulta de optometría</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Los cuatro llegan por un problema de los ojos, y en los cuatro el problema empieza en una glándula
+      que no está en el ojo. Responde con lo que ya sabes, sin buscar. Al final de la clase volvemos sobre
+      ellos.</p>
+
+    <div class="two-col">
+      <div class="col-card">
+        <h5>1 · Los ojos que se salen</h5>
+        <p>Una mujer de 35 años dice que sus amigas la ven «con cara de susto». Los ojos se le ven más
+          grandes y más hacia fuera que en las fotos de hace dos años. Además está nerviosa, ha bajado de
+          peso y le sudan las manos. ¿Qué tiene que ver todo eso con el cuello?</p>
+      </div>
+      <div class="col-card">
+        <h5>2 · Choca con las puertas</h5>
+        <p>Un hombre de 45 años se golpea el hombro con los marcos de las puertas, de un lado y del otro.
+          Ve bien de frente y lee sin problema. ¿Qué parte de su campo visual perdió, y qué hay en la base
+          del cráneo que pueda explicarlo?</p>
+      </div>
+      <div class="col-card amber">
+        <h5>3 · La fórmula que no sirve</h5>
+        <p>Un hombre de 52 años pide gafas nuevas porque ve borroso de lejos. Le mides la refracción y
+          tiene una miopía que no tenía. Una semana después vuelve: la miopía cambió otra vez. Le acaban de
+          diagnosticar diabetes. ¿Le formulas?</p>
+      </div>
+      <div class="col-card teal">
+        <h5>4 · Las gotas para la alergia</h5>
+        <p>Una joven usa desde hace meses unas gotas «que le quitan la alergia de una vez». Las gotas
+          tienen un corticoide. ¿Qué dos cosas del ojo tienes que vigilar, y por qué el nombre del
+          medicamento te lleva a una glándula que está encima del riñón?</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 01 ─────────── -->
+<section class="station" id="e1">
+  <div class="station-header">
+    <div class="station-number">01</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">La idea central</div>
+      <h2>Qué es una glándula endocrina</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <h3>Una glándula sin conductos</h3>
+    <p>Ya conoces glándulas con conductos: la lagrimal vierte la lágrima en el fórnix; las salivales, la
+      saliva en la boca. Son <strong>exocrinas</strong>: su producto sale a una superficie por un tubo. Una
+      glándula <strong>endocrina</strong> no tiene tubo. Vierte su producto, la <strong>hormona</strong>,
+      al líquido intersticial que la rodea, y desde ahí pasa a la sangre, que la lleva a todo el cuerpo.</p>
+
+    <div class="pearl">
+      <p><strong>Si no hay conducto, la sangre es el conducto.</strong> Por eso las glándulas endocrinas
+        están entre los órganos más irrigados del cuerpo, y sus capilares son <em>fenestrados</em>, con
+        poros en la pared, como los que vimos en los procesos ciliares. La hormona tiene que poder salir de
+        la célula y entrar al capilar sin obstáculos.</p>
+    </div>
+
+    <p>La hormona viaja a todas partes, pero solo actúa sobre las células que tienen un
+      <strong>receptor</strong> para ella: las <strong>células diana</strong>. La hormona tiroidea tiene
+      receptores en casi todas las células; la hormona antidiurética, solo en unas pocas del riñón y de los
+      vasos. El mensaje llega a todos, pero solo lo «oye» quien tiene el receptor.</p>
+
+    <h3>Dos maneras de mandar mensajes</h3>
+    <p>El cuerpo tiene dos sistemas de control. Ya estudiaste uno, el nervioso. Compáralos:</p>
+    <table class="data">
+      <tr><th></th><th>Sistema nervioso</th><th>Sistema endocrino</th></tr>
+      <tr><td><strong>Mensajero</strong></td><td>Neurotransmisor, liberado en una sinapsis</td><td>Hormona, liberada a la sangre</td></tr>
+      <tr><td><strong>A quién llega</strong></td><td>A la célula con la que hace sinapsis</td><td>A todas las células con receptor, en cualquier parte</td></tr>
+      <tr><td><strong>Velocidad</strong></td><td>Milisegundos</td><td>Segundos, horas o días</td></tr>
+      <tr><td><strong>Duración del efecto</strong></td><td>Breve</td><td>Prolongada</td></tr>
+      <tr><td><strong>Ejemplo ocular</strong></td><td>El reflejo pupilar a la luz</td><td>El crecimiento del globo ocular en la infancia</td></tr>
+    </table>
+    <p>No son dos mundos aparte. Hay fibras nerviosas que terminan soltando su mensaje a la sangre
+      —ocurre en la médula suprarrenal—, y la hipófisis está colgada del cerebro y
+      recibe órdenes de neuronas. Los dos sistemas forman un solo aparato de control, el
+      <em>neuroendocrino</em>.</p>
+
+    <div class="photo-hero">
+      <img src="img/fig_18_1_glandulas_endocrinas.png"
+           alt="Mapa del cuerpo con la ubicación de las glándulas endocrinas: hipotálamo, hipófisis y pineal en el encéfalo, tiroides y paratiroides en el cuello, timo en el tórax, suprarrenales sobre los riñones, páncreas, ovarios y testículos"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>El mapa de la clase.</strong> Las glándulas propiamente dichas
+        —hipófisis, pineal, tiroides, paratiroides y suprarrenales— y los órganos que, además de su
+        función principal, tienen células endocrinas: hipotálamo, timo, páncreas, gónadas, e incluso el
+        corazón, el riñón, el estómago y la piel. Tortora, Fig. 18.1.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 02 ─────────── -->
+<section class="station" id="e2">
+  <div class="station-header">
+    <div class="station-number">02</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">La regla que lo gobierna todo</div>
+      <h2>El control: la retroalimentación negativa</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Una hormona que se secretara sin freno sería un problema. Casi todas se regulan como un termostato:
+      cuando el efecto ya se logró, el propio producto <strong>apaga</strong> la orden que lo produjo. Eso
+      es la <strong>retroalimentación negativa</strong>.</p>
+
+    <div class="two-col">
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_18_6_retroalimentacion.png"
+               alt="Eje hipotálamo, hipófisis y corteza suprarrenal: la hormona liberadora de corticotrofina estimula la secreción de ACTH, la ACTH estimula la secreción de cortisol, y el cortisol inhibe al hipotálamo y a la hipófisis"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>Un eje de tres pisos.</strong> Flechas verdes: estímulo.
+          Líneas rojas punteadas: freno. El cortisol frena a los dos pisos de arriba. Tortora, Fig. 18.6.</div>
+      </div>
+      <div>
+        <h4>Leer el eje de arriba abajo</h4>
+        <div class="recorrido" style="flex-direction:column;align-items:stretch">
+          <div class="paso">Hipotálamo · hormona liberadora (CRH)</div>
+          <div class="flecha" style="justify-content:center;transform:none">↓</div>
+          <div class="paso">Adenohipófisis · hormona trófica (ACTH)</div>
+          <div class="flecha" style="justify-content:center;transform:none">↓</div>
+          <div class="paso">Glándula diana · hormona final (cortisol)</div>
+        </div>
+        <p>El mismo esquema se repite con la tiroides: TRH → TSH → hormonas tiroideas. Una
+          <em>hormona trófica</em> es la que estimula a otra glándula; su nombre suele terminar en
+          <em>-tropina</em> o <em>-trofina</em>.</p>
+      </div>
+    </div>
+
+    <div class="pearl">
+      <p><strong>El eje es la herramienta del diagnóstico.</strong> Si la hormona final está alta y la
+        trófica está baja, el problema está en la glándula de abajo: trabaja de más por su cuenta y la
+        hipófisis, obediente, se frena. Si las dos están altas, el problema está arriba: la hipófisis
+        manda de más. Con esta sola regla vas a entender la enfermedad de Graves en la estación 06.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 03 ─────────── -->
+<section class="station" id="e3">
+  <div class="station-header">
+    <div class="station-number">03</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">El centro de mando</div>
+      <h2>Hipotálamo e hipófisis</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>La <strong>hipófisis</strong> es del tamaño de un garbanzo: <strong>1 a 1,5 cm</strong>. Cuelga del
+      hipotálamo por un tallo, el <strong>infundíbulo</strong>, y descansa en la <strong>fosa
+      hipofisaria</strong> de la <strong>silla turca</strong> del esfenoides, un hueso que conoces bien
+      porque forma buena parte del fondo de la órbita. Tiene dos lóbulos que, aunque estén pegados, son
+      dos órganos distintos.</p>
+
+    <div class="photo-hero">
+      <img src="img/fig_18_5_hipotalamo_hipofisis.png"
+           alt="Hipotálamo e hipófisis: corte sagital con la neurohipófisis posterior y la adenohipófisis anterior, el infundíbulo, la eminencia media, el sistema porta hipofisario con sus plexos primario y secundario, y la hipófisis en la fosa hipofisaria del esfenoides"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>Dos lóbulos, dos maneras de recibir órdenes.</strong> Al
+        anterior, la adenohipófisis, le llegan por la sangre del <em>sistema porta</em>: una red de
+        capilares en el hipotálamo, unas venas cortas, y otra red de capilares en la hipófisis. Fíjate en
+        el hueso de abajo: es el esfenoides. Tortora, Fig. 18.5.</div>
+    </div>
+
+    <div class="two-col">
+      <div class="col-card">
+        <h5>Adenohipófisis · lóbulo anterior</h5>
+        <p>Es <strong>tejido epitelial</strong>, el 75 % de la glándula. <strong>Fabrica</strong> sus
+          propias hormonas. El hipotálamo le da órdenes con hormonas liberadoras e inhibidoras que viajan
+          por el <strong>sistema porta hipofisario</strong>. Un sistema porta es una vena que une dos redes
+          de capilares, sin pasar por el corazón; así la orden llega concentrada y en segundos.</p>
+      </div>
+      <div class="col-card teal">
+        <h5>Neurohipófisis · lóbulo posterior</h5>
+        <p>Es <strong>tejido nervioso</strong>. <strong>No fabrica</strong> nada: es un almacén. Allí
+          terminan los axones de neuronas cuyo cuerpo está en el hipotálamo, en los núcleos
+          <em>supraóptico</em> y <em>paraventricular</em>. Esas neuronas fabrican la oxitocina y la hormona
+          antidiurética, las bajan por el axón y las sueltan a la sangre en la neurohipófisis.</p>
+      </div>
+    </div>
+
+    <h3>Lo que secreta cada lóbulo</h3>
+    <table class="data">
+      <tr><th>Hormona</th><th>Lóbulo</th><th>Qué hace</th></tr>
+      <tr><td>Hormona del crecimiento (GH)</td><td>Anterior</td><td>Crecimiento de huesos y tejidos; su exceso en el adulto produce acromegalia</td></tr>
+      <tr><td>Tirotropina (TSH)</td><td>Anterior</td><td>Estimula a la tiroides</td></tr>
+      <tr><td>Corticotropina (ACTH)</td><td>Anterior</td><td>Estimula a la corteza suprarrenal</td></tr>
+      <tr><td>Folitropina (FSH) y lutropina (LH)</td><td>Anterior</td><td>Estimulan a ovarios y testículos</td></tr>
+      <tr><td>Prolactina (PRL)</td><td>Anterior</td><td>Producción de leche</td></tr>
+      <tr><td>Melanotropina (MSH)</td><td>Anterior</td><td>Escasa en el adulto; pigmentación</td></tr>
+      <tr><td>Oxitocina</td><td>Posterior (la fabrica el hipotálamo)</td><td>Contracción del útero en el parto y eyección de la leche</td></tr>
+      <tr><td>Hormona antidiurética (ADH)</td><td>Posterior (la fabrica el hipotálamo)</td><td>Hace que el riñón ahorre agua</td></tr>
+    </table>
+
+    <div class="photo-hero">
+      <img src="img/fig_18_8_neurohipofisis_quiasma.png"
+           alt="Tracto hipotalamohipofisario: axones de células neurosecretoras del hipotálamo que bajan por el infundíbulo hasta la neurohipófisis; por delante del infundíbulo se ve el quiasma óptico"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>Mira quién está delante del tallo.</strong> El dibujo es sobre
+        los axones que bajan a la neurohipófisis, pero el rótulo que importa a un optómetra es otro: el
+        <em>quiasma óptico</em>, justo por delante y por encima del infundíbulo. Esa vecindad es la
+        estación siguiente. Tortora, Fig. 18.8.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 04 ─────────── -->
+<section class="station" id="e4">
+  <div class="station-header">
+    <div class="station-number">04</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Relaciones anatómicas</div>
+      <h2>La hipófisis vive al lado del ojo</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>De todas las glándulas del cuerpo, la hipófisis es la que tiene los vecinos más delicados. Ubícala
+      en la silla turca y mira qué tiene en cada dirección:</p>
+
+    <div class="two-col">
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_7_8a_esfenoides_piso.png"
+               alt="Hueso esfenoides visto desde arriba, en el piso del cráneo, con la silla turca en el centro del cuerpo del esfenoides"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>La silla turca, desde arriba.</strong> El nicho en el centro
+          del cuerpo del esfenoides. A cada lado pasa un seno cavernoso; por delante, los conductos
+          ópticos. Tortora, Fig. 7.8a (clase 6).</div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/moore_8_8_seno_cavernoso.png"
+               alt="Corte coronal del seno cavernoso a los lados de la hipófisis, con la arteria carótida interna y los nervios oculomotor, troclear, oftálmico, maxilar y abducens"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>Los vecinos laterales.</strong> La hipófisis en el centro; a
+          cada lado, el seno cavernoso con la carótida interna, el III, el IV, el V1, el V2 y el VI. Moore,
+          Fig. 8.8 (clase 6).</div>
+      </div>
+    </div>
+
+    <table class="data">
+      <tr><th>Dirección</th><th>Qué hay</th><th>Qué pasa si la hipófisis crece hacia ahí</th></tr>
+      <tr><td><strong>Arriba</strong></td><td>El diafragma de la silla y, encima, el <strong>quiasma óptico</strong></td><td>Pérdida de campo visual: <em>hemianopsia bitemporal</em></td></tr>
+      <tr><td><strong>A los lados</strong></td><td>Los <strong>senos cavernosos</strong>, con el III, IV, V1, V2 y VI y la carótida interna</td><td>Visión doble, párpado caído, adormecimiento de la frente</td></tr>
+      <tr><td><strong>Abajo</strong></td><td>El <strong>seno esfenoidal</strong>, una cavidad con aire</td><td>Por ahí entra el neurocirujano: la cirugía <em>transesfenoidal</em>, a través de la nariz</td></tr>
+      <tr><td><strong>Atrás</strong></td><td>El dorso de la silla y el tronco del encéfalo</td><td>Raro que llegue tan lejos</td></tr>
+    </table>
+
+    <h3>Por qué el campo se pierde por fuera</h3>
+    <div class="two-col">
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_17_17_via_visual.png"
+               alt="Vía visual: las fibras de la retina nasal de cada ojo se cruzan en el quiasma óptico y las de la retina temporal siguen del mismo lado"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>La vía visual que ya conoces.</strong> En el quiasma solo se
+          cruzan las fibras de la retina <em>nasal</em> de cada ojo. Tortora, Fig. 17.17 (clase 8).</div>
+      </div>
+      <div>
+        <p>Un tumor de la hipófisis que crece hacia arriba aprieta el quiasma <strong>por debajo y por el
+          centro</strong>, justo donde se cruzan las fibras. Esas fibras vienen de la retina
+          <strong>nasal</strong>, y la retina nasal ve el campo <strong>temporal</strong>. Por eso el
+          paciente pierde las dos mitades de fuera: no ve los marcos de las puertas a ningún lado.</p>
+        <p>Hay un detalle más fino. Las fibras que se cruzan más abajo en el quiasma vienen de la retina
+          <strong>inferior</strong>, que ve el campo <strong>superior</strong>. Como el tumor llega desde
+          abajo, lo primero que se pierde suelen ser los <strong>cuadrantes temporales superiores</strong>.
+          Un tumor que baja desde arriba, como el craneofaringioma, empieza al revés: por los temporales
+          inferiores.</p>
+      </div>
+    </div>
+
+    <div class="clinical-box">
+      <h5>El campo visual descubre el tumor</h5>
+      <p>Un adenoma de la hipófisis crece despacio y casi no duele. La agudeza visual central se conserva
+        hasta muy tarde, porque las fibras de la mácula ocupan todo el quiasma. Muchos pacientes llegan a
+        la consulta de optometría por «chocar con las cosas» o por un accidente de tránsito al cambiar de
+        carril. <strong>Un campo visual que respeta la línea media vertical es neurológico hasta que se
+        demuestre lo contrario</strong>, y se remite. A veces el tumor sangra de golpe dentro de la silla
+        —la <em>apoplejía hipofisaria</em>—: dolor de cabeza brutal, pérdida visual rápida y ojo
+        paralizado. Es una urgencia.</p>
+    </div>
+
+    <div class="photo-card" style="max-width:460px;margin:24px auto">
+      <div class="photo-frame">
+        <img src="img/fig_18_22b_acromegalia.png"
+             alt="Hombre adulto con acromegalia: rasgos faciales engrosados, mandíbula y nariz grandes"
+             onerror="this.classList.add('broken')">
+        <div class="photo-missing">No disponible</div>
+      </div>
+      <div class="photo-caption"><strong>Acromegalia.</strong> Un adenoma que fabrica hormona del
+        crecimiento en un adulto: los huesos ya no pueden alargarse, pero se engruesan los de la cara, las
+        manos y los pies. El mismo tumor que cambia la cara puede estar apretando el quiasma. Tortora,
+        Fig. 18.22b.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 05 ─────────── -->
+<section class="station" id="e5">
+  <div class="station-header">
+    <div class="station-number">05</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">En el cuello</div>
+      <h2>Tiroides y paratiroides</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <h3>La tiroides</h3>
+    <p>Tiene forma de mariposa y está en la parte anterior del cuello, <strong>debajo de la laringe</strong>.
+      Dos <strong>lóbulos laterales</strong>, uno a cada lado de la tráquea, unidos por un
+      <strong>istmo</strong> que pasa por delante de ella. En la mitad de las personas hay un tercer lóbulo
+      pequeño, el <strong>piramidal</strong>, que sube desde el istmo. Pesa unos <strong>30 g</strong> y,
+      como todas las glándulas endocrinas, está muy irrigada.</p>
+
+    <div class="photo-hero">
+      <img src="img/fig_18_10_tiroides.png"
+           alt="Glándula tiroides en vista anterior con sus lóbulos laterales, el istmo, el lóbulo piramidal y su irrigación; histología de los folículos tiroideos con células foliculares, coloide y células parafoliculares; y pieza anatómica"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>Por fuera y por dentro.</strong> Arriba, la glándula con sus
+        arterias tiroideas superior e inferior. Abajo a la izquierda, al microscopio: esferas huecas
+        —los <em>folículos</em>— tapizadas de células foliculares y llenas de coloide, con alguna célula
+        parafolicular suelta entre ellas. Tortora, Fig. 18.10.</div>
+    </div>
+
+    <div class="two-col">
+      <div class="col-card">
+        <h5>Células foliculares → T3 y T4</h5>
+        <p>Tapizan los folículos. Fabrican las <strong>hormonas tiroideas</strong>: la tiroxina
+          (<strong>T4</strong>) y la triyodotironina (<strong>T3</strong>), que llevan yodo. Las guardan en
+          el coloide y las sueltan cuando la TSH lo ordena. Aceleran el metabolismo de casi todas las
+          células del cuerpo: son el acelerador general.</p>
+      </div>
+      <div class="col-card amber">
+        <h5>Células parafoliculares (C) → calcitonina</h5>
+        <p>Están <strong>entre</strong> los folículos, no dentro de ellos. Fabrican la
+          <strong>calcitonina</strong>, que baja el calcio de la sangre. En el adulto su papel es pequeño;
+          lo importante es saber que existen y que no dependen de la TSH.</p>
+      </div>
+    </div>
+
+    <div class="photo-card" style="max-width:340px;margin:24px auto">
+      <div class="photo-frame">
+        <img src="img/fig_18_22c_bocio.png"
+             alt="Mujer con un bocio: aumento de volumen de la parte anterior del cuello"
+             onerror="this.classList.add('broken')">
+        <div class="photo-missing">No disponible</div>
+      </div>
+      <div class="photo-caption"><strong>Bocio.</strong> La tiroides agrandada. Si falta yodo en la dieta,
+        la glándula no puede fabricar sus hormonas, la hipófisis no recibe freno y sube la TSH, que hace
+        crecer la glándula sin lograr nada. Por eso la sal se yoda. Tortora, Fig. 18.22c.</div>
+    </div>
+
+    <h3>Las paratiroides</h3>
+    <p>Son <strong>cuatro</strong> en general, dos a cada lado, del tamaño de una lenteja (unos 40 mg cada
+      una). Están <strong>pegadas a la cara posterior</strong> de los lóbulos de la tiroides, a veces
+      metidas dentro de su cápsula.</p>
+
+    <div class="photo-hero">
+      <img src="img/fig_18_13_paratiroides.png"
+           alt="Vista posterior de la glándula tiroides con las cuatro glándulas paratiroides, superiores e inferiores, adosadas a la cara posterior de los lóbulos, y el esófago y la tráquea por delante"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>Hay que mirar por detrás.</strong> Vista posterior: las cuatro
+        paratiroides, las manchas verdes en la cara de atrás de los lóbulos. Tortora, Fig. 18.13a.</div>
+    </div>
+
+    <p>Sus <strong>células principales</strong> fabrican la <strong>hormona paratiroidea (PTH)</strong>, que
+      <strong>sube el calcio</strong> de la sangre: lo saca del hueso, lo ahorra en el riñón y activa la
+      vitamina D. Es la contraria de la calcitonina, y mucho más importante que ella.</p>
+
+    <div class="pearl">
+      <p><strong>Una relación anatómica que vale una complicación.</strong> Como las paratiroides están
+        pegadas a la tiroides, en una tiroidectomía se pueden quitar o dejar sin sangre sin querer. Sin
+        PTH, el calcio baja y los nervios y músculos se vuelven hiperexcitables: hormigueo alrededor de la
+        boca, calambres, espasmos. El cirujano las busca una por una para respetarlas.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 06 ─────────── -->
+<section class="station" id="e6">
+  <div class="station-header">
+    <div class="station-number">06</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Interfaz optométrica · Caso de la tiroides</div>
+      <h2>Graves: la tiroides que se ve en la órbita</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>La <strong>enfermedad de Graves</strong> es la causa más frecuente de hipertiroidismo. Es
+      autoinmune: el cuerpo fabrica un <strong>anticuerpo que imita a la TSH</strong> y se pega a su
+      receptor en la tiroides. La glándula recibe una orden que nadie apaga, crece y fabrica hormona de
+      más. Afecta de 7 a 10 veces más a mujeres que a hombres, casi siempre antes de los 40.</p>
+
+    <div class="pearl">
+      <p><strong>Aplica la regla de la estación 02.</strong> Las hormonas tiroideas están altas. La
+        hipófisis las detecta y frena su TSH: la <strong>TSH queda baja</strong>. Pero la glándula no se
+        detiene, porque quien la estimula no es la TSH sino el anticuerpo, y el anticuerpo no obedece a
+        ningún freno.</p>
+    </div>
+
+    <h3>Por qué los ojos se salen</h3>
+    <div class="two-col">
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_18_22d_exoftalmos.png"
+               alt="Mujer con exoftalmos bilateral: ojos protruidos con esclera visible por encima y por debajo del iris"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>Exoftalmos.</strong> Se ve blanco de esclera encima y debajo del
+          iris. El pie de figura del libro lo atribuye al «exceso de hormonas tiroideas»; mira abajo por
+          qué eso es solo media verdad. Tortora, Fig. 18.22d.</div>
+      </div>
+      <div>
+        <p>Los fibroblastos de la órbita también tienen el receptor de la TSH. El anticuerpo los activa,
+          y la órbita se inflama: <strong>los músculos extraoculares se engruesan</strong> —sobre todo el
+          <strong>recto inferior</strong> y el <strong>recto medial</strong>— y aumenta la
+          <strong>grasa orbitaria</strong>.</p>
+        <p>La órbita es una caja de hueso con una sola pared blanda: la de delante. Si el contenido
+          crece, lo único que puede moverse es el globo, <strong>hacia fuera</strong>. Eso es el
+          exoftalmos o <em>proptosis</em>.</p>
+        <p>Como la causa es el anticuerpo y no la hormona, la enfermedad ocular puede aparecer aunque la
+          tiroides ya esté controlada, e incluso en personas con la hormona normal.</p>
+      </div>
+    </div>
+
+    <h3>Lo que el optómetra encuentra</h3>
+    <div class="three-col">
+      <div class="col-card">
+        <h5>Retracción palpebral</h5>
+        <p>El párpado superior queda más alto de lo normal y deja ver esclera encima del iris. Al mirar
+          hacia abajo, el párpado se queda atrás. Es el signo más frecuente, y a veces el primero.</p>
+      </div>
+      <div class="col-card rust">
+        <h5>Visión doble</h5>
+        <p>Los músculos engrosados se vuelven rígidos y no se estiran. Un recto inferior rígido no deja
+          subir el ojo: el paciente ve doble al mirar hacia arriba.</p>
+      </div>
+      <div class="col-card teal">
+        <h5>Ojo seco y expuesto</h5>
+        <p>Con el globo hacia fuera y el párpado retraído, la córnea queda descubierta. Ardor, sensación de
+          arena, lagrimeo. Es la queja más común.</p>
+      </div>
+    </div>
+
+    <div class="clinical-box">
+      <h5>La urgencia está en el vértice</h5>
+      <p>En el fondo de la órbita, en el <strong>vértice</strong>, los cuatro rectos se juntan en el anillo
+        tendinoso común alrededor del nervio óptico. Si los músculos engrosados aprietan el nervio en ese
+        embudo, aparece una <strong>neuropatía óptica compresiva</strong>: baja la visión, los colores se
+        ven lavados y el campo se altera, aunque la córnea y la retina estén sanas. Puede pasar con un
+        exoftalmos pequeño, porque la compresión es atrás, no adelante. Ante un paciente con Graves que
+        refiere que los colores «se apagan», se remite el mismo día.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 07 ─────────── -->
+<section class="station" id="e7">
+  <div class="station-header">
+    <div class="station-number">07</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Encima del riñón</div>
+      <h2>Las glándulas suprarrenales</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Son dos, una sobre el polo superior de cada riñón, en el retroperitoneo. Cada una pesa entre
+      <strong>3,5 y 5 g</strong>. En realidad son <strong>dos glándulas en una</strong>, con origen,
+      tejido y hormonas distintos: una <strong>corteza</strong> por fuera (80 a 90 % del órgano) y una
+      <strong>médula</strong> en el centro.</p>
+
+    <div class="photo-hero">
+      <img src="img/fig_18_15a_suprarrenales.png"
+           alt="Vista anterior de los riñones con las glándulas suprarrenales en sus polos superiores, sus arterias suprarrenales superiores, medias e inferiores y la vena suprarrenal"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>Tres arterias, una vena.</strong> Cada suprarrenal recibe tres
+        arterias de tres orígenes distintos —de la frénica inferior, de la aorta y de la renal— pero la
+        drena una sola vena. Tortora, Fig. 18.15a.</div>
+    </div>
+
+    <div class="photo-hero">
+      <img src="img/fig_18_15b_corteza_medula.png"
+           alt="Corte de la glándula suprarrenal con la cápsula, la corteza y la médula, e histología con las zonas glomerulosa, fasciculada y reticular de la corteza y las células cromafines de la médula"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>De fuera hacia dentro.</strong> Cápsula, tres zonas de corteza y
+        médula. Tortora, Fig. 18.15b–d.</div>
+    </div>
+
+    <h3>La corteza: sal, azúcar y sexo</h3>
+    <p>Fabrica hormonas esteroideas, y son <strong>indispensables para vivir</strong>: sin ellas, la
+      persona muere en días. Tiene tres zonas, y una regla mnemotécnica las ordena de fuera hacia
+      dentro:</p>
+    <table class="data">
+      <tr><th>Zona</th><th>Hormona principal</th><th>Para qué</th><th>Regla</th></tr>
+      <tr><td><strong>Glomerulosa</strong> (la externa)</td><td>Aldosterona (mineralocorticoide)</td><td>El riñón retiene sodio y agua</td><td><em>Sal</em></td></tr>
+      <tr><td><strong>Fasciculada</strong> (la media y más ancha)</td><td>Cortisol (glucocorticoide)</td><td>Sube la glucosa; frena la inflamación y la respuesta inmune</td><td><em>Azúcar</em></td></tr>
+      <tr><td><strong>Reticular</strong> (la interna)</td><td>Andrógenos débiles</td><td>Vello, impulso sexual</td><td><em>Sexo</em></td></tr>
+    </table>
+
+    <h3>La médula: un ganglio simpático que se volvió glándula</h3>
+    <p>La médula suprarrenal recibe directamente <strong>neuronas simpáticas preganglionares</strong>,
+      sin ganglio en medio. Sus <strong>células cromafines</strong> ocupan el lugar de las neuronas
+      posganglionares, pero en vez de axón tienen la sangre: sueltan <strong>adrenalina</strong> (80 %) y
+      noradrenalina (20 %) a la circulación. Es la parte hormonal de la respuesta de «lucha o huida».
+      Esas catecolaminas dilatan la pupila, igual que el simpático que ya estudiaste.</p>
+
+    <div class="clinical-box">
+      <h5>Los corticoides, a la vista</h5>
+      <p>El cortisol frena la inflamación, y por eso los <strong>corticoides</strong> —sus versiones de
+        farmacia— están en cremas, inhaladores, pastillas y gotas oftálmicas. Usados por mucho tiempo, en
+        el ojo producen dos cosas que el optómetra debe buscar:</p>
+      <ul>
+        <li><strong>Catarata subcapsular posterior</strong>: una opacidad en la parte de atrás del
+          cristalino, justo en el eje visual. Molesta mucho para leer y con luz intensa.</li>
+        <li><strong>Aumento de la presión intraocular</strong>: en algunas personas, los corticoides
+          dificultan la salida del humor acuoso. Si no se vigila, termina en glaucoma.</li>
+      </ul>
+      <p>Por eso en la historia clínica se pregunta siempre por corticoides, en cualquier presentación y
+        no solo en gotas.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 08 ─────────── -->
+<section class="station" id="e8">
+  <div class="station-header">
+    <div class="station-number">08</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Una glándula doble</div>
+      <h2>El páncreas endocrino</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>El páncreas mide entre 12,5 y 15 cm y está detrás del estómago, con la cabeza metida en la curva
+      del duodeno, un cuerpo y una cola que llega al bazo. Es <strong>exocrino y endocrino a la vez</strong>:
+      el <strong>99 %</strong> de sus células forma los <em>ácinos</em>, que fabrican enzimas digestivas y
+      las mandan al duodeno por un conducto. Entre los ácinos hay entre <strong>1 y 2 millones</strong> de
+      pequeños grupos de células endocrinas, sin conducto: los <strong>islotes pancreáticos</strong> o de
+      Langerhans.</p>
+
+    <div class="photo-hero">
+      <img src="img/fig_18_18a_pancreas.png"
+           alt="Vista anterior del páncreas con su cabeza en el marco duodenal, el cuerpo y la cola hacia el bazo, y sus arterias"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>Cabeza, cuerpo y cola.</strong> Tortora, Fig. 18.18a.</div>
+    </div>
+
+    <div class="two-col">
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_18_18b_islote.png"
+               alt="Islote pancreático rodeado de ácinos exocrinos, con sus células alfa, beta, delta y F y capilares sanguíneos"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>Un islote entre los ácinos.</strong> Cuatro tipos de células y
+          muchos capilares. Tortora, Fig. 18.18b.</div>
+      </div>
+      <div>
+        <table class="data">
+          <tr><th>Célula</th><th>Del islote</th><th>Secreta</th></tr>
+          <tr><td><strong>Beta</strong></td><td>≈ 70 %</td><td>Insulina: baja la glucosa</td></tr>
+          <tr><td><strong>Alfa</strong></td><td>≈ 17 %</td><td>Glucagón: sube la glucosa</td></tr>
+          <tr><td><strong>Delta</strong></td><td>≈ 7 %</td><td>Somatostatina: frena a las otras dos</td></tr>
+          <tr><td><strong>F</strong></td><td>El resto</td><td>Polipéptido pancreático</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <p>La <strong>insulina</strong> es la única hormona que baja la glucosa de la sangre: abre la puerta
+      para que la glucosa entre a las células del músculo y del tejido adiposo. Cuando falta, o cuando las
+      células dejan de responderle, la glucosa se acumula en la sangre: eso es la <strong>diabetes
+      mellitus</strong>. En el tipo 1, el propio cuerpo destruye las células beta y no hay insulina; en el
+      tipo 2, mucho más frecuente, hay insulina pero las células la «oyen» mal.</p>
+  </div>
+</section>
+
+<!-- ─────────── 09 ─────────── -->
+<section class="station" id="e9">
+  <div class="station-header">
+    <div class="station-number">09</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Interfaz optométrica · Caso del páncreas</div>
+      <h2>La diabetes y el ojo</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>La glucosa alta durante años daña la pared de los vasos pequeños de todo el cuerpo. Los de la retina
+      son los únicos que se pueden ver directamente, sin cirugía: <strong>el fondo de ojo es una ventana
+      a la diabetes</strong>. La diabetes toca el ojo de cuatro maneras.</p>
+
+    <h3>1 · La retinopatía diabética</h3>
+    <div class="two-col">
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/lat_44_9_fondo_de_ojo.png"
+               alt="Fondo de ojo normal con el disco óptico, la mácula y los vasos de la retina"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>Un fondo de ojo sano, para comparar.</strong> Los vasos que salen
+          del disco son ramas de la arteria y de la vena centrales de la retina. En la diabetes son estos
+          capilares los que se dañan. Latarjet, Fig. 44-9 (clase 9).</div>
+      </div>
+      <div>
+        <p>Los capilares de la retina pierden las células que los sostienen y su pared se debilita. Los
+          signos aparecen en un orden:</p>
+        <ol>
+          <li><strong>Microaneurismas</strong>: dilataciones diminutas de la pared de los capilares, como
+            puntos rojos. Son el <strong>primer signo visible</strong>.</li>
+          <li><strong>Hemorragias</strong> en punto y mancha, y <strong>exudados duros</strong>: grasa
+            amarilla que se escapa de los capilares que gotean.</li>
+          <li><strong>Manchas algodonosas</strong>: zonas blancas de retina sin sangre.</li>
+          <li><strong>Neovasos</strong>: la retina sin sangre pide vasos nuevos, y crecen, pero frágiles y
+            en el sitio equivocado. Sangran y tiran de la retina. Es la fase <em>proliferativa</em>, la que
+            deja ciego.</li>
+        </ol>
+        <p>Si el líquido se acumula en la mácula —el <strong>edema macular</strong>—, baja la visión
+          central en cualquier fase.</p>
+      </div>
+    </div>
+
+    <div class="three-col">
+      <div class="col-card amber">
+        <h5>2 · La refracción que cambia</h5>
+        <p>Con la glucosa alta, el cristalino absorbe agua, se hincha y enfoca más fuerte: aparece una
+          <strong>miopía</strong> que sube y baja con la glucemia. <strong>No se formulan gafas hasta que la
+          glucosa se estabilice</strong>: la fórmula de hoy no servirá la semana que viene.</p>
+      </div>
+      <div class="col-card">
+        <h5>3 · La catarata</h5>
+        <p>Los diabéticos desarrollan catarata más joven y más rápido que el resto de la población.</p>
+      </div>
+      <div class="col-card rust">
+        <h5>4 · El III par que respeta la pupila</h5>
+        <p>Un diabético puede amanecer con ptosis y el ojo desviado hacia abajo y afuera: una parálisis del
+          III par por isquemia del nervio. La pupila suele quedar normal. Abajo, por qué.</p>
+      </div>
+    </div>
+
+    <div class="clinical-box">
+      <h5>Por qué la pupila se salva</h5>
+      <p>Las fibras parasimpáticas que contraen la pupila viajan <strong>por fuera</strong> del III par,
+        en la superficie del nervio, y se nutren de los vasos de la piamadre que lo rodean. La diabetes
+        tapa los vasos pequeños que irrigan el <strong>centro</strong> del nervio: se dañan las fibras
+        motoras del centro y se respetan las pupilares de la periferia. Un aneurisma hace lo contrario:
+        aprieta el nervio desde fuera y la primera en caer es la pupila. Por eso <strong>un III par con la
+        pupila dilatada es una urgencia</strong>, y uno con la pupila normal en un diabético suele ser
+        isquémico y mejora solo en semanas.</p>
+    </div>
+
+    <div class="pearl">
+      <p><strong>Todo diabético necesita un fondo de ojo dilatado al menos una vez al año</strong>, aunque
+        vea bien. La retinopatía no duele y la visión puede ser normal hasta fases avanzadas. Encontrarla a
+        tiempo es, muchas veces, trabajo del optómetra.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 10 ─────────── -->
+<section class="station" id="e10">
+  <div class="station-header">
+    <div class="station-number">10</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Para completar el mapa</div>
+      <h2>El resto, en breve: pineal, timo y otros</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <details class="acorde teal" open>
+      <summary>La glándula pineal: un reloj que se ajusta con la retina <span class="pista">la que más te toca</span></summary>
+      <div class="cuerpo">
+        <p>Es pequeña (0,1 a 0,2 g), tiene forma de piña y está en la línea media, pegada al techo del
+          tercer ventrículo, entre los dos colículos superiores. Forma parte del epitálamo. Secreta
+          <strong>melatonina</strong>: mucha de noche, poca de día. Así ayuda a regular el sueño y los
+          ritmos de 24 horas.</p>
+        <p>¿Cómo sabe la pineal si es de día? <strong>Por la retina.</strong> Un grupo pequeño de células
+          ganglionares de la retina detecta la luz pero no forma imágenes: manda su señal al
+          <strong>núcleo supraquiasmático</strong> del hipotálamo, que está —como dice su nombre— encima
+          del quiasma. De ahí la señal baja por la médula y sube por el simpático cervical hasta la pineal:</p>
+        <div class="recorrido">
+          <div class="paso">Retina</div><div class="flecha">→</div>
+          <div class="paso">Núcleo supraquiasmático</div><div class="flecha">→</div>
+          <div class="paso">Médula espinal torácica</div><div class="flecha">→</div>
+          <div class="paso">Ganglio cervical superior</div><div class="flecha">→</div>
+          <div class="paso">Glándula pineal</div>
+        </div>
+        <p>El ganglio cervical superior es el mismo por el que pasa la vía simpática que dilata la pupila.
+          Por eso una persona sin ninguna percepción de luz puede tener alterado el ciclo del sueño: le
+          falta el estímulo que pone en hora su reloj.</p>
+      </div>
+    </details>
+
+    <details class="acorde">
+      <summary>El timo <span class="pista">ya lo viste en linfático</span></summary>
+      <div class="cuerpo">
+        <p>Está en el mediastino, detrás del esternón. Además de ser un órgano linfoide primario, secreta
+          hormonas —las <em>timosinas</em>— que ayudan a madurar a los linfocitos T. Es grande en el niño y
+          se reemplaza por grasa con la edad.</p>
+      </div>
+    </details>
+
+    <details class="acorde">
+      <summary>Ovarios y testículos <span class="pista">gónadas</span></summary>
+      <div class="cuerpo">
+        <p>Además de producir óvulos y espermatozoides, secretan hormonas sexuales: los ovarios,
+          estrógenos y progesterona; los testículos, testosterona. Las controlan la FSH y la LH de la
+          adenohipófisis, con el mismo esquema de retroalimentación negativa.</p>
+      </div>
+    </details>
+
+    <details class="acorde">
+      <summary>Órganos que no son glándulas pero secretan hormonas</summary>
+      <div class="cuerpo">
+        <p>El <strong>corazón</strong> (péptido natriurético auricular, que hace perder sodio), el
+          <strong>riñón</strong> (eritropoyetina, que estimula la producción de glóbulos rojos), el
+          <strong>estómago</strong> y el intestino, el <strong>tejido adiposo</strong> (leptina, que da
+          saciedad), la <strong>piel</strong> (la vitamina D empieza ahí con el sol) y la placenta. La
+          lista muestra que «endocrino» describe una función, no un tipo de órgano.</p>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- ─────────── 11 ─────────── -->
+<section class="station" id="e11">
+  <div class="station-header">
+    <div class="station-number">11</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Vocabulario</div>
+      <h2>Términos TA2 de la clase</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Toca la tarjeta para ver la definición. El nombre en latín es el de la <em>Terminologia
+      Anatomica</em>; es el que aparece en los atlas y en los informes.</p>
+    <div class="flip-grid">
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Glándula endocrina</span><span class="term-en">Glandula endocrina</span></div>
+        <div class="flip-back"><p class="term-def">Glándula sin conducto que vierte su secreción, la hormona, a la sangre.</p><p class="term-opto">👁 La lagrimal es su contrario: exocrina.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Hipófisis</span><span class="term-en">Hypophysis; Glandula pituitaria</span></div>
+        <div class="flip-back"><p class="term-def">Glándula de 1 a 1,5 cm alojada en la fosa hipofisaria, unida al hipotálamo.</p><p class="term-opto">👁 Debajo del quiasma óptico.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Adenohipófisis</span><span class="term-en">Adenohypophysis; Lobus anterior</span></div>
+        <div class="flip-back"><p class="term-def">Lóbulo anterior, epitelial; fabrica GH, TSH, ACTH, FSH, LH, prolactina y MSH.</p><p class="term-opto">👁 De aquí nacen casi todos los adenomas.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Neurohipófisis</span><span class="term-en">Neurohypophysis; Lobus posterior</span></div>
+        <div class="flip-back"><p class="term-def">Lóbulo posterior, nervioso; almacena la oxitocina y la ADH que fabrica el hipotálamo.</p><p class="term-opto">👁 Un almacén, no una fábrica.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Infundíbulo</span><span class="term-en">Infundibulum</span></div>
+        <div class="flip-back"><p class="term-def">Tallo que une el hipotálamo con la hipófisis.</p><p class="term-opto">👁 Pasa justo detrás del quiasma.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Silla turca</span><span class="term-en">Sella turcica</span></div>
+        <div class="flip-back"><p class="term-def">Depresión del cuerpo del esfenoides; su fondo es la fosa hipofisaria.</p><p class="term-opto">👁 El esfenoides también forma el fondo de la órbita.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Diafragma de la silla</span><span class="term-en">Diaphragma sellae</span></div>
+        <div class="flip-back"><p class="term-def">Lámina de duramadre que cubre la silla turca; la atraviesa el infundíbulo.</p><p class="term-opto">👁 Lo único que separa la hipófisis del quiasma.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Venas porta hipofisarias</span><span class="term-en">Venae portales hypophysiales</span></div>
+        <div class="flip-back"><p class="term-def">Venas que unen los capilares del hipotálamo con los de la adenohipófisis.</p><p class="term-opto">👁 Llevan las órdenes del hipotálamo.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Glándula tiroides</span><span class="term-en">Glandula thyroidea</span></div>
+        <div class="flip-back"><p class="term-def">Dos lóbulos laterales y un istmo, debajo de la laringe; unos 30 g.</p><p class="term-opto">👁 Su enfermedad autoinmune llega a la órbita.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Istmo de la tiroides</span><span class="term-en">Isthmus glandulae thyroideae</span></div>
+        <div class="flip-back"><p class="term-def">Puente de tejido tiroideo que une los dos lóbulos por delante de la tráquea.</p><p class="term-opto">👁 De él sube a veces el lóbulo piramidal.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Lóbulo piramidal</span><span class="term-en">Lobus pyramidalis glandulae thyroideae</span></div>
+        <div class="flip-back"><p class="term-def">Tercer lóbulo inconstante que sube desde el istmo; lo tiene la mitad de las personas.</p><p class="term-opto">👁 Variante normal, no un nódulo.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Glándula paratiroides</span><span class="term-en">Glandula parathyroidea</span></div>
+        <div class="flip-back"><p class="term-def">Cuatro glándulas pequeñas en la cara posterior de la tiroides; secretan PTH.</p><p class="term-opto">👁 La PTH sube el calcio.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Glándula suprarrenal</span><span class="term-en">Glandula suprarenalis</span></div>
+        <div class="flip-back"><p class="term-def">Glándula sobre el polo superior del riñón, con corteza y médula.</p><p class="term-opto">👁 Su cortisol es el modelo de los corticoides.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Corteza suprarrenal</span><span class="term-en">Cortex glandulae suprarenalis</span></div>
+        <div class="flip-back"><p class="term-def">Zonas glomerulosa, fasciculada y reticular; hormonas esteroideas.</p><p class="term-opto">👁 Sal, azúcar y sexo, de fuera hacia dentro.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Médula suprarrenal</span><span class="term-en">Medulla glandulae suprarenalis</span></div>
+        <div class="flip-back"><p class="term-def">Centro de la glándula; células cromafines que liberan adrenalina y noradrenalina.</p><p class="term-opto">👁 Un ganglio simpático convertido en glándula.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Islotes pancreáticos</span><span class="term-en">Insulae pancreaticae</span></div>
+        <div class="flip-back"><p class="term-def">Grupos de células endocrinas entre los ácinos del páncreas: alfa, beta, delta y F.</p><p class="term-opto">👁 Sin insulina de las beta, diabetes.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Glándula pineal</span><span class="term-en">Glandula pinealis; Corpus pineale</span></div>
+        <div class="flip-back"><p class="term-def">Glándula del epitálamo, en el techo del tercer ventrículo; secreta melatonina.</p><p class="term-opto">👁 La pone en hora la luz que entra por la retina.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Núcleo supraquiasmático</span><span class="term-en">Nucleus suprachiasmaticus</span></div>
+        <div class="flip-back"><p class="term-def">Núcleo del hipotálamo, encima del quiasma: el reloj de 24 horas.</p><p class="term-opto">👁 Recibe fibras de la retina que no sirven para ver.</p></div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 12 ─────────── -->
+<section class="station" id="e12">
+  <div class="station-header">
+    <div class="station-number">12</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Autodiagnóstico</div>
+      <h2>Comprueba lo que aprendiste</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Haz clic en tu respuesta. La retroalimentación explica por qué es correcta y qué es en realidad
+      cada una de las otras. Responde primero sin mirar arriba: lo que cuenta es recuperar, no
+      reconocer.</p>
+
+    <div class="check-question" data-question="q1">
+      <p class="question-text">1. ¿Qué rasgo distingue a una glándula endocrina de una exocrina?</p>
+      <ul class="options">
+        <li data-letter="A" data-correct="true">No tiene conducto: vierte su producto a la sangre</li>
+        <li data-letter="B">Secreta solo sustancias de naturaleza proteica</li>
+        <li data-letter="C">Está formada solo por tejido nervioso</li>
+        <li data-letter="D">Siempre es un órgano aislado, con cápsula propia</li>
+        <li data-letter="E">Vierte su producto sobre la superficie de un epitelio</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: A.</strong> Sin conducto, la secreción pasa al líquido
+        intersticial y de ahí a la sangre, que la reparte. Por eso estas glándulas están tan irrigadas.
+        Verter el producto sobre un epitelio es justo lo que hace una exocrina, como la lagrimal. La
+        mayoría de las endocrinas son epiteliales, no nerviosas; la neurohipófisis es la excepción. Hay
+        hormonas proteicas, pero también esteroideas, como el cortisol, y derivadas de aminoácidos, como
+        la tiroxina. Y muchas células endocrinas no forman órgano aparte: los islotes están dispersos en el
+        páncreas.</div>
+    </div>
+
+    <div class="check-question" data-question="q2">
+      <p class="question-text">2. El cortisol en sangre sube por encima de lo normal. ¿Qué le ocurre a la
+        ACTH de la hipófisis?</p>
+      <ul class="options">
+        <li data-letter="A">Sube, para mantener el estímulo sobre la corteza</li>
+        <li data-letter="B" data-correct="true">Baja: el cortisol frena al hipotálamo y a la hipófisis</li>
+        <li data-letter="C">No cambia: la ACTH solo responde a la luz</li>
+        <li data-letter="D">Sube primero la CRH y después baja el cortisol</li>
+        <li data-letter="E">Baja, porque la médula suprarrenal la degrada</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: B.</strong> Es la retroalimentación negativa: el producto
+        final apaga la orden que lo produjo, en los dos pisos de arriba. Subir la ACTH con el cortisol ya
+        alto sería retroalimentación positiva, que solo existe en pocos casos, como el parto. La hormona
+        que responde a la luz es la melatonina de la pineal, no la ACTH. Que suba la CRH invierte el
+        sentido del freno: con cortisol alto, la CRH baja. Y la médula suprarrenal libera adrenalina; no
+        degrada hormonas de la hipófisis.</div>
+    </div>
+
+    <div class="check-question" data-question="q3">
+      <p class="question-text">3. ¿Dónde se aloja la hipófisis?</p>
+      <ul class="options">
+        <li data-letter="A">En la lámina cribosa del etmoides</li>
+        <li data-letter="B">Dentro del seno cavernoso, junto a la carótida</li>
+        <li data-letter="C">En la fosa craneal posterior, sobre el occipital</li>
+        <li data-letter="D" data-correct="true">En la silla turca del esfenoides</li>
+        <li data-letter="E">En el techo del tercer ventrículo, en el epitálamo</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: D.</strong> La hipófisis descansa en la fosa hipofisaria,
+        el fondo de la silla turca, en el cuerpo del esfenoides. La lámina cribosa del etmoides está más
+        adelante y la atraviesan los filetes olfatorios. Los senos cavernosos son sus vecinos laterales,
+        no su alojamiento: por eso un tumor que crece hacia un lado los invade. La fosa posterior aloja el
+        cerebelo y el tronco. El techo del tercer ventrículo, en el epitálamo, es el lugar de la glándula
+        pineal.</div>
+    </div>
+
+    <div class="check-question" data-question="q4">
+      <p class="question-text">4. ¿Cuál es la diferencia fundamental entre los dos lóbulos de la
+        hipófisis?</p>
+      <ul class="options">
+        <li data-letter="A">La neurohipófisis fabrica la hormona del crecimiento</li>
+        <li data-letter="B">La adenohipófisis libera la oxitocina y la antidiurética</li>
+        <li data-letter="C">La adenohipófisis es tejido nervioso y la neurohipófisis, epitelio</li>
+        <li data-letter="D">La neurohipófisis recibe sus órdenes por el sistema porta</li>
+        <li data-letter="E" data-correct="true">La neurohipófisis guarda hormonas fabricadas en el hipotálamo</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: E.</strong> La neurohipófisis es un almacén: los cuerpos de
+        las neuronas que fabrican la oxitocina y la ADH están en el hipotálamo, y sus axones bajan por el
+        infundíbulo. La hormona del crecimiento la fabrica la adenohipófisis. Los tejidos están al revés:
+        la adeno es epitelial y la neuro, nerviosa —el prefijo lo dice—. El sistema porta lleva las
+        órdenes a la adenohipófisis, no a la neuro, que las recibe por sus axones. Y la oxitocina y la ADH
+        se liberan en el lóbulo posterior, no en el anterior.</div>
+    </div>
+
+    <div class="saber-box">
+      <strong>Pregunta tipo Saber Pro · Caso</strong>
+      <div class="check-question" style="margin-top:16px;border-color:var(--purple)" data-question="q5">
+        <p class="question-text">5. Un hombre de 45 años tiene un adenoma de la hipófisis que crece hacia
+          arriba y empieza a apretar el quiasma óptico por debajo. Todavía no pierde la mitad completa de
+          ningún campo. ¿Qué parte del campo visual es la primera en alterarse?</p>
+        <ul class="options">
+          <li data-letter="A">Los cuadrantes temporales inferiores de ambos ojos</li>
+          <li data-letter="B">Los cuadrantes nasales superiores de ambos ojos</li>
+          <li data-letter="C" data-correct="true">Los cuadrantes temporales superiores de ambos ojos</li>
+          <li data-letter="D">La mitad derecha del campo de ambos ojos</li>
+          <li data-letter="E">Todo el campo del ojo del lado del tumor</li>
+        </ul>
+        <div class="feedback"><strong>Correcta: C.</strong> En el quiasma se cruzan las fibras de la retina
+          nasal, que ve el campo temporal. Las que cruzan por la parte más baja vienen de la retina
+          inferior, que ve el campo superior; el tumor sube desde abajo y las aprieta primero. Los
+          temporales inferiores se pierden primero cuando la compresión llega desde arriba, como en el
+          craneofaringioma. Las fibras de la retina temporal, que ven el campo nasal, no se cruzan y
+          quedan a los lados del quiasma, lejos del tumor. Perder todo el campo de un ojo es una lesión del
+          nervio óptico, antes del quiasma. Y perder la misma mitad en los dos ojos es una lesión detrás
+          del quiasma, en la cintilla o más atrás.</div>
+      </div>
+    </div>
+
+    <div class="check-question" data-question="q6">
+      <p class="question-text">6. Un tumor de la hipófisis crece hacia un lado e invade el seno cavernoso.
+        ¿Qué síntoma es esperable por esa invasión?</p>
+      <ul class="options">
+        <li data-letter="A">Ojo seco, por compresión de la glándula lagrimal</li>
+        <li data-letter="B">Pérdida del olfato, por compresión del bulbo olfatorio</li>
+        <li data-letter="C">Parálisis de la cara, por compresión del nervio facial (VII)</li>
+        <li data-letter="D">Sordera, por compresión del nervio vestibulococlear</li>
+        <li data-letter="E" data-correct="true">Diplopía, por los nervios motores del ojo que lo cruzan</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: E.</strong> Por el seno cavernoso pasan el III, el IV y el
+        VI, los tres nervios que mueven el ojo, además del V1, el V2 y la carótida interna. Si se
+        comprimen, los ojos se desalinean y aparece la diplopía. El bulbo olfatorio está sobre la lámina
+        cribosa, delante, lejos del seno. El facial y el vestibulococlear salen del tronco por el ángulo
+        pontocerebeloso y entran al conducto auditivo interno, en el temporal. Y la glándula lagrimal está
+        en la órbita, en su ángulo superolateral, no en la base del cráneo.</div>
+    </div>
+
+    <div class="check-question" data-question="q7">
+      <p class="question-text">7. ¿Qué células fabrican la calcitonina?</p>
+      <ul class="options">
+        <li data-letter="A">Las foliculares, que tapizan el folículo tiroideo</li>
+        <li data-letter="B">Las principales de las glándulas paratiroides</li>
+        <li data-letter="C">Las oxífilas de las glándulas paratiroides</li>
+        <li data-letter="D" data-correct="true">Las parafoliculares (C), entre los folículos</li>
+        <li data-letter="E">Las del coloide, en el interior del folículo</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: D.</strong> Las células C están entre los folículos, no
+        formando su pared, y no dependen de la TSH. Las foliculares fabrican la T3 y la T4. Las principales
+        de las paratiroides fabrican otra hormona, la PTH. Las
+        oxífilas de las paratiroides tienen una función poco clara. Y el coloide no tiene células: es el
+        contenido del folículo, donde se guarda la hormona tiroidea.</div>
+    </div>
+
+    <div class="check-question" data-question="q8">
+      <p class="question-text">8. Al día siguiente de una tiroidectomía total, un paciente siente
+        hormigueo alrededor de la boca y calambres en las manos. ¿Qué explica el cuadro?</p>
+      <ul class="options">
+        <li data-letter="A">Se retiró el istmo, que es el que fabrica la PTH</li>
+        <li data-letter="B">La adenohipófisis dejó de producir TSH por la cirugía</li>
+        <li data-letter="C">Se perdieron las foliculares, que guardan el calcio en el coloide</li>
+        <li data-letter="D">Se cortó el vago, que controla la secreción de calcitonina</li>
+        <li data-letter="E" data-correct="true">Se dañaron las paratiroides, pegadas a la cara posterior</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: E.</strong> Las paratiroides están adosadas a la cara
+        posterior de los lóbulos tiroideos y pueden extirparse o quedarse sin sangre en la cirugía. Sin
+        PTH, el calcio baja y los nervios se vuelven hiperexcitables: hormigueo y calambres. El istmo es
+        tejido tiroideo, no paratiroideo. Quitar la tiroides no detiene la TSH, que de hecho sube al
+        faltar el freno. El coloide guarda tiroglobulina, no calcio. Y la calcitonina no depende del
+        vago; además, perderla no baja el calcio, porque su función es precisamente bajarlo.</div>
+    </div>
+
+    <div class="check-question" data-question="q9">
+      <p class="question-text">9. En la enfermedad de Graves la tiroides trabaja de más. ¿Por qué la TSH
+        en sangre está baja?</p>
+      <ul class="options">
+        <li data-letter="A">La hipófisis quedó destruida por los mismos anticuerpos de la tiroides</li>
+        <li data-letter="B">Falta yodo, y la tiroides no puede fabricar sus hormonas</li>
+        <li data-letter="C" data-correct="true">Un anticuerpo la estimula y sus hormonas frenan la hipófisis</li>
+        <li data-letter="D">La TSH se consume toda al estimular la glándula</li>
+        <li data-letter="E">El hipotálamo dejó de producir TRH por un tumor</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: C.</strong> El anticuerpo imita a la TSH y no obedece al
+        freno. Las hormonas tiroideas suben, la hipófisis las detecta y baja su TSH, pero la glándula sigue
+        porque no depende de ella. El anticuerpo actúa sobre el receptor de la TSH en la tiroides y en la
+        órbita, no destruye la hipófisis. La falta de yodo produce lo contrario: hormona baja y TSH alta,
+        con bocio. Las hormonas no se «gastan» al actuar; su nivel lo fija la secreción. Y un hipotálamo
+        sin TRH llevaría a una tiroides apagada, no hiperactiva.</div>
+    </div>
+
+    <div class="check-question" data-question="q10">
+      <p class="question-text">10. ¿Qué empuja el globo ocular hacia delante en el exoftalmos de Graves?</p>
+      <ul class="options">
+        <li data-letter="A">La presión intraocular, que sube por el exceso de hormona</li>
+        <li data-letter="B" data-correct="true">El aumento de los músculos extraoculares y de la grasa orbitaria</li>
+        <li data-letter="C">Un edema de la córnea que la vuelve más curva</li>
+        <li data-letter="D">La retracción del párpado superior, que tira del globo</li>
+        <li data-letter="E">La parálisis del orbicular de los ojos, que deja de sujetarlo</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: B.</strong> La órbita es una caja ósea abierta solo por
+        delante. Si los músculos —sobre todo el recto inferior y el medial— y la grasa aumentan de volumen,
+        el globo sale hacia fuera. La presión intraocular es la del interior del globo, y no lo desplaza
+        dentro de la órbita. La retracción palpebral existe, pero solo descubre más esclera: el ojo
+        <em>parece</em> más saliente sin estarlo. La córnea no cambia su posición aunque se edematice. Y
+        el orbicular cierra los párpados; no sostiene el globo.</div>
+    </div>
+
+    <div class="saber-box">
+      <strong>Question in English · Clinical anatomy</strong>
+      <div class="check-question" style="margin-top:16px;border-color:var(--purple)" data-question="q11">
+        <p class="question-text">11. A patient with Graves' orbitopathy reports that colours look washed
+          out, although the cornea and retina are healthy. What is the most likely cause?</p>
+        <ul class="options">
+          <li data-letter="A">The antibodies block the central retinal artery</li>
+          <li data-letter="B">Thyroid hormones directly damage the photoreceptors</li>
+          <li data-letter="C">The eyelids cannot close and the lens becomes opaque</li>
+          <li data-letter="D" data-correct="true">Swollen muscles at the orbital apex compress the optic nerve</li>
+          <li data-letter="E">The proptosis stretches and tears the optic chiasm</li>
+        </ul>
+        <div class="feedback"><strong>Correct answer: D.</strong> At the apex the four recti converge on
+          the common tendinous ring around the optic nerve; thickened muscles compress the nerve there.
+          Loss of colour vision is an early sign of this <em>compressive optic neuropathy</em>, and it is
+          an emergency. Thyroid hormones do not act directly on the photoreceptors. Poor eyelid closure
+          exposes the cornea, but it does not turn the lens opaque. The antibodies target the TSH receptor
+          on orbital fibroblasts, not the retinal circulation, and an occluded central retinal artery would
+          make the retina itself abnormal. The chiasm lies inside the skull, out of reach of the
+          proptosis.</div>
+      </div>
+    </div>
+
+    <div class="check-question" data-question="q12">
+      <p class="question-text">12. ¿Qué zona de la corteza suprarrenal fabrica el cortisol?</p>
+      <ul class="options">
+        <li data-letter="A">La glomerulosa, justo debajo de la cápsula</li>
+        <li data-letter="B">La reticular, la más profunda de la corteza</li>
+        <li data-letter="C" data-correct="true">La fasciculada, la capa media y la más ancha</li>
+        <li data-letter="D">La cápsula de tejido conectivo que la envuelve</li>
+        <li data-letter="E">La médula, en sus células cromafines</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: C.</strong> La zona fasciculada fabrica los
+        glucocorticoides, y el cortisol es casi todo lo que produce («azúcar»). La glomerulosa, la externa,
+        fabrica la aldosterona («sal»). La reticular, la interna, andrógenos débiles («sexo»). La médula no
+        es corteza ni fabrica esteroides. Y la cápsula es tejido
+        conectivo de envoltura, sin función endocrina.</div>
+    </div>
+
+    <div class="check-question" data-question="q13">
+      <p class="question-text">13. ¿Por qué se dice que la médula suprarrenal es un ganglio simpático
+        modificado?</p>
+      <ul class="options">
+        <li data-letter="A" data-correct="true">Recibe fibras preganglionares y suelta adrenalina a la sangre</li>
+        <li data-letter="B">Sus neuronas tienen axones que llegan hasta el corazón</li>
+        <li data-letter="C">Fabrica cortisol cuando el simpático la estimula</li>
+        <li data-letter="D">Está hecha de tejido nervioso que le llega desde el hipotálamo</li>
+        <li data-letter="E">Se comunica con la hipófisis por un sistema porta propio</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: A.</strong> Las fibras simpáticas preganglionares llegan a la
+        médula sin hacer escala en otro ganglio, y las células cromafines ocupan el lugar de la neurona
+        posganglionar. La diferencia es que en vez de un axón usan la sangre. El cortisol se fabrica en la
+        corteza, no en la médula. Las cromafines no tienen axones: por eso su mensaje viaja por la sangre.
+        No hay tejido hipotalámico en la suprarrenal; el que baja del hipotálamo forma la neurohipófisis. Y
+        el único sistema porta endocrino de esta clase es el de la hipófisis.</div>
+    </div>
+
+    <div class="check-question" data-question="q14">
+      <p class="question-text">14. Una paciente usa desde hace meses gotas con un corticoide por una
+        alergia ocular. ¿Qué dos efectos debe vigilar el optómetra?</p>
+      <ul class="options">
+        <li data-letter="A">Retinopatía diabética proliferativa y desprendimiento de retina</li>
+        <li data-letter="B" data-correct="true">Catarata subcapsular posterior y presión intraocular alta</li>
+        <li data-letter="C">Hemianopsia bitemporal y parálisis del sexto par</li>
+        <li data-letter="D">Exoftalmos y retracción del párpado superior</li>
+        <li data-letter="E">Miopía que fluctúa y engrosamiento de la córnea</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: B.</strong> Los corticoides prolongados opacifican la parte
+        posterior del cristalino y, en personas susceptibles, dificultan la salida del humor acuoso y suben
+        la presión, que puede terminar en glaucoma. La retinopatía proliferativa es de la diabetes. La
+        hemianopsia bitemporal y la parálisis del VI son signos de un tumor de la hipófisis. El exoftalmos
+        y la retracción palpebral son de la enfermedad de Graves. Y una miopía que fluctúa no es un
+        efecto de los corticoides.</div>
+    </div>
+
+    <div class="check-question" data-question="q15">
+      <p class="question-text">15. ¿Qué células del islote pancreático secretan insulina?</p>
+      <ul class="options">
+        <li data-letter="A">Las alfa, cerca del 17 % de las células del islote</li>
+        <li data-letter="B">Las delta, cerca del 7 % de las células del islote</li>
+        <li data-letter="C">Las de los ácinos, el 99 % de las células del páncreas</li>
+        <li data-letter="D" data-correct="true">Las beta, cerca del 70 % de las células del islote</li>
+        <li data-letter="E">Las F, el resto de las células del islote</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: D.</strong> Las células beta son la mayoría del islote y la
+        única fuente de insulina; en la diabetes tipo 1 son las que el sistema inmune destruye. Las alfa
+        secretan glucagón, que sube la glucosa: lo contrario de la insulina. Las delta secretan
+        somatostatina, que frena a las otras dos. Los ácinos son la parte exocrina: fabrican enzimas
+        digestivas y las mandan por un conducto, no a la sangre. Las F secretan el polipéptido
+        pancreático.</div>
+    </div>
+
+    <div class="check-question" data-question="q16">
+      <p class="question-text">16. Un hombre con diabetes recién diagnosticada y la glucosa todavía alta
+        consulta por visión borrosa de lejos que cambia de un día a otro. ¿Cuál es la conducta correcta?</p>
+      <ul class="options">
+        <li data-letter="A">Formular de inmediato la graduación que se mide ese día</li>
+        <li data-letter="B" data-correct="true">Esperar a que la glucemia se estabilice para formular</li>
+        <li data-letter="C">Remitir por sospecha de un desprendimiento de retina</li>
+        <li data-letter="D">Adaptar lentes de contacto para compensar los cambios</li>
+        <li data-letter="E">Indicar gotas de corticoide para desinflamar el cristalino</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: B.</strong> Con la glucosa alta, el cristalino absorbe agua,
+        se hincha y aumenta su poder: aparece una miopía que cambia con la glucemia. Una fórmula de hoy no
+        servirá cuando la glucosa se controle. Formular ya es justo ese error. El desprendimiento de retina
+        da destellos, moscas y una cortina en el campo, no una miopía que fluctúa. Unos lentes de contacto
+        tienen el mismo problema que las gafas: corrigen una refracción que va a cambiar. Y el corticoide
+        no desinflama el cristalino: el problema es el agua que entra con la glucosa, no una
+        inflamación.</div>
+    </div>
+
+    <div class="check-question" data-question="q17">
+      <p class="question-text">17. ¿Cuál es el primer signo visible de la retinopatía diabética en el
+        fondo de ojo?</p>
+      <ul class="options">
+        <li data-letter="A" data-correct="true">Microaneurismas: pequeñas dilataciones capilares</li>
+        <li data-letter="B">Una mancha rojo cereza en el centro de la mácula</li>
+        <li data-letter="C">Papiledema bilateral por hipertensión intracraneal</li>
+        <li data-letter="D">Palidez de toda la retina por obstrucción arterial</li>
+        <li data-letter="E">Neovasos que crecen sobre la superficie de la retina</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: A.</strong> Cuando la pared del capilar pierde sus células de
+        sostén, se abomba en puntos rojos diminutos: es lo primero que se ve. Los neovasos son lo último:
+        marcan la fase proliferativa. La mancha rojo cereza y la palidez de toda la retina son los signos
+        de la obstrucción de la arteria central de la retina, que viste en circulatorio. Y el papiledema es
+        la hinchazón del disco óptico por presión dentro del cráneo, no una lesión de los capilares
+        retinianos.</div>
+    </div>
+
+    <div class="saber-box">
+      <strong>Pregunta tipo Saber Pro · Caso</strong>
+      <div class="check-question" style="margin-top:16px;border-color:var(--purple)" data-question="q18">
+        <p class="question-text">18. Un hombre diabético de 62 años amanece con el párpado derecho caído y
+          el ojo derecho desviado hacia abajo y afuera. La pupila derecha tiene el mismo tamaño que la
+          izquierda y reacciona bien a la luz. ¿Cuál es la explicación más probable?</p>
+        <ul class="options">
+          <li data-letter="A">Una lesión del VI par, que mueve el ojo hacia afuera</li>
+          <li data-letter="B">Un aneurisma que comprime el III par desde fuera</li>
+          <li data-letter="C" data-correct="true">Isquemia del centro del III par; las fibras pupilares van por fuera</li>
+          <li data-letter="D">Una lesión del simpático cervical, como en el síndrome de Horner</li>
+          <li data-letter="E">Un exoftalmos de Graves que estira los nervios del ojo</li>
+        </ul>
+        <div class="feedback"><strong>Correcta: C.</strong> Ptosis y ojo abajo y afuera son una parálisis
+          del III par. En el diabético se tapan los vasos que irrigan el centro del nervio, y las fibras
+          pupilares, que van en la superficie, se salvan. Un aneurisma aprieta desde fuera y lo primero que
+          daña es justamente la pupila, que quedaría dilatada. Una lesión del VI impide mirar hacia afuera;
+          no produce ptosis ni desvía el ojo hacia abajo. El Horner da una ptosis leve con la pupila
+          pequeña, sin alterar los movimientos. Y el Graves restringe los movimientos por músculos rígidos,
+          sin ptosis: el párpado queda retraído, más alto.</div>
+      </div>
+    </div>
+
+    <div class="check-question" data-question="q19">
+      <p class="question-text">19. La luz que entra por la retina frena la secreción de melatonina. ¿Por
+        qué camino llega esa información a la glándula pineal?</p>
+      <ul class="options">
+        <li data-letter="A" data-correct="true">Retina, supraquiasmático, simpático cervical y pineal</li>
+        <li data-letter="B">Retina, nervio oculomotor, mesencéfalo y pineal</li>
+        <li data-letter="C">Retina, hipófisis, sistema porta y pineal</li>
+        <li data-letter="D">Retina, nervio óptico, corteza occipital y pineal</li>
+        <li data-letter="E">De forma directa: la luz atraviesa el cráneo hasta la pineal</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: A.</strong> Unas pocas células ganglionares de la retina
+        llevan la señal de luz al núcleo supraquiasmático del hipotálamo; de ahí baja a la médula torácica,
+        sube por el ganglio cervical superior y llega a la pineal. La corteza occipital es la de la visión
+        consciente, y la pineal no recibe nada de ella. El oculomotor es un nervio que sale del encéfalo
+        hacia el ojo, no que trae información. El sistema porta lleva órdenes del hipotálamo a la
+        adenohipófisis, no a la pineal. Y en algunos vertebrados la pineal sí capta luz a través del
+        cráneo, pero en el ser humano no.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 13 ─────────── -->
+<section class="station" id="e13">
+  <div class="station-header">
+    <div class="station-number">13</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Cierre</div>
+      <h2>Volvemos a los cuatro pacientes</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Los mismos del principio. Intenta responder antes de abrir cada uno.</p>
+
+    <details class="acorde">
+      <summary>1 · La mujer de los ojos que se salen</summary>
+      <div class="cuerpo">
+        <p>Tiene <strong>enfermedad de Graves</strong>. Un anticuerpo imita a la TSH: la tiroides, en el
+          cuello, fabrica hormona de más, y de ahí los nervios, el peso que baja y el sudor. El mismo
+          anticuerpo activa los fibroblastos de la órbita: engrosan los músculos extraoculares y la grasa, y
+          el globo, que solo puede moverse hacia delante, sale. Lo que hay que vigilar es el vértice: si
+          los colores se apagan, el nervio óptico está comprimido y se remite ese mismo día.</p>
+      </div>
+    </details>
+    <details class="acorde">
+      <summary>2 · El hombre que choca con las puertas</summary>
+      <div class="cuerpo">
+        <p>Perdió los dos campos <strong>temporales</strong>: una hemianopsia bitemporal. Es lo que hace un
+          tumor de la hipófisis que sale de la silla turca y aprieta el quiasma desde abajo, justo donde se
+          cruzan las fibras de la retina nasal. La agudeza central se conserva, por eso lee bien. El campo
+          visual descubre el tumor, y se remite.</p>
+      </div>
+    </details>
+    <details class="acorde">
+      <summary>3 · La fórmula que no sirve</summary>
+      <div class="cuerpo">
+        <p><strong>No le formulas todavía.</strong> Con la glucosa alta, su cristalino absorbe agua, se
+          hincha y lo vuelve miope, y la miopía cambia con cada cambio de la glucemia. Se le explica, se
+          espera a que la glucosa se estabilice y, como es un diabético nuevo, se le hace un fondo de ojo
+          dilatado para buscar microaneurismas.</p>
+      </div>
+    </details>
+    <details class="acorde">
+      <summary>4 · Las gotas para la alergia</summary>
+      <div class="cuerpo">
+        <p>Hay que vigilar la <strong>presión intraocular</strong> y el <strong>cristalino</strong>, buscando
+          una catarata subcapsular posterior. El corticoide es la versión de farmacia del
+          <strong>cortisol</strong>, que fabrica la zona fasciculada de la corteza suprarrenal, encima del
+          riñón. Comparte con él la capacidad de frenar la inflamación, y también sus efectos sobre el
+          ojo.</p>
+      </div>
+    </details>
+
+    <div class="adelanto">
+      <p>El sistema endocrino entra en el <strong>examen final</strong> con el resto del tercer corte. La
+        próxima clase es el <strong>sistema respiratorio</strong>, el jueves 29 de octubre; allí vuelve a
+        aparecer el ganglio cervical superior, a propósito del síndrome de Horner.</p>
+    </div>
+  </div>
+</section>
+
+</div><!-- fin sesión única -->
+</div><!-- fin container -->
+
+<footer class="footer">
+  <p><strong>Morfología General · Optometría · Universidad de La Salle · 2026-II</strong></p>
+  <p>Clase 11 · Sistema endocrino: mensajes por la sangre y una glándula al lado del quiasma · Jueves 22 de octubre de 2026</p>
+  <p>Fuentes: Tortora &amp; Derrickson, <em>Principios de Anatomía y Fisiología</em>, capítulo 18 ·
+     láminas reutilizadas de las clases 6, 8 y 9 (Tortora caps. 7 y 17, Moore cap. 8, Latarjet cap. 44)</p>
+</footer>
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" aria-label="Cerrar">✕</button>
+  <img src="" alt="">
+  <div class="lb-caption"></div>
+</div>
+
+<script>
+function showTab(id,btn){
+  document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+document.querySelectorAll('.check-question').forEach(block=>{
+  const options=block.querySelectorAll('.options li');
+  const feedback=block.querySelector('.feedback');
+  const correctLetter=Array.from(options).find(o=>o.dataset.correct==='true')?.dataset.letter;
+  let answered=false;
+  options.forEach(opt=>{
+    opt.addEventListener('click',()=>{
+      if(answered)return;
+      answered=true;
+      options.forEach(o=>{
+        if(o.dataset.letter===correctLetter)o.classList.add('correct');
+        else if(o===opt&&opt.dataset.letter!==correctLetter)o.classList.add('incorrect');
+      });
+      feedback.classList.add('show');
+      feedback.scrollIntoView({behavior:'smooth',block:'nearest'});
+    });
+  });
+});
+document.querySelectorAll('.flip-card').forEach(card=>{
+  card.addEventListener('click',()=>card.classList.toggle('flipped'));
+});
+
+/* Lupa: las láminas del Tortora llevan rótulos que no se leen a tamaño de columna.
+   Ampliar no es un adorno. */
+(function(){
+  const lb=document.getElementById('lightbox');
+  const lbImg=lb.querySelector('img'), lbCap=lb.querySelector('.lb-caption');
+  document.querySelectorAll('.photo-card img, .photo-hero img').forEach(img=>{
+    img.addEventListener('click',()=>{
+      if(img.classList.contains('broken'))return;
+      lbImg.src=img.src;
+      lbImg.alt=img.alt||'';
+      const cap=img.closest('.photo-card,.photo-hero').querySelector('.photo-caption');
+      lbCap.textContent=cap?cap.textContent.trim().replace(/\s+/g,' ').slice(0,220):'';
+      lb.classList.add('open');
+    });
+  });
+  const cerrar=()=>{lb.classList.remove('open');lbImg.src='';};
+  lb.addEventListener('click',cerrar);
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')cerrar();});
+})();
+</script>
+
+</body>
+</html>
