@@ -139,15 +139,19 @@ footer{margin-top:44px;padding:22px;text-align:center;border-top:3px double var(
         <div class="nota" id="c2-nota">—</div>
         <div class="de" id="c2-de">Segundo corte · promedio de quices</div>
       </div>
-      <div class="aviso ojo"><b>Esto es un avance, no la nota del corte.</b> El segundo corte
-        todavía no ha terminado: faltan talleres y el II Parcial.</div>
+      <div class="aviso ojo"><b>Esto es un avance, no la nota del corte.</b> Todavía faltan el taller
+        de linfático, que está en revisión, y el Taller 2 de repaso, que cierra el viernes 23 de octubre
+        a las 9:00. Con eso se calcula la nota del corte.</div>
       <div class="desglose" id="c2-desglose"></div>
       <div id="c2-obs"></div>
       <div class="tarjeta">
         <h2>Cómo leerlo</h2>
-        <p>Cuentan los quices en papel del segundo corte que ves arriba, y se irán sumando a medida
-          que se califiquen. <b>El Quiz 1 no se tiene en cuenta.</b> La cifra grande es el promedio
-          de todos ellos.</p>
+        <p><b>La cifra grande es tu II Parcial.</b> Cuando entregues el Taller 2 pasa a ser el
+          II Parcial promediado con él: (II Parcial + Taller 2) ÷ 2. Si no lo entregas, el II Parcial
+          queda como está.</p>
+        <p>Debajo están las piezas del seguimiento: los quices en papel (<b>el Quiz 1 no se tiene en
+          cuenta</b>), el taller de sistema muscular, el taller de repaso —calificado sin las
+          preguntas de linfático— y el de linfático.</p>
         <p>El <b>Quiz 3 también sirvió para conmutar el taller de sistema muscular</b>: quien
           entregó el taller conserva su nota; quien no lo entregó recibe en el taller la nota del
           Quiz 3.</p>
@@ -334,10 +338,16 @@ function pintarCorte2(r){
   document.querySelector('[data-hoja="corte2"]').classList.remove("oculto");
   const val = k => String(c[k] === undefined || c[k] === null ? "" : c[k]).replace(",", ".").trim();
   const nota = k => { const n = parseFloat(val(k)); return isNaN(n) ? "sin nota" : n.toFixed(2); };
-  const pr = parseFloat(val("PROMEDIO QUICES"));
+  const num = k => parseFloat(val(k));
+  const txt = k => String(c[k] === undefined || c[k] === null ? "" : c[k]).trim();   // texto: sin tocar las comas
+  const notaO = (k, si) => isNaN(num(k)) ? si : num(k).toFixed(2);   // «si» = qué decir cuando aún no hay nota
+  // La cifra grande: el II Parcial, o el II Parcial ya promediado con el Taller 2 cuando exista.
+  // Si la hoja todavía no trae el II Parcial, se queda el promedio de quices de antes.
+  const conT2 = num("II Parcial con Taller 2"), p2 = num("II Parcial"), pr = num("PROMEDIO QUICES");
+  const grande = !isNaN(conT2) ? conT2 : (!isNaN(p2) ? p2 : pr);
   $("c2-quien").textContent = r.alumno;
-  $("c2-nota").textContent  = isNaN(pr) ? "—" : pr.toFixed(2);
-  $("c2-nota").classList.toggle("baja", !isNaN(pr) && pr < 3);
+  $("c2-nota").textContent  = isNaN(grande) ? "—" : grande.toFixed(2);
+  $("c2-nota").classList.toggle("baja", !isNaN(grande) && grande < 3);
 
   const linea = (et, sub, v, suma) =>
     '<div class="linea' + (suma ? " suma" : "") + '"><span class="q">' + et +
@@ -351,12 +361,21 @@ function pintarCorte2(r){
     .map(Number).filter(n => n !== 1).sort((a, b) => a - b);
   const lista = nums.length > 1
     ? "Quiz " + nums.slice(0, -1).join(", ") + " y " + nums[nums.length - 1] : "Quiz " + nums.join("");
-  $("c2-de").textContent = "Segundo corte · promedio de quices · " + lista;
+  $("c2-de").textContent = !isNaN(conT2) ? "Segundo corte · II Parcial promediado con el Taller 2"
+    : (!isNaN(p2) ? "Segundo corte · II Parcial" : "Segundo corte · promedio de quices · " + lista);
+  const hayP2 = txt("II Parcial") !== "" || txt("II Parcial aciertos") !== "";
   $("c2-desglose").innerHTML =
     nums.map(n => linea("Quiz " + n + (TEMA[n] ? " · " + TEMA[n] : ""),
       ac("Quiz " + n + " aciertos", ITEMS[n] || 5) + "en papel", nota("Quiz " + n))).join("") +
     linea("Promedio de quices", lista + " · sin el Quiz 1", nota("PROMEDIO QUICES"), true) +
-    linea("Taller · sistema muscular", val("Regla taller") || "individual", nota("Taller muscular"), true);
+    linea("Taller · sistema muscular", txt("Regla taller") || "individual", nota("Taller muscular"), true) +
+    (hayP2 ? (
+      linea("Taller de repaso del II Parcial", txt("Regla repaso") || "sin linfático", notaO("Taller repaso", "pendiente"), true) +
+      linea("Taller · sistema linfático", "las preguntas abiertas están en revisión", notaO("Taller linfático", "en revisión"), true) +
+      linea("II Parcial · en papel", (/^\d/.test(txt("II Parcial aciertos")) ? txt("II Parcial aciertos").replace("/", " de ") + " aciertos" : txt("II Parcial aciertos")) || "15 de octubre", notaO("II Parcial", "sin nota")) +
+      linea("Taller 2 · repaso del II Parcial", "50 preguntas · cierra el viernes 23 de octubre, 9:00", notaO("Taller 2", "pendiente")) +
+      linea("II Parcial con el Taller 2", "(II Parcial + Taller 2) ÷ 2", notaO("II Parcial con Taller 2", "cuando entregues el Taller 2"), true)
+    ) : "");
 
   const obs = String(c.Observaciones || "").trim();
   $("c2-obs").innerHTML = obs
