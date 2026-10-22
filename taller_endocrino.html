@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Taller gráfico · Sistema endocrino · Morfología General 2026-II</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1a2a35;--text:#2c3e4f;--soft:#5a6b7a;--muted:#8a9aa8;--parchment:#f8f3e8;--parchment-dark:#f0e8d4;
+  --card:#fdfaf2;--border:#d4c8a8;--border-light:#e5dbc0;--amber:#b8860b;--amber-dark:#8b6914;--amber-pale:#f5e9c8;
+  --teal:#2a7a6e;--clinical:#b5413b;--clinical-bg:#fce8e6;--purple:#6b4a8a;
+  --display:'Playfair Display',Georgia,serif;--body:'Source Serif 4',Georgia,serif;--mono:'DM Mono','Courier New',monospace}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--body);background:var(--parchment);color:var(--text);line-height:1.6;font-size:17px}
+.header{text-align:center;padding:56px 24px 40px;border-bottom:3px double var(--amber);margin-bottom:36px}
+.eyebrow{font-family:var(--mono);font-size:.74rem;letter-spacing:.3em;text-transform:uppercase;color:var(--amber-dark);margin-bottom:12px}
+.header h1{font-family:var(--display);font-size:clamp(2rem,5vw,3.1rem);font-weight:900;color:var(--ink);line-height:1.08;margin-bottom:10px}
+.header h1 em{font-weight:400;color:var(--amber-dark)}
+.header p{font-style:italic;color:var(--soft);max-width:720px;margin:0 auto}
+.container{max-width:1000px;margin:0 auto;padding:0 22px 80px}
+.bloque{background:var(--card);border:1px solid var(--border-light);border-radius:4px;padding:24px 28px;margin-bottom:26px;box-shadow:0 2px 8px rgba(26,42,53,.06)}
+.bloque h2{font-family:var(--display);font-size:1.5rem;color:var(--ink);margin-bottom:12px}
+.ident{display:grid;grid-template-columns:2fr 1fr;gap:14px}
+.ident label{display:block;font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--amber-dark);margin-bottom:4px}
+input[type=text],textarea{width:100%;font:inherit;font-size:.95rem;border:1px solid var(--border);border-radius:3px;padding:7px 9px;background:#fff;color:var(--ink)}
+textarea{resize:vertical;min-height:42px;line-height:1.4}
+input:focus,textarea:focus{outline:2px solid var(--amber-pale);border-color:var(--amber)}
+.reglas{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:6px}
+.regla{background:var(--parchment-dark);border-left:4px solid var(--amber);padding:10px 14px;font-size:.92rem;border-radius:2px}
+.regla b{font-family:var(--display);color:var(--ink);display:block}
+@media(max-width:760px){.ident,.reglas{grid-template-columns:1fr}}
+.lamina{background:var(--card);border:1px solid var(--border-light);border-radius:4px;margin-bottom:30px;box-shadow:0 2px 8px rgba(26,42,53,.06);overflow:hidden}
+.lam-head{display:flex;gap:16px;align-items:baseline;padding:18px 26px 6px}
+.lam-n{font-family:var(--display);font-style:italic;font-size:2.6rem;color:var(--amber);line-height:1}
+.lam-head h3{font-family:var(--display);font-size:1.35rem;color:var(--ink)}
+.lam-head .sub{font-size:.92rem;color:var(--soft);font-style:italic}
+.dibujo{padding:6px 18px 0;text-align:center}
+.dibujo svg{width:100%;max-width:760px;height:auto}
+table.resp{width:calc(100% - 44px);margin:6px 22px 22px;border-collapse:collapse;font-size:.93rem}
+table.resp th{background:var(--amber-dark);color:var(--parchment);font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;font-weight:500;padding:7px 10px;text-align:left}
+table.resp td{padding:6px 8px;border-bottom:1px solid var(--border-light);vertical-align:top}
+table.resp td.n{width:38px;text-align:center;font-family:var(--mono);font-weight:500;color:var(--amber-dark);padding-top:12px}
+table.resp td.est{width:30%}
+table.resp tr.lleno td.n{color:var(--teal)}
+.flujo{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px;padding:16px 18px 4px}
+.flujo .caja{background:#e3f0f5;border:1.5px solid #1976a1;color:#115670;border-radius:4px;padding:10px 14px;font-weight:600;font-size:.95rem}
+.flujo .caja.hueco{background:#fff;border-style:dashed;color:var(--amber-dark);font-family:var(--mono);min-width:64px;text-align:center}
+.flujo .fl{color:#1976a1;font-size:1.3rem}
+.entrega{position:sticky;bottom:0;background:var(--ink);color:#f8f3e8;padding:12px 22px;display:flex;gap:16px;align-items:center;flex-wrap:wrap;z-index:5}
+.entrega .prog{font-family:var(--mono);font-size:.8rem;letter-spacing:.06em}
+.entrega .sp{flex:1}
+.entrega button{font-family:var(--mono);font-size:.82rem;letter-spacing:.06em;background:var(--amber);color:#fff;border:0;border-radius:4px;padding:10px 18px;cursor:pointer}
+.entrega button.sec{background:transparent;border:1px solid #5b6b76}
+.aviso{font-size:.9rem;color:var(--soft);font-style:italic;margin-top:8px}
+/* ── el informe que se imprime como PDF ── */
+#informe{display:none}
+@media print{
+  @page{size:letter;margin:14mm 14mm 16mm}
+  body{background:#fff;font-size:10.5pt}
+  .header,.container,.entrega{display:none!important}
+  #informe{display:block}
+  #informe h1{font-family:var(--display);font-size:16pt;margin-bottom:2px}
+  #informe .meta{font-family:var(--mono);font-size:8.5pt;color:#555;margin-bottom:10px;border-bottom:1px solid #999;padding-bottom:6px}
+  #informe h2{font-family:var(--display);font-size:12pt;margin:12px 0 4px;break-after:avoid}
+  #informe table{width:100%;border-collapse:collapse;font-size:9.5pt;break-inside:auto}
+  #informe td,#informe th{border:1px solid #bbb;padding:3px 6px;vertical-align:top;text-align:left}
+  #informe th{background:#eee;font-family:var(--mono);font-size:7.5pt}
+  #informe td.n{width:22px;text-align:center}
+  #informe tr{break-inside:avoid}
+  #informe .vacio{color:#b00;font-style:italic}
+  #informe .pie{margin-top:14px;font-size:8.5pt;color:#555}
+}
+/* SVG */
+.svg-txt{font-family:'Source Serif 4',Georgia,serif;font-size:13px;fill:#5a6b7a;font-style:italic}
+.pin circle{fill:#8b6914;stroke:#fff;stroke-width:2}
+.pin text{fill:#fff;font-family:'DM Mono',monospace;font-size:13px;font-weight:500;text-anchor:middle;dominant-baseline:central}
+.pin line{stroke:#8b6914;stroke-width:1.4}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="eyebrow">Taller gráfico · Clase 11 · Morfología General 2026-II</div>
+  <h1>Sistema endocrino: <em>ponle nombre y dime para qué sirve</em></h1>
+  <p>Ocho láminas sin rótulos. Cada número es una estructura de la clase del 22 de octubre: escribe cuál es y qué hace</p>
+</header>
+
+<div class="container">
+
+<section class="bloque">
+  <h2>Antes de empezar</h2>
+  <div class="ident">
+    <div><label for="nombre">Apellidos y nombres</label><input type="text" id="nombre" autocomplete="name" placeholder="Como aparece en la lista del curso"></div>
+    <div><label for="codigo">Código</label><input type="text" id="codigo" inputmode="numeric" placeholder="Tu código"></div>
+  </div>
+  <div class="reglas" style="margin-top:16px">
+    <div class="regla"><b>Individual · hasta el martes 27 de octubre, 23:59</b>Se empezó en clase el jueves 22. Intenta primero cada lámina de memoria y consulta la clase solo después: lo que se queda es lo que recuperas, no lo que copias.</div>
+    <div class="regla"><b>Dos cosas por número</b>El <em>nombre anatómico</em> de la estructura y <em>para qué sirve</em>, en una o dos frases concretas: «fabrica…», «aloja…», «lleva…».</div>
+    <div class="regla"><b>Entrega en PDF</b>Al terminar pulsa «Generar PDF», guárdalo y súbelo a la plataforma del curso antes del martes 27 de octubre a las 23:59.</div>
+  </div>
+  <p class="aviso"><b>Cómo se califica:</b> cada casilla vale 1 (correcta y concreta), 0,5 (incompleta) o 0. La
+    ortografía no se penaliza si el término se reconoce. Nota = 5 × puntos ÷ puntos posibles.</p>
+  <p class="aviso">Lo que escribes se guarda solo en este navegador mientras trabajas: si recargas la página no se pierde. Usa siempre el mismo computador.</p>
+</section>
+
+<!-- ═══════════ LÁMINA 1 · MAPA ═══════════ -->
+<section class="lamina" data-lam="1" data-titulo="El mapa de las glándulas">
+  <div class="lam-head"><div class="lam-n">1</div><div><h3>El mapa de las glándulas</h3><div class="sub">Cada número es una glándula o un grupo de glándulas. En «para qué sirve», di qué hormona principal secreta o qué controla.</div></div></div>
+  <div class="dibujo">
+<svg viewBox="0 0 640 450" role="img" aria-label="Silueta humana con ocho glándulas endocrinas numeradas">
+  <rect width="640" height="450" fill="#fdfaf2"/>
+  <!-- silueta -->
+  <g fill="#f0e8d4" stroke="#c9b98f" stroke-width="2">
+    <circle cx="320" cy="62" r="40"/>
+    <rect x="304" y="98" width="32" height="30" rx="6"/>
+    <path d="M232 132 Q320 116 408 132 L398 300 Q320 318 242 300 Z"/>
+    <path d="M232 134 L196 250 L210 255 L246 160 Z"/>
+    <path d="M408 134 L444 250 L430 255 L394 160 Z"/>
+    <path d="M250 300 L262 440 L304 440 L314 308 Z"/>
+    <path d="M390 300 L378 440 L336 440 L326 308 Z"/>
+  </g>
+  <ellipse cx="320" cy="56" rx="27" ry="21" fill="#f3d9d0" stroke="#d9a99a" stroke-width="1.2"/>
+  <!-- glándulas -->
+  <circle cx="331" cy="56" r="4.5" fill="#6b4a8a"/>
+  <circle cx="314" cy="72" r="5" fill="#b5413b"/>
+  <path d="M306 116 q-6 6 0 14 q8 3 14 -3 q6 6 14 3 q6 -8 0 -14 q-7 -3 -14 4 q-7 -7 -14 -4z" fill="#c0504d" opacity=".85"/>
+  <circle cx="309" cy="120" r="2.6" fill="#2e7d32"/><circle cx="331" cy="120" r="2.6" fill="#2e7d32"/>
+  <circle cx="309" cy="128" r="2.6" fill="#2e7d32"/><circle cx="331" cy="128" r="2.6" fill="#2e7d32"/>
+  <path d="M306 150 q14 -8 28 0 q4 18 -14 30 q-18 -12 -14 -30z" fill="#e8b4a8"/>
+  <ellipse cx="290" cy="248" rx="13" ry="22" fill="#a0522d" opacity=".55"/>
+  <ellipse cx="350" cy="248" rx="13" ry="22" fill="#a0522d" opacity=".55"/>
+  <path d="M280 228 q10 -12 20 0z" fill="#d4a72c"/><path d="M340 228 q10 -12 20 0z" fill="#d4a72c"/>
+  <path d="M296 268 q30 -10 62 -2 q4 6 -2 9 q-30 -4 -58 4 q-6 -4 -2 -11z" fill="#e6b85c"/>
+  <ellipse cx="301" cy="298" rx="8" ry="5" fill="#d98aa0"/><ellipse cx="339" cy="298" rx="8" ry="5" fill="#d98aa0"/>
+  <!-- marcadores -->
+  <g class="pin"><line x1="335" y1="54" x2="470" y2="40"/><circle cx="484" cy="40" r="13"/><text x="484" y="40">1</text></g>
+  <g class="pin"><line x1="310" y1="74" x2="170" y2="74"/><circle cx="156" cy="74" r="13"/><text x="156" y="74">2</text></g>
+  <g class="pin"><line x1="336" y1="122" x2="470" y2="112"/><circle cx="484" cy="112" r="13"/><text x="484" y="112">3</text></g>
+  <g class="pin"><line x1="307" y1="128" x2="170" y2="138"/><circle cx="156" cy="138" r="13"/><text x="156" y="138">4</text></g>
+  <g class="pin"><line x1="332" y1="160" x2="470" y2="175"/><circle cx="484" cy="175" r="13"/><text x="484" y="175">5</text></g>
+  <g class="pin"><line x1="282" y1="225" x2="170" y2="215"/><circle cx="156" cy="215" r="13"/><text x="156" y="215">6</text></g>
+  <g class="pin"><line x1="356" y1="268" x2="470" y2="262"/><circle cx="484" cy="262" r="13"/><text x="484" y="262">7</text></g>
+  <g class="pin"><line x1="294" y1="300" x2="170" y2="318"/><circle cx="156" cy="318" r="13"/><text x="156" y="318">8</text></g>
+  <text class="svg-txt" x="18" y="438">Los puntos verdes del cuello están en la cara posterior del órgano rojo.</text>
+</svg>
+  </div>
+  <table class="resp" data-n="8"></table>
+</section>
+
+<!-- ═══════════ LÁMINA 2 · HIPÓFISIS SAGITAL ═══════════ -->
+<section class="lamina" data-lam="2" data-titulo="La hipófisis y sus vecinos · corte sagital">
+  <div class="lam-head"><div class="lam-n">2</div><div><h3>La hipófisis y sus vecinos · corte sagital</h3><div class="sub">La nariz está a la izquierda. Para cada estructura, di qué hace o qué relación tiene con el ojo.</div></div></div>
+  <div class="dibujo">
+<svg viewBox="0 0 640 400" role="img" aria-label="Corte sagital esquemático de la región hipofisaria con siete estructuras numeradas">
+  <rect width="640" height="400" fill="#fdfaf2"/>
+  <defs><pattern id="hueso" width="10" height="10" patternUnits="userSpaceOnUse"><rect width="10" height="10" fill="#efe3c6"/><circle cx="3" cy="3" r="1.3" fill="#d9c79c"/><circle cx="8" cy="7" r="1" fill="#d9c79c"/></pattern></defs>
+  <!-- esfenoides con la silla turca -->
+  <path d="M150 262 L262 262 Q262 330 330 330 Q398 330 398 262 L500 262 L500 380 L150 380 Z" fill="url(#hueso)" stroke="#c9b98f" stroke-width="2"/>
+  <ellipse cx="300" cy="358" rx="88" ry="16" fill="#dcecf2" stroke="#9cc3d2" stroke-width="1.5"/>
+  <!-- hipotálamo -->
+  <path d="M220 120 Q330 70 450 118 Q470 150 430 170 Q380 186 352 182 L340 196 L326 182 Q270 180 236 166 Q206 148 220 120Z" fill="#f3d9d0" stroke="#d9a99a" stroke-width="1.5"/>
+  <!-- quiasma y nervio óptico -->
+  <path d="M120 206 L262 200" stroke="#e6c34a" stroke-width="10" stroke-linecap="round"/>
+  <ellipse cx="282" cy="200" rx="26" ry="9" fill="#e6c34a"/>
+  <!-- diafragma -->
+  <path d="M262 258 L398 258" stroke="#9a8a6a" stroke-width="2" stroke-dasharray="5 3"/>
+  <!-- infundíbulo -->
+  <path d="M330 184 Q338 220 344 258" stroke="#e7b3a3" stroke-width="13" fill="none" stroke-linecap="round"/>
+  <!-- hipófisis -->
+  <ellipse cx="308" cy="292" rx="40" ry="31" fill="#d9776a"/>
+  <ellipse cx="362" cy="292" rx="26" ry="27" fill="#f0c2b4" stroke="#d9a99a"/>
+  <text class="svg-txt" x="150" y="252">← anterior (nariz)</text><text class="svg-txt" x="420" y="252">posterior →</text>
+  <g class="pin"><line x1="420" y1="130" x2="540" y2="100"/><circle cx="554" cy="100" r="13"/><text x="554" y="100">1</text></g>
+  <g class="pin"><line x1="270" y1="198" x2="110" y2="160"/><circle cx="96" cy="160" r="13"/><text x="96" y="160">2</text></g>
+  <g class="pin"><line x1="340" y1="222" x2="540" y2="200"/><circle cx="554" cy="200" r="13"/><text x="554" y="200">3</text></g>
+  <g class="pin"><line x1="290" y1="296" x2="110" y2="300"/><circle cx="96" cy="300" r="13"/><text x="96" y="300">4</text></g>
+  <g class="pin"><line x1="372" y1="296" x2="540" y2="296"/><circle cx="554" cy="296" r="13"/><text x="554" y="296">5</text></g>
+  <g class="pin"><line x1="336" y1="328" x2="540" y2="350"/><circle cx="554" cy="350" r="13"/><text x="554" y="350">6</text></g>
+  <g class="pin"><line x1="240" y1="360" x2="110" y2="360"/><circle cx="96" cy="360" r="13"/><text x="96" y="360">7</text></g>
+  <text class="svg-txt" x="18" y="30">La línea discontinua sobre la glándula es el diafragma de la silla (no se pregunta).</text>
+</svg>
+  </div>
+  <table class="resp" data-n="7"></table>
+</section>
+
+<!-- ═══════════ LÁMINA 3 · CORONAL ═══════════ -->
+<section class="lamina" data-lam="3" data-titulo="A los lados de la hipófisis · corte coronal">
+  <div class="lam-head"><div class="lam-n">3</div><div><h3>A los lados de la hipófisis · corte coronal</h3><div class="sub">Corte de frente, como si miraras a la persona a la cara. La glándula del centro es la hipófisis.</div></div></div>
+  <div class="dibujo">
+<svg viewBox="0 0 640 380" role="img" aria-label="Corte coronal esquemático de la silla turca con los senos cavernosos y los nervios que los atraviesan, seis estructuras numeradas">
+  <rect width="640" height="380" fill="#fdfaf2"/>
+  <rect x="200" y="250" width="240" height="110" rx="8" fill="url(#hueso2)" stroke="#c9b98f" stroke-width="2"/>
+  <defs><pattern id="hueso2" width="10" height="10" patternUnits="userSpaceOnUse"><rect width="10" height="10" fill="#efe3c6"/><circle cx="3" cy="3" r="1.3" fill="#d9c79c"/></pattern></defs>
+  <ellipse cx="320" cy="310" rx="78" ry="32" fill="#dcecf2" stroke="#9cc3d2" stroke-width="1.5"/>
+  <ellipse cx="320" cy="122" rx="62" ry="12" fill="#e6c34a"/>
+  <text class="svg-txt" x="342" y="100">quiasma</text>
+  <ellipse cx="320" cy="214" rx="42" ry="32" fill="#d9776a"/>
+  <text class="svg-txt" x="296" y="218" style="fill:#fff;font-style:normal">hipófisis</text>
+  <!-- senos cavernosos -->
+  <g fill="#cfe3ef" stroke="#8fb6c9" stroke-width="1.5">
+    <path d="M276 172 Q206 150 186 196 Q176 250 238 258 Q270 258 276 236 Z"/>
+    <path d="M364 172 Q434 150 454 196 Q464 250 402 258 Q370 258 364 236 Z"/>
+  </g>
+  <circle cx="246" cy="214" r="15" fill="#c0392b"/><circle cx="394" cy="214" r="15" fill="#c0392b"/>
+  <circle cx="226" cy="228" r="5" fill="#e6c34a"/><circle cx="414" cy="228" r="5" fill="#e6c34a"/>
+  <g fill="#e6c34a">
+    <circle cx="192" cy="178" r="6"/><circle cx="187" cy="194" r="4"/><circle cx="185" cy="210" r="6"/><circle cx="188" cy="228" r="6"/>
+    <circle cx="448" cy="178" r="6"/><circle cx="453" cy="194" r="4"/><circle cx="455" cy="210" r="6"/><circle cx="452" cy="228" r="6"/>
+  </g>
+  <text class="svg-txt" x="176" y="198" style="font-size:12px;text-anchor:end">IV →</text><text class="svg-txt" x="178" y="233" style="font-size:12px;text-anchor:end">V2 →</text>
+  <g class="pin"><line x1="420" y1="170" x2="540" y2="120"/><circle cx="554" cy="120" r="13"/><text x="554" y="120">1</text></g>
+  <g class="pin"><line x1="400" y1="210" x2="540" y2="170"/><circle cx="554" cy="170" r="13"/><text x="554" y="170">2</text></g>
+  <g class="pin"><line x1="448" y1="178" x2="540" y2="222"/><circle cx="554" cy="222" r="13"/><text x="554" y="222">3</text></g>
+  <g class="pin"><line x1="414" y1="230" x2="540" y2="272"/><circle cx="554" cy="272" r="13"/><text x="554" y="272">4</text></g>
+  <g class="pin"><line x1="455" y1="210" x2="586" y2="210" style="stroke-dasharray:3 2"/><circle cx="600" cy="210" r="13"/><text x="600" y="210">5</text></g>
+  <g class="pin"><line x1="270" y1="320" x2="110" y2="330"/><circle cx="96" cy="330" r="13"/><text x="96" y="330">6</text></g>
+  <text class="svg-txt" x="18" y="30">En la pared lateral de cada seno van cuatro nervios en fila; a la izquierda ya están nombrados dos (IV y V2).</text>
+</svg>
+  </div>
+  <table class="resp" data-n="6"></table>
+</section>
+
+<!-- ═══════════ LÁMINA 4 · TIROIDES ═══════════ -->
+<section class="lamina" data-lam="4" data-titulo="Tiroides y paratiroides">
+  <div class="lam-head"><div class="lam-n">4</div><div><h3>Tiroides y paratiroides</h3><div class="sub">A la izquierda, vista anterior; a la derecha, vista posterior; abajo, un trozo de la glándula al microscopio.</div></div></div>
+  <div class="dibujo">
+<svg viewBox="0 0 640 520" role="img" aria-label="Glándula tiroides en vista anterior y posterior y un folículo tiroideo al microscopio, diez estructuras numeradas">
+  <rect width="640" height="520" fill="#fdfaf2"/>
+  <text class="svg-txt" x="110" y="24">vista anterior</text><text class="svg-txt" x="420" y="24">vista posterior</text>
+  <line x1="320" y1="20" x2="320" y2="330" stroke="#e5dbc0" stroke-width="2"/>
+  <!-- anterior -->
+  <path d="M120 50 L200 50 L190 104 Q160 122 130 104 Z" fill="#e8e0cc" stroke="#b9a87e" stroke-width="2"/>
+  <rect x="142" y="104" width="36" height="210" rx="8" fill="#eef2f4" stroke="#b9c6cc" stroke-width="1.5"/>
+  <g stroke="#c5d0d6" stroke-width="3">
+    <line x1="144" y1="128" x2="176" y2="128"/><line x1="144" y1="146" x2="176" y2="146"/><line x1="144" y1="164" x2="176" y2="164"/>
+    <line x1="144" y1="182" x2="176" y2="182"/><line x1="144" y1="200" x2="176" y2="200"/><line x1="144" y1="218" x2="176" y2="218"/>
+    <line x1="144" y1="236" x2="176" y2="236"/><line x1="144" y1="254" x2="176" y2="254"/><line x1="144" y1="272" x2="176" y2="272"/>
+  </g>
+  <ellipse cx="118" cy="182" rx="26" ry="56" fill="#c0504d" opacity=".9"/>
+  <ellipse cx="202" cy="182" rx="26" ry="56" fill="#c0504d" opacity=".9"/>
+  <rect x="128" y="196" width="64" height="20" rx="8" fill="#c0504d" opacity=".95"/>
+  <path d="M158 196 Q154 160 164 128" stroke="#c0504d" stroke-width="8" fill="none" stroke-linecap="round" opacity=".9"/>
+  <!-- posterior -->
+  <ellipse cx="418" cy="182" rx="26" ry="56" fill="#c0504d" opacity=".9"/>
+  <ellipse cx="502" cy="182" rx="26" ry="56" fill="#c0504d" opacity=".9"/>
+  <rect x="442" y="104" width="36" height="210" rx="8" fill="#eef2f4" stroke="#b9c6cc" stroke-width="1.5" opacity=".75"/>
+  <circle cx="424" cy="150" r="7" fill="#2e7d32"/><circle cx="496" cy="150" r="7" fill="#2e7d32"/>
+  <circle cx="424" cy="216" r="7" fill="#2e7d32"/><circle cx="496" cy="216" r="7" fill="#2e7d32"/>
+  <!-- folículo -->
+  <rect x="150" y="345" width="340" height="165" rx="10" fill="#f7eef0" stroke="#e0c9ce"/>
+  <circle cx="290" cy="428" r="58" fill="#f4c6cf"/>
+  <g fill="#b57ea0" stroke="#fff" stroke-width="1">
+    <rect x="282" y="362" width="16" height="12" rx="2"/><rect x="306" y="366" width="16" height="12" rx="2" transform="rotate(20 314 372)"/>
+    <rect x="326" y="380" width="16" height="12" rx="2" transform="rotate(45 334 386)"/><rect x="338" y="402" width="16" height="12" rx="2" transform="rotate(70 346 408)"/>
+    <rect x="340" y="428" width="16" height="12" rx="2" transform="rotate(95 348 434)"/><rect x="334" y="452" width="16" height="12" rx="2" transform="rotate(120 342 458)"/>
+    <rect x="318" y="472" width="16" height="12" rx="2" transform="rotate(150 326 478)"/><rect x="292" y="480" width="16" height="12" rx="2"/>
+    <rect x="266" y="476" width="16" height="12" rx="2" transform="rotate(-150 274 482)"/><rect x="246" y="460" width="16" height="12" rx="2" transform="rotate(-120 254 466)"/>
+    <rect x="234" y="436" width="16" height="12" rx="2" transform="rotate(-95 242 442)"/><rect x="234" y="410" width="16" height="12" rx="2" transform="rotate(-70 242 416)"/>
+    <rect x="242" y="386" width="16" height="12" rx="2" transform="rotate(-45 250 392)"/><rect x="260" y="368" width="16" height="12" rx="2" transform="rotate(-20 268 374)"/>
+  </g>
+  <ellipse cx="406" cy="400" rx="20" ry="15" fill="#e9dfc8" stroke="#bfae86"/>
+  <circle cx="406" cy="400" r="5" fill="#8b6914"/>
+  <!-- marcadores -->
+  <g class="pin"><line x1="196" y1="62" x2="262" y2="50"/><circle cx="276" cy="50" r="13"/><text x="276" y="50">1</text></g>
+  <g class="pin"><line x1="100" y1="160" x2="46" y2="140"/><circle cx="32" cy="140" r="13"/><text x="32" y="140">2</text></g>
+  <g class="pin"><line x1="186" y1="210" x2="262" y2="236"/><circle cx="276" cy="236" r="13"/><text x="276" y="236">3</text></g>
+  <g class="pin"><line x1="160" y1="140" x2="46" y2="96"/><circle cx="32" cy="96" r="13"/><text x="32" y="96">4</text></g>
+  <g class="pin"><line x1="150" y1="290" x2="46" y2="296"/><circle cx="32" cy="296" r="13"/><text x="32" y="296">5</text></g>
+  <g class="pin"><line x1="502" y1="150" x2="580" y2="120"/><circle cx="594" cy="120" r="13"/><text x="594" y="120">6</text></g>
+  <g class="pin"><line x1="502" y1="216" x2="580" y2="246"/><circle cx="594" cy="246" r="13"/><text x="594" y="246">7</text></g>
+  <g class="pin"><line x1="240" y1="414" x2="176" y2="390"/><circle cx="162" cy="390" r="13"/><text x="162" y="390">8</text></g>
+  <g class="pin"><line x1="290" y1="428" x2="176" y2="470"/><circle cx="162" cy="470" r="13"/><text x="162" y="470">9</text></g>
+  <g class="pin"><line x1="424" y1="404" x2="462" y2="440"/><circle cx="476" cy="452" r="13"/><text x="476" y="452">10</text></g>
+</svg>
+  </div>
+  <table class="resp" data-n="10"></table>
+</section>
+
+<!-- ═══════════ LÁMINA 5 · SUPRARRENAL ═══════════ -->
+<section class="lamina" data-lam="5" data-titulo="La glándula suprarrenal">
+  <div class="lam-head"><div class="lam-n">5</div><div><h3>La glándula suprarrenal</h3><div class="sub">A la izquierda, el órgano; a la derecha, su pared ampliada de fuera (arriba) hacia dentro (abajo). Para las capas, di qué hormona fabrican.</div></div></div>
+  <div class="dibujo">
+<svg viewBox="0 0 640 380" role="img" aria-label="Riñón con su glándula suprarrenal y corte ampliado de la glándula con sus capas, siete estructuras numeradas">
+  <rect width="640" height="380" fill="#fdfaf2"/>
+  <path d="M110 140 Q150 70 210 100 Q250 140 210 172 Q160 180 110 140Z" fill="#d4a72c" stroke="#a37e1a" stroke-width="1.5"/>
+  <path d="M120 160 Q100 250 150 320 Q210 360 240 300 Q220 260 238 236 Q260 200 230 168 Q180 150 120 160Z" fill="#b5674a" stroke="#8a4a33" stroke-width="1.5"/>
+  <path d="M196 112 L296 60" stroke="#c9b98f" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <!-- capas -->
+  <g>
+    <rect x="300" y="40" width="300" height="10" fill="#7d6a4a"/>
+    <rect x="300" y="50" width="300" height="36" fill="#f3d38a"/>
+    <rect x="300" y="86" width="300" height="104" fill="#e8b862"/>
+    <rect x="300" y="190" width="300" height="56" fill="#c98c4a"/>
+    <rect x="300" y="246" width="300" height="100" fill="#8e5a7a"/>
+  </g>
+  <g stroke="#fff" stroke-width="1" opacity=".6">
+    <line x1="330" y1="90" x2="330" y2="186"/><line x1="370" y1="90" x2="370" y2="186"/><line x1="410" y1="90" x2="410" y2="186"/>
+    <line x1="450" y1="90" x2="450" y2="186"/><line x1="490" y1="90" x2="490" y2="186"/><line x1="530" y1="90" x2="530" y2="186"/><line x1="570" y1="90" x2="570" y2="186"/>
+  </g>
+  <g class="pin"><line x1="160" y1="260" x2="60" y2="290"/><circle cx="46" cy="290" r="13"/><text x="46" y="290">1</text></g>
+  <g class="pin"><line x1="150" y1="118" x2="60" y2="90"/><circle cx="46" cy="90" r="13"/><text x="46" y="90">2</text></g>
+  <g class="pin"><line x1="600" y1="45" x2="612" y2="45"/><circle cx="624" cy="45" r="12"/><text x="624" y="45">3</text></g>
+  <g class="pin"><line x1="600" y1="68" x2="612" y2="80"/><circle cx="624" cy="86" r="12"/><text x="624" y="86">4</text></g>
+  <g class="pin"><line x1="600" y1="138" x2="612" y2="138"/><circle cx="624" cy="138" r="12"/><text x="624" y="138">5</text></g>
+  <g class="pin"><line x1="600" y1="218" x2="612" y2="218"/><circle cx="624" cy="218" r="12"/><text x="624" y="218">6</text></g>
+  <g class="pin"><line x1="600" y1="296" x2="612" y2="296"/><circle cx="624" cy="296" r="12"/><text x="624" y="296">7</text></g>
+  <text class="svg-txt" x="300" y="368">Pared de la glándula, de fuera hacia dentro</text>
+</svg>
+  </div>
+  <table class="resp" data-n="7"></table>
+</section>
+
+<!-- ═══════════ LÁMINA 6 · PÁNCREAS ═══════════ -->
+<section class="lamina" data-lam="6" data-titulo="El páncreas y un islote">
+  <div class="lam-head"><div class="lam-n">6</div><div><h3>El páncreas y un islote</h3><div class="sub">Arriba, el órgano en su sitio. Abajo, un islote ampliado: cuenta cuántas células hay de cada color, y deduce cuál es cuál.</div></div></div>
+  <div class="dibujo">
+<svg viewBox="0 0 640 470" role="img" aria-label="Páncreas en el marco duodenal y un islote pancreático ampliado con tres tipos de células de distinto color, ocho estructuras numeradas">
+  <rect width="640" height="470" fill="#fdfaf2"/>
+  <!-- duodeno en C -->
+  <path d="M190 60 Q110 60 110 140 Q110 220 190 220" stroke="#d9a28a" stroke-width="26" fill="none" stroke-linecap="round"/>
+  <!-- páncreas -->
+  <path d="M150 110 Q180 92 230 112 Q330 128 430 104 Q480 96 496 112 Q500 128 480 134 Q400 150 300 154 Q220 160 196 186 Q160 196 150 168 Q140 140 150 110Z" fill="#e6b85c" stroke="#b98c34" stroke-width="1.5"/>
+  <ellipse cx="548" cy="112" rx="34" ry="48" fill="#8e4a5a" opacity=".75"/>
+  <text class="svg-txt" x="524" y="178">bazo</text>
+  <!-- islote -->
+  <rect x="120" y="232" width="400" height="226" rx="12" fill="#f9f1e6" stroke="#e5dbc0"/>
+  <g fill="#f0d9b5" stroke="#d8b98a">
+    <circle cx="160" cy="270" r="22"/><circle cx="160" cy="420" r="22"/><circle cx="480" cy="270" r="22"/><circle cx="480" cy="420" r="22"/>
+    <circle cx="150" cy="345" r="20"/><circle cx="490" cy="345" r="20"/><circle cx="320" cy="252" r="16"/><circle cx="320" cy="440" r="16"/>
+  </g>
+  <circle cx="320" cy="346" r="92" fill="#fbe9ee" stroke="#e7c3cd"/>
+  <path d="M232 330 Q300 300 410 352" stroke="#c0392b" stroke-width="5" fill="none"/>
+  <g fill="#5b8fc9">
+    <circle cx="300" cy="320" r="9"/><circle cx="322" cy="318" r="9"/><circle cx="344" cy="326" r="9"/><circle cx="286" cy="340" r="9"/>
+    <circle cx="308" cy="342" r="9"/><circle cx="330" cy="342" r="9"/><circle cx="352" cy="348" r="9"/><circle cx="274" cy="360" r="9"/>
+    <circle cx="296" cy="362" r="9"/><circle cx="318" cy="364" r="9"/><circle cx="340" cy="366" r="9"/><circle cx="362" cy="370" r="9"/>
+    <circle cx="284" cy="382" r="9"/><circle cx="306" cy="386" r="9"/><circle cx="328" cy="388" r="9"/><circle cx="350" cy="390" r="9"/>
+    <circle cx="372" cy="350" r="9"/><circle cx="268" cy="340" r="9"/><circle cx="316" cy="406" r="9"/><circle cx="338" cy="408" r="9"/>
+  </g>
+  <g fill="#d9534f"><circle cx="262" cy="306" r="9"/><circle cx="390" cy="320" r="9"/><circle cx="252" cy="384" r="9"/><circle cx="378" cy="404" r="9"/><circle cx="298" cy="420" r="9"/></g>
+  <g fill="#4caf50"><circle cx="248" cy="360" r="9"/><circle cx="394" cy="370" r="9"/></g>
+  <g class="pin"><line x1="116" y1="160" x2="56" y2="160"/><circle cx="42" cy="160" r="13"/><text x="42" y="160">1</text></g>
+  <g class="pin"><line x1="166" y1="150" x2="56" y2="98"/><circle cx="42" cy="98" r="13"/><text x="42" y="98">2</text></g>
+  <g class="pin"><line x1="470" y1="116" x2="460" y2="60"/><circle cx="460" cy="46" r="13"/><text x="460" y="46">3</text></g>
+  <g class="pin"><line x1="140" y1="420" x2="70" y2="440"/><circle cx="56" cy="440" r="13"/><text x="56" y="440">4</text></g>
+  <g class="pin"><line x1="232" y1="300" x2="70" y2="262"/><circle cx="56" cy="262" r="13"/><text x="56" y="262">5</text></g>
+  <g class="pin"><line x1="352" y1="348" x2="560" y2="300"/><circle cx="574" cy="300" r="13"/><text x="574" y="300">6</text></g>
+  <g class="pin"><line x1="390" y1="320" x2="560" y2="260"/><circle cx="574" cy="260" r="13"/><text x="574" y="260">7</text></g>
+  <g class="pin"><line x1="394" y1="370" x2="560" y2="400"/><circle cx="574" cy="400" r="13"/><text x="574" y="400">8</text></g>
+  <text class="svg-txt" x="128" y="250" style="font-size:11px">La línea roja es un capilar sanguíneo.</text>
+</svg>
+  </div>
+  <table class="resp" data-n="8"></table>
+</section>
+
+<!-- ═══════════ LÁMINA 7 · ÓRBITA EN GRAVES ═══════════ -->
+<section class="lamina" data-lam="7" data-titulo="La órbita en la enfermedad de Graves · corte sagital" data-graves="1">
+  <div class="lam-head"><div class="lam-n">7</div><div><h3>La órbita en la enfermedad de Graves · corte sagital</h3><div class="sub">La cara está a la izquierda. Además de para qué sirve cada estructura, di qué le pasa en la enfermedad de Graves.</div></div></div>
+  <div class="dibujo">
+<svg viewBox="0 0 640 380" role="img" aria-label="Corte sagital esquemático de la órbita con exoftalmos, seis estructuras numeradas">
+  <rect width="640" height="380" fill="#fdfaf2"/>
+  <path d="M130 50 L540 178 L130 330" fill="none" stroke="#c9b98f" stroke-width="16" stroke-linejoin="round"/>
+  <path d="M138 66 L520 180 L138 314 Z" fill="#fbecc0"/>
+  <g fill="#f5d77a" opacity=".8"><circle cx="300" cy="150" r="5"/><circle cx="340" cy="190" r="4"/><circle cx="380" cy="160" r="5"/><circle cx="420" cy="196" r="4"/><circle cx="310" cy="220" r="5"/><circle cx="360" cy="228" r="4"/><circle cx="440" cy="170" r="4"/></g>
+  <path d="M250 120 Q380 136 516 172" stroke="#c0504d" stroke-width="14" fill="none" stroke-linecap="round"/>
+  <path d="M250 246 Q380 226 516 188" stroke="#c0504d" stroke-width="30" fill="none" stroke-linecap="round"/>
+  <path d="M250 182 Q390 186 512 180" stroke="#e6c34a" stroke-width="12" fill="none" stroke-linecap="round"/>
+  <circle cx="512" cy="180" r="18" fill="none" stroke="#8b6914" stroke-width="5"/>
+  <circle cx="188" cy="182" r="72" fill="#ffffff" stroke="#9aa8b0" stroke-width="2"/>
+  <ellipse cx="118" cy="182" rx="10" ry="34" fill="#6a8fa8"/>
+  <path d="M96 92 Q70 112 92 132 L128 120" fill="#e8c0a8" stroke="#b98c74"/>
+  <path d="M100 270 Q74 248 96 232 L128 244" fill="#e8c0a8" stroke="#b98c74"/>
+  <g class="pin"><line x1="92" y1="104" x2="56" y2="70"/><circle cx="42" cy="58" r="13"/><text x="42" y="58">1</text></g>
+  <g class="pin"><line x1="380" y1="226" x2="400" y2="320"/><circle cx="400" cy="334" r="13"/><text x="400" y="334">2</text></g>
+  <g class="pin"><line x1="380" y1="160" x2="420" y2="70"/><circle cx="426" cy="56" r="13"/><text x="426" y="56">3</text></g>
+  <g class="pin"><line x1="440" y1="183" x2="590" y2="230"/><circle cx="604" cy="236" r="13"/><text x="604" y="236">4</text></g>
+  <g class="pin"><line x1="526" y1="168" x2="590" y2="130"/><circle cx="604" cy="124" r="13"/><text x="604" y="124">5</text></g>
+  <g class="pin"><line x1="300" y1="125" x2="260" y2="60"/><circle cx="252" cy="48" r="13"/><text x="252" y="48">6</text></g>
+  <text class="svg-txt" x="18" y="365">El músculo de abajo está dibujado engrosado, como en la enfermedad.</text>
+</svg>
+  </div>
+  <table class="resp" data-n="6" data-extra="¿Qué le pasa en Graves?"></table>
+</section>
+
+<!-- ═══════════ LÁMINA 8 · LA LUZ Y LA PINEAL ═══════════ -->
+<section class="lamina" data-lam="8" data-titulo="El camino de la luz hasta la glándula pineal">
+  <div class="lam-head"><div class="lam-n">8</div><div><h3>El camino de la luz hasta la glándula pineal</h3><div class="sub">Completa la cadena: qué estructura hay en cada hueco y qué hace en este camino.</div></div></div>
+  <div class="flujo">
+    <span class="caja">Luz en la retina</span><span class="fl">→</span>
+    <span class="caja hueco">1</span><span class="fl">→</span>
+    <span class="caja hueco">2</span><span class="fl">→</span>
+    <span class="caja hueco">3</span><span class="fl">→</span>
+    <span class="caja hueco">4</span><span class="fl">→</span>
+    <span class="caja">Menos melatonina de día</span>
+  </div>
+  <table class="resp" data-n="4"></table>
+</section>
+
+</div>
+
+<div class="entrega">
+  <span class="prog" id="prog"></span>
+  <span class="sp"></span>
+  <button class="sec" id="borrar">Empezar de nuevo</button>
+  <button id="pdf">Generar PDF</button>
+</div>
+
+<div id="informe"></div>
+
+<script>
+const CLAVE = "morfo_taller_endocrino_2026II_v1";
+let E = {};
+try { E = JSON.parse(localStorage.getItem(CLAVE) || "{}") || {}; } catch (e) { E = {}; }
+const guardar = () => { try { localStorage.setItem(CLAVE, JSON.stringify(E)); } catch (e) {} };
+const esc = s => String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+/* tablas de respuesta: N filas por lámina; la 7 lleva una columna más */
+document.querySelectorAll("table.resp").forEach(t => {
+  const L = t.closest(".lamina").dataset.lam, n = +t.dataset.n, extra = t.dataset.extra;
+  let h = `<tr><th>N.º</th><th>Estructura</th><th>¿Para qué sirve?</th>${extra ? `<th>${esc(extra)}</th>` : ""}</tr>`;
+  for (let i = 1; i <= n; i++) {
+    const k = `${L}.${i}`;
+    h += `<tr data-k="${k}"><td class="n">${i}</td>
+      <td class="est"><input type="text" data-k="${k}" data-c="e" aria-label="Lámina ${L}, número ${i}: estructura"></td>
+      <td><textarea rows="2" data-k="${k}" data-c="f" aria-label="Lámina ${L}, número ${i}: para qué sirve"></textarea></td>
+      ${extra ? `<td><textarea rows="2" data-k="${k}" data-c="g" aria-label="Lámina ${L}, número ${i}: qué le pasa en Graves"></textarea></td>` : ""}</tr>`;
+  }
+  t.innerHTML = h;
+});
+
+const campos = () => [...document.querySelectorAll("[data-k][data-c]")];
+function pintar() {
+  document.getElementById("nombre").value = E.nombre || "";
+  document.getElementById("codigo").value = E.codigo || "";
+  campos().forEach(c => c.value = (E[c.dataset.k] || {})[c.dataset.c] || "");
+  progreso();
+}
+function progreso() {
+  const filas = [...document.querySelectorAll("tr[data-k]")];
+  let llenas = 0;
+  filas.forEach(tr => {
+    const r = E[tr.dataset.k] || {}, ok = (r.e || "").trim() && (r.f || "").trim();
+    tr.classList.toggle("lleno", !!ok); if (ok) llenas++;
+  });
+  document.getElementById("prog").textContent = `${llenas} de ${filas.length} números completos (estructura y función)`;
+}
+document.addEventListener("input", ev => {
+  const c = ev.target;
+  if (c.id === "nombre" || c.id === "codigo") { E[c.id] = c.value; guardar(); return; }
+  if (!c.dataset.k) return;
+  E[c.dataset.k] = E[c.dataset.k] || {}; E[c.dataset.k][c.dataset.c] = c.value; guardar(); progreso();
+});
+document.getElementById("borrar").onclick = () => {
+  if (confirm("¿Borrar todas tus respuestas de este navegador y empezar de nuevo?")) { E = {}; guardar(); pintar(); }
+};
+
+/* el PDF: un informe limpio con todas las respuestas, y la impresión del navegador lo guarda */
+document.getElementById("pdf").onclick = () => {
+  const nom = (E.nombre || "").trim(), cod = (E.codigo || "").trim();
+  if (!nom || !cod) { alert("Escribe tu nombre y tu código antes de generar el PDF."); document.getElementById("nombre").focus(); return; }
+  const filas = document.querySelectorAll("tr[data-k]").length;
+  const vacias = [...document.querySelectorAll("tr[data-k]")].filter(tr => !((E[tr.dataset.k] || {}).e || "").trim()).length;
+  if (vacias && !confirm(`Te faltan ${vacias} estructuras de ${filas}. ¿Generar el PDF de todos modos?`)) return;
+  const ahora = new Date().toLocaleString("es-CO", { dateStyle: "long", timeStyle: "short", timeZone: "America/Bogota" });
+  let h = `<h1>Taller gráfico · Sistema endocrino</h1>
+    <div class="meta">${esc(nom)} · código ${esc(cod)} · Morfología General 2026-II · generado el ${esc(ahora)}</div>`;
+  document.querySelectorAll(".lamina").forEach(l => {
+    const L = l.dataset.lam, extra = l.querySelector("table.resp").dataset.extra;
+    h += `<h2>Lámina ${L} · ${esc(l.dataset.titulo)}</h2><table><tr><th>N.º</th><th>Estructura</th><th>Para qué sirve</th>${extra ? `<th>${esc(extra)}</th>` : ""}</tr>`;
+    l.querySelectorAll("tr[data-k]").forEach(tr => {
+      const r = E[tr.dataset.k] || {}, cel = x => (x || "").trim() ? esc(x) : '<span class="vacio">sin respuesta</span>';
+      h += `<tr><td class="n">${tr.dataset.k.split(".")[1]}</td><td>${cel(r.e)}</td><td>${cel(r.f)}</td>${extra ? `<td>${cel(r.g)}</td>` : ""}</tr>`;
+    });
+    h += "</table>";
+  });
+  h += `<p class="pie">Completos: ${filas - vacias} de ${filas}. Guarda este documento como PDF y súbelo a la plataforma del curso.</p>`;
+  document.getElementById("informe").innerHTML = h;
+  const t = document.title;
+  document.title = "Taller_endocrino_" + nom.replace(/[^\wáéíóúñÁÉÍÓÚÑ]+/g, "_");
+  window.print();
+  setTimeout(() => { document.title = t; }, 1000);
+};
+pintar();
+</script>
+</body>
+</html>
