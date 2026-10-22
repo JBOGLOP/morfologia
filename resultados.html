@@ -139,19 +139,22 @@ footer{margin-top:44px;padding:22px;text-align:center;border-top:3px double var(
         <div class="nota" id="c2-nota">—</div>
         <div class="de" id="c2-de">Segundo corte · promedio de quices</div>
       </div>
-      <div class="aviso ojo"><b>Esto es un avance, no la nota del corte.</b> Todavía faltan el taller
-        de linfático, que está en revisión, y el Taller 2 de repaso, que cierra el viernes 23 de octubre
-        a las 9:00. Con eso se calcula la nota del corte.</div>
+      <div class="aviso ojo" id="c2-aviso"><b>Esto es un avance, no la nota del corte.</b> Falta el
+        Taller 2 de repaso, que cierra el viernes 23 de octubre a las 9:00. <b>Si no lo presentas, vale
+        0</b> y tu parcial queda en la mitad.</div>
       <div class="desglose" id="c2-desglose"></div>
       <div id="c2-obs"></div>
       <div class="tarjeta">
         <h2>Cómo leerlo</h2>
-        <p><b>La cifra grande es tu II Parcial.</b> Cuando entregues el Taller 2 pasa a ser el
-          II Parcial promediado con él: (II Parcial + Taller 2) ÷ 2. Si no lo entregas, el II Parcial
-          queda como está.</p>
-        <p>Debajo están las piezas del seguimiento: los quices en papel (<b>el Quiz 1 no se tiene en
-          cuenta</b>), el taller de sistema muscular, el taller de repaso —calificado sin las
-          preguntas de linfático— y el de linfático.</p>
+        <p><b>Cómo se calcula el corte.</b> Los pesos son del semestre: el corte vale 35 %, de los
+          cuales 20 son del seguimiento y 15 del parcial.</p>
+        <p>· <b>Seguimiento</b> = (promedio de quices + taller de sistema muscular + taller de repaso) ÷ 3.<br>
+          · <b>Parcial</b> = (II Parcial + Taller 2) ÷ 2. El Taller 2 no presentado vale 0.<br>
+          · <b>Corte 2</b> = (20 × seguimiento + 15 × parcial) ÷ 35.</p>
+        <p>Mientras falte el Taller 2, la cifra grande es tu II Parcial; cuando esté, pasa a ser la
+          nota del corte. En el promedio de quices <b>el Quiz 1 no se tiene en cuenta</b>, y el taller
+          de repaso se calificó sin las preguntas de linfático. El taller de linfático cuenta en el
+          tercer corte.</p>
         <p>El <b>Quiz 3 también sirvió para conmutar el taller de sistema muscular</b>: quien
           entregó el taller conserva su nota; quien no lo entregó recibe en el taller la nota del
           Quiz 3.</p>
@@ -341,10 +344,10 @@ function pintarCorte2(r){
   const num = k => parseFloat(val(k));
   const txt = k => String(c[k] === undefined || c[k] === null ? "" : c[k]).trim();   // texto: sin tocar las comas
   const notaO = (k, si) => isNaN(num(k)) ? si : num(k).toFixed(2);   // «si» = qué decir cuando aún no hay nota
-  // La cifra grande: el II Parcial, o el II Parcial ya promediado con el Taller 2 cuando exista.
+  // La cifra grande: la nota del corte cuando exista; si no, el II Parcial (con el Taller 2 si ya lo hay).
   // Si la hoja todavía no trae el II Parcial, se queda el promedio de quices de antes.
-  const conT2 = num("II Parcial con Taller 2"), p2 = num("II Parcial"), pr = num("PROMEDIO QUICES");
-  const grande = !isNaN(conT2) ? conT2 : (!isNaN(p2) ? p2 : pr);
+  const corte = num("CORTE 2"), conT2 = num("II Parcial con Taller 2"), p2 = num("II Parcial"), pr = num("PROMEDIO QUICES");
+  const grande = !isNaN(corte) ? corte : (!isNaN(conT2) ? conT2 : (!isNaN(p2) ? p2 : pr));
   $("c2-quien").textContent = r.alumno;
   $("c2-nota").textContent  = isNaN(grande) ? "—" : grande.toFixed(2);
   $("c2-nota").classList.toggle("baja", !isNaN(grande) && grande < 3);
@@ -361,8 +364,10 @@ function pintarCorte2(r){
     .map(Number).filter(n => n !== 1).sort((a, b) => a - b);
   const lista = nums.length > 1
     ? "Quiz " + nums.slice(0, -1).join(", ") + " y " + nums[nums.length - 1] : "Quiz " + nums.join("");
-  $("c2-de").textContent = !isNaN(conT2) ? "Segundo corte · II Parcial promediado con el Taller 2"
-    : (!isNaN(p2) ? "Segundo corte · II Parcial" : "Segundo corte · promedio de quices · " + lista);
+  $("c2-de").textContent = !isNaN(corte) ? "Segundo corte · 35 % del semestre"
+    : (!isNaN(conT2) ? "Segundo corte · II Parcial promediado con el Taller 2"
+    : (!isNaN(p2) ? "Segundo corte · II Parcial" : "Segundo corte · promedio de quices · " + lista));
+  if(!isNaN(corte)) $("c2-aviso").classList.add("oculto");
   const hayP2 = txt("II Parcial") !== "" || txt("II Parcial aciertos") !== "";
   $("c2-desglose").innerHTML =
     nums.map(n => linea("Quiz " + n + (TEMA[n] ? " · " + TEMA[n] : ""),
@@ -371,10 +376,11 @@ function pintarCorte2(r){
     linea("Taller · sistema muscular", txt("Regla taller") || "individual", nota("Taller muscular"), true) +
     (hayP2 ? (
       linea("Taller de repaso del II Parcial", txt("Regla repaso") || "sin linfático", notaO("Taller repaso", "pendiente"), true) +
-      linea("Taller · sistema linfático", "las preguntas abiertas están en revisión", notaO("Taller linfático", "en revisión"), true) +
+      linea("Seguimiento", "(quices + muscular + repaso) ÷ 3 · pesa 20 de 35", notaO("Seguimiento", "pendiente"), true) +
       linea("II Parcial · en papel", (/^\d/.test(txt("II Parcial aciertos")) ? txt("II Parcial aciertos").replace("/", " de ") + " aciertos" : txt("II Parcial aciertos")) || "15 de octubre", notaO("II Parcial", "sin nota")) +
-      linea("Taller 2 · repaso del II Parcial", "50 preguntas · cierra el viernes 23 de octubre, 9:00", notaO("Taller 2", "pendiente")) +
-      linea("II Parcial con el Taller 2", "(II Parcial + Taller 2) ÷ 2", notaO("II Parcial con Taller 2", "cuando entregues el Taller 2"), true)
+      linea("Taller 2 · repaso del II Parcial", "50 preguntas · cierra el viernes 23 de octubre, 9:00 · no presentado vale 0", notaO("Taller 2", "pendiente")) +
+      linea("Parcial", "(II Parcial + Taller 2) ÷ 2 · pesa 15 de 35", notaO("II Parcial con Taller 2", "cuando cierre el Taller 2"), true) +
+      linea("Corte 2", "(20 × seguimiento + 15 × parcial) ÷ 35", notaO("CORTE 2", "cuando cierre el Taller 2"), true)
     ) : "");
 
   const obs = String(c.Observaciones || "").trim();
