@@ -20,9 +20,19 @@ body{font-family:var(--body);background:var(--parchment);color:var(--text);line-
 .container{max-width:1000px;margin:0 auto;padding:0 22px 80px}
 .bloque{background:var(--card);border:1px solid var(--border-light);border-radius:4px;padding:24px 28px;margin-bottom:26px;box-shadow:0 2px 8px rgba(26,42,53,.06)}
 .bloque h2{font-family:var(--display);font-size:1.5rem;color:var(--ink);margin-bottom:12px}
-.ident{display:grid;grid-template-columns:2fr 1fr;gap:14px}
+.ident{display:grid;grid-template-columns:2fr 1fr auto;gap:14px;align-items:end}
 .ident label{display:block;font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--amber-dark);margin-bottom:4px}
-input[type=text],textarea{width:100%;font:inherit;font-size:.95rem;border:1px solid var(--border);border-radius:3px;padding:7px 9px;background:#fff;color:var(--ink)}
+input[type=text],textarea,select{width:100%;font:inherit;font-size:.95rem;border:1px solid var(--border);border-radius:3px;padding:7px 9px;background:#fff;color:var(--ink)}
+.ident button{font-family:var(--mono);font-size:.82rem;letter-spacing:.06em;background:var(--teal);color:#fff;border:0;border-radius:4px;padding:10px 18px;cursor:pointer}
+.ident button:disabled{opacity:.5;cursor:default}
+#identEstado{font-size:.92rem;margin-top:8px;color:var(--soft)}
+#identEstado.bien{color:var(--teal);font-weight:600}
+#identEstado.mal{color:var(--clinical);font-weight:600}
+.srv{border-radius:3px;padding:10px 14px;margin-top:12px;font-size:.93rem;background:var(--amber-pale);border-left:4px solid var(--amber)}
+.srv.rojo{background:var(--clinical-bg);border-left-color:var(--clinical)}
+.srv.verde{background:#e3f1ee;border-left-color:var(--teal)}
+.entrega button:disabled{opacity:.45;cursor:default}
+#guardado{font-family:var(--mono);font-size:.75rem;color:#c9d3da}
 textarea{resize:vertical;min-height:42px;line-height:1.4}
 input:focus,textarea:focus{outline:2px solid var(--amber-pale);border-color:var(--amber)}
 .reglas{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:6px}
@@ -90,17 +100,20 @@ table.resp tr.lleno td.n{color:var(--teal)}
 <section class="bloque">
   <h2>Antes de empezar</h2>
   <div class="ident">
-    <div><label for="nombre">Apellidos y nombres</label><input type="text" id="nombre" autocomplete="name" placeholder="Como aparece en la lista del curso"></div>
-    <div><label for="codigo">Código</label><input type="text" id="codigo" inputmode="numeric" placeholder="Tu código"></div>
+    <div><label for="nombre">Apellidos y nombres</label><select id="nombre"><option value="">Cargando la lista del curso…</option></select></div>
+    <div><label for="codigo">Documento de identidad</label><input type="text" id="codigo" inputmode="numeric" placeholder="El de la lista del curso"></div>
+    <div><button id="entrar">Entrar</button></div>
   </div>
+  <div id="identEstado">Elige tu nombre, escribe tu documento y pulsa «Entrar»: así tu trabajo se guarda en el servidor.</div>
+  <div id="srvAviso"></div>
   <div class="reglas" style="margin-top:16px">
     <div class="regla"><b>Individual · hasta el martes 27 de octubre, 23:59</b>Se empezó en clase el jueves 22. Intenta primero cada lámina de memoria y consulta la clase solo después: lo que se queda es lo que recuperas, no lo que copias.</div>
     <div class="regla"><b>Dos cosas por número</b>El <em>nombre anatómico</em> de la estructura y <em>para qué sirve</em>, en una o dos frases concretas: «fabrica…», «aloja…», «lleva…».</div>
-    <div class="regla"><b>Entrega en PDF</b>Al terminar pulsa «Generar PDF», guárdalo y súbelo a la plataforma del curso antes del martes 27 de octubre a las 23:59.</div>
+    <div class="regla"><b>Entrega en esta página</b>Tu avance se guarda solo en el servidor y puedes seguir desde otro computador. Cuando termines pulsa «Entregar»: <b>se entrega una sola vez</b> y después no se puede cambiar. «Generar PDF» te deja una copia.</div>
   </div>
   <p class="aviso"><b>Cómo se califica:</b> cada casilla vale 1 (correcta y concreta), 0,5 (incompleta) o 0. La
     ortografía no se penaliza si el término se reconoce. Nota = 5 × puntos ÷ puntos posibles.</p>
-  <p class="aviso">Lo que escribes se guarda solo en este navegador mientras trabajas: si recargas la página no se pierde. Usa siempre el mismo computador.</p>
+  <p class="aviso">Lo que escribes se guarda en este navegador y, después de «Entrar», también en el servidor cada pocos segundos: si recargas la página o cambias de computador, no se pierde.</p>
 </section>
 
 <!-- ═══════════ LÁMINA 1 · MAPA ═══════════ -->
@@ -400,19 +413,25 @@ table.resp tr.lleno td.n{color:var(--teal)}
 
 <div class="entrega">
   <span class="prog" id="prog"></span>
+  <span id="guardado"></span>
   <span class="sp"></span>
   <button class="sec" id="borrar">Empezar de nuevo</button>
-  <button id="pdf">Generar PDF</button>
+  <button class="sec" id="pdf">Generar PDF</button>
+  <button id="entregar" disabled title="Primero pulsa «Entrar» arriba">Entregar</button>
 </div>
 
 <div id="informe"></div>
 
 <script>
 const CLAVE = "morfo_taller_endocrino_2026II_v1";
+const VERSION = "endocrino-v1";                                       // = CONFIG.VERSION del servidor
+const API   = "https://script.google.com/macros/s/AKfycbwTuj5Ovv2IW5LMLs7n4BlnMKlSaLBq5aHCTZjTWyn7NX8OcAZuYKb19IGs3t9EkyEH/exec";
+const TOKEN = "TALLER_ENDOCRINO_MORF_2026II_5b165b";                  // escritura: público por diseño
 let E = {};
 try { E = JSON.parse(localStorage.getItem(CLAVE) || "{}") || {}; } catch (e) { E = {}; }
 const guardar = () => { try { localStorage.setItem(CLAVE, JSON.stringify(E)); } catch (e) {} };
 const esc = s => String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+const $ = id => document.getElementById(id);
 
 /* tablas de respuesta: N filas por lámina; la 7 lleva una columna más */
 document.querySelectorAll("table.resp").forEach(t => {
@@ -430,8 +449,6 @@ document.querySelectorAll("table.resp").forEach(t => {
 
 const campos = () => [...document.querySelectorAll("[data-k][data-c]")];
 function pintar() {
-  document.getElementById("nombre").value = E.nombre || "";
-  document.getElementById("codigo").value = E.codigo || "";
   campos().forEach(c => c.value = (E[c.dataset.k] || {})[c.dataset.c] || "");
   progreso();
 }
@@ -446,24 +463,115 @@ function progreso() {
 }
 document.addEventListener("input", ev => {
   const c = ev.target;
-  if (c.id === "nombre" || c.id === "codigo") { E[c.id] = c.value; guardar(); return; }
-  if (!c.dataset.k) return;
-  E[c.dataset.k] = E[c.dataset.k] || {}; E[c.dataset.k][c.dataset.c] = c.value; guardar(); progreso();
+  if (!c.dataset.k || ENTREGADO) return;
+  E[c.dataset.k] = E[c.dataset.k] || {}; E[c.dataset.k][c.dataset.c] = c.value; guardar(); progreso(); programarGuardado();
 });
 document.getElementById("borrar").onclick = () => {
-  if (confirm("¿Borrar todas tus respuestas de este navegador y empezar de nuevo?")) { E = {}; guardar(); pintar(); }
+  if (ENTREGADO) { alert("Ya entregaste: tu entrega no se puede cambiar."); return; }
+  if (confirm("¿Borrar todas tus respuestas y empezar de nuevo? También se borra tu avance guardado en el servidor.")) {
+    const n = E.nombre, d = E.codigo; E = {nombre: n, codigo: d}; guardar(); pintar(); programarGuardado();
+  }
+};
+
+/* ── servidor: entrar, guardar solo, entregar una vez ── */
+let VERIFICADO = false, ENTREGADO = false, pendiente = null, enVuelo = false;
+const respuestas = () => { const r = {}; Object.keys(E).forEach(k => { if (/^\d\.\d+$/.test(k)) r[k] = E[k]; }); return r; };
+const completos = r => Object.values(r).filter(x => (x.e || "").trim() && (x.f || "").trim()).length;
+async function apiGet(action) { const r = await fetch(`${API}?token=${encodeURIComponent(TOKEN)}&action=${action}`); return r.json(); }
+async function apiPost(payload) {
+  const r = await fetch(API, {method: "POST", redirect: "follow", headers: {"Content-Type": "text/plain;charset=utf-8"},
+    body: JSON.stringify(Object.assign({token: TOKEN, version: VERSION, alumno: E.nombre, codigo: E.codigo}, payload))});
+  return r.json();
+}
+function srv(html, cls) { $("srvAviso").innerHTML = html ? `<div class="srv ${cls || ""}">${html}</div>` : ""; }
+function estadoIdent(txt, cls) { const d = $("identEstado"); d.textContent = txt; d.className = cls || ""; }
+function tratarError(r) {
+  if (r.error === "version_antigua") { srv('Hay una versión nueva del taller: recarga la página (no pierdes nada).', "rojo"); return true; }
+  if (r.error === "codigo_incorrecto" || r.error === "alumno_desconocido") { VERIFICADO = false; $("entregar").disabled = true; estadoIdent("Vuelve a entrar: tu nombre o tu documento no coinciden con la lista.", "mal"); return true; }
+  if (r.error === "ya_entregado") { marcarEntregado(r.fecha ? {fecha: r.fecha, estado: r.estado} : null); return true; }
+  if (r.error === "taller_cerrado") { srv("El taller está cerrado: ya no se reciben entregas.", "rojo"); return true; }
+  return false;
+}
+function marcarEntregado(info) {
+  ENTREGADO = true; clearTimeout(pendiente);
+  $("entregar").disabled = true; $("entregar").textContent = "Entregado";
+  document.querySelectorAll("[data-k][data-c]").forEach(c => c.readOnly = true);
+  $("guardado").textContent = "";
+  srv(`<b>✓ Ya entregaste</b>${info ? " el " + esc(info.fecha) + (info.estado === "TARDE" ? " (fuera de plazo)" : "") : ""}. Tu entrega no se puede cambiar; con «Generar PDF» guardas una copia.`, "verde");
+}
+
+function programarGuardado() { if (!VERIFICADO || ENTREGADO) return; clearTimeout(pendiente); pendiente = setTimeout(guardarServidor, 4000); }
+async function guardarServidor() {
+  if (!VERIFICADO || ENTREGADO) return;
+  if (enVuelo) { programarGuardado(); return; }
+  enVuelo = true; $("guardado").textContent = "guardando…";
+  try {
+    const r = await apiPost({action: "guardar", resp: respuestas()});
+    if (r.ok) $("guardado").textContent = "guardado en el servidor " + new Date().toLocaleTimeString("es-CO", {hour: "2-digit", minute: "2-digit"});
+    else if (!tratarError(r)) { $("guardado").textContent = "sin guardar: reintentando"; enVuelo = false; programarGuardado(); return; }
+  } catch (e) { $("guardado").textContent = "sin conexión: reintentando"; enVuelo = false; programarGuardado(); return; }
+  enVuelo = false;
+}
+
+async function iniciar() {
+  try {
+    const r = await apiGet("roster");
+    if (!r.ok) { estadoIdent(r.error === "taller_cerrado" ? "El taller está cerrado." : "No se pudo cargar la lista del curso. Recarga la página.", "mal"); return; }
+    $("nombre").innerHTML = '<option value="">— elige tu nombre —</option>' + r.roster.map(n => `<option>${esc(n)}</option>`).join("");
+    if (r.plazo && !r.plazo.abierto) srv(`<b>El plazo se cerró</b> el ${esc(r.plazo.cierra)}. Todavía puedes entregar, pero quedará como entrega tardía.`, "rojo");
+    if (E.nombre && E.codigo) { $("nombre").value = E.nombre; $("codigo").value = E.codigo; entrar(); }
+  } catch (e) { estadoIdent("Sin conexión con el servidor. Puedes seguir trabajando: se guarda en este navegador. Recarga cuando tengas internet.", "mal"); }
+}
+async function entrar() {
+  const nom = $("nombre").value, doc = $("codigo").value.trim();
+  if (!nom || !doc) { estadoIdent("Elige tu nombre y escribe tu documento.", "mal"); return; }
+  $("entrar").disabled = true; estadoIdent("Comprobando…");
+  try {
+    const anterior = E.nombre;
+    const r = await apiPost({action: "ingreso", alumno: nom, codigo: doc});
+    if (!r.ok) { $("entrar").disabled = false; estadoIdent(r.error === "codigo_incorrecto" ? "El documento no coincide con el de la lista del curso." : "No se pudo entrar (" + r.error + ").", "mal"); return; }
+    if (anterior && anterior !== nom) E = {};                     // otro estudiante en este navegador: no hereda respuestas
+    E.nombre = nom; E.codigo = doc; guardar(); VERIFICADO = true;
+    estadoIdent("✓ Trabajando como " + nom + ". Tu avance se guarda solo en el servidor.", "bien");
+    if (r.borrador) {
+      const local = completos(respuestas()), remoto = r.borrador.completos;
+      if (!Object.keys(respuestas()).length || (remoto > local &&
+          confirm(`En el servidor tienes un avance del ${r.borrador.fecha} con ${remoto} números completos; en este navegador, ${local}. ¿Cargar el del servidor?`))) {
+        Object.assign(E, r.borrador.resp); guardar(); pintar();
+      }
+    }
+    if (r.entregado) { pintar(); marcarEntregado(r.entregado); return; }
+    $("entregar").disabled = false; $("entregar").title = "";
+    if (r.plazo && r.plazo.abierto) srv(`La entrega cierra el <b>${esc(r.plazo.cierra)}</b>.`);
+    if (Object.keys(respuestas()).length) guardarServidor();
+  } catch (e) { $("entrar").disabled = false; estadoIdent("Sin conexión. Inténtalo de nuevo.", "mal"); }
+}
+$("entrar").onclick = entrar;
+
+$("entregar").onclick = async () => {
+  if (!VERIFICADO || ENTREGADO) return;
+  const r0 = respuestas(), filas = document.querySelectorAll("tr[data-k]").length, hechos = completos(r0);
+  if (!confirm(`Vas a entregar ${hechos} de ${filas} números completos.\n\nSe entrega UNA sola vez: después no podrás cambiar nada. ¿Entregar ahora?`)) return;
+  clearTimeout(pendiente);
+  $("entregar").disabled = true; $("entregar").textContent = "Entregando…";
+  try {
+    const r = await apiPost({action: "entregar", resp: r0});
+    if (r.ok) { marcarEntregado({fecha: r.fecha, estado: r.estado}); return; }
+    $("entregar").textContent = "Entregar";
+    if (!tratarError(r)) { $("entregar").disabled = false; alert("No se pudo entregar (" + (r.detalle || r.error) + "). Inténtalo de nuevo."); }
+  } catch (e) { $("entregar").disabled = false; $("entregar").textContent = "Entregar"; alert("Sin conexión: no se entregó. Inténtalo de nuevo."); }
 };
 
 /* el PDF: un informe limpio con todas las respuestas, y la impresión del navegador lo guarda */
 document.getElementById("pdf").onclick = () => {
   const nom = (E.nombre || "").trim(), cod = (E.codigo || "").trim();
-  if (!nom || !cod) { alert("Escribe tu nombre y tu código antes de generar el PDF."); document.getElementById("nombre").focus(); return; }
+  if (!nom || !cod) { alert("Primero elige tu nombre, escribe tu documento y pulsa «Entrar»."); document.getElementById("nombre").focus(); return; }
   const filas = document.querySelectorAll("tr[data-k]").length;
   const vacias = [...document.querySelectorAll("tr[data-k]")].filter(tr => !((E[tr.dataset.k] || {}).e || "").trim()).length;
   if (vacias && !confirm(`Te faltan ${vacias} estructuras de ${filas}. ¿Generar el PDF de todos modos?`)) return;
   const ahora = new Date().toLocaleString("es-CO", { dateStyle: "long", timeStyle: "short", timeZone: "America/Bogota" });
   let h = `<h1>Taller gráfico · Sistema endocrino</h1>
-    <div class="meta">${esc(nom)} · código ${esc(cod)} · Morfología General 2026-II · generado el ${esc(ahora)}</div>`;
+    <div class="meta">${esc(nom)} · Morfología General 2026-II · generado el ${esc(ahora)}</div>`;
   document.querySelectorAll(".lamina").forEach(l => {
     const L = l.dataset.lam, extra = l.querySelector("table.resp").dataset.extra;
     h += `<h2>Lámina ${L} · ${esc(l.dataset.titulo)}</h2><table><tr><th>N.º</th><th>Estructura</th><th>Para qué sirve</th>${extra ? `<th>${esc(extra)}</th>` : ""}</tr>`;
@@ -473,7 +581,7 @@ document.getElementById("pdf").onclick = () => {
     });
     h += "</table>";
   });
-  h += `<p class="pie">Completos: ${filas - vacias} de ${filas}. Guarda este documento como PDF y súbelo a la plataforma del curso.</p>`;
+  h += `<p class="pie">Completos: ${filas - vacias} de ${filas}. Esta es tu copia: la entrega es la que haces con el botón «Entregar» de la página.</p>`;
   document.getElementById("informe").innerHTML = h;
   const t = document.title;
   document.title = "Taller_endocrino_" + nom.replace(/[^\wáéíóúñÁÉÍÓÚÑ]+/g, "_");
@@ -481,6 +589,7 @@ document.getElementById("pdf").onclick = () => {
   setTimeout(() => { document.title = t; }, 1000);
 };
 pintar();
+iniciar();
 </script>
 </body>
 </html>
