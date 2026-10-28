@@ -1,0 +1,1679 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sistema respiratorio · Clase 12 · Morfología General 2026-II</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:#1a2a35;--text:#2c3e4f;--text-soft:#5a6b7a;--text-muted:#8a9aa8;
+  --parchment:#f8f3e8;--parchment-dark:#f0e8d4;--parchment-deep:#e8dcc0;
+  --bg-card:#fdfaf2;--border:#d4c8a8;--border-light:#e5dbc0;
+  --amber:#b8860b;--amber-dark:#8b6914;--amber-light:#d4a72c;--amber-pale:#f5e9c8;
+  --teal:#2a7a6e;--teal-dark:#1f5d54;
+  --rust:#a0522d;--rust-dark:#7d3f22;
+  --clinical:#b5413b;--clinical-dark:#8a2f2a;--clinical-bg:#fce8e6;
+  --blue:#1976a1;--blue-dark:#115670;--blue-bg:#e3f0f5;
+  --green:#2e7d32;--green-bg:#e8f5e9;
+  --purple:#6b4a8a;--purple-bg:#f0e8f4;--purple-dark:#4a2d6e;
+  --shadow-sm:0 2px 8px rgba(26,42,53,0.06);
+  --shadow-md:0 4px 20px rgba(26,42,53,0.10);
+  --font-display:'Playfair Display',Georgia,serif;
+  --font-body:'Source Serif 4',Georgia,serif;
+  --font-mono:'DM Mono','Courier New',monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-body);background:var(--parchment);color:var(--text);line-height:1.75;font-size:17px;
+  background-image:radial-gradient(at 12% 8%,rgba(184,134,11,.04) 0%,transparent 50%),radial-gradient(at 88% 92%,rgba(42,122,110,.04) 0%,transparent 50%);
+  background-attachment:fixed}
+
+/* HEADER */
+.header{text-align:center;padding:70px 30px 50px;border-bottom:3px double var(--amber);margin-bottom:50px;position:relative}
+.header::before{content:'';position:absolute;top:30px;left:50%;transform:translateX(-50%);width:80px;height:1px;background:var(--amber)}
+.eyebrow{font-family:var(--font-mono);font-size:.78rem;letter-spacing:.32em;text-transform:uppercase;color:var(--amber-dark);margin-bottom:14px}
+.header h1{font-family:var(--font-display);font-size:clamp(2.2rem,5vw,3.6rem);font-weight:900;color:var(--ink);line-height:1.05;margin-bottom:12px}
+.header h1 em{font-style:italic;font-weight:400;color:var(--amber-dark)}
+.header .subtitle{font-family:var(--font-body);font-style:italic;font-size:1.15rem;color:var(--text-soft);margin-bottom:22px;font-weight:300}
+.header .meta{font-family:var(--font-mono);font-size:.82rem;letter-spacing:.18em;color:var(--text-muted);text-transform:uppercase}
+
+/* TABS */
+.tab-bar{background:var(--bg-card);border:1px solid var(--border);border-radius:4px;padding:0;margin-bottom:50px;box-shadow:var(--shadow-sm);overflow:hidden;display:flex}
+.tab-btn{flex:1;padding:18px 24px;background:none;border:none;border-right:1px solid var(--border-light);font-family:var(--font-body);font-size:.95rem;color:var(--text-soft);cursor:pointer;transition:all .2s;text-align:center;line-height:1.4}
+.tab-btn:last-child{border-right:none}
+.tab-btn:hover{background:var(--parchment-dark);color:var(--ink)}
+.tab-btn.active{background:var(--amber-pale);color:var(--ink);font-weight:600;border-bottom:3px solid var(--amber)}
+.tab-btn .tab-date{display:block;font-family:var(--font-mono);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--amber-dark);margin-bottom:4px}
+.tab-pane{display:none}
+.tab-pane.active{display:block}
+
+/* CONTAINER */
+.container{max-width:1100px;margin:0 auto;padding:0 30px 80px}
+
+/* NAV INTERNA */
+.station-nav{background:var(--bg-card);border:1px solid var(--border);border-radius:4px;padding:24px 28px;margin-bottom:50px;box-shadow:var(--shadow-sm)}
+.station-nav h3{font-family:var(--font-mono);font-size:.75rem;letter-spacing:.25em;text-transform:uppercase;color:var(--amber-dark);margin-bottom:16px}
+.station-nav ol{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px 24px;counter-reset:stations}
+.station-nav li{counter-increment:stations;padding:4px 0}
+.station-nav li::before{content:counter(stations,decimal-leading-zero) '. ';font-family:var(--font-mono);color:var(--amber-dark);font-weight:500;margin-right:6px}
+.station-nav a{color:var(--text);text-decoration:none;font-style:italic;border-bottom:1px dotted var(--border);transition:color .2s,border-color .2s}
+.station-nav a:hover{color:var(--amber-dark);border-color:var(--amber-dark)}
+
+/* STATIONS */
+.station{margin-bottom:80px;scroll-margin-top:30px}
+.station-header{display:flex;align-items:baseline;gap:20px;margin-bottom:30px;padding-bottom:18px;border-bottom:2px solid var(--border)}
+.station-number{font-family:var(--font-display);font-style:italic;font-size:4rem;font-weight:400;color:var(--amber);line-height:1;flex-shrink:0}
+.station-titles{flex:1}
+.station-eyebrow{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;color:var(--amber-dark);margin-bottom:6px}
+.station h2{font-family:var(--font-display);font-size:clamp(1.7rem,3.5vw,2.4rem);font-weight:700;color:var(--ink);line-height:1.15}
+
+/* CONTENT BLOCK */
+.content-block{background:var(--bg-card);border:1px solid var(--border-light);border-radius:4px;padding:28px 32px;margin-bottom:24px;box-shadow:var(--shadow-sm)}
+.content-block h3{font-family:var(--font-display);font-size:1.4rem;font-weight:700;color:var(--ink);margin-bottom:16px;padding-bottom:8px;border-bottom:1px dotted var(--border)}
+.content-block h4{font-family:var(--font-display);font-size:1.1rem;font-weight:700;color:var(--amber-dark);margin:20px 0 10px;font-style:italic}
+.content-block p{margin-bottom:14px}
+.content-block ul,.content-block ol{margin:12px 0 18px 24px}
+.content-block li{margin-bottom:8px;padding-left:6px}
+.content-block strong{color:var(--ink);font-weight:700}
+.content-block em.term{font-style:italic;color:var(--amber-dark);font-weight:600}
+
+/* TWO-COL / THREE-COL */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:20px 0}
+.three-col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin:20px 0}
+@media(max-width:900px){.two-col,.three-col{grid-template-columns:1fr}}
+.col-card{background:var(--parchment-dark);border-left:4px solid var(--amber);padding:18px 22px;border-radius:2px}
+.col-card.teal{border-color:var(--teal);background:#e8f0ee}
+.col-card.rust{border-color:var(--rust);background:#f3e8de}
+.col-card.blue{border-color:var(--blue);background:var(--blue-bg)}
+.col-card.green{border-color:var(--green);background:var(--green-bg)}
+.col-card h5{font-family:var(--font-display);font-weight:700;color:var(--ink);margin-bottom:8px;font-size:1.05rem}
+
+/* TABLE */
+table.data{width:100%;border-collapse:collapse;margin:18px 0;font-size:.95rem}
+table.data th{background:var(--amber-dark);color:var(--parchment);padding:10px 14px;text-align:left;font-family:var(--font-mono);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;font-weight:500}
+table.data td{padding:10px 14px;border-bottom:1px solid var(--border-light);vertical-align:top}
+table.data tr:nth-child(even) td{background:var(--parchment-dark)}
+table.data tr:hover td{background:var(--amber-pale)}
+
+/* CLINICAL BOX */
+.clinical-box{background:var(--clinical-bg);border-left:5px solid var(--clinical);padding:20px 26px;margin:22px 0;border-radius:2px;position:relative}
+.clinical-box::before{content:'👁 Interfaz optométrica';display:block;font-family:var(--font-mono);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--clinical-dark);margin-bottom:10px;font-weight:600}
+.clinical-box h5{font-family:var(--font-display);font-weight:700;color:var(--clinical-dark);font-size:1.1rem;margin-bottom:6px}
+
+/* PEARL */
+.pearl{background:var(--amber-pale);border:1px solid var(--amber-light);border-radius:2px;padding:16px 22px;margin:18px 0;font-style:italic;color:var(--text);position:relative;padding-left:50px}
+.pearl::before{content:'◆';position:absolute;left:18px;top:16px;color:var(--amber-dark);font-size:1.2rem;font-style:normal}
+
+/* SABER PRO */
+.saber-box{background:var(--purple-bg);border-left:5px solid var(--purple);padding:20px 26px;margin:22px 0;border-radius:2px}
+.saber-box::before{content:'★ Tipo Saber Pro';display:block;font-family:var(--font-mono);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--purple-dark);margin-bottom:10px;font-weight:600}
+
+/* FIGURE */
+.figure{margin:28px 0;background:var(--bg-card);border:1px solid var(--border-light);border-radius:4px;padding:20px;box-shadow:var(--shadow-sm);text-align:center}
+.figure svg{width:100%;max-width:800px;height:auto}
+.figure-caption{font-family:var(--font-mono);font-size:.78rem;color:var(--text-muted);margin-top:12px;letter-spacing:.06em;text-align:center}
+
+/* FLIP CARDS */
+.flip-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;margin:20px 0}
+.flip-card{height:160px;perspective:800px;cursor:pointer}
+.flip-inner{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform .5s ease}
+.flip-card:hover .flip-inner,.flip-card.flipped .flip-inner{transform:rotateY(180deg)}
+.flip-front,.flip-back{position:absolute;inset:0;border-radius:4px;padding:16px;backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.flip-front{background:var(--bg-card);border:2px solid var(--border)}
+.flip-back{background:var(--amber-pale);border:2px solid var(--amber);transform:rotateY(180deg)}
+.flip-front .term-label{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px}
+.flip-front .term-name{font-family:var(--font-display);font-size:1.15rem;font-weight:700;color:var(--ink);line-height:1.2}
+.flip-front .term-en{font-family:var(--font-mono);font-size:.75rem;color:var(--text-muted);margin-top:6px;font-style:italic}
+.flip-back .term-def{font-size:.88rem;color:var(--text);line-height:1.5;margin-bottom:8px}
+.flip-back .term-opto{font-family:var(--font-mono);font-size:.72rem;color:var(--clinical-dark);letter-spacing:.05em}
+
+/* CHECK QUESTION */
+.check-question{background:linear-gradient(180deg,#fdfaf2 0%,#f5ecd5 100%);border:2px dashed var(--amber);border-radius:4px;padding:28px 30px;margin:30px 0;position:relative}
+.check-question::before{content:'? Verificación';position:absolute;top:-12px;left:24px;background:var(--parchment);padding:2px 14px;font-family:var(--font-mono);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--amber-dark);font-weight:600}
+.check-question .question-text{font-family:var(--font-display);font-size:1.15rem;color:var(--ink);margin-bottom:18px;font-weight:400;font-style:italic}
+.options{list-style:none;margin:0}
+.options li{margin-bottom:10px;padding:12px 18px;background:var(--bg-card);border:1px solid var(--border);border-radius:3px;cursor:pointer;transition:all .2s;position:relative;padding-left:50px}
+.options li::before{content:attr(data-letter);position:absolute;left:16px;top:50%;transform:translateY(-50%);font-family:var(--font-mono);font-weight:500;color:var(--amber-dark)}
+.options li:hover{background:var(--amber-pale);border-color:var(--amber)}
+.options li.correct{background:#e8f5e8;border-color:#2e7d32;color:#1b5e20}
+.options li.correct::after{content:' ✓';color:#2e7d32;font-weight:700}
+.options li.incorrect{background:var(--clinical-bg);border-color:var(--clinical);color:var(--clinical-dark)}
+.options li.incorrect::after{content:' ✗';color:var(--clinical);font-weight:700}
+.feedback{display:none;margin-top:16px;padding:14px 18px;background:var(--bg-card);border-left:4px solid var(--amber);border-radius:2px;font-size:.96rem}
+.feedback.show{display:block}
+.feedback strong{color:var(--amber-dark)}
+
+/* PHOTO */
+.photo-grid{display:grid;gap:20px;margin:24px 0}
+@media(min-width:640px){.photo-grid.cols-2{grid-template-columns:1fr 1fr}.photo-grid.cols-3{grid-template-columns:1fr 1fr 1fr}}
+.photo-card{background:var(--bg-card);border:1px solid var(--border-light);border-radius:4px;padding:14px;box-shadow:var(--shadow-sm);transition:box-shadow .2s}
+.photo-card:hover{box-shadow:var(--shadow-md)}
+.photo-card .photo-frame{position:relative;background:repeating-linear-gradient(45deg,var(--parchment-dark) 0,var(--parchment-dark) 10px,var(--parchment-deep) 10px,var(--parchment-deep) 20px);border-radius:3px;overflow:hidden;min-height:200px;display:flex;align-items:center;justify-content:center}
+.photo-card img{display:block;width:100%;height:auto;border-radius:3px;cursor:zoom-in}
+.photo-card img.broken{display:none}
+.photo-card .photo-missing{display:none;font-family:var(--font-mono);font-size:.75rem;color:var(--text-muted);text-align:center;padding:40px 20px;letter-spacing:.08em;text-transform:uppercase}
+.photo-card img.broken+.photo-missing{display:block}
+.photo-card .photo-missing::before{content:'⏳ ';margin-right:4px}
+.photo-card .photo-caption{font-family:var(--font-body);font-size:.92rem;color:var(--text);margin-top:12px;line-height:1.5}
+.photo-card .photo-caption strong{font-family:var(--font-display);color:var(--ink);display:block;margin-bottom:4px;font-weight:700;font-size:.98rem}
+.photo-card .photo-credit{font-family:var(--font-mono);font-size:.7rem;color:var(--text-muted);margin-top:8px;letter-spacing:.06em;text-transform:uppercase}
+.photo-hero{background:var(--bg-card);border:1px solid var(--border-light);border-radius:4px;padding:18px;margin:24px 0;box-shadow:var(--shadow-sm);text-align:center}
+.photo-hero img{display:block;width:100%;max-width:720px;height:auto;margin:0 auto;border-radius:3px;cursor:zoom-in}
+.photo-hero img.broken{display:none}
+.photo-hero .photo-missing{display:none;font-family:var(--font-mono);font-size:.78rem;color:var(--text-muted);padding:60px 20px;letter-spacing:.1em;text-transform:uppercase}
+.photo-hero img.broken+.photo-missing{display:block}
+.photo-hero .photo-missing::before{content:'⏳ ';margin-right:4px}
+.photo-hero .photo-caption{font-family:var(--font-body);font-size:.92rem;color:var(--text);margin-top:14px;max-width:640px;margin-left:auto;margin-right:auto}
+.photo-hero .photo-caption strong{font-family:var(--font-display);color:var(--ink);font-weight:700}
+
+/* LIGHTBOX */
+.lightbox{display:none;position:fixed;inset:0;background:rgba(26,42,53,.92);z-index:9999;align-items:center;justify-content:center;padding:30px;cursor:zoom-out}
+.lightbox.open{display:flex}
+.lightbox img{max-width:95vw;max-height:90vh;border-radius:4px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.lightbox .lb-caption{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);color:var(--parchment);font-family:var(--font-mono);font-size:.82rem;background:rgba(26,42,53,.7);padding:8px 16px;border-radius:2px;max-width:90vw;text-align:center}
+.lightbox .lb-close{position:absolute;top:20px;right:30px;background:none;border:2px solid var(--parchment);color:var(--parchment);width:44px;height:44px;border-radius:50%;font-size:1.3rem;cursor:pointer;font-family:var(--font-mono)}
+.lightbox .lb-close:hover{background:rgba(255,255,255,.1)}
+
+/* FOOTER */
+.footer{margin-top:80px;padding:30px;text-align:center;border-top:3px double var(--amber);font-family:var(--font-mono);font-size:.78rem;color:var(--text-muted);letter-spacing:.12em}
+/* ACORDEONES — <details>/<summary> nativos: se despliegan sin JavaScript,
+   así que funcionan aunque el archivo se abra desde el disco o se imprima. */
+.acorde{background:var(--bg-card);border:1px solid var(--border-light);border-left:4px solid var(--teal);
+  border-radius:3px;margin:10px 0;overflow:hidden}
+.acorde > summary{cursor:pointer;padding:13px 18px;font-family:var(--font-display);font-weight:700;
+  color:var(--ink);font-size:1rem;list-style:none;display:flex;align-items:center;gap:10px;
+  background:var(--parchment-dark);transition:background .15s}
+.acorde > summary:hover{background:var(--amber-pale)}
+.acorde > summary::-webkit-details-marker{display:none}
+.acorde > summary::before{content:'+';font-family:var(--font-mono);font-size:1.15rem;color:var(--teal);
+  font-weight:400;width:16px;flex-shrink:0;text-align:center}
+.acorde[open] > summary::before{content:'−'}
+.acorde[open] > summary{border-bottom:1px solid var(--border-light)}
+.acorde > summary .pista{font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted);
+  font-weight:400;letter-spacing:.06em;margin-left:auto;text-transform:uppercase}
+.acorde .cuerpo{padding:16px 18px 18px}
+.acorde .cuerpo > *:last-child{margin-bottom:0}
+.acorde.rust{border-left-color:var(--rust)} .acorde.amber{border-left-color:var(--amber)}
+.acorde.blue{border-left-color:var(--blue)} .acorde.purple{border-left-color:var(--purple)}
+@media print{.acorde .cuerpo{display:block!important}.acorde > summary::before{content:''}}
+
+/* Ficha de tejido: la imagen del cuadro de Tortora más su texto */
+.ficha{margin:22px 0}
+.ficha > h4{font-family:var(--font-display);font-size:1.12rem;color:var(--ink);font-weight:700;
+  margin-bottom:4px;padding-bottom:5px;border-bottom:2px solid var(--amber-light)}
+.ficha .datos{display:grid;grid-template-columns:auto 1fr;gap:5px 14px;margin:10px 0 0;font-size:.93rem}
+.ficha .datos dt{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--amber-dark);padding-top:3px;font-weight:500}
+.ficha .datos dd{margin:0;color:var(--text)}
+.ficha .datos dd b{color:var(--ink)}
+@media(max-width:640px){.ficha .datos{grid-template-columns:1fr;gap:2px}
+  .ficha .datos dd{margin-bottom:8px}}
+
+@media print{body{background:white;font-size:11pt}.tab-bar{display:none}}
+
+/* ─── Añadidos de la clase 6 ─── */
+
+/* Fichas de hueso: nombre, cuántos son y qué aporta a la órbita */
+.huesos-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(215px,1fr));gap:12px;margin:18px 0}
+.hueso{background:var(--parchment-dark);border:1px solid var(--border-light);border-left:4px solid var(--teal);
+  border-radius:3px;padding:12px 15px}
+.hueso.orb{border-left-color:var(--clinical);background:#fbeeec}
+.hueso .nom{font-family:var(--font-display);font-weight:700;color:var(--ink);font-size:1.02rem}
+.hueso .par{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--text-muted);display:block;margin-bottom:5px}
+.hueso .que{font-size:.87rem;color:var(--text-soft);line-height:1.45;margin-top:4px}
+.hueso .marca{display:inline-block;font-family:var(--font-mono);font-size:.62rem;letter-spacing:.1em;
+  text-transform:uppercase;background:var(--clinical);color:#fff;padding:1px 7px;border-radius:9px;margin-top:7px}
+
+/* Puntos craneométricos: cada punto con su traducción de campo */
+.puntos{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px;margin:16px 0}
+.punto{background:var(--bg-card);border:1px solid var(--border-light);border-radius:3px;padding:11px 14px;font-size:.9rem}
+.punto b{font-family:var(--font-display);color:var(--amber-dark);font-size:1rem;display:block}
+.punto.clave{background:var(--amber-pale);border-color:var(--amber-light)}
+
+/* Recorrido: una cadena de pasos con flecha, para el drenaje de la lágrima */
+.recorrido{display:flex;flex-wrap:wrap;align-items:stretch;gap:0;margin:20px 0;font-size:.86rem}
+.recorrido .paso{background:var(--blue-bg);border:1px solid var(--blue);color:var(--blue-dark);
+  padding:9px 14px;border-radius:3px;display:flex;align-items:center;text-align:center;line-height:1.35}
+.recorrido .flecha{display:flex;align-items:center;color:var(--blue);padding:0 8px;font-size:1.15rem}
+@media(max-width:720px){.recorrido{flex-direction:column}
+  .recorrido .flecha{padding:3px 0;transform:rotate(90deg)}}
+
+/* Aviso de que un tema se retoma en otra clase, para no invadir el temario */
+.adelanto{background:var(--parchment-dark);border:1px dashed var(--teal);border-radius:3px;
+  padding:14px 20px;margin:20px 0;font-size:.93rem;color:var(--text-soft)}
+.adelanto::before{content:'→ Se retoma más adelante';display:block;font-family:var(--font-mono);
+  font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--teal-dark);
+  margin-bottom:7px;font-weight:600}
+.adelanto strong{color:var(--ink)}
+</style>
+<body>
+
+<header class="header">
+  <div class="eyebrow">Clase 12 · Morfología General 2026-II</div>
+  <h1>Sistema respiratorio: el aire, la sangre y <em>un pulmón que se ve en la pupila</em></h1>
+  <p class="subtitle">Un tubo que se ramifica veintitrés veces hasta terminar en trescientos millones de alvéolos, un músculo que lo mueve todo y cuatro maneras en que el pulmón se asoma al ojo</p>
+  <div class="meta">Dr. Jorge Bogoya &middot; Universidad de La Salle &middot; Optometría &middot; Primer semestre</div>
+</header>
+
+<div class="container">
+
+<div class="tab-bar" role="tablist">
+  <button class="tab-btn active" role="tab" onclick="showTab('s1',this)">
+    <span class="tab-date">Jue. 29 oct · 09:00–11:00</span>
+    Sesión única · El aire y el ojo
+  </button>
+</div>
+
+<!-- ═══════════════════════ SESIÓN ÚNICA ═══════════════════════ -->
+<div class="tab-pane active" id="s1">
+<nav class="station-nav">
+  <h3>Contenido</h3>
+  <ol>
+    <li><a href="#e0">Para empezar: cuatro pacientes</a></li>
+    <li><a href="#e1">El plan del aparato respiratorio</a></li>
+    <li><a href="#e2">La nariz, los senos y la lágrima</a></li>
+    <li><a href="#e3">Faringe y laringe: el cruce y la voz</a></li>
+    <li><a href="#e4">Tráquea y árbol bronquial</a></li>
+    <li><a href="#e5">Los pulmones y la pleura</a></li>
+    <li><a href="#e6">El alvéolo: donde el aire toca la sangre</a></li>
+    <li><a href="#e7">Cómo entra el aire</a></li>
+    <li><a href="#e8">Gases, sangre y control, en breve</a></li>
+    <li><a href="#e9">El pulmón en la pupila: síndrome de Horner</a></li>
+    <li><a href="#e10">El pulmón en el fondo de ojo y en la conjuntiva</a></li>
+    <li><a href="#e11">Términos TA2</a></li>
+    <li><a href="#e12">Comprueba lo que aprendiste</a></li>
+    <li><a href="#e13">Volvemos a los cuatro pacientes</a></li>
+  </ol>
+</nav>
+
+<!-- ─────────── 00 ─────────── -->
+<section class="station" id="e0">
+  <div class="station-header">
+    <div class="station-number">00</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Para empezar · Conversación</div>
+      <h2>Cuatro pacientes en la consulta de optometría</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Los cuatro consultan por los ojos, y en los cuatro la explicación pasa por la vía aérea o por el
+      pulmón. Responde con lo que ya sabes, sin buscar. Al final de la clase volvemos sobre ellos.</p>
+
+    <div class="two-col">
+      <div class="col-card">
+        <h5>1 · El párpado que cae poquito</h5>
+        <p>Un hombre de 58 años, fumador desde los 18, dice que el ojo derecho «se le ve más chiquito».
+          El párpado derecho cae uno o dos milímetros y, con la luz baja, la pupila derecha es más pequeña
+          que la izquierda. Hace meses le duele el hombro derecho. ¿Qué tiene que ver el hombro con la
+          pupila?</p>
+      </div>
+      <div class="col-card">
+        <h5>2 · La papila hinchada</h5>
+        <p>Una mujer de 66 años con enfisema, que usa oxígeno en casa, viene por visión borrosa. Se
+          despierta con dolor de cabeza. En el fondo de ojo, las dos papilas tienen los bordes borrosos y
+          elevados. ¿Cómo puede un pulmón enfermo hinchar el nervio óptico?</p>
+      </div>
+      <div class="col-card amber">
+        <h5>3 · El sabor de las gotas</h5>
+        <p>Le pones gotas para dilatar la pupila a un niño de 7 años. Un minuto después hace una mueca:
+          dice que le sabe amarga la garganta. ¿Por dónde viajó la gota desde el ojo hasta la boca, y qué
+          puedes hacer para que no pase?</p>
+      </div>
+      <div class="col-card teal">
+        <h5>4 · El ojo hinchado después del resfriado</h5>
+        <p>Una niña de 9 años lleva una semana con mocos espesos y fiebre. Hoy amaneció con el párpado
+          izquierdo rojo e hinchado, le duele mover el ojo y ve doble. ¿Cómo llegó la infección de la
+          nariz a la órbita?</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 01 ─────────── -->
+<section class="station" id="e1">
+  <div class="station-header">
+    <div class="station-number">01</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">La idea central</div>
+      <h2>El plan del aparato respiratorio</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>El aparato respiratorio es, ante todo, un <strong>tubo que se ramifica</strong>: empieza en la
+      nariz y termina en unos <strong>300 millones de alvéolos</strong>, bolsitas de pared finísima
+      rodeadas de capilares. Su trabajo es llevar el oxígeno del aire hasta la sangre y sacar el dióxido de
+      carbono que produce el cuerpo. Se ordena de dos maneras, y conviene tenerlas claras desde ya.</p>
+
+    <div class="photo-hero">
+      <img src="img/fig_23_1a_aparato_respiratorio.png"
+           alt="Vista anterior de los órganos respiratorios: nariz, cavidad nasal, faringe, laringe, tráquea, bronquio principal derecho y pulmones"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>El mapa de la clase.</strong> Nariz, faringe, laringe, tráquea,
+        bronquios y pulmones. Fíjate en el bronquio principal derecho: más corto, más ancho y más vertical
+        que el izquierdo. Tortora, Fig. 23.1a.</div>
+    </div>
+
+    <div class="two-col">
+      <div class="col-card">
+        <h5>Por su posición</h5>
+        <p>La <strong>vía aérea superior</strong> es la que está en la cabeza y el cuello: nariz, cavidad
+          nasal, senos paranasales y faringe. La <strong>inferior</strong> empieza en la laringe y sigue por
+          la tráquea, los bronquios y los pulmones.</p>
+      </div>
+      <div class="col-card teal">
+        <h5>Por lo que hace</h5>
+        <p>La <strong>zona de conducción</strong> solo lleva el aire, lo filtra, lo calienta y lo humedece:
+          de la nariz a los <em>bronquiolos terminales</em>. La <strong>zona respiratoria</strong> es donde
+          el aire toca la sangre: <em>bronquiolos respiratorios</em>, conductos alveolares, sacos alveolares
+          y alvéolos.</p>
+      </div>
+    </div>
+
+    <div class="pearl">
+      <p><strong>Todo lo que hay antes del alvéolo es «espacio muerto».</strong> Unos 150 mL de cada
+        respiración se quedan en la zona de conducción y nunca participan del intercambio. Por eso respirar
+        rápido y superficial, como un paciente angustiado, mueve mucho aire y oxigena poco.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 02 ─────────── -->
+<section class="station" id="e2">
+  <div class="station-header">
+    <div class="station-number">02</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Vía aérea superior · Relaciones con la órbita</div>
+      <h2>La nariz, los senos y la lágrima</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>La <strong>cavidad nasal</strong> está dividida en dos por el <strong>tabique nasal</strong>. De su
+      pared lateral cuelgan tres láminas de hueso enrolladas, los <strong>cornetes</strong> superior, medio
+      e inferior. Debajo de cada uno queda un canal, el <strong>meato</strong> del mismo nombre. Los cornetes
+      hacen que el aire dé vueltas y roce una mucosa muy irrigada: así se calienta, se humedece y deja
+      pegado el polvo en el moco, que los cilios barren hacia la faringe. En el techo, la mucosa olfatoria
+      recibe las fibras del nervio olfatorio a través de la lámina cribosa del etmoides.</p>
+
+    <div class="two-col">
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_23_2c_cornetes_frontal.png"
+               alt="Corte frontal de la cabeza que muestra el tabique nasal, los cornetes superior, medio e inferior, las celdillas etmoidales, el seno maxilar y el globo ocular a cada lado"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>La nariz vista de frente.</strong> Mira qué cerca están los
+          globos oculares de las celdillas etmoidales y del seno maxilar: entre ellos solo hay hueso muy
+          delgado. Tortora, Fig. 23.2c.</div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_23_2b_via_aerea_parasagital.png"
+               alt="Corte parasagital de la cabeza y el cuello con los cornetes, los meatos, el seno esfenoidal, la nasofaringe, la orofaringe, la laringofaringe, la laringe y el esófago"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>De la nariz a la laringe.</strong> Los tres cornetes con sus
+          meatos, el orificio de la trompa auditiva en la nasofaringe y las tres porciones de la faringe.
+          Tortora, Fig. 23.2b.</div>
+      </div>
+    </div>
+
+    <h3>Los senos paranasales: cuevas de aire alrededor de la órbita</h3>
+    <p>Cuatro huesos del cráneo tienen cavidades llenas de aire, tapizadas por la misma mucosa de la nariz
+      y abiertas a ella: los senos <strong>frontal</strong>, <strong>etmoidales</strong>,
+      <strong>esfenoidal</strong> y <strong>maxilar</strong>. Aligeran el cráneo y dan resonancia a la voz.
+      Ya los viste en cabeza y cuello; lo nuevo es <em>dónde desagua cada uno</em>.</p>
+
+    <table class="data">
+      <tr><th>Dónde desemboca</th><th>Qué llega allí</th><th>Por qué le importa al optómetra</th></tr>
+      <tr><td><strong>Meato superior</strong></td><td>Celdillas etmoidales posteriores</td><td>Pegadas al conducto óptico</td></tr>
+      <tr><td><strong>Meato medio</strong></td><td>Senos frontal y maxilar, celdillas etmoidales anteriores</td><td>El maxilar es el suelo de la órbita; el frontal, su techo</td></tr>
+      <tr><td><strong>Meato inferior</strong></td><td><strong>Conducto nasolagrimal</strong></td><td>Por aquí sale la lágrima, y con ella las gotas que pones en el ojo</td></tr>
+      <tr><td><strong>Receso esfenoetmoidal</strong></td><td>Seno esfenoidal</td><td>Debajo de la hipófisis y al lado del seno cavernoso</td></tr>
+    </table>
+
+    <div class="two-col">
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_7_13ab_senos.png"
+               alt="Senos paranasales vistos de frente y de lado: frontal, etmoidales, esfenoidal y maxilar"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>Los cuatro senos.</strong> El frontal encima de la órbita, el
+          maxilar debajo, las celdillas etmoidales en la pared medial y el esfenoidal detrás. Tortora,
+          Fig. 7.13a-b (clase 6).</div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/moore_8_25_aparato_lagrimal.png"
+               alt="Aparato lagrimal: glándula lagrimal, puntos y canalículos lagrimales, saco lagrimal y conducto nasolagrimal que desemboca en el meato inferior"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>El camino de la lágrima.</strong> Punto lagrimal, canalículo,
+          saco lagrimal y conducto nasolagrimal, que termina debajo del cornete inferior. Moore, Fig. 8.25
+          (clase 6).</div>
+      </div>
+    </div>
+
+    <div class="clinical-box">
+      <h5>La lámina papirácea: un papel entre la nariz y la órbita</h5>
+      <p>La pared medial de la órbita es la <strong>lámina orbitaria del etmoides</strong>, tan delgada
+        que la llaman <em>papirácea</em>. Detrás de ella están las celdillas etmoidales, y la atraviesan
+        venas sin válvulas. En un niño con sinusitis etmoidal, la infección puede cruzarla y producir una
+        <strong>celulitis orbitaria</strong>: párpado rojo e hinchado, dolor al mover el ojo, visión doble y,
+        si avanza, ojo protruido y pérdida de visión. Se distingue de la celulitis preseptal, que se queda
+        delante del septo orbitario y no limita los movimientos del ojo. <strong>Dolor al mover el ojo o
+        visión doble en un niño con sinusitis es una urgencia</strong>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 03 ─────────── -->
+<section class="station" id="e3">
+  <div class="station-header">
+    <div class="station-number">03</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Donde se cruzan el aire y la comida</div>
+      <h2>Faringe y laringe: el cruce y la voz</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>La <strong>faringe</strong> es un tubo muscular de unos 13 cm que comparten el aire y la comida. Tiene
+      tres pisos: la <strong>nasofaringe</strong>, detrás de la nariz, donde se abren las trompas auditivas
+      y está la amígdala faríngea; la <strong>orofaringe</strong>, detrás de la boca, con las amígdalas
+      palatinas; y la <strong>laringofaringe</strong>, que se divide adelante en la laringe y atrás en el
+      esófago.</p>
+
+    <p>La <strong>laringe</strong> es la puerta de la vía aérea inferior. Es un armazón de
+      <strong>nueve cartílagos</strong> unidos por membranas y músculos:</p>
+
+    <div class="three-col">
+      <div class="col-card">
+        <h5>Cartílago tiroides</h5>
+        <p>Dos láminas unidas adelante como un escudo abierto por detrás. Su saliente es la «nuez de Adán»,
+          más marcada en el hombre.</p>
+      </div>
+      <div class="col-card teal">
+        <h5>Cartílago cricoides</h5>
+        <p>Debajo del tiroides. Es el <strong>único anillo completo</strong> de toda la vía aérea, más alto
+          por detrás, como un anillo de sello. Une la laringe con la tráquea.</p>
+      </div>
+      <div class="col-card amber">
+        <h5>Epiglotis</h5>
+        <p>Una hoja de cartílago elástico. Al tragar, la laringe sube, la epiglotis la tapa y la comida
+          pasa por detrás, al esófago.</p>
+      </div>
+    </div>
+    <p>Los otros seis son pares y pequeños: <strong>aritenoides</strong>, sobre el borde posterior del
+      cricoides, que mueven los pliegues vocales; <strong>corniculados</strong> y
+      <strong>cuneiformes</strong>.</p>
+
+    <div class="two-col">
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_23_4ab_laringe.png"
+               alt="Laringe en vista anterior y posterior: epiglotis, hueso hioides, membrana tirohioidea, cartílago tiroides, cartílago cricoides, cartílagos aritenoides y corniculados, glándula tiroides y paratiroides, cartílagos traqueales"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>Nueve cartílagos.</strong> De frente se ven el tiroides y el
+          cricoides; por detrás, los aritenoides apoyados en el cricoides. Abajo está la glándula tiroides de
+          la clase pasada. Tortora, Fig. 23.4a-b.</div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_23_4d_laringe_frontal.png"
+               alt="Corte frontal de la laringe con el vestíbulo, los pliegues vestibulares, los pliegues vocales, la rima glótica, la cavidad infraglótica y la tráquea"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>Dos pares de pliegues.</strong> Arriba, los vestibulares,
+          que no producen voz. Abajo, los vocales: entre ellos queda la rima glótica. Tortora, Fig. 23.4d.</div>
+      </div>
+    </div>
+
+    <h3>La voz</h3>
+    <p>Por dentro, la mucosa de la laringe forma dos pares de pliegues. Los superiores son los
+      <strong>pliegues vestibulares</strong> («cuerdas vocales falsas»): ayudan a cerrar la laringe al hacer
+      fuerza. Los inferiores son los <strong>pliegues vocales</strong>, las cuerdas vocales verdaderas. Los
+      pliegues vocales y el espacio que dejan entre ellos, la <strong>rima glótica</strong>, forman la
+      <strong>glotis</strong>. Los músculos que mueven los aritenoides tensan los pliegues y los acercan; el
+      aire espirado los hace vibrar. Más tensión, tono más agudo; más fuerza del aire, voz más alta.</p>
+
+    <div class="photo-hero">
+      <img src="img/fig_23_5_pliegues_vocales.png"
+           alt="Movimiento de los pliegues vocales: vista superior de los cartílagos y músculos con la glotis abierta y cerrada, y vistas por laringoscopia"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>La glotis se abre para respirar y se cierra para hablar.</strong>
+        Arriba, el esquema; abajo, lo que se ve con el laringoscopio. Tortora, Fig. 23.5.</div>
+    </div>
+
+    <div class="clinical-box">
+      <h5>La ronquera que viene del tórax</h5>
+      <p>Casi todos los músculos de la laringe los mueve el <strong>nervio laríngeo recurrente</strong>,
+        rama del vago. El izquierdo baja hasta el tórax, da la vuelta por debajo del <strong>arco
+        aórtico</strong> y sube entre la tráquea y el esófago. Un tumor del pulmón izquierdo, un ganglio
+        grande en el hilio o un aneurisma de la aorta pueden apretarlo en ese recorrido: un pliegue vocal se
+        paraliza y la voz se vuelve ronca. Una ronquera que dura más de tres semanas en un fumador se
+        estudia.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 04 ─────────── -->
+<section class="station" id="e4">
+  <div class="station-header">
+    <div class="station-number">04</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">El tronco del árbol</div>
+      <h2>Tráquea y árbol bronquial</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>La <strong>tráquea</strong> mide unos 12 cm de largo y 2,5 cm de diámetro. Va del cricoides, a la
+      altura de la sexta vértebra cervical, hasta la quinta torácica, delante del esófago. Su pared lleva
+      entre 16 y 20 <strong>anillos de cartílago en forma de C</strong>, abiertos por detrás. El hueco lo
+      cierran el <strong>músculo traqueal</strong> y una membrana. El cartílago impide que la tráquea se
+      aplaste al inspirar; la parte blanda de atrás deja que el esófago, pegado a ella, se ensanche cuando
+      pasa la comida.</p>
+
+    <p>Por dentro la tapiza un epitelio cilíndrico seudoestratificado ciliado con células caliciformes,
+      el que viste en la clase de tejidos: el moco atrapa partículas y los cilios lo empujan hacia la
+      faringe. El humo del cigarrillo paraliza esos cilios; por eso el fumador tose para sacar lo que los
+      cilios ya no barren.</p>
+
+    <div class="photo-hero">
+      <img src="img/fig_23_7_arbol_bronquial.png"
+           alt="Árbol bronquial: laringe, tráquea, carina, bronquios principales, bronquios lobulares y segmentarios, bronquiolos y bronquiolos terminales, con un recuadro de la ramificación"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>Un árbol al revés.</strong> Tráquea, bronquios principales,
+        lobulares, segmentarios, bronquiolos y bronquiolos terminales. Del cartílago al músculo liso a medida
+        que el tubo se hace pequeño. Tortora, Fig. 23.7.</div>
+    </div>
+
+    <h3>La ramificación</h3>
+    <div class="recorrido">
+      <div class="paso">Tráquea</div><div class="flecha">→</div>
+      <div class="paso">Bronquios principales</div><div class="flecha">→</div>
+      <div class="paso">Lobulares<br><small>3 der · 2 izq</small></div><div class="flecha">→</div>
+      <div class="paso">Segmentarios</div><div class="flecha">→</div>
+      <div class="paso">Bronquiolos</div><div class="flecha">→</div>
+      <div class="paso">Terminales</div>
+    </div>
+    <p>A la altura de la quinta vértebra torácica la tráquea se divide en dos. En el punto de la división,
+      por dentro, hay una cresta de cartílago, la <strong>carina</strong>, con una mucosa tan sensible que
+      tocarla provoca tos. A medida que el tubo se ramifica, los anillos se vuelven placas sueltas, hasta
+      desaparecer en los bronquiolos, y el <strong>músculo liso</strong> gana espacio. En el asma ese
+      músculo se contrae de más y cierra los bronquiolos, que ya no tienen cartílago que los sostenga.</p>
+
+    <div class="pearl">
+      <p><strong>El bronquio derecho es la vía más fácil.</strong> El bronquio principal derecho es más
+        corto, más ancho y más vertical que el izquierdo, que tiene que pasar por encima del corazón y por
+        debajo del arco aórtico. Lo que se cuela por la carina suele seguir el camino más recto.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 05 ─────────── -->
+<section class="station" id="e5">
+  <div class="station-header">
+    <div class="station-number">05</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Los órganos y su envoltura</div>
+      <h2>Los pulmones y la pleura</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Los <strong>pulmones</strong> son dos conos esponjosos que llenan la cavidad torácica a cada lado del
+      corazón. La <strong>base</strong> descansa sobre el diafragma. El <strong>vértice</strong> sube hasta
+      2,5 cm por encima de la clavícula, en la raíz del cuello: allí el pulmón tiene por vecinos a los
+      vasos y nervios que van al brazo y a la cadena simpática. La cara medial tiene el
+      <strong>hilio</strong>, la puerta por donde entran y salen los bronquios, los vasos y los
+      nervios.</p>
+
+    <div class="two-col">
+      <div class="col-card">
+        <h5>Pulmón derecho</h5>
+        <p>Más ancho y más corto, porque el hígado empuja el diafragma hacia arriba. <strong>Tres
+          lóbulos</strong> separados por <strong>dos fisuras</strong>, la oblicua y la horizontal.</p>
+      </div>
+      <div class="col-card teal">
+        <h5>Pulmón izquierdo</h5>
+        <p>Más estrecho, para dejarle sitio al corazón. <strong>Dos lóbulos</strong> y una sola fisura, la
+          oblicua. En el borde anterior tiene la <strong>escotadura cardíaca</strong> y, debajo, una lengüeta
+          del lóbulo superior, la <strong>língula</strong>.</p>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_23_9_pulmones.png"
+               alt="Anatomía superficial de los pulmones: vista anterior en la caja torácica, caras laterales y mediales de los pulmones derecho e izquierdo con lóbulos, fisuras oblicua y horizontal, hilio y escotadura cardíaca"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>Tres lóbulos a la derecha, dos a la izquierda.</strong> Busca la
+          fisura horizontal, que solo tiene el derecho, y la escotadura cardíaca, que solo tiene el
+          izquierdo. Tortora, Fig. 23.9.</div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_23_1b_pulmones_corazon.png"
+               alt="Fotografía de disección: vista anterior de los pulmones y el corazón después de resecar la pared torácica, con la tráquea, las carótidas, el nervio frénico y el diafragma"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>Así se ven de verdad.</strong> El color oscuro es el depósito de
+          partículas inhaladas a lo largo de la vida. Sobre el pericardio baja el nervio frénico hacia el
+          diafragma. Tortora, Fig. 23.1b.</div>
+      </div>
+    </div>
+
+    <h3>La pleura: dos hojas y casi nada entre ellas</h3>
+    <p>Cada pulmón está envuelto por una bolsa cerrada de serosa, la <strong>pleura</strong>. La
+      <strong>pleura visceral</strong> está pegada al pulmón; la <strong>parietal</strong>, a la pared del
+      tórax, al diafragma y al mediastino. Entre las dos queda la <strong>cavidad pleural</strong>, un
+      espacio virtual con una película de líquido que las deja resbalar y, a la vez, las mantiene pegadas,
+      como dos vidrios mojados. En la parte baja, la pleura parietal forma los <strong>recesos
+      costodiafragmáticos</strong>, donde se acumula el líquido cuando sobra.</p>
+
+    <div class="photo-hero">
+      <img src="img/fig_23_8_pleura.png"
+           alt="Corte transversal del tórax: pleura parietal, pleura visceral y cavidad pleural alrededor de cada pulmón, con el mediastino, el corazón, la aorta y el esófago en el centro"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>Dos bolsas, una a cada lado.</strong> En el centro queda el
+        mediastino, con el corazón, la aorta y el esófago. Tortora, Fig. 23.8.</div>
+    </div>
+
+    <div class="clinical-box">
+      <h5>Neumotórax: cuando entra aire entre las hojas</h5>
+      <p>Normalmente la presión dentro de la cavidad pleural es menor que la atmosférica: el pulmón, que es
+        elástico, tira hacia dentro, y la pared, hacia fuera. Si entra aire a la cavidad, por una herida o
+        porque se rompe una burbuja en la superficie del pulmón, esa presión se iguala y el pulmón se
+        <strong>colapsa</strong> sobre su hilio. Dolor de un lado al respirar y falta de aire súbita, típico
+        en hombres jóvenes, altos y delgados.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 06 ─────────── -->
+<section class="station" id="e6">
+  <div class="station-header">
+    <div class="station-number">06</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Zona respiratoria</div>
+      <h2>El alvéolo: donde el aire toca la sangre</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Cada bronquiolo terminal abre un <strong>lobulillo</strong>: bronquiolos respiratorios, conductos
+      alveolares y racimos de alvéolos, los <strong>sacos alveolares</strong>. Si se pudiera extender la
+      superficie de todos los alvéolos, cubriría unos 70 m², media cancha de tenis, metida en el pecho.</p>
+
+    <div class="two-col">
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_23_10_lobulillo.png"
+               alt="Lobulillo pulmonar: bronquiolo terminal, bronquiolo respiratorio, conducto alveolar, sacos alveolares y alvéolos rodeados por capilares, arteriola pulmonar, vénula y vaso linfático; fotomicrografía del pulmón"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>El final del árbol.</strong> La arteriola pulmonar trae sangre
+          pobre en oxígeno; la red de capilares envuelve cada alvéolo. Tortora, Fig. 23.10.</div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_23_11_alveolo.png"
+               alt="Componentes de un alvéolo: neumocitos tipo I y tipo II, macrófago alveolar, capilar y membrana respiratoria con sus capas"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>Las células del alvéolo.</strong> Neumocitos tipo I, planos, y
+          tipo II, redondeados; macrófagos sueltos en la luz. Abajo, las capas de la membrana respiratoria.
+          Tortora, Fig. 23.11.</div>
+      </div>
+    </div>
+
+    <div class="three-col">
+      <div class="col-card">
+        <h5>Neumocito tipo I</h5>
+        <p>Epitelio plano simple que forma casi toda la pared. Tan delgado que el gas lo cruza sin
+          esfuerzo.</p>
+      </div>
+      <div class="col-card teal">
+        <h5>Neumocito tipo II</h5>
+        <p>Menos numeroso, cúbico. Secreta el <strong>surfactante</strong>, que baja la tensión superficial
+          del agua que moja el alvéolo. Sin él, los alvéolos se cerrarían al espirar, como bolsitas mojadas
+          que se pegan.</p>
+      </div>
+      <div class="col-card amber">
+        <h5>Macrófago alveolar</h5>
+        <p>Recorre la superficie y se come el polvo y los microbios que llegaron hasta allí. Los que no
+          salen se quedan en el tejido: de ahí el color de los pulmones del fumador.</p>
+      </div>
+    </div>
+
+    <p>Entre el aire y la sangre solo hay <strong>0,5 µm</strong>: la pared del alvéolo, la del capilar y
+      las dos membranas basales fusionadas. Es la <strong>membrana respiratoria</strong>. Todo lo que la
+      engrose —líquido en un edema pulmonar, cicatriz en una fibrosis— frena el paso del oxígeno.</p>
+
+    <div class="pearl">
+      <p><strong>El prematuro que no tiene surfactante.</strong> Los neumocitos tipo II empiezan a fabricar
+        surfactante suficiente hacia el final del embarazo. Un bebé que nace muy antes no lo tiene: sus
+        alvéolos se cierran en cada espiración. Recibe oxígeno, y en exceso el oxígeno daña los vasos de una
+        retina inmadura: es la <em>retinopatía del prematuro</em>, que se tamiza en el examen de fondo de
+        ojo de todo recién nacido de riesgo.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 07 ─────────── -->
+<section class="station" id="e7">
+  <div class="station-header">
+    <div class="station-number">07</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Mecánica ventilatoria</div>
+      <h2>Cómo entra el aire</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>El aire no se «chupa»: entra solo cuando la presión dentro de los alvéolos es menor que la de
+      afuera. Para lograrlo, el cuerpo cambia el tamaño del tórax. Es la <strong>ley de Boyle</strong>: a
+      temperatura constante, si el volumen de un gas aumenta, su presión baja, y al revés.</p>
+
+    <div class="photo-hero">
+      <img src="img/fig_23_14_presiones_ventilacion.png"
+           alt="Cambios de presión durante la ventilación: en reposo la presión alveolar es igual a la atmosférica; en la inspiración el diafragma se contrae y la presión alveolar baja; en la espiración el diafragma se relaja y la presión alveolar sube"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>Tres momentos.</strong> En reposo, 760 mm Hg dentro y fuera. Al
+        inspirar, el tórax crece y la presión alveolar baja a 758: entra aire. Al espirar, el tórax se
+        achica, sube a 762: sale aire. Tortora, Fig. 23.14.</div>
+    </div>
+
+    <div class="two-col">
+      <div class="col-card">
+        <h5>Inspiración: activa</h5>
+        <p>El <strong>diafragma</strong> se contrae, se aplana y baja: hace el 75 % del trabajo. Los
+          <strong>intercostales externos</strong> suben las costillas y el esternón. Cuando hace falta más
+          aire, ayudan el esternocleidomastoideo, los escalenos y el pectoral menor: son los
+          <em>músculos accesorios</em>.</p>
+      </div>
+      <div class="col-card teal">
+        <h5>Espiración: pasiva</h5>
+        <p>En reposo basta con soltar. El diafragma se relaja, el pulmón vuelve a su tamaño por su propia
+          elasticidad y el aire sale. Solo al hacer fuerza —toser, soplar, hacer ejercicio— trabajan los
+          intercostales internos y los músculos del abdomen.</p>
+      </div>
+    </div>
+
+    <div class="photo-hero">
+      <img src="img/fig_23_13_musculos_respiratorios.png"
+           alt="Músculos inspiratorios y espiratorios: esternocleidomastoideo, escalenos, pectoral menor, intercostales externos e internos, diafragma y músculos abdominales, con los cambios de tamaño del tórax"
+           onerror="this.classList.add('broken')">
+      <div class="photo-missing">No disponible</div>
+      <div class="photo-caption"><strong>Los músculos de la respiración.</strong> A la izquierda, los que
+        inspiran; a la derecha, los que espiran con fuerza. Abajo, la costilla que sube como el asa de un
+        balde. Tortora, Fig. 23.13.</div>
+    </div>
+
+    <div class="clinical-box">
+      <h5>C3, C4 y C5 mantienen vivo el diafragma</h5>
+      <p>El diafragma lo mueve el <strong>nervio frénico</strong>, que nace de los segmentos cervicales
+        <strong>C3, C4 y C5</strong> y baja por el cuello y el tórax, sobre el pericardio, hasta el músculo.
+        Una lesión de la médula por debajo de C5 paraliza brazos o piernas, pero el paciente respira solo.
+        Una lesión por encima de C3 lo deja sin diafragma: necesita un ventilador para vivir. Y una
+        irritación del diafragma puede doler en el hombro, porque los mismos segmentos reciben la
+        sensibilidad de esa zona.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 08 ─────────── -->
+<section class="station" id="e8">
+  <div class="station-header">
+    <div class="station-number">08</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Fisiología mínima</div>
+      <h2>Gases, sangre y control, en breve</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>La anatomía es el centro de esta clase, pero para entender cómo el pulmón llega al ojo necesitas
+      tres ideas de fisiología. Están en breve; las desarrollará la asignatura de fisiología.</p>
+
+    <details class="acorde teal" open>
+      <summary>Los gases van de donde hay más a donde hay menos <span class="pista">la que más te toca</span></summary>
+      <div class="cuerpo">
+        <p>Cada gas se mueve según su <strong>presión parcial</strong>: la parte de la presión total que le
+          toca. En el alvéolo el oxígeno está a unos 105 mm Hg y en la sangre que llega, a 40: pasa a la
+          sangre. El dióxido de carbono hace el camino contrario, de 45 en la sangre a 40 en el alvéolo. En
+          los tejidos todo se invierte.</p>
+        <div class="photo-card" style="max-width:440px;margin:16px auto">
+          <div class="photo-frame">
+            <img src="img/fig_23_17_presiones_parciales.png"
+                 alt="Presiones parciales de oxígeno y dióxido de carbono en el aire, los alvéolos, la sangre de los capilares pulmonares y sistémicos y las células de los tejidos"
+                 onerror="this.classList.add('broken')">
+            <div class="photo-missing">No disponible</div>
+          </div>
+          <div class="photo-caption"><strong>Siempre cuesta abajo.</strong> Los números en mm Hg de cada
+            gas en el aire, el alvéolo, la sangre y los tejidos. Tortora, Fig. 23.17.</div>
+        </div>
+        <p><strong>En Bogotá esto se nota.</strong> A 2600 m la presión del aire es de unos 560 mm Hg, no
+          760. El oxígeno sigue siendo el 21 %, pero su presión parcial baja de 159 a unos 117 mm Hg. Por eso
+          al subir respiramos más rápido y los que vienen de la costa se cansan los primeros días.</p>
+      </div>
+    </details>
+
+    <details class="acorde">
+      <summary>La hemoglobina lleva casi todo el oxígeno <span class="pista">y le gusta más el monóxido</span></summary>
+      <div class="cuerpo">
+        <p>Disuelto en el plasma va menos del 2 % del oxígeno; el 98,5 % viaja pegado a la
+          <strong>hemoglobina</strong> de los glóbulos rojos. La hemoglobina cargada es roja brillante; la
+          que soltó su oxígeno es más oscura. El dióxido de carbono vuelve sobre todo como
+          <strong>bicarbonato</strong> disuelto en el plasma.</p>
+        <p>El <strong>monóxido de carbono</strong> (CO), que sale de un calentador mal ventilado o de un
+          motor encendido en un garaje, se pega a la hemoglobina unas 200 veces más que el oxígeno y no la
+          suelta. La sangre queda roja, pero no lleva oxígeno.</p>
+      </div>
+    </details>
+
+    <details class="acorde">
+      <summary>Quién decide cuánto respiramos <span class="pista">el dióxido de carbono, no el oxígeno</span></summary>
+      <div class="cuerpo">
+        <p>El ritmo lo marcan grupos de neuronas del <strong>bulbo raquídeo</strong> y la protuberancia, que
+          mandan órdenes al frénico y a los intercostales. Lo que más los estimula es que suba el
+          <strong>dióxido de carbono</strong> en la sangre: los <em>quimiorreceptores centrales</em>, en el
+          bulbo, lo detectan en minutos. Los <em>periféricos</em>, en los cuerpos carotídeos y aórticos,
+          avisan además cuando el oxígeno baja mucho. Ojo: el <strong>cuerpo carotídeo</strong> mide gases; el
+          <strong>seno carotídeo</strong>, que viste en circulatorio, mide la presión.</p>
+      </div>
+    </details>
+  </div>
+</section>
+
+<!-- ─────────── 09 ─────────── -->
+<section class="station" id="e9">
+  <div class="station-header">
+    <div class="station-number">09</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Interfaz optométrica · La más importante de la clase</div>
+      <h2>El pulmón en la pupila: síndrome de Horner</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Dos músculos del ojo dependen del <strong>simpático</strong>: el <strong>músculo dilatador de la
+      pupila</strong>, que la abre, y el <strong>músculo tarsal superior</strong> (de Müller), una lámina de
+      músculo liso que ayuda al elevador a sostener el párpado uno o dos milímetros más arriba. La orden que
+      los mueve hace un recorrido sorprendente: <strong>baja hasta el tórax, pasa sobre el vértice del
+      pulmón y sube otra vez a la cabeza</strong>.</p>
+
+    <div class="photo-hero" style="background:var(--bg-card)">
+      <svg viewBox="0 0 760 470" role="img" aria-label="Esquema de la vía simpática del ojo en tres neuronas: del hipotálamo a la médula torácica alta, de allí por la raíz T1 y la cadena simpática, pasando sobre el vértice del pulmón, hasta el ganglio cervical superior, y de este con la carótida interna hasta el seno cavernoso y la órbita, al músculo dilatador de la pupila y al músculo tarsal superior" style="width:100%;height:auto;display:block">
+        <defs>
+          <marker id="fl" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1a2a35"/></marker>
+        </defs>
+        <g font-family="'Source Serif 4',Georgia,serif" font-size="14" fill="#1a2a35">
+          <!-- pulmón -->
+          <path d="M300,462 C300,420 330,384 372,378 C414,384 444,420 444,462 Z" fill="#f3d9d4" stroke="#b5413b" stroke-width="1.5"/>
+          <text x="372" y="448" text-anchor="middle" font-style="italic" fill="#8a2f2a">vértice del pulmón</text>
+          <circle cx="398" cy="400" r="17" fill="#b5413b" opacity=".85"/>
+          <text x="455" y="402" fill="#8a2f2a" font-weight="600">tumor de Pancoast</text>
+          <!-- neurona 1 -->
+          <rect x="30" y="24" width="170" height="52" rx="5" fill="#ece3f3" stroke="#6b4a8a"/>
+          <text x="115" y="46" text-anchor="middle" font-weight="700">Hipotálamo</text>
+          <text x="115" y="66" text-anchor="middle" font-size="12" fill="#6b4a8a">1.ª neurona</text>
+          <line x1="115" y1="76" x2="115" y2="296" stroke="#6b4a8a" stroke-width="3" marker-end="url(#fl)"/>
+          <text x="126" y="170" font-size="12.5" fill="#6b4a8a">baja por el tronco</text>
+          <text x="126" y="186" font-size="12.5" fill="#6b4a8a">del encéfalo y la</text>
+          <text x="126" y="202" font-size="12.5" fill="#6b4a8a">médula cervical</text>
+          <!-- neurona 2 -->
+          <rect x="22" y="300" width="196" height="54" rx="5" fill="#f5e9c8" stroke="#b8860b"/>
+          <text x="120" y="322" text-anchor="middle" font-weight="700">Médula C8–T2</text>
+          <text x="120" y="342" text-anchor="middle" font-size="12" fill="#8b6914">centro cilioespinal</text>
+          <path d="M218,327 L292,327 C330,327 336,368 372,366 C410,364 410,330 410,300 L410,196" fill="none" stroke="#b8860b" stroke-width="3" marker-end="url(#fl)"/>
+          <text x="226" y="318" font-size="12" fill="#8b6914">raíz T1</text>
+          <text x="398" y="240" text-anchor="end" font-size="12.5" fill="#8b6914">2.ª neurona: sube por la</text>
+          <text x="398" y="256" text-anchor="end" font-size="12.5" fill="#8b6914">cadena simpática pasando</text>
+          <text x="398" y="272" text-anchor="end" font-size="12.5" fill="#8b6914">sobre el vértice pulmonar</text>
+          <!-- ganglio -->
+          <rect x="335" y="140" width="150" height="54" rx="27" fill="#e3f1ee" stroke="#2a7a6e"/>
+          <text x="410" y="162" text-anchor="middle" font-weight="700">Ganglio cervical</text>
+          <text x="410" y="181" text-anchor="middle" font-weight="700">superior</text>
+          <!-- neurona 3 -->
+          <path d="M485,156 L556,108" fill="none" stroke="#2a7a6e" stroke-width="3" marker-end="url(#fl)"/>
+          <text x="470" y="118" font-size="12" fill="#1f5c53" transform="rotate(-34 470 118)">con la carótida interna</text>
+          <rect x="560" y="84" width="150" height="40" rx="5" fill="#e3f1ee" stroke="#2a7a6e"/>
+          <text x="635" y="109" text-anchor="middle" font-weight="700">Seno cavernoso</text>
+          <line x1="635" y1="124" x2="635" y2="190" stroke="#2a7a6e" stroke-width="3" marker-end="url(#fl)"/>
+          <text x="645" y="160" font-size="12" fill="#1f5c53">3.ª neurona</text>
+          <rect x="520" y="194" width="232" height="100" rx="5" fill="#fff" stroke="#2a7a6e" stroke-width="1.5"/>
+          <text x="636" y="216" text-anchor="middle" font-weight="700">Órbita</text>
+          <text x="532" y="242" font-size="13">• músculo dilatador de la pupila</text>
+          <text x="532" y="262" font-size="13">• músculo tarsal superior</text>
+          <text x="544" y="280" font-size="12" fill="#5a6b7a" font-style="italic">sostiene el párpado 1–2 mm</text>
+          <!-- sudor -->
+          <path d="M445,194 C452,262 478,338 556,339" fill="none" stroke="#2a7a6e" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#fl)"/>
+          <rect x="560" y="316" width="192" height="46" rx="5" fill="#fff" stroke="#2a7a6e" stroke-dasharray="4 3"/>
+          <text x="656" y="335" text-anchor="middle" font-size="12.5">glándulas del sudor de la cara</text>
+          <text x="656" y="352" text-anchor="middle" font-size="12" fill="#5a6b7a" font-style="italic">con la carótida externa</text>
+          <!-- leyenda -->
+          <g font-size="12.5">
+            <line x1="30" y1="392" x2="62" y2="392" stroke="#6b4a8a" stroke-width="3"/><text x="70" y="396">1.ª neurona · central</text>
+            <line x1="30" y1="414" x2="62" y2="414" stroke="#b8860b" stroke-width="3"/><text x="70" y="418">2.ª · preganglionar</text>
+            <line x1="30" y1="436" x2="62" y2="436" stroke="#2a7a6e" stroke-width="3"/><text x="70" y="440">3.ª · posganglionar</text>
+          </g>
+        </g>
+      </svg>
+      <div class="photo-caption"><strong>Tres neuronas y una curva peligrosa.</strong> La segunda neurona
+        sale de la médula torácica alta y sube por la cadena simpática pasando sobre el vértice del pulmón.
+        Un tumor en ese vértice la corta. Esquema propio de la clase.</div>
+    </div>
+
+    <h3>Lo que ves cuando se corta</h3>
+    <div class="three-col">
+      <div class="col-card">
+        <h5>Ptosis leve</h5>
+        <p>El párpado superior cae <strong>1 a 2 mm</strong>, porque se paraliza el músculo tarsal, no el
+          elevador. A veces el párpado inferior sube un poco: es la <em>ptosis invertida</em>. Una ptosis que
+          tapa la pupila no es un Horner: es del III par.</p>
+      </div>
+      <div class="col-card teal">
+        <h5>Miosis</h5>
+        <p>La pupila del lado afectado es más pequeña y <strong>no se dilata bien en la oscuridad</strong>.
+          La diferencia entre las dos pupilas es mayor en penumbra que con luz. Reacciona a la luz con
+          normalidad: el esfínter, parasimpático, está intacto.</p>
+      </div>
+      <div class="col-card rust">
+        <h5>Anhidrosis</h5>
+        <p>La mitad de la cara no suda, si la lesión está antes de que las fibras del sudor se separen con la
+          carótida externa, como en el tórax o el cuello.</p>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="photo-card">
+        <div class="photo-frame">
+          <img src="img/fig_17_8_pupila.png"
+               alt="Respuesta de la pupila a la luz: el músculo esfínter de la pupila contrae la pupila con la luz brillante y el músculo dilatador la agranda con la luz tenue"
+               onerror="this.classList.add('broken')">
+          <div class="photo-missing">No disponible</div>
+        </div>
+        <div class="photo-caption"><strong>Dos músculos, dos sistemas.</strong> El esfínter cierra la pupila
+          con el parasimpático del III par; el dilatador la abre con el simpático. En el Horner falla el
+          segundo. Tortora, Fig. 17.8 (clase 8).</div>
+      </div>
+      <div>
+        <h4>La regla de la penumbra</h4>
+        <p>Ante dos pupilas de distinto tamaño, mídelas con luz y en penumbra:</p>
+        <table class="data">
+          <tr><th>La diferencia es mayor…</th><th>Falla</th><th>Piensa en</th></tr>
+          <tr><td>en penumbra</td><td>la pupila pequeña no se dilata</td><td>Horner (simpático)</td></tr>
+          <tr><td>con luz</td><td>la pupila grande no se contrae</td><td>III par o gotas dilatadoras (parasimpático)</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="clinical-box">
+      <h5>El tumor de Pancoast</h5>
+      <p>Es un cáncer del pulmón que nace en el <strong>vértice</strong>, casi siempre en fumadores. Al
+        crecer hacia la raíz del cuello alcanza la cadena simpática y las raíces C8–T1 del plexo braquial.
+        Por eso el cuadro típico junta un <strong>Horner</strong> con <strong>dolor en el hombro y el
+        brazo</strong> y debilidad de la mano, a veces con una radiografía de tórax «casi normal», porque el
+        vértice se esconde detrás de la clavícula. <strong>Un Horner que aparece en un adulto se remite el
+        mismo día</strong>: puede ser este tumor, o una disección de la carótida en el cuello, que es una
+        urgencia neurológica.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 10 ─────────── -->
+<section class="station" id="e10">
+  <div class="station-header">
+    <div class="station-number">10</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Interfaz optométrica · Los gases se ven</div>
+      <h2>El pulmón en el fondo de ojo y en la conjuntiva</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>La retina es el único sitio del cuerpo donde se miran vasos y nervio sin abrir nada, y la
+      conjuntiva es una mucosa a la vista. Por eso un pulmón que no funciona deja huellas que el optómetra
+      puede ver primero.</p>
+
+    <h3>Demasiado dióxido de carbono: papiledema</h3>
+    <div class="recorrido">
+      <div class="paso">EPOC grave<br><small>no saca el CO₂</small></div><div class="flecha">→</div>
+      <div class="paso">CO₂ alto en sangre<br><small>hipercapnia</small></div><div class="flecha">→</div>
+      <div class="paso">Se dilatan los vasos del cerebro</div><div class="flecha">→</div>
+      <div class="paso">Sube la presión intracraneal</div><div class="flecha">→</div>
+      <div class="paso">Papiledema</div>
+    </div>
+    <p>El dióxido de carbono es el dilatador más potente de los vasos del cerebro. Con más sangre dentro
+      del cráneo, sube la presión; el líquido cefalorraquídeo, que rodea al nervio óptico hasta el globo,
+      la transmite a la papila, que se hincha. Son las dos papilas, con dolor de cabeza al despertar, porque
+      de noche se respira menos y el CO₂ sube más.</p>
+
+    <h3>Poco oxígeno: cianosis y venas oscuras</h3>
+    <div class="two-col">
+      <div class="col-card">
+        <h5>Cianosis central</h5>
+        <p>Labios, <strong>lengua</strong> y conjuntiva azulados: la sangre arterial misma lleva poco
+          oxígeno. Problema del pulmón o del corazón. La conjuntiva y la mucosa la muestran antes que la
+          piel.</p>
+      </div>
+      <div class="col-card teal">
+        <h5>Cianosis periférica</h5>
+        <p>Dedos y nariz azulados, con la lengua rosada: la sangre llega bien oxigenada pero se mueve
+          despacio, por frío o mala circulación, y los tejidos le sacan más oxígeno.</p>
+      </div>
+    </div>
+    <p>En el fondo de ojo de un paciente con poco oxígeno crónico, las <strong>venas de la retina</strong>
+      se ven más anchas, tortuosas y oscuras.</p>
+
+    <div class="clinical-box">
+      <h5>Monóxido de carbono: rojo que engaña</h5>
+      <p>La hemoglobina con CO es roja brillante: el paciente puede verse sonrosado, con mucosas color
+        cereza, y el oxímetro de pulso marca casi 100 %, porque no distingue esa hemoglobina de la que lleva
+        oxígeno. Mientras tanto, la retina y el cerebro se ahogan: dolor de cabeza, mareo, visión borrosa y,
+        en el fondo de ojo, venas dilatadas y hemorragias. Si varios en la misma casa tienen dolor de cabeza
+        al despertar, <strong>piensa en el calentador</strong>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 11 ─────────── -->
+<section class="station" id="e11">
+  <div class="station-header">
+    <div class="station-number">11</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Vocabulario</div>
+      <h2>Términos TA2 de la clase</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Toca la tarjeta para ver la definición. El nombre en latín es el de la <em>Terminologia
+      Anatomica</em>; es el que aparece en los atlas y en los informes.</p>
+    <div class="flip-grid">
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Cornete nasal inferior</span><span class="term-en">Concha nasalis inferior</span></div>
+        <div class="flip-back"><p class="term-def">Hueso enrollado de la pared lateral de la nariz; debajo queda el meato inferior.</p><p class="term-opto">👁 Bajo él desemboca la lágrima.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Conducto nasolagrimal</span><span class="term-en">Ductus nasolacrimalis</span></div>
+        <div class="flip-back"><p class="term-def">Conducto que lleva la lágrima del saco lagrimal al meato inferior.</p><p class="term-opto">👁 Presionar el punto lagrimal frena el paso de las gotas.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Senos paranasales</span><span class="term-en">Sinus paranasales</span></div>
+        <div class="flip-back"><p class="term-def">Cavidades de aire de los huesos frontal, etmoides, esfenoides y maxilar, abiertas a la nariz.</p><p class="term-opto">👁 Rodean la órbita por arriba, abajo, adentro y atrás.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Lámina orbitaria del etmoides</span><span class="term-en">Lamina orbitalis ossis ethmoidalis</span></div>
+        <div class="flip-back"><p class="term-def">Pared medial de la órbita, delgada como papel; separa la órbita de las celdillas etmoidales.</p><p class="term-opto">👁 Por ella pasa una sinusitis a la órbita.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Laringe</span><span class="term-en">Larynx</span></div>
+        <div class="flip-back"><p class="term-def">Órgano de nueve cartílagos que une la faringe con la tráquea y produce la voz.</p><p class="term-opto">👁 Delante de C4 a C6.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Cartílago cricoides</span><span class="term-en">Cartilago cricoidea</span></div>
+        <div class="flip-back"><p class="term-def">Único anillo completo de la vía aérea, en la base de la laringe.</p><p class="term-opto">👁 Forma de anillo de sello.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Epiglotis</span><span class="term-en">Epiglottis</span></div>
+        <div class="flip-back"><p class="term-def">Hoja de cartílago elástico que cierra la entrada de la laringe al tragar.</p><p class="term-opto">👁 La puerta que separa el aire de la comida.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Pliegue vocal</span><span class="term-en">Plica vocalis</span></div>
+        <div class="flip-back"><p class="term-def">Pliegue inferior de la mucosa laríngea; vibra con el aire espirado y produce la voz.</p><p class="term-opto">👁 Lo mueve el nervio laríngeo recurrente.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Rima glótica</span><span class="term-en">Rima glottidis</span></div>
+        <div class="flip-back"><p class="term-def">Hendidura entre los pliegues vocales; con ellos forma la glotis.</p><p class="term-opto">👁 Abierta para respirar, cerrada para hablar.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Tráquea</span><span class="term-en">Trachea</span></div>
+        <div class="flip-back"><p class="term-def">Tubo de 12 cm con anillos de cartílago en C, de C6 a T5, delante del esófago.</p><p class="term-opto">👁 Su epitelio ciliado lo paraliza el humo.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Carina traqueal</span><span class="term-en">Carina tracheae</span></div>
+        <div class="flip-back"><p class="term-def">Cresta interna en el punto donde la tráquea se divide en los dos bronquios principales.</p><p class="term-opto">👁 Tocarla provoca tos.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Bronquio principal</span><span class="term-en">Bronchus principalis</span></div>
+        <div class="flip-back"><p class="term-def">Cada una de las dos ramas de la tráquea; el derecho es más corto, ancho y vertical.</p><p class="term-opto">👁 Por el derecho entran los cuerpos extraños.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Alvéolo pulmonar</span><span class="term-en">Alveolus pulmonis</span></div>
+        <div class="flip-back"><p class="term-def">Saco de pared finísima donde el aire y la sangre intercambian gases.</p><p class="term-opto">👁 Unos 300 millones en los dos pulmones.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Cavidad pleural</span><span class="term-en">Cavitas pleuralis</span></div>
+        <div class="flip-back"><p class="term-def">Espacio virtual entre la pleura visceral y la parietal, con una película de líquido.</p><p class="term-opto">👁 Si entra aire, el pulmón se colapsa.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Diafragma</span><span class="term-en">Diaphragma</span></div>
+        <div class="flip-back"><p class="term-def">Músculo en cúpula entre el tórax y el abdomen; al contraerse baja y hace entrar el aire.</p><p class="term-opto">👁 Hace el 75 % del trabajo de inspirar.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Nervio frénico</span><span class="term-en">Nervus phrenicus</span></div>
+        <div class="flip-back"><p class="term-def">Nervio del diafragma; nace de C3, C4 y C5.</p><p class="term-opto">👁 Baja sobre el pericardio.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Ganglio cervical superior</span><span class="term-en">Ganglion cervicale superius</span></div>
+        <div class="flip-back"><p class="term-def">Ganglio más alto de la cadena simpática; de él sale la tercera neurona hacia el ojo.</p><p class="term-opto">👁 También manda la orden a la pineal.</p></div>
+      </div></div>
+      <div class="flip-card"><div class="flip-inner">
+        <div class="flip-front"><span class="term-label">TA2</span><span class="term-name">Músculo tarsal superior</span><span class="term-en">Musculus tarsalis superior</span></div>
+        <div class="flip-back"><p class="term-def">Músculo liso del párpado superior, con inervación simpática; lo eleva 1 a 2 mm.</p><p class="term-opto">👁 Su parálisis es la ptosis del Horner.</p></div>
+      </div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 12 ─────────── -->
+<section class="station" id="e12">
+  <div class="station-header">
+    <div class="station-number">12</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Autodiagnóstico</div>
+      <h2>Comprueba lo que aprendiste</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Haz clic en tu respuesta. La retroalimentación explica por qué es correcta y qué es en realidad
+      cada una de las otras. Responde primero sin mirar arriba: lo que cuenta es recuperar, no
+      reconocer.</p>
+
+    <div class="check-question" data-question="q1">
+      <p class="question-text">1. ¿Cuál de estas estructuras pertenece ya a la zona respiratoria, donde el
+        aire intercambia gases con la sangre?</p>
+      <ul class="options">
+        <li data-letter="A">El bronquiolo terminal</li>
+        <li data-letter="B" data-correct="true">El bronquiolo respiratorio</li>
+        <li data-letter="C">El bronquio segmentario</li>
+        <li data-letter="D">La tráquea, en su porción torácica</li>
+        <li data-letter="E">La laringe, por debajo de la glotis</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: B.</strong> El bronquiolo respiratorio ya tiene alvéolos que
+        se abren en su pared: ahí empieza el intercambio. El bronquiolo terminal es justo la última pieza
+        de la zona de conducción; el nombre engaña, pero en él no hay alvéolos. El bronquio segmentario
+        lleva aire a un segmento del pulmón y todavía tiene placas de cartílago. La tráquea y la laringe son
+        tubos de paso: filtran, calientan y humedecen, y suman al espacio muerto.</div>
+    </div>
+
+    <div class="check-question" data-question="q2">
+      <p class="question-text">2. Un minuto después de ponerle gotas en los ojos, un niño dice que le sabe
+        amarga la garganta. ¿Por qué camino llegó allí la gota?</p>
+      <ul class="options">
+        <li data-letter="A">Se absorbió en la córnea y salió por la saliva</li>
+        <li data-letter="B">Pasó a la sangre por la conjuntiva y llegó a la lengua</li>
+        <li data-letter="C" data-correct="true">Bajó por la vía lagrimal hasta el meato inferior y la faringe</li>
+        <li data-letter="D">Atravesó la lámina papirácea hasta las celdillas etmoidales</li>
+        <li data-letter="E">Siguió al nervio óptico por el conducto óptico</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: C.</strong> La lágrima, con lo que le pongas, entra por el
+        punto lagrimal, recorre el canalículo, el saco y el conducto nasolagrimal y sale debajo del cornete
+        inferior; de la nariz pasa a la faringe y se siente en la garganta. Presionar el ángulo interno del
+        ojo un minuto después de la gota cierra ese camino. Es verdad que algo de fármaco pasa a la sangre
+        por la conjuntiva, pero eso no da un sabor inmediato. La córnea absorbe una fracción, que va al
+        interior del ojo, no a la saliva. La lámina papirácea es hueso, no un camino para un líquido. Y el
+        conducto óptico es un canal óseo para el nervio y la arteria oftálmica, no para la lágrima.</div>
+    </div>
+
+    <div class="check-question" data-question="q3">
+      <p class="question-text">3. ¿Qué hueso forma la pared medial de la órbita y la separa de las
+        celdillas etmoidales, y por qué deja pasar una infección?</p>
+      <ul class="options">
+        <li data-letter="A" data-correct="true">La lámina orbitaria del etmoides, porque es delgada como papel</li>
+        <li data-letter="B">El techo del maxilar, porque está perforado por el nervio infraorbitario</li>
+        <li data-letter="C">La lámina cribosa del etmoides, porque tiene agujeros para el olfatorio</li>
+        <li data-letter="D">El ala mayor del esfenoides, porque tiene la fisura orbitaria</li>
+        <li data-letter="E">El hueso nasal, porque es la parte más blanda de la nariz</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: A.</strong> La lámina orbitaria del etmoides, la papirácea,
+        es la pared medial de la órbita y tiene detrás las celdillas etmoidales; es finísima y la atraviesan
+        venas sin válvulas, por eso una etmoiditis puede pasar a la órbita. El techo del maxilar es el suelo
+        de la órbita, no su pared medial, y lo que lo vuelve frágil es la fractura por estallido. La lámina
+        cribosa forma el techo de la cavidad nasal, no la pared de la órbita. El ala mayor del esfenoides
+        forma la pared lateral. El hueso nasal es el puente de la nariz y no limita con la órbita.</div>
+    </div>
+
+    <div class="check-question" data-question="q4">
+      <p class="question-text">4. ¿Cuál de los cartílagos de la vía aérea forma un anillo completo?</p>
+      <ul class="options">
+        <li data-letter="A">El cartílago tiroides</li>
+        <li data-letter="B">Cada cartílago de la tráquea</li>
+        <li data-letter="C">La epiglotis</li>
+        <li data-letter="D">El cartílago aritenoides</li>
+        <li data-letter="E" data-correct="true">El cartílago cricoides</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: E.</strong> El cricoides es el único anillo completo, más
+        alto por detrás, como un anillo de sello; une la laringe con la tráquea. El tiroides son dos
+        láminas unidas por delante y abiertas por detrás, como un escudo. Los cartílagos de la tráquea son
+        herraduras en C abiertas hacia el esófago. La epiglotis es una hoja que tapa la laringe al tragar.
+        Los aritenoides son dos piezas pequeñas sobre el cricoides que mueven los pliegues vocales.</div>
+    </div>
+
+    <div class="check-question" data-question="q5">
+      <p class="question-text">5. ¿Qué estructura vibra con el aire espirado para producir la voz?</p>
+      <ul class="options">
+        <li data-letter="A">Los pliegues vestibulares de la laringe</li>
+        <li data-letter="B">La epiglotis, al subir la laringe</li>
+        <li data-letter="C">El paladar blando contra la faringe</li>
+        <li data-letter="D" data-correct="true">Los pliegues vocales, en la glotis</li>
+        <li data-letter="E">Los anillos de la tráquea</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: D.</strong> Los pliegues vocales, tensados y acercados por los
+        músculos que mueven los aritenoides, vibran con el aire que sale. Los pliegues vestibulares están
+        encima: por eso los llaman cuerdas vocales falsas; cierran la laringe al hacer fuerza pero no
+        producen la voz. La epiglotis tapa la laringe al tragar. El paladar blando cierra la nasofaringe
+        para que la comida no suba a la nariz y modifica el timbre, pero no genera el sonido. Los anillos de
+        la tráquea solo la mantienen abierta.</div>
+    </div>
+
+    <div class="check-question" data-question="q6">
+      <p class="question-text">6. Un fumador con un tumor en el hilio del pulmón izquierdo empieza a
+        hablar ronco. ¿Qué nervio está afectado y por qué del lado izquierdo?</p>
+      <ul class="options">
+        <li data-letter="A">El frénico izquierdo, que sube por el hilio hasta la laringe</li>
+        <li data-letter="B" data-correct="true">El laríngeo recurrente izquierdo, que rodea el arco aórtico</li>
+        <li data-letter="C">El hipogloso, que mueve la lengua al articular la voz</li>
+        <li data-letter="D">El glosofaríngeo, que da la sensibilidad de la faringe</li>
+        <li data-letter="E">El laríngeo superior, que baja hasta el mediastino</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: B.</strong> El laríngeo recurrente, rama del vago, mueve casi
+        todos los músculos de la laringe; el izquierdo baja hasta el tórax, pasa por debajo del arco aórtico,
+        junto al hilio, y sube entre la tráquea y el esófago. Un tumor o un ganglio en esa zona lo aprieta y
+        paraliza un pliegue vocal. El frénico baja hacia el diafragma, no sube a la laringe. El hipogloso
+        mueve la lengua y nunca entra al tórax. El glosofaríngeo da sensibilidad a la faringe, y tampoco baja
+        al tórax. El laríngeo superior se queda en el cuello.</div>
+    </div>
+
+    <div class="check-question" data-question="q7">
+      <p class="question-text">7. Un niño aspira un trozo de maní. ¿Hacia dónde es más probable que vaya, y
+        por qué?</p>
+      <ul class="options">
+        <li data-letter="A" data-correct="true">Al bronquio principal derecho, más vertical y más ancho</li>
+        <li data-letter="B">Al bronquio principal izquierdo, que es más largo y lo atrapa</li>
+        <li data-letter="C">Se queda en la carina, que cierra el paso a los dos bronquios</li>
+        <li data-letter="D">Al esófago, porque la epiglotis desvía todo lo que es sólido</li>
+        <li data-letter="E">A los dos lados por igual, según cómo esté acostado el niño</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: A.</strong> El bronquio principal derecho sigue casi la línea
+        de la tráquea y es más ancho y más corto: es el camino recto. El izquierdo es más largo y más
+        horizontal porque pasa por encima del corazón y por debajo del arco aórtico; esa curva lo protege, no
+        lo vuelve una trampa. La carina es una cresta en el punto de la división, no una compuerta; tocarla
+        provoca tos. La epiglotis desvía la comida al tragar, pero aquí el maní ya pasó a la vía aérea. La
+        posición cambia algo la probabilidad, pero en un niño sentado o de pie predomina el lado
+        derecho.</div>
+    </div>
+
+    <div class="check-question" data-question="q8">
+      <p class="question-text">8. ¿Por qué los cartílagos de la tráquea están abiertos por detrás?</p>
+      <ul class="options">
+        <li data-letter="A">Para que la tráquea se alargue al levantar la cabeza</li>
+        <li data-letter="B">Para dejar pasar los nervios laríngeos recurrentes</li>
+        <li data-letter="C">Para que el aire caliente salga hacia el mediastino</li>
+        <li data-letter="D" data-correct="true">Para que el esófago, pegado detrás, se ensanche al tragar</li>
+        <li data-letter="E">Para que la tráquea se cierre del todo en la espiración</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: D.</strong> Detrás de la tráquea va el esófago; la pared
+        posterior blanda, con el músculo traqueal, cede cuando pasa el bolo. El cartílago está donde hace
+        falta: adelante y a los lados, para que el tubo no se aplaste al inspirar. Al levantar la cabeza la
+        tráquea sí se estira, pero lo permiten los ligamentos entre los anillos. Los recurrentes van por el
+        surco entre tráquea y esófago, por fuera, no a través de la pared. El aire no sale de la tráquea al
+        mediastino; si lo hiciera sería una lesión. Y la tráquea no se cierra al espirar: eso sería una
+        obstrucción.</div>
+    </div>
+
+    <div class="check-question" data-question="q9">
+      <p class="question-text">9. ¿Qué tiene el pulmón izquierdo que no tiene el derecho?</p>
+      <ul class="options">
+        <li data-letter="A">La fisura horizontal</li>
+        <li data-letter="B">Un lóbulo medio</li>
+        <li data-letter="C" data-correct="true">La escotadura cardíaca y la língula</li>
+        <li data-letter="D">Un hilio con bronquio, arteria y venas</li>
+        <li data-letter="E">Un vértice que sube por encima de la clavícula</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: C.</strong> El pulmón izquierdo deja sitio al corazón con la
+        escotadura cardíaca de su borde anterior, y debajo de ella su lóbulo superior se prolonga en la
+        língula. La fisura horizontal y el lóbulo medio son, al contrario, exclusivos del derecho, que tiene
+        tres lóbulos. Los dos pulmones tienen hilio, por donde entran el bronquio y la arteria y salen las
+        venas, y los dos tienen un vértice que asoma sobre la clavícula.</div>
+    </div>
+
+    <div class="check-question" data-question="q10">
+      <p class="question-text">10. Un joven alto y delgado siente un dolor súbito en un lado del pecho y le
+        falta el aire. Se le rompió una burbuja en la superficie del pulmón. ¿Por qué el pulmón se
+        colapsa?</p>
+      <ul class="options">
+        <li data-letter="A">Porque la sangre de la burbuja llena los alvéolos</li>
+        <li data-letter="B">Porque el diafragma de ese lado se paraliza</li>
+        <li data-letter="C">Porque el aire sale del pulmón por la tráquea hacia afuera</li>
+        <li data-letter="D">Porque se pierde el surfactante de todo el pulmón</li>
+        <li data-letter="E" data-correct="true">Porque entra aire entre las pleuras y se pierde la presión negativa</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: E.</strong> En la cavidad pleural la presión es menor que la
+        atmosférica; eso mantiene el pulmón pegado a la pared. Si entra aire, la presión se iguala y el
+        pulmón, elástico, se encoge sobre su hilio: es un neumotórax. Una burbuja rota deja escapar aire,
+        no sangre. El diafragma sigue funcionando; lo que falla es la unión entre pulmón y pared. El aire
+        que se pierde sale hacia la cavidad pleural, no por la tráquea. Y el surfactante es de cada alvéolo;
+        una burbuja rota no lo elimina.</div>
+    </div>
+
+    <div class="check-question" data-question="q11">
+      <p class="question-text">11. ¿Qué hace el surfactante que secretan los neumocitos tipo II?</p>
+      <ul class="options">
+        <li data-letter="A" data-correct="true">Baja la tensión superficial y evita que los alvéolos se cierren</li>
+        <li data-letter="B">Atrapa y digiere el polvo que llega a los alvéolos</li>
+        <li data-letter="C">Forma la pared plana por donde pasan los gases</li>
+        <li data-letter="D">Lleva el oxígeno desde el alvéolo hasta el glóbulo rojo</li>
+        <li data-letter="E">Mueve el moco de los bronquiolos hacia la faringe</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: A.</strong> El surfactante es una mezcla de lípidos y
+        proteínas que se extiende sobre el agua que moja el alvéolo y baja su tensión superficial; sin él,
+        los alvéolos se pegarían al espirar, como le pasa al prematuro. Comerse el polvo es el trabajo del
+        macrófago alveolar. La pared plana del alvéolo la forman los neumocitos tipo I. El oxígeno cruza la
+        membrana por difusión y viaja en la hemoglobina; el surfactante no lo transporta. Y mover el moco es
+        cosa de los cilios del epitelio de conducción.</div>
+    </div>
+
+    <div class="saber-box">
+      <strong>Pregunta tipo Saber Pro · Caso</strong>
+      <div class="check-question" style="margin-top:16px;border-color:var(--purple)" data-question="q12">
+        <p class="question-text">12. Durante una inspiración tranquila el diafragma se contrae y baja. ¿Qué
+          explica que entre el aire a los pulmones?</p>
+        <ul class="options">
+          <li data-letter="A">El diafragma empuja el aire del abdomen hacia el tórax</li>
+          <li data-letter="B">Los alvéolos se contraen y aspiran el aire de la tráquea</li>
+          <li data-letter="C" data-correct="true">El tórax crece, la presión alveolar baja y el aire entra solo</li>
+          <li data-letter="D">La presión de la cavidad pleural se vuelve mayor que la atmosférica</li>
+          <li data-letter="E">El centro respiratorio abre la glotis y el aire cae por su peso</li>
+        </ul>
+        <div class="feedback"><strong>Correcta: C.</strong> Es la ley de Boyle: al bajar el diafragma aumenta
+          el volumen del tórax y de los pulmones, que van pegados a él por la pleura; la presión en los
+          alvéolos cae un poco por debajo de la atmosférica y el aire entra hasta igualarlas. No hay aire en
+          el abdomen que empujar. Los alvéolos no tienen músculo para aspirar: se estiran pasivamente. La
+          presión pleural se vuelve todavía más negativa al inspirar, no positiva; si superara la atmosférica
+          el pulmón se colapsaría. Y la glotis abierta deja pasar el aire, pero no lo hace entrar.</div>
+      </div>
+    </div>
+
+    <div class="check-question" data-question="q13">
+      <p class="question-text">13. Dos motociclistas tienen una lesión completa de la médula cervical: uno a
+        la altura de C2 y otro a la de C7. Solo el primero necesita un ventilador. ¿Por qué?</p>
+      <ul class="options">
+        <li data-letter="A">Porque en C2 está el centro que marca el ritmo respiratorio</li>
+        <li data-letter="B">Porque la lesión de C2 corta el vago y para el corazón</li>
+        <li data-letter="C">Porque los intercostales nacen de C2 y en C7 ya no hay</li>
+        <li data-letter="D" data-correct="true">Porque el frénico nace de C3 a C5, por debajo de la primera lesión</li>
+        <li data-letter="E">Porque en C7 la médula ya no lleva fibras motoras</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: D.</strong> El nervio frénico, que mueve el diafragma, sale de
+        los segmentos C3, C4 y C5. Una lesión en C2 corta la orden del bulbo antes de que llegue a esos
+        segmentos: el diafragma queda quieto. En C7 el frénico está intacto y el paciente respira, aunque
+        pierda los intercostales. El centro respiratorio está en el bulbo y la protuberancia, no en la
+        médula. El vago sale del cráneo directamente y no pasa por la médula cervical. Los intercostales los
+        inervan los nervios torácicos, no C2. Y en C7 la médula sí lleva fibras motoras: las de la mano, el
+        tronco y las piernas.</div>
+    </div>
+
+    <div class="saber-box">
+      <strong>Question in English · Clinical anatomy</strong>
+      <div class="check-question" style="margin-top:16px;border-color:var(--purple)" data-question="q14">
+        <p class="question-text">14. Why is the eyelid droop in Horner syndrome only 1 to 2 mm?</p>
+        <ul class="options">
+          <li data-letter="A">Because the oculomotor nerve is only partly damaged</li>
+          <li data-letter="B" data-correct="true">Because only the smooth superior tarsal muscle is paralysed</li>
+          <li data-letter="C">Because the orbicularis oculi keeps the eye half open</li>
+          <li data-letter="D">Because the frontalis muscle lifts the eyebrow to compensate</li>
+          <li data-letter="E">Because the superior rectus pulls the eyelid up with the eye</li>
+        </ul>
+        <div class="feedback"><strong>Correct answer: B.</strong> The superior tarsal (Müller's) muscle is a
+          thin sheet of smooth muscle with sympathetic supply; it adds only 1 to 2 mm of lift. The main
+          elevator, the levator palpebrae superioris, is supplied by the oculomotor nerve and still works, so
+          the droop is mild. A partial oculomotor palsy can cause a mild ptosis, but it
+          comes with a larger pupil and weak eye movements. The orbicularis oculi closes the eye, it does not hold
+          it open. The frontalis may raise the brow, but that is not why the droop is small. The superior
+          rectus moves the globe, and only drags the lid a little in upgaze.</div>
+      </div>
+    </div>
+
+    <div class="check-question" data-question="q15">
+      <p class="question-text">15. Una paciente tiene una pupila más pequeña que la otra. Sospechas un
+        Horner. ¿En qué condición de luz esperas que la diferencia entre las dos sea mayor?</p>
+      <ul class="options">
+        <li data-letter="A">Con luz brillante, porque la pupila afectada no se contrae</li>
+        <li data-letter="B">Igual con luz y en penumbra, porque las dos fallan por igual</li>
+        <li data-letter="C">Solo al mirar de cerca, porque falla la acomodación</li>
+        <li data-letter="D">Con luz brillante, porque la pupila sana se dilata de más</li>
+        <li data-letter="E" data-correct="true">En penumbra, porque la pupila afectada no se dilata bien</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: E.</strong> En el Horner falla el músculo dilatador. Con luz,
+        las dos pupilas se cierran con el esfínter, que está sano, y se parecen. En la oscuridad la pupila
+        sana se abre y la afectada se queda pequeña: la diferencia crece. Que la diferencia sea mayor con
+        luz describe lo contrario, una pupila grande que no se contrae, como en una lesión del III par o con
+        gotas dilatadoras. La pupila sana no se dilata de más con la luz; se contrae. La acomodación depende
+        del parasimpático y no cambia en el Horner. Y no es igual en las dos condiciones: justamente esa
+        diferencia es la prueba.</div>
+    </div>
+
+    <div class="check-question" data-question="q16">
+      <p class="question-text">16. ¿Qué recorrido de la vía simpática del ojo explica que un tumor en el
+        vértice del pulmón la interrumpa?</p>
+      <ul class="options">
+        <li data-letter="A" data-correct="true">La segunda neurona sube por la cadena simpática sobre el vértice pulmonar</li>
+        <li data-letter="B">La tercera neurona baja del ganglio ciliar hasta el tórax y vuelve a subir</li>
+        <li data-letter="C">Las fibras del ojo viajan con el nervio frénico sobre el pericardio</li>
+        <li data-letter="D">Las fibras salen de C3 a C5 y cruzan el hilio del pulmón</li>
+        <li data-letter="E">La primera neurona baja por el vago hasta el mediastino</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: A.</strong> La segunda neurona sale de la médula torácica alta
+        por la raíz T1 y sube por la cadena simpática, apoyada sobre el vértice del pulmón, hasta el ganglio
+        cervical superior; un tumor de Pancoast la corta ahí. El ganglio ciliar está en la órbita y su
+        relevo es parasimpático: no baja al tórax. El frénico es motor del diafragma y no lleva fibras para el
+        ojo. Los segmentos C3 a C5 son el origen del frénico, no del simpático ocular, que sale de C8 a T2.
+        La primera neurona va del hipotálamo a la médula por el tronco del encéfalo; el vago es
+        parasimpático.</div>
+    </div>
+
+    <div class="saber-box">
+      <strong>Pregunta tipo Saber Pro · Caso</strong>
+      <div class="check-question" style="margin-top:16px;border-color:var(--purple)" data-question="q17">
+        <p class="question-text">17. Una paciente con enfisema grave retiene dióxido de carbono. Se levanta
+          con dolor de cabeza y en el fondo de ojo tiene las dos papilas edematosas. ¿Cuál es el mecanismo
+          más probable?</p>
+        <ul class="options">
+          <li data-letter="A">El oxígeno de la bala que usa en casa daña el nervio óptico</li>
+          <li data-letter="B">La tos crónica rompe vasos de la retina alrededor de la papila</li>
+          <li data-letter="C">El enfisema destruye los alvéolos y libera toxinas al nervio</li>
+          <li data-letter="D" data-correct="true">El CO₂ dilata los vasos cerebrales y sube la presión intracraneal</li>
+          <li data-letter="E">La falta de oxígeno engrosa la membrana de los capilares de la papila</li>
+        </ul>
+        <div class="feedback"><strong>Correcta: D.</strong> El dióxido de carbono es el dilatador más potente
+          de los vasos del cerebro; más sangre dentro del cráneo sube la presión, y el líquido que rodea al
+          nervio óptico la transmite hasta la papila, que se hincha en los dos ojos. Por eso empeora al
+          despertar, cuando el CO₂ subió durante la noche. El oxígeno en casa, bien dosificado, no daña el
+          nervio. La tos fuerte puede romper vasos de la conjuntiva, pero no edematiza las dos papilas. El
+          enfisema destruye paredes alveolares, pero no libera toxinas que lleguen al nervio. Y la falta de
+          oxígeno dilata y oscurece las venas de la retina, pero no explica una papila hinchada por
+          presión.</div>
+      </div>
+    </div>
+
+    <div class="check-question" data-question="q18">
+      <p class="question-text">18. En la consulta notas que un paciente tiene la conjuntiva y la lengua de
+        color violáceo. ¿Qué te indica?</p>
+      <ul class="options">
+        <li data-letter="A">Frío en la cara, que hizo más lenta la circulación de la piel</li>
+        <li data-letter="B">Una intoxicación por monóxido de carbono</li>
+        <li data-letter="C" data-correct="true">Cianosis central: la sangre arterial lleva poco oxígeno</li>
+        <li data-letter="D">Anemia: le faltan glóbulos rojos</li>
+        <li data-letter="E">Una conjuntivitis alérgica con vasos congestionados</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: C.</strong> Si la lengua, que está caliente y muy irrigada,
+        también se ve violácea, el problema está en la sangre que sale del corazón: cianosis central, por un
+        pulmón o un corazón que no la oxigenan. El frío produce cianosis periférica, en dedos y nariz, con la
+        lengua rosada. El monóxido de carbono deja la sangre roja cereza, no violácea. En la anemia la
+        conjuntiva se ve pálida, porque hay poca hemoglobina para teñirla. Y la conjuntivitis alérgica la
+        pone roja, con picor, no violácea.</div>
+    </div>
+
+    <div class="check-question" data-question="q19">
+      <p class="question-text">19. En una familia, todos amanecen con dolor de cabeza en los días fríos.
+        Uno de ellos tiene el oxímetro de pulso en 99 % y las mucosas muy rojas. ¿Por qué el oxímetro no
+        ayuda?</p>
+      <ul class="options">
+        <li data-letter="A">Porque el frío cierra los vasos del dedo y la lectura sube</li>
+        <li data-letter="B" data-correct="true">Porque no distingue la hemoglobina con CO de la que lleva oxígeno</li>
+        <li data-letter="C">Porque el dolor de cabeza acelera el pulso y confunde al aparato</li>
+        <li data-letter="D">Porque el monóxido aumenta el número de glóbulos rojos</li>
+        <li data-letter="E">Porque el oxímetro mide el CO₂ espirado, no el oxígeno de la sangre</li>
+      </ul>
+      <div class="feedback"><strong>Correcta: B.</strong> El oxímetro mira el color de la sangre con dos
+        longitudes de onda; la carboxihemoglobina es roja como la oxihemoglobina y la cuenta como si llevara
+        oxígeno. El paciente puede marcar 99 % mientras sus tejidos se ahogan. El frío cierra los vasos del
+        dedo y empeora la señal, pero no sube la lectura. Un pulso rápido no altera la saturación que se
+        mide. El monóxido no multiplica los glóbulos rojos en horas. Y el aparato que mide el CO₂ espirado es
+        el capnógrafo, no el oxímetro.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────── 13 ─────────── -->
+<section class="station" id="e13">
+  <div class="station-header">
+    <div class="station-number">13</div>
+    <div class="station-titles">
+      <div class="station-eyebrow">Cierre · Conversación</div>
+      <h2>Volvemos a los cuatro pacientes</h2>
+    </div>
+  </div>
+  <div class="content-block">
+    <p>Antes de abrir cada respuesta, dila en voz alta con tus palabras.</p>
+    <details class="acorde">
+      <summary>1 · El párpado que cae poquito</summary>
+      <div class="cuerpo">
+        <p>Es un <strong>síndrome de Horner</strong>: ptosis de 1 a 2 mm por el músculo tarsal y miosis que
+          se nota más en penumbra. En un fumador con dolor de hombro, hay que pensar en un <strong>tumor de
+          Pancoast</strong> en el vértice del pulmón derecho, que corta la segunda neurona simpática y
+          alcanza el plexo braquial. Se remite el mismo día para una imagen del tórax.</p>
+      </div>
+    </details>
+    <details class="acorde">
+      <summary>2 · La papila hinchada</summary>
+      <div class="cuerpo">
+        <p>Su enfisema no le deja sacar el CO₂. El <strong>dióxido de carbono alto</strong> dilata los vasos
+          del cerebro, sube la presión intracraneal y las dos papilas se edematizan; por eso se despierta con
+          dolor de cabeza. Es un <strong>papiledema</strong>, y se remite: el ajuste de su tratamiento
+          respiratorio lo decide el neumólogo, y otras causas de presión alta se descartan con imagen.</p>
+      </div>
+    </details>
+    <details class="acorde">
+      <summary>3 · El sabor de las gotas</summary>
+      <div class="cuerpo">
+        <p>La gota bajó por la <strong>vía lagrimal</strong>: punto, canalículo, saco y conducto
+          nasolagrimal, que desemboca en el <strong>meato inferior</strong>; de la nariz pasó a la faringe.
+          Para que no pase, se presiona con el dedo el ángulo interno del ojo durante un minuto después de
+          la gota: llega menos fármaco a la sangre y a la boca, lo que importa mucho en un niño.</p>
+      </div>
+    </details>
+    <details class="acorde">
+      <summary>4 · El ojo hinchado después del resfriado</summary>
+      <div class="cuerpo">
+        <p>Una <strong>sinusitis etmoidal</strong> cruzó la <strong>lámina papirácea</strong>, la pared
+          medial de la órbita, y produjo una <strong>celulitis orbitaria</strong>. El dolor al mover el ojo y
+          la visión doble dicen que la infección está detrás del septo orbitario. Es una urgencia: necesita
+          antibiótico intravenoso y una imagen de la órbita.</p>
+      </div>
+    </details>
+
+    <div class="adelanto">
+      <p>El sistema respiratorio entra en el <strong>examen final</strong> con el resto del tercer corte.
+        La próxima sesión, el <strong>jueves 5 de noviembre</strong>, es de integración y Lectura
+        Selecta.</p>
+    </div>
+  </div>
+</section>
+
+</div><!-- fin sesión única -->
+</div><!-- fin container -->
+
+<footer class="footer">
+  <p><strong>Morfología General · Optometría · Universidad de La Salle · 2026-II</strong></p>
+  <p>Clase 12 · Sistema respiratorio: el aire, la sangre y un pulmón que se ve en la pupila · Jueves 29 de octubre de 2026</p>
+  <p>Fuentes: Tortora &amp; Derrickson, <em>Principios de Anatomía y Fisiología</em>, capítulo 23 ·
+     láminas reutilizadas de las clases 6 y 8 (Tortora caps. 7 y 17, Moore cap. 8) · esquema de la vía
+     simpática, propio</p>
+</footer>
+<div class="lightbox" id="lightbox">
+  <button class="lb-close" aria-label="Cerrar">✕</button>
+  <img src="" alt="">
+  <div class="lb-caption"></div>
+</div>
+
+
+<script>
+function showTab(id,btn){
+  document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+document.querySelectorAll('.check-question').forEach(block=>{
+  const options=block.querySelectorAll('.options li');
+  const feedback=block.querySelector('.feedback');
+  const correctLetter=Array.from(options).find(o=>o.dataset.correct==='true')?.dataset.letter;
+  let answered=false;
+  options.forEach(opt=>{
+    opt.addEventListener('click',()=>{
+      if(answered)return;
+      answered=true;
+      options.forEach(o=>{
+        if(o.dataset.letter===correctLetter)o.classList.add('correct');
+        else if(o===opt&&opt.dataset.letter!==correctLetter)o.classList.add('incorrect');
+      });
+      feedback.classList.add('show');
+      feedback.scrollIntoView({behavior:'smooth',block:'nearest'});
+    });
+  });
+});
+document.querySelectorAll('.flip-card').forEach(card=>{
+  card.addEventListener('click',()=>card.classList.toggle('flipped'));
+});
+
+/* Lupa: las láminas del Tortora llevan rótulos que no se leen a tamaño de columna.
+   Ampliar no es un adorno. */
+(function(){
+  const lb=document.getElementById('lightbox');
+  const lbImg=lb.querySelector('img'), lbCap=lb.querySelector('.lb-caption');
+  document.querySelectorAll('.photo-card img, .photo-hero img').forEach(img=>{
+    img.addEventListener('click',()=>{
+      if(img.classList.contains('broken'))return;
+      lbImg.src=img.src;
+      lbImg.alt=img.alt||'';
+      const cap=img.closest('.photo-card,.photo-hero').querySelector('.photo-caption');
+      lbCap.textContent=cap?cap.textContent.trim().replace(/\s+/g,' ').slice(0,220):'';
+      lb.classList.add('open');
+    });
+  });
+  const cerrar=()=>{lb.classList.remove('open');lbImg.src='';};
+  lb.addEventListener('click',cerrar);
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')cerrar();});
+})();
+</script>
+
+</body>
+</html>
